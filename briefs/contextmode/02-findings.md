@@ -13,7 +13,54 @@ manifests in `out/ctx-ab/`.
 
 ---
 
-## THE RESULT
+## THE HEADLINE NUMBER, and why it is the one that ships
+
+**Real code work on the flagship model: 14% cheaper, 2.2× less raw data in the window, peak
+context down 19%.**
+
+| Claude Opus 5, code comprehension | plain | with context-mode |
+|---|---|---|
+| tool bytes into context | 43.1 KB [39.5–47.7] | **19.2 KB** [14.9–24.8] |
+| peak context | 37.8K [36.1–40.0] | **30.6K** [27.9–33.7] |
+| cost | $0.379 [$0.346–$0.410] | **$0.325** [$0.302–$0.353] |
+| rubric score | 12/12 ×3 | 12/12 ×3 |
+
+This cell is the one a claim can rest on: **the ranges on both counted measures do not overlap**,
+all three measures move the same way, and accuracy is identical. The video's claim is "about 15%
+cheaper", which is the conservative end of what was measured.
+
+⚠ **COST IS THE NOISY COLUMN.** Within a single arm, cost spans 2–3× purely because of
+prompt-cache warmth — a run whose prefix is already cached is billed at a fraction of a cold one.
+Tool bytes and peak context are counted from the transcript and not priced, so every conclusion
+here rests on those; cost is quoted only where the counted measures agree with it.
+
+## THE FULL RESULT — three arms
+
+Arm three is the free alternative: no plugin, no per-turn rent, just context-mode's *argument*
+rewritten against Claude Code's native tools in a 1.2 KB `CLAUDE.md`.
+
+| task · model | arm | tool bytes | peak | cost | ctx calls |
+|---|---|---|---|---|---|
+| **code · Opus 5** | plain | 43.1 KB | 37.8K | $0.379 | — |
+| | **plugin** | **19.2 KB (2.2×)** | **30.6K** | **$0.325** | 0 |
+| | CLAUDE.md | 36.2 KB (1.2×) | 41.1K | $0.430 | 0 |
+| **code · Haiku** | plain | 151.0 KB | 82.8K | $0.302 | — |
+| | **plugin** | **52.7 KB (2.9×)** | **54.5K** | **$0.227** | 10 |
+| | CLAUDE.md | 82.1 KB (1.8×) | 60.1K | $0.239 | 0 |
+| **log · Opus 5** | plain | 0.8 KB | 18.2K | $0.088 | — |
+| | plugin | 0.6 KB | 21.4K | $0.114 | 0 |
+| | CLAUDE.md | 0.4 KB | 23.6K | $0.143 | 0 |
+| **log · Haiku** | plain | 4.1 KB | 25.8K | $0.033 | — |
+| | plugin | 1.0 KB (4.2×) | 26.1K | $0.026 | 3 |
+| | **CLAUDE.md** | **0.1 KB (51×)** | **23.8K** | **$0.017** | 0 |
+
+**What the third arm settled.** The free `CLAUDE.md` is real but *unreliable*: it wins the simple
+aggregation cell outright (51× less into the window — the model writes one `awk` line and stops)
+and it helps on Haiku code work, but on Opus code work it spans 38–120 KB run to run and ends up
+costing more than plain. **The plugin is the consistent one**, and consistency is what a
+recommendation needs. The prompt is worth copying; it is not a replacement.
+
+## THE PER-CELL DETAIL
 
 Four cells: two shapes of work × two models. Tool bytes = raw bytes that entered the context
 window.
@@ -97,7 +144,14 @@ stated the wrong verdict from that single run, and only repetition caught it.
 
 ---
 
-## What this means for iauteur — measured on the owner's own sessions
+## OFF-CAMERA — what this means for iauteur
+
+**The video must NOT mention iauteur, this repo, or that the tool was trialled here** (owner,
+2026-09-16: a viewer has no idea what iauteur is, and it buries the point). On screen the test
+bed is named plainly for what it is: a real open-source repository, `tt-a1i/archify`. What
+follows is an internal engineering note only.
+
+### Measured on this machine's own sessions
 
 The question was whether iauteur's own loop wastes tokens on validation output. Measured across
 the real Claude Code sessions on this machine (≥5 assistant turns):

@@ -36,8 +36,23 @@ const cwd = arg('cwd');
 const plugin = arg('plugin');
 const n = Number(arg('n', 3));
 const tag = arg('tag', 'ab');
-const only = arg('arm');                    // 'off' | 'on' | undefined (both)
+const only = arg('arm');                    // 'off' | 'on' | 'md' | undefined (all configured)
 const store = arg('store', path.join(cwd || '.', '.cm-store'));
+
+/**
+ * ARM 'md' — the free alternative, and the reason it exists.
+ *
+ * Six treatment runs on Opus called a context-mode tool ZERO times and still came out 14%
+ * cheaper, because the plugin's SessionStart hook injects a routing argument that changes how
+ * the model uses its ORDINARY tools. That makes the prompt and the sandbox separable effects,
+ * and separable effects have to be separated before either gets the credit.
+ *
+ * This arm loads no plugin and pays no per-turn rent: it drops a CLAUDE.md carrying the same
+ * ARGUMENT — rewritten against Bash/Read/Grep, with every ctx_ tool name removed — into the
+ * working directory for the duration of the run, then removes it. Anything this arm captures
+ * is available to any user for nothing.
+ */
+const mdFile = arg('md');
 
 if (!taskFile || !cwd || !plugin) {
   console.error('usage: ctx-ab.mjs --task <file> --cwd <dir> --plugin <cm-dir> [--n 3] [--tag t1] [--arm on|off]');
@@ -62,13 +77,27 @@ const sid = (arm, i) => {
 
 const results = [];
 
-for (const arm of (only ? [only] : ['off', 'on'])) {
+const arms = only ? [only] : (mdFile ? ['off', 'on', 'md'] : ['off', 'on']);
+const cwdClaudeMd = path.join(cwd, 'CLAUDE.md');
+
+for (const arm of arms) {
+  // The md arm's file must exist for ITS runs and for no others, or the comparison is ruined.
+  // Written and removed around each run rather than once, so a crash cannot leak it into a
+  // later arm — and refuse outright if the workspace already has one we would clobber.
+  if (arm === 'md') {
+    if (fs.existsSync(cwdClaudeMd)) {
+      console.error(`refusing: ${cwdClaudeMd} already exists — the md arm would overwrite it`);
+      process.exit(1);
+    }
+  }
+
   for (let i = 1; i <= n; i++) {
     const sessionId = sid(arm, i);
     const args = ['-p', task, '--session-id', sessionId, '--output-format', 'json',
       ...(process.env.CTXAB_MODEL ? ['--model', process.env.CTXAB_MODEL] : []),
       '--allowedTools', [...BASE, ...(arm === 'on' ? CTX : [])].join(' ')];
     if (arm === 'on') args.push('--plugin-dir', plugin);
+    if (arm === 'md') fs.copyFileSync(mdFile, cwdClaudeMd);
 
     process.stderr.write(`\n▶ ${tag} arm=${arm} run ${i}/${n}  session=${sessionId}\n`);
     const started = Date.now();
@@ -84,7 +113,10 @@ for (const arm of (only ? [only] : ['off', 'on'])) {
     } catch (e) {
       process.stderr.write(`  FAILED: ${e.message.slice(0, 300)}\n`);
       results.push({ tag, arm, i, sessionId, failed: true });
+      if (arm === 'md') fs.rmSync(cwdClaudeMd, { force: true });
       continue;
+    } finally {
+      if (arm === 'md') fs.rmSync(cwdClaudeMd, { force: true });
     }
     let parsed = {};
     try { parsed = JSON.parse(out); } catch { /* keep the raw text below */ }
