@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "topic": "Context-Mode Promises 98%. I Measured 14%.",
+    "format": "long",
+    "fps": 30,
+    "onePayoff": "TODO",
+    "openLoop": "TODO",
+    "analogy": "TODO"
+  },
+  "brand": {
+    "theme": "CHOOSE_DARK_THEME",
+    "channel": "YOUR CHANNEL",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "TODO",
+    "badge": "TODO",
+    "asset": "lucide:sparkles"
+  },
+  "scenes": []
+}
