@@ -84,23 +84,171 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Two findings. Both high — on a pull request Google reviewed, approved and merged.",
+      "narration": "One finding, marked high. Two places in the code. On a pull request that Google reviewed, approved and merged.",
       "data": {
         "recordedStep": {
           "clips": [
             {
-              "ref": "rec:ocr-blind#review",
+              "ref": "rec:ocr-blind#hit",
               "label": "found blind",
               "focus": false,
-              "atWord": 1,
+              "atWord": 5,
               "zooms": [],
-              "callouts": []
+              "callouts": [],
+              "id": "hit",
+              "src": "rec/ocr-blind/seg-03-hit.mp4",
+              "frames": 133,
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 199,
+                  "y": 71,
+                  "w": 956,
+                  "h": 19,
+                  "covers": "claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
+                }
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 71,
+                  "w": 1087,
+                  "h": 40
+                },
+                {
+                  "x": 87,
+                  "y": 130,
+                  "w": 769,
+                  "h": 19
+                },
+                {
+                  "x": 87,
+                  "y": 169,
+                  "w": 872,
+                  "h": 134
+                },
+                {
+                  "x": 87,
+                  "y": 322,
+                  "w": 1481,
+                  "h": 115
+                },
+                {
+                  "x": 87,
+                  "y": 456,
+                  "w": 1022,
+                  "h": 19
+                },
+                {
+                  "x": 87,
+                  "y": 495,
+                  "w": 722,
+                  "h": 57
+                },
+                {
+                  "x": 87,
+                  "y": 571,
+                  "w": 112,
+                  "h": 19
+                },
+                {
+                  "x": 87,
+                  "y": 610,
+                  "w": 1181,
+                  "h": 38
+                },
+                {
+                  "x": 87,
+                  "y": 667,
+                  "w": 1481,
+                  "h": 38
+                },
+                {
+                  "x": 68,
+                  "y": 725,
+                  "w": 319,
+                  "h": 19
+                },
+                {
+                  "x": 68,
+                  "y": 763,
+                  "w": 1509,
+                  "h": 96
+                }
+              ],
+              "changes": [
+                2,
+                4,
+                5,
+                9,
+                12,
+                16,
+                19,
+                22,
+                25,
+                29,
+                32,
+                33,
+                36,
+                39,
+                40,
+                42,
+                46,
+                49,
+                50,
+                52,
+                56,
+                59,
+                61,
+                62,
+                63,
+                66,
+                69,
+                73,
+                76,
+                78,
+                79,
+                81,
+                82,
+                83,
+                84,
+                85,
+                88,
+                91,
+                103,
+                105,
+                106,
+                107,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132
+              ],
+              "shows": "$ claude --permission-mode bypassPermissions '/open-code-review:dele",
+              "said": " Where: stream.go:1124 (csAttempt.recvMsg) and stream.go:1444 (addrConnStream.RecvMsg)\n The PR changed the second recv call in each function to declare err inside the if:\n if err := recv(...); err == nil {\n return toRPCErr(errors.New(\"...protocol violation...\"))\n }\n if err == io.EOF { // this `err` is the function's return value, not the recv result\n return a.s.Status().Err()\n }\n return toRPCErr(err)\n That err only exists inside the if. The two checks after it read the function's named return value err, which is always nil at that point. As a result, when a\n client call without server streaming reads past its single response:\n - On io.EOF (the normal end of the call), it returns toRPCErr(nil), which is nil, instead of a.s.Status().Err(). If the server sends a message and then an\n error status in its trailers, the client never sees that error.\n - On a real error (the stream is reset, a decompression failure, or the message is too large), the error is dropped and the call looks successful.\n - In addrConnStream, the deferred as.finish(err) also gets nil, so the failure isn't recorded when the stream ends.\n The first recv call in each function is fine, because everything that uses its result is inside the if block.\n Fix applied: those two call sites now assign to the named return value again:\n err = recv(..., false)\n if err == nil {\n Not reported\n - rpc_util.go: the if isServer { return ... } else { return ... } block has an unneeded else. That's a style issue only.\n - The rest of the change is correct: isServer is set to true in server.go and serverStream, and to false on both client paths.\n Before merging, please run go test ./test/ -run Compressor and the stream tests. A test where the client receives a unary response followed by a non-OK status\n in the trailers would catch this bug if it came back.\n✻ Crunched for 26s · done 11:12 PM\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯ commit the fix\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ bypass permissions on (shift+tab to cycle)\nPS ocr-blind> claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274"
+          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 163
+      "durationFrames": 400
     },
     {
       "id": "s03",
@@ -239,22 +387,360 @@
               "ref": "rec:ocr-gh#about",
               "label": "the official page",
               "focus": false,
-              "atWord": 2,
+              "atWord": 5,
               "zooms": [
                 {
                   "marks": [
                     "licence"
                   ],
-                  "wantAtWord": 10
+                  "wantAtWord": 10,
+                  "atWord": 10
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "about",
+              "src": "rec/ocr-gh/seg-02.mp4",
+              "frames": 37,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "desc": {
+                  "x": 1136,
+                  "y": 244,
+                  "w": 219,
+                  "h": 43,
+                  "covers": "Fast, efficient, battle-tested at Alibaba's scale",
+                  "block": {
+                    "x": 1136,
+                    "y": 244,
+                    "w": 272,
+                    "h": 187
+                  }
+                },
+                "licence": {
+                  "x": 1160,
+                  "y": 610,
+                  "w": 76,
+                  "h": 16,
+                  "covers": "Apache-2.0",
+                  "block": {
+                    "x": 1160,
+                    "y": 610,
+                    "w": 125,
+                    "h": 16
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 412,
+                  "y": 26,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 296,
+                  "y": 26,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 26,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 26,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 26,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 1464,
+                  "y": 28,
+                  "w": 51,
+                  "h": 16
+                },
+                {
+                  "x": 132,
+                  "y": 91,
+                  "w": 170,
+                  "h": 23
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 63,
+                  "h": 23
+                },
+                {
+                  "x": 1217,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 784,
+                  "y": 150,
+                  "w": 128,
+                  "h": 16
+                },
+                {
+                  "x": 278,
+                  "y": 150,
+                  "w": 83,
+                  "h": 16
+                },
+                {
+                  "x": 451,
+                  "y": 150,
+                  "w": 77,
+                  "h": 16
+                },
+                {
+                  "x": 678,
+                  "y": 150,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 992,
+                  "y": 150,
+                  "w": 51,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 208,
+                  "w": 46,
+                  "h": 19
+                },
+                {
+                  "x": 347,
+                  "y": 214,
+                  "w": 62,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 244,
+                  "w": 272,
+                  "h": 188
+                },
+                {
+                  "x": 192,
+                  "y": 272,
+                  "w": 136,
+                  "h": 186
+                },
+                {
+                  "x": 274,
+                  "y": 272,
+                  "w": 288,
+                  "h": 16
+                },
+                {
+                  "x": 969,
+                  "y": 272,
+                  "w": 106,
+                  "h": 38
+                },
+                {
+                  "x": 570,
+                  "y": 319,
+                  "w": 346,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 360,
+                  "w": 346,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 401,
+                  "w": 235,
+                  "h": 16
+                },
+                {
+                  "x": 286,
+                  "y": 401,
+                  "w": 71,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 442,
+                  "w": 225,
+                  "h": 16
+                },
+                {
+                  "x": 1160,
+                  "y": 448,
+                  "w": 133,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 449,
+                  "w": 146,
+                  "h": 82
+                },
+                {
+                  "x": 570,
+                  "y": 483,
+                  "w": 225,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 483,
+                  "w": 76,
+                  "h": 16
+                },
+                {
+                  "x": 1308,
+                  "y": 484,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 1210,
+                  "y": 484,
+                  "w": 70,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 523,
+                  "w": 338,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 523,
+                  "w": 110,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 551,
+                  "w": 183,
+                  "h": 335
+                },
+                {
+                  "x": 570,
+                  "y": 564,
+                  "w": 416,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 605,
+                  "w": 421,
+                  "h": 16
+                },
+                {
+                  "x": 267,
+                  "y": 605,
+                  "w": 106,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 646,
+                  "w": 225,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 687,
+                  "w": 421,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 687,
+                  "w": 61,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 728,
+                  "w": 233,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 728,
+                  "w": 73,
+                  "h": 16
+                },
+                {
+                  "x": 806,
+                  "y": 730,
+                  "w": 101,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 768,
+                  "w": 437,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 809,
+                  "w": 288,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 850,
+                  "w": 440,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 891,
+                  "w": 421,
+                  "h": 9
+                }
+              ],
+              "changes": [
+                0,
+                1
+              ],
+              "shows": "About"
             }
           ],
-          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0"
+          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
         }
       },
-      "durationFrames": 154
+      "durationFrames": 201
     },
     {
       "id": "s07",

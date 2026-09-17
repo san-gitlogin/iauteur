@@ -209,8 +209,7 @@ add('REVIEW_YIELD', 'slide', 'zoneA',
 
 // 10 · what the wall costs a person. 2 anchors -> ~50 words.
 add('BAR_COMPARE', 'fade', 'zoneA',
-  "Forget the tools for a second and picture the person. Somebody has to read every one of those " +
-  "comments and decide. At nearly six thousand, you're discarding about nine in every ten, and " +
+  "Forget the benchmark for a second and picture the person. Somebody has to read every comment Claude Code wrote and decide what to do with it. At nearly six thousand, you're discarding about nine in every ten, and " +
   "that costs real minutes and real patience.",
   (A) => ({
     bars: [
@@ -237,8 +236,7 @@ add('RULE_TEST', 'slide', 'zoneC',
   "advert. Flip those same figures around. Open Code Review got about thirty-four percent of its " +
   "comments right, which beats seven by miles — and still means two out of every three things it " +
   "flags are not real bugs. Open Code Review found twenty percent of the known problems, so it missed four in " +
-  "five. Claude Code actually found more of them; it simply buried them. Neither tool is anywhere " +
-  "near solved. This is a better reviewer, not a finished one.",
+  "five. Claude Code actually found more of them; it simply buried them. Neither tool is anywhere near solved. Open Code Review is a better reviewer, not a finished one.",
   (A) => ({
     ruleTest: {
       kicker: 'read it honestly',
@@ -283,10 +281,25 @@ add('CLAIM_CHECK', 'fade', 'zoneA',
     },
   }));
 
+// 12b · the answer key, drawn — a benchmark is only as good as the labels under it
+add('PICTOGRAM', 'fade', 'zoneA',
+  "One more thing about that benchmark, because it's the part people skip. Eighty senior engineers read two hundred pull requests and agreed on fifteen hundred and five genuine defects. Get that answer key wrong, and every percentage above it is decoration.",
+  (A) => ({
+    pictogram: {
+      rows: [
+        {label: 'Real defects found', value: 60, color: 'green', atWord: A(0.4)},
+        {label: 'Pull requests read', value: 20, color: 'blue', atWord: A(0.28)},
+      ],
+      icon: 'lucide:check-check',
+      unit: '',
+    },
+    source: 'AACR-Bench: 1,505 ground-truth issues, 200 PRs, 80+ senior engineers',
+  }));
+
 // ═══ III · WHY IT WORKS ═════════════════════════════════════════════════════════
 
 add('CHAPTER', 'wipe', 'zoneC',
-  "Which leaves one obvious question. If the brain is the same, why are the answers better?",
+  "Which leaves one obvious question. If the model underneath is the same, why are the answers better?",
   () => ({chapter: {number: '02', title: 'Why the same model wins', subtitle: 'the part that is not the model'}}));
 
 // 14 · the three failures. 1 clip + 3 zooms = 4 anchors → 28s → ~87 words.
@@ -340,8 +353,7 @@ rules('fade', 'zoneB',
   "checklist applies to Go files only. Then read its opening sentence, because it's remarkable. " +
   "Favour precision over recall. A false positive costs reviewer trust. That's a design decision, " +
   "written in plain English, sitting inside a rule file. Now watch a plain text file instead. " +
-  "Pattern: default. Four vague questions. One file gets a specialist; the other gets a shrug, and " +
-  "that difference is the whole product.",
+  "Pattern: default. Four vague questions — is the logic correct, are there security problems. One file gets a specialist; the other gets a shrug. That difference is the whole product, and it cost nothing to check. Any file the engine does not recognise falls back to those four questions, which is honest, but it is not the thing you are paying for.",
   LOCAL,
   [
     {step: 'gorule', at: 0.06, label: 'what a Go file gets',
@@ -350,14 +362,14 @@ rules('fade', 'zoneB',
         {frame: 'trust', at: 'Favour precision over recall'},
         {frame: 'trust', at: 'costs reviewer trust', band: true},
       ]},
-    {step: 'mdrule', at: 0.62, pivot: 'Now watch a plain text', label: 'what everything else gets',
+    {step: 'mdrule', at: 0.40, pivot: 'Now watch a plain text', label: 'what everything else gets',
       camera: [{frame: 'default', at: 'Pattern: default'}, {frame: 'generic', at: 'Four vague questions'}]},
   ]);
 
 // ═══ IV · INSTALL ═══════════════════════════════════════════════════════════════
 
 add('CHAPTER', 'wipe', 'zoneC',
-  "Enough reading. Let's put it on a machine and aim it at real code.",
+  "Enough reading. Let's try installing it, and then aim it at real code.",
   () => ({chapter: {number: '03', title: 'Installing it', subtitle: 'two commands, and one you must not skip'}}));
 
 // 18 · install. 3 clips + 3 zooms = 6 anchors → 40s → ~124 words.
@@ -366,17 +378,15 @@ setup('letterbox', 'zoneB',
   "point four one or newer. Git is the tool that tracks every change to a project, and an older " +
   "copy makes every command print a warning, so check yours before anything else. After that, " +
   "installing is a single line. That's npm, the installer bundled with Node, and dash g means " +
-  "install this for the whole machine rather than one folder. Seconds later we can ask which " +
-  "version arrived: one point twelve point four. Notice the command itself is only three letters. " +
-  "O, C, R.",
+  "install this for the whole machine rather than one folder. Seconds later we can ask which version arrived. And notice the command itself is only three letters — O, C, R — which is the whole tool, sitting on your machine, ready to be pointed at anything with a git history. No service to sign up for, no dashboard, no seat licence. That matters more than it sounds, because a reviewer you have to justify to someone is a reviewer you quietly stop using.",
   LOCAL,
   [
     {step: 'gitv', at: 0.08, label: 'the one prerequisite',
       camera: [{frame: 'ver', at: 'two point four one'}]},
-    {step: 'install', at: 0.40, pivot: 'After that, installing', label: 'a single line',
+    {step: 'install', at: 0.28, pivot: 'After that, installing', label: 'a single line',
       camera: [{frame: 'pkg', at: "That's npm"}]},
-    {step: 'version', at: 0.70, pivot: 'Seconds later we can ask', label: 'which version arrived',
-      camera: [{frame: 'v', at: 'one point twelve point four'}]},
+    {step: 'version', at: 0.50, pivot: 'Seconds later we can ask', label: 'which version arrived',
+      camera: [{frame: 'v', at: 'no seat licence'}]},
   ]);
 
 // 19 · the plugin. 2 clips + 3 zooms = 5 anchors → 34s → ~105 words.
@@ -384,9 +394,7 @@ setup('fade', 'zoneB',
   "Now the part that makes this genuinely odd. Open Code Review ships a plugin for Claude Code, so " +
   "it runs inside the very tool it just outscored. The first command points Claude Code at " +
   "Alibaba's plugin list, which they call a marketplace. Then the second installs the plugin. " +
-  "Successfully added. Successfully installed. No account to create, no key to paste. What we've " +
-  "gained are two slash commands — those are shortcuts you type inside Claude Code to trigger " +
-  "something specific — and one of the two does all the work from here.",
+  "Successfully added. Successfully installed. No account to create, no key to paste. What we've gained are two slash commands — those are shortcuts you type inside Claude Code to trigger something specific — and one of those two does all the work from here. Everything after this point runs through that one command.",
   LOCAL,
   [
     {step: 'market', at: 0.10, label: 'point it at the list',
@@ -465,7 +473,7 @@ control('fade', 'zoneB',
   "Three reviewable, five total. Open Code Review examined the five changed files and decided only three deserve " +
   "a reviewer's attention — and look at the two crossed out. Those are test files, and Open Code Review prints exactly why it dropped them, because a reason you can read is a decision you can argue with. No model touched that decision. The " +
   "second command fetches the checklists, and notice the heading: rule group one, with all three " +
-  "files listed beneath it. Behind that heading, Open Code Review worked out those three need the same checklist, so the three travel as one job rather than three.",
+  "files listed beneath it. Behind that heading, Open Code Review worked out those three files need the same checklist, so they travel together as one job rather than three separate ones. Fewer trips, and the reviewer sees related files side by side, which matters when a change only makes sense across two of them.",
   LOCAL,
   [
     {step: 'preview', at: 0.05, label: 'which files, and why not',
@@ -474,20 +482,38 @@ control('fade', 'zoneB',
         {frame: 'dropped', at: 'exactly why it dropped them'},
         {frame: 'dropped', at: 'No model touched', band: true},
       ]},
-    {step: 'bundle', at: 0.58, pivot: 'The second command fetches', label: 'three files, one list',
+    {step: 'bundle', at: 0.40, pivot: 'The second command fetches', label: 'three files, one list',
       camera: [{frame: 'group', at: 'rule group one'}]},
   ]);
 
 // 26 · the control review. 1 clip + camera holds; narration sized to 2 anchors → ~50 words.
 control('letterbox', 'zoneB',
-  "And here's the review itself, running inside Claude Code. You can watch it work: reading the " +
-  "diff, which is just the list of changed lines, opening surrounding code, checking how the locks " +
-  "are ordered. Then it comes back with nothing to report. Nothing high, nothing medium, because there was genuinely nothing to say.",
+  "And here's the review itself, running inside Claude Code. Every green dot is a tool call — the " +
+  "reviewer deciding what it needs and going to fetch it, out in the open where you can watch. The " +
+  "first call is the one we just ran by hand: delegate preview. Three reviewable, five total. The " +
+  "second asks for the rules, and there's rule group one again, the Go checklist, five hundred and " +
+  "eighty-seven lines of it folded away. The third pulls the actual diff — the list of changed " +
+  "lines — five hundred and sixty lines this time. So before a single judgement gets made, the " +
+  "reviewer has been handed exactly which files, exactly which checklist, and exactly what " +
+  "changed. None of that was guessed.",
   LOCAL,
-  [{step: 'review', at: 0.06, label: 'reviewing good code',
-    camera: [{frame: 'full', at: 'opening surrounding code'}, {frame: 'full', at: 'nothing to report'}]}]);
+  [{step: 'tools', at: 0.06, label: 'three tool calls'}]);
 
-// 27 · what silence proves. 4 anchors.
+// 27b · the thinking, which is the honest part of the run
+control('fade', 'zoneB',
+  "Then the reviewer stops, and that counter is real — it is still thinking. Twenty-four seconds gone, five hundred and " +
+  "thirty-two tokens spent, still going. I want to sit on this for a second, because it is the " +
+  "least glamorous thing in the video and the most reassuring. Locking is genuinely hard. A reviewer that answered instantly here would be guessing at it.",
+  LOCAL,
+  [{step: 'think', at: 0.08, label: 'it is still thinking'}]);
+
+// 27c · the verdict
+control('fade', 'zoneB',
+  "About eighty seconds after it started, it comes back. Nothing to report. Nothing high, nothing " +
+  "medium, because there was genuinely nothing to say. No hedging, no let-me-flag-this-just-in-case, and no invented concern dressed up to justify the time it spent. It looked properly, and then it said so. Which sounds like nothing happened, and is in fact the hardest behaviour to get out of a tool like this — because saying nothing looks, to whoever is paying, like the tool did nothing.",
+  LOCAL,
+  [{step: 'verdict', at: 0.08, label: 'nothing to report'}]);
+
 add('CLAIM_CHECK', 'slide', 'zoneA',
   "Stay with that a second, because watching nothing happen can feel like a let-down. That silence is the product, because silence is a finding too. Open Code Review even listed what it had ruled out: the lock ordering, a write " +
   "it judged safe, a loop variable it judged fine. A reviewer that cannot say nothing gets muted, and a muted reviewer is worse than none, because " +
@@ -564,10 +590,46 @@ rules('slide', 'zoneB',
 
 // 32 ★ the blind run. 1 clip; narration sized modestly.
 blind('letterbox', 'zoneB',
-  "Same command, no hints. Open Code Review pulls the file list, collects the checklists, and reads around every line that moved. Then it stops on stream dot go. One finding, marked high — the top severity, for real bugs rather than suggestions. And it names two places.",
+  "Same command, same tool, no hints. The same three steps go past: which files, which rules, what " +
+  "changed. Nothing here knows that this pull request is the broken one — as far as this copy of " +
+  "the project is concerned, it is just another change waiting to be read.",
   LOCAL,
-  [{step: 'review', at: 0.06, label: 'the blind review',
-    camera: [{frame: 'full', at: 'reads around every line'}, {frame: 'full', at: 'it names two places'}]}]);
+  [{step: 'scan', at: 0.08, label: 'the same three steps'}]);
+
+// 33b ★ the finding
+blind('fade', 'zoneB',
+  "Then the reviewer reads stream dot go, and stops. One finding, marked high — that's the top severity, " +
+  "the bucket for real bugs rather than style suggestions. Read the line it wrote: the second recv " +
+  "loses its error, so non-streaming client calls report success when they fail. Underneath, it names two places — line eleven twenty-four, and line fourteen forty-four — and I checked both of those line numbers against the file myself.",
+  LOCAL,
+  [{step: 'finding', at: 0.06, label: 'one finding, marked high'}]);
+
+// 33c · what it says breaks
+blind('fade', 'zoneB',
+  "And look at the note it left inside the code itself: this err is the function's return value, " +
+  "not the recv result. The shadowed err is the whole bug, in one sentence. The report doesn't stop at naming the line either — it spells out what actually breaks. If the server sends a reply and then an error, the " +
+  "client never sees that error. If the connection drops on that last read, the call still looks " +
+  "like it worked. Three different failures, every one of them turned into silence. And silence, in " +
+  "a library this widely used, is the worst possible way for something to go wrong.",
+  LOCAL,
+  [{step: 'detail', at: 0.05, label: 'what actually breaks'}]);
+
+// 36b · position drift, checked rather than assumed
+add('TEST_MATRIX', 'slide', 'zoneA',
+  "Remember the README accusing general-purpose assistants of position drift — pointing at one line when the problem is on another. This review gave six line numbers, and all six land exactly where it said. A reviewer you have to double-check costs more than it saves.",
+  (A) => ({
+    testMatrix: {
+      headline: 'Six line numbers, checked by hand',
+      rows: ['recvMsg', 'RecvMsg'],
+      cols: ['the call', 'the check', 'the return'],
+      cells: [
+        {r: 0, c: 0, status: 'pass'}, {r: 0, c: 1, status: 'pass'}, {r: 0, c: 2, status: 'pass'},
+        {r: 1, c: 0, status: 'pass'}, {r: 1, c: 1, status: 'pass'}, {r: 1, c: 2, status: 'pass'},
+      ],
+      atWord: A(0.5),
+    },
+    source: 'stream.go at 6d0aaaec, lines 1124/1127/1130 and 1444/1447/1450',
+  }));
 
 // ═══ VII · THE BUG, TAUGHT ══════════════════════════════════════════════════════
 
@@ -728,11 +790,36 @@ blind('letterbox', 'zoneB',
       source: GRPC, camera: [{frame: 'line', at: 'Same bug though'}]},
   ]);
 
+// 41b · what happens to a finding before you ever see it
+add('CHECK_SWEEP', 'slide', 'zoneA',
+  "There's a step in that slash command worth knowing about, because it happens before anything " +
+  "reaches your screen. Every comment gets sorted into three buckets. High is an obvious bug or a " +
+  "security problem. Medium is a fair concern that depends on context. Low is a nitpick or a likely " +
+  "false alarm — and Low gets thrown away without ever being shown to you. Discarding them is a deliberate choice, and the same choice as the benchmark: fewer things said, so the things said get read.",
+  (A) => ({
+    checkSweep: {
+      headline: 'Three buckets, and one is [discarded]',
+      subjectLabel: 'every comment',
+      checks: [
+        {label: 'High — a real bug', atWord: A(0.3)},
+        {label: 'Medium — it depends', atWord: A(0.42)},
+        {label: 'Low — discarded unseen', atWord: A(0.54)},
+      ],
+      caughtIndex: 2,
+      caughtNote: 'never shown to you',
+      fixNote: 'dropped on purpose',
+      verdict: 'fewer, so they get read',
+      color: 'purple',
+      atWord: A(0.08),
+    },
+    source: 'the plugin\'s own review workflow, plugins/open-code-review/claude-code/commands',
+  }));
+
 // ═══ IX · WHO IT IS FOR ═════════════════════════════════════════════════════════
 
 add('CHAPTER', 'wipe', 'zoneC',
-  "So who is this actually for, and where does it fit in a normal week?",
-  () => ({chapter: {number: '06', title: 'Who should use this', subtitle: 'and where it fits'}}));
+  "So who is this actually for — developers, testers, the person running the team — and where does it fit in a normal week?",
+  () => ({chapter: {number: '06', title: 'Who this is for', subtitle: 'developers, testers, team leads'}}));
 
 add('ICON_GRID', 'slide', 'zoneA',
   "If you write code, this is a second pair of eyes before you trouble a colleague — and being told " +
@@ -794,6 +881,22 @@ add('SPEC_COMPARE', 'slide', 'zoneC',
     },
   }));
 
+// 43b · a chapter for the close, and a recap of the three things that happened
+add('CHAPTER', 'wipe', 'zoneC',
+  "So let's put the whole thing back together, because three separate things happened today.",
+  () => ({chapter: {number: '07', title: 'What actually happened', subtitle: 'three results, honestly'}}));
+
+add('RECAP', 'slide', 'zoneA',
+  "First, pointed at a pull request Google had already approved, Open Code Review said nothing — and nothing was correct. Second, pointed at one they later had to fix, with that fix hidden, it found the bug, named both places and repaired it. Third, the repair matched what the maintainers landed a week later. None of that is magic, and all of it took two minutes.",
+  (A) => ({
+    heading: 'Two pull requests, two honest answers',
+    points: [
+      {text: 'Correct code: nothing reported', atWord: A(0.14)},
+      {text: 'Broken code: found it blind', atWord: A(0.4)},
+      {text: 'Its repair matched the maintainers', atWord: A(0.66)},
+    ],
+  }));
+
 // 44 · outro
 add('OUTRO_CTA', 'fade', 'zoneA',
   "Everything's linked below, so you can check every number I've said out loud. If you've inherited " +
@@ -853,6 +956,7 @@ const spec = {
       ],
       sources: [
         'github.com/alibaba/open-code-review — Open Code Review by Alibaba (Apache-2.0)',
+        'npmjs.com/package/@alibaba-group/open-code-review — the CLI installed in this video',
         'huggingface.co/datasets/Alibaba-Aone/aacr-bench — the benchmark dataset',
         'github.com/grpc/grpc-go/pull/9290 — the correct pull request used as a control',
         'github.com/grpc/grpc-go/pull/7461 — the pull request that shipped the bug',
