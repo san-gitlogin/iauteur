@@ -564,10 +564,10 @@ rules('slide', 'zoneB',
 
 // 32 ★ the blind run. 1 clip; narration sized modestly.
 blind('letterbox', 'zoneB',
-  "Same command, no hints. Open Code Review pulls the file list, collects the checklists, and reads around every line that moved. Then it stops on stream dot go. Two findings, both marked high — the bucket for real bugs, not suggestions.",
+  "Same command, no hints. Open Code Review pulls the file list, collects the checklists, and reads around every line that moved. Then it stops on stream dot go. One finding, marked high — the top severity, for real bugs rather than suggestions. And it names two places.",
   LOCAL,
   [{step: 'review', at: 0.06, label: 'the blind review',
-    camera: [{frame: 'full', at: 'reads around every line'}, {frame: 'full', at: 'both marked high'}]}]);
+    camera: [{frame: 'full', at: 'reads around every line'}, {frame: 'full', at: 'it names two places'}]}]);
 
 // ═══ VII · THE BUG, TAUGHT ══════════════════════════════════════════════════════
 

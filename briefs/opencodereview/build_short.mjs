@@ -60,7 +60,7 @@ add('HOOK', 'dip', 'zoneA',
 
 // 2 · THE RESULT FIRST — the finding, before any explanation.
 blind('letterbox', 'zoneB',
-  "Two findings. Both high — on a pull request Google reviewed, approved and merged.",
+  "One finding, marked high. Two places. On a pull request Google reviewed, approved and merged.",
   LOCAL,
   [{step: 'review', at: 0.1, label: 'found blind'}]);
 
