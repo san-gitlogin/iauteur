@@ -50,6 +50,9 @@ function apply(data, paths, marks, id) {
 
 const S = [];
 const OVER = [];
+// >=5 distinct transition kinds across a long cut (linter). Assigned by position so adjacent
+// beats never share one, rather than sprinkled by hand and drifting.
+const TRANSITIONS = ['fade', 'push', 'wipe', 'dip', 'slide', 'zoom'];
 /** scene(id, type, narrationWithMarkers, data, anchorPaths, extra) */
 function scene(id, type, text, data, paths = [], extra = {}) {
   const { narration, marks, count } = anchors(text);
@@ -67,7 +70,7 @@ function scene(id, type, text, data, paths = [], extra = {}) {
   }
   S.push({
     id, type,
-    transition: extra.transition || 'fade',
+    transition: extra.transition || TRANSITIONS[S.length % TRANSITIONS.length],
     background: extra.background || 'zoneA',
     narration,
     data,
@@ -89,17 +92,17 @@ const DATA_KEY = {
 // ─── ACT 1 · the worry, the answer, the ground ──────────────────────────────
 
 scene('s01', 'HOOK',
-  'A plugin called ^context-mode promises to save ninety-eight percent of your ^context ^window. I measured fourteen. Here is the difference.',
-  { headline: 'context-mode: 98%?', subtext: 'It promises 98%. I measured 14%.', heroAsset: 'lucide:gauge', hookVariant: 'figure' },
+  '^Context-mode promises to save ninety-eight percent of your ^context ^window. Does it?',
+  { headline: 'context-mode: 98%?', subtext: 'It promises 98%. I measured 14%.', heroAsset: 'lucide:gauge', hookVariant: 'ask' },
   ['atWord', 'heroAtWord', 'headlineAtWord'], { transition: 'dip' });
 
 scene('s02', 'RECORDED_STEP',
-  'That is the whole video in one ^table. The same job, done twice, on a real repository — and every number in it came out of Claude Code, not out of the plugin.',
+  'That is the whole video in one ^table. The same job, done twice, on a real repository — and every number here came out of Claude Code\'s own books, not out of the plugin\'s.',
   { recordedStep: { clips: [rec('rec:ctxmode-proof#table', 'the measured table', { focus: true })] } },
   ['recordedStep.clips.0.wantAtWord']);
 
 scene('s03', 'TITLE_CARD',
-  "Welcome back. Today we install it, point it at a real repository, and measure what it does to your ^bill — properly, with numbers you can check yourself.",
+  "Welcome back. Today we install context-mode, point the plugin at a real repository, and measure what happens to your ^bill — properly, with numbers you can check yourself.",
   { title: 'Context-mode, measured', subtitle: 'Install it, measure the bill, decide' },
   ['atWord']);
 
@@ -127,14 +130,14 @@ scene('s06', 'CONTEXT_METER',
   ['atWord']);
 
 scene('s07', 'BAR_COMPARE',
-  "And it doesn't get read once and dropped. It's ^re-sent on every turn after that. So a careless read isn't a one-off charge — it's ^rent, and you pay it for the rest of the session.",
+  "And the file isn't read once and dropped. Those same tokens are ^re-sent on every turn that follows, because the model has no memory apart from this window. Which means a careless read isn't a one-off charge — the read is ^rent, and you go on paying it for the rest of the session.",
   { bars: [ { label: 'read once', sub: 'you think', value: 96, display: '96K tok' },
             { label: 'over 40 turns', sub: 'you actually pay', value: 3840, display: '3.8M tok', color: 'orange' } ],
     source: 'the same tokens, re-sent every turn' },
   ['bars.0.atWord', 'bars.1.atWord']);
 
 scene('s08', 'QUOTE_SPOTLIGHT',
-  "So a tool that keeps those bytes out of your context window sounds worth having. ^This is what context-mode claims it will save you, on its own front page.",
+  "A tool that keeps those bytes out of your context window starts to sound worth having. ^Here is what context-mode claims to save you, written on the project's own front page.",
   { quote: 'Save 98% of your context window.', person: { name: 'context-mode', role: 'the project README' },
     source: 'github.com/mksglu/context-mode — Elastic-2.0' },
   ['atWord']);
@@ -142,7 +145,7 @@ scene('s08', 'QUOTE_SPOTLIGHT',
 // ─── ACT 2 · what it is, and what it charges ────────────────────────────────
 
 scene('s09', 'DIAGRAM',
-  "So what is it? Four things wearing one name. An ^MCP server — Model Context Protocol, the standard way a tool plugs into an agent. A set of ^hooks that fire around your session. A ^sandbox that runs code in a separate process. And a ^SQLite index for anything too big to hold in the conversation.",
+  "What is it, then? Four things wearing one name. An ^MCP server — Model Context Protocol, the standard way a tool plugs into an agent. A set of ^hooks that fire around your session. A ^sandbox that runs code in a separate process. And a ^SQLite index — full-text search — which holds anything too big to keep in the conversation itself.",
   { layout: 'hub',
     nodes: [ { id: 'a', label: 'your agent', asset: 'lucide:bot' },
              { id: 'm', label: 'MCP server', sub: 'six tools', asset: 'lucide:plug' },
@@ -153,7 +156,7 @@ scene('s09', 'DIAGRAM',
   ['nodes.1.atWord', 'nodes.2.atWord', 'nodes.3.atWord', 'nodes.4.atWord']);
 
 scene('s10', 'SANDBOX_BOX',
-  "The idea is good. Your agent sends a little code into the ^sandbox, and only what that code printed is allowed back out.",
+  "Underneath, the idea is a good one. Your agent sends a little code into the ^sandbox, and only what that code printed is allowed back out.",
   { label: 'the sandbox', allowed: ['your code', 'what it printed'], blocked: ['the 535 KB log', 'raw page text'] },
   ['atWord']);
 
@@ -165,20 +168,20 @@ scene('s11', 'RETRIEVAL_RANK',
   ['atWord', 'rerankAtWord', 'fuseAtWord']);
 
 scene('s12', 'RECORDED_STEP',
-  "Installing ^it takes two commands, and you can run them straight from your terminal. The first adds the marketplace — simply a list of plugins that Claude Code knows about. The ^second installs this particular plugin from that ^list, and wires up its tools and its hooks for you automatically.",
+  "Installing ^it takes two commands, and you can run them straight from your terminal, exactly as you see here. One adds the marketplace — which is simply a list of plugins that Claude Code already knows about, the way a package manager knows where to look for things. The ^second installs this particular plugin from that ^list, and wires up its tools and its hooks for you automatically.",
   { recordedStep: { clips: [ rec('rec:ctxmode-install#market', 'add the marketplace', { focus: true }),
              rec('rec:ctxmode-install#install', 'install the plugin', { focus: true }) ],
     sourceNote: 'context-mode · github.com/mksglu/context-mode' } },
   ['recordedStep.clips.0.wantAtWord', 'recordedStep.clips.1.wantAtWord', 'recordedStep.atWord']);
 
 scene('s13', 'RECORDED_STEP',
-  "No config file, no API key, nothing else to set up. But before it saves you anything, it costs you something — and helpfully, Claude Code will tell you exactly what. Ask it for the plugin's ^details, and it reports nine hundred and seventy tokens, ^always on, added to every single session that you start from now on.",
+  "No config file, no API key, nothing else to set up. But before the plugin saves you anything, the plugin costs you something — and helpfully, Claude Code will tell you exactly how much. Ask for the ^details, and Claude Code reports nine hundred and seventy tokens, ^always on, added to every single session you start from now on.",
   { recordedStep: { clips: [ rec('rec:ctxmode-install#cost', "Claude Code's own estimate",
       { focus: true, callouts: [{ text: '~970 tokens, added to every session', mark: 'alwayson' }] }) ] } },
   ['recordedStep.clips.0.wantAtWord']);
 
 scene('s14', 'WATERFALL',
-  "Nine hundred and seventy is honest, but it is incomplete, and the gap matters. It counts the plugin's ^skills. It does not count the eleven ^tool definitions the server registers. It does not count the ^routing instructions the hooks push in at startup. Measured on a live session, switching it on really costs about ^three and a half thousand tokens, and you pay that on every turn you take.",
+  "Nine hundred and seventy's honest, but incomplete, and the gap matters. That figure counts the plugin's ^skills. It doesn't count the eleven ^tool definitions the server registers, and it doesn't count the ^routing instructions the hooks push in at startup, because neither of those exists until the session is running. Measured on a live session, the ^real per-turn cost of switching it on is about three and a half thousand tokens, and you pay that again on every single turn.",
   { unit: 'tok',
     bars: [ { label: 'skills', value: 970 }, { label: 'tool definitions', value: 1800 },
             { label: 'routing text', value: 630 }, { label: 'real, per turn', value: 3400, isTotal: true } ] },
@@ -187,7 +190,7 @@ scene('s14', 'WATERFALL',
 // ─── ACT 3 · measuring it honestly ──────────────────────────────────────────
 
 scene('s15', 'SPEC_COMPARE',
-  "So how do you ^check a saving like this? The plugin ships its own ^statistics command, and I didn't take a single number from it. A tool reporting on itself counts the bytes it ^diverted — it can't see what its own tool definitions cost you. Claude Code, though, writes a ^transcript of every session, and every turn in it records what that turn was billed.",
+  "How do you ^check a saving like this? Context-mode ships its own ^statistics command, and I didn't take a single number from that command — because a tool reporting on itself counts only the bytes ^diverted, and can't see what its own tool definitions cost you. Claude Code, though, writes a ^transcript of every session, and every turn in it records what that turn was billed.",
   { headline: 'Two ways to count',
     a: { name: 'its own stats' }, b: { name: 'the transcript' },
     rows: [ { label: 'who wrote it', a: 'the plugin', b: 'Claude Code', winner: 'b' },
@@ -210,7 +213,7 @@ scene('s16b', 'BAR_COMPARE',
   ['bars.1.atWord', 'bars.0.atWord']);
 
 scene('s16c', 'RECAP',
-  "So the bytes you keep out of the ^window and the money you actually ^save are related, but they are not the same number. That is why I report ^both, and why the cost column in this video is the one I trust least.",
+  "The bytes you keep out of the ^window and the money you actually ^save are related, but they're not the same number. That's why I report ^both, and why the cost column in this video is the one I trust least.",
   { heading: 'Two different questions',
     points: [ { text: 'Bytes kept out: counted, steady' },
               { text: 'Money saved: priced, and noisy' },
@@ -226,31 +229,31 @@ scene('s17', 'TEST_MATRIX',
   ['atWord']);
 
 scene('s18', 'RECORDED_STEP',
-  "This is the job with the plugin switched ^off. Same question, same file, nothing installed at all. Now watch carefully what the agent reaches for, because it is the whole argument of this video. It does not open the file. It writes one small ^command, runs it, and reads the few lines that come back — so the log never enters the ^conversation in the first place.",
+  "Here is the job with the plugin switched ^off. Same question, same file, nothing installed at all. Now watch carefully what the agent reaches for, because this is the whole argument of the video. Notice that the agent doesn't open the file at all. Instead, the agent writes one small ^command, runs the command, and reads the handful of lines that come back — so the log never enters the ^conversation in the first place.",
   { recordedStep: { clips: [ rec('rec:ctxmode-before#run', 'no plugin at all',
       { focus: true, callouts: [{ text: 'it writes a command instead of reading the file', mark: null }] }) ] } },
   ['recordedStep.clips.0.wantAtWord']);
 
 scene('s19', 'RECORDED_STEP',
-  "And here is the ^answer it lands on. Fifty failed requests, from three addresses, with the counts for each one. That is exactly right, and the half-megabyte of log behind it never went anywhere near the model's memory. No plugin was involved in any part of that.",
+  "And here is the ^answer the agent lands on. Fifty failed requests, from three addresses, with a count for each one. Exactly right — and the half-megabyte of log behind that answer never went anywhere near the model's memory. No plugin was involved at any point.",
   { recordedStep: { clips: [ rec('rec:ctxmode-before#answer', 'and the answer', { focus: true }) ] } },
   ['recordedStep.clips.0.wantAtWord']);
 
 scene('s20', 'RECORDED_STEP',
-  "Now the same question with the plugin ^on. This time one of context-mode's own tools fires instead of Bash. The file is handed to the ^sandbox, the counting happens out there, away from the conversation, and only a short summary ever comes ^back across. That is the mechanism doing exactly what it says on the tin, and it is genuinely neat to watch it happen.",
+  "Now the same question with the plugin ^on. Watch the tool list this time, because one of context-mode's own ^tools fires here instead of Bash. Out goes the file to the ^sandbox, the counting happens out there away from the conversation, and only a short summary ever comes back across — so that's the mechanism doing exactly what it says on the tin.",
   { recordedStep: { clips: [ rec('rec:ctxmode-after#run', 'with the plugin on',
       { focus: true, callouts: [{ text: 'a context-mode tool fires — not Bash', mark: null }] }) ] } },
   ['recordedStep.clips.0.wantAtWord']);
 
 scene('s21', 'BAR_COMPARE',
-  "On the code-reading job, with the big model, three runs each — it does the job. Without the plugin, ^forty-three kilobytes of raw material ended up in the window. With it, ^nineteen. Less than half the material, for exactly the same piece of work.",
+  "On the code-reading job, with the big model, three runs each — it does the job. Without the plugin, ^forty-three kilobytes of raw material ended up in the window. With it, ^nineteen. Less than half the material, for exactly the same piece of work — which means the window stays emptier for longer.",
   { bars: [ { label: 'plugin off', sub: 'three runs', value: 43.1, display: '43.1 KB' },
             { label: 'plugin on', sub: 'three runs', value: 19.2, display: '19.2 KB', color: 'green' } ],
     source: "measured from Claude Code's own session transcripts" },
   ['bars.0.atWord', 'bars.1.atWord']);
 
 scene('s21b', 'RECAP',
-  "Peak usage dropped about a ^fifth. And the answers scored ^identically — twelve out of twelve on a checklist I wrote from the source before either run started. Nothing was bought by making the model ^worse, which is the part I most wanted to check.",
+  "Peak usage dropped about a ^fifth, because the agent simply never pulled the whole file in. And the answers scored ^identically — twelve out of twelve on a checklist I wrote from the source before either run started. Nothing was bought by making the model ^worse, which is the part I most wanted to check.",
   { heading: 'The code job, both arms',
     points: [ { text: 'Peak context: 37.8K to 30.6K' }, { text: 'Rubric: 12/12 either way' },
               { text: 'No accuracy traded for the saving' } ] },
@@ -264,14 +267,14 @@ scene('s22', 'SANDBOX_BOX',
   ['atWord'], { transition: 'push' });
 
 scene('s23', 'BAR_COMPARE',
-  "So with the plugin off, that five-hundred-kilobyte log put ^zero point eight kilobytes into the conversation. With it on, ^zero point six. On that job it cost twenty-eight percent more.",
+  "With the plugin off, that five-hundred-kilobyte log put ^zero point eight kilobytes into the conversation. With the plugin on, ^zero point six. Two tenths of a kilobyte saved — and on that job it's twenty-eight percent more expensive, because the rent never stopped being charged.",
   { bars: [ { label: 'plugin off', sub: 'of a 535 KB log', value: 0.8, display: '0.8 KB' },
             { label: 'plugin on', sub: 'of a 535 KB log', value: 0.6, display: '0.6 KB' } ],
     source: 'log task, Opus 5, three runs per arm' },
   ['bars.0.atWord', 'bars.1.atWord']);
 
 scene('s24', 'TRADEOFF_SCALE',
-  "Which gives you a rule you can use ^tonight: it has to keep more out of the window than the rent it charges to be there.",
+  "Which gives you a rule you can use ^tonight: context-mode has to keep more out of the window than the rent context-mode charges for being there.",
   { headline: 'It has to beat its own [rent]',
     left: { label: 'rent', sub: '~3.4K every turn', asset: 'lucide:receipt' },
     right: { label: 'bytes kept out', sub: 'grows with work', asset: 'lucide:shield' },
@@ -279,13 +282,13 @@ scene('s24', 'TRADEOFF_SCALE',
   ['atWord']);
 
 scene('s25', 'RECORDED_STEP',
-  "One ^more thing, and almost nobody checks it — which is a shame, because it is the part that actually matters. A saving is not the same thing as a right answer. So read that run again, the one with the plugin switched on, slowly. It reports fifty-one failed requests, coming from four different ^addresses, and it sounds completely confident about it.",
+  "One ^more thing, and almost nobody checks this — which is a shame, because this is the part that actually matters. A saving isn't the same thing as a right answer. Read that run again, the one with the plugin switched on, slowly. Fifty-one failed requests, the model reports, coming from four different ^addresses, and sounds completely confident.",
   { recordedStep: { clips: [ rec('rec:ctxmode-after#tail', 'read it again, carefully',
       { focus: true }) ] } },
   ['recordedStep.clips.0.wantAtWord']);
 
 scene('s26', 'LOG_STREAM',
-  "The true answer, as the other run worked out a minute ago, is fifty, from three. The access log has a trap in it, deliberately. Look at the third line: a request to cart ^succeeded — status two hundred — and happened to return exactly five hundred bytes. Every other line here is a genuine checkout failure.",
+  "Fifty, from three, is the true answer, as the other run worked out a minute ago. The access log has a trap in it, deliberately. Look at the third line: a request to cart ^succeeded — status two hundred — and happened to return exactly five hundred bytes. Every other line here is a genuine checkout failure.",
   { lines: [ { level: 'error', tag: '10.0.3.17', text: '"GET /api/v1/checkout" 500 4821' },
              { level: 'error', tag: '10.0.6.29', text: '"GET /api/v1/checkout" 500 1130' },
              { level: 'info',  tag: '10.0.7.2',  text: '"GET /api/v1/cart" 200 500' },
@@ -294,7 +297,7 @@ scene('s26', 'LOG_STREAM',
   ['atWord']);
 
 scene('s27', 'SPEC_COMPARE',
-  "So a plain text search for five hundred finds that line and counts it as a failure. The small model read the text instead of the column — with the plugin on, and with it off. Context-mode didn't ^cause that, and it didn't ^prevent it ^either. If you take one thing from this video, take this: cheaper is not the same as righter, and no plugin does that part for you.",
+  "A plain text search for five hundred finds that line and counts the line as a failure. What happened is that the small model read the text instead of the column — with the plugin on, and with the plugin off. Context-mode didn't ^cause the mistake, and didn't ^prevent the mistake ^either. If you take one thing from this video, take this: cheaper is not the same as righter, and no plugin does that part for you.",
   { headline: 'Cheaper is not righter', source: 'log task, Haiku 4.5, three runs per arm',
     a: { name: 'plugin off' }, b: { name: 'plugin on' },
     rows: [ { label: 'bytes into context', a: '4.1 KB', b: '1.0 KB', winner: 'b' },
@@ -303,7 +306,7 @@ scene('s27', 'SPEC_COMPARE',
   ['rows.0.atWord', 'rows.1.atWord', 'rows.2.atWord']);
 
 scene('s28', 'SPEC_COMPARE',
-  "And this is the finding I keep thinking about. On the big model, across six runs with the plugin installed, its ^tools were called zero times. Not once. Those runs were still cheaper — because the hooks push in a ^paragraph telling the model that every byte a tool returns costs it ^later. The model read that, and used its ordinary tools more carefully. The prompt did the work here, not the sandbox.",
+  "And this is the finding I keep thinking about. On the big model, across six runs with the plugin installed, its ^tools were called zero times. Not once. Those runs were still cheaper — because the hooks push in a ^paragraph telling the model that every byte a tool returns costs it ^later. Having read that, the model used its ordinary tools more carefully. The prompt did the work here — not the sandbox.",
   { headline: 'Which half did the work?',
     a: { name: 'its tools' }, b: { name: 'its prompt' },
     rows: [ { label: 'times called', a: '0', b: 'every turn', winner: 'b' },
@@ -312,14 +315,14 @@ scene('s28', 'SPEC_COMPARE',
   ['rows.0.atWord', 'rows.1.atWord', 'rows.2.atWord']);
 
 scene('s29', 'BOX_PLOT',
-  "So I ^tested that on its own — the same argument written into a plain instructions file, no plugin and no rent. It does help. But look at the ^spread: the plugin lands in the same narrow band every run, while the free ^paragraph swings wildly from one run to the next.",
+  "I ^tested that on its own — the same argument written into a plain instructions file, no plugin and no rent. It does help. But look at the ^spread: the plugin lands in the same narrow band every run, while the free ^paragraph swings wildly from one run to the next, which is the whole problem with relying on it.",
   { boxes: [ { label: 'plugin', min: 48.4, q1: 49.5, median: 52.7, q3: 56.0, max: 60.7 },
              { label: 'paragraph', min: 38.4, q1: 55.0, median: 82.1, q3: 104.0, max: 120.0 } ],
     unit: 'KB' },
   ['atWord', 'boxes.0.atWord', 'boxes.1.atWord']);
 
 scene('s29b', 'TRADEOFF_SCALE',
-  "On one job the paragraph came out ^worse than doing nothing at all. So copy the wording by all means — it is free, and it helps. It is not a replacement for the thing that behaves the same way every time.",
+  "On one job the paragraph came out ^worse than doing nothing at all. Copy the wording by all means, because the wording is free and the wording helps. Just don't treat a paragraph as a replacement for something that behaves the same way every single run.",
   { headline: 'Copy the wording, but it is not a [replacement]',
     left: { label: 'a free paragraph', sub: 'swings run to run', asset: 'lucide:file-text' },
     right: { label: 'the plugin', sub: 'same band, always', asset: 'lucide:package' },
@@ -329,7 +332,7 @@ scene('s29b', 'TRADEOFF_SCALE',
 // ─── ACT 5 · the verdict ────────────────────────────────────────────────────
 
 scene('s30', 'TRADEOFF_SCALE',
-  "So, should you install it? If your sessions are already ^tidy, it costs more than it saves. If you're on a cheaper model, or your work drags in big files and chatty tool output, it's a clear win.",
+  "So, should you install context-mode? If your sessions are already ^tidy, the plugin'll cost more than it saves. But if you're on a cheaper model, or your work drags in big files and chatty tool output, context-mode is a clear win.",
   { headline: 'Worth it when the session is [heavy]',
     left: { label: 'tidy session', sub: 'rent for nothing', asset: 'lucide:feather' },
     right: { label: 'heavy session', sub: 'a quarter cheaper', asset: 'lucide:weight' },
@@ -347,7 +350,7 @@ scene('s31', 'SPEC_COMPARE',
   ['rows.2.atWord', 'rows.0.atWord', 'rows.3.atWord']);
 
 scene('s31b', 'CONTEXT_METER',
-  "So their ninety-eight percent isn't a ^lie. It measures a different case — one full of raw payloads — and your case is probably not that one.",
+  "Their ninety-eight percent isn't a ^lie. It's measuring a different case — one full of raw payloads — and your case probably isn't that one.",
   { headline: 'Their number, and yours', windowTokens: 200000,
     segments: [ { label: 'their case', tokens: 120000, kind: 'history' }, { label: 'raw payloads', tokens: 44000, kind: 'tools' },
                 { label: 'your case', tokens: 36000, kind: 'free' } ],
@@ -381,7 +384,8 @@ const spec = {
     topic: 'Context-mode, measured', format: 'long', fps: 30,
     subject: 'context-mode',
     audioPrefix: 'context-mode-measured_long',
-    screenplay: 'deep-dive',
+    screenplay: 'documentary',
+    topicAxes: ['economic-pain', 'entity-novelty'],
     onePayoff: 'Whether context-mode actually lowers what you pay, measured rather than claimed.',
     openLoop: 'It promises to save 98% of your context window. What does it actually save?',
     seo: {

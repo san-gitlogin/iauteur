@@ -5,7 +5,11 @@
     "fps": 30,
     "subject": "context-mode",
     "audioPrefix": "context-mode-measured_long",
-    "screenplay": "deep-dive",
+    "screenplay": "documentary",
+    "topicAxes": [
+      "economic-pain",
+      "entity-novelty"
+    ],
     "onePayoff": "Whether context-mode actually lowers what you pay, measured rather than claimed.",
     "openLoop": "It promises to save 98% of your context window. What does it actually save?",
     "seo": {
@@ -83,24 +87,26 @@
       "type": "HOOK",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "A plugin called context-mode promises to save ninety-eight percent of your context window. I measured fourteen. Here is the difference.",
+      "narration": "Context-mode promises to save ninety-eight percent of your context window. Does it?",
       "data": {
         "headline": "context-mode: 98%?",
         "subtext": "It promises 98%. I measured 14%.",
         "heroAsset": "lucide:gauge",
-        "hookVariant": "figure",
-        "atWord": 4,
-        "heroAtWord": 12,
-        "headlineAtWord": 13
+        "hookVariant": "ask",
+        "atWord": 1,
+        "heroAtWord": 8.083,
+        "headlineAtWord": 9.25
       },
-      "durationFrames": 227
+      "durationFrames": 175,
+      "audio": "audio/context-mode-measured_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
       "type": "RECORDED_STEP",
-      "transition": "fade",
+      "transition": "push",
       "background": "zoneA",
-      "narration": "That is the whole video in one table. The same job, done twice, on a real repository — and every number in it came out of Claude Code, not out of the plugin.",
+      "narration": "That is the whole video in one table. The same job, done twice, on a real repository — and every number here came out of Claude Code's own books, not out of the plugin's.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -108,7 +114,7 @@
               "ref": "rec:ctxmode-proof#table",
               "label": "the measured table",
               "focus": true,
-              "wantAtWord": 8,
+              "wantAtWord": 4.083,
               "id": "table",
               "src": "rec/ctxmode-proof/seg-02.mp4",
               "frames": 140,
@@ -225,35 +231,39 @@
               ],
               "shows": "$ node ctx-summary.mjs runs/t1-opus.json",
               "said": "PS ctxmode-ws> node ctx-summary.mjs runs/t1-opus.json\n■ code comprehension (57 KB source) · Claude Opus 5\n arm tool bytes into ctx peak context cost (NOISY) ctx calls\n plain Claude Code 43.1KB [39.5KB–47.7KB] 37.8K [36.1K–40.0K] $0.379 [$0.346–$0.410] 0\n context-mode plugin 19.2KB [14.9KB–24.8KB] 30.6K [27.9K–33.7K] $0.325 [$0.302–$0.353] 0 2.2× less\nCost spans 2-3x WITHIN an arm because of prompt-cache warmth — treat the cost column\nas indicative only. Tool bytes and peak context are counted, not priced, and are the\nnumbers any conclusion here rests on.\nPS ctxmode-ws>",
-              "atWord": 8
+              "atWord": 4.083
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 452
+      "durationFrames": 343,
+      "audio": "audio/context-mode-measured_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
       "type": "TITLE_CARD",
-      "transition": "fade",
+      "transition": "wipe",
       "background": "zoneA",
-      "narration": "Welcome back. Today we install it, point it at a real repository, and measure what it does to your bill — properly, with numbers you can check yourself.",
+      "narration": "Welcome back. Today we install context-mode, point the plugin at a real repository, and measure what happens to your bill — properly, with numbers you can check yourself.",
       "data": {
         "title": "Context-mode, measured",
         "subtitle": "Install it, measure the bill, decide",
-        "atWord": 20
+        "atWord": 16.5
       },
-      "durationFrames": 306
+      "durationFrames": 314,
+      "audio": "audio/context-mode-measured_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
       "type": "CONTEXT_METER",
-      "transition": "fade",
+      "transition": "dip",
       "background": "zoneA",
       "narration": "First, the thing being saved. A model reads everything through one fixed window — two hundred thousand tokens for Claude.",
       "data": {
@@ -283,10 +293,12 @@
             }
           ],
           "verdict": "Nothing leaves until the session ends",
-          "atWord": 13
+          "atWord": 10.833
         }
       },
-      "durationFrames": 227
+      "durationFrames": 239,
+      "audio": "audio/context-mode-measured_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -301,33 +313,35 @@
             {
               "label": "system prompt",
               "value": 14000,
-              "atWord": 5
+              "atWord": 4
             },
             {
               "label": "tool definitions",
               "value": 18000,
-              "atWord": 11
+              "atWord": 9.667
             },
             {
               "label": "the conversation",
               "value": 38000,
-              "atWord": 44
+              "atWord": 34.417
             },
             {
               "label": "room to think",
               "value": 130000,
               "isTotal": true,
-              "atWord": 26
+              "atWord": 22.583
             }
           ]
         }
       },
-      "durationFrames": 581
+      "durationFrames": 552,
+      "audio": "audio/context-mode-measured_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
       "type": "CONTEXT_METER",
-      "transition": "fade",
+      "transition": "zoom",
       "background": "zoneA",
       "narration": "Here's what costs you money. Your agent reads one big file, and the whole thing lands in that window.",
       "data": {
@@ -357,17 +371,19 @@
             }
           ],
           "verdict": "Re-sent on every turn that follows",
-          "atWord": 16
+          "atWord": 11.583
         }
       },
-      "durationFrames": 217
+      "durationFrames": 202,
+      "audio": "audio/context-mode-measured_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
       "type": "BAR_COMPARE",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "And it doesn't get read once and dropped. It's re-sent on every turn after that. So a careless read isn't a one-off charge — it's rent, and you pay it for the rest of the session.",
+      "narration": "And the file isn't read once and dropped. Those same tokens are re-sent on every turn that follows, because the model has no memory apart from this window. Which means a careless read isn't a one-off charge — the read is rent, and you go on paying it for the rest of the session.",
       "data": {
         "bars": [
           {
@@ -375,7 +391,7 @@
             "sub": "you think",
             "value": 96,
             "display": "96K tok",
-            "atWord": 10
+            "atWord": 9.25
           },
           {
             "label": "over 40 turns",
@@ -383,19 +399,21 @@
             "value": 3840,
             "display": "3.8M tok",
             "color": "orange",
-            "atWord": 26
+            "atWord": 32.333
           }
         ],
         "source": "the same tokens, re-sent every turn"
       },
-      "durationFrames": 384
+      "durationFrames": 477,
+      "audio": "audio/context-mode-measured_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
       "type": "QUOTE_SPOTLIGHT",
-      "transition": "fade",
+      "transition": "push",
       "background": "zoneA",
-      "narration": "So a tool that keeps those bytes out of your context window sounds worth having. This is what context-mode claims it will save you, on its own front page.",
+      "narration": "A tool that keeps those bytes out of your context window starts to sound worth having. Here is what context-mode claims to save you, written on the project's own front page.",
       "data": {
         "quote": "Save 98% of your context window.",
         "person": {
@@ -403,16 +421,18 @@
           "role": "the project README"
         },
         "source": "github.com/mksglu/context-mode — Elastic-2.0",
-        "atWord": 16
+        "atWord": 11.25
       },
-      "durationFrames": 315
+      "durationFrames": 315,
+      "audio": "audio/context-mode-measured_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
       "type": "DIAGRAM",
-      "transition": "fade",
+      "transition": "wipe",
       "background": "zoneA",
-      "narration": "So what is it? Four things wearing one name. An MCP server — Model Context Protocol, the standard way a tool plugs into an agent. A set of hooks that fire around your session. A sandbox that runs code in a separate process. And a SQLite index for anything too big to hold in the conversation.",
+      "narration": "What is it, then? Four things wearing one name. An MCP server — Model Context Protocol, the standard way a tool plugs into an agent. A set of hooks that fire around your session. A sandbox that runs code in a separate process. And a SQLite index — full-text search — which holds anything too big to keep in the conversation itself.",
       "data": {
         "diagram": {
           "layout": "hub",
@@ -427,28 +447,28 @@
               "label": "MCP server",
               "sub": "six tools",
               "asset": "lucide:plug",
-              "atWord": 11
+              "atWord": 8.417
             },
             {
               "id": "h",
               "label": "hooks",
               "sub": "wrap it",
               "asset": "lucide:anchor",
-              "atWord": 29
+              "atWord": 23.833
             },
             {
               "id": "s",
               "label": "sandbox",
               "sub": "own process",
               "asset": "lucide:box",
-              "atWord": 36
+              "atWord": 30
             },
             {
               "id": "d",
               "label": "SQLite index",
               "sub": "text search",
               "asset": "lucide:database",
-              "atWord": 46
+              "atWord": 38.833
             }
           ],
           "edges": [
@@ -471,14 +491,16 @@
           ]
         }
       },
-      "durationFrames": 581
+      "durationFrames": 643,
+      "audio": "audio/context-mode-measured_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
       "type": "SANDBOX_BOX",
-      "transition": "fade",
+      "transition": "dip",
       "background": "zoneA",
-      "narration": "The idea is good. Your agent sends a little code into the sandbox, and only what that code printed is allowed back out.",
+      "narration": "Underneath, the idea is a good one. Your agent sends a little code into the sandbox, and only what that code printed is allowed back out.",
       "data": {
         "sandbox": {
           "label": "the sandbox",
@@ -490,15 +512,17 @@
             "the 535 KB log",
             "raw page text"
           ],
-          "atWord": 13
+          "atWord": 10
         }
       },
-      "durationFrames": 256
+      "durationFrames": 249,
+      "audio": "audio/context-mode-measured_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
       "type": "RETRIEVAL_RANK",
-      "transition": "fade",
+      "transition": "slide",
       "background": "zoneA",
       "narration": "And when something is too big even for that — a whole access log, say — context-mode cuts it into chunks and files them in a search index. Later, a query pulls back only the chunks that match, scored by a formula called BM25 — which is just a way of ranking how well a passage answers a search. The rest never enters the conversation at all, which is the entire point of doing it this way.",
       "data": {
@@ -520,19 +544,21 @@
               "scoreFinal": 0.18
             }
           ],
-          "atWord": 21,
-          "rerankAtWord": 38,
-          "fuseAtWord": 61
+          "atWord": 13.167,
+          "rerankAtWord": 27,
+          "fuseAtWord": 45.083
         }
       },
-      "durationFrames": 788
+      "durationFrames": 673,
+      "audio": "audio/context-mode-measured_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
       "type": "RECORDED_STEP",
-      "transition": "fade",
+      "transition": "zoom",
       "background": "zoneA",
-      "narration": "Installing it takes two commands, and you can run them straight from your terminal. The first adds the marketplace — simply a list of plugins that Claude Code knows about. The second installs this particular plugin from that list, and wires up its tools and its hooks for you automatically.",
+      "narration": "Installing it takes two commands, and you can run them straight from your terminal, exactly as you see here. One adds the marketplace — which is simply a list of plugins that Claude Code already knows about, the way a package manager knows where to look for things. The second installs this particular plugin from that list, and wires up its tools and its hooks for you automatically.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -540,7 +566,7 @@
               "ref": "rec:ctxmode-install#market",
               "label": "add the marketplace",
               "focus": true,
-              "wantAtWord": 2,
+              "wantAtWord": 1.5,
               "id": "market",
               "src": "rec/ctxmode-install/seg-03.mp4",
               "frames": 219,
@@ -639,13 +665,13 @@
               ],
               "shows": "$ claude plugin marketplace add mksglu/context-mode",
               "said": "PS ctxmode-ws> claude plugin marketplace add mksglu/context-mode\nSSH not configured, cloning via HTTPS: https://github.com/mksglu/context-mode.git\nRefreshing marketplace cache (timeout: 120s)…\nCloning repository (timeout: 120s): https://github.com/mksglu/context-mode.git\nClone complete, validating marketplace…\nCleaning up old marketplace cache…\n✔ Successfully added marketplace: context-mode (declared in user settings)\nPS ctxmode-ws>",
-              "atWord": 5
+              "atWord": 2.917
             },
             {
               "ref": "rec:ctxmode-install#install",
               "label": "install the plugin",
               "focus": true,
-              "wantAtWord": 32,
+              "wantAtWord": 35,
               "id": "install",
               "src": "rec/ctxmode-install/seg-04.mp4",
               "frames": 215,
@@ -744,25 +770,27 @@
               ],
               "shows": "$ claude plugin install context-mode@context-mode",
               "said": "PS ctxmode-ws> claude plugin install context-mode@context-mode\n✔ Successfully installed plugin: context-mode@context-mode (scope: user)\nPS ctxmode-ws>",
-              "atWord": 29
+              "atWord": 30.333
             }
           ],
           "sourceNote": "context-mode · github.com/mksglu/context-mode",
-          "atWord": 39,
+          "atWord": 40.333,
           "capture": {
             "width": 1600,
             "height": 900
           }
         }
       },
-      "durationFrames": 877
+      "durationFrames": 608,
+      "audio": "audio/context-mode-measured_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "No config file, no API key, nothing else to set up. But before it saves you anything, it costs you something — and helpfully, Claude Code will tell you exactly what. Ask it for the plugin's details, and it reports nine hundred and seventy tokens, always on, added to every single session that you start from now on.",
+      "narration": "No config file, no API key, nothing else to set up. But before the plugin saves you anything, the plugin costs you something — and helpfully, Claude Code will tell you exactly how much. Ask for the details, and Claude Code reports nine hundred and seventy tokens, always on, added to every single session you start from now on.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -774,10 +802,10 @@
                 {
                   "text": "~970 tokens, added to every session",
                   "mark": "alwayson",
-                  "atWord": 47
+                  "atWord": 37.417
                 }
               ],
-              "wantAtWord": 37,
+              "wantAtWord": 28.833,
               "id": "cost",
               "src": "rec/ctxmode-install/seg-05.mp4",
               "frames": 222,
@@ -920,24 +948,26 @@
               ],
               "shows": "$ claude plugin details context-mode@context-mode | sed -n '1,13p'",
               "said": "edge base with BM25 ranking, and intent-driven search.\n Source: context-mode@context-mode\nComponent inventory\n Skills (8) context-mode, ctx-doctor, ctx-index, ctx-insight, ctx-purge, ctx-search, ctx-stats, ctx-upgrade\n Agents (0)\n Hooks (6) PostToolUse, PreCompact, PreToolUse, UserPromptSubmit, SessionStart, Stop (harness-only — no model context cost)\n MCP servers (0)\n LSP servers (0)\nProjected token cost\n Always-on: ~970 tok added to every session\nPS ctxmode-ws>\nPS ctxmode-ws> claude plugin details context-mode@context-mode | sed -n '1,13p'",
-              "atWord": 5
+              "atWord": 4.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 741
+      "durationFrames": 582,
+      "audio": "audio/context-mode-measured_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
       "type": "WATERFALL",
       "transition": "push",
       "background": "zoneA",
-      "narration": "Nine hundred and seventy is honest, but it is incomplete, and the gap matters. It counts the plugin's skills. It does not count the eleven tool definitions the server registers. It does not count the routing instructions the hooks push in at startup. Measured on a live session, switching it on really costs about three and a half thousand tokens, and you pay that on every turn you take.",
+      "narration": "Nine hundred and seventy's honest, but incomplete, and the gap matters. That figure counts the plugin's skills. It doesn't count the eleven tool definitions the server registers, and it doesn't count the routing instructions the hooks push in at startup, because neither of those exists until the session is running. Measured on a live session, the real per-turn cost of switching it on is about three and a half thousand tokens, and you pay that again on every single turn.",
       "data": {
         "waterfallChart": {
           "unit": "tok",
@@ -945,35 +975,37 @@
             {
               "label": "skills",
               "value": 970,
-              "atWord": 19
+              "atWord": 14.917
             },
             {
               "label": "tool definitions",
               "value": 1800,
-              "atWord": 26
+              "atWord": 19.833
             },
             {
               "label": "routing text",
               "value": 630,
-              "atWord": 36
+              "atWord": 27.25
             },
             {
               "label": "real, per turn",
               "value": 3400,
               "isTotal": true,
-              "atWord": 55
+              "atWord": 45
             }
           ]
         }
       },
-      "durationFrames": 709
+      "durationFrames": 771,
+      "audio": "audio/context-mode-measured_long_s14.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s15",
       "type": "SPEC_COMPARE",
-      "transition": "fade",
+      "transition": "wipe",
       "background": "zoneA",
-      "narration": "So how do you check a saving like this? The plugin ships its own statistics command, and I didn't take a single number from it. A tool reporting on itself counts the bytes it diverted — it can't see what its own tool definitions cost you. Claude Code, though, writes a transcript of every session, and every turn in it records what that turn was billed.",
+      "narration": "How do you check a saving like this? Context-mode ships its own statistics command, and I didn't take a single number from that command — because a tool reporting on itself counts only the bytes diverted, and can't see what its own tool definitions cost you. Claude Code, though, writes a transcript of every session, and every turn in it records what that turn was billed.",
       "data": {
         "compare": {
           "headline": "Two ways to count",
@@ -989,32 +1021,34 @@
               "a": "the plugin",
               "b": "Claude Code",
               "winner": "b",
-              "atWord": 15
+              "atWord": 8
             },
             {
               "label": "counts diverted bytes",
               "a": "yes",
               "b": "yes",
               "winner": "tie",
-              "atWord": 35
+              "atWord": 25.583
             },
             {
               "label": "sees its own cost",
               "a": "no",
               "b": "yes",
               "winner": "b",
-              "atWord": 52
+              "atWord": 40.25
             }
           ],
-          "atWord": 5
+          "atWord": 1
         }
       },
-      "durationFrames": 679
+      "durationFrames": 625,
+      "audio": "audio/context-mode-measured_long_s15.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16",
       "type": "WATERFALL",
-      "transition": "fade",
+      "transition": "dip",
       "background": "zoneA",
       "narration": "Every turn records four numbers. Fresh tokens. Tokens written to the cache. Tokens served straight from that cache. Add those three together and you get the exact size of the prompt that went out, which is the honest measure of how full that window really was at that moment.",
       "data": {
@@ -1024,33 +1058,35 @@
             {
               "label": "fresh",
               "value": 18,
-              "atWord": 6
+              "atWord": 5.833
             },
             {
               "label": "written to cache",
               "value": 20294,
-              "atWord": 9
+              "atWord": 10.25
             },
             {
               "label": "read from cache",
               "value": 190064,
-              "atWord": 16
+              "atWord": 15.917
             },
             {
               "label": "the prompt sent",
               "value": 210376,
               "isTotal": true,
-              "atWord": 34
+              "atWord": 27
             }
           ]
         }
       },
-      "durationFrames": 512
+      "durationFrames": 472,
+      "audio": "audio/context-mode-measured_long_s16.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16b",
       "type": "BAR_COMPARE",
-      "transition": "fade",
+      "transition": "slide",
       "background": "zoneA",
       "narration": "One catch worth knowing, because it explains the rest of this video. Those tokens are not all billed the same. Most of the window on any given turn is a cache read, charged at a small fraction of a fresh one, which changes the arithmetic completely.",
       "data": {
@@ -1060,7 +1096,7 @@
             "sub": "full price",
             "value": 20312,
             "display": "20.3K",
-            "atWord": 37
+            "atWord": 26.417
           },
           {
             "label": "read from cache",
@@ -1068,37 +1104,41 @@
             "value": 190064,
             "display": "190K",
             "color": "blue",
-            "atWord": 31
+            "atWord": 21.25
           }
         ],
         "source": "one measured turn — most of the window is a cache read"
       },
-      "durationFrames": 483
+      "durationFrames": 453,
+      "audio": "audio/context-mode-measured_long_s16b.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16c",
       "type": "RECAP",
-      "transition": "fade",
+      "transition": "zoom",
       "background": "zoneA",
-      "narration": "So the bytes you keep out of the window and the money you actually save are related, but they are not the same number. That is why I report both, and why the cost column in this video is the one I trust least.",
+      "narration": "The bytes you keep out of the window and the money you actually save are related, but they're not the same number. That's why I report both, and why the cost column in this video is the one I trust least.",
       "data": {
         "heading": "Two different questions",
         "points": [
           {
             "text": "Bytes kept out: counted, steady",
-            "atWord": 9
+            "atWord": 2.583
           },
           {
             "text": "Money saved: priced, and noisy",
-            "atWord": 15
+            "atWord": 6.583
           },
           {
             "text": "Cache warmth moves cost 2-3x on its own",
-            "atWord": 30
+            "atWord": 15.5
           }
         ]
       },
-      "durationFrames": 463
+      "durationFrames": 323,
+      "audio": "audio/context-mode-measured_long_s16c.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s17",
@@ -1139,17 +1179,19 @@
             }
           ],
           "headline": "Twelve cells, three runs each",
-          "atWord": 30
+          "atWord": 27
         }
       },
-      "durationFrames": 394
+      "durationFrames": 411,
+      "audio": "audio/context-mode-measured_long_s17.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s18",
       "type": "RECORDED_STEP",
-      "transition": "fade",
+      "transition": "push",
       "background": "zoneA",
-      "narration": "This is the job with the plugin switched off. Same question, same file, nothing installed at all. Now watch carefully what the agent reaches for, because it is the whole argument of this video. It does not open the file. It writes one small command, runs it, and reads the few lines that come back — so the log never enters the conversation in the first place.",
+      "narration": "Here is the job with the plugin switched off. Same question, same file, nothing installed at all. Now watch carefully what the agent reaches for, because this is the whole argument of the video. Notice that the agent doesn't open the file at all. Instead, the agent writes one small command, runs the command, and reads the handful of lines that come back — so the log never enters the conversation in the first place.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -1161,10 +1203,10 @@
                 {
                   "text": "it writes a command instead of reading the file",
                   "mark": null,
-                  "atWord": 49
+                  "atWord": 42.167
                 }
               ],
-              "wantAtWord": 9,
+              "wantAtWord": 4.167,
               "id": "run",
               "src": "rec/ctxmode-before/seg-02-run.mp4",
               "frames": 420,
@@ -1428,24 +1470,26 @@
                 419
               ],
               "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
-              "atWord": 9
+              "atWord": 4.167
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1110
+      "durationFrames": 725,
+      "audio": "audio/context-mode-measured_long_s18.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s19",
       "type": "RECORDED_STEP",
-      "transition": "fade",
+      "transition": "wipe",
       "background": "zoneA",
-      "narration": "And here is the answer it lands on. Fifty failed requests, from three addresses, with the counts for each one. That is exactly right, and the half-megabyte of log behind it never went anywhere near the model's memory. No plugin was involved in any part of that.",
+      "narration": "And here is the answer the agent lands on. Fifty failed requests, from three addresses, with a count for each one. Exactly right — and the half-megabyte of log behind that answer never went anywhere near the model's memory. No plugin was involved at any point.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -1453,7 +1497,7 @@
               "ref": "rec:ctxmode-before#answer",
               "label": "and the answer",
               "focus": true,
-              "wantAtWord": 5,
+              "wantAtWord": 3,
               "id": "answer",
               "src": "rec/ctxmode-before/seg-02-answer.mp4",
               "frames": 391,
@@ -1679,24 +1723,26 @@
               ],
               "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
               "said": " │ 10.0.7.2 │ 1 │\n └────────────┴───────┘\n The majority of 500 errors come from three IP addresses (10.0.6.29, 10.0.3.17, and 10.0.1.4), which account for 50 of the 51\n failed requests. Only one error originated from 10.0.7.2.\n✻ Baked for 11s · done 12:50 AM\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⏸ manual mode on · ? for shortcuts · ← for agents\nPS ctxmode-ws> claude 'Find every request in access.log that failed with HTTP status 500, and summarise which IP addresses they c\name from with a count for each. State the total number of failed requests.' --model claude-haiku-4-5-20251001",
-              "atWord": 5
+              "atWord": 3
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.333
         }
       },
-      "durationFrames": 995
+      "durationFrames": 508,
+      "audio": "audio/context-mode-measured_long_s19.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s20",
       "type": "RECORDED_STEP",
-      "transition": "fade",
+      "transition": "dip",
       "background": "zoneA",
-      "narration": "Now the same question with the plugin on. This time one of context-mode's own tools fires instead of Bash. The file is handed to the sandbox, the counting happens out there, away from the conversation, and only a short summary ever comes back across. That is the mechanism doing exactly what it says on the tin, and it is genuinely neat to watch it happen.",
+      "narration": "Now the same question with the plugin on. Watch the tool list this time, because one of context-mode's own tools fires here instead of Bash. Out goes the file to the sandbox, the counting happens out there away from the conversation, and only a short summary ever comes back across — so that's the mechanism doing exactly what it says on the tin.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -1708,10 +1754,10 @@
                 {
                   "text": "a context-mode tool fires — not Bash",
                   "mark": null,
-                  "atWord": 51
+                  "atWord": 36.833
                 }
               ],
-              "wantAtWord": 8,
+              "wantAtWord": 4.083,
               "id": "run",
               "src": "rec/ctxmode-after/seg-02-run.mp4",
               "frames": 480,
@@ -2012,24 +2058,26 @@
                 477
               ],
               "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
-              "atWord": 8
+              "atWord": 4.083
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1236
+      "durationFrames": 574,
+      "audio": "audio/context-mode-measured_long_s20.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s21",
       "type": "BAR_COMPARE",
-      "transition": "fade",
+      "transition": "slide",
       "background": "zoneA",
-      "narration": "On the code-reading job, with the big model, three runs each — it does the job. Without the plugin, forty-three kilobytes of raw material ended up in the window. With it, nineteen. Less than half the material, for exactly the same piece of work.",
+      "narration": "On the code-reading job, with the big model, three runs each — it does the job. Without the plugin, forty-three kilobytes of raw material ended up in the window. With it, nineteen. Less than half the material, for exactly the same piece of work — which means the window stays emptier for longer.",
       "data": {
         "bars": [
           {
@@ -2037,7 +2085,7 @@
             "sub": "three runs",
             "value": 43.1,
             "display": "43.1 KB",
-            "atWord": 20
+            "atWord": 17
           },
           {
             "label": "plugin on",
@@ -2045,37 +2093,41 @@
             "value": 19.2,
             "display": "19.2 KB",
             "color": "green",
-            "atWord": 32
+            "atWord": 28
           }
         ],
         "source": "measured from Claude Code's own session transcripts"
       },
-      "durationFrames": 463
+      "durationFrames": 537,
+      "audio": "audio/context-mode-measured_long_s21.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s21b",
       "type": "RECAP",
-      "transition": "fade",
+      "transition": "zoom",
       "background": "zoneA",
-      "narration": "Peak usage dropped about a fifth. And the answers scored identically — twelve out of twelve on a checklist I wrote from the source before either run started. Nothing was bought by making the model worse, which is the part I most wanted to check.",
+      "narration": "Peak usage dropped about a fifth, because the agent simply never pulled the whole file in. And the answers scored identically — twelve out of twelve on a checklist I wrote from the source before either run started. Nothing was bought by making the model worse, which is the part I most wanted to check.",
       "data": {
         "heading": "The code job, both arms",
         "points": [
           {
             "text": "Peak context: 37.8K to 30.6K",
-            "atWord": 6
+            "atWord": 3.083
           },
           {
             "text": "Rubric: 12/12 either way",
-            "atWord": 11
+            "atWord": 14.167
           },
           {
             "text": "No accuracy traded for the saving",
-            "atWord": 36
+            "atWord": 32.167
           }
         ]
       },
-      "durationFrames": 473
+      "durationFrames": 471,
+      "audio": "audio/context-mode-measured_long_s21b.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s22",
@@ -2092,17 +2144,19 @@
           "blocked": [
             "the 535 KB log"
           ],
-          "atWord": 12
+          "atWord": 7.667
         }
       },
-      "durationFrames": 424
+      "durationFrames": 382,
+      "audio": "audio/context-mode-measured_long_s22.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s23",
       "type": "BAR_COMPARE",
-      "transition": "fade",
+      "transition": "push",
       "background": "zoneA",
-      "narration": "So with the plugin off, that five-hundred-kilobyte log put zero point eight kilobytes into the conversation. With it on, zero point six. On that job it cost twenty-eight percent more.",
+      "narration": "With the plugin off, that five-hundred-kilobyte log put zero point eight kilobytes into the conversation. With the plugin on, zero point six. Two tenths of a kilobyte saved — and on that job it's twenty-eight percent more expensive, because the rent never stopped being charged.",
       "data": {
         "bars": [
           {
@@ -2110,26 +2164,28 @@
             "sub": "of a 535 KB log",
             "value": 0.8,
             "display": "0.8 KB",
-            "atWord": 10
+            "atWord": 6.333
           },
           {
             "label": "plugin on",
             "sub": "of a 535 KB log",
             "value": 0.6,
             "display": "0.6 KB",
-            "atWord": 20
+            "atWord": 15.583
           }
         ],
         "source": "log task, Opus 5, three runs per arm"
       },
-      "durationFrames": 325
+      "durationFrames": 472,
+      "audio": "audio/context-mode-measured_long_s23.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s24",
       "type": "TRADEOFF_SCALE",
-      "transition": "fade",
+      "transition": "wipe",
       "background": "zoneA",
-      "narration": "Which gives you a rule you can use tonight: it has to keep more out of the window than the rent it charges to be there.",
+      "narration": "Which gives you a rule you can use tonight: context-mode has to keep more out of the window than the rent context-mode charges for being there.",
       "data": {
         "tradeoff": {
           "headline": "It has to beat its own [rent]",
@@ -2144,17 +2200,19 @@
             "asset": "lucide:shield"
           },
           "lean": 0.35,
-          "atWord": 9
+          "atWord": 3.333
         }
       },
-      "durationFrames": 286
+      "durationFrames": 223,
+      "audio": "audio/context-mode-measured_long_s24.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s25",
       "type": "RECORDED_STEP",
-      "transition": "fade",
+      "transition": "dip",
       "background": "zoneA",
-      "narration": "One more thing, and almost nobody checks it — which is a shame, because it is the part that actually matters. A saving is not the same thing as a right answer. So read that run again, the one with the plugin switched on, slowly. It reports fifty-one failed requests, coming from four different addresses, and it sounds completely confident about it.",
+      "narration": "One more thing, and almost nobody checks this — which is a shame, because this is the part that actually matters. A saving isn't the same thing as a right answer. Read that run again, the one with the plugin switched on, slowly. Fifty-one failed requests, the model reports, coming from four different addresses, and sounds completely confident.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -2162,7 +2220,7 @@
               "ref": "rec:ctxmode-after#tail",
               "label": "read it again, carefully",
               "focus": true,
-              "wantAtWord": 2,
+              "wantAtWord": 1,
               "id": "tail",
               "src": "rec/ctxmode-after/seg-02-tail.mp4",
               "frames": 232,
@@ -2313,24 +2371,26 @@
               ],
               "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
               "said": " Total failed requests: 51\n The majority of the 500 errors come from two IP addresses (10.0.3.17 and 10.0.6.29), each accounting for 17 failures, followed\n by 10.0.1.4 with 16 failures. The remaining error came from 10.0.7.2.\n✽ Working… (running Stop hook · 18s · ↓ 1.5k tokens)\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⏸ manual mode on · esc to interrupt · ← for agents\nPS ctxmode-ws> claude 'Find every request in access.log that failed with HTTP status 500, and summarise which IP addresses they c\name from with a count for each. State the total number of failed requests.' --model claude-haiku-4-5-20251001",
-              "atWord": 5
+              "atWord": 2.917
             }
           ],
           "capture": {
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 789
+      "durationFrames": 614,
+      "audio": "audio/context-mode-measured_long_s25.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s26",
       "type": "LOG_STREAM",
-      "transition": "fade",
+      "transition": "slide",
       "background": "zoneA",
-      "narration": "The true answer, as the other run worked out a minute ago, is fifty, from three. The access log has a trap in it, deliberately. Look at the third line: a request to cart succeeded — status two hundred — and happened to return exactly five hundred bytes. Every other line here is a genuine checkout failure.",
+      "narration": "Fifty, from three, is the true answer, as the other run worked out a minute ago. The access log has a trap in it, deliberately. Look at the third line: a request to cart succeeded — status two hundred — and happened to return exactly five hundred bytes. Every other line here is a genuine checkout failure.",
       "data": {
         "logs": {
           "lines": [
@@ -2357,17 +2417,19 @@
           ],
           "highlight": 2,
           "rate": "5,000 lines",
-          "atWord": 35
+          "atWord": 26.917
         }
       },
-      "durationFrames": 591
+      "durationFrames": 609,
+      "audio": "audio/context-mode-measured_long_s26.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s27",
       "type": "SPEC_COMPARE",
-      "transition": "fade",
+      "transition": "zoom",
       "background": "zoneA",
-      "narration": "So a plain text search for five hundred finds that line and counts it as a failure. The small model read the text instead of the column — with the plugin on, and with it off. Context-mode didn't cause that, and it didn't prevent it either. If you take one thing from this video, take this: cheaper is not the same as righter, and no plugin does that part for you.",
+      "narration": "A plain text search for five hundred finds that line and counts the line as a failure. What happened is that the small model read the text instead of the column — with the plugin on, and with the plugin off. Context-mode didn't cause the mistake, and didn't prevent the mistake either. If you take one thing from this video, take this: cheaper is not the same as righter, and no plugin does that part for you.",
       "data": {
         "compare": {
           "headline": "Cheaper is not righter",
@@ -2384,33 +2446,35 @@
               "a": "4.1 KB",
               "b": "1.0 KB",
               "winner": "b",
-              "atWord": 39
+              "atWord": 30.167
             },
             {
               "label": "cost",
               "a": "baseline",
               "b": "−20%",
               "winner": "b",
-              "atWord": 44
+              "atWord": 34.833
             },
             {
               "label": "fell for the trap",
               "a": "yes",
               "b": "yes",
               "winner": "tie",
-              "atWord": 46
+              "atWord": 37.917
             }
           ]
         }
       },
-      "durationFrames": 729
+      "durationFrames": 674,
+      "audio": "audio/context-mode-measured_long_s27.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s28",
       "type": "SPEC_COMPARE",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "And this is the finding I keep thinking about. On the big model, across six runs with the plugin installed, its tools were called zero times. Not once. Those runs were still cheaper — because the hooks push in a paragraph telling the model that every byte a tool returns costs it later. The model read that, and used its ordinary tools more carefully. The prompt did the work here, not the sandbox.",
+      "narration": "And this is the finding I keep thinking about. On the big model, across six runs with the plugin installed, its tools were called zero times. Not once. Those runs were still cheaper — because the hooks push in a paragraph telling the model that every byte a tool returns costs it later. Having read that, the model used its ordinary tools more carefully. The prompt did the work here — not the sandbox.",
       "data": {
         "compare": {
           "headline": "Which half did the work?",
@@ -2426,33 +2490,35 @@
               "a": "0",
               "b": "every turn",
               "winner": "b",
-              "atWord": 22
+              "atWord": 14.917
             },
             {
               "label": "cut bytes on Opus",
               "a": "no",
               "b": "yes",
               "winner": "b",
-              "atWord": 41
+              "atWord": 31.167
             },
             {
               "label": "costs per turn",
               "a": "yes",
               "b": "a paragraph",
               "winner": "b",
-              "atWord": 53
+              "atWord": 39.667
             }
           ]
         }
       },
-      "durationFrames": 748
+      "durationFrames": 706,
+      "audio": "audio/context-mode-measured_long_s28.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s29",
       "type": "BOX_PLOT",
-      "transition": "fade",
+      "transition": "push",
       "background": "zoneA",
-      "narration": "So I tested that on its own — the same argument written into a plain instructions file, no plugin and no rent. It does help. But look at the spread: the plugin lands in the same narrow band every run, while the free paragraph swings wildly from one run to the next.",
+      "narration": "I tested that on its own — the same argument written into a plain instructions file, no plugin and no rent. It does help. But look at the spread: the plugin lands in the same narrow band every run, while the free paragraph swings wildly from one run to the next, which is the whole problem with relying on it.",
       "data": {
         "boxPlot": {
           "boxes": [
@@ -2463,7 +2529,7 @@
               "median": 52.7,
               "q3": 56,
               "max": 60.7,
-              "atWord": 30
+              "atWord": 20.667
             },
             {
               "label": "paragraph",
@@ -2472,21 +2538,23 @@
               "median": 82.1,
               "q3": 104,
               "max": 120,
-              "atWord": 44
+              "atWord": 31
             }
           ],
           "unit": "KB",
-          "atWord": 3
+          "atWord": 1
         }
       },
-      "durationFrames": 542
+      "durationFrames": 529,
+      "audio": "audio/context-mode-measured_long_s29.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s29b",
       "type": "TRADEOFF_SCALE",
-      "transition": "fade",
+      "transition": "wipe",
       "background": "zoneA",
-      "narration": "On one job the paragraph came out worse than doing nothing at all. So copy the wording by all means — it is free, and it helps. It is not a replacement for the thing that behaves the same way every time.",
+      "narration": "On one job the paragraph came out worse than doing nothing at all. Copy the wording by all means, because the wording is free and the wording helps. Just don't treat a paragraph as a replacement for something that behaves the same way every single run.",
       "data": {
         "tradeoff": {
           "headline": "Copy the wording, but it is not a [replacement]",
@@ -2501,17 +2569,19 @@
             "asset": "lucide:package"
           },
           "lean": 0.3,
-          "atWord": 8
+          "atWord": 4.667
         }
       },
-      "durationFrames": 443
+      "durationFrames": 427,
+      "audio": "audio/context-mode-measured_long_s29b.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s30",
       "type": "TRADEOFF_SCALE",
-      "transition": "fade",
+      "transition": "dip",
       "background": "zoneA",
-      "narration": "So, should you install it? If your sessions are already tidy, it costs more than it saves. If you're on a cheaper model, or your work drags in big files and chatty tool output, it's a clear win.",
+      "narration": "So, should you install context-mode? If your sessions are already tidy, the plugin'll cost more than it saves. But if you're on a cheaper model, or your work drags in big files and chatty tool output, context-mode is a clear win.",
       "data": {
         "tradeoff": {
           "headline": "Worth it when the session is [heavy]",
@@ -2526,15 +2596,17 @@
             "asset": "lucide:weight"
           },
           "lean": 0.5,
-          "atWord": 11
+          "atWord": 9.5
         }
       },
-      "durationFrames": 404
+      "durationFrames": 420,
+      "audio": "audio/context-mode-measured_long_s30.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s31",
       "type": "SPEC_COMPARE",
-      "transition": "fade",
+      "transition": "slide",
       "background": "zoneA",
       "narration": "Two honest gaps before you go. I never tested session continuity — the part that rebuilds your state after the conversation compacts — because these jobs were short and none of them ever compacted. And I used no external servers that dump huge payloads, which is the exact case their own benchmark is built on.",
       "data": {
@@ -2552,7 +2624,7 @@
               "a": "yes",
               "b": "—",
               "winner": "a",
-              "atWord": 34
+              "atWord": 28.583
             },
             {
               "label": "per-turn cost",
@@ -2565,26 +2637,28 @@
               "a": "—",
               "b": "not tested",
               "winner": "b",
-              "atWord": 11
+              "atWord": 8.417
             },
             {
               "label": "raw MCP payloads",
               "a": "—",
               "b": "not tested",
               "winner": "b",
-              "atWord": 44
+              "atWord": 36.917
             }
           ]
         }
       },
-      "durationFrames": 571
+      "durationFrames": 546,
+      "audio": "audio/context-mode-measured_long_s31.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s31b",
       "type": "CONTEXT_METER",
-      "transition": "fade",
+      "transition": "zoom",
       "background": "zoneA",
-      "narration": "So their ninety-eight percent isn't a lie. It measures a different case — one full of raw payloads — and your case is probably not that one.",
+      "narration": "Their ninety-eight percent isn't a lie. It's measuring a different case — one full of raw payloads — and your case probably isn't that one.",
       "data": {
         "context": {
           "headline": "Their number, and yours",
@@ -2607,10 +2681,12 @@
             }
           ],
           "verdict": "Both numbers can be true at once",
-          "atWord": 7
+          "atWord": 4.083
         }
       },
-      "durationFrames": 296
+      "durationFrames": 251,
+      "audio": "audio/context-mode-measured_long_s31b.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s32",
@@ -2623,24 +2699,26 @@
         "points": [
           {
             "text": "~3.4K tokens per turn, always",
-            "atWord": 8
+            "atWord": 6.25
           },
           {
             "text": "Heavy work: 2.2× less, ~14% cheaper",
-            "atWord": 30
+            "atWord": 20.333
           },
           {
             "text": "Light work: 28% more expensive",
-            "atWord": 45
+            "atWord": 32.917
           }
         ]
       },
-      "durationFrames": 552
+      "durationFrames": 501,
+      "audio": "audio/context-mode-measured_long_s32.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s33",
       "type": "QUOTE_SPOTLIGHT",
-      "transition": "fade",
+      "transition": "push",
       "background": "zoneA",
       "narration": "Context-mode is by Mert Koseoglu, it's on GitHub under the Elastic licence, and the link is below. Go and read it — it's a genuinely clever piece of engineering whichever way the numbers fall for you.",
       "data": {
@@ -2650,22 +2728,26 @@
           "role": "by Mert Koseoglu"
         },
         "source": "github.com/mksglu/context-mode — Elastic-2.0",
-        "atWord": 4
+        "atWord": 3.167
       },
-      "durationFrames": 384
+      "durationFrames": 363,
+      "audio": "audio/context-mode-measured_long_s33.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s34",
       "type": "OUTRO_CTA",
-      "transition": "fade",
+      "transition": "wipe",
       "background": "zoneA",
       "narration": "And if this saved you running the experiment yourself, subscribe — then go and measure it on your own work.",
       "data": {
         "message": "Measure it on your own work",
         "sub": "THE NBX STUDIO",
-        "atWord": 10
+        "atWord": 6
       },
-      "durationFrames": 227
+      "durationFrames": 188,
+      "audio": "audio/context-mode-measured_long_s34.mp3",
+      "timingSource": "tts"
     }
   ]
 }
