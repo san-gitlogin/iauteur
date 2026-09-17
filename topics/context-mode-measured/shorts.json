@@ -55,18 +55,19 @@
         "subtext": "I measured 14%",
         "heroAsset": "lucide:gauge",
         "hookVariant": "ask",
-        "heroAtWord": 9,
+        "heroAtWord": 7.75,
         "headlineAtWord": 1
       },
-      "durationFrames": 186,
-      "timingSource": "estimated"
+      "durationFrames": 183,
+      "timingSource": "tts",
+      "audio": "audio/context-mode-measured_shorts_s01.mp3"
     },
     {
       "id": "s02",
       "type": "BAR_COMPARE",
       "transition": "push",
       "background": "zoneA",
-      "narration": "On real code work it does help. Forty-three kilobytes of raw material went into the window without it. With it, nineteen. Less than half.",
+      "narration": "On real code work it does help. With the plugin off, forty-three kilobytes of raw material went into the window. With the plugin on, nineteen. Less than half, over three runs each.",
       "data": {
         "bars": [
           {
@@ -74,7 +75,7 @@
             "sub": "three runs",
             "value": 43.1,
             "display": "43.1 KB",
-            "atWord": 8
+            "atWord": 8.5
           },
           {
             "label": "plugin on",
@@ -82,13 +83,14 @@
             "value": 19.2,
             "display": "19.2 KB",
             "color": "green",
-            "atWord": 21
+            "atWord": 19.667
           }
         ],
         "source": "measured from Claude Code's own transcripts"
       },
-      "durationFrames": 318,
-      "timingSource": "estimated"
+      "durationFrames": 369,
+      "timingSource": "tts",
+      "audio": "audio/context-mode-measured_shorts_s02.mp3"
     },
     {
       "id": "s03",
@@ -123,11 +125,12 @@
             }
           ],
           "verdict": "Paid whether you use it or not",
-          "atWord": 11
+          "atWord": 6.833
         }
       },
-      "durationFrames": 294,
-      "timingSource": "estimated"
+      "durationFrames": 223,
+      "timingSource": "tts",
+      "audio": "audio/context-mode-measured_shorts_s03.mp3"
     },
     {
       "id": "s04",
@@ -149,11 +152,12 @@
             "asset": "lucide:weight"
           },
           "lean": 0.45,
-          "atWord": 13
+          "atWord": 8.5
         }
       },
-      "durationFrames": 342,
-      "timingSource": "estimated"
+      "durationFrames": 260,
+      "timingSource": "tts",
+      "audio": "audio/context-mode-measured_shorts_s04.mp3"
     },
     {
       "id": "s05",
@@ -167,7 +171,8 @@
         "atWord": 4
       },
       "durationFrames": 126,
-      "timingSource": "estimated"
+      "timingSource": "tts",
+      "audio": "audio/context-mode-measured_shorts_s05.mp3"
     }
   ]
 }

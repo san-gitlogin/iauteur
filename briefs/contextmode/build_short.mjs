@@ -47,7 +47,7 @@ scene('s01', 'HOOK',
   ['atWord', 'heroAtWord'], { transition: 'dip' });
 
 scene('s02', 'BAR_COMPARE',
-  'On real code work it does help. ^Forty-three kilobytes of raw material went into the window without it. With it, ^nineteen. Less than half.',
+  'On real code work it does help. With the plugin off, ^forty-three kilobytes of raw material went into the window. With the plugin on, ^nineteen. Less than half, over three runs each.',
   { bars: [ { label: 'plugin off', sub: 'three runs', value: 43.1, display: '43.1 KB' },
             { label: 'plugin on', sub: 'three runs', value: 19.2, display: '19.2 KB', color: 'green' } ],
     source: "measured from Claude Code's own transcripts" },

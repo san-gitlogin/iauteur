@@ -79,7 +79,7 @@
     "title": "IT PROMISES 98%",
     "badge": "context-mode",
     "note": "I measured 14%",
-    "asset": "lucide:gauge"
+    "art": "img:ctxmode-window.png"
   },
   "scenes": [
     {

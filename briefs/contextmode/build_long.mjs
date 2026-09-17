@@ -412,7 +412,7 @@ const spec = {
   brand: { theme: 'moderndark', themeLight: 'daylight', design: 'moderndark',
            background: 'aurora', channel: 'THE NBX STUDIO', logo: 'img:channel_logo.png' },
   thumbnail: { title: 'IT PROMISES 98%', badge: 'context-mode', note: 'I measured 14%',
-               asset: 'lucide:gauge' },
+               art: 'img:ctxmode-window.png' },
   scenes: S,
 };
 
