@@ -394,6 +394,7 @@ export type ReviewYieldScene = SceneCommon<'REVIEW_YIELD'> & { data: {
       hitLabel?: string;
       missLabel?: string;
       columns: Array<Record<string, unknown>>;
+      source?: string;
       caption?: string;
       color?: string;
       atWord?: number;
@@ -413,6 +414,7 @@ export type VarScopeScene = SceneCommon<'VAR_SCOPE'> & { data: {
       askLabel?: string;
       verdict?: string;
       steps: Array<Record<string, unknown>>;
+      source?: string;
       caption?: string;
       color?: string;
       atWord?: number;

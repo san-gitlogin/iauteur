@@ -20,7 +20,7 @@
       "hook": "A single colon turned a caught error into a silent success in Google's gRPC library. It was reviewed, approved, merged, and fixed a week later. Alibaba's free open-source reviewer found it blind.",
       "description": "A variable-scope bug in grpc/grpc-go: err := inside an if creates a new variable, so the check two lines later reads the function's own nil return value and reports success. Found blind by Open Code Review.",
       "breakdown": "the colon, the box that disappears, and the tool that caught it",
-      "pinned": "One character. Which one would you have spotted?",
+      "pinned": "One character. Would you have spotted it?",
       "tags": [
         "golang",
         "go programming",
@@ -61,7 +61,7 @@
   },
   "cover": {
     "title": "ONE CHARACTER SHIPPED THIS BUG",
-    "badge": "grpc-go",
+    "badge": "Open Code Review",
     "frames": 2
   },
   "scenes": [
@@ -70,191 +70,203 @@
       "type": "HOOK",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Google shipped this bug. Their reviewers approved it. One character caused it.",
+      "narration": "Open Code Review just caught a bug Google shipped.",
       "data": {
-        "headline": "One character shipped a bug",
-        "subtext": "and a free tool found it blind",
-        "hookVariant": "reveal",
-        "atWord": 6
+        "headline": "Open Code Review",
+        "subtext": "it caught a bug Google shipped",
+        "headlineAtWord": 1,
+        "heroAtWord": 5
       },
-      "durationFrames": 144
+      "durationFrames": 116
     },
     {
       "id": "s02",
-      "type": "CODE_RUN",
-      "transition": "fade",
-      "background": "zoneA",
-      "narration": "A variable is just a labelled box. This one's called err — short for error. Now look at that colon before the equals sign. It makes a brand new box, right there.",
-      "data": {
-        "codeRun": {
-          "codeRun": {
-            "filename": "stream.go",
-            "language": "go",
-            "resultLabel": "what it means",
-            "color": "red",
-            "atWord": 2,
-            "lines": [
-              {
-                "text": "if err := recv(...); err == nil {",
-                "detail": "the colon makes a NEW box",
-                "sub": "a second err, born right here",
-                "label": "new box",
-                "atWord": 16
-              },
-              {
-                "text": "}",
-                "detail": "the block ends",
-                "sub": "and the new box ends with it",
-                "atWord": 22
-              },
-              {
-                "text": "if err == io.EOF {",
-                "detail": "but which err is this?",
-                "sub": "the old one",
-                "atWord": 22
-              }
-            ]
-          },
-          "source": "grpc/grpc-go stream.go at 6d0aaaec"
-        }
-      },
-      "durationFrames": 334
-    },
-    {
-      "id": "s03",
-      "type": "VAR_SCOPE",
-      "transition": "slide",
-      "background": "zoneA",
-      "narration": "The real error drops into that new box. Then the brackets close — and a box made inside brackets dies with them. It's gone, and everything in it goes too.",
-      "data": {
-        "varScope": {
-          "varScope": {
-            "outerLabel": "err",
-            "outerSub": "the function's box — still empty",
-            "innerLabel": "err",
-            "innerSub": "made by the colon",
-            "fenceLabel": "if err := recv(...) { }",
-            "emptyLabel": "nil",
-            "valueLabel": "the real error",
-            "steps": [
-              {
-                "title": "outer",
-                "label": "old box",
-                "sub": "the function already has an err",
-                "atWord": 2
-              },
-              {
-                "title": "fence",
-                "label": "inside",
-                "sub": "now we are inside the brackets",
-                "atWord": 5
-              },
-              {
-                "title": "inner",
-                "label": "new box",
-                "sub": "a second box, same name",
-                "atWord": 6
-              },
-              {
-                "title": "fill",
-                "label": "filled",
-                "sub": "the real error goes in here",
-                "atWord": 9
-              },
-              {
-                "title": "vanish",
-                "label": "gone",
-                "sub": "the brackets close, and it is swept away",
-                "atWord": 18
-              }
-            ],
-            "color": "red",
-            "atWord": 1
-          }
-        }
-      },
-      "durationFrames": 315
-    },
-    {
-      "id": "s04",
-      "type": "VAR_SCOPE",
-      "transition": "fade",
-      "background": "zoneA",
-      "narration": "Two lines later the code asks for err. It reads the only box left, the old one. Empty. So a failed call reports success.",
-      "data": {
-        "varScope": {
-          "varScope": {
-            "outerLabel": "err",
-            "outerSub": "the only box left",
-            "innerLabel": "err",
-            "innerSub": "gone",
-            "fenceLabel": "if err := recv(...) { }",
-            "emptyLabel": "nil — empty",
-            "askLabel": "if err == io.EOF",
-            "verdict": "empty — reports success",
-            "steps": [
-              {
-                "title": "outer",
-                "label": "old box",
-                "sub": "still empty, never filled",
-                "atWord": 1
-              },
-              {
-                "title": "ask",
-                "label": "err?",
-                "sub": "the code asks for err again",
-                "atWord": 5
-              },
-              {
-                "title": "verdict",
-                "label": "empty",
-                "sub": "it finds nothing, so it says all is well",
-                "atWord": 12
-              }
-            ],
-            "caption": "a failed call reports success",
-            "color": "red",
-            "atWord": 1
-          }
-        }
-      },
-      "durationFrames": 258
-    },
-    {
-      "id": "s05",
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Alibaba's free reviewer found both, blind, in two minutes — then fixed them the same way the maintainers did.",
+      "narration": "Two findings. Both high — on a pull request Google reviewed, approved and merged.",
       "data": {
         "recordedStep": {
           "clips": [
             {
               "ref": "rec:ocr-blind#review",
-              "label": "found blind, in two minutes",
+              "label": "found blind",
               "focus": false,
               "atWord": 1,
               "zooms": [],
               "callouts": []
             }
           ],
-          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274"
         }
       },
-      "durationFrames": 211
+      "durationFrames": 163
+    },
+    {
+      "id": "s03",
+      "type": "CODE_RUN",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "A variable is a labelled box you drop a value into, and this box is called err — short for error. Now look at the tiny colon before the equals sign. That colon builds a brand new box.",
+      "data": {
+        "codeRun": {
+          "filename": "stream.go",
+          "language": "go",
+          "resultLabel": "what it means",
+          "color": "red",
+          "atWord": 2,
+          "lines": [
+            {
+              "text": "if err := recv(...); err == nil {",
+              "detail": "the colon makes a NEW box",
+              "sub": "a second err, born here",
+              "label": "new",
+              "atWord": 17
+            },
+            {
+              "text": "if err == io.EOF {",
+              "detail": "which err is this?",
+              "sub": "the old one",
+              "atWord": 26
+            }
+          ],
+          "caption": "one character, and the meaning inverts",
+          "source": "grpc/grpc-go stream.go at 6d0aaaec"
+        }
+      },
+      "durationFrames": 391
+    },
+    {
+      "id": "s04",
+      "type": "VAR_SCOPE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "The real error drops into the new box. Then the brackets close — and a box built inside brackets dies with them.",
+      "data": {
+        "varScope": {
+          "outerLabel": "err",
+          "outerSub": "the function's box",
+          "innerLabel": "err",
+          "innerSub": "made by the colon",
+          "fenceLabel": "if err := recv(...) { }",
+          "emptyLabel": "nil",
+          "valueLabel": "the real error",
+          "steps": [
+            {
+              "title": "outer",
+              "label": "old box",
+              "sub": "the function already has an err",
+              "atWord": 1
+            },
+            {
+              "title": "inner",
+              "label": "new box",
+              "sub": "a second box, same name",
+              "atWord": 3
+            },
+            {
+              "title": "fill",
+              "label": "filled",
+              "sub": "the real error goes in here",
+              "atWord": 6
+            },
+            {
+              "title": "vanish",
+              "label": "gone",
+              "sub": "the brackets close, and it is swept away",
+              "atWord": 14
+            }
+          ],
+          "color": "red",
+          "source": "grpc/grpc-go, fixed by commit 5c4da090",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 239
+    },
+    {
+      "id": "s05",
+      "type": "VAR_SCOPE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So the next line reaches for err and finds the old box, never filled. Empty. A failed call reports success.",
+      "data": {
+        "varScope": {
+          "outerLabel": "err",
+          "outerSub": "the only box left",
+          "innerLabel": "err",
+          "innerSub": "gone",
+          "emptyLabel": "nil — empty",
+          "askLabel": "if err == io.EOF",
+          "verdict": "empty — reports success",
+          "steps": [
+            {
+              "title": "outer",
+              "label": "old box",
+              "sub": "never filled",
+              "atWord": 2
+            },
+            {
+              "title": "ask",
+              "label": "err?",
+              "sub": "the code asks for err again",
+              "atWord": 6
+            },
+            {
+              "title": "verdict",
+              "label": "empty",
+              "sub": "it finds nothing, so it says all is well",
+              "atWord": 12
+            }
+          ],
+          "caption": "a failed call reports success",
+          "color": "red",
+          "atWord": 1
+        }
+      },
+      "durationFrames": 220
     },
     {
       "id": "s06",
+      "type": "RECORDED_STEP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Here's the official page. Alibaba built Open Code Review, Apache licensed and free.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-gh#about",
+              "label": "the official page",
+              "focus": false,
+              "atWord": 2,
+              "zooms": [
+                {
+                  "marks": [
+                    "licence"
+                  ],
+                  "wantAtWord": 10
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0"
+        }
+      },
+      "durationFrames": 154
+    },
+    {
+      "id": "s07",
       "type": "OUTRO_CTA",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Open Code Review. Free, open licence, runs inside Claude Code. Full test on the channel.",
+      "narration": "Open Code Review runs inside Claude Code. Full test on the channel.",
       "data": {
-        "headline": "Open Code Review",
-        "subtext": "free · Apache-2.0 · full test on the channel",
-        "atWord": 6
+        "message": "Full test on the channel",
+        "sub": "github.com/alibaba/open-code-review"
       },
-      "durationFrames": 173
+      "durationFrames": 144
     }
   ]
 }

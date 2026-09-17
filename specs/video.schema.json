@@ -669,6 +669,10 @@
                           },
                           "description": "2-3 runs. label = the run's name; sub = the condition; value = total findings; detail = correct findings (as a number in text); tag = the read-out line; color; atWord"
                         },
+                        "source": {
+                          "type": "string",
+                          "description": "where the figures came from"
+                        },
                         "caption": {
                           "type": "string",
                           "description": "one line under the walls, <= 72 chars"
@@ -750,6 +754,10 @@
                             "type": "object"
                           },
                           "description": "title = phase: outer | fence | inner | fill | vanish | ask | verdict. sub = the plain-English line shown while that phase is live. each carries atWord."
+                        },
+                        "source": {
+                          "type": "string",
+                          "description": "where the figures came from"
                         },
                         "caption": {
                           "type": "string",

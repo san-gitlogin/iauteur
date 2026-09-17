@@ -886,6 +886,38 @@ export const assertAgentWorkspaceTrusted = (demo, ws) => {
     `(add the /private-prefixed spelling too on macOS), or run the agent with \`-p\`, which never prompts.`);
 };
 
+/**
+ * THE SAME FAILURE, ONE LAYER DOWN: a tool-permission prompt.
+ *
+ * After the trust prompt was sealed, the very next take hung for sixteen minutes on
+ * "This command requires approval / Do you want to proceed?" — Claude Code asking before
+ * running `ocr delegate preview`. `--permission-mode acceptEdits` was set, and covers only
+ * FILE EDITS, not commands. Same shape as the trust bug, same cost, caught the same way:
+ * by pulling the last frame and looking at it.
+ *
+ * So the rule is the general one, not the specific one: a recorded agent run must be unable
+ * to stop and ask. It has to carry an explicit pre-approval — `--allowedTools`, a
+ * `--permission-mode` that does not prompt, or `--dangerously-skip-permissions`.
+ * Exported for the seal test.
+ */
+export const assertAgentRunCannotPrompt = (demo) => {
+  const NON_PROMPTING = /--allowedTools\b|--allowed-tools\b|--dangerously-skip-permissions\b|--permission-mode\s+(?:bypassPermissions|auto)\b/;
+  for (const s of demo.steps ?? []) {
+    if (typeof s.cmd !== 'string') continue;
+    if (!/(^|[\s;&|(])claude(\s|$)/.test(s.cmd)) continue;
+    if (/\s-p\b|--print\b/.test(s.cmd)) continue;          // print mode never prompts
+    if (NON_PROMPTING.test(s.cmd)) continue;
+    throw new Error(
+      `Step "${s.id}" runs an interactive \`claude\` with nothing pre-approved:\n    ${s.cmd}\n\n` +
+      `The first tool call it wants to make will draw "This command requires approval" and wait for ` +
+      `a keypress the recorder never sends. The take then hangs until its timeout and captures the ` +
+      `prompt instead of the work (recorded 2026-09-17, sixteen minutes lost).\n\n` +
+      `Note that \`--permission-mode acceptEdits\` is NOT enough — it covers file edits, not commands.\n` +
+      `Add an explicit pre-approval, e.g.:\n` +
+      `    claude --allowedTools "Bash,Read,Grep,Glob,Edit" '<your prompt>'`);
+  }
+};
+
 // ── step actions ─────────────────────────────────────────────────────────────
 
 const actions = {
@@ -1483,6 +1515,7 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
   // refuse now and say exactly how to fix it. Failing in a second beats hanging for thirty
   // minutes, and a prompt on camera is a defect even when it does not hang.
   assertAgentWorkspaceTrusted(demo, ws);
+  assertAgentRunCannotPrompt(demo);
 
   const rec = path.resolve(outDir || path.join('public/rec', slug));
   freshRecDir(rec, slug);

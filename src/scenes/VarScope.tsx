@@ -326,7 +326,7 @@ export const VarScope: React.FC<{scene: Scene}> = ({scene}) => {
         </div>
       ) : null}
 
-      {scene.data.source ? <SourceFooter text={scene.data.source} /> : null}
+      {d.source ?? scene.data.source ? <SourceFooter text={(d.source ?? scene.data.source)!} /> : null}
     </AbsoluteFill>
   );
 };

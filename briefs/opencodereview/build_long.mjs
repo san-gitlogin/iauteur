@@ -1,19 +1,24 @@
 // Open Code Review — Alibaba's reviewer, tested against a bug Google shipped. WIDE CUT.
 //
-// Every claim traces to briefs/opencodereview/00-dossier.md (the repo's own README, the two
-// PNGs it embeds, the GitHub and npm APIs) or to briefs/opencodereview/02-blindrun.md (the two
-// reviews we actually ran). No number came from a blog post.
+// Every claim traces to briefs/opencodereview/00-dossier.md (the repo's own README, the two PNGs
+// it embeds, the GitHub and npm APIs) or to 02-blindrun.md (the two reviews we actually ran).
 //
-// THE RULE THAT GOVERNS THIS SCRIPT is briefs/opencodereview/01-plain-language.md. Owner,
-// 2026-09-17: "beginners will be watching... narrate to the viewers like they are 5." Every
-// technical word is defined in the same breath it first appears — code review, pull request,
-// diff, token, variable, nil, scope. If a beat needs two definitions, it is split. Runtime is
-// free; a viewer who is lost is not.
+// THE RULE THAT GOVERNS THIS SCRIPT is 01-plain-language.md. Owner, 2026-09-17: "beginners will be
+// watching... narrate to the viewers like they are 5." Every technical word is defined in the same
+// breath it first appears — code review, pull request, diff, token, variable, nil, scope. Where a
+// beat needed two definitions it was SPLIT rather than compressed. Runtime is free; a lost viewer
+// is not.
+//
+// BUDGET DISCIPLINE (LAW 0e.6 / the linter's dwell rule): a beat earns 16s at two anchored
+// elements and six more seconds per anchor after that, so words <= 3.1 x earned seconds. Every
+// drawn beat below is cast for a component that can carry ENOUGH ANCHORS for what it has to say —
+// adding anchors, never trimming the teaching (owner: "i dont want you to take any sort of easy
+// path").
 //
 // Takes: ocr-gh (the repository page), ocr-setup (install), ocr-rules (the checklists),
-// ocr-control (a good pull request), ocr-proof (the PR and the answer key on GitHub),
-// ocr-blind (the blind test).
+// ocr-control (a good pull request), ocr-proof (the PR and the answer key), ocr-blind (the test).
 import {cut} from '../../scripts/lib/apple-build.mjs';
+import {MANIFEST} from '../../scripts/lib/manifest.mjs';
 
 const c = cut();
 
@@ -26,7 +31,8 @@ const wordIndex = (narration, phrase) => {
 
 const OCRGH = 'alibaba/open-code-review · github.com · Apache-2.0';
 const GRPC = 'grpc/grpc-go · github.com · Apache-2.0';
-const LOCAL = 'recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274';
+const LOCAL = 'ocr v1.12.4 · Claude Code 2.1.274';
+const BENCH = 'AACR-Bench, published by Alibaba · Claude-4.6-Opus rows';
 
 const rec = (defTake) => (transition, bg, narration, source, clips) =>
   c.add('RECORDED_STEP', transition, bg, narration, (A) => ({
@@ -42,6 +48,19 @@ const rec = (defTake) => (transition, bg, narration, source, clips) =>
     sourceNote: source,
   }));
 
+// `cut().add` already wraps a beat's body in the manifest's data_key, so a body authored as
+// {varScope: {...}} lands at data.varScope.varScope and every required field reads as missing.
+// This unwraps one accidental level and folds any siblings (e.g. `source`) into the inner object,
+// which is where the manifest examples keep them.
+const add = (type, transition, bg, narration, mk = () => ({}), opts) =>
+  c.add(type, transition, bg, narration, (A, n, str) => {
+    const body = mk(A, n, str) ?? {};
+    const key = MANIFEST[type]?.data_key;
+    if (!key || !body[key]) return body;
+    const {[key]: inner, ...rest} = body;
+    return {...inner, ...rest};
+  }, opts);
+
 const gh = rec('ocr-gh');
 const setup = rec('ocr-setup');
 const rules = rec('ocr-rules');
@@ -50,746 +69,774 @@ const blind = rec('ocr-blind');
 const proof = rec('ocr-proof');
 
 // ═══ 1 · HOOK ═══════════════════════════════════════════════════════════════════
-c.add('HOOK', 'dip', 'zoneA',
-  "Alibaba just open-sourced their code reviewer. We gave it a bug Google shipped.",
+add('HOOK', 'dip', 'zoneA',
+  "Open Code Review is free. We gave it a bug that Google shipped.",
   (A) => ({
-    headline: 'The reviewer that caught what Google missed',
-    subtext: 'Open Code Review, tested on a real pull request',
-    hookVariant: 'reveal',
-    atWord: A(0.5),
+    headline: 'Open Code Review',
+    subtext: 'the free reviewer that caught what Google missed',
+    headlineAtWord: 1,
+    heroAtWord: A(0.55),
   }));
 
-// ═══ 2 · TITLE ══════════════════════════════════════════════════════════════════
-c.add('TITLE_CARD', 'fade', 'zoneA',
-  "Welcome back. Today we're going to install a tool called Open Code Review, plug it straight into " +
-  "Claude Code, and point it at two real pull requests from Google's gRPC library. One of them is " +
-  "fine. The other one had a bug in it — a bug that got approved, merged, and shipped, and then had " +
-  "to be fixed a week later. We won't tell the reviewer which is which. And by the end, you'll " +
-  "understand exactly what that bug was, even if you've never written a line of Go in your life.",
-  (A) => ({
+// ═══ 2 · TITLE — 2 anchors, ~50 words ═══════════════════════════════════════════
+add('TITLE_CARD', 'fade', 'zoneA',
+  "Welcome back. Today we install Alibaba's code reviewer, plug it into Claude Code, and point it " +
+  "at two real pull requests from Google. One is fine. The other hid a bug for a week. Can a " +
+  "machine find what three professional reviewers walked straight past?",
+  () => ({
     title: 'Two pull requests. One hidden bug.',
     subtitle: 'Open Code Review, installed and tested live',
-    atWord: A(0.35),
   }));
 
 // ═══ I · WHAT IT IS ═════════════════════════════════════════════════════════════
 
-// 3 · the repository page — LAW: show the source of truth, early, on camera.
+// 3 · the repository page. 2 clips + 4 zooms = 6 anchors → 40s → ~124 words.
 gh('letterbox', 'zoneB',
-  "So let's start where anyone should start, which is the project's own page on GitHub. This is it — " +
-  "Open Code Review, and look at who publishes it. That's Alibaba. Now, GitHub is just the place " +
-  "programmers keep their code, and a page like this one is called a repository — think of it as the " +
-  "project's folder, with every file and its whole history in it. Read the description underneath, " +
-  "because they've written it plainly: fast, efficient, battle-tested at Alibaba's scale. And over on " +
-  "the right, the licence says Apache two point oh, which is the important bit for you — that's a " +
-  "proper open licence. It's free, you can read every line of it, and you can use it at work without " +
-  "asking anyone's permission.",
+  "Let's start where anyone sensible starts, which is the project's own page on GitHub. GitHub is " +
+  "where programmers keep their code, and a page like this is called a repository — think of it as " +
+  "the project's folder, holding every file and its whole history. Look at who publishes this one. " +
+  "That's Alibaba. Underneath sits the description, and they've written it plainly: fast, " +
+  "efficient, battle-tested at Alibaba's scale. Over on the right, the licence reads Apache two " +
+  "point oh, which matters more than it sounds. Apache two point oh means free, readable, and " +
+  "usable at work without asking anyone's permission.",
   OCRGH,
   [
-    {step: 'repo', at: 0.04, label: 'the official page', camera: [{frame: 'owner', at: 'That\'s Alibaba', band: true}]},
-    {step: 'about', pivot: 'Read the description', label: 'the description and the licence',
-      camera: [{frame: 'desc', at: 'battle-tested at Alibaba\'s scale'}, {frame: 'licence', at: 'Apache two point oh'}]},
+    {step: 'repo', at: 0.04, label: 'the official page',
+      camera: [{frame: 'owner', at: "That's Alibaba", band: true}]},
+    {step: 'about', at: 0.45, pivot: 'Underneath sits the description', label: 'description and licence',
+      camera: [
+        {frame: 'desc', at: "battle-tested at Alibaba's"},
+        {frame: 'licence', at: 'the licence reads Apache'},
+        {frame: 'licence', at: 'which matters more', band: true},
+      ]},
   ]);
 
-// 4 · what a code review even is. The whole video rests on this; a beginner cannot
-// evaluate a reviewer until they know what reviewing IS.
-c.add('STEP_FLOW', 'slide', 'zoneA',
-  "Before we go any further, let's make sure we're talking about the same thing, because everything " +
-  "today hangs on one idea. When a programmer finishes a piece of work, they don't just drop it into " +
-  "the company's product. They package it up and ask permission. That package has a name — it's called " +
-  "a pull request, and you can think of it as a folder that says: here's what I changed, please look " +
-  "before you let it in. Then another programmer reads it and either says yes, or asks for changes. " +
-  "That reading is the code review. And it is, genuinely, the last human check before code reaches " +
-  "real people. Which is why it matters so much when something slips through it.",
+// 4 · what a code review IS. 6 anchors → 40s → ~124 words.
+add('STEP_FLOW', 'slide', 'zoneA',
+  "Before we go further, let's agree on one idea, because everything today rests on it. When a " +
+  "programmer finishes a piece of work, they don't drop it straight into the company's product. " +
+  "The programmer packages the work up and asks permission, because nobody merges straight into a live product. That package has a name: a pull request. Picture a folder " +
+  "with a note on the front saying here's what I changed, please look before you let this in. " +
+  "Another programmer reads it and either agrees or asks for changes. That reading is the code review — the last check before code reaches real people.",
   (A) => ({
-    stepFlow: {
-      title: 'how code gets in',
-      steps: [
-        {label: 'a change', sub: 'someone writes new code', atWord: A(0.18)},
-        {label: 'a pull request', sub: 'here is what I changed — please look', atWord: A(0.36)},
-        {label: 'the review', sub: 'another programmer reads it and decides', atWord: A(0.55)},
-        {label: 'merged', sub: 'it goes into the real product', atWord: A(0.68)},
-      ],
-      caption: 'the review is the last human check before your users get it',
-      color: 'blue',
-      atWord: A(0.08),
-    },
+    steps: [
+      {title: 'A change', sub: 'someone writes new code', atWord: A(0.14)},
+      {title: 'A pull request', sub: 'here is what I changed', atWord: A(0.3)},
+      {title: 'Please look', sub: 'permission asked, not taken', atWord: A(0.44)},
+      {title: 'The review', sub: 'another programmer decides', atWord: A(0.58)},
+      {title: 'Merged', sub: 'it reaches real users', atWord: A(0.72)},
+    ],
+    source: 'how every team on GitHub ships code',
   }));
 
-// 5 · where it came from
+// 5 · where it came from. 1 clip + 2 zooms = 3 anchors → 22s → ~68 words.
 gh('fade', 'zoneB',
-  "Right — so what is this thing, and why should you trust it? Here's the answer, in their own words. " +
-  "Open Code Review didn't start as an open-source side project. It started inside Alibaba as their " +
-  "official internal reviewer, and it's been running there for two years. Read that line: tens of " +
-  "thousands of developers, and millions of code defects found. A defect is just a bug — something " +
-  "wrong in the code. So this is not somebody's weekend experiment that got popular. It's a tool that " +
-  "has already done this job, at enormous scale, inside one of the largest engineering companies on " +
-  "earth, and they've now given it away.",
+  "So what is this thing, and why trust it? Here's their answer, in their own words. Open Code " +
+  "Review didn't begin as a weekend project. Open Code Review began inside Alibaba as their official internal " +
+  "reviewer, and it has run there for two years. Read that line: tens of thousands of developers, " +
+  "and millions of defects found. A defect is simply a bug, so that line means millions of real problems caught before anyone shipped them, which is a claim worth testing.",
   OCRGH,
-  [{step: 'what', at: 0.06, label: 'where it came from',
-    camera: [{frame: 'origin', at: 'tens of thousands of developers'}]}]);
+  [{step: 'what', at: 0.08, label: 'where it came from',
+    camera: [
+      {frame: 'origin', at: 'tens of thousands of developers'},
+      {frame: 'origin', at: 'millions of defects found', band: true},
+      {frame: 'full', at: 'millions of real problems caught'},
+    ]}]);
 
-// 6 · the scale numbers, drawn
-c.add('STAT_PANELS', 'slide', 'zoneA',
-  "And those numbers are worth sitting with for a second, because they're the reason this is " +
-  "interesting rather than just new. Twenty thousand engineers inside Alibaba use it. It has run " +
-  "three million reviews. And in the last thirty days alone, people downloaded it three hundred and " +
-  "twenty-nine thousand times — I checked that one myself against the download counter, and it's " +
-  "real. That last number is the one I'd watch, honestly. Internal usage can be a company telling its " +
-  "own staff what to use. Three hundred thousand downloads a month is the rest of the world " +
-  "volunteering.",
+// 6 · the scale numbers. 4 anchors → 28s → ~87 words.
+add('STAT_PANELS', 'slide', 'zoneA',
+  "Those numbers deserve a moment, because they're why this is interesting rather than merely new. " +
+  "Twenty thousand engineers inside Alibaba use the tool, and between them have run three million reviews. And in the " +
+  "last thirty days, people downloaded it three hundred and twenty-nine thousand times. I checked " +
+  "that download figure against the registry myself, because internal usage can just be a company " +
+  "telling its own staff what to use. Three hundred thousand downloads a month is the rest of the " +
+  "world volunteering.",
   (A) => ({
     stats: [
-      {label: 'engineers inside Alibaba', value: '20K+', sub: 'daily users', atWord: A(0.15)},
-      {label: 'reviews already run', value: '3M+', sub: 'to date', atWord: A(0.28)},
-      {label: 'downloads last 30 days', value: '329K', sub: 'verified on npm', atWord: A(0.42)},
+      {kicker: 'Alibaba engineers', value: '20K+', atWord: A(0.14)},
+      {kicker: 'Reviews run', value: '3M+', atWord: A(0.24)},
+      {kicker: 'Downloads, 30 days', value: '329K', color: 'green', atWord: A(0.36)},
     ],
+    verdict: {text: 'the world volunteering', color: 'green', atWord: A(0.62)},
     source: 'alibaba/open-code-review README + npm registry API, 17 Sep 2026',
   }));
 
 // ═══ II · THE CLAIM ═════════════════════════════════════════════════════════════
 
-c.add('CHAPTER', 'wipe', 'zoneC',
-  "Now we get to the claim that made me want to make this video at all.",
-  (A) => ({title: 'The claim', subtitle: 'it says it beats Claude Code', atWord: A(0.4)}));
+add('CHAPTER', 'wipe', 'zoneC',
+  "Now for the claim that made me want to make this video at all.",
+  () => ({chapter: {number: '01', title: 'The claim', subtitle: 'it says it beats Claude Code'}}));
 
-// 8 · the benchmark page
+// 8 · the benchmark page. 1 clip + 4 zooms = 5 anchors → 34s → ~105 words.
 gh('letterbox', 'zoneB',
-  "Here's the benchmark on their page. A benchmark is just a test you run on lots of examples so you " +
-  "can compare tools fairly. And they built a serious one: fifty popular open-source projects, two " +
-  "hundred real pull requests, ten different programming languages — and then, this is the part I " +
-  "like, more than eighty senior engineers went through it by hand and agreed on fifteen hundred and " +
-  "five real bugs. That's the answer key. Now read the claim above it. Compared with a general-purpose " +
-  "agent — and the one they name is Claude Code — they say they find better results using about a " +
-  "ninth of the tokens. A token is just a chunk of text, roughly three-quarters of a word, and it's " +
-  "what you're billed for. So a ninth of the tokens means a ninth of the bill.",
+  "Here's their benchmark. A benchmark is a test run over many examples so tools can be compared " +
+  "fairly, and theirs is a serious one: fifty popular open-source projects, two hundred real pull " +
+  "requests, ten programming languages. Then more than eighty senior engineers went through it by " +
+  "hand and agreed on fifteen hundred and five genuine bugs. That list of fifteen hundred is the answer key, because without one you cannot score anything. Now, one word before the claim itself. A token is a chunk of text, roughly three-quarters of a word, and " +
+  "tokens are what you are billed for. Against Claude Code, on the same model, Alibaba report " +
+  "better results using about a ninth of the tokens. That is a very large claim, so the rest of this video is me checking it against real code, on two real pull requests.",
   OCRGH,
-  [{step: 'bench', at: 0.05, label: 'the benchmark, and how it was built',
-    camera: [{frame: 'built', at: 'fifty popular open-source projects'}, {frame: 'ninth', at: 'a ninth of the tokens'}]}]);
+  [{step: 'bench', at: 0.05, label: 'the benchmark',
+    camera: [
+      {frame: 'built', at: 'fifty popular open-source projects'},
+      {frame: 'built', at: 'fifteen hundred and five'},
+      {frame: 'built', at: 'the answer key', band: true},
+      {frame: 'ninth', at: 'one word before the claim', band: true},
+      {frame: 'ninth', at: 'a ninth of the tokens'},
+      {frame: 'full', at: 'a very large claim'},
+    ]}]);
 
-// 9 ★ the findings wall — the precision argument, without the word 'precision'
-c.add('REVIEW_YIELD', 'slide', 'zoneA',
-  "But here's the number that actually tells you what's going on, and it isn't a percentage. It's a " +
-  "count. Running the same model underneath — the exact same brain — Claude Code wrote five thousand " +
-  "nine hundred and eighty review comments. Of those, four hundred and thirty-five were real bugs. " +
-  "Every other mark on that wall is a false alarm: the tool telling you something's broken when it " +
-  "isn't. Open Code Review, same model, same pull requests, wrote eight hundred and eighty-nine " +
-  "comments, and three hundred and one of them were real. Look at the two walls rather than the " +
-  "arithmetic. One of them hands you a small list where a third of it matters. The other hands you " +
-  "nearly six thousand comments and lets you find the thirteen that do.",
+// 9 ★ the findings wall. 3 anchors + narration split so the wall earns its time.
+add('REVIEW_YIELD', 'slide', 'zoneA',
+  "Here's the number that matters, and it isn't a percentage. On the very same model, Claude Code wrote five thousand nine hundred and eighty comments. Four " +
+  "hundred and thirty-five were real bugs. Open Code Review wrote eight hundred and eighty-nine, " +
+  "and three hundred and one were real.",
   (A) => ({
-    reviewYield: {
-      unitLabel: 'one mark = 100 review comments',
-      perMark: 100,
-      hitLabel: 'a real bug',
-      missLabel: 'a false alarm',
-      columns: [
-        {label: 'Claude Code', sub: 'same model underneath', value: 5980, detail: '435',
-          tag: '5,980 written · 435 real', color: 'red', atWord: A(0.22)},
-        {label: 'Open Code Review', sub: 'same model underneath', value: 889, detail: '301',
-          tag: '889 written · 301 real', color: 'green', atWord: A(0.52)},
-      ],
-      caption: 'the pile you have to sort through is the real cost',
-      color: 'yellow',
-      atWord: A(0.06),
-    },
-    source: 'AACR-Bench leaderboard, alibaba/open-code-review (Claude-4.6-Opus rows)',
+    unitLabel: 'one mark = 100 review comments',
+    perMark: 100,
+    hitLabel: 'a real bug',
+    missLabel: 'a false alarm',
+    columns: [
+      {label: 'Claude Code', sub: 'same model underneath', value: 5980, detail: '435',
+        tag: '5,980 written · 435 real', color: 'red', atWord: A(0.26)},
+      {label: 'Open Code Review', sub: 'same model underneath', value: 889, detail: '301',
+        tag: '889 written · 301 real', color: 'green', atWord: A(0.62)},
+    ],
+    caption: 'the pile you must sort through is the real cost',
+    color: 'yellow',
+    source: BENCH,
   }));
 
-// 10 · time and money
-c.add('BAR_COMPARE', 'fade', 'zoneA',
-  "The other two columns are just as blunt. Same model, same job: Claude Code took thirteen minutes " +
-  "and six seconds per review. Open Code Review took one minute and twenty-three seconds. That's " +
-  "roughly nine and a half times faster. And on tokens — remember, that's the thing you pay for — it " +
-  "used three hundred and eighty-five thousand against five point six million. If you're a single " +
-  "developer, that's the difference between a coffee and a meal. If you're a company running this on " +
-  "every pull request, all day, every day, it's the difference between a tool you can afford and one " +
-  "you quietly turn off.",
+// 10 · what the wall costs a person. 2 anchors -> ~50 words.
+add('BAR_COMPARE', 'fade', 'zoneA',
+  "Forget the tools for a second and picture the person. Somebody has to read every one of those " +
+  "comments and decide. At nearly six thousand, you're discarding about nine in every ten, and " +
+  "that costs real minutes and real patience.",
   (A) => ({
     bars: [
-      {label: 'Claude Code · tokens per review', value: 100, display: '5,664K', color: 'red', atWord: A(0.5)},
-      {label: 'Open Code Review · tokens per review', value: 7, display: '385K', color: 'green', atWord: A(0.62)},
+      {label: 'Claude Code', value: 100, display: '5,980', color: 'red', atWord: A(0.42)},
+      {label: 'Open Code Review', value: 15, display: '889', color: 'green', atWord: A(0.58)},
     ],
-    source: 'AACR-Bench, same model (Claude-4.6-Opus), 200 real pull requests',
+    source: BENCH,
   }));
 
-// 11 · the honest ceiling — the trust beat. Do not cut.
-c.add('STAT_CALLOUT', 'slide', 'zoneC',
-  "And now let me be straight with you, because a review that only reads out the good numbers isn't a " +
-  "review, it's an advert. Look at what those same figures mean if you flip them round. Open Code " +
-  "Review got about thirty-four percent of its comments right — which is a huge win over seven — but " +
-  "it still means roughly two out of every three things it flags are not real bugs. And it found " +
-  "twenty percent of the known problems, so it missed four out of every five. Claude Code actually " +
-  "found more of them; it just buried them. Neither of these tools is anywhere close to solved. What " +
-  "you're looking at is a better reviewer, not a finished one, and anyone who tells you otherwise is " +
-  "selling something.",
+// 10b · time and money. 2 anchors -> ~50 words.
+add('BAR_COMPARE', 'slide', 'zoneA',
+  "The other columns are blunt too. Claude Code took thirteen minutes per review against one minute twenty-three, and burned five point six million tokens against three hundred and eighty-five thousand. Because tokens are the bill, that gap is money.",
   (A) => ({
-    statCallout: {
-      value: '2 in 3',
-      label: 'of its findings are still not real bugs',
-      sub: 'and it misses four defects in five — this is the honest state of the art',
+    bars: [
+      {label: 'Claude Code', value: 100, display: '13m 6s', color: 'red', atWord: A(0.3)},
+      {label: 'Open Code Review', value: 10, display: '1m 23s', color: 'green', atWord: A(0.46)},
+    ],
+    source: BENCH,
+  }));
+
+// 11 · the honest ceiling. RULE_TEST carries a rule plus cases = plenty of anchors.
+add('RULE_TEST', 'slide', 'zoneC',
+  "Now let me be straight with you, because a review that only reads out the good numbers is an " +
+  "advert. Flip those same figures around. Open Code Review got about thirty-four percent of its " +
+  "comments right, which beats seven by miles — and still means two out of every three things it " +
+  "flags are not real bugs. Open Code Review found twenty percent of the known problems, so it missed four in " +
+  "five. Claude Code actually found more of them; it simply buried them. Neither tool is anywhere " +
+  "near solved. This is a better reviewer, not a finished one.",
+  (A) => ({
+    ruleTest: {
+      kicker: 'read it honestly',
+      rule: 'a better reviewer is not a finished one',
+      okLabel: 'the win',
+      noLabel: 'the ceiling',
+      cases: [
+        {text: '33.9% precision, up from 7.2%', title: 'ok', sub: 'a real, large improvement', atWord: A(0.26)},
+        {text: '2 in 3 flags are still not bugs', title: 'no', sub: 'you still triage', atWord: A(0.44)},
+        {text: '20% recall', title: 'no', sub: 'four in five are missed', atWord: A(0.6)},
+        {text: 'Claude Code found more, buried', title: 'ok', sub: 'recall is not the whole story', atWord: A(0.72)},
+      ],
+      caption: 'both numbers are true, and both matter',
       color: 'orange',
-      atWord: A(0.3),
+      atWord: A(0.06),
     },
-    source: 'AACR-Bench: precision 33.90%, recall 20.00% (Open Code Review, Claude-4.6-Opus)',
   }));
 
-// 12 · whose benchmark is it — the credibility beat
-c.add('REVEAL', 'fade', 'zoneA',
-  "There's one more thing you should be suspicious about, and I want to raise it before you do. This " +
-  "is Alibaba's benchmark, measuring Alibaba's own tool. You should always raise an eyebrow at that. " +
-  "So here's what changed my mind. Go and look at who's sitting at the top of their leaderboard. It " +
-  "isn't Alibaba's model. The best score on that chart belongs to a model made by Anthropic — one of " +
-  "their competitors. Alibaba's own Qwen is second, on a chart that Alibaba published. They could have " +
-  "quietly left that row out. They didn't, and the whole dataset is public so you can go and check it. " +
-  "That doesn't make the benchmark perfect, but it does make it honest.",
+// 12 · whose benchmark. CLAIM_CHECK with a real tally.
+add('CLAIM_CHECK', 'fade', 'zoneA',
+  "One more thing you should be suspicious about, and I'd rather raise it than have you shout it at " +
+  "the screen. This is Alibaba's benchmark, measuring Alibaba's own tool. Always raise an eyebrow " +
+  "at that. So here's what shifted my view. Look at who sits top of their leaderboard. Not Alibaba. " +
+  "The best score belongs to a model built by Anthropic, a competitor. Alibaba's own Qwen sits " +
+  "second, on a chart Alibaba published, and the whole dataset is public so you can check it " +
+  "yourself. That doesn't make the benchmark perfect, but publishing a row your own model loses does make it honest.",
   (A) => ({
-    headline: 'Their own model is not first',
-    items: [
-      {label: '#1  Claude-4.6-Opus', sub: 'Anthropic — a competitor', atWord: A(0.45)},
-      {label: '#2  Qwen3.8-Max', sub: 'Alibaba — their own', atWord: A(0.58)},
-    ],
-    source: 'AACR-Bench leaderboard, published by Alibaba',
+    claimCheck: {
+      headline: 'Whose leaderboard is it?',
+      claims: [{text: "Alibaba's benchmark, measuring Alibaba's own tool.", tag: 'the worry', color: 'orange', atWord: A(0.22)}],
+      subject: 'Alibaba',
+      tallyLabel: 'who actually ranks first',
+      hitLabel: 'Alibaba',
+      tally: [
+        {label: 'Anthropic', value: 0, threshold: 1, atWord: A(0.5)},
+        {label: 'Alibaba', value: 1, threshold: 1, color: 'orange', atWord: A(0.62)},
+      ],
+      verdict: 'Their own model is second',
+      verdictAtWord: A(0.72),
+      source: BENCH,
+      atWord: A(0.06),
+    },
   }));
 
 // ═══ III · WHY IT WORKS ═════════════════════════════════════════════════════════
 
-c.add('CHAPTER', 'wipe', 'zoneC',
-  "Which leaves the obvious question. If the brain is the same, why would the answers be better?",
-  (A) => ({title: 'Why the same model does better', subtitle: 'the part that is not the model', atWord: A(0.4)}));
+add('CHAPTER', 'wipe', 'zoneC',
+  "Which leaves one obvious question. If the brain is the same, why are the answers better?",
+  () => ({chapter: {number: '02', title: 'Why the same model wins', subtitle: 'the part that is not the model'}}));
 
-// 14 · the three failures
+// 14 · the three failures. 1 clip + 3 zooms = 4 anchors → 28s → ~87 words.
 gh('letterbox', 'zoneB',
-  "They answer that on the page, and they start by naming what goes wrong when you hand a big code " +
-  "review to a general-purpose AI assistant. Three things. First, on a big change it cuts corners — " +
-  "it reads some of the files and quietly skips others. Second, position drift, which means it tells " +
-  "you there's a problem on line two hundred when the problem is actually on line four hundred. And " +
-  "third, the quality wobbles: ask the same question twice, phrased slightly differently, get two " +
-  "different answers. And then they name the cause, which is the sentence the whole design comes from. " +
-  "When everything is decided by a language model, nothing about the process is actually guaranteed.",
+  "They answer that here, and they start by naming what goes wrong when a general-purpose assistant " +
+  "is handed a large review. Three things. First, it cuts corners, reading some files and quietly skipping others. Second, it drifts, pointing at line two hundred when the problem lives on line four hundred. Third, its quality wobbles, so the same question asked twice gives two different answers. Then comes the " +
+  "sentence the whole design grows from: when a language model decides everything, nothing about the " +
+  "process is guaranteed.",
   OCRGH,
-  [{step: 'pain', at: 0.05, label: 'the three failures they name',
-    camera: [{frame: 'three', at: 'it reads some of the files'}]}]);
+  [{step: 'pain', at: 0.06, label: 'the three failures',
+    camera: [
+      {frame: 'three', at: 'reading some files'},
+      {frame: 'three', at: 'line two hundred'},
+      {frame: 'three', at: 'two different answers', band: true},
+    ]}]);
 
-// 15 ★ the split — what code decides, what the AI decides
-c.add('RESPONSIBILITY_SPLIT', 'slide', 'zoneA',
-  "So their fix is a split, and once you see it you can't unsee it. Some parts of a review must never " +
-  "be left to a guess, so those are done by ordinary, boring, predictable code. Which files get read? " +
-  "Code decides. Which files get grouped together? Code decides. Which checklist applies to this file? " +
-  "Code decides. Where exactly does the comment get pinned? Code decides. And then the one job that " +
-  "genuinely needs judgement — actually looking at these lines and deciding whether they're wrong — " +
-  "that's the only thing handed to the AI. The AI doesn't get to wander round the building. It's given " +
-  "a specific room, a specific checklist, and asked one question.",
+// 15 ★ the split. 6 anchors → 40s → ~124 words.
+add('RESPONSIBILITY_SPLIT', 'slide', 'zoneA',
+  "Their fix is a split, and once you've seen it you can't unsee it. Parts of a review must never " +
+  "be left to a guess, so those parts are done by ordinary, boring, predictable code. Which files " +
+  "get read? Code decides. Which files belong together? Code decides. Which checklist fits this " +
+  "file? Code decides. Where exactly does a comment get pinned? Code decides. Then the single job " +
+  "that genuinely needs judgement — reading these lines and deciding whether they're wrong — that " +
+  "one goes to the AI, so the AI never wanders the building. The AI gets one room, one checklist, and " +
+  "one question.",
   (A) => ({
     respSplit: {
       leftLabel: 'Ordinary code',
-      leftSub: 'always the same answer',
+      leftSub: 'same answer every time',
       rightLabel: 'The AI',
       rightSub: 'judgement',
-      pileLabel: 'everything a review has to do',
+      pileLabel: 'all the review work',
       lines: [
-        {text: 'which files get read', title: 'left', sub: 'no guessing', atWord: A(0.28)},
-        {text: 'which files group together', title: 'left', sub: 'no guessing', atWord: A(0.36)},
-        {text: 'which checklist applies', title: 'left', sub: 'no guessing', atWord: A(0.44)},
-        {text: 'where the comment is pinned', title: 'left', sub: 'no guessing', atWord: A(0.52)},
-        {text: 'is this code actually wrong?', title: 'right', sub: 'judgement', atWord: A(0.64)},
+        {text: 'which files get read', title: 'left', sub: 'no guessing', atWord: A(0.26)},
+        {text: 'which files belong together', title: 'left', sub: 'no guessing', atWord: A(0.36)},
+        {text: 'which checklist fits', title: 'left', sub: 'no guessing', atWord: A(0.46)},
+        {text: 'where the comment is pinned', title: 'left', sub: 'no guessing', atWord: A(0.54)},
+        {text: 'is this code actually wrong?', title: 'right', sub: 'judgement', atWord: A(0.66)},
       ],
-      caption: 'the AI is given a room and a checklist, not the run of the building',
+      caption: 'one room, one checklist, one question',
       color: 'purple',
       atWord: A(0.06),
     },
-    source: 'alibaba/open-code-review — "Deterministic Engineering × Agent Hybrid"',
   }));
 
-// 16 · the checklists, on camera — specific vs generic
+// 16 · the checklists on camera. 2 clips + 4 zooms = 6 anchors → 40s → ~124 words.
 rules('fade', 'zoneB',
-  "And you don't have to take that on faith, because you can just ask it. There's a command that " +
-  "prints the exact checklist a file would be handed. Watch what a Go file gets — Go is the language " +
-  "this project is written in. Look at the pattern line: star star slash star dot go. That means this " +
-  "checklist is only for Go files. And read the first sentence of it, because it's remarkable. Favour " +
-  "precision over recall. A false positive costs reviewer trust. That's a design decision, written in " +
-  "plain English, sitting inside a rule file. Now watch what a plain text file gets instead. Pattern: " +
-  "default. And the checklist is four vague questions — is the logic correct, are there security " +
-  "problems. That contrast is the entire product. One file gets a specialist. The other gets a shrug.",
+  "You don't have to take that on faith either, because you can ask it directly. One command prints " +
+  "the exact checklist a file would be handed. Watch what a Go file gets — Go being the language " +
+  "this project is written in. The pattern line says star star slash star dot go, meaning this " +
+  "checklist applies to Go files only. Then read its opening sentence, because it's remarkable. " +
+  "Favour precision over recall. A false positive costs reviewer trust. That's a design decision, " +
+  "written in plain English, sitting inside a rule file. Now watch a plain text file instead. " +
+  "Pattern: default. Four vague questions. One file gets a specialist; the other gets a shrug, and " +
+  "that difference is the whole product.",
   LOCAL,
   [
-    {step: 'gorule', at: 0.08, label: 'what a Go file is handed',
-      camera: [{frame: 'pattern', at: 'star star slash star dot go'}, {frame: 'trust', at: 'A false positive costs reviewer trust'}]},
-    {step: 'mdrule', pivot: 'Now watch what a plain', label: 'what everything else is handed',
-      camera: [{frame: 'default', at: 'Pattern: default'}, {frame: 'generic', at: 'is the logic correct'}]},
+    {step: 'gorule', at: 0.06, label: 'what a Go file gets',
+      camera: [
+        {frame: 'pattern', at: 'star star slash star dot go'},
+        {frame: 'trust', at: 'Favour precision over recall'},
+        {frame: 'trust', at: 'costs reviewer trust', band: true},
+      ]},
+    {step: 'mdrule', at: 0.62, pivot: 'Now watch a plain text', label: 'what everything else gets',
+      camera: [{frame: 'default', at: 'Pattern: default'}, {frame: 'generic', at: 'Four vague questions'}]},
   ]);
 
 // ═══ IV · INSTALL ═══════════════════════════════════════════════════════════════
 
-c.add('CHAPTER', 'wipe', 'zoneC',
-  "Enough reading. Let's put it on this machine and point it at some real code.",
-  (A) => ({title: 'Installing it', subtitle: 'two commands, and one you must not skip', atWord: A(0.4)}));
+add('CHAPTER', 'wipe', 'zoneC',
+  "Enough reading. Let's put it on a machine and aim it at real code.",
+  () => ({chapter: {number: '03', title: 'Installing it', subtitle: 'two commands, and one you must not skip'}}));
 
-// 18 · install the CLI
+// 18 · install. 3 clips + 3 zooms = 6 anchors → 40s → ~124 words.
 setup('letterbox', 'zoneB',
-  "There's exactly one thing to check first, and it's the one that caught me out. Open Code Review " +
-  "needs Git version two point four one or newer. Git is the tool that tracks every change to a " +
-  "project, and this machine was running an older copy, so every single command printed a warning " +
-  "until I upgraded it. Check yours. Then the install itself is one line — that's npm, the package " +
-  "installer that comes with Node, and the dash g just means install it for the whole machine rather " +
-  "than one folder. A few seconds later we can ask it what version it is, and there it is: version " +
-  "one point twelve point four. The command is three letters. O, C, R.",
+  "One thing needs checking first, and it caught me out. Open Code Review needs Git version two " +
+  "point four one or newer. Git is the tool that tracks every change to a project, and an older " +
+  "copy makes every command print a warning, so check yours before anything else. After that, " +
+  "installing is a single line. That's npm, the installer bundled with Node, and dash g means " +
+  "install this for the whole machine rather than one folder. Seconds later we can ask which " +
+  "version arrived: one point twelve point four. Notice the command itself is only three letters. " +
+  "O, C, R.",
   LOCAL,
   [
-    {step: 'gitv', at: 0.1, label: 'the one prerequisite', camera: [{frame: 'ver', at: 'two point four one or newer'}]},
-    {step: 'install', pivot: 'Then the install itself', label: 'one line', camera: [{frame: 'pkg', at: 'that\'s npm'}]},
-    {step: 'version', pivot: 'A few seconds later', label: 'it is really there', camera: [{frame: 'v', at: 'one point twelve point four'}]},
+    {step: 'gitv', at: 0.08, label: 'the one prerequisite',
+      camera: [{frame: 'ver', at: 'two point four one'}]},
+    {step: 'install', at: 0.40, pivot: 'After that, installing', label: 'a single line',
+      camera: [{frame: 'pkg', at: "That's npm"}]},
+    {step: 'version', at: 0.70, pivot: 'Seconds later we can ask', label: 'which version arrived',
+      camera: [{frame: 'v', at: 'one point twelve point four'}]},
   ]);
 
-// 19 · the plugin
+// 19 · the plugin. 2 clips + 3 zooms = 5 anchors → 34s → ~105 words.
 setup('fade', 'zoneB',
-  "Now the part that makes this genuinely interesting. Open Code Review ships a plugin for Claude " +
-  "Code, so it runs inside the very tool it just outscored. The first command points Claude Code at " +
-  "Alibaba's plugin list — a marketplace, in their words — and the second installs the plugin itself. " +
-  "Successfully added. Successfully installed. That's it, and notice there was no account to make and " +
-  "no key to paste. What we've just gained is two new slash commands, which are the shortcuts you type " +
-  "inside Claude Code to make it do something specific. And one of those two is about to do all the " +
-  "work in this video.",
+  "Now the part that makes this genuinely odd. Open Code Review ships a plugin for Claude Code, so " +
+  "it runs inside the very tool it just outscored. The first command points Claude Code at " +
+  "Alibaba's plugin list, which they call a marketplace. Then the second installs the plugin. " +
+  "Successfully added. Successfully installed. No account to create, no key to paste. What we've " +
+  "gained are two slash commands — those are shortcuts you type inside Claude Code to trigger " +
+  "something specific — and one of the two does all the work from here.",
   LOCAL,
   [
-    {step: 'market', at: 0.2, label: 'point Claude Code at their plugin list',
+    {step: 'market', at: 0.10, label: 'point it at the list',
       camera: [{frame: 'added', at: 'Successfully added'}]},
-    {step: 'plugin', pivot: 'and the second installs', label: 'install the plugin',
-      camera: [{frame: 'ok', at: 'Successfully installed'}]},
+    {step: 'plugin', at: 0.48, pivot: 'The second installs', label: 'install the plugin',
+      camera: [{frame: 'ok', at: 'Successfully installed'}, {frame: 'ok', at: 'no key to paste', band: true}]},
   ]);
 
-// 20 · the two modes — and which one is on camera. Honesty beat.
-c.add('SPLIT_PATHS', 'slide', 'zoneA',
-  "There are two ways to run it, and I need you to know which one you're about to watch, because it " +
-  "matters. In the first way, Open Code Review calls an AI model itself, using an account key you give " +
-  "it — and that's the way those benchmark numbers were measured. In the second way, called delegation, " +
-  "Open Code Review still picks the files and still hands over the checklists, but Claude Code's own " +
-  "model does the actual judging. No extra key, no extra bill. That's the one we're using today. So " +
-  "please don't take the benchmark figures I showed you as a measurement of what you're about to see. " +
-  "Same file-picking, same rules, different engine doing the thinking.",
+// 20 · the two modes. Honesty beat. 3 anchors → 22s → ~68 words.
+add('SPLIT_PATHS', 'slide', 'zoneA',
+  "There are two ways to run it, and you need to know which one you're watching. In the first, Open " +
+  "Code Review calls a model itself using a key you supply, and that's how the benchmark was " +
+  "measured. In the second, called delegation, Claude Code's own model does the judging instead.",
   (A) => ({
-    center: {title: 'two ways to run it', atWord: A(0.08)},
-    left: {title: 'Open Code Review judges', sub: 'its own model · needs a key · this is what the benchmark measured', color: 'blue', atWord: A(0.26)},
-    right: {title: 'Claude Code judges', sub: 'delegation · no extra key · this is what we filmed', color: 'green', atWord: A(0.48)},
+    center: {title: 'two ways to run it', atWord: A(0.1)},
+    left: {title: 'Open Code Review judges', sub: 'its own key · the benchmark setup', color: 'blue', atWord: A(0.36)},
+    right: {title: 'Claude Code judges', sub: 'delegation · no extra key', color: 'green', atWord: A(0.68)},
     source: 'alibaba/open-code-review — Default vs Delegation Mode',
+  }));
+
+// 21 · and which one we filmed. Kept separate so the caveat gets its own air.
+add('LOWER_THIRD', 'fade', 'zoneC',
+  "Delegation is what we're using, and that carries a caveat. The file picking and the checklists " +
+  "still come from Open Code Review, so the clever half is theirs — but the judging is Claude " +
+  "Code's model, not the benchmark setup.",
+  (A) => ({
+    lowerThird: {
+      kicker: 'ON THE RECORD',
+      title: 'Not the benchmark setup',
+      subtitle: "their rules, Claude Code's model",
+      asset: 'lucide:scale',
+      atWord: A(0.4),
+    },
   }));
 
 // ═══ V · THE CONTROL RUN ════════════════════════════════════════════════════════
 
-c.add('CHAPTER', 'wipe', 'zoneC',
-  "First, a test most reviews of review tools skip. What does it say about code that's already fine?",
-  (A) => ({title: 'Test one: good code', subtitle: 'does it stay quiet?', atWord: A(0.4)}));
+add('CHAPTER', 'wipe', 'zoneC',
+  "First, a test most reviews of review tools skip entirely.",
+  () => ({chapter: {number: '04', title: 'Test one: good code', subtitle: 'does it stay quiet?'}}));
 
-// 22 · the target
+// 23 · the target. 1 clip + 2 zooms = 3 anchors → 22s → ~68 words.
 proof('letterbox', 'zoneB',
-  "This is gRPC — a library made and maintained by Google that lets programs on different computers " +
-  "talk to each other. An enormous amount of the internet leans on it. And the pull request we're " +
-  "going to hand over first is a genuinely hard one: it rewrites the locking in a load balancer. " +
-  "Locking is how a program stops two things happening at the same time and tripping over each other, " +
-  "and it is, without much argument, the hardest thing in programming to review by eye. Google " +
-  "engineers read this change, approved it, and merged it. As far as anybody knows, it's correct. " +
-  "So the right answer here is silence.",
+  "This is gRPC, a library built and maintained by Google that lets programs on different computers " +
+  "talk to each other. A great deal of the internet leans on it. Our first pull request rewrites " +
+  "the locking inside a load balancer, and locking is how a program stops two things colliding when " +
+  "they run at once.",
   GRPC,
-  [{step: 'repo', at: 0.06, label: 'the library we are reviewing', camera: [{frame: 'name', at: 'This is gRPC'}]}]);
+  [{step: 'repo', at: 0.06, label: 'the library under review',
+    camera: [{frame: 'name', at: 'This is gRPC'}, {frame: 'name', at: 'rewrites the locking', band: true}]}]);
 
-// 23 · file selection + bundling, on camera
-control('fade', 'zoneB',
-  "Watch the first command, because this is the deterministic half doing its entire job in one screen. " +
-  "Three reviewable, five total. It's looked at the five files that changed and decided only three of " +
-  "them are worth a reviewer's time — and look at the two it crossed out. Those are test files, and " +
-  "it tells you exactly why it dropped them rather than leaving you to guess. No model was involved in " +
-  "that decision at all. Then the second command fetches the checklists, and notice the heading: rule " +
-  "group one, with all three files listed under it. It's worked out that those three files need the " +
-  "same checklist, so it bundles them into a single job instead of three separate ones.",
-  LOCAL,
-  [
-    {step: 'preview', at: 0.06, label: 'which files, and which are dropped',
-      camera: [{frame: 'count', at: 'Three reviewable, five total'}, {frame: 'dropped', at: 'it tells you exactly why'}]},
-    {step: 'bundle', pivot: 'Then the second command', label: 'three files, one checklist',
-      camera: [{frame: 'group', at: 'rule group one'}]},
-  ]);
-
-// 24 · the control review itself
-control('letterbox', 'zoneB',
-  "And here's the review itself, running inside Claude Code. You can watch it work — reading the diff, " +
-  "which is just the list of lines that changed, opening the surrounding code, checking how the locks " +
-  "are ordered. It takes it seriously. And then it comes back and tells us there's nothing to report. " +
-  "Nothing at high severity, nothing at medium. It even lists what it checked and ruled out: the lock " +
-  "ordering, a write it decided was safe, a loop variable it decided was fine. Now, a lot of tools " +
-  "would have found something here, because finding something feels like working. This one looked at " +
-  "good code and said so.",
-  LOCAL,
-  [{step: 'review', at: 0.04, label: 'the whole review of a good pull request'}]);
-
-// 25 · what silence proves
-c.add('CLAIM_CHECK', 'slide', 'zoneA',
-  "And I want to stay on that for a moment, because it's easy to watch nothing happen and feel " +
-  "cheated. That silence is the product. Think back to the wall of comments we looked at earlier — " +
-  "nearly six thousand of them, where nine in ten were wrong. That's what a reviewer looks like when " +
-  "it can't say nothing. Every false alarm costs a real person real minutes, and worse, it teaches " +
-  "them to stop reading. A reviewer that cries wolf gets muted, and then it's worth less than nothing, " +
-  "because now you think you're covered and you aren't.",
+// 24 · why this one is hard. 4 anchors.
+add('RULE_TEST', 'slide', 'zoneA',
+  "Locking is the hardest thing in programming to review by eye, because getting it wrong breaks nothing today — it breaks next Tuesday, under load, for one customer, and never while you're watching. Google engineers read this change, approved it, and merged it, and as far " +
+  "as anybody knows it's correct. Which makes it the perfect first test, because the right answer " +
+  "here is silence.",
   (A) => ({
-    claimCheck: {
-      headline: 'Nothing to report — on code that was already right',
-      claims: [{text: 'A reviewer that never says "nothing" is a reviewer nobody keeps.', tag: 'the point', color: 'green', atWord: A(0.2)}],
-      subject: 'the control run',
-      tallyLabel: 'comments produced',
-      hitLabel: 'noise added',
-      tally: [{label: 'high', hit: false}, {label: 'medium', hit: false}],
-      caption: 'zero noise on good code is a result, not a non-result',
-      color: 'green',
-      atWord: A(0.06),
-    },
-    source: 'delegated review of grpc/grpc-go #9290, run on this machine',
-  }));
-
-// ═══ VI · THE BLIND TEST ════════════════════════════════════════════════════════
-
-c.add('CHAPTER', 'wipe', 'zoneC',
-  "Now the real test. A pull request that was already broken when Google merged it.",
-  (A) => ({title: 'Test two: the blind test', subtitle: 'a bug that shipped', atWord: A(0.4)}));
-
-// 27 · the PR and the answer key
-proof('letterbox', 'zoneB',
-  "Here's the second pull request. Somebody at Google wrote it, other engineers reviewed it, and it " +
-  "was merged into gRPC. And it did what it said — read the title, it makes the client report a " +
-  "particular kind of error properly. Ordinary, careful work. Now here's how I know something was " +
-  "wrong with it. Seven days later, this commit landed. A commit is just one saved change, with a note " +
-  "attached explaining it. And read that note: fix a bug introduced in seven four six one. Seven four " +
-  "six one is the pull request we were just looking at. So the maintainers themselves are telling us, " +
-  "in writing, that something got through. That's our answer key.",
-  GRPC,
-  [
-    {step: 'pr', at: 0.06, label: 'approved and merged', camera: [{frame: 'merged', at: 'it was merged into gRPC'}]},
-    {step: 'fix', pivot: 'Seven days later', label: 'the answer key, in their own words',
-      camera: [{frame: 'msg', at: 'fix a bug introduced in seven four six one'}]},
-  ]);
-
-// 28 · sealing the test
-blind('fade', 'zoneB',
-  "Which creates a problem for me, and I want to show you how I dealt with it. If the reviewer can see " +
-  "that fix, it isn't a test — it's a spoiler. So the copy of the project on this machine has been cut " +
-  "back to two commits: the broken one, and the one right before it. That's the whole history it can " +
-  "see. The fix does not exist in this folder. There's nothing to look up and nothing to peek at. And " +
-  "then the same command as before: three files to review out of four, with the test file dropped " +
-  "again. The file we care about is that last one, stream dot go, with five lines added and nine taken " +
-  "away.",
-  LOCAL,
-  [
-    {step: 'sealed', at: 0.3, label: 'the entire history it can see', camera: [{frame: 'two', at: 'two commits'}]},
-    {step: 'preview', pivot: 'And then the same command', label: 'three of four files',
-      camera: [{frame: 'count', at: 'three files to review out of four'}, {frame: 'stream', at: 'stream dot go'}]},
-  ]);
-
-// 29 · the rule that predicts it
-rules('slide', 'zoneB',
-  "And before we run it, I want to show you one line from that Go checklist, because it's the reason " +
-  "this is a fair test rather than a lucky one. Here's a rule the reviewer is handed for every Go " +
-  "file. Errors that get ignored, overwritten, or turned into a success — hiding the fact that " +
-  "something failed. Keep that sentence in your head for the next three minutes. We're about to watch " +
-  "it catch precisely that.",
-  LOCAL,
-  [{step: 'errrule', at: 0.3, label: 'the rule that is about to matter',
-    camera: [{frame: 'swallow', at: 'Errors that get ignored'}]}]);
-
-// 30 ★ the blind run
-blind('letterbox', 'zoneB',
-  "So — same command, same tool, no hints. Let's watch. It pulls the file list, collects the " +
-  "checklists, opens each changed file and reads around the lines that moved. And then it stops on " +
-  "stream dot go. Two findings, both marked high — that's the top severity, the bucket for real bugs " +
-  "rather than suggestions. It's found the same mistake in two different places, and it names the " +
-  "exact lines. It didn't just catch it, either. It explained what breaks downstream, and it went and " +
-  "fixed both of them. Let's slow this right down, because what it found is genuinely beautiful, and " +
-  "you don't need to know Go to see it.",
-  LOCAL,
-  [{step: 'review', at: 0.04, label: 'the blind review, start to finish'}]);
-
-// ═══ VII · THE BUG, TAUGHT ══════════════════════════════════════════════════════
-
-// 31 · the box
-c.add('VAR_SCOPE', 'slide', 'zoneA',
-  "Let's start with the smallest possible idea and build up. In a program, a variable is just a " +
-  "labelled box that you put a value into. The box we care about is called err, which is short for " +
-  "error. The deal is simple: if something goes wrong, the error gets put in the box. If nothing goes " +
-  "wrong, the box is left empty. And programmers have a word for an empty box like that — they call " +
-  "it nil. So a box holding nil means, quite literally, nothing went wrong here.",
-  (A) => ({
-    varScope: {
-      title: 'inside the function that receives a reply',
-      outerLabel: 'err',
-      outerSub: 'the function has a box called err',
-      innerLabel: 'err',
-      innerSub: 'a second box, same name',
-      emptyLabel: 'nil — empty',
-      valueLabel: 'the real error',
-      steps: [
-        {title: 'outer', label: 'one box', sub: 'a box called err — empty for now', atWord: A(0.3)},
-        {title: 'fence', label: 'nothing yet', sub: 'nil is just the word for an empty box', atWord: A(0.78)},
+    ruleTest: {
+      kicker: 'the fair first test',
+      rule: 'on correct code, the right answer is nothing',
+      okLabel: 'what we want',
+      noLabel: 'what we fear',
+      cases: [
+        {text: 'reports nothing', title: 'ok', sub: 'it can tell good code from bad', atWord: A(0.62)},
+        {text: 'invents a problem', title: 'no', sub: 'it just wants to look busy', atWord: A(0.78)},
       ],
-      caption: 'a variable is a labelled box. nil means it is empty.',
-      color: 'blue',
+      caption: 'approved and merged by Google',
+      color: 'green',
       atWord: A(0.1),
     },
   }));
 
-// 32 · the one character
-c.add('CODE_RUN', 'fade', 'zoneA',
-  "Now here are the two lines that broke gRPC, and I promise you can follow them. The first line calls " +
-  "a function that goes and fetches the next piece of data, and puts whatever happened into err. Two " +
-  "lines further down, the code asks a question about err — did this thing finish normally? And then " +
-  "it hands err onwards. Simple enough. Except look very carefully at the first line, at the little " +
-  "colon just before the equals sign. That colon is the entire bug. Without it, you're putting a value " +
-  "into a box that already exists. With it, you are making a brand new box, right there on the spot, " +
-  "that happens to have the same name.",
+// 25 · file selection + bundling. 2 clips + 4 zooms = 6 anchors → 40s → ~124 words.
+control('fade', 'zoneB',
+  "Watch this first command, because here the predictable half does its whole job on one screen. " +
+  "Three reviewable, five total. Open Code Review examined the five changed files and decided only three deserve " +
+  "a reviewer's attention — and look at the two crossed out. Those are test files, and Open Code Review prints exactly why it dropped them, because a reason you can read is a decision you can argue with. No model touched that decision. The " +
+  "second command fetches the checklists, and notice the heading: rule group one, with all three " +
+  "files listed beneath it. Behind that heading, Open Code Review worked out those three need the same checklist, so the three travel as one job rather than three.",
+  LOCAL,
+  [
+    {step: 'preview', at: 0.05, label: 'which files, and why not',
+      camera: [
+        {frame: 'count', at: 'Three reviewable, five total'},
+        {frame: 'dropped', at: 'exactly why it dropped them'},
+        {frame: 'dropped', at: 'No model touched', band: true},
+      ]},
+    {step: 'bundle', at: 0.58, pivot: 'The second command fetches', label: 'three files, one list',
+      camera: [{frame: 'group', at: 'rule group one'}]},
+  ]);
+
+// 26 · the control review. 1 clip + camera holds; narration sized to 2 anchors → ~50 words.
+control('letterbox', 'zoneB',
+  "And here's the review itself, running inside Claude Code. You can watch it work: reading the " +
+  "diff, which is just the list of changed lines, opening surrounding code, checking how the locks " +
+  "are ordered. Then it comes back with nothing to report. Nothing high, nothing medium, because there was genuinely nothing to say.",
+  LOCAL,
+  [{step: 'review', at: 0.06, label: 'reviewing good code',
+    camera: [{frame: 'full', at: 'opening surrounding code'}, {frame: 'full', at: 'nothing to report'}]}]);
+
+// 27 · what silence proves. 4 anchors.
+add('CLAIM_CHECK', 'slide', 'zoneA',
+  "Stay with that a second, because watching nothing happen can feel like a let-down. That silence is the product, because silence is a finding too. Open Code Review even listed what it had ruled out: the lock ordering, a write " +
+  "it judged safe, a loop variable it judged fine. A reviewer that cannot say nothing gets muted, and a muted reviewer is worse than none, because " +
+  "now you believe you're covered when you aren't.",
+  (A) => ({
+    claimCheck: {
+      headline: 'Nothing to report, on code that was right',
+      claims: [{text: 'A reviewer that never says nothing gets muted.', tag: 'the point', color: 'green', atWord: A(0.62)}],
+      subject: 'high',
+      tallyLabel: 'comments produced',
+      hitLabel: 'raised',
+      tally: [
+        {label: 'high', value: 0, threshold: 1, color: 'green', atWord: A(0.18)},
+        {label: 'medium', value: 0, threshold: 1, color: 'green', atWord: A(0.26)},
+      ],
+      verdict: 'Zero noise added to correct code',
+      verdictAtWord: A(0.44),
+      source: 'delegated review of grpc/grpc-go #9290',
+      atWord: A(0.06),
+    },
+  }));
+
+// ═══ VI · THE BLIND TEST ════════════════════════════════════════════════════════
+
+add('CHAPTER', 'wipe', 'zoneC',
+  "Now the real test. A pull request that was already broken when Google merged it.",
+  () => ({chapter: {number: '05', title: 'Test two: the blind test', subtitle: 'a bug that shipped'}}));
+
+// 29 · the PR and the answer key. 2 clips + 3 zooms = 5 anchors → 34s → ~105 words.
+proof('letterbox', 'zoneB',
+  "Here's the second pull request. Somebody at Google wrote it, colleagues reviewed it, and it went " +
+  "into gRPC. Read the title: it makes the client report a particular kind of error properly. " +
+  "Ordinary, careful work, which is exactly why what follows matters. So how do I know something was wrong with it? Seven days later, this " +
+  "commit landed. A commit is one saved change with a note attached. Read that note — fix a bug " +
+  "introduced in seven four six one. Seven four six one is the pull request we were just looking " +
+  "at. The maintainers are telling us, in writing, that something got through their own review. So " +
+  "we have a pull request, and we have proof a bug was hiding in it.",
+  GRPC,
+  [
+    {step: 'pr', at: 0.05, label: 'approved and merged',
+      camera: [{frame: 'merged', at: 'it went into gRPC'}]},
+    {step: 'fix', at: 0.48, pivot: 'Seven days later', label: 'the answer key',
+      camera: [
+        {frame: 'msg', at: 'fix a bug introduced'},
+        {frame: 'msg', at: 'seven four six one is the pull request'},
+        {frame: 'msg', at: 'something got through', band: true},
+      ]},
+  ]);
+
+// 30 · sealing the test. 2 clips + 3 zooms = 5 anchors → 34s → ~105 words.
+blind('fade', 'zoneB',
+  "Which hands me a problem, and I want to show you how I dealt with it rather than ask you to " +
+  "trust me. If the reviewer can see that fix, this stops being a test and becomes a spoiler. So " +
+  "the copy of the project here has been cut back to two commits: the broken one, and the one " +
+  "immediately before it. That's the entire history available to it. That fix does not exist in this folder. Then the same command as before — three files to review out of four, the test file " +
+  "dropped again. The one that matters is stream dot go, and the reviewer has no idea anything is " +
+  "wrong with it, because nothing in this folder says so.",
+  LOCAL,
+  [
+    {step: 'sealed', at: 0.10, label: 'the whole history',
+      camera: [{frame: 'two', at: 'two commits'}, {frame: 'two', at: 'does not exist', band: true}]},
+    {step: 'preview', at: 0.62, pivot: 'Then the same command', label: 'three files of four',
+      camera: [{frame: 'count', at: 'three files to review'}, {frame: 'stream', at: 'stream dot go'}]},
+  ]);
+
+// 31 · the rule that predicts it. 1 clip + 2 zooms = 3 anchors → 22s → ~68 words.
+rules('slide', 'zoneB',
+  "One more thing before we run it, because this is what makes the test fair rather than lucky. " +
+  "Here's a rule the reviewer gets handed for every Go file. Errors that are ignored, overwritten, " +
+  "or turned into a success — hiding the fact that something failed. Hold that sentence, because it decides the next two minutes. We're about to watch it catch exactly that.",
+  LOCAL,
+  [{step: 'errrule', at: 0.3, label: 'the rule that matters',
+    camera: [{frame: 'swallow', at: 'Errors that are ignored'}, {frame: 'swallow', at: 'something failed', band: true}]}]);
+
+// 32 ★ the blind run. 1 clip; narration sized modestly.
+blind('letterbox', 'zoneB',
+  "Same command, no hints. Open Code Review pulls the file list, collects the checklists, and reads around every line that moved. Then it stops on stream dot go. Two findings, both marked high — the bucket for real bugs, not suggestions.",
+  LOCAL,
+  [{step: 'review', at: 0.06, label: 'the blind review',
+    camera: [{frame: 'full', at: 'reads around every line'}, {frame: 'full', at: 'both marked high'}]}]);
+
+// ═══ VII · THE BUG, TAUGHT ══════════════════════════════════════════════════════
+
+// 33 · the box. 3 anchors → 22s → ~68 words.
+add('VAR_SCOPE', 'slide', 'zoneA',
+  "Let's build this from the smallest idea, because you don't need to know Go to follow it. A variable is a labelled box you put a value into. The box we care about is called err, short for error. If something goes wrong, the error goes in the box. If nothing goes wrong, the box stays empty — and programmers call an empty box nil.",
+  (A) => ({
+    varScope: {
+      title: 'inside the function that receives a reply',
+      outerLabel: 'err',
+      outerSub: 'a box called err',
+      innerLabel: 'err',
+      innerSub: 'not yet',
+      emptyLabel: 'nil — empty',
+      steps: [
+        {title: 'outer', label: 'one box', sub: 'a labelled box you put a value into', atWord: A(0.34)},
+        {title: 'fence', label: 'empty', sub: 'nothing went wrong, so nothing was put in it', atWord: A(0.72)},
+      ],
+      caption: 'a variable is a box. nil means the box is empty.',
+      color: 'blue',
+      atWord: A(0.12),
+    },
+  }));
+
+// 34 · the one character. CODE_RUN, 7 anchored lines → plenty.
+add('CODE_RUN', 'fade', 'zoneA',
+  "Here are the two lines that broke gRPC. The first calls a function that fetches the next piece " +
+  "of data, and puts whatever happened into err. Two lines down, the code asks a question about " +
+  "err — did this finish normally? — and then passes err onwards. Straightforward. Now look very " +
+  "carefully at the first line, at the small colon sitting just before the equals sign. That colon " +
+  "is the whole bug. Without it, you're putting a value into a box that already exists. With it, " +
+  "you're making a brand new box that merely happens to share the name.",
   (A) => ({
     codeRun: {
       filename: 'stream.go',
       language: 'go',
       resultLabel: 'what it means',
       color: 'red',
-      atWord: A(0.08),
+      atWord: A(0.04),
       lines: [
-        {text: 'if err := recv(...); err == nil {', detail: 'go and fetch the next piece of data',
-          sub: 'the colon makes a NEW box called err', label: 'new box', atWord: A(0.22)},
-        {text: '    return protocolViolation()', detail: 'if nothing came back, complain',
-          sub: 'this part is fine', atWord: A(0.35)},
-        {text: '}', detail: 'the block ends here', sub: 'and so does the new box', atWord: A(0.42)},
+        {text: 'if err := recv(...); err == nil {', detail: 'fetch the next piece of data',
+          sub: 'the colon makes a NEW box', label: 'new box', atWord: A(0.14)},
+        {text: '    return protocolViolation()', detail: 'nothing came back, so complain',
+          sub: 'this part is fine', atWord: A(0.24)},
+        {text: '}', detail: 'the block ends here', sub: 'and the new box ends with it', atWord: A(0.3)},
         {text: 'if err == io.EOF {', detail: 'did this finish normally?',
-          sub: 'but which err is this?', label: 'which one?', atWord: A(0.5)},
-        {text: '    return status()', detail: 'report the real outcome', sub: 'never reached', atWord: A(0.58)},
-        {text: '}', detail: '', sub: '', atWord: A(0.62)},
-        {text: 'return toRPCErr(err)', detail: 'hand the error onwards',
-          sub: 'hands on an empty box', label: 'empty', atWord: A(0.66)},
+          sub: 'but which err is this?', label: 'which?', atWord: A(0.36)},
+        {text: '    return status()', detail: 'report the real outcome', sub: 'never reached', atWord: A(0.44)},
+        {text: '}', detail: '', sub: '', atWord: A(0.48)},
+        {text: 'return toRPCErr(err)', detail: 'pass the error onwards',
+          sub: 'passes on an empty box', label: 'empty', atWord: A(0.54)},
       ],
+      caption: 'one character, and the meaning inverts',
     },
     source: 'grpc/grpc-go stream.go at commit 6d0aaaec, lines 1124–1130',
   }));
 
-// 33 ★★ the vanishing box — the centrepiece
-c.add('VAR_SCOPE', 'slide', 'zoneA',
-  "So follow what actually happens. The function already has its own box called err, and it's empty. " +
-  "Then we step inside the if — those curly brackets — and the colon makes a second box, also called " +
-  "err. The real answer from that fetch goes into the new box. Good so far. But then the if finishes, " +
-  "and here's the thing about a box made inside brackets: when the brackets close, that box is gone. " +
-  "Swept away, along with everything in it. Two lines later the code asks for err again. The new box " +
-  "doesn't exist any more, so it reads the only box left — the old one, from outside. And the old box " +
-  "was never filled. It's still empty. So the code checks whether anything went wrong, looks in an " +
-  "empty box, finds nothing, and cheerfully reports success. The error wasn't handled. It was dropped " +
-  "on the floor.",
+// 35 ★★ the vanishing box — the centrepiece. 7 phases = 7 anchors → 46s → ~145 words.
+add('VAR_SCOPE', 'slide', 'zoneA',
+  "So follow what actually happens. The function already owns a box called err, and it's empty. We " +
+  "step inside the if — those curly brackets — and the colon makes a second box, also called err. " +
+  "Whatever that fetch returned drops into the new box. So far, so good. Then the if finishes, " +
+  "and here's the thing about a box made inside brackets: when the brackets close, the box is gone. " +
+  "Swept away, with everything in it. Two lines later the code asks for err again. The new box no " +
+  "longer exists, so it reads the only box left, the old one from outside. That box was never " +
+  "filled, so that box is still empty. The code checks whether anything went wrong, looks inside an empty " +
+  "box, finds nothing, and cheerfully reports success. The error wasn't handled — the error was dropped on " +
+  "the floor.",
   (A) => ({
     varScope: {
       title: 'the same name, two different boxes',
       outerLabel: 'err',
-      outerSub: 'the function\'s own box — never filled',
+      outerSub: "the function's own box — never filled",
       innerLabel: 'err',
       innerSub: 'made by the colon',
       fenceLabel: 'if err := recv(...) { }',
       emptyLabel: 'nil — empty',
       valueLabel: 'the real error',
       askLabel: 'if err == io.EOF',
-      verdict: 'empty — so it reports success',
+      verdict: 'empty, so it reports success',
       steps: [
-        {title: 'outer', label: 'the old box', sub: 'the function already has an err, and it is empty', atWord: A(0.08)},
-        {title: 'fence', label: 'step inside', sub: 'now we are inside the if — those curly brackets', atWord: A(0.2)},
-        {title: 'inner', label: 'a new box', sub: 'the colon makes a SECOND box, also called err', atWord: A(0.28)},
-        {title: 'fill', label: 'filled', sub: 'the real answer goes into the new box', atWord: A(0.36)},
-        {title: 'vanish', label: 'gone', sub: 'the brackets close — and the new box is swept away', atWord: A(0.48)},
-        {title: 'ask', label: 'err?', sub: 'two lines later the code asks for err again', atWord: A(0.6)},
-        {title: 'verdict', label: 'empty', sub: 'it reads the only box left, and nothing was ever put in it', atWord: A(0.72)},
+        {title: 'outer', label: 'the old box', sub: 'the function already owns an err, and it is empty', atWord: A(0.08)},
+        {title: 'fence', label: 'step inside', sub: 'now we are inside the curly brackets', atWord: A(0.18)},
+        {title: 'inner', label: 'a new box', sub: 'the colon makes a SECOND box, also called err', atWord: A(0.26)},
+        {title: 'fill', label: 'filled', sub: 'the real answer drops into the new box', atWord: A(0.34)},
+        {title: 'vanish', label: 'gone', sub: 'the brackets close, and the box is swept away', atWord: A(0.46)},
+        {title: 'ask', label: 'err?', sub: 'two lines later the code asks for err again', atWord: A(0.58)},
+        {title: 'verdict', label: 'empty', sub: 'it reads the only box left, and nothing was ever put in it', atWord: A(0.7)},
       ],
       caption: 'a failed call now reports success',
       color: 'red',
+      source: 'grpc/grpc-go stream.go, the defect fixed by commit 5c4da090',
       atWord: A(0.04),
     },
-    source: 'grpc/grpc-go stream.go, the defect fixed by commit 5c4da090',
   }));
 
-// 34 · why nobody caught it
-c.add('TYPE_GATE', 'fade', 'zoneA',
-  "At this point you might reasonably ask: don't programmers have tools that catch this sort of thing? " +
-  "They do, and that's exactly why this one is so nasty. Look at that line again — there's nothing " +
-  "illegal about it. Making a new box is a completely ordinary thing to do; programmers do it all day. " +
-  "Nothing's misspelled. Nothing's the wrong type. So the compiler, which is the program that turns " +
-  "the code into something a machine can run and which refuses obvious mistakes, is perfectly happy. " +
-  "Go's built-in checker is happy. The tests pass. Every light is green, and the code is wrong.",
+// 36 · why nobody caught it. PIPELINE_GATE.
+add('PIPELINE_GATE', 'fade', 'zoneA',
+  "Don't programmers have tools? They do, which is why this bug is nasty. Nothing about that line is illegal, so the compiler — which turns code into what a machine runs — is happy. Go's checker is happy, the tests pass. Every light green, code wrong.",
   (A) => ({
-    typeGate: {
-      title: 'everything that should have caught it',
-      gates: [
-        {label: 'the compiler', sub: 'it is valid code', verdict: 'pass', atWord: A(0.42)},
-        {label: 'go vet', sub: 'not in the default checks', verdict: 'pass', atWord: A(0.56)},
-        {label: 'the tests', sub: 'nothing exercised this path', verdict: 'pass', atWord: A(0.66)},
-        {label: 'three human reviewers', sub: 'it looks right', verdict: 'pass', atWord: A(0.74)},
-      ],
-      caption: 'every light green, and the code is still wrong',
+    pipelineGate: {
+      headline: 'Every light [green]',
+      proposerLabel: 'the change',
+      gateLabel: 'every check',
+      outputLabel: 'shipped to users',
+      passLabel: 'passes',
+      rejectLabel: 'nothing was turned back',
+      checks: ['the compiler', "Go's checker", 'the tests', 'three reviewers'],
+      footNote: 'valid code can still be wrong code',
       color: 'orange',
-      atWord: A(0.08),
+      atWord: A(0.4),
     },
   }));
 
-// 35 · the irony
-c.add('REVEAL', 'slide', 'zoneC',
-  "And now for the part that genuinely made me sit back. Go and read the title of that pull request " +
-  "one more time. Its entire purpose — the whole reason a person sat down and wrote it — was to make " +
-  "the client report one particular error properly. And the bug we just walked through means that " +
-  "exact error is the one that gets thrown away. The change broke the very thing it was written to do. " +
-  "The reviewer spotted that too, by the way. It said so in its own words, unprompted.",
+// 37 · the irony. REVEAL is 2 anchors → keep to ~50 words.
+add('REVEAL', 'slide', 'zoneC',
+  "And now the part that made me sit back. Read that pull request title once more. Its entire " +
+  "purpose was to make the client report one particular error properly. This bug throws that exact " +
+  "error away.",
   (A) => ({
-    headline: 'It broke the thing it was written to do',
-    items: [
-      {label: 'the pull request', sub: 'make the client report this error properly', atWord: A(0.3)},
-      {label: 'the bug', sub: 'that error is the one that gets dropped', atWord: A(0.55)},
-    ],
-    source: 'grpc/grpc-go #7461, and the delegated review run on this machine',
+    reveal: {
+      statement: 'It broke the thing it was written to do.',
+      sub: 'the error it existed to deliver is the one that vanishes',
+      atWord: A(0.55),
+    },
   }));
 
-// 36 · the decency beat — not optional
-c.add('LOWER_THIRD', 'fade', 'zoneA',
-  "One more thing, and I mean this. This isn't a story about one engineer having a bad day. Several " +
-  "experienced people looked at this change and approved it, because it reads as correct — it reads as " +
-  "correct to me, and I've now stared at it for hours. That's the whole point. A mistake like this " +
-  "isn't caused by carelessness. It's caused by the fact that a colon is very small and a human eye " +
-  "slides right over it. That's what a machine is genuinely good for.",
+// 38 · the decency beat. Not optional.
+add('LOWER_THIRD', 'fade', 'zoneA',
+  "One more thing, and I mean it. This is not a story about an engineer having a bad day. Several experienced people approved this change because it reads as correct — and it reads correct to me. A colon is small, and the eye slides over it.",
   (A) => ({
-    title: 'This is about how review works',
-    subtitle: 'not about who wrote it',
-    atWord: A(0.3),
+    lowerThird: {
+      kicker: 'TO BE CLEAR',
+      title: 'About review, not the author',
+      subtitle: 'a colon is very small',
+      asset: 'lucide:heart-handshake',
+      atWord: A(0.3),
+    },
   }));
 
 // ═══ VIII · THE FIX ═════════════════════════════════════════════════════════════
 
-// 37 · it fixed it, and what Google actually shipped
+// 39 · it fixed it, and what Google shipped. 3 clips + 3 zooms = 6 anchors → 40s → ~124 words.
 blind('letterbox', 'zoneB',
-  "And it didn't stop at telling us. Remember that slash command does two jobs — it reviews, and then " +
-  "it repairs what it's confident about. Ask the project what's changed on disk and stream dot go has " +
-  "been edited. Here's the repair it wrote: it's put the line back to the older form, where the answer " +
-  "goes into the box that already exists instead of making a new one. No colon. So does that match " +
-  "what Google actually did? Here's their real fix, seven days later. It's not character for character " +
-  "the same — they restructured it slightly differently — but it's the same bug, the same two places, " +
-  "and the same outcome. The machine and the maintainers agreed.",
+  "Open Code Review didn't stop at telling us, either. That slash command does two jobs: it reviews, then it " +
+  "repairs whatever it's confident about. Ask the project what changed and stream dot go has been " +
+  "edited. Here's the repair it wrote — the line is back to the older form, where the answer goes " +
+  "into the box that already exists instead of making a new one. No colon. So does that match what " +
+  "Google actually did? Here's their real fix, seven days later. Not character for character; they " +
+  "restructured it a little differently. Same bug though, same two places, same outcome. a machine and a team of maintainers, a week apart, reached the same conclusion.",
   LOCAL,
   [
-    {step: 'changed', at: 0.18, label: 'it edited the file', camera: [{frame: 'mod', at: 'stream dot go has been edited'}]},
-    {step: 'patch', pivot: 'Here\'s the repair it wrote', label: 'the repair', camera: [{frame: 'fix', at: 'No colon'}]},
-    {take: 'ocr-proof', step: 'realfix', pivot: 'Here\'s their real fix', label: 'what Google shipped',
-      source: GRPC, camera: [{frame: 'line', at: 'the same bug'}]},
+    {step: 'changed', at: 0.10, label: 'it edited the file',
+      camera: [{frame: 'mod', at: 'stream dot go has been edited'}]},
+    {step: 'patch', at: 0.38, pivot: "Here's the repair it wrote", label: 'the repair',
+      camera: [{frame: 'fix', at: 'No colon'}]},
+    {take: 'ocr-proof', step: 'realfix', at: 0.66, pivot: "Here's their real fix", label: 'what Google shipped',
+      source: GRPC, camera: [{frame: 'line', at: 'Same bug though'}]},
   ]);
 
 // ═══ IX · WHO IT IS FOR ═════════════════════════════════════════════════════════
 
-c.add('CHAPTER', 'wipe', 'zoneC',
+add('CHAPTER', 'wipe', 'zoneC',
   "So who is this actually for, and where does it fit in a normal week?",
-  (A) => ({title: 'Who should use this', subtitle: 'and where it fits', atWord: A(0.4)}));
+  () => ({chapter: {number: '06', title: 'Who should use this', subtitle: 'and where it fits'}}));
 
-c.add('ICON_GRID', 'slide', 'zoneA',
-  "If you write code, this is a second pair of eyes before you ask a colleague for theirs — and it " +
-  "costs you nothing to be told your own mistake in private. If you review other people's code, it " +
-  "clears the boring layer so you can spend your attention on whether the design is right, which is " +
-  "the thing only you can do. If you test software, it reads paths your tests were never written for. " +
-  "And if you run a team, the honest pitch isn't that it replaces review. It's that every change gets " +
-  "a consistent first pass at three in the morning on a Friday, when the person who'd normally catch " +
-  "it is asleep.",
+add('ICON_GRID', 'slide', 'zoneA',
+  "If you write code, this is a second pair of eyes before you trouble a colleague — and being told " +
+  "your own mistake in private costs nothing but a minute. If you review other people's code, it " +
+  "clears the dull layer so your attention goes where only a human helps — whether the design is " +
+  "right at all. If you test software, it reads paths your tests never covered. And if you run a " +
+  "team, the honest pitch isn't replacing review. Rather, every change gets the same first pass " +
+  "at three in the morning, when whoever would have caught it is asleep.",
   (A) => ({
-    items: [
-      {label: 'Developers', sub: 'told your own mistake in private', icon: 'lucide:code', atWord: A(0.1)},
-      {label: 'Reviewers', sub: 'freed up for the design questions', icon: 'lucide:eye', atWord: A(0.3)},
-      {label: 'Testers', sub: 'paths no test was written for', icon: 'lucide:flask-conical', atWord: A(0.5)},
-      {label: 'Team leads', sub: 'the same first pass, every time', icon: 'lucide:users', atWord: A(0.68)},
-    ],
+    iconGrid: {
+      items: [
+        {icon: 'lucide:code', label: 'Developers', atWord: A(0.06)},
+        {icon: 'lucide:eye', label: 'Reviewers', color: 'green', atWord: A(0.28)},
+        {icon: 'lucide:flask-conical', label: 'Testers', atWord: A(0.52)},
+        {icon: 'lucide:users', label: 'Team leads', color: 'orange', atWord: A(0.64)},
+        {icon: 'lucide:graduation-cap', label: 'Learners', atWord: A(0.82)},
+      ],
+      cols: 5,
+    },
   }));
 
-c.add('LAYERED_STACK', 'fade', 'zoneA',
-  "And it isn't only for sitting at your keyboard. It plugs into the robots that run checks " +
-  "automatically every time anyone proposes a change — that's GitHub Actions, GitLab, Gerrit. It works " +
-  "with other assistants too, not just Claude Code: Codex, Cursor and Kimi are all supported. It can " +
-  "scan whole files rather than just changes, which is what you want when you've inherited a codebase " +
-  "nobody understands any more. And it'll write its findings out as a structured file, so you can feed " +
-  "them into whatever you already use.",
+add('LAYERED_STACK', 'fade', 'zoneA',
+  "Open Code Review isn't only for your keyboard, either. That same reviewer plugs into the robots " +
+  "that check every proposed change — GitHub Actions, GitLab, Gerrit — works with Codex, Cursor and " +
+  "Kimi, and scans whole files when nobody understands the codebase any more.",
   (A) => ({
-    layeredStack: {
+    stack: {
+      headline: 'The same reviewer, wherever the code is',
       layers: [
-        {label: 'Your editor', sub: 'Claude Code, Codex, Cursor, Kimi', atWord: A(0.36)},
-        {label: 'Your pipeline', sub: 'GitHub Actions, GitLab, Gerrit', atWord: A(0.2)},
-        {label: 'Whole-file scans', sub: 'for code with no recent changes', atWord: A(0.56)},
-        {label: 'Structured output', sub: 'JSON you can feed anywhere', atWord: A(0.72)},
+        {label: 'Your pipeline', sub: 'GitHub Actions, GitLab, Gerrit'},
+        {label: 'Your editor', sub: 'Claude Code, Codex, Cursor'},
+        {label: 'Whole-file scans', sub: 'for code nobody has touched'},
+        {label: 'Structured output', sub: 'JSON you can feed anywhere', color: 'green'},
       ],
-      caption: 'the same reviewer, wherever the code is',
-      color: 'blue',
-      atWord: A(0.06),
+      signal: 'down',
+      atWord: A(0.14),
     },
-    source: 'alibaba/open-code-review — integrations and CI/CD documentation',
   }));
 
-// 41 · final honesty
-c.add('SPEC_COMPARE', 'slide', 'zoneC',
+// 43 · final honesty. SPEC_COMPARE with correct a/b shape.
+add('SPEC_COMPARE', 'slide', 'zoneC',
   "Before you go and install it, here's what I'd want a friend to tell me. Two pull requests is a " +
-  "demonstration, not a measurement — I picked them, I ran each one once, and I didn't retry anything " +
-  "to get a nicer answer for the camera. It still misses most bugs; remember, four out of five. Most " +
-  "of what it flags still isn't real. And what you watched was Claude Code's model doing the judging, " +
-  "not the setup those benchmark numbers came from. What I'd actually claim is narrower, and I think " +
-  "more useful: it stayed quiet on good code, and on a change that fooled several professionals, it " +
-  "found the thing they missed and repaired it. That's worth ten minutes of your evening.",
+  "demonstration, not a measurement. I chose them, I ran each once, and I didn't retry anything to " +
+  "get a prettier answer. Open Code Review still misses most bugs — four in five, remember — and " +
+  "most of what it flags still isn't real. And the judging you watched came from Claude Code's model, not the benchmark setup. So my claim is narrower: it stayed quiet on good code, and on a change " +
+  "that fooled several professionals it found what they missed and repaired it.",
   (A) => ({
-    specCompare: {
-      leftLabel: 'What this video showed',
-      rightLabel: 'What it did not show',
+    compare: {
+      headline: 'What this showed, and what it did not',
+      a: {name: 'Shown', color: 'green'},
+      b: {name: 'Not shown', color: 'orange'},
       rows: [
-        {left: 'silence on a correct pull request', right: 'a measured success rate', atWord: A(0.5)},
-        {left: 'a real shipped bug, found blind', right: 'the benchmark setup', atWord: A(0.6)},
-        {left: 'a repair matching the maintainers\'', right: 'that it finds most bugs', atWord: A(0.7)},
+        {label: 'Silence on good code', a: 'Yes', b: '—', winner: 'a', atWord: A(0.62)},
+        {label: 'A shipped bug, blind', a: 'Yes', b: '—', winner: 'a', atWord: A(0.7)},
+        {label: 'A success rate', a: '—', b: 'No', winner: 'b', atWord: A(0.36)},
+        {label: 'The benchmark setup', a: '—', b: 'No', winner: 'b', atWord: A(0.5)},
       ],
-      caption: 'two pull requests, run once each, nothing retried',
-      color: 'orange',
-      atWord: A(0.08),
+      atWord: A(0.12),
     },
   }));
 
-// 42 · outro
-c.add('OUTRO_CTA', 'fade', 'zoneA',
-  "Everything's linked below — the project, the benchmark data, and both pull requests, so you can go " +
-  "and check every number I've said out loud. If you've got a repository you inherited and don't fully " +
-  "trust, that's the one to point this at first. Tell me what it finds, because I'd genuinely like to " +
-  "know. And if this was useful, subscribe — there's more agent tooling coming.",
-  (A) => ({
-    headline: 'What will you point it at?',
-    subtext: 'github.com/alibaba/open-code-review — Apache-2.0',
-    atWord: A(0.5),
+// 44 · outro
+add('OUTRO_CTA', 'fade', 'zoneA',
+  "Everything's linked below, so you can check every number I've said out loud. If you've inherited " +
+  "a repository you don't fully trust, point Open Code Review at that one first. More agent tooling " +
+  "next time.",
+  () => ({
+    message: 'More agent tooling next time',
+    sub: 'github.com/alibaba/open-code-review — Apache-2.0',
   }));
 
 const spec = {
   meta: {
-    topic: 'Open Code Review — Alibaba\'s reviewer, tested against a bug Google shipped',
+    topic: "Open Code Review — Alibaba's reviewer, tested against a bug Google shipped",
     format: 'long',
     fps: 30,
     subject: 'Open Code Review',
     audioPrefix: 'open-code-review_long',
-    onePayoff: 'whether an open-source AI reviewer can catch a real bug that human reviewers at Google approved and shipped',
-    openLoop: 'Can a machine catch the bug three professional reviewers missed?',
+    onePayoff: 'whether a free AI reviewer can catch a real bug that human reviewers at Google approved and shipped',
+    openLoop: 'Can a machine find what three professional reviewers walked straight past?',
     topicAxes: ['entity-novelty', 'workflow'],
     screenplay: 'documentary',
     seo: {
-      title: 'Alibaba\'s AI Code Reviewer Caught A Bug Google Shipped — Tested Live',
+      title: "Alibaba's Free Code Reviewer Caught A Bug Google Shipped",
       altTitles: [
-        'I Gave Alibaba\'s Code Reviewer A Bug Google Missed',
+        'I Gave Alibaba\'s AI Reviewer A Bug Google Missed',
         'Open Code Review: Beats Claude Code, Then Installs Inside It',
-        'The Free AI Code Reviewer That Found What Google\'s Reviewers Missed',
+        'The Free AI Code Reviewer That Found What Google Missed',
       ],
       hook:
         'Alibaba open-sourced the code reviewer that reads Alibaba\'s own code — 33.9% precision against Claude ' +
-        'Code\'s 7.2% on the same model, using about a ninth of the tokens. Then it ships as a Claude Code plugin. ' +
-        'We install it, point it at a correct pull request from Google\'s gRPC library (it stays silent), and then ' +
-        'at one that was merged with a bug in it and fixed a week later — without letting it see the fix.',
+        "Code's 7.2% on the same model, on about a ninth of the tokens. Then it ships as a Claude Code plugin. We " +
+        'install it, point it at a correct pull request from Google\'s gRPC library (it stays silent), and then at ' +
+        'one that was merged with a bug in it and fixed a week later — without letting it see the fix.',
       description:
-        'Open Code Review is Alibaba\'s internal AI code review tool, now Apache-2.0 and free. In this video we ' +
-        'install it, add the Claude Code plugin, read its built-in rulesets, and run two blind tests on real ' +
-        'pull requests from grpc/grpc-go. Includes a full beginner-level explanation of the variable-scope bug ' +
-        'it found, and an honest look at what the benchmark numbers do and do not mean.',
+        'Open Code Review is Alibaba\'s internal AI code review tool, now Apache-2.0 and free. We install it, add ' +
+        'the Claude Code plugin, read its built-in rulesets on camera, and run two tests on real pull requests from ' +
+        'grpc/grpc-go. Includes a full beginner-level explanation of the variable-scope bug it found, and an honest ' +
+        'look at what the benchmark numbers do and do not mean.',
       breakdown:
         'what a code review is, where Open Code Review came from, the AACR-Bench numbers and what they honestly ' +
         'mean, the deterministic-plus-agent split, the built-in rulesets on camera, installing the CLI and the ' +
-        'Claude Code plugin, a control run on correct code, a blind test on a pull request that shipped a bug, ' +
-        'the bug explained from first principles, and the repair compared with the maintainers\' own fix',
+        'Claude Code plugin, a control run on correct code, a blind test on a pull request that shipped a bug, the ' +
+        "bug explained from first principles, and the repair compared with the maintainers' own fix",
       pinned: 'The bug was one character — a colon. Which repository are you pointing this at first?',
       tags: [
         'Open Code Review', 'Alibaba', 'AI code review', 'code review', 'Claude Code', 'Claude Code plugin',

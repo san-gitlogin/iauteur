@@ -11010,6 +11010,7 @@ export interface VarScopeItem {
   icon?: string;
 }
 export interface VarScopeData {
+  source?: string;
   title?: string;
   outerLabel?: string;
   outerSub?: string;
@@ -11076,6 +11077,7 @@ export interface ReviewYieldItem {
   icon?: string;
 }
 export interface ReviewYieldData {
+  source?: string;
   unitLabel?: string;
   perMark?: number;
   hitLabel?: string;

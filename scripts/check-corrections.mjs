@@ -35,6 +35,12 @@ const CORRECTIONS = [
    // the guard sat unreferenced, which is the exact shape of the bug it exists to prevent.
    () => has('scripts/lib/record/runner.mjs', 'assertAgentWorkspaceTrusted\\(demo, ws\\);') &&
          has('scripts/lib/record/runner.mjs', 'hasTrustDialogAccepted')],
+  ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
+   'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
+   '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +
+   'NOT commands. The rule is the general one — a recorded agent run must be unable to stop and ask.',
+   () => has('scripts/lib/record/runner.mjs', 'assertAgentRunCannotPrompt\\(demo\\);') &&
+         has('scripts/lib/record/runner.mjs', 'is NOT enough — it covers file edits')],
   // ── the voice ──────────────────────────────────────────────────────────────
   ['the voice speed used as a pacing knob', 'SEAL',
    '"why does ava sound slow!!! it was perfect before" / "never adjust the pace of the voice to match"',

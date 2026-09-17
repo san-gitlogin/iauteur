@@ -1,6 +1,61 @@
 # PROJECT STATE — read this after CLAUDE.md
 
-## 2026-09-17 — context-mode reviewed, and two corrections that outlive it
+## 2026-09-17 — Open Code Review, and the recording lesson that cost the most time
+
+`topics/open-code-review` (42 scenes, ~22 min wide + a 48s short) reviews **alibaba/open-code-review**
+by running it against two real `grpc/grpc-go` pull requests: #9290, which is correct (it reports
+nothing — the precision claim demonstrated rather than quoted), and **#7461, which shipped a
+variable-scope bug that the maintainers fixed seven days later in commit `5c4da090`, whose message
+literally reads "fix a bug introduced in #7461."** The reviewer found both call sites blind, with
+all six cited line numbers exact, and wrote a repair matching the maintainers' own.
+
+**The blind test is only honest if the answer is unreachable.** The first run was correct but ran in
+a full clone where `git log --all` still reached the fix commit. That is not a standard worth
+shipping on, so the recorded workspace is built with `git fetch --depth=2` — two commits, and
+`git log --all --oneline | grep -c 5c4da090` returning `0` is **filmed**, not asserted. Research and
+the fairness argument: `briefs/opencodereview/{00-dossier,01-plain-language,02-blindrun}.md`.
+
+**Two new components**, both because a caption would have been a lie about the mechanism:
+- `VAR_SCOPE` — two boxes with the same name, and the one that disappears. Scope is a LIFETIME, so
+  it is drawn as nesting and as time: the inner box is born inside a bracket fence, filled, and
+  swept away when the fence closes, and the later line's pointer lands on the empty survivor.
+- `REVIEW_YIELD` — every comment a checker wrote, with the genuinely correct ones lit. 5,980 marks
+  beside 889 teaches the precision trade without the word "precision" being spoken.
+
+### ★ A LIVE-AGENT TAKE HANGS ON A PROMPT; IT DOES NOT FAIL (sealed)
+
+A 30-minute take produced 594 frames and then waited out its timeout. The frames showed why: Claude
+Code had drawn its own **folder-trust prompt** — *"Quick safety check: Is this a project you created
+or one you trust?"* — waiting on a keypress a recorder never sends. The agent never started, so
+`waitFor` could never match and every downstream gate was green because there was nothing to judge.
+
+**`claude -p` does not prompt, which is why every headless rehearsal passed and only the recorded
+take hung.** `assertAgentWorkspaceTrusted` (runner.mjs) now refuses such a take in one second and
+prints the fix. Registered in `check-corrections.mjs`; **the first version of that row was weak** —
+it checked the guard *existed* rather than that it was *called*, which is precisely the failure it
+exists to prevent. It now anchors on the call site and was re-broken to prove it goes red.
+
+### ⚠ AND THE EXPENSIVE PART: THE FIX WAS ONE FLAG — THE REST WAS SELF-INFLICTED
+
+Marking the workspace trusted was the whole fix. What followed was not, and it cost hours:
+
+1. **Three caches were cleared at once** to "get a clean slate" — the Playwright profile
+   (`out/rec-profile`), the serve-web data dir, and briefly the 3.3 GB VS Code server install. Each
+   removal created a new failure at a different layer, and with three changed at once none of them
+   could be attributed. **Change one thing and observe.**
+2. **`out/rec-profile` is not a cache.** It carries VS Code for Web's dark theme, its dismissed
+   Welcome page, the hidden Chat panel and the workspace-trust decision. Deleting it puts every
+   later run through a light-themed workbench with a Chat panel holding keyboard focus, so prep is
+   slow and fragile. Treat it as state, not scratch.
+3. **Moving 3.3 GB started a Spotlight reindex** that held a full CPU core for hours, which made a
+   dsf-4 capture (6400×3600) crawl and looked exactly like a hang.
+4. **Polling is not waiting.** Several "wait ten minutes" checks were backgrounded and then read a
+   second later, so slow stages were repeatedly misdiagnosed as hung — and the kills that followed
+   took live recorders with them. Use `Monitor` with an until-loop, or a blocking check.
+
+The diagnostic that actually worked was the one the method already prescribes: **pull a still and
+look at it.** Both the trust prompt and the light-theme/Chat-panel state were invisible in logs and
+obvious in a single frame.
 
 `topics/context-mode-measured` shipped (10:05 wide, 39s short). The review itself is in
 `briefs/contextmode/` — twelve measured cells, three runs each, every number read from Claude
