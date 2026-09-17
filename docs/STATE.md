@@ -1,5 +1,26 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-09-18 — Open Code Review SHIPPED (21:27 wide + 51s short)
+
+`topics/open-code-review/out/wide-dark.mp4` — 38,619 frames EXACT, drift 0 ms, audio mean −22.6 dB.
+Plus `short-dark.mp4`, `thumb.png`, `cover.png` and both upload kits. 54 scenes, 7 takes, two new
+components (`VAR_SCOPE`, `REVIEW_YIELD`), four new recorder seals.
+
+**Two self-inflicted costs, both worth not repeating:**
+1. **Clearing three caches at once** to chase a hang. The fix was a single flag; each extra
+   deletion created a new failure at a different layer, and with three variables changed none of
+   them could be attributed. `out/rec-profile` in particular is STATE, not scratch — it carries
+   VS Code for Web's theme, its dismissed Welcome page, the hidden Chat panel and the workspace
+   trust decision. Delete it and every later take fights a light-themed workbench with a Chat
+   panel holding keyboard focus.
+2. **Editing the spec mid-render.** The thumbnail was patched into `long.json` while the render
+   was running; `render-long` hashes the spec and aborted at segment 5/10 rather than mix two
+   versions. Correct behaviour, ~20 minutes lost. **Metadata edits go BEFORE the render starts.**
+
+**And the thing that worked every time:** pulling one still and looking at it. The trust prompt,
+the permission prompt, the swallowed prompt, the light-theme workbench — all four were invisible
+in logs ("still running") and obvious in a single frame.
+
 ## 2026-09-17 — Open Code Review, and the recording lesson that cost the most time
 
 `topics/open-code-review` (42 scenes, ~22 min wide + a 48s short) reviews **alibaba/open-code-review**
