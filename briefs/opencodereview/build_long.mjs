@@ -966,9 +966,9 @@ const spec = {
   },
   brand: c.brand(),
   thumbnail: {
-    title: 'BEATS CLAUDE CODE',
+    title: 'OPEN SOURCE CLI THAT BEATS CLAUDE CODE',
     badge: 'Open Code Review',
-    note: '20K+ ENGINEERS',
+    note: 'IN CODE REVIEWS',
     art: 'img:ocr-trending.png',
     asset: 'img:ocr-trending.png',
   },
