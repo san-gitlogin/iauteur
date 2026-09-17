@@ -1,6 +1,6 @@
 {
   "meta": {
-    "topic": "Open Code Review — the one-character bug Google shipped",
+    "topic": "Open Code Review \u2014 the one-character bug Google shipped",
     "format": "short",
     "fps": 30,
     "subject": "Open Code Review",
@@ -40,9 +40,9 @@
         "grpc-go bug"
       ],
       "sources": [
-        "github.com/alibaba/open-code-review — Open Code Review (Apache-2.0)",
-        "github.com/grpc/grpc-go/pull/7461 — the pull request that shipped the bug",
-        "github.com/grpc/grpc-go/commit/5c4da090 — the maintainers' own fix"
+        "github.com/alibaba/open-code-review \u2014 Open Code Review (Apache-2.0)",
+        "github.com/grpc/grpc-go/pull/7461 \u2014 the pull request that shipped the bug",
+        "github.com/grpc/grpc-go/commit/5c4da090 \u2014 the maintainers' own fix"
       ]
     }
   },
@@ -57,12 +57,13 @@
   "thumbnail": {
     "title": "ONE CHARACTER SHIPPED THIS BUG",
     "badge": "Open Code Review",
-    "note": "found blind · Apache-2.0"
+    "note": "found blind \u00b7 Apache-2.0"
   },
   "cover": {
     "title": "ONE CHARACTER SHIPPED THIS BUG",
     "badge": "Open Code Review",
-    "frames": 2
+    "frames": 2,
+    "asset": "si:go"
   },
   "scenes": [
     {
@@ -239,10 +240,10 @@
                 132
               ],
               "shows": "$ claude --permission-mode bypassPermissions '/open-code-review:dele",
-              "said": " Where: stream.go:1124 (csAttempt.recvMsg) and stream.go:1444 (addrConnStream.RecvMsg)\n The PR changed the second recv call in each function to declare err inside the if:\n if err := recv(...); err == nil {\n return toRPCErr(errors.New(\"...protocol violation...\"))\n }\n if err == io.EOF { // this `err` is the function's return value, not the recv result\n return a.s.Status().Err()\n }\n return toRPCErr(err)\n That err only exists inside the if. The two checks after it read the function's named return value err, which is always nil at that point. As a result, when a\n client call without server streaming reads past its single response:\n - On io.EOF (the normal end of the call), it returns toRPCErr(nil), which is nil, instead of a.s.Status().Err(). If the server sends a message and then an\n error status in its trailers, the client never sees that error.\n - On a real error (the stream is reset, a decompression failure, or the message is too large), the error is dropped and the call looks successful.\n - In addrConnStream, the deferred as.finish(err) also gets nil, so the failure isn't recorded when the stream ends.\n The first recv call in each function is fine, because everything that uses its result is inside the if block.\n Fix applied: those two call sites now assign to the named return value again:\n err = recv(..., false)\n if err == nil {\n Not reported\n - rpc_util.go: the if isServer { return ... } else { return ... } block has an unneeded else. That's a style issue only.\n - The rest of the change is correct: isServer is set to true in server.go and serverStream, and to false on both client paths.\n Before merging, please run go test ./test/ -run Compressor and the stream tests. A test where the client receives a unary response followed by a non-OK status\n in the trailers would catch this bug if it came back.\n✻ Crunched for 26s · done 11:12 PM\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯ commit the fix\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ bypass permissions on (shift+tab to cycle)\nPS ocr-blind> claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
+              "said": " Where: stream.go:1124 (csAttempt.recvMsg) and stream.go:1444 (addrConnStream.RecvMsg)\n The PR changed the second recv call in each function to declare err inside the if:\n if err := recv(...); err == nil {\n return toRPCErr(errors.New(\"...protocol violation...\"))\n }\n if err == io.EOF { // this `err` is the function's return value, not the recv result\n return a.s.Status().Err()\n }\n return toRPCErr(err)\n That err only exists inside the if. The two checks after it read the function's named return value err, which is always nil at that point. As a result, when a\n client call without server streaming reads past its single response:\n - On io.EOF (the normal end of the call), it returns toRPCErr(nil), which is nil, instead of a.s.Status().Err(). If the server sends a message and then an\n error status in its trailers, the client never sees that error.\n - On a real error (the stream is reset, a decompression failure, or the message is too large), the error is dropped and the call looks successful.\n - In addrConnStream, the deferred as.finish(err) also gets nil, so the failure isn't recorded when the stream ends.\n The first recv call in each function is fine, because everything that uses its result is inside the if block.\n Fix applied: those two call sites now assign to the named return value again:\n err = recv(..., false)\n if err == nil {\n Not reported\n - rpc_util.go: the if isServer { return ... } else { return ... } block has an unneeded else. That's a style issue only.\n - The rest of the change is correct: isServer is set to true in server.go and serverStream, and to false on both client paths.\n Before merging, please run go test ./test/ -run Compressor and the stream tests. A test where the client receives a unary response followed by a non-OK status\n in the trailers would catch this bug if it came back.\n\u273b Crunched for 26s \u00b7 done 11:12 PM\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\u276f\u00a0commit the fix\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n \u26a0 Transcript saving is off \u2014 inherited CLAUDE_CODE_CHILD_SESSION marker \u00b7 restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n \u23f5\u23f5 bypass permissions on (shift+tab to cycle)\nPS ocr-blind> claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -259,7 +260,7 @@
       "type": "CODE_RUN",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "A variable is a labelled box you drop a value into, and this box is called err — short for error. Now look at the tiny colon before the equals sign. That colon builds a brand new box.",
+      "narration": "A variable is a labelled box you drop a value into, and this box is called err \u2014 short for error. Now look at the tiny colon before the equals sign. That colon builds a brand new box.",
       "data": {
         "codeRun": {
           "filename": "stream.go",
@@ -295,7 +296,7 @@
       "type": "VAR_SCOPE",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "The real error drops into the new box. Then the brackets close — and a box built inside brackets dies with them.",
+      "narration": "The real error drops into the new box. Then the brackets close \u2014 and a box built inside brackets dies with them.",
       "data": {
         "varScope": {
           "outerLabel": "err",
@@ -352,9 +353,9 @@
           "outerSub": "the only box left",
           "innerLabel": "err",
           "innerSub": "gone",
-          "emptyLabel": "nil — empty",
+          "emptyLabel": "nil \u2014 empty",
           "askLabel": "if err == io.EOF",
-          "verdict": "empty — reports success",
+          "verdict": "empty \u2014 reports success",
           "steps": [
             {
               "title": "outer",
@@ -742,7 +743,7 @@
               "shows": "About"
             }
           ],
-          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0",
+          "sourceNote": "alibaba/open-code-review \u00b7 github.com \u00b7 Apache-2.0",
           "capture": {
             "width": 1600,
             "height": 900

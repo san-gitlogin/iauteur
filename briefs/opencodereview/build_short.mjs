@@ -195,6 +195,7 @@ const spec = {
   cover: {
     title: 'ONE CHARACTER SHIPPED THIS BUG',
     badge: 'Open Code Review',
+    asset: 'si:go',
     frames: 2,
   },
   scenes: c.S,

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "topic": "Open Code Review — Alibaba's reviewer, tested against a bug Google shipped",
+    "topic": "Open Code Review \u2014 Alibaba's reviewer, tested against a bug Google shipped",
     "format": "long",
     "fps": 30,
     "subject": "Open Code Review",
@@ -19,10 +19,10 @@
         "Open Code Review: Beats Claude Code, Then Installs Inside It",
         "The Free AI Code Reviewer That Found What Google Missed"
       ],
-      "hook": "Alibaba open-sourced the code reviewer that reads Alibaba's own code — 33.9% precision against Claude Code's 7.2% on the same model, on about a ninth of the tokens. Then it ships as a Claude Code plugin. We install it, point it at a correct pull request from Google's gRPC library (it stays silent), and then at one that was merged with a bug in it and fixed a week later — without letting it see the fix.",
+      "hook": "Alibaba open-sourced the code reviewer that reads Alibaba's own code \u2014 33.9% precision against Claude Code's 7.2% on the same model, on about a ninth of the tokens. Then it ships as a Claude Code plugin. We install it, point it at a correct pull request from Google's gRPC library (it stays silent), and then at one that was merged with a bug in it and fixed a week later \u2014 without letting it see the fix.",
       "description": "Open Code Review is Alibaba's internal AI code review tool, now Apache-2.0 and free. We install it, add the Claude Code plugin, read its built-in rulesets on camera, and run two tests on real pull requests from grpc/grpc-go. Includes a full beginner-level explanation of the variable-scope bug it found, and an honest look at what the benchmark numbers do and do not mean.",
       "breakdown": "what a code review is, where Open Code Review came from, the AACR-Bench numbers and what they honestly mean, the deterministic-plus-agent split, the built-in rulesets on camera, installing the CLI and the Claude Code plugin, a control run on correct code, a blind test on a pull request that shipped a bug, the bug explained from first principles, and the repair compared with the maintainers' own fix",
-      "pinned": "The bug was one character — a colon. Which repository are you pointing this at first?",
+      "pinned": "The bug was one character \u2014 a colon. Which repository are you pointing this at first?",
       "tags": [
         "Open Code Review",
         "Alibaba",
@@ -56,12 +56,12 @@
         "automated pull request review"
       ],
       "sources": [
-        "github.com/alibaba/open-code-review — Open Code Review by Alibaba (Apache-2.0)",
-        "npmjs.com/package/@alibaba-group/open-code-review — the CLI installed in this video",
-        "huggingface.co/datasets/Alibaba-Aone/aacr-bench — the benchmark dataset",
-        "github.com/grpc/grpc-go/pull/9290 — the correct pull request used as a control",
-        "github.com/grpc/grpc-go/pull/7461 — the pull request that shipped the bug",
-        "github.com/grpc/grpc-go/commit/5c4da090 — the maintainers' own fix"
+        "github.com/alibaba/open-code-review \u2014 Open Code Review by Alibaba (Apache-2.0)",
+        "npmjs.com/package/@alibaba-group/open-code-review \u2014 the CLI installed in this video",
+        "huggingface.co/datasets/Alibaba-Aone/aacr-bench \u2014 the benchmark dataset",
+        "github.com/grpc/grpc-go/pull/9290 \u2014 the correct pull request used as a control",
+        "github.com/grpc/grpc-go/pull/7461 \u2014 the pull request that shipped the bug",
+        "github.com/grpc/grpc-go/commit/5c4da090 \u2014 the maintainers' own fix"
       ]
     }
   },
@@ -76,7 +76,15 @@
   "thumbnail": {
     "title": "IT CAUGHT WHAT GOOGLE MISSED",
     "badge": "Open Code Review",
-    "note": "free · Apache-2.0 · tested live"
+    "note": "33.9% vs 7.2% \u00b7 free \u00b7 Apache-2.0",
+    "asset": "si:alibabacloud",
+    "logos": [
+      "si:alibabacloud",
+      "si:anthropic",
+      "si:github",
+      "si:npm",
+      "si:googlecloud"
+    ]
   },
   "scenes": [
     {
@@ -114,7 +122,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Let's start where anyone sensible starts, which is the project's own page on GitHub. GitHub is where programmers keep their code, and a page like this is called a repository — think of it as the project's folder, holding every file and its whole history. Look at who publishes this one. That's Alibaba. Underneath sits the description, and they've written it plainly: fast, efficient, battle-tested at Alibaba's scale. Over on the right, the licence reads Apache two point oh, which matters more than it sounds. Apache two point oh means free, readable, and usable at work without asking anyone's permission.",
+      "narration": "Let's start where anyone sensible starts, which is the project's own page on GitHub. GitHub is where programmers keep their code, and a page like this is called a repository \u2014 think of it as the project's folder, holding every file and its whole history. Look at who publishes this one. That's Alibaba. Underneath sits the description, and they've written it plainly: fast, efficient, battle-tested at Alibaba's scale. Over on the right, the licence reads Apache two point oh, which matters more than it sounds. Apache two point oh means free, readable, and usable at work without asking anyone's permission.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -818,7 +826,7 @@
               "shows": "About"
             }
           ],
-          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0",
+          "sourceNote": "alibaba/open-code-review \u00b7 github.com \u00b7 Apache-2.0",
           "capture": {
             "width": 1600,
             "height": 900
@@ -835,7 +843,7 @@
       "type": "STEP_FLOW",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "Before we go further, let's agree on one idea, because everything today rests on it. When a programmer finishes a piece of work, they don't drop it straight into the company's product. The programmer packages the work up and asks permission, because nobody merges straight into a live product. That package has a name: a pull request. Picture a folder with a note on the front saying here's what I changed, please look before you let this in. Another programmer reads it and either agrees or asks for changes. That reading is the code review — the last check before code reaches real people.",
+      "narration": "Before we go further, let's agree on one idea, because everything today rests on it. When a programmer finishes a piece of work, they don't drop it straight into the company's product. The programmer packages the work up and asks permission, because nobody merges straight into a live product. That package has a name: a pull request. Picture a folder with a note on the front saying here's what I changed, please look before you let this in. Another programmer reads it and either agrees or asks for changes. That reading is the code review \u2014 the last check before code reaches real people.",
       "data": {
         "steps": [
           {
@@ -922,7 +930,7 @@
                   "y": 309,
                   "w": 826,
                   "h": 91,
-                  "covers": "Open Code Review is an AI-powered code review CLI tool. It originated as Alibaba Group's internal official AI code review assistant — over the past two years, it has served tens of thousands of developers and identified millions of code defects. After thorough validation at massive scale, we incubated it into an open source project for the community. Simply configure a model endpoint to get started."
+                  "covers": "Open Code Review is an AI-powered code review CLI tool. It originated as Alibaba Group's internal official AI code review assistant \u2014 over the past two years, it has served tens of thousands of developers and identified millions of code defects. After thorough validation at massive scale, we incubated it into an open source project for the community. Simply configure a model endpoint to get started."
                 }
               },
               "ink": [
@@ -1180,7 +1188,7 @@
               "shows": "What is Open Code Review?"
             }
           ],
-          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0",
+          "sourceNote": "alibaba/open-code-review \u00b7 github.com \u00b7 Apache-2.0",
           "capture": {
             "width": 1600,
             "height": 900
@@ -1327,7 +1335,7 @@
                   "y": 254,
                   "w": 817,
                   "h": 43,
-                  "covers": "A real-world code review benchmark built from 50 popular open-source repositories, 200 real Pull Requests, and 10 programming languages — cross-validated by 80+ senior engineers ( 1,505 annotated ground-truth issues)."
+                  "covers": "A real-world code review benchmark built from 50 popular open-source repositories, 200 real Pull Requests, and 10 programming languages \u2014 cross-validated by 80+ senior engineers ( 1,505 annotated ground-truth issues)."
                 }
               },
               "ink": [
@@ -1536,7 +1544,7 @@
               "shows": "Benchmark"
             }
           ],
-          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0",
+          "sourceNote": "alibaba/open-code-review \u00b7 github.com \u00b7 Apache-2.0",
           "capture": {
             "width": 1600,
             "height": 900
@@ -1566,7 +1574,7 @@
               "sub": "same model underneath",
               "value": 5980,
               "detail": "435",
-              "tag": "5,980 written · 435 real",
+              "tag": "5,980 written \u00b7 435 real",
               "color": "red",
               "atWord": 14.167
             },
@@ -1575,14 +1583,14 @@
               "sub": "same model underneath",
               "value": 889,
               "detail": "301",
-              "tag": "889 written · 301 real",
+              "tag": "889 written \u00b7 301 real",
               "color": "green",
               "atWord": 14.917
             }
           ],
           "caption": "the pile you must sort through is the real cost",
           "color": "yellow",
-          "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows"
+          "source": "AACR-Bench, published by Alibaba \u00b7 Claude-4.6-Opus rows"
         }
       },
       "durationFrames": 503,
@@ -1612,7 +1620,7 @@
             "atWord": 18.75
           }
         ],
-        "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows"
+        "source": "AACR-Bench, published by Alibaba \u00b7 Claude-4.6-Opus rows"
       },
       "durationFrames": 463,
       "audio": "audio/open-code-review_long_s10.mp3",
@@ -1641,7 +1649,7 @@
             "atWord": 14.083
           }
         ],
-        "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows"
+        "source": "AACR-Bench, published by Alibaba \u00b7 Claude-4.6-Opus rows"
       },
       "durationFrames": 426,
       "audio": "audio/open-code-review_long_s11.mp3",
@@ -1652,7 +1660,7 @@
       "type": "RULE_TEST",
       "transition": "slide",
       "background": "zoneC",
-      "narration": "Now let me be straight with you, because a review that only reads out the good numbers is an advert. Flip those same figures around. Open Code Review got about thirty-four percent of its comments right, which beats seven by miles — and still means two out of every three things it flags are not real bugs. Open Code Review found twenty percent of the known problems, so it missed four in five. Claude Code actually found more of them; it simply buried them. Neither tool is anywhere near solved. Open Code Review is a better reviewer, not a finished one.",
+      "narration": "Now let me be straight with you, because a review that only reads out the good numbers is an advert. Flip those same figures around. Open Code Review got about thirty-four percent of its comments right, which beats seven by miles \u2014 and still means two out of every three things it flags are not real bugs. Open Code Review found twenty percent of the known problems, so it missed four in five. Claude Code actually found more of them; it simply buried them. Neither tool is anywhere near solved. Open Code Review is a better reviewer, not a finished one.",
       "data": {
         "ruleTest": {
           "kicker": "read it honestly",
@@ -1731,7 +1739,7 @@
           ],
           "verdict": "Their own model is second",
           "verdictAtWord": 36.167,
-          "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows",
+          "source": "AACR-Bench, published by Alibaba \u00b7 Claude-4.6-Opus rows",
           "atWord": 2.75
         }
       },
@@ -1841,7 +1849,7 @@
                   "y": 360,
                   "w": 805,
                   "h": 147,
-                  "covers": "Incomplete coverage — On larger changesets, agents tend to \"cut corners,\" selectively reviewing only some files and missing others. Position drift — Reported issues frequently don't match the actual code location, with line numbers or file references drifting off target. Unstable quality — Natural-language-driven Skills are hard to debug, and review quality fluctuates significantly with minor prompt variations."
+                  "covers": "Incomplete coverage \u2014 On larger changesets, agents tend to \"cut corners,\" selectively reviewing only some files and missing others. Position drift \u2014 Reported issues frequently don't match the actual code location, with line numbers or file references drifting off target. Unstable quality \u2014 Natural-language-driven Skills are hard to debug, and review quality fluctuates significantly with minor prompt variations."
                 }
               },
               "ink": [
@@ -2031,7 +2039,7 @@
               "shows": "Why Open Code Review?"
             }
           ],
-          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0",
+          "sourceNote": "alibaba/open-code-review \u00b7 github.com \u00b7 Apache-2.0",
           "capture": {
             "width": 1600,
             "height": 900
@@ -2048,7 +2056,7 @@
       "type": "RESPONSIBILITY_SPLIT",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "Their fix is a split, and once you've seen it you can't unsee it. Parts of a review must never be left to a guess, so those parts are done by ordinary, boring, predictable code. Which files get read? Code decides. Which files belong together? Code decides. Which checklist fits this file? Code decides. Where exactly does a comment get pinned? Code decides. Then the single job that genuinely needs judgement — reading these lines and deciding whether they're wrong — that one goes to the AI, so the AI never wanders the building. The AI gets one room, one checklist, and one question.",
+      "narration": "Their fix is a split, and once you've seen it you can't unsee it. Parts of a review must never be left to a guess, so those parts are done by ordinary, boring, predictable code. Which files get read? Code decides. Which files belong together? Code decides. Which checklist fits this file? Code decides. Where exactly does a comment get pinned? Code decides. Then the single job that genuinely needs judgement \u2014 reading these lines and deciding whether they're wrong \u2014 that one goes to the AI, so the AI never wanders the building. The AI gets one room, one checklist, and one question.",
       "data": {
         "respSplit": {
           "leftLabel": "Ordinary code",
@@ -2102,7 +2110,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "You don't have to take that on faith either, because you can ask it directly. One command prints the exact checklist a file would be handed. Watch what a Go file gets — Go being the language this project is written in. The pattern line says star star slash star dot go, meaning this checklist applies to Go files only. Then read its opening sentence, because it's remarkable. Favour precision over recall. A false positive costs reviewer trust. That's a design decision, written in plain English, sitting inside a rule file. Now watch a plain text file instead. Pattern: default. Four vague questions — is the logic correct, are there security problems. One file gets a specialist; the other gets a shrug. That difference is the whole product, and it cost nothing to check. Any file the engine does not recognise falls back to those four questions, which is honest, but it is not the thing you are paying for.",
+      "narration": "You don't have to take that on faith either, because you can ask it directly. One command prints the exact checklist a file would be handed. Watch what a Go file gets \u2014 Go being the language this project is written in. The pattern line says star star slash star dot go, meaning this checklist applies to Go files only. Then read its opening sentence, because it's remarkable. Favour precision over recall. A false positive costs reviewer trust. That's a design decision, written in plain English, sitting inside a rule file. Now watch a plain text file instead. Pattern: default. Four vague questions \u2014 is the logic correct, are there security problems. One file gets a specialist; the other gets a shrug. That difference is the whole product, and it cost nothing to check. Any file the engine does not recognise falls back to those four questions, which is honest, but it is not the thing you are paying for.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -2234,7 +2242,7 @@
                 103
               ],
               "shows": "$ Favor precision over recall: report only defects that are likely real in the c",
-              "said": "PS ocr-blind> ocr rules check stream.go | sed -n '1,8p'\nFile: stream.go\nSource: System built-in\nPattern: **/*.go\nRule:\n────────────────────────────────────────\n#### Go Review Principles\n> Favor precision over recall: report only defects that are likely real in the changed code and its reachable context. A false positive costs reviewer trust. Tre\nat correctness and security findings as blocking; style-only suggestions are non-blocking. Focus on language-specific risks that ordinary formatting and determin\nistic tooling do not already cover.\nPS ocr-blind>"
+              "said": "PS ocr-blind> ocr rules check stream.go | sed -n '1,8p'\nFile: stream.go\nSource: System built-in\nPattern: **/*.go\nRule:\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n#### Go Review Principles\n> Favor precision over recall: report only defects that are likely real in the changed code and its reachable context. A false positive costs reviewer trust. Tre\nat correctness and security findings as blocking; style-only suggestions are non-blocking. Focus on language-specific risks that ordinary formatting and determin\nistic tooling do not already cover.\nPS ocr-blind>"
             },
             {
               "ref": "rec:ocr-rules#mdrule",
@@ -2362,10 +2370,10 @@
                 110
               ],
               "shows": "$ Security",
-              "said": "PS ocr-blind> ocr rules check README.md | sed -n '1,11p'\nFile: README.md\nSource: System built-in\nPattern: default\nRule:\n────────────────────────────────────────\n#### Correctness\nIs the logic correct? Are there missing boundary conditions?\nAre exceptions handled properly?\nIs it thread-safe in concurrent scenarios?\n#### Security\nPS ocr-blind>"
+              "said": "PS ocr-blind> ocr rules check README.md | sed -n '1,11p'\nFile: README.md\nSource: System built-in\nPattern: default\nRule:\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n#### Correctness\nIs the logic correct? Are there missing boundary conditions?\nAre exceptions handled properly?\nIs it thread-safe in concurrent scenarios?\n#### Security\nPS ocr-blind>"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -2399,7 +2407,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "One thing needs checking first, and it caught me out. Open Code Review needs Git version two point four one or newer. Git is the tool that tracks every change to a project, and an older copy makes every command print a warning, so check yours before anything else. After that, installing is a single line. That's npm, the installer bundled with Node, and dash g means install this for the whole machine rather than one folder. Seconds later we can ask which version arrived. And notice the command itself is only three letters — O, C, R — which is the whole tool, sitting on your machine, ready to be pointed at anything with a git history. No service to sign up for, no dashboard, no seat licence. That matters more than it sounds, because a reviewer you have to justify to someone is a reviewer you quietly stop using.",
+      "narration": "One thing needs checking first, and it caught me out. Open Code Review needs Git version two point four one or newer. Git is the tool that tracks every change to a project, and an older copy makes every command print a warning, so check yours before anything else. After that, installing is a single line. That's npm, the installer bundled with Node, and dash g means install this for the whole machine rather than one folder. Seconds later we can ask which version arrived. And notice the command itself is only three letters \u2014 O, C, R \u2014 which is the whole tool, sitting on your machine, ready to be pointed at anything with a git history. No service to sign up for, no dashboard, no seat licence. That matters more than it sounds, because a reviewer you have to justify to someone is a reviewer you quietly stop using.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -2681,7 +2689,7 @@
               "said": "PS ocr-blind> ocr --version\nopen-code-review v1.12.4 (f1101fd7f) darwin/arm64\nbuilt at: 2026-09-16T09:58:39Z\nhttps://github.com/alibaba/open-code-review\nPS ocr-blind>"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -2698,7 +2706,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Now the part that makes this genuinely odd. Open Code Review ships a plugin for Claude Code, so it runs inside the very tool it just outscored. The first command points Claude Code at Alibaba's plugin list, which they call a marketplace. Then the second installs the plugin. Successfully added. Successfully installed. No account to create, no key to paste. What we've gained are two slash commands — those are shortcuts you type inside Claude Code to trigger something specific — and one of those two does all the work from here. Everything after this point runs through that one command.",
+      "narration": "Now the part that makes this genuinely odd. Open Code Review ships a plugin for Claude Code, so it runs inside the very tool it just outscored. The first command points Claude Code at Alibaba's plugin list, which they call a marketplace. Then the second installs the plugin. Successfully added. Successfully installed. No account to create, no key to paste. What we've gained are two slash commands \u2014 those are shortcuts you type inside Claude Code to trigger something specific \u2014 and one of those two does all the work from here. Everything after this point runs through that one command.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -2824,7 +2832,7 @@
                 202
               ],
               "shows": "$ claude plugin marketplace add alibaba/open-code-review",
-              "said": "PS ocr-blind> claude plugin marketplace add alibaba/open-code-review\nSSH not configured, cloning via HTTPS: https://github.com/alibaba/open-code-review.git\nRefreshing marketplace cache (timeout: 120s)…\nCloning repository (timeout: 120s): https://github.com/alibaba/open-code-review.git\nClone complete, validating marketplace…\nCleaning up old marketplace cache…\n✔ Successfully added marketplace: open-code-review (declared in user settings)\nPS ocr-blind>"
+              "said": "PS ocr-blind> claude plugin marketplace add alibaba/open-code-review\nSSH not configured, cloning via HTTPS: https://github.com/alibaba/open-code-review.git\nRefreshing marketplace cache (timeout: 120s)\u2026\nCloning repository (timeout: 120s): https://github.com/alibaba/open-code-review.git\nClone complete, validating marketplace\u2026\nCleaning up old marketplace cache\u2026\n\u2714 Successfully added marketplace: open-code-review (declared in user settings)\nPS ocr-blind>"
             },
             {
               "ref": "rec:ocr-setup#plugin",
@@ -2965,10 +2973,10 @@
                 157
               ],
               "shows": "$ claude plugin install open-code-review@open-code-review",
-              "said": "PS ocr-blind> claude plugin install open-code-review@open-code-review\n✔ Successfully installed plugin: open-code-review@open-code-review (scope: user)\nPS ocr-blind>"
+              "said": "PS ocr-blind> claude plugin install open-code-review@open-code-review\n\u2714 Successfully installed plugin: open-code-review@open-code-review (scope: user)\nPS ocr-blind>"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -2993,17 +3001,17 @@
         },
         "left": {
           "title": "Open Code Review judges",
-          "sub": "its own key · the benchmark setup",
+          "sub": "its own key \u00b7 the benchmark setup",
           "color": "blue",
           "atWord": 8.25
         },
         "right": {
           "title": "Claude Code judges",
-          "sub": "delegation · no extra key",
+          "sub": "delegation \u00b7 no extra key",
           "color": "green",
           "atWord": 20.083
         },
-        "source": "alibaba/open-code-review — Default vs Delegation Mode"
+        "source": "alibaba/open-code-review \u2014 Default vs Delegation Mode"
       },
       "durationFrames": 447,
       "audio": "audio/open-code-review_long_s22.mp3",
@@ -3014,7 +3022,7 @@
       "type": "LOWER_THIRD",
       "transition": "fade",
       "background": "zoneC",
-      "narration": "Delegation is what we're using, and that carries a caveat. The file picking and the checklists still come from Open Code Review, so the clever half is theirs — but the judging is Claude Code's model, not the benchmark setup.",
+      "narration": "Delegation is what we're using, and that carries a caveat. The file picking and the checklists still come from Open Code Review, so the clever half is theirs \u2014 but the judging is Claude Code's model, not the benchmark setup.",
       "data": {
         "lowerThird": {
           "kicker": "ON THE RECORD",
@@ -3397,7 +3405,7 @@
               "shows": "About"
             }
           ],
-          "sourceNote": "grpc/grpc-go · github.com · Apache-2.0",
+          "sourceNote": "grpc/grpc-go \u00b7 github.com \u00b7 Apache-2.0",
           "capture": {
             "width": 1600,
             "height": 900
@@ -3414,7 +3422,7 @@
       "type": "RULE_TEST",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "Locking is the hardest thing in programming to review by eye, because getting it wrong breaks nothing today — it breaks next Tuesday, under load, for one customer, and never while you're watching. Google engineers read this change, approved it, and merged it, and as far as anybody knows it's correct. Which makes it the perfect first test, because the right answer here is silence.",
+      "narration": "Locking is the hardest thing in programming to review by eye, because getting it wrong breaks nothing today \u2014 it breaks next Tuesday, under load, for one customer, and never while you're watching. Google engineers read this change, approved it, and merged it, and as far as anybody knows it's correct. Which makes it the perfect first test, because the right answer here is silence.",
       "data": {
         "ruleTest": {
           "kicker": "the fair first test",
@@ -3449,7 +3457,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Watch this first command, because here the predictable half does its whole job on one screen. Three reviewable, five total. Open Code Review examined the five changed files and decided only three deserve a reviewer's attention — and look at the two crossed out. Those are test files, and Open Code Review prints exactly why it dropped them, because a reason you can read is a decision you can argue with. No model touched that decision. The second command fetches the checklists, and notice the heading: rule group one, with all three files listed beneath it. Behind that heading, Open Code Review worked out those three files need the same checklist, so they travel together as one job rather than three separate ones. Fewer trips, and the reviewer sees related files side by side, which matters when a change only makes sense across two of them.",
+      "narration": "Watch this first command, because here the predictable half does its whole job on one screen. Three reviewable, five total. Open Code Review examined the five changed files and decided only three deserve a reviewer's attention \u2014 and look at the two crossed out. Those are test files, and Open Code Review prints exactly why it dropped them, because a reason you can read is a decision you can argue with. No model touched that decision. The second command fetches the checklists, and notice the heading: rule group one, with all three files listed beneath it. Behind that heading, Open Code Review worked out those three files need the same checklist, so they travel together as one job rather than three separate ones. Fewer trips, and the reviewer sees related files side by side, which matters when a change only makes sense across two of them.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -3818,7 +3826,7 @@
               "said": "PS ocr-control> ocr delegate rule balancer/endpointsharding/endpointsharding.go balancer/ringhash/picker.go balancer/ringhash/ringhash.go | sed -n '1,7p'\n### Rule Group 1: system / **/*.go\nApplies to:\n- balancer/endpointsharding/endpointsharding.go\n- balancer/ringhash/picker.go\n- balancer/ringhash/ringhash.go\nPS ocr-control>"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -3835,7 +3843,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "And here's the review itself, running inside Claude Code. Every green dot is a tool call — the reviewer deciding what it needs and going to fetch it, out in the open where you can watch. The first call is the one we just ran by hand: delegate preview. Three reviewable, five total. The second asks for the rules, and there's rule group one again, the Go checklist, five hundred and eighty-seven lines of it folded away. The third pulls the actual diff — the list of changed lines — five hundred and sixty lines this time. So before a single judgement gets made, the reviewer has been handed exactly which files, exactly which checklist, and exactly what changed. None of that was guessed.",
+      "narration": "And here's the review itself, running inside Claude Code. Every green dot is a tool call \u2014 the reviewer deciding what it needs and going to fetch it, out in the open where you can watch. The first call is the one we just ran by hand: delegate preview. Three reviewable, five total. The second asks for the rules, and there's rule group one again, the Go checklist, five hundred and eighty-seven lines of it folded away. The third pulls the actual diff \u2014 the list of changed lines \u2014 five hundred and sixty lines this time. So before a single judgement gets made, the reviewer has been handed exactly which files, exactly which checklist, and exactly what changed. None of that was guessed.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -4260,7 +4268,7 @@
               "shows": "$ claude '/open-code-review:delegate-review --from base --to pr929"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -4277,7 +4285,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Then the reviewer stops, and that counter is real — it is still thinking. Twenty-four seconds gone, five hundred and thirty-two tokens spent, still going. I want to sit on this for a second, because it is the least glamorous thing in the video and the most reassuring. Locking is genuinely hard. A reviewer that answered instantly here would be guessing at it.",
+      "narration": "Then the reviewer stops, and that counter is real \u2014 it is still thinking. Twenty-four seconds gone, five hundred and thirty-two tokens spent, still going. I want to sit on this for a second, because it is the least glamorous thing in the video and the most reassuring. Locking is genuinely hard. A reviewer that answered instantly here would be guessing at it.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -4523,7 +4531,7 @@
               "shows": "$ claude '/open-code-review:delegate-review --from base --to pr929"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -4540,7 +4548,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "About eighty seconds after it started, it comes back. Nothing to report. Nothing high, nothing medium, because there was genuinely nothing to say. No hedging, no let-me-flag-this-just-in-case, and no invented concern dressed up to justify the time it spent. It looked properly, and then it said so. Which sounds like nothing happened, and is in fact the hardest behaviour to get out of a tool like this — because saying nothing looks, to whoever is paying, like the tool did nothing.",
+      "narration": "About eighty seconds after it started, it comes back. Nothing to report. Nothing high, nothing medium, because there was genuinely nothing to say. No hedging, no let-me-flag-this-just-in-case, and no invented concern dressed up to justify the time it spent. It looked properly, and then it said so. Which sounds like nothing happened, and is in fact the hardest behaviour to get out of a tool like this \u2014 because saying nothing looks, to whoever is paying, like the tool did nothing.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -4901,7 +4909,7 @@
               "shows": "$ claude '/open-code-review:delegate-review --from base --to pr929"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -4981,7 +4989,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Here's the second pull request. Somebody at Google wrote it, colleagues reviewed it, and it went into gRPC. Read the title: it makes the client report a particular kind of error properly. Ordinary, careful work, which is exactly why what follows matters. So how do I know something was wrong with it? Seven days later, this commit landed. A commit is one saved change with a note attached. Read that note — fix a bug introduced in seven four six one. Seven four six one is the pull request we were just looking at. The maintainers are telling us, in writing, that something got through their own review. So we have a pull request, and we have proof a bug was hiding in it.",
+      "narration": "Here's the second pull request. Somebody at Google wrote it, colleagues reviewed it, and it went into gRPC. Read the title: it makes the client report a particular kind of error properly. Ordinary, careful work, which is exactly why what follows matters. So how do I know something was wrong with it? Seven days later, this commit landed. A commit is one saved change with a note attached. Read that note \u2014 fix a bug introduced in seven four six one. Seven four six one is the pull request we were just looking at. The maintainers are telling us, in writing, that something got through their own review. So we have a pull request, and we have proof a bug was hiding in it.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -5672,7 +5680,7 @@
               "shows": "Commit 5c4da09"
             }
           ],
-          "sourceNote": "grpc/grpc-go · github.com · Apache-2.0",
+          "sourceNote": "grpc/grpc-go \u00b7 github.com \u00b7 Apache-2.0",
           "capture": {
             "width": 1600,
             "height": 900
@@ -5689,7 +5697,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Which hands me a problem, and I want to show you how I dealt with it rather than ask you to trust me. If the reviewer can see that fix, this stops being a test and becomes a spoiler. So the copy of the project here has been cut back to two commits: the broken one, and the one immediately before it. That's the entire history available to it. That fix does not exist in this folder. Then the same command as before — three files to review out of four, the test file dropped again. The one that matters is stream dot go, and the reviewer has no idea anything is wrong with it, because nothing in this folder says so.",
+      "narration": "Which hands me a problem, and I want to show you how I dealt with it rather than ask you to trust me. If the reviewer can see that fix, this stops being a test and becomes a spoiler. So the copy of the project here has been cut back to two commits: the broken one, and the one immediately before it. That's the entire history available to it. That fix does not exist in this folder. Then the same command as before \u2014 three files to review out of four, the test file dropped again. The one that matters is stream dot go, and the reviewer has no idea anything is wrong with it, because nothing in this folder says so.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -5921,7 +5929,7 @@
               "said": "PS ocr-blind> ocr delegate preview --from base --to pr7461\n# Files (3 reviewable / 4 total)\n- mode: range\n- from: base\n- to: pr7461\n- merge_base: 338595ca57fe74d566e52f8a630c34b3adb3e515\n- total_insertions: 95\n- total_deletions: 16\n - `rpc_util.go` [modified] +12/-6\n - `server.go` [modified] +1/-1\n - `stream.go` [modified] +5/-9\n~~- `test/compressor_test.go` [modified] +77/-0 (excluded: default_path)~~\nPS ocr-blind>"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -5938,7 +5946,7 @@
       "type": "RECORDED_STEP",
       "transition": "slide",
       "background": "zoneB",
-      "narration": "One more thing before we run it, because this is what makes the test fair rather than lucky. Here's a rule the reviewer gets handed for every Go file. Errors that are ignored, overwritten, or turned into a success — hiding the fact that something failed. Hold that sentence, because it decides the next two minutes. We're about to watch it catch exactly that.",
+      "narration": "One more thing before we run it, because this is what makes the test fair rather than lucky. Here's a rule the reviewer gets handed for every Go file. Errors that are ignored, overwritten, or turned into a success \u2014 hiding the fact that something failed. Hold that sentence, because it decides the next two minutes. We're about to watch it catch exactly that.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -6061,7 +6069,7 @@
               "said": "PS ocr-blind> ocr rules check stream.go | sed -n '11,12p'\n#### Errors, Panics, and API Contracts\n- Errors returned from calls that are ignored, overwritten, or converted into success/default values that hide a failed operation. A deliberately best-effort ope\nration is acceptable only when the ignored failure is safe and documented or evident from the context.\nPS ocr-blind>"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -6078,7 +6086,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Same command, same tool, no hints. The same three steps go past: which files, which rules, what changed. Nothing here knows that this pull request is the broken one — as far as this copy of the project is concerned, it is just another change waiting to be read.",
+      "narration": "Same command, same tool, no hints. The same three steps go past: which files, which rules, what changed. Nothing here knows that this pull request is the broken one \u2014 as far as this copy of the project is concerned, it is just another change waiting to be read.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -6291,7 +6299,7 @@
               "shows": "$ claude --permission-mode bypassPermissions '/open-code-review:dele"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -6308,7 +6316,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Then the reviewer reads stream dot go, and stops. One finding, marked high — that's the top severity, the bucket for real bugs rather than style suggestions. Read the line it wrote: the second recv loses its error, so non-streaming client calls report success when they fail. Underneath, it names two places — line eleven twenty-four, and line fourteen forty-four — and I checked both of those line numbers against the file myself.",
+      "narration": "Then the reviewer reads stream dot go, and stops. One finding, marked high \u2014 that's the top severity, the bucket for real bugs rather than style suggestions. Read the line it wrote: the second recv loses its error, so non-streaming client calls report success when they fail. Underneath, it names two places \u2014 line eleven twenty-four, and line fourteen forty-four \u2014 and I checked both of those line numbers against the file myself.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -6725,10 +6733,10 @@
                 657
               ],
               "shows": "$ claude --permission-mode bypassPermissions '/open-code-review:dele",
-              "said": " Where: stream.go:1124 (csAttempt.recvMsg) and stream.go:1444 (addrConnStream.RecvMsg)\n The PR changed the second recv call in each function to declare err inside the if:\n if err := recv(...); err == nil {\n return toRPCErr(errors.New(\"...protocol violation...\"))\n }\n if err == io.EOF { // this `err` is the function's return value, not the recv result\n return a.s.Status().Err()\n }\n return toRPCErr(err)\n That err only exists inside the if. The two checks after it read the function's named return value err, which is always nil at that point. As a result, when a\n client call without server streaming reads past its single response:\n - On io.EOF (the normal end of the call), it returns toRPCErr(nil), which is nil, instead of a.s.Status().Err(). If the server sends a message and then an\n error status in its trailers, the client never sees that error.\n - On a real error (the stream is reset, a decompression failure, or the message is too large), the error is dropped and the call looks successful.\n - In addrConnStream, the deferred as.finish(err) also gets nil, so the failure isn't recorded when the stream ends.\n The first recv call in each function is fine, because everything that uses its result is inside the if block.\n Fix applied: those two call sites now assign to the named return value again:\n err = recv(..., false)\n if err == nil {\n Not reported\n - rpc_util.go: the if isServer { return ... } else { return ... } block has an unneeded else. That's a style issue only.\n - The rest of the change is correct: isServer is set to true in server.go and serverStream, and to false on both client paths.\n Before merging, please run go test ./test/ -run Compressor and the stream tests. A test where the client receives a unary response followed by a non-OK status\n in the trailers would catch this bug if it came back.\n✻ Crunched for 26s · done 11:12 PM\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯ commit the fix\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ bypass permissions on (shift+tab to cycle)\nPS ocr-blind> claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
+              "said": " Where: stream.go:1124 (csAttempt.recvMsg) and stream.go:1444 (addrConnStream.RecvMsg)\n The PR changed the second recv call in each function to declare err inside the if:\n if err := recv(...); err == nil {\n return toRPCErr(errors.New(\"...protocol violation...\"))\n }\n if err == io.EOF { // this `err` is the function's return value, not the recv result\n return a.s.Status().Err()\n }\n return toRPCErr(err)\n That err only exists inside the if. The two checks after it read the function's named return value err, which is always nil at that point. As a result, when a\n client call without server streaming reads past its single response:\n - On io.EOF (the normal end of the call), it returns toRPCErr(nil), which is nil, instead of a.s.Status().Err(). If the server sends a message and then an\n error status in its trailers, the client never sees that error.\n - On a real error (the stream is reset, a decompression failure, or the message is too large), the error is dropped and the call looks successful.\n - In addrConnStream, the deferred as.finish(err) also gets nil, so the failure isn't recorded when the stream ends.\n The first recv call in each function is fine, because everything that uses its result is inside the if block.\n Fix applied: those two call sites now assign to the named return value again:\n err = recv(..., false)\n if err == nil {\n Not reported\n - rpc_util.go: the if isServer { return ... } else { return ... } block has an unneeded else. That's a style issue only.\n - The rest of the change is correct: isServer is set to true in server.go and serverStream, and to false on both client paths.\n Before merging, please run go test ./test/ -run Compressor and the stream tests. A test where the client receives a unary response followed by a non-OK status\n in the trailers would catch this bug if it came back.\n\u273b Crunched for 26s \u00b7 done 11:12 PM\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\u276f\u00a0commit the fix\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n \u26a0 Transcript saving is off \u2014 inherited CLAUDE_CODE_CHILD_SESSION marker \u00b7 restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n \u23f5\u23f5 bypass permissions on (shift+tab to cycle)\nPS ocr-blind> claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -6745,7 +6753,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "And look at the note it left inside the code itself: this err is the function's return value, not the recv result. The shadowed err is the whole bug, in one sentence. The report doesn't stop at naming the line either — it spells out what actually breaks. If the server sends a reply and then an error, the client never sees that error. If the connection drops on that last read, the call still looks like it worked. Three different failures, every one of them turned into silence. And silence, in a library this widely used, is the worst possible way for something to go wrong.",
+      "narration": "And look at the note it left inside the code itself: this err is the function's return value, not the recv result. The shadowed err is the whole bug, in one sentence. The report doesn't stop at naming the line either \u2014 it spells out what actually breaks. If the server sends a reply and then an error, the client never sees that error. If the connection drops on that last read, the call still looks like it worked. Three different failures, every one of them turned into silence. And silence, in a library this widely used, is the worst possible way for something to go wrong.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -6976,10 +6984,10 @@
                 297
               ],
               "shows": "$ claude --permission-mode bypassPermissions '/open-code-review:dele",
-              "said": " Where: stream.go:1124 (csAttempt.recvMsg) and stream.go:1444 (addrConnStream.RecvMsg)\n The PR changed the second recv call in each function to declare err inside the if:\n if err := recv(...); err == nil {\n return toRPCErr(errors.New(\"...protocol violation...\"))\n }\n if err == io.EOF { // this `err` is the function's return value, not the recv result\n return a.s.Status().Err()\n }\n return toRPCErr(err)\n That err only exists inside the if. The two checks after it read the function's named return value err, which is always nil at that point. As a result, when a\n client call without server streaming reads past its single response:\n - On io.EOF (the normal end of the call), it returns toRPCErr(nil), which is nil, instead of a.s.Status().Err(). If the server sends a message and then an\n error status in its trailers, the client never sees that error.\n - On a real error (the stream is reset, a decompression failure, or the message is too large), the error is dropped and the call looks successful.\n - In addrConnStream, the deferred as.finish(err) also gets nil, so the failure isn't recorded when the stream ends.\n The first recv call in each function is fine, because everything that uses its result is inside the if block.\n Fix applied: those two call sites now assign to the named return value again:\n err = recv(..., false)\n if err == nil {\n Not reported\n - rpc_util.go: the if isServer { return ... } else { return ... } block has an unneeded else. That's a style issue only.\n - The rest of the change is correct: isServer is set to true in server.go and serverStream, and to false on both client paths.\n Before merging, please run go test ./test/ -run Compressor and the stream tests. A test where the client receives a unary response followed by a non-OK status\n in the trailers would catch this bug if it came back.\n✻ Crunched for 26s · done 11:12 PM\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯ commit the fix\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ bypass permissions on (shift+tab to cycle)\nPS ocr-blind> claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
+              "said": " Where: stream.go:1124 (csAttempt.recvMsg) and stream.go:1444 (addrConnStream.RecvMsg)\n The PR changed the second recv call in each function to declare err inside the if:\n if err := recv(...); err == nil {\n return toRPCErr(errors.New(\"...protocol violation...\"))\n }\n if err == io.EOF { // this `err` is the function's return value, not the recv result\n return a.s.Status().Err()\n }\n return toRPCErr(err)\n That err only exists inside the if. The two checks after it read the function's named return value err, which is always nil at that point. As a result, when a\n client call without server streaming reads past its single response:\n - On io.EOF (the normal end of the call), it returns toRPCErr(nil), which is nil, instead of a.s.Status().Err(). If the server sends a message and then an\n error status in its trailers, the client never sees that error.\n - On a real error (the stream is reset, a decompression failure, or the message is too large), the error is dropped and the call looks successful.\n - In addrConnStream, the deferred as.finish(err) also gets nil, so the failure isn't recorded when the stream ends.\n The first recv call in each function is fine, because everything that uses its result is inside the if block.\n Fix applied: those two call sites now assign to the named return value again:\n err = recv(..., false)\n if err == nil {\n Not reported\n - rpc_util.go: the if isServer { return ... } else { return ... } block has an unneeded else. That's a style issue only.\n - The rest of the change is correct: isServer is set to true in server.go and serverStream, and to false on both client paths.\n Before merging, please run go test ./test/ -run Compressor and the stream tests. A test where the client receives a unary response followed by a non-OK status\n in the trailers would catch this bug if it came back.\n\u273b Crunched for 26s \u00b7 done 11:12 PM\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\u276f\u00a0commit the fix\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n \u26a0 Transcript saving is off \u2014 inherited CLAUDE_CODE_CHILD_SESSION marker \u00b7 restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n \u23f5\u23f5 bypass permissions on (shift+tab to cycle)\nPS ocr-blind> claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr7461'"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -6996,7 +7004,7 @@
       "type": "TEST_MATRIX",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "Remember the README accusing general-purpose assistants of position drift — pointing at one line when the problem is on another. This review gave six line numbers, and all six land exactly where it said. A reviewer you have to double-check costs more than it saves.",
+      "narration": "Remember the README accusing general-purpose assistants of position drift \u2014 pointing at one line when the problem is on another. This review gave six line numbers, and all six land exactly where it said. A reviewer you have to double-check costs more than it saves.",
       "data": {
         "testMatrix": {
           "headline": "Six line numbers, checked by hand",
@@ -7054,7 +7062,7 @@
       "type": "VAR_SCOPE",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "Let's build this from the smallest idea, because you don't need to know Go to follow it. A variable is a labelled box you put a value into. The box we care about is called err, short for error. If something goes wrong, the error goes in the box. If nothing goes wrong, the box stays empty — and programmers call an empty box nil.",
+      "narration": "Let's build this from the smallest idea, because you don't need to know Go to follow it. A variable is a labelled box you put a value into. The box we care about is called err, short for error. If something goes wrong, the error goes in the box. If nothing goes wrong, the box stays empty \u2014 and programmers call an empty box nil.",
       "data": {
         "varScope": {
           "title": "inside the function that receives a reply",
@@ -7062,7 +7070,7 @@
           "outerSub": "a box called err",
           "innerLabel": "err",
           "innerSub": "not yet",
-          "emptyLabel": "nil — empty",
+          "emptyLabel": "nil \u2014 empty",
           "steps": [
             {
               "title": "outer",
@@ -7091,7 +7099,7 @@
       "type": "CODE_RUN",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Here are the two lines that broke gRPC. The first calls a function that fetches the next piece of data, and puts whatever happened into err. Two lines down, the code asks a question about err — did this finish normally? — and then passes err onwards. Straightforward. Now look very carefully at the first line, at the small colon sitting just before the equals sign. That colon is the whole bug. Without it, you're putting a value into a box that already exists. With it, you're making a brand new box that merely happens to share the name.",
+      "narration": "Here are the two lines that broke gRPC. The first calls a function that fetches the next piece of data, and puts whatever happened into err. Two lines down, the code asks a question about err \u2014 did this finish normally? \u2014 and then passes err onwards. Straightforward. Now look very carefully at the first line, at the small colon sitting just before the equals sign. That colon is the whole bug. Without it, you're putting a value into a box that already exists. With it, you're making a brand new box that merely happens to share the name.",
       "data": {
         "codeRun": {
           "filename": "stream.go",
@@ -7147,7 +7155,7 @@
             }
           ],
           "caption": "one character, and the meaning inverts",
-          "source": "grpc/grpc-go stream.go at commit 6d0aaaec, lines 1124–1130"
+          "source": "grpc/grpc-go stream.go at commit 6d0aaaec, lines 1124\u20131130"
         }
       },
       "durationFrames": 940,
@@ -7159,16 +7167,16 @@
       "type": "VAR_SCOPE",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "So follow what actually happens. The function already owns a box called err, and it's empty. We step inside the if — those curly brackets — and the colon makes a second box, also called err. Whatever that fetch returned drops into the new box. So far, so good. Then the if finishes, and here's the thing about a box made inside brackets: when the brackets close, the box is gone. Swept away, with everything in it. Two lines later the code asks for err again. The new box no longer exists, so it reads the only box left, the old one from outside. That box was never filled, so that box is still empty. The code checks whether anything went wrong, looks inside an empty box, finds nothing, and cheerfully reports success. The error wasn't handled — the error was dropped on the floor.",
+      "narration": "So follow what actually happens. The function already owns a box called err, and it's empty. We step inside the if \u2014 those curly brackets \u2014 and the colon makes a second box, also called err. Whatever that fetch returned drops into the new box. So far, so good. Then the if finishes, and here's the thing about a box made inside brackets: when the brackets close, the box is gone. Swept away, with everything in it. Two lines later the code asks for err again. The new box no longer exists, so it reads the only box left, the old one from outside. That box was never filled, so that box is still empty. The code checks whether anything went wrong, looks inside an empty box, finds nothing, and cheerfully reports success. The error wasn't handled \u2014 the error was dropped on the floor.",
       "data": {
         "varScope": {
           "title": "the same name, two different boxes",
           "outerLabel": "err",
-          "outerSub": "the function's own box — never filled",
+          "outerSub": "the function's own box \u2014 never filled",
           "innerLabel": "err",
           "innerSub": "made by the colon",
           "fenceLabel": "if err := recv(...) { }",
-          "emptyLabel": "nil — empty",
+          "emptyLabel": "nil \u2014 empty",
           "valueLabel": "the real error",
           "askLabel": "if err == io.EOF",
           "verdict": "empty, so it reports success",
@@ -7231,7 +7239,7 @@
       "type": "PIPELINE_GATE",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Don't programmers have tools? They do, which is why this bug is nasty. Nothing about that line is illegal, so the compiler — which turns code into what a machine runs — is happy. Go's checker is happy, the tests pass. Every light green, code wrong.",
+      "narration": "Don't programmers have tools? They do, which is why this bug is nasty. Nothing about that line is illegal, so the compiler \u2014 which turns code into what a machine runs \u2014 is happy. Go's checker is happy, the tests pass. Every light green, code wrong.",
       "data": {
         "pipelineGate": {
           "headline": "Every light [green]",
@@ -7277,7 +7285,7 @@
       "type": "LOWER_THIRD",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "One more thing, and I mean it. This is not a story about an engineer having a bad day. Several experienced people approved this change because it reads as correct — and it reads correct to me. A colon is small, and the eye slides over it.",
+      "narration": "One more thing, and I mean it. This is not a story about an engineer having a bad day. Several experienced people approved this change because it reads as correct \u2014 and it reads correct to me. A colon is small, and the eye slides over it.",
       "data": {
         "lowerThird": {
           "kicker": "TO BE CLEAR",
@@ -7296,7 +7304,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Open Code Review didn't stop at telling us, either. That slash command does two jobs: it reviews, then it repairs whatever it's confident about. Ask the project what changed and stream dot go has been edited. Here's the repair it wrote — the line is back to the older form, where the answer goes into the box that already exists instead of making a new one. No colon. So does that match what Google actually did? Here's their real fix, seven days later. Not character for character; they restructured it a little differently. Same bug though, same two places, same outcome. a machine and a team of maintainers, a week apart, reached the same conclusion.",
+      "narration": "Open Code Review didn't stop at telling us, either. That slash command does two jobs: it reviews, then it repairs whatever it's confident about. Ask the project what changed and stream dot go has been edited. Here's the repair it wrote \u2014 the line is back to the older form, where the answer goes into the box that already exists instead of making a new one. No colon. So does that match what Google actually did? Here's their real fix, seven days later. Not character for character; they restructured it a little differently. Same bug though, same two places, same outcome. a machine and a team of maintainers, a week apart, reached the same conclusion.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -7486,7 +7494,7 @@
               "focus": true,
               "atWord": 60.5,
               "wantAtWord": 60.5,
-              "sourceNote": "grpc/grpc-go · github.com · Apache-2.0",
+              "sourceNote": "grpc/grpc-go \u00b7 github.com \u00b7 Apache-2.0",
               "zooms": [
                 {
                   "marks": [
@@ -7828,10 +7836,10 @@
                 14,
                 18
               ],
-              "shows": "‎stream.go‎"
+              "shows": "\u200estream.go\u200e"
             }
           ],
-          "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
+          "sourceNote": "ocr v1.12.4 \u00b7 Claude Code 2.1.274",
           "capture": {
             "width": 1600,
             "height": 900
@@ -7848,22 +7856,22 @@
       "type": "CHECK_SWEEP",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "There's a step in that slash command worth knowing about, because it happens before anything reaches your screen. Every comment gets sorted into three buckets. High is an obvious bug or a security problem. Medium is a fair concern that depends on context. Low is a nitpick or a likely false alarm — and Low gets thrown away without ever being shown to you. Discarding them is a deliberate choice, and the same choice as the benchmark: fewer things said, so the things said get read.",
+      "narration": "There's a step in that slash command worth knowing about, because it happens before anything reaches your screen. Every comment gets sorted into three buckets. High is an obvious bug or a security problem. Medium is a fair concern that depends on context. Low is a nitpick or a likely false alarm \u2014 and Low gets thrown away without ever being shown to you. Discarding them is a deliberate choice, and the same choice as the benchmark: fewer things said, so the things said get read.",
       "data": {
         "checkSweep": {
           "headline": "Three buckets, and one is [discarded]",
           "subjectLabel": "every comment",
           "checks": [
             {
-              "label": "High — a real bug",
+              "label": "High \u2014 a real bug",
               "atWord": 22.083
             },
             {
-              "label": "Medium — it depends",
+              "label": "Medium \u2014 it depends",
               "atWord": 29.167
             },
             {
-              "label": "Low — discarded unseen",
+              "label": "Low \u2014 discarded unseen",
               "atWord": 34.583
             }
           ],
@@ -7885,7 +7893,7 @@
       "type": "CHAPTER",
       "transition": "wipe",
       "background": "zoneC",
-      "narration": "So who is this actually for — developers, testers, the person running the team — and where does it fit in a normal week?",
+      "narration": "So who is this actually for \u2014 developers, testers, the person running the team \u2014 and where does it fit in a normal week?",
       "data": {
         "chapter": {
           "number": "06",
@@ -7902,7 +7910,7 @@
       "type": "ICON_GRID",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "If you write code, this is a second pair of eyes before you trouble a colleague — and being told your own mistake in private costs nothing but a minute. If you review other people's code, it clears the dull layer so your attention goes where only a human helps — whether the design is right at all. If you test software, it reads paths your tests never covered. And if you run a team, the honest pitch isn't replacing review. Rather, every change gets the same first pass at three in the morning, when whoever would have caught it is asleep.",
+      "narration": "If you write code, this is a second pair of eyes before you trouble a colleague \u2014 and being told your own mistake in private costs nothing but a minute. If you review other people's code, it clears the dull layer so your attention goes where only a human helps \u2014 whether the design is right at all. If you test software, it reads paths your tests never covered. And if you run a team, the honest pitch isn't replacing review. Rather, every change gets the same first pass at three in the morning, when whoever would have caught it is asleep.",
       "data": {
         "iconGrid": {
           "items": [
@@ -7946,7 +7954,7 @@
       "type": "LAYERED_STACK",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Open Code Review isn't only for your keyboard, either. That same reviewer plugs into the robots that check every proposed change — GitHub Actions, GitLab, Gerrit — works with Codex, Cursor and Kimi, and scans whole files when nobody understands the codebase any more.",
+      "narration": "Open Code Review isn't only for your keyboard, either. That same reviewer plugs into the robots that check every proposed change \u2014 GitHub Actions, GitLab, Gerrit \u2014 works with Codex, Cursor and Kimi, and scans whole files when nobody understands the codebase any more.",
       "data": {
         "stack": {
           "headline": "The same reviewer, wherever the code is",
@@ -7982,7 +7990,7 @@
       "type": "SPEC_COMPARE",
       "transition": "slide",
       "background": "zoneC",
-      "narration": "Before you go and install it, here's what I'd want a friend to tell me. Two pull requests is a demonstration, not a measurement. I chose them, I ran each once, and I didn't retry anything to get a prettier answer. Open Code Review still misses most bugs — four in five, remember — and most of what it flags still isn't real. And the judging you watched came from Claude Code's model, not the benchmark setup. So my claim is narrower: it stayed quiet on good code, and on a change that fooled several professionals it found what they missed and repaired it.",
+      "narration": "Before you go and install it, here's what I'd want a friend to tell me. Two pull requests is a demonstration, not a measurement. I chose them, I ran each once, and I didn't retry anything to get a prettier answer. Open Code Review still misses most bugs \u2014 four in five, remember \u2014 and most of what it flags still isn't real. And the judging you watched came from Claude Code's model, not the benchmark setup. So my claim is narrower: it stayed quiet on good code, and on a change that fooled several professionals it found what they missed and repaired it.",
       "data": {
         "compare": {
           "headline": "What this showed, and what it did not",
@@ -7998,27 +8006,27 @@
             {
               "label": "Silence on good code",
               "a": "Yes",
-              "b": "—",
+              "b": "\u2014",
               "winner": "a",
               "atWord": 47.25
             },
             {
               "label": "A shipped bug, blind",
               "a": "Yes",
-              "b": "—",
+              "b": "\u2014",
               "winner": "a",
               "atWord": 53.667
             },
             {
               "label": "A success rate",
-              "a": "—",
+              "a": "\u2014",
               "b": "No",
               "winner": "b",
               "atWord": 28.75
             },
             {
               "label": "The benchmark setup",
-              "a": "—",
+              "a": "\u2014",
               "b": "No",
               "winner": "b",
               "atWord": 54.667
@@ -8053,7 +8061,7 @@
       "type": "RECAP",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "First, pointed at a pull request Google had already approved, Open Code Review said nothing — and nothing was correct. Second, pointed at one they later had to fix, with that fix hidden, it found the bug, named both places and repaired it. Third, the repair matched what the maintainers landed a week later. None of that is magic, and all of it took two minutes.",
+      "narration": "First, pointed at a pull request Google had already approved, Open Code Review said nothing \u2014 and nothing was correct. Second, pointed at one they later had to fix, with that fix hidden, it found the bug, named both places and repaired it. Third, the repair matched what the maintainers landed a week later. None of that is magic, and all of it took two minutes.",
       "data": {
         "heading": "Two pull requests, two honest answers",
         "points": [
@@ -8083,7 +8091,7 @@
       "narration": "Everything's linked below, so you can check every number I've said out loud. If you've inherited a repository you don't fully trust, point Open Code Review at that one first. More agent tooling next time.",
       "data": {
         "message": "More agent tooling next time",
-        "sub": "github.com/alibaba/open-code-review — Apache-2.0"
+        "sub": "github.com/alibaba/open-code-review \u2014 Apache-2.0"
       },
       "durationFrames": 367,
       "audio": "audio/open-code-review_long_s54.mp3",

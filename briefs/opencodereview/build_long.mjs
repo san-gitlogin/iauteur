@@ -968,7 +968,9 @@ const spec = {
   thumbnail: {
     title: 'IT CAUGHT WHAT GOOGLE MISSED',
     badge: 'Open Code Review',
-    note: 'free · Apache-2.0 · tested live',
+    note: '33.9% vs 7.2% · free · Apache-2.0',
+    asset: 'si:alibabacloud',
+    logos: ['si:alibabacloud', 'si:anthropic', 'si:github', 'si:npm', 'si:googlecloud'],
   },
   scenes: c.S,
 };
