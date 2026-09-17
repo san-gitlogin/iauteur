@@ -926,6 +926,29 @@ export const assertAgentRunCannotPrompt = (demo) => {
         `    claude --permission-mode bypassPermissions '<your prompt>'`);
     }
     if (NON_PROMPTING.test(s.cmd)) continue;
+  }
+
+  // AN INTERACTIVE AGENT SESSION DOES NOT EXIT WHEN IT FINISHES ANSWERING.
+  //
+  // `waitFor` matches the agent's "done" line, but Claude Code is still running and still owns
+  // the terminal. Any LATER step then types its command into the agent's prompt instead of the
+  // shell. Recorded 2026-09-17: the take after the review typed `clear` and the command line
+  // read back "bypass permissions on (shift+tab to cycle)" — the recorder refused to press
+  // Enter, which was exactly right, and the whole take was lost.
+  //
+  // So an interactive agent run must be the LAST step of its take. Anything that follows it
+  // belongs in a separate demo against the same workspace, which starts a clean terminal.
+  const steps = demo.steps ?? [];
+  const lastAgent = steps.map((s) => typeof s.cmd === 'string' &&
+    /(^|[\s;&|(])claude(\s|$)/.test(s.cmd) && !/\s-p\b|--print\b/.test(s.cmd)).lastIndexOf(true);
+  if (lastAgent >= 0 && lastAgent !== steps.length - 1) {
+    throw new Error(
+      `Step "${steps[lastAgent].id}" runs an interactive \`claude\`, but ${steps.length - 1 - lastAgent} ` +
+      `step(s) follow it in the same take.\n\n` +
+      `Claude Code keeps the terminal after it answers, so "${steps[lastAgent + 1].id}" would be typed ` +
+      `into the AGENT's prompt, not the shell (recorded 2026-09-17 — the take was refused and lost).\n\n` +
+      `Put the agent run LAST, and record the follow-up commands as a separate demo against the same ` +
+      `workspace — a new take opens a clean terminal, and the workspace keeps whatever the agent changed.`);
     throw new Error(
       `Step "${s.id}" runs an interactive \`claude\` with nothing pre-approved:\n    ${s.cmd}\n\n` +
       `The first tool call it wants to make will draw "This command requires approval" and wait for ` +

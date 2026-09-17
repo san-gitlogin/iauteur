@@ -46,7 +46,11 @@ export const VarScope: React.FC<{scene: Scene}> = ({scene}) => {
   };
 
   const pOuter = Math.max(on('outer'), on('fence'), on('inner'));
-  const pFence = on('fence');
+  // The inner box LIVES INSIDE the fence, so the fence must be visible whenever the box is.
+  // A spec that skips the `fence` phase (the short does — it goes straight outer → inner)
+  // would otherwise draw the new box inside a fully transparent container and show nothing
+  // at the exact moment the narration says "a second box, same name".
+  const pFence = Math.max(on('fence'), on('inner'));
   const pInner = on('inner');
   const pFill = on('fill');
   const pVanish = on('vanish', 20);

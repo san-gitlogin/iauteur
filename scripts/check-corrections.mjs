@@ -35,6 +35,13 @@ const CORRECTIONS = [
    // the guard sat unreferenced, which is the exact shape of the bug it exists to prevent.
    () => has('scripts/lib/record/runner.mjs', 'assertAgentWorkspaceTrusted\\(demo, ws\\);') &&
          has('scripts/lib/record/runner.mjs', 'hasTrustDialogAccepted')],
+  ['a command typed into the agent instead of the shell', 'SEAL',
+   'Open Code Review cut, 2026-09-17: Claude Code keeps the terminal after it answers, so the step ' +
+   'after an interactive agent run was typed into the AGENT prompt. The recorder read back "bypass ' +
+   'permissions on (shift+tab to cycle)" and refused to press Enter — correctly — losing the take. ' +
+   'An interactive agent run must be the LAST step; follow-ups go in a separate demo.',
+   () => has('scripts/lib/record/runner.mjs', 'AN INTERACTIVE AGENT SESSION DOES NOT EXIT') &&
+         has('scripts/lib/record/runner.mjs', 'lastAgent !== steps\\.length - 1')],
   ['the prompt swallowed by a variadic flag', 'SEAL',
    'Open Code Review cut, 2026-09-17: `claude --allowedTools "Bash,Read" \'/cmd\'` starts Claude Code ' +
    'with NO prompt — --allowedTools is variadic and eats the quoted prompt as another tool name. The ' +

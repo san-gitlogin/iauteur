@@ -1,0 +1,56 @@
+{
+  "slug": "ocr-fix",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ocr-blind",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "steps": [
+    {
+      "id": "changed",
+      "action": "run",
+      "cmd": "git status --short",
+      "label": "it did not just report \u2014 it edited",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "stream.go",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "mod",
+          "text": "stream.go"
+        }
+      ]
+    },
+    {
+      "id": "patch",
+      "action": "run",
+      "cmd": "git diff stream.go | sed -n '5,14p'",
+      "label": "the repair it wrote",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "err = recv",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "fix",
+          "text": "err = recv"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "workbench.startupEditor": "none"
+  }
+}
