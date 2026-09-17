@@ -1,21 +1,2671 @@
 {
   "meta": {
-    "topic": "Context-Mode Promises 98%. I Measured 14%.",
+    "topic": "Context-mode, measured",
     "format": "long",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "subject": "context-mode",
+    "audioPrefix": "context-mode-measured_long",
+    "screenplay": "deep-dive",
+    "onePayoff": "Whether context-mode actually lowers what you pay, measured rather than claimed.",
+    "openLoop": "It promises to save 98% of your context window. What does it actually save?",
+    "seo": {
+      "title": "Context-Mode Promises 98%. I Measured 14%.",
+      "altTitles": [
+        "I Measured Context-Mode: Does It Really Cut Your AI Bill?",
+        "The 98% Context Saving, Measured On Real Work"
+      ],
+      "hook": "Does context-mode actually cut what you pay for Claude Code? I ran twelve measured tests to find out.",
+      "breakdown": "what context-mode does, what it costs every turn, and the one rule that tells you whether it will pay for you",
+      "queries": [
+        "does context-mode save tokens",
+        "context mode claude code review",
+        "how to reduce claude code context usage",
+        "claude code token cost plugin",
+        "context mode mcp server worth it",
+        "reduce ai coding costs",
+        "claude code context window full",
+        "mcp context window optimization",
+        "context mode vs claude md",
+        "how to measure claude code token usage"
+      ],
+      "hashtags": [
+        "#claudecode",
+        "#ai",
+        "#mcp",
+        "#developertools"
+      ],
+      "tags": [
+        "context-mode",
+        "claude code",
+        "mcp",
+        "context window",
+        "ai coding",
+        "token cost",
+        "anthropic",
+        "claude",
+        "ai agents",
+        "developer tools",
+        "code review",
+        "benchmark",
+        "ai cost optimization",
+        "sqlite fts5",
+        "bm25",
+        "claude code plugin",
+        "llm context",
+        "prompt caching",
+        "agentic coding",
+        "open source"
+      ],
+      "sources": [
+        "context-mode — github.com/mksglu/context-mode (Elastic-2.0), by Mert Koseoglu",
+        "archify — github.com/tt-a1i/archify (MIT), the repository used as the test bed"
+      ],
+      "pinned": "What would you want measured next — session continuity, or a Playwright-heavy session?"
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
-    "channel": "YOUR CHANNEL",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles"
+    "title": "IT PROMISES 98%",
+    "badge": "context-mode",
+    "note": "I measured 14%",
+    "asset": "lucide:gauge"
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "A plugin called context-mode promises to save ninety-eight percent of your context window. I measured fourteen. Here is the difference.",
+      "data": {
+        "headline": "context-mode: 98%?",
+        "subtext": "It promises 98%. I measured 14%.",
+        "heroAsset": "lucide:gauge",
+        "hookVariant": "figure",
+        "atWord": 4,
+        "heroAtWord": 12,
+        "headlineAtWord": 13
+      },
+      "durationFrames": 227
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "That is the whole video in one table. The same job, done twice, on a real repository — and every number in it came out of Claude Code, not out of the plugin.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ctxmode-proof#table",
+              "label": "the measured table",
+              "focus": true,
+              "wantAtWord": 8,
+              "id": "table",
+              "src": "rec/ctxmode-proof/seg-02.mp4",
+              "frames": 140,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "plainbytes": {
+                  "x": 612,
+                  "y": 707,
+                  "w": 56,
+                  "h": 19,
+                  "covers": "43.1KB"
+                },
+                "onbytes": {
+                  "x": 612,
+                  "y": 726,
+                  "w": 56,
+                  "h": 19,
+                  "covers": "19.2KB"
+                },
+                "factor": {
+                  "x": 1361,
+                  "y": 726,
+                  "w": 84,
+                  "h": 19,
+                  "covers": "2.2× less"
+                },
+                "noisy": {
+                  "x": 1099,
+                  "y": 688,
+                  "w": 112,
+                  "h": 19,
+                  "covers": "cost (NOISY)"
+                },
+                "__cmd": {
+                  "x": 509,
+                  "y": 631,
+                  "w": 356,
+                  "h": 19,
+                  "covers": "node ctx-summary.mjs runs/t1-opus.json"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 497,
+                  "h": 19
+                },
+                {
+                  "x": 368,
+                  "y": 669,
+                  "w": 1078,
+                  "h": 76
+                },
+                {
+                  "x": 368,
+                  "y": 764,
+                  "w": 787,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                4,
+                6,
+                7,
+                10,
+                11,
+                14,
+                15,
+                17,
+                19,
+                20,
+                23,
+                26,
+                27,
+                29,
+                30,
+                31,
+                34,
+                36,
+                38,
+                39,
+                41,
+                43,
+                47,
+                49,
+                50,
+                51,
+                53,
+                55,
+                56,
+                57,
+                60,
+                61,
+                63,
+                64,
+                65,
+                67,
+                70,
+                72,
+                82,
+                83,
+                85,
+                86,
+                91,
+                106
+              ],
+              "shows": "$ node ctx-summary.mjs runs/t1-opus.json",
+              "said": "PS ctxmode-ws> node ctx-summary.mjs runs/t1-opus.json\n■ code comprehension (57 KB source) · Claude Opus 5\n arm tool bytes into ctx peak context cost (NOISY) ctx calls\n plain Claude Code 43.1KB [39.5KB–47.7KB] 37.8K [36.1K–40.0K] $0.379 [$0.346–$0.410] 0\n context-mode plugin 19.2KB [14.9KB–24.8KB] 30.6K [27.9K–33.7K] $0.325 [$0.302–$0.353] 0 2.2× less\nCost spans 2-3x WITHIN an arm because of prompt-cache warmth — treat the cost column\nas indicative only. Tool bytes and peak context are counted, not priced, and are the\nnumbers any conclusion here rests on.\nPS ctxmode-ws>",
+              "atWord": 8
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 452
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Welcome back. Today we install it, point it at a real repository, and measure what it does to your bill — properly, with numbers you can check yourself.",
+      "data": {
+        "title": "Context-mode, measured",
+        "subtitle": "Install it, measure the bill, decide",
+        "atWord": 20
+      },
+      "durationFrames": 306
+    },
+    {
+      "id": "s04",
+      "type": "CONTEXT_METER",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "First, the thing being saved. A model reads everything through one fixed window — two hundred thousand tokens for Claude.",
+      "data": {
+        "context": {
+          "headline": "One window, shared by everything",
+          "windowTokens": 200000,
+          "segments": [
+            {
+              "label": "system",
+              "tokens": 14000,
+              "kind": "system"
+            },
+            {
+              "label": "tools",
+              "tokens": 18000,
+              "kind": "tools"
+            },
+            {
+              "label": "history",
+              "tokens": 38000,
+              "kind": "history"
+            },
+            {
+              "label": "free",
+              "tokens": 130000,
+              "kind": "free"
+            }
+          ],
+          "verdict": "Nothing leaves until the session ends",
+          "atWord": 13
+        }
+      },
+      "durationFrames": 227
+    },
+    {
+      "id": "s05",
+      "type": "WATERFALL",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Everything shares it. Your system prompt takes a slice. Every tool definition takes a slice. Everything said so far takes a slice. And what is left is the room the model has to actually think in. A token, by the way, is roughly three quarters of a word, so that window is smaller than it sounds.",
+      "data": {
+        "waterfallChart": {
+          "unit": "tok",
+          "bars": [
+            {
+              "label": "system prompt",
+              "value": 14000,
+              "atWord": 5
+            },
+            {
+              "label": "tool definitions",
+              "value": 18000,
+              "atWord": 11
+            },
+            {
+              "label": "the conversation",
+              "value": 38000,
+              "atWord": 44
+            },
+            {
+              "label": "room to think",
+              "value": 130000,
+              "isTotal": true,
+              "atWord": 26
+            }
+          ]
+        }
+      },
+      "durationFrames": 581
+    },
+    {
+      "id": "s06",
+      "type": "CONTEXT_METER",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Here's what costs you money. Your agent reads one big file, and the whole thing lands in that window.",
+      "data": {
+        "context": {
+          "headline": "One file read, and it stays",
+          "windowTokens": 200000,
+          "segments": [
+            {
+              "label": "system",
+              "tokens": 14000,
+              "kind": "system"
+            },
+            {
+              "label": "tools",
+              "tokens": 18000,
+              "kind": "tools"
+            },
+            {
+              "label": "that one log",
+              "tokens": 96000,
+              "kind": "history"
+            },
+            {
+              "label": "free",
+              "tokens": 72000,
+              "kind": "free"
+            }
+          ],
+          "verdict": "Re-sent on every turn that follows",
+          "atWord": 16
+        }
+      },
+      "durationFrames": 217
+    },
+    {
+      "id": "s07",
+      "type": "BAR_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And it doesn't get read once and dropped. It's re-sent on every turn after that. So a careless read isn't a one-off charge — it's rent, and you pay it for the rest of the session.",
+      "data": {
+        "bars": [
+          {
+            "label": "read once",
+            "sub": "you think",
+            "value": 96,
+            "display": "96K tok",
+            "atWord": 10
+          },
+          {
+            "label": "over 40 turns",
+            "sub": "you actually pay",
+            "value": 3840,
+            "display": "3.8M tok",
+            "color": "orange",
+            "atWord": 26
+          }
+        ],
+        "source": "the same tokens, re-sent every turn"
+      },
+      "durationFrames": 384
+    },
+    {
+      "id": "s08",
+      "type": "QUOTE_SPOTLIGHT",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So a tool that keeps those bytes out of your context window sounds worth having. This is what context-mode claims it will save you, on its own front page.",
+      "data": {
+        "quote": "Save 98% of your context window.",
+        "person": {
+          "name": "context-mode",
+          "role": "the project README"
+        },
+        "source": "github.com/mksglu/context-mode — Elastic-2.0",
+        "atWord": 16
+      },
+      "durationFrames": 315
+    },
+    {
+      "id": "s09",
+      "type": "DIAGRAM",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So what is it? Four things wearing one name. An MCP server — Model Context Protocol, the standard way a tool plugs into an agent. A set of hooks that fire around your session. A sandbox that runs code in a separate process. And a SQLite index for anything too big to hold in the conversation.",
+      "data": {
+        "diagram": {
+          "layout": "hub",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "your agent",
+              "asset": "lucide:bot"
+            },
+            {
+              "id": "m",
+              "label": "MCP server",
+              "sub": "six tools",
+              "asset": "lucide:plug",
+              "atWord": 11
+            },
+            {
+              "id": "h",
+              "label": "hooks",
+              "sub": "wrap it",
+              "asset": "lucide:anchor",
+              "atWord": 29
+            },
+            {
+              "id": "s",
+              "label": "sandbox",
+              "sub": "own process",
+              "asset": "lucide:box",
+              "atWord": 36
+            },
+            {
+              "id": "d",
+              "label": "SQLite index",
+              "sub": "text search",
+              "asset": "lucide:database",
+              "atWord": 46
+            }
+          ],
+          "edges": [
+            {
+              "from": "a",
+              "to": "m"
+            },
+            {
+              "from": "a",
+              "to": "h"
+            },
+            {
+              "from": "m",
+              "to": "s"
+            },
+            {
+              "from": "m",
+              "to": "d"
+            }
+          ]
+        }
+      },
+      "durationFrames": 581
+    },
+    {
+      "id": "s10",
+      "type": "SANDBOX_BOX",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The idea is good. Your agent sends a little code into the sandbox, and only what that code printed is allowed back out.",
+      "data": {
+        "sandbox": {
+          "label": "the sandbox",
+          "allowed": [
+            "your code",
+            "what it printed"
+          ],
+          "blocked": [
+            "the 535 KB log",
+            "raw page text"
+          ],
+          "atWord": 13
+        }
+      },
+      "durationFrames": 256
+    },
+    {
+      "id": "s11",
+      "type": "RETRIEVAL_RANK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And when something is too big even for that — a whole access log, say — context-mode cuts it into chunks and files them in a search index. Later, a query pulls back only the chunks that match, scored by a formula called BM25 — which is just a way of ranking how well a passage answers a search. The rest never enters the conversation at all, which is the entire point of doing it this way.",
+      "data": {
+        "retrieval": {
+          "chunks": [
+            {
+              "label": "access log · lines 1–500",
+              "scoreA": 0.31,
+              "scoreFinal": 0.22
+            },
+            {
+              "label": "access log · the 500 errors",
+              "scoreA": 0.72,
+              "scoreFinal": 0.94
+            },
+            {
+              "label": "access log · lines 4k–4.5k",
+              "scoreA": 0.28,
+              "scoreFinal": 0.18
+            }
+          ],
+          "atWord": 21,
+          "rerankAtWord": 38,
+          "fuseAtWord": 61
+        }
+      },
+      "durationFrames": 788
+    },
+    {
+      "id": "s12",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Installing it takes two commands, and you can run them straight from your terminal. The first adds the marketplace — simply a list of plugins that Claude Code knows about. The second installs this particular plugin from that list, and wires up its tools and its hooks for you automatically.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ctxmode-install#market",
+              "label": "add the marketplace",
+              "focus": true,
+              "wantAtWord": 2,
+              "id": "market",
+              "src": "rec/ctxmode-install/seg-03.mp4",
+              "frames": 219,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "added": {
+                  "x": 387,
+                  "y": 745,
+                  "w": 281,
+                  "h": 19,
+                  "covers": "Successfully added marketplace"
+                },
+                "__cmd": {
+                  "x": 509,
+                  "y": 631,
+                  "w": 459,
+                  "h": 19,
+                  "covers": "claude plugin marketplace add mksglu/context-mode"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 759,
+                  "h": 152
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                4,
+                5,
+                6,
+                8,
+                10,
+                12,
+                15,
+                17,
+                18,
+                21,
+                23,
+                24,
+                26,
+                27,
+                29,
+                31,
+                32,
+                33,
+                35,
+                36,
+                38,
+                39,
+                40,
+                42,
+                44,
+                46,
+                48,
+                49,
+                51,
+                52,
+                54,
+                55,
+                57,
+                58,
+                61,
+                62,
+                65,
+                66,
+                67,
+                70,
+                72,
+                75,
+                76,
+                79,
+                81,
+                83,
+                84,
+                86,
+                96,
+                97,
+                100,
+                110,
+                115,
+                151,
+                152,
+                166,
+                167,
+                183
+              ],
+              "shows": "$ claude plugin marketplace add mksglu/context-mode",
+              "said": "PS ctxmode-ws> claude plugin marketplace add mksglu/context-mode\nSSH not configured, cloning via HTTPS: https://github.com/mksglu/context-mode.git\nRefreshing marketplace cache (timeout: 120s)…\nCloning repository (timeout: 120s): https://github.com/mksglu/context-mode.git\nClone complete, validating marketplace…\nCleaning up old marketplace cache…\n✔ Successfully added marketplace: context-mode (declared in user settings)\nPS ctxmode-ws>",
+              "atWord": 5
+            },
+            {
+              "ref": "rec:ctxmode-install#install",
+              "label": "install the plugin",
+              "focus": true,
+              "wantAtWord": 32,
+              "id": "install",
+              "src": "rec/ctxmode-install/seg-04.mp4",
+              "frames": 215,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "ok": {
+                  "x": 387,
+                  "y": 650,
+                  "w": 272,
+                  "h": 19,
+                  "covers": "Successfully installed plugin"
+                },
+                "__cmd": {
+                  "x": 509,
+                  "y": 631,
+                  "w": 440,
+                  "h": 19,
+                  "covers": "claude plugin install context-mode@context-mode"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 631,
+                  "w": 675,
+                  "h": 57
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                2,
+                3,
+                6,
+                9,
+                10,
+                12,
+                15,
+                17,
+                18,
+                21,
+                23,
+                24,
+                25,
+                26,
+                27,
+                29,
+                31,
+                32,
+                34,
+                36,
+                37,
+                39,
+                41,
+                42,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                51,
+                54,
+                56,
+                57,
+                59,
+                60,
+                62,
+                64,
+                67,
+                68,
+                70,
+                71,
+                72,
+                74,
+                76,
+                77,
+                79,
+                80,
+                81,
+                82,
+                94,
+                95,
+                100,
+                101,
+                111,
+                147,
+                148,
+                163,
+                179
+              ],
+              "shows": "$ claude plugin install context-mode@context-mode",
+              "said": "PS ctxmode-ws> claude plugin install context-mode@context-mode\n✔ Successfully installed plugin: context-mode@context-mode (scope: user)\nPS ctxmode-ws>",
+              "atWord": 29
+            }
+          ],
+          "sourceNote": "context-mode · github.com/mksglu/context-mode",
+          "atWord": 39,
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "durationFrames": 877
+    },
+    {
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "No config file, no API key, nothing else to set up. But before it saves you anything, it costs you something — and helpfully, Claude Code will tell you exactly what. Ask it for the plugin's details, and it reports nine hundred and seventy tokens, always on, added to every single session that you start from now on.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ctxmode-install#cost",
+              "label": "Claude Code's own estimate",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "~970 tokens, added to every session",
+                  "mark": "alwayson",
+                  "atWord": 47
+                }
+              ],
+              "wantAtWord": 37,
+              "id": "cost",
+              "src": "rec/ctxmode-install/seg-05.mp4",
+              "frames": 222,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {
+                "alwayson": {
+                  "x": 509,
+                  "y": 840,
+                  "w": 75,
+                  "h": 19,
+                  "covers": "~970 tok"
+                },
+                "hooks": {
+                  "x": 387,
+                  "y": 745,
+                  "w": 84,
+                  "h": 19,
+                  "covers": "Hooks (6)"
+                },
+                "__cmd": {
+                  "x": 509,
+                  "y": 613,
+                  "w": 600,
+                  "h": 19,
+                  "covers": "claude plugin details context-mode@context-mode | sed -n '1,13p'"
+                }
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 613,
+                  "w": 740,
+                  "h": 56
+                },
+                {
+                  "x": 368,
+                  "y": 688,
+                  "w": 1181,
+                  "h": 114
+                },
+                {
+                  "x": 368,
+                  "y": 821,
+                  "w": 450,
+                  "h": 57
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                7,
+                8,
+                10,
+                11,
+                13,
+                15,
+                17,
+                18,
+                19,
+                20,
+                21,
+                23,
+                24,
+                26,
+                27,
+                29,
+                30,
+                33,
+                34,
+                35,
+                36,
+                38,
+                39,
+                41,
+                43,
+                46,
+                47,
+                49,
+                50,
+                51,
+                54,
+                56,
+                58,
+                59,
+                61,
+                62,
+                64,
+                65,
+                68,
+                70,
+                72,
+                73,
+                75,
+                76,
+                77,
+                79,
+                82,
+                83,
+                85,
+                86,
+                87,
+                89,
+                92,
+                93,
+                96,
+                98,
+                99,
+                102,
+                103,
+                105,
+                116,
+                118,
+                133,
+                169,
+                172,
+                183,
+                184,
+                186,
+                187,
+                189,
+                191,
+                192,
+                194,
+                195,
+                197,
+                198,
+                200,
+                202,
+                203,
+                205,
+                206
+              ],
+              "shows": "$ claude plugin details context-mode@context-mode | sed -n '1,13p'",
+              "said": "edge base with BM25 ranking, and intent-driven search.\n Source: context-mode@context-mode\nComponent inventory\n Skills (8) context-mode, ctx-doctor, ctx-index, ctx-insight, ctx-purge, ctx-search, ctx-stats, ctx-upgrade\n Agents (0)\n Hooks (6) PostToolUse, PreCompact, PreToolUse, UserPromptSubmit, SessionStart, Stop (harness-only — no model context cost)\n MCP servers (0)\n LSP servers (0)\nProjected token cost\n Always-on: ~970 tok added to every session\nPS ctxmode-ws>\nPS ctxmode-ws> claude plugin details context-mode@context-mode | sed -n '1,13p'",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 741
+    },
+    {
+      "id": "s14",
+      "type": "WATERFALL",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "Nine hundred and seventy is honest, but it is incomplete, and the gap matters. It counts the plugin's skills. It does not count the eleven tool definitions the server registers. It does not count the routing instructions the hooks push in at startup. Measured on a live session, switching it on really costs about three and a half thousand tokens, and you pay that on every turn you take.",
+      "data": {
+        "waterfallChart": {
+          "unit": "tok",
+          "bars": [
+            {
+              "label": "skills",
+              "value": 970,
+              "atWord": 19
+            },
+            {
+              "label": "tool definitions",
+              "value": 1800,
+              "atWord": 26
+            },
+            {
+              "label": "routing text",
+              "value": 630,
+              "atWord": 36
+            },
+            {
+              "label": "real, per turn",
+              "value": 3400,
+              "isTotal": true,
+              "atWord": 55
+            }
+          ]
+        }
+      },
+      "durationFrames": 709
+    },
+    {
+      "id": "s15",
+      "type": "SPEC_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So how do you check a saving like this? The plugin ships its own statistics command, and I didn't take a single number from it. A tool reporting on itself counts the bytes it diverted — it can't see what its own tool definitions cost you. Claude Code, though, writes a transcript of every session, and every turn in it records what that turn was billed.",
+      "data": {
+        "compare": {
+          "headline": "Two ways to count",
+          "a": {
+            "name": "its own stats"
+          },
+          "b": {
+            "name": "the transcript"
+          },
+          "rows": [
+            {
+              "label": "who wrote it",
+              "a": "the plugin",
+              "b": "Claude Code",
+              "winner": "b",
+              "atWord": 15
+            },
+            {
+              "label": "counts diverted bytes",
+              "a": "yes",
+              "b": "yes",
+              "winner": "tie",
+              "atWord": 35
+            },
+            {
+              "label": "sees its own cost",
+              "a": "no",
+              "b": "yes",
+              "winner": "b",
+              "atWord": 52
+            }
+          ],
+          "atWord": 5
+        }
+      },
+      "durationFrames": 679
+    },
+    {
+      "id": "s16",
+      "type": "WATERFALL",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Every turn records four numbers. Fresh tokens. Tokens written to the cache. Tokens served straight from that cache. Add those three together and you get the exact size of the prompt that went out, which is the honest measure of how full that window really was at that moment.",
+      "data": {
+        "waterfallChart": {
+          "unit": "tok",
+          "bars": [
+            {
+              "label": "fresh",
+              "value": 18,
+              "atWord": 6
+            },
+            {
+              "label": "written to cache",
+              "value": 20294,
+              "atWord": 9
+            },
+            {
+              "label": "read from cache",
+              "value": 190064,
+              "atWord": 16
+            },
+            {
+              "label": "the prompt sent",
+              "value": 210376,
+              "isTotal": true,
+              "atWord": 34
+            }
+          ]
+        }
+      },
+      "durationFrames": 512
+    },
+    {
+      "id": "s16b",
+      "type": "BAR_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One catch worth knowing, because it explains the rest of this video. Those tokens are not all billed the same. Most of the window on any given turn is a cache read, charged at a small fraction of a fresh one, which changes the arithmetic completely.",
+      "data": {
+        "bars": [
+          {
+            "label": "fresh tokens",
+            "sub": "full price",
+            "value": 20312,
+            "display": "20.3K",
+            "atWord": 37
+          },
+          {
+            "label": "read from cache",
+            "sub": "a fraction",
+            "value": 190064,
+            "display": "190K",
+            "color": "blue",
+            "atWord": 31
+          }
+        ],
+        "source": "one measured turn — most of the window is a cache read"
+      },
+      "durationFrames": 483
+    },
+    {
+      "id": "s16c",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So the bytes you keep out of the window and the money you actually save are related, but they are not the same number. That is why I report both, and why the cost column in this video is the one I trust least.",
+      "data": {
+        "heading": "Two different questions",
+        "points": [
+          {
+            "text": "Bytes kept out: counted, steady",
+            "atWord": 9
+          },
+          {
+            "text": "Money saved: priced, and noisy",
+            "atWord": 15
+          },
+          {
+            "text": "Cache warmth moves cost 2-3x on its own",
+            "atWord": 30
+          }
+        ]
+      },
+      "durationFrames": 463
+    },
+    {
+      "id": "s17",
+      "type": "TEST_MATRIX",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Here's the test. One real open-source repository, two different jobs — a code task and a log task — run against both Opus and Haiku, and every box run three times, because one agent run proves nothing.",
+      "data": {
+        "testMatrix": {
+          "rows": [
+            "code task",
+            "log task"
+          ],
+          "cols": [
+            "Opus",
+            "Haiku"
+          ],
+          "cells": [
+            {
+              "r": 0,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 0,
+              "c": 1,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 0,
+              "status": "pass"
+            },
+            {
+              "r": 1,
+              "c": 1,
+              "status": "pass"
+            }
+          ],
+          "headline": "Twelve cells, three runs each",
+          "atWord": 30
+        }
+      },
+      "durationFrames": 394
+    },
+    {
+      "id": "s18",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "This is the job with the plugin switched off. Same question, same file, nothing installed at all. Now watch carefully what the agent reaches for, because it is the whole argument of this video. It does not open the file. It writes one small command, runs it, and reads the few lines that come back — so the log never enters the conversation in the first place.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ctxmode-before#run",
+              "label": "no plugin at all",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "it writes a command instead of reading the file",
+                  "mark": null,
+                  "atWord": 49
+                }
+              ],
+              "wantAtWord": 9,
+              "id": "run",
+              "src": "rec/ctxmode-before/seg-02-run.mp4",
+              "frames": 420,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {},
+              "ink": [],
+              "changes": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                11,
+                13,
+                16,
+                17,
+                19,
+                20,
+                24,
+                25,
+                27,
+                30,
+                31,
+                33,
+                34,
+                35,
+                36,
+                38,
+                39,
+                41,
+                42,
+                43,
+                44,
+                45,
+                47,
+                49,
+                50,
+                51,
+                52,
+                54,
+                56,
+                57,
+                59,
+                60,
+                62,
+                63,
+                64,
+                66,
+                68,
+                71,
+                73,
+                74,
+                75,
+                77,
+                78,
+                79,
+                80,
+                82,
+                83,
+                85,
+                86,
+                88,
+                90,
+                91,
+                95,
+                97,
+                99,
+                100,
+                101,
+                103,
+                105,
+                106,
+                109,
+                110,
+                112,
+                114,
+                115,
+                117,
+                118,
+                121,
+                123,
+                124,
+                126,
+                128,
+                129,
+                130,
+                131,
+                133,
+                135,
+                136,
+                139,
+                141,
+                142,
+                143,
+                144,
+                146,
+                148,
+                149,
+                151,
+                152,
+                154,
+                156,
+                157,
+                158,
+                160,
+                161,
+                163,
+                164,
+                166,
+                168,
+                170,
+                172,
+                175,
+                177,
+                178,
+                179,
+                180,
+                181,
+                182,
+                183,
+                186,
+                188,
+                189,
+                190,
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201,
+                203,
+                205,
+                207,
+                209,
+                211,
+                213,
+                214,
+                217,
+                218,
+                220,
+                221,
+                224,
+                225,
+                228,
+                229,
+                230,
+                231,
+                233,
+                234,
+                235,
+                237,
+                239,
+                241,
+                242,
+                244,
+                245,
+                246,
+                247,
+                249,
+                250,
+                251,
+                254,
+                256,
+                258,
+                259,
+                261,
+                262,
+                263,
+                264,
+                266,
+                267,
+                269,
+                270,
+                273,
+                275,
+                276,
+                278,
+                279,
+                281,
+                283,
+                284,
+                285,
+                286,
+                288,
+                289,
+                290,
+                291,
+                292,
+                293,
+                296,
+                298,
+                299,
+                300,
+                302,
+                303,
+                306,
+                307,
+                308,
+                309,
+                310,
+                313,
+                314,
+                316,
+                317,
+                318,
+                320,
+                321,
+                322,
+                324,
+                326,
+                329,
+                330,
+                332,
+                333,
+                335,
+                336,
+                338,
+                339,
+                341,
+                342,
+                344,
+                347,
+                348,
+                350,
+                352,
+                353,
+                355,
+                357,
+                359,
+                360,
+                363,
+                364,
+                367,
+                369,
+                371,
+                373,
+                374,
+                376,
+                377,
+                378,
+                379,
+                381,
+                384,
+                385,
+                395,
+                399,
+                404,
+                411,
+                415,
+                419
+              ],
+              "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
+              "atWord": 9
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1110
+    },
+    {
+      "id": "s19",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And here is the answer it lands on. Fifty failed requests, from three addresses, with the counts for each one. That is exactly right, and the half-megabyte of log behind it never went anywhere near the model's memory. No plugin was involved in any part of that.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ctxmode-before#answer",
+              "label": "and the answer",
+              "focus": true,
+              "wantAtWord": 5,
+              "id": "answer",
+              "src": "rec/ctxmode-before/seg-02-answer.mp4",
+              "frames": 391,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 629,
+                  "w": 1209,
+                  "h": 40
+                },
+                {
+                  "x": 387,
+                  "y": 688,
+                  "w": 1162,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 745,
+                  "w": 291,
+                  "h": 19
+                },
+                {
+                  "x": 368,
+                  "y": 783,
+                  "w": 1209,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                41,
+                42,
+                44,
+                47,
+                51,
+                52,
+                54,
+                57,
+                58,
+                59,
+                62,
+                65,
+                68,
+                69,
+                71,
+                72,
+                73,
+                74,
+                76,
+                77,
+                79,
+                80,
+                82,
+                84,
+                85,
+                89,
+                90,
+                93,
+                96,
+                99,
+                100,
+                103,
+                107,
+                108,
+                113,
+                116,
+                117,
+                119,
+                120,
+                123,
+                124,
+                125,
+                126,
+                130,
+                131,
+                133,
+                134,
+                136,
+                137,
+                140,
+                143,
+                144,
+                146,
+                147,
+                150,
+                153,
+                157,
+                159,
+                160,
+                163,
+                164,
+                165,
+                166,
+                169,
+                171,
+                172,
+                174,
+                175,
+                177,
+                178,
+                180,
+                181,
+                183,
+                184,
+                187,
+                189,
+                190,
+                194,
+                197,
+                200,
+                201,
+                203,
+                204,
+                207,
+                208,
+                210,
+                214,
+                216,
+                217,
+                220,
+                221,
+                223,
+                224,
+                227,
+                229,
+                230,
+                231,
+                233,
+                234,
+                236,
+                237,
+                238,
+                239,
+                240,
+                241,
+                242,
+                243,
+                244,
+                245,
+                247,
+                248,
+                249,
+                251,
+                252,
+                254,
+                257,
+                261,
+                262,
+                264,
+                265,
+                266,
+                267,
+                268,
+                269,
+                270,
+                271,
+                272,
+                273,
+                275,
+                276,
+                278,
+                279,
+                281,
+                282,
+                283,
+                284,
+                285,
+                286,
+                287,
+                288,
+                291,
+                295,
+                298,
+                300,
+                301,
+                303,
+                304,
+                306,
+                307,
+                309,
+                310,
+                312,
+                314,
+                317,
+                318,
+                321,
+                325,
+                326,
+                327,
+                328,
+                330,
+                331,
+                333,
+                334,
+                336,
+                337,
+                339,
+                340,
+                341,
+                343,
+                344,
+                346,
+                348,
+                349,
+                352,
+                355,
+                358,
+                361,
+                364,
+                367,
+                368,
+                369,
+                371,
+                384,
+                387,
+                388
+              ],
+              "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
+              "said": " │ 10.0.7.2 │ 1 │\n └────────────┴───────┘\n The majority of 500 errors come from three IP addresses (10.0.6.29, 10.0.3.17, and 10.0.1.4), which account for 50 of the 51\n failed requests. Only one error originated from 10.0.7.2.\n✻ Baked for 11s · done 12:50 AM\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⏸ manual mode on · ? for shortcuts · ← for agents\nPS ctxmode-ws> claude 'Find every request in access.log that failed with HTTP status 500, and summarise which IP addresses they c\name from with a count for each. State the total number of failed requests.' --model claude-haiku-4-5-20251001",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 995
+    },
+    {
+      "id": "s20",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Now the same question with the plugin on. This time one of context-mode's own tools fires instead of Bash. The file is handed to the sandbox, the counting happens out there, away from the conversation, and only a short summary ever comes back across. That is the mechanism doing exactly what it says on the tin, and it is genuinely neat to watch it happen.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ctxmode-after#run",
+              "label": "with the plugin on",
+              "focus": true,
+              "callouts": [
+                {
+                  "text": "a context-mode tool fires — not Bash",
+                  "mark": null,
+                  "atWord": 51
+                }
+              ],
+              "wantAtWord": 8,
+              "id": "run",
+              "src": "rec/ctxmode-after/seg-02-run.mp4",
+              "frames": 480,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "marks": {},
+              "ink": [],
+              "changes": [
+                0,
+                3,
+                4,
+                6,
+                7,
+                9,
+                10,
+                11,
+                13,
+                15,
+                16,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                25,
+                26,
+                28,
+                29,
+                31,
+                32,
+                34,
+                35,
+                37,
+                39,
+                41,
+                42,
+                43,
+                45,
+                47,
+                48,
+                49,
+                50,
+                51,
+                54,
+                56,
+                57,
+                59,
+                60,
+                62,
+                63,
+                64,
+                67,
+                68,
+                71,
+                73,
+                75,
+                76,
+                79,
+                80,
+                83,
+                84,
+                85,
+                87,
+                88,
+                90,
+                92,
+                93,
+                96,
+                97,
+                98,
+                99,
+                101,
+                102,
+                104,
+                105,
+                106,
+                108,
+                109,
+                111,
+                113,
+                114,
+                116,
+                117,
+                118,
+                119,
+                120,
+                122,
+                124,
+                125,
+                127,
+                130,
+                131,
+                132,
+                134,
+                136,
+                137,
+                139,
+                140,
+                142,
+                144,
+                145,
+                146,
+                148,
+                149,
+                151,
+                153,
+                155,
+                156,
+                158,
+                161,
+                162,
+                164,
+                166,
+                168,
+                169,
+                171,
+                172,
+                175,
+                176,
+                178,
+                179,
+                181,
+                182,
+                183,
+                185,
+                186,
+                187,
+                188,
+                190,
+                191,
+                193,
+                195,
+                197,
+                199,
+                201,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209,
+                211,
+                212,
+                214,
+                215,
+                217,
+                219,
+                220,
+                221,
+                222,
+                223,
+                224,
+                226,
+                229,
+                230,
+                232,
+                233,
+                234,
+                235,
+                238,
+                239,
+                241,
+                242,
+                243,
+                245,
+                246,
+                247,
+                249,
+                251,
+                252,
+                254,
+                256,
+                257,
+                259,
+                261,
+                262,
+                264,
+                265,
+                267,
+                269,
+                270,
+                271,
+                272,
+                273,
+                274,
+                275,
+                277,
+                279,
+                281,
+                283,
+                285,
+                288,
+                290,
+                291,
+                292,
+                293,
+                296,
+                297,
+                299,
+                300,
+                302,
+                303,
+                304,
+                306,
+                307,
+                308,
+                309,
+                310,
+                312,
+                314,
+                315,
+                317,
+                318,
+                320,
+                321,
+                322,
+                324,
+                325,
+                326,
+                328,
+                329,
+                332,
+                333,
+                335,
+                336,
+                337,
+                339,
+                340,
+                341,
+                342,
+                343,
+                345,
+                346,
+                348,
+                349,
+                352,
+                353,
+                355,
+                356,
+                358,
+                360,
+                361,
+                364,
+                365,
+                367,
+                369,
+                371,
+                373,
+                375,
+                377,
+                378,
+                381,
+                382,
+                384,
+                385,
+                387,
+                388,
+                398,
+                399,
+                402,
+                403,
+                407,
+                415,
+                422,
+                431,
+                432,
+                435,
+                439,
+                443,
+                444,
+                446,
+                450,
+                453,
+                457,
+                459,
+                460,
+                462,
+                463,
+                464,
+                465,
+                466,
+                467,
+                468,
+                469,
+                470,
+                471,
+                472,
+                473,
+                474,
+                475,
+                476,
+                477
+              ],
+              "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
+              "atWord": 8
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 1236
+    },
+    {
+      "id": "s21",
+      "type": "BAR_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "On the code-reading job, with the big model, three runs each — it does the job. Without the plugin, forty-three kilobytes of raw material ended up in the window. With it, nineteen. Less than half the material, for exactly the same piece of work.",
+      "data": {
+        "bars": [
+          {
+            "label": "plugin off",
+            "sub": "three runs",
+            "value": 43.1,
+            "display": "43.1 KB",
+            "atWord": 20
+          },
+          {
+            "label": "plugin on",
+            "sub": "three runs",
+            "value": 19.2,
+            "display": "19.2 KB",
+            "color": "green",
+            "atWord": 32
+          }
+        ],
+        "source": "measured from Claude Code's own session transcripts"
+      },
+      "durationFrames": 463
+    },
+    {
+      "id": "s21b",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Peak usage dropped about a fifth. And the answers scored identically — twelve out of twelve on a checklist I wrote from the source before either run started. Nothing was bought by making the model worse, which is the part I most wanted to check.",
+      "data": {
+        "heading": "The code job, both arms",
+        "points": [
+          {
+            "text": "Peak context: 37.8K to 30.6K",
+            "atWord": 6
+          },
+          {
+            "text": "Rubric: 12/12 either way",
+            "atWord": 11
+          },
+          {
+            "text": "No accuracy traded for the saving",
+            "atWord": 36
+          }
+        ]
+      },
+      "durationFrames": 473
+    },
+    {
+      "id": "s22",
+      "type": "SANDBOX_BOX",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "But here's what surprised me. On the log job, the plugin lost — and the reason was already on screen. Claude Code already has a tool that runs a command and hands back only what it printed. It's called Bash.",
+      "data": {
+        "sandbox": {
+          "label": "Bash, already",
+          "allowed": [
+            "one line of output"
+          ],
+          "blocked": [
+            "the 535 KB log"
+          ],
+          "atWord": 12
+        }
+      },
+      "durationFrames": 424
+    },
+    {
+      "id": "s23",
+      "type": "BAR_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So with the plugin off, that five-hundred-kilobyte log put zero point eight kilobytes into the conversation. With it on, zero point six. On that job it cost twenty-eight percent more.",
+      "data": {
+        "bars": [
+          {
+            "label": "plugin off",
+            "sub": "of a 535 KB log",
+            "value": 0.8,
+            "display": "0.8 KB",
+            "atWord": 10
+          },
+          {
+            "label": "plugin on",
+            "sub": "of a 535 KB log",
+            "value": 0.6,
+            "display": "0.6 KB",
+            "atWord": 20
+          }
+        ],
+        "source": "log task, Opus 5, three runs per arm"
+      },
+      "durationFrames": 325
+    },
+    {
+      "id": "s24",
+      "type": "TRADEOFF_SCALE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Which gives you a rule you can use tonight: it has to keep more out of the window than the rent it charges to be there.",
+      "data": {
+        "tradeoff": {
+          "headline": "It has to beat its own [rent]",
+          "left": {
+            "label": "rent",
+            "sub": "~3.4K every turn",
+            "asset": "lucide:receipt"
+          },
+          "right": {
+            "label": "bytes kept out",
+            "sub": "grows with work",
+            "asset": "lucide:shield"
+          },
+          "lean": 0.35,
+          "atWord": 9
+        }
+      },
+      "durationFrames": 286
+    },
+    {
+      "id": "s25",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One more thing, and almost nobody checks it — which is a shame, because it is the part that actually matters. A saving is not the same thing as a right answer. So read that run again, the one with the plugin switched on, slowly. It reports fifty-one failed requests, coming from four different addresses, and it sounds completely confident about it.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ctxmode-after#tail",
+              "label": "read it again, carefully",
+              "focus": true,
+              "wantAtWord": 2,
+              "id": "tail",
+              "src": "rec/ctxmode-after/seg-02-tail.mp4",
+              "frames": 232,
+              "bbox": {
+                "x": 348,
+                "y": 578,
+                "w": 1252,
+                "h": 300
+              },
+              "ink": [
+                {
+                  "x": 368,
+                  "y": 629,
+                  "w": 1209,
+                  "h": 40
+                },
+                {
+                  "x": 387,
+                  "y": 688,
+                  "w": 1181,
+                  "h": 38
+                },
+                {
+                  "x": 368,
+                  "y": 745,
+                  "w": 487,
+                  "h": 19
+                },
+                {
+                  "x": 368,
+                  "y": 783,
+                  "w": 1209,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                15,
+                17,
+                18,
+                21,
+                22,
+                25,
+                28,
+                32,
+                35,
+                36,
+                38,
+                39,
+                42,
+                45,
+                48,
+                52,
+                53,
+                55,
+                58,
+                59,
+                62,
+                65,
+                66,
+                67,
+                68,
+                70,
+                71,
+                73,
+                74,
+                75,
+                76,
+                80,
+                82,
+                83,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                95,
+                96,
+                97,
+                99,
+                102,
+                103,
+                105,
+                106,
+                109,
+                112,
+                116,
+                119,
+                122,
+                124,
+                125,
+                126,
+                127,
+                129,
+                133,
+                135,
+                136,
+                137,
+                139,
+                140,
+                142,
+                146,
+                149,
+                152,
+                156,
+                158,
+                159,
+                162,
+                166,
+                169,
+                173,
+                175,
+                176,
+                183,
+                184,
+                187,
+                189,
+                190,
+                193,
+                194,
+                196,
+                197,
+                200,
+                203,
+                204,
+                206,
+                207,
+                208,
+                211,
+                212,
+                215,
+                216,
+                228,
+                229
+              ],
+              "shows": "$ claude 'Find every request in access.log that failed with HTTP st",
+              "said": " Total failed requests: 51\n The majority of the 500 errors come from two IP addresses (10.0.3.17 and 10.0.6.29), each accounting for 17 failures, followed\n by 10.0.1.4 with 16 failures. The remaining error came from 10.0.7.2.\n✽ Working… (running Stop hook · 18s · ↓ 1.5k tokens)\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⏸ manual mode on · esc to interrupt · ← for agents\nPS ctxmode-ws> claude 'Find every request in access.log that failed with HTTP status 500, and summarise which IP addresses they c\name from with a count for each. State the total number of failed requests.' --model claude-haiku-4-5-20251001",
+              "atWord": 5
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 2
+        }
+      },
+      "durationFrames": 789
+    },
+    {
+      "id": "s26",
+      "type": "LOG_STREAM",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The true answer, as the other run worked out a minute ago, is fifty, from three. The access log has a trap in it, deliberately. Look at the third line: a request to cart succeeded — status two hundred — and happened to return exactly five hundred bytes. Every other line here is a genuine checkout failure.",
+      "data": {
+        "logs": {
+          "lines": [
+            {
+              "level": "error",
+              "tag": "10.0.3.17",
+              "text": "\"GET /api/v1/checkout\" 500 4821"
+            },
+            {
+              "level": "error",
+              "tag": "10.0.6.29",
+              "text": "\"GET /api/v1/checkout\" 500 1130"
+            },
+            {
+              "level": "info",
+              "tag": "10.0.7.2",
+              "text": "\"GET /api/v1/cart\" 200 500"
+            },
+            {
+              "level": "error",
+              "tag": "10.0.1.4",
+              "text": "\"GET /api/v1/checkout\" 500 7742"
+            }
+          ],
+          "highlight": 2,
+          "rate": "5,000 lines",
+          "atWord": 35
+        }
+      },
+      "durationFrames": 591
+    },
+    {
+      "id": "s27",
+      "type": "SPEC_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So a plain text search for five hundred finds that line and counts it as a failure. The small model read the text instead of the column — with the plugin on, and with it off. Context-mode didn't cause that, and it didn't prevent it either. If you take one thing from this video, take this: cheaper is not the same as righter, and no plugin does that part for you.",
+      "data": {
+        "compare": {
+          "headline": "Cheaper is not righter",
+          "source": "log task, Haiku 4.5, three runs per arm",
+          "a": {
+            "name": "plugin off"
+          },
+          "b": {
+            "name": "plugin on"
+          },
+          "rows": [
+            {
+              "label": "bytes into context",
+              "a": "4.1 KB",
+              "b": "1.0 KB",
+              "winner": "b",
+              "atWord": 39
+            },
+            {
+              "label": "cost",
+              "a": "baseline",
+              "b": "−20%",
+              "winner": "b",
+              "atWord": 44
+            },
+            {
+              "label": "fell for the trap",
+              "a": "yes",
+              "b": "yes",
+              "winner": "tie",
+              "atWord": 46
+            }
+          ]
+        }
+      },
+      "durationFrames": 729
+    },
+    {
+      "id": "s28",
+      "type": "SPEC_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And this is the finding I keep thinking about. On the big model, across six runs with the plugin installed, its tools were called zero times. Not once. Those runs were still cheaper — because the hooks push in a paragraph telling the model that every byte a tool returns costs it later. The model read that, and used its ordinary tools more carefully. The prompt did the work here, not the sandbox.",
+      "data": {
+        "compare": {
+          "headline": "Which half did the work?",
+          "a": {
+            "name": "its tools"
+          },
+          "b": {
+            "name": "its prompt"
+          },
+          "rows": [
+            {
+              "label": "times called",
+              "a": "0",
+              "b": "every turn",
+              "winner": "b",
+              "atWord": 22
+            },
+            {
+              "label": "cut bytes on Opus",
+              "a": "no",
+              "b": "yes",
+              "winner": "b",
+              "atWord": 41
+            },
+            {
+              "label": "costs per turn",
+              "a": "yes",
+              "b": "a paragraph",
+              "winner": "b",
+              "atWord": 53
+            }
+          ]
+        }
+      },
+      "durationFrames": 748
+    },
+    {
+      "id": "s29",
+      "type": "BOX_PLOT",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So I tested that on its own — the same argument written into a plain instructions file, no plugin and no rent. It does help. But look at the spread: the plugin lands in the same narrow band every run, while the free paragraph swings wildly from one run to the next.",
+      "data": {
+        "boxPlot": {
+          "boxes": [
+            {
+              "label": "plugin",
+              "min": 48.4,
+              "q1": 49.5,
+              "median": 52.7,
+              "q3": 56,
+              "max": 60.7,
+              "atWord": 30
+            },
+            {
+              "label": "paragraph",
+              "min": 38.4,
+              "q1": 55,
+              "median": 82.1,
+              "q3": 104,
+              "max": 120,
+              "atWord": 44
+            }
+          ],
+          "unit": "KB",
+          "atWord": 3
+        }
+      },
+      "durationFrames": 542
+    },
+    {
+      "id": "s29b",
+      "type": "TRADEOFF_SCALE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "On one job the paragraph came out worse than doing nothing at all. So copy the wording by all means — it is free, and it helps. It is not a replacement for the thing that behaves the same way every time.",
+      "data": {
+        "tradeoff": {
+          "headline": "Copy the wording, but it is not a [replacement]",
+          "left": {
+            "label": "a free paragraph",
+            "sub": "swings run to run",
+            "asset": "lucide:file-text"
+          },
+          "right": {
+            "label": "the plugin",
+            "sub": "same band, always",
+            "asset": "lucide:package"
+          },
+          "lean": 0.3,
+          "atWord": 8
+        }
+      },
+      "durationFrames": 443
+    },
+    {
+      "id": "s30",
+      "type": "TRADEOFF_SCALE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So, should you install it? If your sessions are already tidy, it costs more than it saves. If you're on a cheaper model, or your work drags in big files and chatty tool output, it's a clear win.",
+      "data": {
+        "tradeoff": {
+          "headline": "Worth it when the session is [heavy]",
+          "left": {
+            "label": "tidy session",
+            "sub": "rent for nothing",
+            "asset": "lucide:feather"
+          },
+          "right": {
+            "label": "heavy session",
+            "sub": "a quarter cheaper",
+            "asset": "lucide:weight"
+          },
+          "lean": 0.5,
+          "atWord": 11
+        }
+      },
+      "durationFrames": 404
+    },
+    {
+      "id": "s31",
+      "type": "SPEC_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Two honest gaps before you go. I never tested session continuity — the part that rebuilds your state after the conversation compacts — because these jobs were short and none of them ever compacted. And I used no external servers that dump huge payloads, which is the exact case their own benchmark is built on.",
+      "data": {
+        "compare": {
+          "headline": "What this video did not test",
+          "a": {
+            "name": "tested"
+          },
+          "b": {
+            "name": "not tested"
+          },
+          "rows": [
+            {
+              "label": "sandbox + index",
+              "a": "yes",
+              "b": "—",
+              "winner": "a",
+              "atWord": 34
+            },
+            {
+              "label": "per-turn cost",
+              "a": "yes",
+              "b": "—",
+              "winner": "a"
+            },
+            {
+              "label": "session continuity",
+              "a": "—",
+              "b": "not tested",
+              "winner": "b",
+              "atWord": 11
+            },
+            {
+              "label": "raw MCP payloads",
+              "a": "—",
+              "b": "not tested",
+              "winner": "b",
+              "atWord": 44
+            }
+          ]
+        }
+      },
+      "durationFrames": 571
+    },
+    {
+      "id": "s31b",
+      "type": "CONTEXT_METER",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "So their ninety-eight percent isn't a lie. It measures a different case — one full of raw payloads — and your case is probably not that one.",
+      "data": {
+        "context": {
+          "headline": "Their number, and yours",
+          "windowTokens": 200000,
+          "segments": [
+            {
+              "label": "their case",
+              "tokens": 120000,
+              "kind": "history"
+            },
+            {
+              "label": "raw payloads",
+              "tokens": 44000,
+              "kind": "tools"
+            },
+            {
+              "label": "your case",
+              "tokens": 36000,
+              "kind": "free"
+            }
+          ],
+          "verdict": "Both numbers can be true at once",
+          "atWord": 7
+        }
+      },
+      "durationFrames": 296
+    },
+    {
+      "id": "s32",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Three numbers worth keeping. It costs about three and a half thousand tokens a turn whether you use it or not. On heavy work it cut raw material by more than half, and came out around fourteen percent cheaper. On light work it charged twenty-eight percent more, and gave nothing back for it.",
+      "data": {
+        "heading": "What twelve measured runs said",
+        "points": [
+          {
+            "text": "~3.4K tokens per turn, always",
+            "atWord": 8
+          },
+          {
+            "text": "Heavy work: 2.2× less, ~14% cheaper",
+            "atWord": 30
+          },
+          {
+            "text": "Light work: 28% more expensive",
+            "atWord": 45
+          }
+        ]
+      },
+      "durationFrames": 552
+    },
+    {
+      "id": "s33",
+      "type": "QUOTE_SPOTLIGHT",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Context-mode is by Mert Koseoglu, it's on GitHub under the Elastic licence, and the link is below. Go and read it — it's a genuinely clever piece of engineering whichever way the numbers fall for you.",
+      "data": {
+        "quote": "Measure it on your own work before you commit to it.",
+        "person": {
+          "name": "context-mode",
+          "role": "by Mert Koseoglu"
+        },
+        "source": "github.com/mksglu/context-mode — Elastic-2.0",
+        "atWord": 4
+      },
+      "durationFrames": 384
+    },
+    {
+      "id": "s34",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And if this saved you running the experiment yourself, subscribe — then go and measure it on your own work.",
+      "data": {
+        "message": "Measure it on your own work",
+        "sub": "THE NBX STUDIO",
+        "atWord": 10
+      },
+      "durationFrames": 227
+    }
+  ]
 }
