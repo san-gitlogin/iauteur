@@ -35,6 +35,12 @@ const CORRECTIONS = [
    // the guard sat unreferenced, which is the exact shape of the bug it exists to prevent.
    () => has('scripts/lib/record/runner.mjs', 'assertAgentWorkspaceTrusted\\(demo, ws\\);') &&
          has('scripts/lib/record/runner.mjs', 'hasTrustDialogAccepted')],
+  ['the prompt swallowed by a variadic flag', 'SEAL',
+   'Open Code Review cut, 2026-09-17: `claude --allowedTools "Bash,Read" \'/cmd\'` starts Claude Code ' +
+   'with NO prompt — --allowedTools is variadic and eats the quoted prompt as another tool name. The ' +
+   'take captured an empty input box, which looks exactly like a hang. Found by pulling the frame.',
+   () => has('scripts/lib/record/runner.mjs', 'A VARIADIC FLAG EATS THE PROMPT') &&
+         has('scripts/lib/record/runner.mjs', 'allowed-\\?\\[Tt\\]ools')],
   ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
    'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
    '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +

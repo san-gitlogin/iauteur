@@ -906,6 +906,25 @@ export const assertAgentRunCannotPrompt = (demo) => {
     if (typeof s.cmd !== 'string') continue;
     if (!/(^|[\s;&|(])claude(\s|$)/.test(s.cmd)) continue;
     if (/\s-p\b|--print\b/.test(s.cmd)) continue;          // print mode never prompts
+
+    // A VARIADIC FLAG EATS THE PROMPT THAT FOLLOWS IT.
+    //
+    // `--allowedTools <tools...>` takes a LIST, so it keeps consuming arguments until the
+    // next flag — and the quoted prompt sitting after it is just another argument. Recorded
+    // 2026-09-17: the take launched Claude Code, which then sat at an empty input box with
+    // its placeholder showing, having been given no prompt at all. It looks identical to a
+    // hang, and it cost a whole take to see (the frame showed the empty prompt).
+    //
+    // Fixed by using a single-value flag instead. This refuses the ordering outright rather
+    // than trusting an author to remember which flags are variadic.
+    if (/--allowed-?[Tt]ools\s+(?:"[^"]*"|'[^']*'|\S+)\s+(?:'|")/.test(s.cmd)) {
+      throw new Error(
+        `Step "${s.id}" puts the prompt straight after --allowedTools:\n    ${s.cmd}\n\n` +
+        `--allowedTools is VARIADIC — it swallows the prompt as another tool name, and Claude Code ` +
+        `starts with no prompt at all, sitting at an empty input box that looks exactly like a hang.\n\n` +
+        `Use a single-value flag instead:\n` +
+        `    claude --permission-mode bypassPermissions '<your prompt>'`);
+    }
     if (NON_PROMPTING.test(s.cmd)) continue;
     throw new Error(
       `Step "${s.id}" runs an interactive \`claude\` with nothing pre-approved:\n    ${s.cmd}\n\n` +

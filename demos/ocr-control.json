@@ -60,7 +60,7 @@
       "waitFor": "\u00b7 done",
       "timeout": 1800000,
       "settleMs": 4000,
-      "cmd": "claude --allowedTools \"Bash,Read,Grep,Glob,Edit\" '/open-code-review:delegate-review --from base --to pr9290'",
+      "cmd": "claude --permission-mode bypassPermissions '/open-code-review:delegate-review --from base --to pr9290'",
       "label": "the whole review of a good pull request",
       "focus": "terminal",
       "clearFirst": true
