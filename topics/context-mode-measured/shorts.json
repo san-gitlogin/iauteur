@@ -1,22 +1,173 @@
 {
   "meta": {
-    "topic": "Context-Mode Promises 98%. I Measured 14%.",
-    "format": "short",
+    "topic": "Context-mode, measured",
+    "format": "shorts",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "subject": "context-mode",
+    "screenplay": "explainer",
+    "onePayoff": "context-mode charges rent every turn; it only pays on heavy sessions.",
+    "openLoop": "It promises 98%. What does it actually save?",
+    "seo": {
+      "title": "context-mode promises 98% #claudecode #ai",
+      "hook": "It promises to save 98% of your context window. I measured 14%.",
+      "hashtags": [
+        "#claudecode",
+        "#ai",
+        "#mcp"
+      ],
+      "tags": [
+        "context-mode",
+        "claude code",
+        "mcp",
+        "ai coding",
+        "token cost",
+        "context window"
+      ],
+      "sources": [
+        "context-mode — github.com/mksglu/context-mode (Elastic-2.0), by Mert Koseoglu"
+      ],
+      "pinned": "Would context-mode pay for your sessions? Check how much tool output you actually pull in."
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
-    "channel": "YOUR CHANNEL",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
   "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
-    "frames": 2
+    "title": "IT PROMISES 98%",
+    "badge": "context-mode",
+    "note": "I measured 14%",
+    "asset": "lucide:gauge"
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Context-mode promises to save ninety-eight percent of your context window. I measured it.",
+      "data": {
+        "headline": "context-mode: 98%?",
+        "subtext": "I measured 14%",
+        "heroAsset": "lucide:gauge",
+        "hookVariant": "ask",
+        "heroAtWord": 9,
+        "headlineAtWord": 1
+      },
+      "durationFrames": 186,
+      "timingSource": "estimated"
+    },
+    {
+      "id": "s02",
+      "type": "BAR_COMPARE",
+      "transition": "push",
+      "background": "zoneA",
+      "narration": "On real code work it does help. Forty-three kilobytes of raw material went into the window without it. With it, nineteen. Less than half.",
+      "data": {
+        "bars": [
+          {
+            "label": "plugin off",
+            "sub": "three runs",
+            "value": 43.1,
+            "display": "43.1 KB",
+            "atWord": 8
+          },
+          {
+            "label": "plugin on",
+            "sub": "three runs",
+            "value": 19.2,
+            "display": "19.2 KB",
+            "color": "green",
+            "atWord": 21
+          }
+        ],
+        "source": "measured from Claude Code's own transcripts"
+      },
+      "durationFrames": 318,
+      "timingSource": "estimated"
+    },
+    {
+      "id": "s03",
+      "type": "CONTEXT_METER",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "But loading it costs about three and a half thousand tokens of prompt, and you pay that again on every single turn.",
+      "data": {
+        "context": {
+          "headline": "It charges rent, every turn",
+          "windowTokens": 200000,
+          "segments": [
+            {
+              "label": "the plugin",
+              "tokens": 3400,
+              "kind": "tools"
+            },
+            {
+              "label": "system",
+              "tokens": 15600,
+              "kind": "system"
+            },
+            {
+              "label": "your work",
+              "tokens": 41000,
+              "kind": "history"
+            },
+            {
+              "label": "free",
+              "tokens": 140000,
+              "kind": "free"
+            }
+          ],
+          "verdict": "Paid whether you use it or not",
+          "atWord": 11
+        }
+      },
+      "durationFrames": 294,
+      "timingSource": "estimated"
+    },
+    {
+      "id": "s04",
+      "type": "TRADEOFF_SCALE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "Which gives you the rule. On a lean session it costs you more than it saves. On heavy work it came out about fourteen percent cheaper.",
+      "data": {
+        "tradeoff": {
+          "headline": "Worth it when the session is [heavy]",
+          "left": {
+            "label": "lean session",
+            "sub": "rent for nothing",
+            "asset": "lucide:feather"
+          },
+          "right": {
+            "label": "heavy session",
+            "sub": "~14% cheaper",
+            "asset": "lucide:weight"
+          },
+          "lean": 0.45,
+          "atWord": 13
+        }
+      },
+      "durationFrames": 342,
+      "timingSource": "estimated"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Full breakdown, twelve measured runs, on the channel.",
+      "data": {
+        "message": "Twelve measured runs — full video on the channel",
+        "sub": "THE NBX STUDIO",
+        "atWord": 4
+      },
+      "durationFrames": 126,
+      "timingSource": "estimated"
+    }
+  ]
 }
