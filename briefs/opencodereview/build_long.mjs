@@ -505,14 +505,14 @@ control('fade', 'zoneB',
   "thirty-two tokens spent, still going. I want to sit on this for a second, because it is the " +
   "least glamorous thing in the video and the most reassuring. Locking is genuinely hard. A reviewer that answered instantly here would be guessing at it.",
   LOCAL,
-  [{step: 'think', at: 0.08, label: 'it is still thinking'}]);
+  [{step: 'think2', at: 0.08, label: 'it is still thinking'}]);
 
 // 27c · the verdict
 control('fade', 'zoneB',
   "About eighty seconds after it started, it comes back. Nothing to report. Nothing high, nothing " +
   "medium, because there was genuinely nothing to say. No hedging, no let-me-flag-this-just-in-case, and no invented concern dressed up to justify the time it spent. It looked properly, and then it said so. Which sounds like nothing happened, and is in fact the hardest behaviour to get out of a tool like this — because saying nothing looks, to whoever is paying, like the tool did nothing.",
   LOCAL,
-  [{step: 'verdict', at: 0.08, label: 'nothing to report'}]);
+  [{step: 'verdict2', at: 0.08, label: 'nothing to report'}]);
 
 add('CLAIM_CHECK', 'slide', 'zoneA',
   "Stay with that a second, because watching nothing happen can feel like a let-down. That silence is the product, because silence is a finding too. Open Code Review even listed what it had ruled out: the lock ordering, a write " +
@@ -866,7 +866,7 @@ add('SPEC_COMPARE', 'slide', 'zoneC',
   "get a prettier answer. Open Code Review still misses most bugs — four in five, remember — and " +
   "most of what it flags still isn't real. And the judging you watched came from Claude Code's model, not the benchmark setup. So my claim is narrower: it stayed quiet on good code, and on a change " +
   "that fooled several professionals it found what they missed and repaired it.",
-  (A) => ({
+  (A, n, nar) => ({
     compare: {
       headline: 'What this showed, and what it did not',
       a: {name: 'Shown', color: 'green'},
@@ -875,7 +875,7 @@ add('SPEC_COMPARE', 'slide', 'zoneC',
         {label: 'Silence on good code', a: 'Yes', b: '—', winner: 'a', atWord: A(0.62)},
         {label: 'A shipped bug, blind', a: 'Yes', b: '—', winner: 'a', atWord: A(0.7)},
         {label: 'A success rate', a: '—', b: 'No', winner: 'b', atWord: A(0.36)},
-        {label: 'The benchmark setup', a: '—', b: 'No', winner: 'b', atWord: A(0.5)},
+        {label: 'The benchmark setup', a: '—', b: 'No', winner: 'b', atWord: wordIndex(nar, 'the benchmark setup')},
       ],
       atWord: A(0.12),
     },

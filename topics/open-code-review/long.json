@@ -89,9 +89,11 @@
         "headline": "Open Code Review",
         "subtext": "the free reviewer that caught what Google missed",
         "headlineAtWord": 1,
-        "heroAtWord": 7
+        "heroAtWord": 5.083
       },
-      "durationFrames": 154
+      "durationFrames": 141,
+      "audio": "audio/open-code-review_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -103,7 +105,9 @@
         "title": "Two pull requests. One hidden bug.",
         "subtitle": "Open Code Review, installed and tested live"
       },
-      "durationFrames": 458
+      "durationFrames": 476,
+      "audio": "audio/open-code-review_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
@@ -118,15 +122,15 @@
               "ref": "rec:ocr-gh#repo",
               "label": "the official page",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.917,
               "zooms": [
                 {
                   "marks": [
                     "owner"
                   ],
                   "band": true,
-                  "wantAtWord": 52,
-                  "atWord": 52
+                  "wantAtWord": 39.917,
+                  "atWord": 39.917
                 }
               ],
               "callouts": [],
@@ -453,30 +457,30 @@
               "ref": "rec:ocr-gh#about",
               "label": "description and licence",
               "focus": true,
-              "atWord": 54,
-              "wantAtWord": 54,
+              "atWord": 43.667,
+              "wantAtWord": 43.667,
               "zooms": [
                 {
                   "marks": [
                     "desc"
                   ],
-                  "wantAtWord": 65,
-                  "atWord": 65
+                  "wantAtWord": 56.833,
+                  "atWord": 56.833
                 },
                 {
                   "marks": [
                     "licence"
                   ],
-                  "wantAtWord": 73,
-                  "atWord": 73
+                  "wantAtWord": 63.917,
+                  "atWord": 63.917
                 },
                 {
                   "marks": [
                     "licence"
                   ],
                   "band": true,
-                  "wantAtWord": 80,
-                  "atWord": 80
+                  "wantAtWord": 70.667,
+                  "atWord": 70.667
                 }
               ],
               "callouts": [],
@@ -819,10 +823,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1245
+      "durationFrames": 1113,
+      "audio": "audio/open-code-review_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -835,32 +841,34 @@
           {
             "title": "A change",
             "sub": "someone writes new code",
-            "atWord": 15
+            "atWord": 11.417
           },
           {
             "title": "A pull request",
             "sub": "here is what I changed",
-            "atWord": 31
+            "atWord": 21.417
           },
           {
             "title": "Please look",
             "sub": "permission asked, not taken",
-            "atWord": 46
+            "atWord": 34.917
           },
           {
             "title": "The review",
             "sub": "another programmer decides",
-            "atWord": 60
+            "atWord": 46.583
           },
           {
             "title": "Merged",
             "sub": "it reaches real users",
-            "atWord": 72
+            "atWord": 54.5
           }
         ],
         "source": "how every team on GitHub ships code"
       },
-      "durationFrames": 1018
+      "durationFrames": 978,
+      "audio": "audio/open-code-review_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -875,27 +883,27 @@
               "ref": "rec:ocr-gh#what",
               "label": "where it came from",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.167,
               "zooms": [
                 {
                   "marks": [
                     "origin"
                   ],
-                  "wantAtWord": 48,
-                  "atWord": 48
+                  "wantAtWord": 39.25,
+                  "atWord": 39.25
                 },
                 {
                   "marks": [
                     "origin"
                   ],
                   "band": true,
-                  "wantAtWord": 54,
-                  "atWord": 54
+                  "wantAtWord": 43.417,
+                  "atWord": 43.417
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 68,
-                  "atWord": 67
+                  "wantAtWord": 54.083,
+                  "atWord": 53.333
                 }
               ],
               "callouts": [],
@@ -1177,10 +1185,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1029
+      "durationFrames": 811,
+      "audio": "audio/open-code-review_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
@@ -1193,28 +1203,30 @@
           {
             "kicker": "Alibaba engineers",
             "value": "20K+",
-            "atWord": 12
+            "atWord": 8.833
           },
           {
             "kicker": "Reviews run",
             "value": "3M+",
-            "atWord": 20
+            "atWord": 17.167
           },
           {
             "kicker": "Downloads, 30 days",
             "value": "329K",
             "color": "green",
-            "atWord": 30
+            "atWord": 25.083
           }
         ],
         "verdict": {
           "text": "the world volunteering",
           "color": "green",
-          "atWord": 51
+          "atWord": 44.25
         },
         "source": "alibaba/open-code-review README + npm registry API, 17 Sep 2026"
       },
-      "durationFrames": 819
+      "durationFrames": 845,
+      "audio": "audio/open-code-review_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
@@ -1229,7 +1241,9 @@
           "subtitle": "it says it beats Claude Code"
         }
       },
-      "durationFrames": 163
+      "durationFrames": 110,
+      "audio": "audio/open-code-review_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
@@ -1244,44 +1258,44 @@
               "ref": "rec:ocr-gh#bench",
               "label": "the benchmark",
               "focus": true,
-              "atWord": 5,
+              "atWord": 4.083,
               "zooms": [
                 {
                   "marks": [
                     "built"
                   ],
-                  "wantAtWord": 25,
-                  "atWord": 25
+                  "wantAtWord": 19.417,
+                  "atWord": 19.417
                 },
                 {
                   "marks": [
                     "built"
                   ],
-                  "wantAtWord": 51,
-                  "atWord": 51
+                  "wantAtWord": 43.25,
+                  "atWord": 43.25
                 },
                 {
                   "marks": [
                     "built"
                   ],
                   "band": true,
-                  "wantAtWord": 63,
-                  "atWord": 63
+                  "wantAtWord": 53.083,
+                  "atWord": 53.083
                 },
                 {
                   "marks": [
                     "ninth"
                   ],
                   "band": true,
-                  "wantAtWord": 74,
-                  "atWord": 74
+                  "wantAtWord": 64.75,
+                  "atWord": 64.75
                 },
                 {
                   "marks": [
                     "ninth"
                   ],
-                  "wantAtWord": 113,
-                  "atWord": 113
+                  "wantAtWord": 96.25,
+                  "atWord": 96.25
                 }
               ],
               "callouts": [],
@@ -1527,10 +1541,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1737
+      "durationFrames": 1412,
+      "audio": "audio/open-code-review_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
@@ -1552,7 +1568,7 @@
               "detail": "435",
               "tag": "5,980 written · 435 real",
               "color": "red",
-              "atWord": 12
+              "atWord": 14.167
             },
             {
               "label": "Open Code Review",
@@ -1561,7 +1577,7 @@
               "detail": "301",
               "tag": "889 written · 301 real",
               "color": "green",
-              "atWord": 29
+              "atWord": 14.917
             }
           ],
           "caption": "the pile you must sort through is the real cost",
@@ -1569,7 +1585,9 @@
           "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows"
         }
       },
-      "durationFrames": 477
+      "durationFrames": 503,
+      "audio": "audio/open-code-review_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
@@ -1584,19 +1602,21 @@
             "value": 100,
             "display": "5,980",
             "color": "red",
-            "atWord": 19
+            "atWord": 14.5
           },
           {
             "label": "Open Code Review",
             "value": 15,
             "display": "889",
             "color": "green",
-            "atWord": 26
+            "atWord": 18.75
           }
         ],
         "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows"
       },
-      "durationFrames": 458
+      "durationFrames": 463,
+      "audio": "audio/open-code-review_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
@@ -1611,19 +1631,21 @@
             "value": 100,
             "display": "13m 6s",
             "color": "red",
-            "atWord": 12
+            "atWord": 8.417
           },
           {
             "label": "Open Code Review",
             "value": 10,
             "display": "1m 23s",
             "color": "green",
-            "atWord": 18
+            "atWord": 14.083
           }
         ],
         "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows"
       },
-      "durationFrames": 401
+      "durationFrames": 426,
+      "audio": "audio/open-code-review_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
@@ -1642,33 +1664,35 @@
               "text": "33.9% precision, up from 7.2%",
               "title": "ok",
               "sub": "a real, large improvement",
-              "atWord": 26
+              "atWord": 17.833
             },
             {
               "text": "2 in 3 flags are still not bugs",
               "title": "no",
               "sub": "you still triage",
-              "atWord": 44
+              "atWord": 31.333
             },
             {
               "text": "20% recall",
               "title": "no",
               "sub": "four in five are missed",
-              "atWord": 61
+              "atWord": 43.583
             },
             {
               "text": "Claude Code found more, buried",
               "title": "ok",
               "sub": "recall is not the whole story",
-              "atWord": 70
+              "atWord": 49.667
             }
           ],
           "caption": "both numbers are true, and both matter",
           "color": "orange",
-          "atWord": 6
+          "atWord": 2.25
         }
       },
-      "durationFrames": 990
+      "durationFrames": 946,
+      "audio": "audio/open-code-review_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
@@ -1684,7 +1708,7 @@
               "text": "Alibaba's benchmark, measuring Alibaba's own tool.",
               "tag": "the worry",
               "color": "orange",
-              "atWord": 23
+              "atWord": 13.417
             }
           ],
           "subject": "Alibaba",
@@ -1695,23 +1719,25 @@
               "label": "Anthropic",
               "value": 0,
               "threshold": 1,
-              "atWord": 52
+              "atWord": 47.5
             },
             {
               "label": "Alibaba",
               "value": 1,
               "threshold": 1,
               "color": "orange",
-              "atWord": 64
+              "atWord": 51.5
             }
           ],
           "verdict": "Their own model is second",
-          "verdictAtWord": 72,
+          "verdictAtWord": 36.167,
           "source": "AACR-Bench, published by Alibaba · Claude-4.6-Opus rows",
-          "atWord": 6
+          "atWord": 2.75
         }
       },
-      "durationFrames": 1009
+      "durationFrames": 1033,
+      "audio": "audio/open-code-review_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
@@ -1726,13 +1752,13 @@
               "label": "Real defects found",
               "value": 60,
               "color": "green",
-              "atWord": 16
+              "atWord": 23.667
             },
             {
               "label": "Pull requests read",
               "value": 20,
               "color": "blue",
-              "atWord": 11
+              "atWord": 5.917
             }
           ],
           "icon": "lucide:check-check",
@@ -1740,7 +1766,9 @@
           "source": "AACR-Bench: 1,505 ground-truth issues, 200 PRs, 80+ senior engineers"
         }
       },
-      "durationFrames": 420
+      "durationFrames": 446,
+      "audio": "audio/open-code-review_long_s14.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s15",
@@ -1755,7 +1783,9 @@
           "subtitle": "the part that is not the model"
         }
       },
-      "durationFrames": 192
+      "durationFrames": 200,
+      "audio": "audio/open-code-review_long_s15.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16",
@@ -1770,29 +1800,29 @@
               "ref": "rec:ocr-gh#pain",
               "label": "the three failures",
               "focus": true,
-              "atWord": 5,
+              "atWord": 3.25,
               "zooms": [
                 {
                   "marks": [
                     "three"
                   ],
-                  "wantAtWord": 28,
-                  "atWord": 28
+                  "wantAtWord": 22.667,
+                  "atWord": 22.667
                 },
                 {
                   "marks": [
                     "three"
                   ],
-                  "wantAtWord": 40,
-                  "atWord": 40
+                  "wantAtWord": 35.333,
+                  "atWord": 35.333
                 },
                 {
                   "marks": [
                     "three"
                   ],
                   "band": true,
-                  "wantAtWord": 62,
-                  "atWord": 62
+                  "wantAtWord": 52.333,
+                  "atWord": 52.333
                 }
               ],
               "callouts": [],
@@ -2006,10 +2036,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1065
+      "durationFrames": 909,
+      "audio": "audio/open-code-review_long_s16.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s17",
@@ -2029,39 +2061,41 @@
               "text": "which files get read",
               "title": "left",
               "sub": "no guessing",
-              "atWord": 27
+              "atWord": 13.5
             },
             {
               "text": "which files belong together",
               "title": "left",
               "sub": "no guessing",
-              "atWord": 37
+              "atWord": 25.917
             },
             {
               "text": "which checklist fits",
               "title": "left",
               "sub": "no guessing",
-              "atWord": 48
+              "atWord": 39.917
             },
             {
               "text": "where the comment is pinned",
               "title": "left",
               "sub": "no guessing",
-              "atWord": 56
+              "atWord": 48.5
             },
             {
               "text": "is this code actually wrong?",
               "title": "right",
               "sub": "judgement",
-              "atWord": 69
+              "atWord": 59.333
             }
           ],
           "caption": "one room, one checklist, one question",
           "color": "purple",
-          "atWord": 6
+          "atWord": 3
         }
       },
-      "durationFrames": 1018
+      "durationFrames": 1067,
+      "audio": "audio/open-code-review_long_s17.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s18",
@@ -2076,29 +2110,29 @@
               "ref": "rec:ocr-rules#gorule",
               "label": "what a Go file gets",
               "focus": true,
-              "atWord": 5,
+              "atWord": 1.167,
               "zooms": [
                 {
                   "marks": [
                     "pattern"
                   ],
-                  "wantAtWord": 47,
-                  "atWord": 47
+                  "wantAtWord": 31.75,
+                  "atWord": 31.75
                 },
                 {
                   "marks": [
                     "trust"
                   ],
-                  "wantAtWord": 69,
-                  "atWord": 69
+                  "wantAtWord": 53.333,
+                  "atWord": 53.333
                 },
                 {
                   "marks": [
                     "trust"
                   ],
                   "band": true,
-                  "wantAtWord": 76,
-                  "atWord": 76
+                  "wantAtWord": 60.833,
+                  "atWord": 60.833
                 }
               ],
               "callouts": [],
@@ -2206,22 +2240,22 @@
               "ref": "rec:ocr-rules#mdrule",
               "label": "what everything else gets",
               "focus": true,
-              "atWord": 92,
-              "wantAtWord": 92,
+              "atWord": 77.167,
+              "wantAtWord": 77.167,
               "zooms": [
                 {
                   "marks": [
                     "default"
                   ],
-                  "wantAtWord": 99,
-                  "atWord": 117
+                  "wantAtWord": 83.25,
+                  "atWord": 100.25
                 },
                 {
                   "marks": [
                     "generic"
                   ],
-                  "wantAtWord": 101,
-                  "atWord": 118
+                  "wantAtWord": 85.917,
+                  "atWord": 100.833
                 }
               ],
               "callouts": [],
@@ -2336,10 +2370,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1965
+      "durationFrames": 1555,
+      "audio": "audio/open-code-review_long_s18.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s19",
@@ -2354,7 +2390,9 @@
           "subtitle": "two commands, and one you must not skip"
         }
       },
-      "durationFrames": 154
+      "durationFrames": 151,
+      "audio": "audio/open-code-review_long_s19.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s20",
@@ -2369,14 +2407,14 @@
               "ref": "rec:ocr-setup#gitv",
               "label": "the one prerequisite",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.833,
               "zooms": [
                 {
                   "marks": [
                     "ver"
                   ],
-                  "wantAtWord": 17,
-                  "atWord": 19
+                  "wantAtWord": 13.083,
+                  "atWord": 14.333
                 }
               ],
               "callouts": [],
@@ -2439,15 +2477,15 @@
               "ref": "rec:ocr-setup#install",
               "label": "a single line",
               "focus": true,
-              "atWord": 50,
-              "wantAtWord": 50,
+              "atWord": 37.667,
+              "wantAtWord": 37.667,
               "zooms": [
                 {
                   "marks": [
                     "pkg"
                   ],
-                  "wantAtWord": 57,
-                  "atWord": 65
+                  "wantAtWord": 44.167,
+                  "atWord": 51.667
                 }
               ],
               "callouts": [],
@@ -2571,15 +2609,15 @@
               "ref": "rec:ocr-setup#version",
               "label": "which version arrived",
               "focus": true,
-              "atWord": 78,
-              "wantAtWord": 78,
+              "atWord": 62.5,
+              "wantAtWord": 62.5,
               "zooms": [
                 {
                   "marks": [
                     "v"
                   ],
-                  "wantAtWord": 127,
-                  "atWord": 122
+                  "wantAtWord": 101.333,
+                  "atWord": 97.083
                 }
               ],
               "callouts": [],
@@ -2648,10 +2686,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1857
+      "durationFrames": 1457,
+      "audio": "audio/open-code-review_long_s20.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s21",
@@ -2666,14 +2706,14 @@
               "ref": "rec:ocr-setup#market",
               "label": "point it at the list",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.333,
               "zooms": [
                 {
                   "marks": [
                     "added"
                   ],
-                  "wantAtWord": 49,
-                  "atWord": 44
+                  "wantAtWord": 40.25,
+                  "atWord": 35.5
                 }
               ],
               "callouts": [],
@@ -2790,23 +2830,23 @@
               "ref": "rec:ocr-setup#plugin",
               "label": "install the plugin",
               "focus": true,
-              "atWord": 44,
-              "wantAtWord": 44,
+              "atWord": 35.5,
+              "wantAtWord": 35.5,
               "zooms": [
                 {
                   "marks": [
                     "ok"
                   ],
-                  "wantAtWord": 51,
-                  "atWord": 73
+                  "wantAtWord": 43.667,
+                  "atWord": 64.083
                 },
                 {
                   "marks": [
                     "ok"
                   ],
                   "band": true,
-                  "wantAtWord": 57,
-                  "atWord": 74
+                  "wantAtWord": 51.583,
+                  "atWord": 65.083
                 }
               ],
               "callouts": [],
@@ -2933,10 +2973,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1257
+      "durationFrames": 1025,
+      "audio": "audio/open-code-review_long_s21.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s22",
@@ -2947,23 +2989,25 @@
       "data": {
         "center": {
           "title": "two ways to run it",
-          "atWord": 5
+          "atWord": 2
         },
         "left": {
           "title": "Open Code Review judges",
           "sub": "its own key · the benchmark setup",
           "color": "blue",
-          "atWord": 18
+          "atWord": 8.25
         },
         "right": {
           "title": "Claude Code judges",
           "sub": "delegation · no extra key",
           "color": "green",
-          "atWord": 35
+          "atWord": 20.083
         },
         "source": "alibaba/open-code-review — Default vs Delegation Mode"
       },
-      "durationFrames": 515
+      "durationFrames": 447,
+      "audio": "audio/open-code-review_long_s22.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s23",
@@ -2977,10 +3021,12 @@
           "title": "Not the benchmark setup",
           "subtitle": "their rules, Claude Code's model",
           "asset": "lucide:scale",
-          "atWord": 16
+          "atWord": 12.083
         }
       },
-      "durationFrames": 410
+      "durationFrames": 377,
+      "audio": "audio/open-code-review_long_s23.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s24",
@@ -2995,7 +3041,9 @@
           "subtitle": "does it stay quiet?"
         }
       },
-      "durationFrames": 125
+      "durationFrames": 140,
+      "audio": "audio/open-code-review_long_s24.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s25",
@@ -3010,22 +3058,22 @@
               "ref": "rec:ocr-proof#repo",
               "label": "the library under review",
               "focus": true,
-              "atWord": 5,
+              "atWord": 4.083,
               "zooms": [
                 {
                   "marks": [
                     "name"
                   ],
                   "wantAtWord": 1,
-                  "atWord": 6
+                  "atWord": 5.333
                 },
                 {
                   "marks": [
                     "name"
                   ],
                   "band": true,
-                  "wantAtWord": 34,
-                  "atWord": 34
+                  "wantAtWord": 25.75,
+                  "atWord": 25.75
                 }
               ],
               "callouts": [],
@@ -3354,10 +3402,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 705
+      "durationFrames": 536,
+      "audio": "audio/open-code-review_long_s25.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s26",
@@ -3376,21 +3426,23 @@
               "text": "reports nothing",
               "title": "ok",
               "sub": "it can tell good code from bad",
-              "atWord": 40
+              "atWord": 30.583
             },
             {
               "text": "invents a problem",
               "title": "no",
               "sub": "it just wants to look busy",
-              "atWord": 45
+              "atWord": 33.667
             }
           ],
           "caption": "approved and merged by Google",
           "color": "green",
-          "atWord": 7
+          "atWord": 3.333
         }
       },
-      "durationFrames": 648
+      "durationFrames": 617,
+      "audio": "audio/open-code-review_long_s26.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s27",
@@ -3405,29 +3457,29 @@
               "ref": "rec:ocr-control#preview",
               "label": "which files, and why not",
               "focus": true,
-              "atWord": 5,
+              "atWord": 3.667,
               "zooms": [
                 {
                   "marks": [
                     "count"
                   ],
-                  "wantAtWord": 17,
-                  "atWord": 36
+                  "wantAtWord": 12.667,
+                  "atWord": 30.167
                 },
                 {
                   "marks": [
                     "dropped"
                   ],
-                  "wantAtWord": 54,
-                  "atWord": 54
+                  "wantAtWord": 44.583,
+                  "atWord": 44.583
                 },
                 {
                   "marks": [
                     "dropped"
                   ],
                   "band": true,
-                  "wantAtWord": 72,
-                  "atWord": 72
+                  "wantAtWord": 54.833,
+                  "atWord": 54.833
                 }
               ],
               "callouts": [],
@@ -3546,15 +3598,15 @@
               "ref": "rec:ocr-control#bundle",
               "label": "three files, one list",
               "focus": true,
-              "atWord": 77,
-              "wantAtWord": 77,
+              "atWord": 59.083,
+              "wantAtWord": 59.083,
               "zooms": [
                 {
                   "marks": [
                     "group"
                   ],
-                  "wantAtWord": 87,
-                  "atWord": 117
+                  "wantAtWord": 68.167,
+                  "atWord": 92.083
                 }
               ],
               "callouts": [],
@@ -3771,10 +3823,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1797
+      "durationFrames": 1406,
+      "audio": "audio/open-code-review_long_s27.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s28",
@@ -3789,7 +3843,7 @@
               "ref": "rec:ocr-control#tools",
               "label": "three tool calls",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.333,
               "zooms": [],
               "callouts": [],
               "id": "tools",
@@ -4211,10 +4265,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 2307
+      "durationFrames": 1175,
+      "audio": "audio/open-code-review_long_s28.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s29",
@@ -4226,15 +4282,15 @@
         "recordedStep": {
           "clips": [
             {
-              "ref": "rec:ocr-control#think",
+              "ref": "rec:ocr-control#think2",
               "label": "it is still thinking",
               "focus": true,
-              "atWord": 5,
+              "atWord": 3.333,
               "zooms": [],
               "callouts": [],
-              "id": "think",
-              "src": "rec/ocr-control/seg-03-think.mp4",
-              "frames": 600,
+              "id": "think2",
+              "src": "rec/ocr-control/seg-03-think2.mp4",
+              "frames": 582,
               "bbox": {
                 "x": 48,
                 "y": 30,
@@ -4462,16 +4518,7 @@
                 574,
                 577,
                 578,
-                581,
-                584,
-                585,
-                587,
-                588,
-                590,
-                591,
-                594,
-                595,
-                598
+                581
               ],
               "shows": "$ claude '/open-code-review:delegate-review --from base --to pr929"
             }
@@ -4481,10 +4528,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1477
+      "durationFrames": 617,
+      "audio": "audio/open-code-review_long_s29.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s30",
@@ -4496,74 +4545,23 @@
         "recordedStep": {
           "clips": [
             {
-              "ref": "rec:ocr-control#verdict",
+              "ref": "rec:ocr-control#verdict2",
               "label": "nothing to report",
               "focus": true,
-              "atWord": 5,
+              "atWord": 3.333,
               "zooms": [],
               "callouts": [],
-              "id": "verdict",
-              "src": "rec/ocr-control/seg-03-verdict.mp4",
-              "frames": 828,
+              "id": "verdict2",
+              "src": "rec/ocr-control/seg-03-verdict2.mp4",
+              "frames": 810,
               "bbox": {
                 "x": 48,
                 "y": 30,
                 "w": 1552,
                 "h": 848
               },
-              "marks": {
-                "__cmd": {
-                  "x": 218,
-                  "y": 78,
-                  "w": 619,
-                  "h": 19,
-                  "covers": "claude '/open-code-review:delegate-review --from base --to pr9290'"
-                }
-              },
-              "ink": [
-                {
-                  "x": 68,
-                  "y": 78,
-                  "w": 1500,
-                  "h": 135
-                },
-                {
-                  "x": 68,
-                  "y": 232,
-                  "w": 1443,
-                  "h": 38
-                },
-                {
-                  "x": 87,
-                  "y": 289,
-                  "w": 1481,
-                  "h": 38
-                },
-                {
-                  "x": 87,
-                  "y": 346,
-                  "w": 1481,
-                  "h": 285
-                },
-                {
-                  "x": 87,
-                  "y": 650,
-                  "w": 1472,
-                  "h": 38
-                },
-                {
-                  "x": 68,
-                  "y": 707,
-                  "w": 337,
-                  "h": 19
-                },
-                {
-                  "x": 68,
-                  "y": 745,
-                  "w": 1509,
-                  "h": 95
-                }
-              ],
+              "marks": {},
+              "ink": [],
               "changes": [
                 1,
                 2,
@@ -4898,15 +4896,9 @@
                 777,
                 790,
                 804,
-                806,
-                821,
-                822,
-                824,
-                825,
-                827
+                806
               ],
-              "shows": "$ claude '/open-code-review:delegate-review --from base --to pr929",
-              "said": "⏺ Bash(sed -n 181,235p balancer/ringhash/ringhash.go; sed -n 305,325p balancer/ringhash/ringhash.go; grep -rn \"ExitIdle\" balancer/weightedroundrobin/balancer.go\n balanc…)\n ⎿  func (b *ringhashBalancer) UpdateClientConnState(ccs balancer.ClientConnState) error {\n if b.logger.V(2) {\n b.logger.Infof(\"Received update from resolver, balancer config: %+v\", pretty.ToJSON(ccs.BalancerConfig))\n … +78 lines (ctrl+o to expand)\n⏺ I found no High or Medium issues in the changes from base to pr9290, so I didn't change any code. I only reviewed by reading: Go isn't installed on this\n machine (go: command not found), so I couldn't build, run go vet, or run the tests with the race detector.\n Scope: 3 files: balancer/endpointsharding/endpointsharding.go, balancer/ringhash/picker.go and balancer/ringhash/ringhash.go. The two _test.go files were left\n out by the tool's default rules, but I read their diffs to confirm they match the API change.\n What I checked in the endpointsharding rewrite (one parent mu plus a lock per child):\n - Lock order: calls into a child hold only that child's lock. A child's UpdateState then takes the parent's mu. No code holds the parent's mu while calling\n into a child, so the lock order never reverses.\n - Unlocked writes in UpdateClientConnState: epState.endpoint and the endpoint map are written without mu. That is safe:\n - Updates from children are paused first, so UpdateState never reads those fields during the write.\n - The only other code that reads them runs from parent calls, and gRPC never runs those at the same time.\n - The new endpoint map is swapped in under mu.\n - Removed children: stale ExitIdle functions in old pickers can still point at a removed child. exitIdle checks closed under the child's lock, so a closed\n child is never woken up. close can safely run twice.\n - Close: Close() leaves updates from children paused for good, so a closed balancer never pushes a picker again. That is the right behaviour.\n - Wake-up calls: both the ExitIdle function handed out in ChildState and the automatic reconnect run in a new goroutine. Ringhash calls them while holding its\n own lock, when building a picker or picking, so it can't deadlock. Ringhash also makes no calls into its child while holding its lock.\n - Loop variable in the ExitIdle function: go.mod is at Go 1.25, where each loop pass gets its own variable, so each function points at the right child.\n - Public API: removing ChildState.Balancer and the ExitIdler type is a breaking change. Nothing else in the repo uses them: weightedroundrobin, leastrequest\n and the customroundrobin example only read Endpoint and State.\n Dropped as Low: endpointSharding.ExitIdle now always sends the parent a fresh picker when it finishes, even if nothing changed. That looks intended, since it\n bundles any updates children send during the call, and an extra picker does no harm.\n✻ Crunched for 1m 13s · done 6:50 PM\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ auto mode on (shift+tab to cycle)\nPS ocr-control> claude '/open-code-review:delegate-review --from base --to pr9290'"
+              "shows": "$ claude '/open-code-review:delegate-review --from base --to pr929"
             }
           ],
           "sourceNote": "ocr v1.12.4 · Claude Code 2.1.274",
@@ -4914,10 +4906,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.167
         }
       },
-      "durationFrames": 2003
+      "durationFrames": 845,
+      "audio": "audio/open-code-review_long_s30.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s31",
@@ -4933,7 +4927,7 @@
               "text": "A reviewer that never says nothing gets muted.",
               "tag": "the point",
               "color": "green",
-              "atWord": 46
+              "atWord": 32.833
             }
           ],
           "subject": "high",
@@ -4945,23 +4939,25 @@
               "value": 0,
               "threshold": 1,
               "color": "green",
-              "atWord": 13
+              "atWord": 7.583
             },
             {
               "label": "medium",
               "value": 0,
               "threshold": 1,
               "color": "green",
-              "atWord": 19
+              "atWord": 12.25
             }
           ],
           "verdict": "Zero noise added to correct code",
-          "verdictAtWord": 33,
+          "verdictAtWord": 5.75,
           "source": "delegated review of grpc/grpc-go #9290",
-          "atWord": 4
+          "atWord": 1.583
         }
       },
-      "durationFrames": 733
+      "durationFrames": 696,
+      "audio": "audio/open-code-review_long_s31.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s32",
@@ -4976,7 +4972,9 @@
           "subtitle": "a bug that shipped"
         }
       },
-      "durationFrames": 173
+      "durationFrames": 164,
+      "audio": "audio/open-code-review_long_s32.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s33",
@@ -4991,14 +4989,14 @@
               "ref": "rec:ocr-proof#pr",
               "label": "approved and merged",
               "focus": true,
-              "atWord": 5,
+              "atWord": 3.083,
               "zooms": [
                 {
                   "marks": [
                     "merged"
                   ],
-                  "wantAtWord": 15,
-                  "atWord": 15
+                  "wantAtWord": 12.333,
+                  "atWord": 12.333
                 }
               ],
               "callouts": [],
@@ -5326,30 +5324,30 @@
               "ref": "rec:ocr-proof#fix",
               "label": "the answer key",
               "focus": true,
-              "atWord": 53,
-              "wantAtWord": 53,
+              "atWord": 44,
+              "wantAtWord": 44,
               "zooms": [
                 {
                   "marks": [
                     "msg"
                   ],
-                  "wantAtWord": 73,
-                  "atWord": 88
+                  "wantAtWord": 62.417,
+                  "atWord": 73.917
                 },
                 {
                   "marks": [
                     "msg"
                   ],
-                  "wantAtWord": 82,
-                  "atWord": 89
+                  "wantAtWord": 69.75,
+                  "atWord": 75
                 },
                 {
                   "marks": [
                     "msg"
                   ],
                   "band": true,
-                  "wantAtWord": 103,
-                  "atWord": 100
+                  "wantAtWord": 84.833,
+                  "atWord": 81.667
                 }
               ],
               "callouts": [],
@@ -5679,10 +5677,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.167
         }
       },
-      "durationFrames": 1533
+      "durationFrames": 1198,
+      "audio": "audio/open-code-review_long_s33.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s34",
@@ -5697,22 +5697,22 @@
               "ref": "rec:ocr-blind#sealed",
               "label": "the whole history",
               "focus": true,
-              "atWord": 5,
+              "atWord": 1.75,
               "zooms": [
                 {
                   "marks": [
                     "two"
                   ],
-                  "wantAtWord": 52,
-                  "atWord": 52
+                  "wantAtWord": 30.333,
+                  "atWord": 30.333
                 },
                 {
                   "marks": [
                     "two"
                   ],
                   "band": true,
-                  "wantAtWord": 72,
-                  "atWord": 72
+                  "wantAtWord": 47.25,
+                  "atWord": 47.25
                 }
               ],
               "callouts": [],
@@ -5788,22 +5788,22 @@
               "ref": "rec:ocr-blind#preview",
               "label": "three files of four",
               "focus": true,
-              "atWord": 78,
-              "wantAtWord": 78,
+              "atWord": 51.917,
+              "wantAtWord": 51.917,
               "zooms": [
                 {
                   "marks": [
                     "count"
                   ],
-                  "wantAtWord": 85,
-                  "atWord": 97
+                  "wantAtWord": 57.167,
+                  "atWord": 66
                 },
                 {
                   "marks": [
                     "stream"
                   ],
-                  "wantAtWord": 102,
-                  "atWord": 99
+                  "wantAtWord": 69.25,
+                  "atWord": 66.917
                 }
               ],
               "callouts": [],
@@ -5926,10 +5926,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1509
+      "durationFrames": 1025,
+      "audio": "audio/open-code-review_long_s34.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s35",
@@ -5944,22 +5946,22 @@
               "ref": "rec:ocr-rules#errrule",
               "label": "the rule that matters",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.75,
               "zooms": [
                 {
                   "marks": [
                     "swallow"
                   ],
-                  "wantAtWord": 30,
-                  "atWord": 30
+                  "wantAtWord": 20.75,
+                  "atWord": 20.75
                 },
                 {
                   "marks": [
                     "swallow"
                   ],
                   "band": true,
-                  "wantAtWord": 45,
-                  "atWord": 45
+                  "wantAtWord": 33.583,
+                  "atWord": 33.583
                 }
               ],
               "callouts": [],
@@ -6064,10 +6066,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 813
+      "durationFrames": 604,
+      "audio": "audio/open-code-review_long_s35.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s36",
@@ -6082,7 +6086,7 @@
               "ref": "rec:ocr-blind#scan",
               "label": "the same three steps",
               "focus": true,
-              "atWord": 5,
+              "atWord": 4.833,
               "zooms": [],
               "callouts": [],
               "id": "scan",
@@ -6292,10 +6296,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 993
+      "durationFrames": 518,
+      "audio": "audio/open-code-review_long_s36.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s37",
@@ -6310,7 +6316,7 @@
               "ref": "rec:ocr-blind#finding",
               "label": "one finding, marked high",
               "focus": true,
-              "atWord": 5,
+              "atWord": 2.417,
               "zooms": [],
               "callouts": [],
               "id": "finding",
@@ -6727,10 +6733,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1611
+      "durationFrames": 791,
+      "audio": "audio/open-code-review_long_s37.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s38",
@@ -6745,7 +6753,7 @@
               "ref": "rec:ocr-blind#detail",
               "label": "what actually breaks",
               "focus": true,
-              "atWord": 5,
+              "atWord": 1.25,
               "zooms": [],
               "callouts": [],
               "id": "detail",
@@ -6976,10 +6984,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1329
+      "durationFrames": 979,
+      "audio": "audio/open-code-review_long_s38.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s39",
@@ -7031,11 +7041,13 @@
               "status": "pass"
             }
           ],
-          "atWord": 23,
+          "atWord": 19.167,
           "source": "stream.go at 6d0aaaec, lines 1124/1127/1130 and 1444/1447/1450"
         }
       },
-      "durationFrames": 458
+      "durationFrames": 459,
+      "audio": "audio/open-code-review_long_s39.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s40",
@@ -7056,21 +7068,23 @@
               "title": "outer",
               "label": "one box",
               "sub": "a labelled box you put a value into",
-              "atWord": 22
+              "atWord": 13.25
             },
             {
               "title": "fence",
               "label": "empty",
               "sub": "nothing went wrong, so nothing was put in it",
-              "atWord": 45
+              "atWord": 30.583
             }
           ],
           "caption": "a variable is a box. nil means the box is empty.",
           "color": "blue",
-          "atWord": 8
+          "atWord": 5.333
         }
       },
-      "durationFrames": 648
+      "durationFrames": 591,
+      "audio": "audio/open-code-review_long_s40.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s41",
@@ -7084,59 +7098,61 @@
           "language": "go",
           "resultLabel": "what it means",
           "color": "red",
-          "atWord": 4,
+          "atWord": 1.167,
           "lines": [
             {
               "text": "if err := recv(...); err == nil {",
               "detail": "fetch the next piece of data",
               "sub": "the colon makes a NEW box",
               "label": "new box",
-              "atWord": 14
+              "atWord": 10
             },
             {
               "text": "    return protocolViolation()",
               "detail": "nothing came back, so complain",
               "sub": "this part is fine",
-              "atWord": 24
+              "atWord": 16.917
             },
             {
               "text": "}",
               "detail": "the block ends here",
               "sub": "and the new box ends with it",
-              "atWord": 30
+              "atWord": 22.25
             },
             {
               "text": "if err == io.EOF {",
               "detail": "did this finish normally?",
               "sub": "but which err is this?",
               "label": "which?",
-              "atWord": 36
+              "atWord": 26
             },
             {
               "text": "    return status()",
               "detail": "report the real outcome",
               "sub": "never reached",
-              "atWord": 44
+              "atWord": 33.083
             },
             {
               "text": "}",
               "detail": "",
               "sub": "",
-              "atWord": 48
+              "atWord": 39.5
             },
             {
               "text": "return toRPCErr(err)",
               "detail": "pass the error onwards",
               "sub": "passes on an empty box",
               "label": "empty",
-              "atWord": 53
+              "atWord": 42.5
             }
           ],
           "caption": "one character, and the meaning inverts",
           "source": "grpc/grpc-go stream.go at commit 6d0aaaec, lines 1124–1130"
         }
       },
-      "durationFrames": 971
+      "durationFrames": 940,
+      "audio": "audio/open-code-review_long_s41.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s42",
@@ -7161,43 +7177,43 @@
               "title": "outer",
               "label": "the old box",
               "sub": "the function already owns an err, and it is empty",
-              "atWord": 12
+              "atWord": 9.583
             },
             {
               "title": "fence",
               "label": "step inside",
               "sub": "now we are inside the curly brackets",
-              "atWord": 26
+              "atWord": 16.083
             },
             {
               "title": "inner",
               "label": "a new box",
               "sub": "the colon makes a SECOND box, also called err",
-              "atWord": 38
+              "atWord": 32
             },
             {
               "title": "fill",
               "label": "filled",
               "sub": "the real answer drops into the new box",
-              "atWord": 49
+              "atWord": 83
             },
             {
               "title": "vanish",
               "label": "gone",
               "sub": "the brackets close, and the box is swept away",
-              "atWord": 67
+              "atWord": 55.75
             },
             {
               "title": "ask",
               "label": "err?",
               "sub": "two lines later the code asks for err again",
-              "atWord": 84
+              "atWord": 70.25
             },
             {
               "title": "verdict",
               "label": "empty",
               "sub": "it reads the only box left, and nothing was ever put in it",
-              "atWord": 101
+              "atWord": 82.5
             }
           ],
           "caption": "a failed call now reports success",
@@ -7206,7 +7222,9 @@
           "atWord": 6
         }
       },
-      "durationFrames": 1408
+      "durationFrames": 1453,
+      "audio": "audio/open-code-review_long_s42.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s43",
@@ -7230,10 +7248,12 @@
           ],
           "footNote": "valid code can still be wrong code",
           "color": "orange",
-          "atWord": 18
+          "atWord": 12.75
         }
       },
-      "durationFrames": 467
+      "durationFrames": 428,
+      "audio": "audio/open-code-review_long_s43.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s44",
@@ -7245,10 +7265,12 @@
         "reveal": {
           "statement": "It broke the thing it was written to do.",
           "sub": "the error it existed to deliver is the one that vanishes",
-          "atWord": 20
+          "atWord": 14.583
         }
       },
-      "durationFrames": 372
+      "durationFrames": 368,
+      "audio": "audio/open-code-review_long_s44.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s45",
@@ -7262,10 +7284,12 @@
           "title": "About review, not the author",
           "subtitle": "a colon is very small",
           "asset": "lucide:heart-handshake",
-          "atWord": 14
+          "atWord": 7.667
         }
       },
-      "durationFrames": 477
+      "durationFrames": 439,
+      "audio": "audio/open-code-review_long_s45.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s46",
@@ -7280,14 +7304,14 @@
               "ref": "rec:ocr-fix#changed",
               "label": "it edited the file",
               "focus": true,
-              "atWord": 5,
+              "atWord": 3.333,
               "zooms": [
                 {
                   "marks": [
                     "mod"
                   ],
-                  "wantAtWord": 31,
-                  "atWord": 31
+                  "wantAtWord": 26.917,
+                  "atWord": 26.917
                 }
               ],
               "callouts": [],
@@ -7360,15 +7384,15 @@
               "ref": "rec:ocr-fix#patch",
               "label": "the repair",
               "focus": true,
-              "atWord": 37,
-              "wantAtWord": 37,
+              "atWord": 32.167,
+              "wantAtWord": 32.167,
               "zooms": [
                 {
                   "marks": [
                     "fix"
                   ],
-                  "wantAtWord": 67,
-                  "atWord": 67
+                  "wantAtWord": 51.333,
+                  "atWord": 51.333
                 }
               ],
               "callouts": [],
@@ -7460,16 +7484,16 @@
               "ref": "rec:ocr-proof#realfix",
               "label": "what Google shipped",
               "focus": true,
-              "atWord": 77,
-              "wantAtWord": 77,
+              "atWord": 60.5,
+              "wantAtWord": 60.5,
               "sourceNote": "grpc/grpc-go · github.com · Apache-2.0",
               "zooms": [
                 {
                   "marks": [
                     "line"
                   ],
-                  "wantAtWord": 94,
-                  "atWord": 93
+                  "wantAtWord": 77.5,
+                  "atWord": 76.5
                 }
               ],
               "callouts": [],
@@ -7812,10 +7836,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1425
+      "durationFrames": 1184,
+      "audio": "audio/open-code-review_long_s46.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s47",
@@ -7830,15 +7856,15 @@
           "checks": [
             {
               "label": "High — a real bug",
-              "atWord": 26
+              "atWord": 22.083
             },
             {
               "label": "Medium — it depends",
-              "atWord": 36
+              "atWord": 29.167
             },
             {
               "label": "Low — discarded unseen",
-              "atWord": 46
+              "atWord": 34.583
             }
           ],
           "caughtIndex": 2,
@@ -7846,11 +7872,13 @@
           "fixNote": "dropped on purpose",
           "verdict": "fewer, so they get read",
           "color": "purple",
-          "atWord": 7,
+          "atWord": 3.667,
           "source": "the plugin's own review workflow, plugins/open-code-review/claude-code/commands"
         }
       },
-      "durationFrames": 847
+      "durationFrames": 843,
+      "audio": "audio/open-code-review_long_s47.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s48",
@@ -7865,7 +7893,9 @@
           "subtitle": "developers, testers, team leads"
         }
       },
-      "durationFrames": 258
+      "durationFrames": 210,
+      "audio": "audio/open-code-review_long_s48.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s49",
@@ -7879,35 +7909,37 @@
             {
               "icon": "lucide:code",
               "label": "Developers",
-              "atWord": 6
+              "atWord": 3.583
             },
             {
               "icon": "lucide:eye",
               "label": "Reviewers",
               "color": "green",
-              "atWord": 29
+              "atWord": 17.417
             },
             {
               "icon": "lucide:flask-conical",
               "label": "Testers",
-              "atWord": 53
+              "atWord": 35.417
             },
             {
               "icon": "lucide:users",
               "label": "Team leads",
               "color": "orange",
-              "atWord": 65
+              "atWord": 50.333
             },
             {
               "icon": "lucide:graduation-cap",
               "label": "Learners",
-              "atWord": 71
+              "atWord": 49.333
             }
           ],
           "cols": 5
         }
       },
-      "durationFrames": 999
+      "durationFrames": 886,
+      "audio": "audio/open-code-review_long_s49.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s50",
@@ -7938,10 +7970,12 @@
             }
           ],
           "signal": "down",
-          "atWord": 6
+          "atWord": 4.667
         }
       },
-      "durationFrames": 448
+      "durationFrames": 489,
+      "audio": "audio/open-code-review_long_s50.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s51",
@@ -7966,34 +8000,36 @@
               "a": "Yes",
               "b": "—",
               "winner": "a",
-              "atWord": 64
+              "atWord": 47.25
             },
             {
               "label": "A shipped bug, blind",
               "a": "Yes",
               "b": "—",
               "winner": "a",
-              "atWord": 72
+              "atWord": 53.667
             },
             {
               "label": "A success rate",
               "a": "—",
               "b": "No",
               "winner": "b",
-              "atWord": 37
+              "atWord": 28.75
             },
             {
               "label": "The benchmark setup",
               "a": "—",
               "b": "No",
               "winner": "b",
-              "atWord": 52
+              "atWord": 54.667
             }
           ],
-          "atWord": 12
+          "atWord": 6.917
         }
       },
-      "durationFrames": 1018
+      "durationFrames": 953,
+      "audio": "audio/open-code-review_long_s51.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s52",
@@ -8008,7 +8044,9 @@
           "subtitle": "three results, honestly"
         }
       },
-      "durationFrames": 163
+      "durationFrames": 143,
+      "audio": "audio/open-code-review_long_s52.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s53",
@@ -8021,19 +8059,21 @@
         "points": [
           {
             "text": "Correct code: nothing reported",
-            "atWord": 9
+            "atWord": 6.667
           },
           {
             "text": "Broken code: found it blind",
-            "atWord": 26
+            "atWord": 22.75
           },
           {
             "text": "Its repair matched the maintainers",
-            "atWord": 44
+            "atWord": 38.25
           }
         ]
       },
-      "durationFrames": 657
+      "durationFrames": 664,
+      "audio": "audio/open-code-review_long_s53.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s54",
@@ -8045,7 +8085,9 @@
         "message": "More agent tooling next time",
         "sub": "github.com/alibaba/open-code-review — Apache-2.0"
       },
-      "durationFrames": 363
+      "durationFrames": 367,
+      "audio": "audio/open-code-review_long_s54.mp3",
+      "timingSource": "tts"
     }
   ]
 }

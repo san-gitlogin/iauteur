@@ -75,9 +75,11 @@
         "headline": "Open Code Review",
         "subtext": "it caught a bug Google shipped",
         "headlineAtWord": 1,
-        "heroAtWord": 5
+        "heroAtWord": 3.25
       },
-      "durationFrames": 116
+      "durationFrames": 110,
+      "audio": "audio/open-code-review_short_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -245,10 +247,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 400
+      "durationFrames": 241,
+      "audio": "audio/open-code-review_short_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
@@ -262,27 +266,29 @@
           "language": "go",
           "resultLabel": "what it means",
           "color": "red",
-          "atWord": 2,
+          "atWord": 1,
           "lines": [
             {
               "text": "if err := recv(...); err == nil {",
               "detail": "the colon makes a NEW box",
               "sub": "a second err, born here",
               "label": "new",
-              "atWord": 17
+              "atWord": 10.417
             },
             {
               "text": "if err == io.EOF {",
               "detail": "which err is this?",
               "sub": "the old one",
-              "atWord": 26
+              "atWord": 17.583
             }
           ],
           "caption": "one character, and the meaning inverts",
           "source": "grpc/grpc-go stream.go at 6d0aaaec"
         }
       },
-      "durationFrames": 391
+      "durationFrames": 359,
+      "audio": "audio/open-code-review_short_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -304,25 +310,25 @@
               "title": "outer",
               "label": "old box",
               "sub": "the function already has an err",
-              "atWord": 1
+              "atWord": 5
             },
             {
               "title": "inner",
               "label": "new box",
               "sub": "a second box, same name",
-              "atWord": 3
+              "atWord": 11.167
             },
             {
               "title": "fill",
               "label": "filled",
               "sub": "the real error goes in here",
-              "atWord": 6
+              "atWord": 3.417
             },
             {
               "title": "vanish",
               "label": "gone",
               "sub": "the brackets close, and it is swept away",
-              "atWord": 14
+              "atWord": 10
             }
           ],
           "color": "red",
@@ -330,7 +336,9 @@
           "atWord": 1
         }
       },
-      "durationFrames": 239
+      "durationFrames": 218,
+      "audio": "audio/open-code-review_short_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -352,19 +360,19 @@
               "title": "outer",
               "label": "old box",
               "sub": "never filled",
-              "atWord": 2
+              "atWord": 8.083
             },
             {
               "title": "ask",
               "label": "err?",
               "sub": "the code asks for err again",
-              "atWord": 6
+              "atWord": 3
             },
             {
               "title": "verdict",
               "label": "empty",
               "sub": "it finds nothing, so it says all is well",
-              "atWord": 12
+              "atWord": 12.833
             }
           ],
           "caption": "a failed call reports success",
@@ -372,7 +380,9 @@
           "atWord": 1
         }
       },
-      "durationFrames": 220
+      "durationFrames": 249,
+      "audio": "audio/open-code-review_short_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
@@ -387,14 +397,14 @@
               "ref": "rec:ocr-gh#about",
               "label": "the official page",
               "focus": false,
-              "atWord": 5,
+              "atWord": 4.25,
               "zooms": [
                 {
                   "marks": [
                     "licence"
                   ],
-                  "wantAtWord": 10,
-                  "atWord": 10
+                  "wantAtWord": 9.5,
+                  "atWord": 9.5
                 }
               ],
               "callouts": [],
@@ -737,10 +747,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 201
+      "durationFrames": 192,
+      "audio": "audio/open-code-review_short_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
@@ -752,7 +764,9 @@
         "message": "Full test on the channel",
         "sub": "github.com/alibaba/open-code-review"
       },
-      "durationFrames": 144
+      "durationFrames": 157,
+      "audio": "audio/open-code-review_short_s07.mp3",
+      "timingSource": "tts"
     }
   ]
 }
