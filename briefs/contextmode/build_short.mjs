@@ -43,7 +43,7 @@ function scene(id, type, text, data, paths = [], extra = {}) {
 
 scene('s01', 'HOOK',
   '^Context-mode promises to save ninety-eight percent of your ^context window. I measured it.',
-  { headline: 'context-mode: 98%?', subtext: 'I measured 14%', heroAsset: 'lucide:gauge', hookVariant: 'ask' },
+  { headline: 'A 15% cheaper bill?', subtext: 'context-mode, measured', heroAsset: 'lucide:gauge', hookVariant: 'ask' },
   ['atWord', 'heroAtWord'], { transition: 'dip' });
 
 scene('s02', 'BAR_COMPARE',
@@ -80,8 +80,8 @@ const spec = {
     onePayoff: 'context-mode charges rent every turn; it only pays on heavy sessions.',
     openLoop: 'It promises 98%. What does it actually save?',
     seo: {
-      title: 'context-mode promises 98% #claudecode #ai',
-      hook: 'It promises to save 98% of your context window. I measured 14%.',
+      title: 'Cut your AI coding bill 15% #claudecode #ai',
+      hook: 'Your Claude Code bill is mostly wasted context. Here is how much you can cut.',
       hashtags: ['#claudecode', '#ai', '#mcp'],
       tags: ['context-mode', 'claude code', 'mcp', 'ai coding', 'token cost', 'context window'],
       sources: ['context-mode — github.com/mksglu/context-mode (Elastic-2.0), by Mert Koseoglu'],
@@ -90,7 +90,7 @@ const spec = {
   },
   brand: { theme: 'moderndark', themeLight: 'daylight', design: 'moderndark',
            background: 'aurora', channel: 'THE NBX STUDIO', logo: 'img:channel_logo.png' },
-  cover: { title: 'IT PROMISES 98%', badge: 'context-mode', note: 'I measured 14%', asset: 'lucide:gauge' },
+  cover: { title: 'CUT YOUR AI BILL', badge: 'context-mode', note: 'Measured, not claimed', art: 'img:ctxmode-bill.png' },
   scenes: S,
 };
 

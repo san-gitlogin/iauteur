@@ -93,7 +93,7 @@ const DATA_KEY = {
 
 scene('s01', 'HOOK',
   '^Context-mode promises to save ninety-eight percent of your ^context ^window. Does it?',
-  { headline: 'context-mode: 98%?', subtext: 'It promises 98%. I measured 14%.', heroAsset: 'lucide:gauge', hookVariant: 'ask' },
+  { headline: 'A 15% cheaper bill?', subtext: 'context-mode, measured over 12 runs', heroAsset: 'lucide:gauge', hookVariant: 'ask' },
   ['atWord', 'heroAtWord', 'headlineAtWord'], { transition: 'dip' });
 
 scene('s02', 'RECORDED_STEP',
@@ -389,10 +389,10 @@ const spec = {
     onePayoff: 'Whether context-mode actually lowers what you pay, measured rather than claimed.',
     openLoop: 'It promises to save 98% of your context window. What does it actually save?',
     seo: {
-      title: 'Context-Mode Promises 98%. I Measured 14%.',
-      altTitles: ['I Measured Context-Mode: Does It Really Cut Your AI Bill?',
-                  'The 98% Context Saving, Measured On Real Work'],
-      hook: 'Does context-mode actually cut what you pay for Claude Code? I ran twelve measured tests to find out.',
+      title: 'Cut Your AI Coding Bill By 15% — I Measured It',
+      altTitles: ['Reduce Your Claude Code Costs By 15% (12 Measured Runs)',
+                  'The Plugin That Cuts Your AI Coding Bill — Measured, Not Claimed'],
+      hook: 'Your Claude Code bill is mostly wasted context. I measured twelve runs to find how much of it you can actually cut — and what it costs you to try.',
       breakdown: 'what context-mode does, what it costs every turn, and the one rule that tells you whether it will pay for you',
       queries: ['does context-mode save tokens', 'context mode claude code review',
                 'how to reduce claude code context usage', 'claude code token cost plugin',
@@ -411,8 +411,8 @@ const spec = {
   },
   brand: { theme: 'moderndark', themeLight: 'daylight', design: 'moderndark',
            background: 'aurora', channel: 'THE NBX STUDIO', logo: 'img:channel_logo.png' },
-  thumbnail: { title: 'IT PROMISES 98%', badge: 'context-mode', note: 'I measured 14%',
-               art: 'img:ctxmode-window.png' },
+  thumbnail: { title: 'CUT YOUR AI BILL', badge: 'context-mode', note: 'Measured, not claimed',
+               art: 'img:ctxmode-bill.png' },
   scenes: S,
 };
 
