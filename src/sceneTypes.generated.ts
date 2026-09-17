@@ -4,6 +4,8 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'REVIEW_YIELD'
+  | 'VAR_SCOPE'
   | 'LIVE_CODE'
   | 'COLUMN_SPLIT'
   | 'CLAIM_CHECK'
@@ -384,6 +386,38 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type ReviewYieldScene = SceneCommon<'REVIEW_YIELD'> & { data: {
+    reviewYield: {
+      unitLabel?: string;
+      perMark?: number;
+      hitLabel?: string;
+      missLabel?: string;
+      columns: Array<Record<string, unknown>>;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
+
+export type VarScopeScene = SceneCommon<'VAR_SCOPE'> & { data: {
+    varScope: {
+      title?: string;
+      outerLabel: string;
+      outerSub?: string;
+      innerLabel: string;
+      innerSub?: string;
+      fenceLabel?: string;
+      emptyLabel?: string;
+      valueLabel?: string;
+      askLabel?: string;
+      verdict?: string;
+      steps: Array<Record<string, unknown>>;
+      caption?: string;
+      color?: string;
+      atWord?: number;
+    };
+  } };
 
 export type LiveCodeScene = SceneCommon<'LIVE_CODE'> & { data: {
     liveCode: {
@@ -5562,6 +5596,8 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  REVIEW_YIELD: ReviewYieldScene;
+  VAR_SCOPE: VarScopeScene;
   LIVE_CODE: LiveCodeScene;
   COLUMN_SPLIT: ColumnSplitScene;
   CLAIM_CHECK: ClaimCheckScene;
@@ -5935,6 +5971,8 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | ReviewYieldScene
+  | VarScopeScene
   | LiveCodeScene
   | ColumnSplitScene
   | ClaimCheckScene

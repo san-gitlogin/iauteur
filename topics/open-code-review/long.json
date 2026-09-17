@@ -1,0 +1,1526 @@
+{
+  "meta": {
+    "topic": "Open Code Review — Alibaba's reviewer, tested against a bug Google shipped",
+    "format": "long",
+    "fps": 30,
+    "subject": "Open Code Review",
+    "audioPrefix": "open-code-review_long",
+    "onePayoff": "whether an open-source AI reviewer can catch a real bug that human reviewers at Google approved and shipped",
+    "openLoop": "Can a machine catch the bug three professional reviewers missed?",
+    "topicAxes": [
+      "entity-novelty",
+      "workflow"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "Alibaba's AI Code Reviewer Caught A Bug Google Shipped — Tested Live",
+      "altTitles": [
+        "I Gave Alibaba's Code Reviewer A Bug Google Missed",
+        "Open Code Review: Beats Claude Code, Then Installs Inside It",
+        "The Free AI Code Reviewer That Found What Google's Reviewers Missed"
+      ],
+      "hook": "Alibaba open-sourced the code reviewer that reads Alibaba's own code — 33.9% precision against Claude Code's 7.2% on the same model, using about a ninth of the tokens. Then it ships as a Claude Code plugin. We install it, point it at a correct pull request from Google's gRPC library (it stays silent), and then at one that was merged with a bug in it and fixed a week later — without letting it see the fix.",
+      "description": "Open Code Review is Alibaba's internal AI code review tool, now Apache-2.0 and free. In this video we install it, add the Claude Code plugin, read its built-in rulesets, and run two blind tests on real pull requests from grpc/grpc-go. Includes a full beginner-level explanation of the variable-scope bug it found, and an honest look at what the benchmark numbers do and do not mean.",
+      "breakdown": "what a code review is, where Open Code Review came from, the AACR-Bench numbers and what they honestly mean, the deterministic-plus-agent split, the built-in rulesets on camera, installing the CLI and the Claude Code plugin, a control run on correct code, a blind test on a pull request that shipped a bug, the bug explained from first principles, and the repair compared with the maintainers' own fix",
+      "pinned": "The bug was one character — a colon. Which repository are you pointing this at first?",
+      "tags": [
+        "Open Code Review",
+        "Alibaba",
+        "AI code review",
+        "code review",
+        "Claude Code",
+        "Claude Code plugin",
+        "static analysis",
+        "gRPC",
+        "grpc-go",
+        "Go programming",
+        "variable shadowing",
+        "developer tools",
+        "open source",
+        "code quality",
+        "pull request review",
+        "CI CD",
+        "GitHub Actions",
+        "software testing",
+        "QA automation",
+        "AI agents",
+        "agentic coding",
+        "software engineering",
+        "code review automation"
+      ],
+      "queries": [
+        "AI code review tool open source",
+        "Open Code Review Alibaba tutorial",
+        "best AI code reviewer 2026",
+        "Claude Code plugins",
+        "automated pull request review"
+      ],
+      "sources": [
+        "github.com/alibaba/open-code-review — Open Code Review by Alibaba (Apache-2.0)",
+        "huggingface.co/datasets/Alibaba-Aone/aacr-bench — the benchmark dataset",
+        "github.com/grpc/grpc-go/pull/9290 — the correct pull request used as a control",
+        "github.com/grpc/grpc-go/pull/7461 — the pull request that shipped the bug",
+        "github.com/grpc/grpc-go/commit/5c4da090 — the maintainers' own fix"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "YOUR CHANNEL",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "IT CAUGHT WHAT GOOGLE MISSED",
+    "badge": "Open Code Review",
+    "note": "free · Apache-2.0 · tested live"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Alibaba just open-sourced their code reviewer. We gave it a bug Google shipped.",
+      "data": {
+        "headline": "The reviewer that caught what Google missed",
+        "subtext": "Open Code Review, tested on a real pull request",
+        "hookVariant": "reveal",
+        "atWord": 7
+      },
+      "durationFrames": 154
+    },
+    {
+      "id": "s02",
+      "type": "TITLE_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Welcome back. Today we're going to install a tool called Open Code Review, plug it straight into Claude Code, and point it at two real pull requests from Google's gRPC library. One of them is fine. The other one had a bug in it — a bug that got approved, merged, and shipped, and then had to be fixed a week later. We won't tell the reviewer which is which. And by the end, you'll understand exactly what that bug was, even if you've never written a line of Go in your life.",
+      "data": {
+        "title": "Two pull requests. One hidden bug.",
+        "subtitle": "Open Code Review, installed and tested live",
+        "atWord": 33
+      },
+      "durationFrames": 914
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "So let's start where anyone should start, which is the project's own page on GitHub. This is it — Open Code Review, and look at who publishes it. That's Alibaba. Now, GitHub is just the place programmers keep their code, and a page like this one is called a repository — think of it as the project's folder, with every file and its whole history in it. Read the description underneath, because they've written it plainly: fast, efficient, battle-tested at Alibaba's scale. And over on the right, the licence says Apache two point oh, which is the important bit for you — that's a proper open licence. It's free, you can read every line of it, and you can use it at work without asking anyone's permission.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-gh#repo",
+              "label": "the official page",
+              "focus": true,
+              "atWord": 5,
+              "zooms": [
+                {
+                  "marks": [
+                    "owner"
+                  ],
+                  "band": true,
+                  "wantAtWord": 29
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-gh#about",
+              "label": "the description and the licence",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 68,
+              "zooms": [
+                {
+                  "marks": [
+                    "desc"
+                  ],
+                  "wantAtWord": 79
+                },
+                {
+                  "marks": [
+                    "licence"
+                  ],
+                  "wantAtWord": 91
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0"
+        }
+      },
+      "durationFrames": 1237
+    },
+    {
+      "id": "s04",
+      "type": "STEP_FLOW",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Before we go any further, let's make sure we're talking about the same thing, because everything today hangs on one idea. When a programmer finishes a piece of work, they don't just drop it into the company's product. They package it up and ask permission. That package has a name — it's called a pull request, and you can think of it as a folder that says: here's what I changed, please look before you let it in. Then another programmer reads it and either says yes, or asks for changes. That reading is the code review. And it is, genuinely, the last human check before code reaches real people. Which is why it matters so much when something slips through it.",
+      "data": {
+        "stepFlow": {
+          "title": "how code gets in",
+          "steps": [
+            {
+              "label": "a change",
+              "sub": "someone writes new code",
+              "atWord": 22
+            },
+            {
+              "label": "a pull request",
+              "sub": "here is what I changed — please look",
+              "atWord": 44
+            },
+            {
+              "label": "the review",
+              "sub": "another programmer reads it and decides",
+              "atWord": 67
+            },
+            {
+              "label": "merged",
+              "sub": "it goes into the real product",
+              "atWord": 83
+            }
+          ],
+          "caption": "the review is the last human check before your users get it",
+          "color": "blue",
+          "atWord": 10
+        }
+      },
+      "durationFrames": 1189
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Right — so what is this thing, and why should you trust it? Here's the answer, in their own words. Open Code Review didn't start as an open-source side project. It started inside Alibaba as their official internal reviewer, and it's been running there for two years. Read that line: tens of thousands of developers, and millions of code defects found. A defect is just a bug — something wrong in the code. So this is not somebody's weekend experiment that got popular. It's a tool that has already done this job, at enormous scale, inside one of the largest engineering companies on earth, and they've now given it away.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-gh#what",
+              "label": "where it came from",
+              "focus": true,
+              "atWord": 7,
+              "zooms": [
+                {
+                  "marks": [
+                    "origin"
+                  ],
+                  "wantAtWord": 51
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0"
+        }
+      },
+      "durationFrames": 1075
+    },
+    {
+      "id": "s06",
+      "type": "STAT_PANELS",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "And those numbers are worth sitting with for a second, because they're the reason this is interesting rather than just new. Twenty thousand engineers inside Alibaba use it. It has run three million reviews. And in the last thirty days alone, people downloaded it three hundred and twenty-nine thousand times — I checked that one myself against the download counter, and it's real. That last number is the one I'd watch, honestly. Internal usage can be a company telling its own staff what to use. Three hundred thousand downloads a month is the rest of the world volunteering.",
+      "data": {
+        "stats": [
+          {
+            "label": "engineers inside Alibaba",
+            "value": "20K+",
+            "sub": "daily users",
+            "atWord": 15
+          },
+          {
+            "label": "reviews already run",
+            "value": "3M+",
+            "sub": "to date",
+            "atWord": 27
+          },
+          {
+            "label": "downloads last 30 days",
+            "value": "329K",
+            "sub": "verified on npm",
+            "atWord": 41
+          }
+        ],
+        "source": "alibaba/open-code-review README + npm registry API, 17 Sep 2026"
+      },
+      "durationFrames": 961
+    },
+    {
+      "id": "s07",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneC",
+      "narration": "Now we get to the claim that made me want to make this video at all.",
+      "data": {
+        "chapter": {
+          "title": "The claim",
+          "subtitle": "it says it beats Claude Code",
+          "atWord": 6
+        }
+      },
+      "durationFrames": 182
+    },
+    {
+      "id": "s08",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Here's the benchmark on their page. A benchmark is just a test you run on lots of examples so you can compare tools fairly. And they built a serious one: fifty popular open-source projects, two hundred real pull requests, ten different programming languages — and then, this is the part I like, more than eighty senior engineers went through it by hand and agreed on fifteen hundred and five real bugs. That's the answer key. Now read the claim above it. Compared with a general-purpose agent — and the one they name is Claude Code — they say they find better results using about a ninth of the tokens. A token is just a chunk of text, roughly three-quarters of a word, and it's what you're billed for. So a ninth of the tokens means a ninth of the bill.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-gh#bench",
+              "label": "the benchmark, and how it was built",
+              "focus": true,
+              "atWord": 7,
+              "zooms": [
+                {
+                  "marks": [
+                    "built"
+                  ],
+                  "wantAtWord": 31
+                },
+                {
+                  "marks": [
+                    "ninth"
+                  ],
+                  "wantAtWord": 105
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0"
+        }
+      },
+      "durationFrames": 1360
+    },
+    {
+      "id": "s09",
+      "type": "REVIEW_YIELD",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "But here's the number that actually tells you what's going on, and it isn't a percentage. It's a count. Running the same model underneath — the exact same brain — Claude Code wrote five thousand nine hundred and eighty review comments. Of those, four hundred and thirty-five were real bugs. Every other mark on that wall is a false alarm: the tool telling you something's broken when it isn't. Open Code Review, same model, same pull requests, wrote eight hundred and eighty-nine comments, and three hundred and one of them were real. Look at the two walls rather than the arithmetic. One of them hands you a small list where a third of it matters. The other hands you nearly six thousand comments and lets you find the thirteen that do.",
+      "data": {
+        "reviewYield": {
+          "reviewYield": {
+            "unitLabel": "one mark = 100 review comments",
+            "perMark": 100,
+            "hitLabel": "a real bug",
+            "missLabel": "a false alarm",
+            "columns": [
+              {
+                "label": "Claude Code",
+                "sub": "same model underneath",
+                "value": 5980,
+                "detail": "435",
+                "tag": "5,980 written · 435 real",
+                "color": "red",
+                "atWord": 29
+              },
+              {
+                "label": "Open Code Review",
+                "sub": "same model underneath",
+                "value": 889,
+                "detail": "301",
+                "tag": "889 written · 301 real",
+                "color": "green",
+                "atWord": 68
+              }
+            ],
+            "caption": "the pile you have to sort through is the real cost",
+            "color": "yellow",
+            "atWord": 8
+          },
+          "source": "AACR-Bench leaderboard, alibaba/open-code-review (Claude-4.6-Opus rows)"
+        }
+      },
+      "durationFrames": 1275
+    },
+    {
+      "id": "s10",
+      "type": "BAR_COMPARE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "The other two columns are just as blunt. Same model, same job: Claude Code took thirteen minutes and six seconds per review. Open Code Review took one minute and twenty-three seconds. That's roughly nine and a half times faster. And on tokens — remember, that's the thing you pay for — it used three hundred and eighty-five thousand against five point six million. If you're a single developer, that's the difference between a coffee and a meal. If you're a company running this on every pull request, all day, every day, it's the difference between a tool you can afford and one you quietly turn off.",
+      "data": {
+        "bars": [
+          {
+            "label": "Claude Code · tokens per review",
+            "value": 100,
+            "display": "5,664K",
+            "color": "red",
+            "atWord": 53
+          },
+          {
+            "label": "Open Code Review · tokens per review",
+            "value": 7,
+            "display": "385K",
+            "color": "green",
+            "atWord": 66
+          }
+        ],
+        "source": "AACR-Bench, same model (Claude-4.6-Opus), 200 real pull requests"
+      },
+      "durationFrames": 1037
+    },
+    {
+      "id": "s11",
+      "type": "STAT_CALLOUT",
+      "transition": "slide",
+      "background": "zoneC",
+      "narration": "And now let me be straight with you, because a review that only reads out the good numbers isn't a review, it's an advert. Look at what those same figures mean if you flip them round. Open Code Review got about thirty-four percent of its comments right — which is a huge win over seven — but it still means roughly two out of every three things it flags are not real bugs. And it found twenty percent of the known problems, so it missed four out of every five. Claude Code actually found more of them; it just buried them. Neither of these tools is anywhere close to solved. What you're looking at is a better reviewer, not a finished one, and anyone who tells you otherwise is selling something.",
+      "data": {
+        "statCallout": {
+          "value": "2 in 3",
+          "label": "of its findings are still not real bugs",
+          "sub": "and it misses four defects in five — this is the honest state of the art",
+          "color": "orange",
+          "atWord": 39
+        },
+        "source": "AACR-Bench: precision 33.90%, recall 20.00% (Open Code Review, Claude-4.6-Opus)"
+      },
+      "durationFrames": 1275
+    },
+    {
+      "id": "s12",
+      "type": "REVEAL",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "There's one more thing you should be suspicious about, and I want to raise it before you do. This is Alibaba's benchmark, measuring Alibaba's own tool. You should always raise an eyebrow at that. So here's what changed my mind. Go and look at who's sitting at the top of their leaderboard. It isn't Alibaba's model. The best score on that chart belongs to a model made by Anthropic — one of their competitors. Alibaba's own Qwen is second, on a chart that Alibaba published. They could have quietly left that row out. They didn't, and the whole dataset is public so you can go and check it. That doesn't make the benchmark perfect, but it does make it honest.",
+      "data": {
+        "reveal": {
+          "headline": "Their own model is not first",
+          "items": [
+            {
+              "label": "#1  Claude-4.6-Opus",
+              "sub": "Anthropic — a competitor",
+              "atWord": 54
+            },
+            {
+              "label": "#2  Qwen3.8-Max",
+              "sub": "Alibaba — their own",
+              "atWord": 70
+            }
+          ],
+          "source": "AACR-Bench leaderboard, published by Alibaba"
+        }
+      },
+      "durationFrames": 1170
+    },
+    {
+      "id": "s13",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneC",
+      "narration": "Which leaves the obvious question. If the brain is the same, why would the answers be better?",
+      "data": {
+        "chapter": {
+          "title": "Why the same model does better",
+          "subtitle": "the part that is not the model",
+          "atWord": 7
+        }
+      },
+      "durationFrames": 192
+    },
+    {
+      "id": "s14",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "They answer that on the page, and they start by naming what goes wrong when you hand a big code review to a general-purpose AI assistant. Three things. First, on a big change it cuts corners — it reads some of the files and quietly skips others. Second, position drift, which means it tells you there's a problem on line two hundred when the problem is actually on line four hundred. And third, the quality wobbles: ask the same question twice, phrased slightly differently, get two different answers. And then they name the cause, which is the sentence the whole design comes from. When everything is decided by a language model, nothing about the process is actually guaranteed.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-gh#pain",
+              "label": "the three failures they name",
+              "focus": true,
+              "atWord": 6,
+              "zooms": [
+                {
+                  "marks": [
+                    "three"
+                  ],
+                  "wantAtWord": 38
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "alibaba/open-code-review · github.com · Apache-2.0"
+        }
+      },
+      "durationFrames": 1151
+    },
+    {
+      "id": "s15",
+      "type": "RESPONSIBILITY_SPLIT",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So their fix is a split, and once you see it you can't unsee it. Some parts of a review must never be left to a guess, so those are done by ordinary, boring, predictable code. Which files get read? Code decides. Which files get grouped together? Code decides. Which checklist applies to this file? Code decides. Where exactly does the comment get pinned? Code decides. And then the one job that genuinely needs judgement — actually looking at these lines and deciding whether they're wrong — that's the only thing handed to the AI. The AI doesn't get to wander round the building. It's given a specific room, a specific checklist, and asked one question.",
+      "data": {
+        "respSplit": {
+          "respSplit": {
+            "leftLabel": "Ordinary code",
+            "leftSub": "always the same answer",
+            "rightLabel": "The AI",
+            "rightSub": "judgement",
+            "pileLabel": "everything a review has to do",
+            "lines": [
+              {
+                "text": "which files get read",
+                "title": "left",
+                "sub": "no guessing",
+                "atWord": 32
+              },
+              {
+                "text": "which files group together",
+                "title": "left",
+                "sub": "no guessing",
+                "atWord": 42
+              },
+              {
+                "text": "which checklist applies",
+                "title": "left",
+                "sub": "no guessing",
+                "atWord": 51
+              },
+              {
+                "text": "where the comment is pinned",
+                "title": "left",
+                "sub": "no guessing",
+                "atWord": 60
+              },
+              {
+                "text": "is this code actually wrong?",
+                "title": "right",
+                "sub": "judgement",
+                "atWord": 74
+              }
+            ],
+            "caption": "the AI is given a room and a checklist, not the run of the building",
+            "color": "purple",
+            "atWord": 7
+          },
+          "source": "alibaba/open-code-review — \"Deterministic Engineering × Agent Hybrid\""
+        }
+      },
+      "durationFrames": 1132
+    },
+    {
+      "id": "s16",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "And you don't have to take that on faith, because you can just ask it. There's a command that prints the exact checklist a file would be handed. Watch what a Go file gets — Go is the language this project is written in. Look at the pattern line: star star slash star dot go. That means this checklist is only for Go files. And read the first sentence of it, because it's remarkable. Favour precision over recall. A false positive costs reviewer trust. That's a design decision, written in plain English, sitting inside a rule file. Now watch what a plain text file gets instead. Pattern: default. And the checklist is four vague questions — is the logic correct, are there security problems. That contrast is the entire product. One file gets a specialist. The other gets a shrug.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-rules#gorule",
+              "label": "what a Go file is handed",
+              "focus": true,
+              "atWord": 11,
+              "zooms": [
+                {
+                  "marks": [
+                    "pattern"
+                  ],
+                  "wantAtWord": 50
+                },
+                {
+                  "marks": [
+                    "trust"
+                  ],
+                  "wantAtWord": 79
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-rules#mdrule",
+              "label": "what everything else is handed",
+              "focus": true,
+              "atWord": 7,
+              "wantAtWord": 98,
+              "zooms": [
+                {
+                  "marks": [
+                    "default"
+                  ],
+                  "wantAtWord": 107
+                },
+                {
+                  "marks": [
+                    "generic"
+                  ],
+                  "wantAtWord": 117
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1360
+    },
+    {
+      "id": "s17",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneC",
+      "narration": "Enough reading. Let's put it on this machine and point it at some real code.",
+      "data": {
+        "chapter": {
+          "title": "Installing it",
+          "subtitle": "two commands, and one you must not skip",
+          "atWord": 6
+        }
+      },
+      "durationFrames": 173
+    },
+    {
+      "id": "s18",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "There's exactly one thing to check first, and it's the one that caught me out. Open Code Review needs Git version two point four one or newer. Git is the tool that tracks every change to a project, and this machine was running an older copy, so every single command printed a warning until I upgraded it. Check yours. Then the install itself is one line — that's npm, the package installer that comes with Node, and the dash g just means install it for the whole machine rather than one folder. A few seconds later we can ask it what version it is, and there it is: version one point twelve point four. The command is three letters. O, C, R.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-setup#gitv",
+              "label": "the one prerequisite",
+              "focus": true,
+              "atWord": 12,
+              "zooms": [
+                {
+                  "marks": [
+                    "ver"
+                  ],
+                  "wantAtWord": 22
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-setup#install",
+              "label": "one line",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 60,
+              "zooms": [
+                {
+                  "marks": [
+                    "pkg"
+                  ],
+                  "wantAtWord": 68
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-setup#version",
+              "label": "it is really there",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 93,
+              "zooms": [
+                {
+                  "marks": [
+                    "v"
+                  ],
+                  "wantAtWord": 110
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1189
+    },
+    {
+      "id": "s19",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Now the part that makes this genuinely interesting. Open Code Review ships a plugin for Claude Code, so it runs inside the very tool it just outscored. The first command points Claude Code at Alibaba's plugin list — a marketplace, in their words — and the second installs the plugin itself. Successfully added. Successfully installed. That's it, and notice there was no account to make and no key to paste. What we've just gained is two new slash commands, which are the shortcuts you type inside Claude Code to make it do something specific. And one of those two is about to do all the work in this video.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-setup#market",
+              "label": "point Claude Code at their plugin list",
+              "focus": true,
+              "atWord": 22,
+              "zooms": [
+                {
+                  "marks": [
+                    "added"
+                  ],
+                  "wantAtWord": 52
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-setup#plugin",
+              "label": "install the plugin",
+              "focus": true,
+              "atWord": 5,
+              "wantAtWord": 45,
+              "zooms": [
+                {
+                  "marks": [
+                    "ok"
+                  ],
+                  "wantAtWord": 54
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1066
+    },
+    {
+      "id": "s20",
+      "type": "SPLIT_PATHS",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "There are two ways to run it, and I need you to know which one you're about to watch, because it matters. In the first way, Open Code Review calls an AI model itself, using an account key you give it — and that's the way those benchmark numbers were measured. In the second way, called delegation, Open Code Review still picks the files and still hands over the checklists, but Claude Code's own model does the actual judging. No extra key, no extra bill. That's the one we're using today. So please don't take the benchmark figures I showed you as a measurement of what you're about to see. Same file-picking, same rules, different engine doing the thinking.",
+      "data": {
+        "center": {
+          "title": "two ways to run it",
+          "atWord": 10
+        },
+        "left": {
+          "title": "Open Code Review judges",
+          "sub": "its own model · needs a key · this is what the benchmark measured",
+          "color": "blue",
+          "atWord": 31
+        },
+        "right": {
+          "title": "Claude Code judges",
+          "sub": "delegation · no extra key · this is what we filmed",
+          "color": "green",
+          "atWord": 57
+        },
+        "source": "alibaba/open-code-review — Default vs Delegation Mode"
+      },
+      "durationFrames": 1161
+    },
+    {
+      "id": "s21",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneC",
+      "narration": "First, a test most reviews of review tools skip. What does it say about code that's already fine?",
+      "data": {
+        "chapter": {
+          "title": "Test one: good code",
+          "subtitle": "does it stay quiet?",
+          "atWord": 7
+        }
+      },
+      "durationFrames": 201
+    },
+    {
+      "id": "s22",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "This is gRPC — a library made and maintained by Google that lets programs on different computers talk to each other. An enormous amount of the internet leans on it. And the pull request we're going to hand over first is a genuinely hard one: it rewrites the locking in a load balancer. Locking is how a program stops two things happening at the same time and tripping over each other, and it is, without much argument, the hardest thing in programming to review by eye. Google engineers read this change, approved it, and merged it. As far as anybody knows, it's correct. So the right answer here is silence.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-proof#repo",
+              "label": "the library we are reviewing",
+              "focus": true,
+              "atWord": 7,
+              "zooms": [
+                {
+                  "marks": [
+                    "name"
+                  ],
+                  "wantAtWord": 1
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "grpc/grpc-go · github.com · Apache-2.0"
+        }
+      },
+      "durationFrames": 1075
+    },
+    {
+      "id": "s23",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Watch the first command, because this is the deterministic half doing its entire job in one screen. Three reviewable, five total. It's looked at the five files that changed and decided only three of them are worth a reviewer's time — and look at the two it crossed out. Those are test files, and it tells you exactly why it dropped them rather than leaving you to guess. No model was involved in that decision at all. Then the second command fetches the checklists, and notice the heading: rule group one, with all three files listed under it. It's worked out that those three files need the same checklist, so it bundles them into a single job instead of three separate ones.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-control#preview",
+              "label": "which files, and which are dropped",
+              "focus": true,
+              "atWord": 7,
+              "zooms": [
+                {
+                  "marks": [
+                    "count"
+                  ],
+                  "wantAtWord": 18
+                },
+                {
+                  "marks": [
+                    "dropped"
+                  ],
+                  "wantAtWord": 55
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-control#bundle",
+              "label": "three files, one checklist",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 78,
+              "zooms": [
+                {
+                  "marks": [
+                    "group"
+                  ],
+                  "wantAtWord": 89
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1189
+    },
+    {
+      "id": "s24",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "And here's the review itself, running inside Claude Code. You can watch it work — reading the diff, which is just the list of lines that changed, opening the surrounding code, checking how the locks are ordered. It takes it seriously. And then it comes back and tells us there's nothing to report. Nothing at high severity, nothing at medium. It even lists what it checked and ruled out: the lock ordering, a write it decided was safe, a loop variable it decided was fine. Now, a lot of tools would have found something here, because finding something feels like working. This one looked at good code and said so.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-control#review",
+              "label": "the whole review of a good pull request",
+              "focus": true,
+              "atWord": 4,
+              "zooms": [],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1075
+    },
+    {
+      "id": "s25",
+      "type": "CLAIM_CHECK",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "And I want to stay on that for a moment, because it's easy to watch nothing happen and feel cheated. That silence is the product. Think back to the wall of comments we looked at earlier — nearly six thousand of them, where nine in ten were wrong. That's what a reviewer looks like when it can't say nothing. Every false alarm costs a real person real minutes, and worse, it teaches them to stop reading. A reviewer that cries wolf gets muted, and then it's worth less than nothing, because now you think you're covered and you aren't.",
+      "data": {
+        "claimCheck": {
+          "claimCheck": {
+            "headline": "Nothing to report — on code that was already right",
+            "claims": [
+              {
+                "text": "A reviewer that never says \"nothing\" is a reviewer nobody keeps.",
+                "tag": "the point",
+                "color": "green",
+                "atWord": 20
+              }
+            ],
+            "subject": "the control run",
+            "tallyLabel": "comments produced",
+            "hitLabel": "noise added",
+            "tally": [
+              {
+                "label": "high",
+                "hit": false
+              },
+              {
+                "label": "medium",
+                "hit": false
+              }
+            ],
+            "caption": "zero noise on good code is a result, not a non-result",
+            "color": "green",
+            "atWord": 6
+          },
+          "source": "delegated review of grpc/grpc-go #9290, run on this machine"
+        }
+      },
+      "durationFrames": 971
+    },
+    {
+      "id": "s26",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneC",
+      "narration": "Now the real test. A pull request that was already broken when Google merged it.",
+      "data": {
+        "chapter": {
+          "title": "Test two: the blind test",
+          "subtitle": "a bug that shipped",
+          "atWord": 6
+        }
+      },
+      "durationFrames": 173
+    },
+    {
+      "id": "s27",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Here's the second pull request. Somebody at Google wrote it, other engineers reviewed it, and it was merged into gRPC. And it did what it said — read the title, it makes the client report a particular kind of error properly. Ordinary, careful work. Now here's how I know something was wrong with it. Seven days later, this commit landed. A commit is just one saved change, with a note attached explaining it. And read that note: fix a bug introduced in seven four six one. Seven four six one is the pull request we were just looking at. So the maintainers themselves are telling us, in writing, that something got through. That's our answer key.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-proof#pr",
+              "label": "approved and merged",
+              "focus": true,
+              "atWord": 7,
+              "zooms": [
+                {
+                  "marks": [
+                    "merged"
+                  ],
+                  "wantAtWord": 16
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-proof#fix",
+              "label": "the answer key, in their own words",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 55,
+              "zooms": [
+                {
+                  "marks": [
+                    "msg"
+                  ],
+                  "wantAtWord": 78
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "grpc/grpc-go · github.com · Apache-2.0"
+        }
+      },
+      "durationFrames": 1132
+    },
+    {
+      "id": "s28",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Which creates a problem for me, and I want to show you how I dealt with it. If the reviewer can see that fix, it isn't a test — it's a spoiler. So the copy of the project on this machine has been cut back to two commits: the broken one, and the one right before it. That's the whole history it can see. The fix does not exist in this folder. There's nothing to look up and nothing to peek at. And then the same command as before: three files to review out of four, with the test file dropped again. The file we care about is that last one, stream dot go, with five lines added and nine taken away.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-blind#sealed",
+              "label": "the entire history it can see",
+              "focus": true,
+              "atWord": 37,
+              "zooms": [
+                {
+                  "marks": [
+                    "two"
+                  ],
+                  "wantAtWord": 47
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-blind#preview",
+              "label": "three of four files",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 83,
+              "zooms": [
+                {
+                  "marks": [
+                    "count"
+                  ],
+                  "wantAtWord": 90
+                },
+                {
+                  "marks": [
+                    "stream"
+                  ],
+                  "wantAtWord": 112
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1189
+    },
+    {
+      "id": "s29",
+      "type": "RECORDED_STEP",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "And before we run it, I want to show you one line from that Go checklist, because it's the reason this is a fair test rather than a lucky one. Here's a rule the reviewer is handed for every Go file. Errors that get ignored, overwritten, or turned into a success — hiding the fact that something failed. Keep that sentence in your head for the next three minutes. We're about to watch it catch precisely that.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-rules#errrule",
+              "label": "the rule that is about to matter",
+              "focus": true,
+              "atWord": 23,
+              "zooms": [
+                {
+                  "marks": [
+                    "swallow"
+                  ],
+                  "wantAtWord": 42
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 762
+    },
+    {
+      "id": "s30",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "So — same command, same tool, no hints. Let's watch. It pulls the file list, collects the checklists, opens each changed file and reads around the lines that moved. And then it stops on stream dot go. Two findings, both marked high — that's the top severity, the bucket for real bugs rather than suggestions. It's found the same mistake in two different places, and it names the exact lines. It didn't just catch it, either. It explained what breaks downstream, and it went and fixed both of them. Let's slow this right down, because what it found is genuinely beautiful, and you don't need to know Go to see it.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-blind#review",
+              "label": "the blind review, start to finish",
+              "focus": true,
+              "atWord": 4,
+              "zooms": [],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1085
+    },
+    {
+      "id": "s31",
+      "type": "VAR_SCOPE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Let's start with the smallest possible idea and build up. In a program, a variable is just a labelled box that you put a value into. The box we care about is called err, which is short for error. The deal is simple: if something goes wrong, the error gets put in the box. If nothing goes wrong, the box is left empty. And programmers have a word for an empty box like that — they call it nil. So a box holding nil means, quite literally, nothing went wrong here.",
+      "data": {
+        "varScope": {
+          "varScope": {
+            "title": "inside the function that receives a reply",
+            "outerLabel": "err",
+            "outerSub": "the function has a box called err",
+            "innerLabel": "err",
+            "innerSub": "a second box, same name",
+            "emptyLabel": "nil — empty",
+            "valueLabel": "the real error",
+            "steps": [
+              {
+                "title": "outer",
+                "label": "one box",
+                "sub": "a box called err — empty for now",
+                "atWord": 27
+              },
+              {
+                "title": "fence",
+                "label": "nothing yet",
+                "sub": "nil is just the word for an empty box",
+                "atWord": 63
+              }
+            ],
+            "caption": "a variable is a labelled box. nil means it is empty.",
+            "color": "blue",
+            "atWord": 9
+          }
+        }
+      },
+      "durationFrames": 895
+    },
+    {
+      "id": "s32",
+      "type": "CODE_RUN",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Now here are the two lines that broke gRPC, and I promise you can follow them. The first line calls a function that goes and fetches the next piece of data, and puts whatever happened into err. Two lines further down, the code asks a question about err — did this thing finish normally? And then it hands err onwards. Simple enough. Except look very carefully at the first line, at the little colon just before the equals sign. That colon is the entire bug. Without it, you're putting a value into a box that already exists. With it, you are making a brand new box, right there on the spot, that happens to have the same name.",
+      "data": {
+        "codeRun": {
+          "codeRun": {
+            "filename": "stream.go",
+            "language": "go",
+            "resultLabel": "what it means",
+            "color": "red",
+            "atWord": 9,
+            "lines": [
+              {
+                "text": "if err := recv(...); err == nil {",
+                "detail": "go and fetch the next piece of data",
+                "sub": "the colon makes a NEW box called err",
+                "label": "new box",
+                "atWord": 26
+              },
+              {
+                "text": "    return protocolViolation()",
+                "detail": "if nothing came back, complain",
+                "sub": "this part is fine",
+                "atWord": 41
+              },
+              {
+                "text": "}",
+                "detail": "the block ends here",
+                "sub": "and so does the new box",
+                "atWord": 50
+              },
+              {
+                "text": "if err == io.EOF {",
+                "detail": "did this finish normally?",
+                "sub": "but which err is this?",
+                "label": "which one?",
+                "atWord": 59
+              },
+              {
+                "text": "    return status()",
+                "detail": "report the real outcome",
+                "sub": "never reached",
+                "atWord": 68
+              },
+              {
+                "text": "}",
+                "detail": "",
+                "sub": "",
+                "atWord": 73
+              },
+              {
+                "text": "return toRPCErr(err)",
+                "detail": "hand the error onwards",
+                "sub": "hands on an empty box",
+                "label": "empty",
+                "atWord": 78
+              }
+            ]
+          },
+          "source": "grpc/grpc-go stream.go at commit 6d0aaaec, lines 1124–1130"
+        }
+      },
+      "durationFrames": 1151
+    },
+    {
+      "id": "s33",
+      "type": "VAR_SCOPE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So follow what actually happens. The function already has its own box called err, and it's empty. Then we step inside the if — those curly brackets — and the colon makes a second box, also called err. The real answer from that fetch goes into the new box. Good so far. But then the if finishes, and here's the thing about a box made inside brackets: when the brackets close, that box is gone. Swept away, along with everything in it. Two lines later the code asks for err again. The new box doesn't exist any more, so it reads the only box left — the old one, from outside. And the old box was never filled. It's still empty. So the code checks whether anything went wrong, looks in an empty box, finds nothing, and cheerfully reports success. The error wasn't handled. It was dropped on the floor.",
+      "data": {
+        "varScope": {
+          "varScope": {
+            "title": "the same name, two different boxes",
+            "outerLabel": "err",
+            "outerSub": "the function's own box — never filled",
+            "innerLabel": "err",
+            "innerSub": "made by the colon",
+            "fenceLabel": "if err := recv(...) { }",
+            "emptyLabel": "nil — empty",
+            "valueLabel": "the real error",
+            "askLabel": "if err == io.EOF",
+            "verdict": "empty — so it reports success",
+            "steps": [
+              {
+                "title": "outer",
+                "label": "the old box",
+                "sub": "the function already has an err, and it is empty",
+                "atWord": 12
+              },
+              {
+                "title": "fence",
+                "label": "step inside",
+                "sub": "now we are inside the if — those curly brackets",
+                "atWord": 30
+              },
+              {
+                "title": "inner",
+                "label": "a new box",
+                "sub": "the colon makes a SECOND box, also called err",
+                "atWord": 42
+              },
+              {
+                "title": "fill",
+                "label": "filled",
+                "sub": "the real answer goes into the new box",
+                "atWord": 54
+              },
+              {
+                "title": "vanish",
+                "label": "gone",
+                "sub": "the brackets close — and the new box is swept away",
+                "atWord": 72
+              },
+              {
+                "title": "ask",
+                "label": "err?",
+                "sub": "two lines later the code asks for err again",
+                "atWord": 90
+              },
+              {
+                "title": "verdict",
+                "label": "empty",
+                "sub": "it reads the only box left, and nothing was ever put in it",
+                "atWord": 105
+              }
+            ],
+            "caption": "a failed call now reports success",
+            "color": "red",
+            "atWord": 6
+          },
+          "source": "grpc/grpc-go stream.go, the defect fixed by commit 5c4da090"
+        }
+      },
+      "durationFrames": 1455
+    },
+    {
+      "id": "s34",
+      "type": "TYPE_GATE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "At this point you might reasonably ask: don't programmers have tools that catch this sort of thing? They do, and that's exactly why this one is so nasty. Look at that line again — there's nothing illegal about it. Making a new box is a completely ordinary thing to do; programmers do it all day. Nothing's misspelled. Nothing's the wrong type. So the compiler, which is the program that turns the code into something a machine can run and which refuses obvious mistakes, is perfectly happy. Go's built-in checker is happy. The tests pass. Every light is green, and the code is wrong.",
+      "data": {
+        "typeGate": {
+          "typeGate": {
+            "title": "everything that should have caught it",
+            "gates": [
+              {
+                "label": "the compiler",
+                "sub": "it is valid code",
+                "verdict": "pass",
+                "atWord": 43
+              },
+              {
+                "label": "go vet",
+                "sub": "not in the default checks",
+                "verdict": "pass",
+                "atWord": 58
+              },
+              {
+                "label": "the tests",
+                "sub": "nothing exercised this path",
+                "verdict": "pass",
+                "atWord": 68
+              },
+              {
+                "label": "three human reviewers",
+                "sub": "it looks right",
+                "verdict": "pass",
+                "atWord": 72
+              }
+            ],
+            "caption": "every light green, and the code is still wrong",
+            "color": "orange",
+            "atWord": 8
+          }
+        }
+      },
+      "durationFrames": 1009
+    },
+    {
+      "id": "s35",
+      "type": "REVEAL",
+      "transition": "slide",
+      "background": "zoneC",
+      "narration": "And now for the part that genuinely made me sit back. Go and read the title of that pull request one more time. Its entire purpose — the whole reason a person sat down and wrote it — was to make the client report one particular error properly. And the bug we just walked through means that exact error is the one that gets thrown away. The change broke the very thing it was written to do. The reviewer spotted that too, by the way. It said so in its own words, unprompted.",
+      "data": {
+        "reveal": {
+          "headline": "It broke the thing it was written to do",
+          "items": [
+            {
+              "label": "the pull request",
+              "sub": "make the client report this error properly",
+              "atWord": 28
+            },
+            {
+              "label": "the bug",
+              "sub": "that error is the one that gets dropped",
+              "atWord": 51
+            }
+          ],
+          "source": "grpc/grpc-go #7461, and the delegated review run on this machine"
+        }
+      },
+      "durationFrames": 914
+    },
+    {
+      "id": "s36",
+      "type": "LOWER_THIRD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "One more thing, and I mean this. This isn't a story about one engineer having a bad day. Several experienced people looked at this change and approved it, because it reads as correct — it reads as correct to me, and I've now stared at it for hours. That's the whole point. A mistake like this isn't caused by carelessness. It's caused by the fact that a colon is very small and a human eye slides right over it. That's what a machine is genuinely good for.",
+      "data": {
+        "lowerThird": {
+          "title": "This is about how review works",
+          "subtitle": "not about who wrote it",
+          "atWord": 26
+        }
+      },
+      "durationFrames": 857
+    },
+    {
+      "id": "s37",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "And it didn't stop at telling us. Remember that slash command does two jobs — it reviews, and then it repairs what it's confident about. Ask the project what's changed on disk and stream dot go has been edited. Here's the repair it wrote: it's put the line back to the older form, where the answer goes into the box that already exists instead of making a new one. No colon. So does that match what Google actually did? Here's their real fix, seven days later. It's not character for character the same — they restructured it slightly differently — but it's the same bug, the same two places, and the same outcome. The machine and the maintainers agreed.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ocr-blind#changed",
+              "label": "it edited the file",
+              "focus": true,
+              "atWord": 21,
+              "zooms": [
+                {
+                  "marks": [
+                    "mod"
+                  ],
+                  "wantAtWord": 34
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-blind#patch",
+              "label": "the repair",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 40,
+              "zooms": [
+                {
+                  "marks": [
+                    "fix"
+                  ],
+                  "wantAtWord": 70
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ocr-proof#realfix",
+              "label": "what Google shipped",
+              "focus": true,
+              "atWord": 6,
+              "wantAtWord": 80,
+              "sourceNote": "grpc/grpc-go · github.com · Apache-2.0",
+              "zooms": [
+                {
+                  "marks": [
+                    "line"
+                  ],
+                  "wantAtWord": 103
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "recorded on this machine · ocr v1.12.4 · Claude Code 2.1.274"
+        }
+      },
+      "durationFrames": 1161
+    },
+    {
+      "id": "s38",
+      "type": "CHAPTER",
+      "transition": "wipe",
+      "background": "zoneC",
+      "narration": "So who is this actually for, and where does it fit in a normal week?",
+      "data": {
+        "chapter": {
+          "title": "Who should use this",
+          "subtitle": "and where it fits",
+          "atWord": 6
+        }
+      },
+      "durationFrames": 173
+    },
+    {
+      "id": "s39",
+      "type": "ICON_GRID",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "If you write code, this is a second pair of eyes before you ask a colleague for theirs — and it costs you nothing to be told your own mistake in private. If you review other people's code, it clears the boring layer so you can spend your attention on whether the design is right, which is the thing only you can do. If you test software, it reads paths your tests were never written for. And if you run a team, the honest pitch isn't that it replaces review. It's that every change gets a consistent first pass at three in the morning on a Friday, when the person who'd normally catch it is asleep.",
+      "data": {
+        "iconGrid": {
+          "items": [
+            {
+              "label": "Developers",
+              "sub": "told your own mistake in private",
+              "icon": "lucide:code",
+              "atWord": 12
+            },
+            {
+              "label": "Reviewers",
+              "sub": "freed up for the design questions",
+              "icon": "lucide:eye",
+              "atWord": 35
+            },
+            {
+              "label": "Testers",
+              "sub": "paths no test was written for",
+              "icon": "lucide:flask-conical",
+              "atWord": 58
+            },
+            {
+              "label": "Team leads",
+              "sub": "the same first pass, every time",
+              "icon": "lucide:users",
+              "atWord": 79
+            }
+          ]
+        }
+      },
+      "durationFrames": 1132
+    },
+    {
+      "id": "s40",
+      "type": "LAYERED_STACK",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "And it isn't only for sitting at your keyboard. It plugs into the robots that run checks automatically every time anyone proposes a change — that's GitHub Actions, GitLab, Gerrit. It works with other assistants too, not just Claude Code: Codex, Cursor and Kimi are all supported. It can scan whole files rather than just changes, which is what you want when you've inherited a codebase nobody understands any more. And it'll write its findings out as a structured file, so you can feed them into whatever you already use.",
+      "data": {
+        "stack": {
+          "layeredStack": {
+            "layers": [
+              {
+                "label": "Your editor",
+                "sub": "Claude Code, Codex, Cursor, Kimi",
+                "atWord": 32
+              },
+              {
+                "label": "Your pipeline",
+                "sub": "GitHub Actions, GitLab, Gerrit",
+                "atWord": 18
+              },
+              {
+                "label": "Whole-file scans",
+                "sub": "for code with no recent changes",
+                "atWord": 50
+              },
+              {
+                "label": "Structured output",
+                "sub": "JSON you can feed anywhere",
+                "atWord": 62
+              }
+            ],
+            "caption": "the same reviewer, wherever the code is",
+            "color": "blue",
+            "atWord": 5
+          },
+          "source": "alibaba/open-code-review — integrations and CI/CD documentation"
+        }
+      },
+      "durationFrames": 885
+    },
+    {
+      "id": "s41",
+      "type": "SPEC_COMPARE",
+      "transition": "slide",
+      "background": "zoneC",
+      "narration": "Before you go and install it, here's what I'd want a friend to tell me. Two pull requests is a demonstration, not a measurement — I picked them, I ran each one once, and I didn't retry anything to get a nicer answer for the camera. It still misses most bugs; remember, four out of five. Most of what it flags still isn't real. And what you watched was Claude Code's model doing the judging, not the setup those benchmark numbers came from. What I'd actually claim is narrower, and I think more useful: it stayed quiet on good code, and on a change that fooled several professionals, it found the thing they missed and repaired it. That's worth ten minutes of your evening.",
+      "data": {
+        "compare": {
+          "specCompare": {
+            "leftLabel": "What this video showed",
+            "rightLabel": "What it did not show",
+            "rows": [
+              {
+                "left": "silence on a correct pull request",
+                "right": "a measured success rate",
+                "atWord": 62
+              },
+              {
+                "left": "a real shipped bug, found blind",
+                "right": "the benchmark setup",
+                "atWord": 74
+              },
+              {
+                "left": "a repair matching the maintainers'",
+                "right": "that it finds most bugs",
+                "atWord": 86
+              }
+            ],
+            "caption": "two pull requests, run once each, nothing retried",
+            "color": "orange",
+            "atWord": 10
+          }
+        }
+      },
+      "durationFrames": 1208
+    },
+    {
+      "id": "s42",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Everything's linked below — the project, the benchmark data, and both pull requests, so you can go and check every number I've said out loud. If you've got a repository you inherited and don't fully trust, that's the one to point this at first. Tell me what it finds, because I'd genuinely like to know. And if this was useful, subscribe — there's more agent tooling coming.",
+      "data": {
+        "headline": "What will you point it at?",
+        "subtext": "github.com/alibaba/open-code-review — Apache-2.0",
+        "atWord": 34
+      },
+      "durationFrames": 667
+    }
+  ]
+}

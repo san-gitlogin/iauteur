@@ -1,0 +1,93 @@
+{
+  "slug": "ocr-gh",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {"url": "https://github.com/alibaba/open-code-review", "settleMs": 4000},
+  "steps": [
+    {
+      "id": "repo",
+      "action": "pause",
+      "ms": 1600,
+      "label": "the official repository, and who wrote it",
+      "marks": [{"id": "owner", "text": "alibaba"}]
+    },
+    {
+      "id": "about",
+      "action": "scroll",
+      "target": "text=Fast, efficient, battle-tested",
+      "settleMs": 1800,
+      "label": "the one-line description, in their own words",
+      "marks": [
+        {"id": "desc", "text": "Fast, efficient, battle-tested at Alibaba's scale"},
+        {"id": "licence", "text": "Apache-2.0"}
+      ]
+    },
+    {
+      "id": "what",
+      "action": "scroll",
+      "target": "text=What is Open Code Review?",
+      "settleMs": 1800,
+      "label": "what it is, and where it came from",
+      "marks": [
+        {"id": "origin", "text": "tens of thousands of developers", "to": "millions of code defects"}
+      ]
+    },
+    {
+      "id": "highlights",
+      "action": "scroll",
+      "target": "text=Visit the official website",
+      "settleMs": 2000,
+      "label": "the headline numbers strip"
+    },
+    {
+      "id": "bench",
+      "action": "scroll",
+      "target": "text=A real-world code review benchmark",
+      "settleMs": 2200,
+      "label": "the benchmark claim and how it was built",
+      "marks": [
+        {"id": "ninth", "text": "~1/9 of the tokens"},
+        {"id": "built", "text": "50", "to": "1,505"}
+      ]
+    },
+    {
+      "id": "table",
+      "action": "scroll",
+      "target": "text=Best single number for overall review quality",
+      "settleMs": 2400,
+      "label": "the leaderboard itself"
+    },
+    {
+      "id": "pain",
+      "action": "scroll",
+      "target": "text=The Problem with General-Purpose Agents",
+      "settleMs": 2200,
+      "label": "the three problems it says it solves",
+      "marks": [
+        {"id": "three", "text": "Incomplete coverage", "to": "review quality fluctuates significantly"}
+      ]
+    },
+    {
+      "id": "design",
+      "action": "scroll",
+      "target": "text=Deterministic Engineering — Hard Constraints",
+      "settleMs": 2200,
+      "label": "the part that is not the model",
+      "marks": [
+        {"id": "det", "text": "Precise file selection", "to": "ensuring no important change is missed"}
+      ]
+    },
+    {
+      "id": "agents",
+      "action": "scroll",
+      "target": "text=Coding Agent Integrations",
+      "settleMs": 2000,
+      "label": "the agents it plugs into",
+      "marks": [{"id": "cc", "text": "Claude Code"}]
+    }
+  ]
+}

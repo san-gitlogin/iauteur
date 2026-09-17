@@ -26,6 +26,15 @@ const quiet = process.argv.includes('--quiet');
 const has = (file, re) => fs.existsSync(file) && new RegExp(re).test(fs.readFileSync(file, 'utf8'));
 
 const CORRECTIONS = [
+  // ── recording ──────────────────────────────────────────────────────────────
+  ['a live-agent take that hangs on a folder-trust prompt', 'SEAL',
+   'Open Code Review cut, 2026-09-17: a 30-minute take captured 594 frames of Claude Code asking ' +
+   '"Quick safety check: Is this a project you created or one you trust?" and then waited out its ' +
+   'timeout. `claude -p` never prompts, so every headless rehearsal passed. Found by pulling a still.',
+   // Checks the CALL SITE, not just the definition — a first draft of this row passed while
+   // the guard sat unreferenced, which is the exact shape of the bug it exists to prevent.
+   () => has('scripts/lib/record/runner.mjs', 'assertAgentWorkspaceTrusted\\(demo, ws\\);') &&
+         has('scripts/lib/record/runner.mjs', 'hasTrustDialogAccepted')],
   // ── the voice ──────────────────────────────────────────────────────────────
   ['the voice speed used as a pacing knob', 'SEAL',
    '"why does ava sound slow!!! it was perfect before" / "never adjust the pace of the voice to match"',

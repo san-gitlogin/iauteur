@@ -374,10 +374,14 @@ import {ModelShrug} from './scenes/ModelShrug';
 import {ClaimCheck} from './scenes/ClaimCheck';
 import {ColumnSplit} from './scenes/ColumnSplit';
 import {LiveCode} from './scenes/LiveCode';
+import {VarScope} from './scenes/VarScope';
+import {ReviewYield} from './scenes/ReviewYield';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  LIVE_CODE: LiveCode,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  REVIEW_YIELD: ReviewYield,
+  VAR_SCOPE: VarScope,
+  LIVE_CODE: LiveCode,
   COLUMN_SPLIT: ColumnSplit,
   CLAIM_CHECK: ClaimCheck,
   MODEL_SHRUG: ModelShrug,

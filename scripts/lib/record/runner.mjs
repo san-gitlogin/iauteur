@@ -859,6 +859,33 @@ const bboxFor = async (page, focus, table = FOCUS_SELECTORS) => {
   }
 };
 
+/**
+ * Refuse a live-agent take whose workspace Claude Code has not been told to trust.
+ * See the call site for the take this was paid for. Exported for the seal test.
+ */
+export const assertAgentWorkspaceTrusted = (demo, ws) => {
+  const agentSteps = (demo.steps ?? []).filter((s) =>
+    typeof s.cmd === 'string' && /(^|[\s;&|(])claude(\s|$)/.test(s.cmd) && !/\s-p\b|--print\b/.test(s.cmd));
+  if (!agentSteps.length) return;
+
+  let cfg;
+  try { cfg = JSON.parse(fs.readFileSync(path.join(os.homedir(), '.claude.json'), 'utf8')); } catch { return; }
+  const projects = cfg?.projects ?? {};
+  // Both spellings matter: macOS resolves /tmp through /private, and Claude Code stores
+  // whichever one it was launched with.
+  const keys = [ws, fs.existsSync(ws) ? fs.realpathSync(ws) : ws];
+  if (keys.some((k) => projects[k]?.hasTrustDialogAccepted === true)) return;
+
+  throw new Error(
+    `Step "${agentSteps[0].id}" runs an interactive \`claude\` in a workspace Claude Code has not been ` +
+    `told to trust:\n    ${ws}\n\n` +
+    `It would draw its folder-trust prompt and wait for a keypress the recorder never sends — the take ` +
+    `hangs until its timeout and captures nothing but the prompt (recorded 2026-09-17).\n\n` +
+    `Fix it before recording, by marking the workspace trusted in ~/.claude.json:\n` +
+    `    projects["${ws}"].hasTrustDialogAccepted = true\n` +
+    `(add the /private-prefixed spelling too on macOS), or run the agent with \`-p\`, which never prompts.`);
+};
+
 // ── step actions ─────────────────────────────────────────────────────────────
 
 const actions = {
@@ -1439,6 +1466,23 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
     fs.mkdirSync(path.dirname(p), {recursive: true});
     fs.copyFileSync(from, p);
   }
+
+  // A `claude` STEP IN AN UNTRUSTED FOLDER IS A TAKE THAT HANGS, NOT A TAKE THAT FAILS.
+  //
+  // Recorded 2026-09-17 on the Open Code Review cut. A 30-minute live-agent take produced
+  // 594 frames and then sat until its timeout. The frames showed why: Claude Code had drawn
+  // its own folder-trust prompt — "Quick safety check: Is this a project you created or one
+  // you trust?" — and was waiting on a keypress that a recorder never sends. The agent never
+  // started, `waitFor` could never match, and every gate downstream was green because there
+  // was nothing yet to judge. The cause was invisible in code review and cost a full take;
+  // it was found by pulling a still, which is the only thing that ever finds this class.
+  //
+  // `claude -p` does not prompt, which is why every headless rehearsal passed and only the
+  // recorded take hung. So the check is on the DEMO, before a server is even started: a step
+  // that shells out to `claude` needs that workspace marked trusted in ~/.claude.json, or we
+  // refuse now and say exactly how to fix it. Failing in a second beats hanging for thirty
+  // minutes, and a prompt on camera is a defect even when it does not hang.
+  assertAgentWorkspaceTrusted(demo, ws);
 
   const rec = path.resolve(outDir || path.join('public/rec', slug));
   freshRecDir(rec, slug);

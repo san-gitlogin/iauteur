@@ -558,7 +558,9 @@
               "MODEL_SHRUG",
               "CLAIM_CHECK",
               "COLUMN_SPLIT",
-              "LIVE_CODE"
+              "LIVE_CODE",
+              "VAR_SCOPE",
+              "REVIEW_YIELD"
             ]
           },
           "narration": {
@@ -628,6 +630,146 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "REVIEW_YIELD"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "reviewYield": {
+                      "type": "object",
+                      "properties": {
+                        "unitLabel": {
+                          "type": "string",
+                          "description": "what one mark stands for, <= 34 chars"
+                        },
+                        "perMark": {
+                          "type": "number",
+                          "description": "findings represented by one mark (default 100)"
+                        },
+                        "hitLabel": {
+                          "type": "string",
+                          "description": "what a lit mark means, <= 22 chars"
+                        },
+                        "missLabel": {
+                          "type": "string",
+                          "description": "what a grey mark means, <= 22 chars"
+                        },
+                        "columns": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "2-3 runs. label = the run's name; sub = the condition; value = total findings; detail = correct findings (as a number in text); tag = the read-out line; color; atWord"
+                        },
+                        "caption": {
+                          "type": "string",
+                          "description": "one line under the walls, <= 72 chars"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "accent for lit marks"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "when the walls appear"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "VAR_SCOPE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "varScope": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "where we are, e.g. 'inside recvMsg()'"
+                        },
+                        "outerLabel": {
+                          "type": "string",
+                          "description": "name of the outer/long-lived box, <= 26 chars"
+                        },
+                        "outerSub": {
+                          "type": "string",
+                          "description": "what the outer box is, <= 34 chars"
+                        },
+                        "innerLabel": {
+                          "type": "string",
+                          "description": "name of the inner/short-lived box, <= 26 chars"
+                        },
+                        "innerSub": {
+                          "type": "string",
+                          "description": "what the inner box is, <= 34 chars"
+                        },
+                        "fenceLabel": {
+                          "type": "string",
+                          "description": "the block that owns the inner box, <= 44 chars"
+                        },
+                        "emptyLabel": {
+                          "type": "string",
+                          "description": "what an unfilled box reads, e.g. 'nil'"
+                        },
+                        "valueLabel": {
+                          "type": "string",
+                          "description": "what drops into the inner box, <= 26 chars"
+                        },
+                        "askLabel": {
+                          "type": "string",
+                          "description": "the later line that asks for the name, <= 40 chars"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "description": "the consequence, <= 56 chars"
+                        },
+                        "steps": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "title = phase: outer | fence | inner | fill | vanish | ask | verdict. sub = the plain-English line shown while that phase is live. each carries atWord."
+                        },
+                        "caption": {
+                          "type": "string",
+                          "description": "one line under the picture, <= 64 chars"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "semantic colour for the inner/short-lived box"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "when the picture appears"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

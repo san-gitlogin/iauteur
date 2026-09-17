@@ -16,7 +16,45 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  LIVE_CODE: {
+export const MANIFEST = {  REVIEW_YIELD: {
+    category: "diagram", family: "diagram", data_key: "reviewYield",
+    purpose: "EVERYTHING A CHECKER REPORTED, AND THE FEW THAT WERE REAL. Each column is one run drawn as a wall of small marks — one mark per N findings — and the marks that were genuinely correct LIGHT UP while the rest stay grey. Two walls side by side settle a precision argument without the words 'precision' or 'false positive' ever appearing: a viewer who sees sixty marks with four lit beside nine marks with three lit has understood the trade in one look. Use for any hit-rate comparison where the RAW COUNT is the argument — review findings, alerts, scan results, test flakes — and never for a plain magnitude (BAR_COMPARE owns that).",
+    use_when: "",
+    fields: {
+      unitLabel: {t: 'string', note: "what one mark stands for, <= 34 chars"},
+      perMark: {t: 'number', note: "findings represented by one mark (default 100)"},
+      hitLabel: {t: 'string', note: "what a lit mark means, <= 22 chars"},
+      missLabel: {t: 'string', note: "what a grey mark means, <= 22 chars"},
+      columns: {t: 'items', req: true, note: "2-3 runs. label = the run's name; sub = the condition; value = total findings; detail = correct findings (as a number in text); tag = the read-out line; color; atWord"},
+      caption: {t: 'string', note: "one line under the walls, <= 72 chars"},
+      color: {t: 'string', note: "accent for lit marks"},
+      atWord: {t: 'anchor', note: "when the walls appear"},
+    },
+    example: {reviewYield: {"unitLabel":"one mark = 100 comments","perMark":100,"hitLabel":"a real bug","missLabel":"a false alarm","columns":[{"label":"Claude Code","sub":"same model","value":5980,"detail":"435","tag":"5,980 written · 435 real","color":"red","atWord":6},{"label":"Open Code Review","sub":"same model","value":889,"detail":"301","tag":"889 written · 301 real","color":"green","atWord":18}],"caption":"same model, same pull requests — one of them hands you a pile to sort","color":"yellow","atWord":2}},
+  },
+  VAR_SCOPE: {
+    category: "diagram", family: "diagram", data_key: "varScope",
+    purpose: "TWO BOXES WITH THE SAME NAME, AND THE ONE THAT DISAPPEARS. A variable declared inside an if-block is drawn as a real box that is born inside a bracket fence, is filled with the value, and is then SWEPT AWAY when the fence closes — while an identically named box outside the fence sits untouched and empty the whole time. A later line asks for the name, the pointer swings to the only box still standing, and finds it empty. Use when the defect IS the scope: shadowing, a value written to the wrong lifetime, a check that reads a stale or never-filled slot. A card that merely captions 'variable shadowing' asserts the bug; this makes the viewer watch the box vanish and then watch the question land on the empty one.",
+    use_when: "",
+    fields: {
+      title: {t: 'string', note: "where we are, e.g. 'inside recvMsg()'"},
+      outerLabel: {t: 'string', req: true, note: "name of the outer/long-lived box, <= 26 chars"},
+      outerSub: {t: 'string', note: "what the outer box is, <= 34 chars"},
+      innerLabel: {t: 'string', req: true, note: "name of the inner/short-lived box, <= 26 chars"},
+      innerSub: {t: 'string', note: "what the inner box is, <= 34 chars"},
+      fenceLabel: {t: 'string', note: "the block that owns the inner box, <= 44 chars"},
+      emptyLabel: {t: 'string', note: "what an unfilled box reads, e.g. 'nil'"},
+      valueLabel: {t: 'string', note: "what drops into the inner box, <= 26 chars"},
+      askLabel: {t: 'string', note: "the later line that asks for the name, <= 40 chars"},
+      verdict: {t: 'string', note: "the consequence, <= 56 chars"},
+      steps: {t: 'items', req: true, note: "title = phase: outer | fence | inner | fill | vanish | ask | verdict. sub = the plain-English line shown while that phase is live. each carries atWord."},
+      caption: {t: 'string', note: "one line under the picture, <= 64 chars"},
+      color: {t: 'string', note: "semantic colour for the inner/short-lived box"},
+      atWord: {t: 'anchor', note: "when the picture appears"},
+    },
+    example: {varScope: {"title":"inside recvMsg()","outerLabel":"err","outerSub":"the function's own box","innerLabel":"err","innerSub":"a brand new box","fenceLabel":"if err := recv(...) { }","emptyLabel":"nil","valueLabel":"the real error","askLabel":"if err == io.EOF","verdict":"reads the empty box, reports success","steps":[{"title":"outer","label":"one box","sub":"the function already has a box called err, and it is empty","atWord":4},{"title":"fence","label":"a block opens","sub":"now we step inside an if","atWord":12},{"title":"inner","label":"a second box","sub":"the colon makes a NEW box, also called err","atWord":20},{"title":"fill","label":"filled","sub":"the real error goes into the new box","atWord":28},{"title":"vanish","label":"gone","sub":"the if ends, and the new box is swept away","atWord":36},{"title":"ask","label":"err?","sub":"two lines later the code asks for err again","atWord":44},{"title":"verdict","label":"empty","sub":"the only box left is the old one, and nothing was ever put in it","atWord":52}],"caption":"same name, different lifetimes","color":"red","atWord":2}},
+  },
+  LIVE_CODE: {
     category: "code", family: "code", data_key: "liveCode",
     purpose: "A FILE BEING WRITTEN, IN TIME WITH THE VOICE. An editor opens empty, its tab named, and the code is typed into it character by character - but each line types across the interval between ITS OWN anchor word and the next line's, so the typing speeds up and slows down with the narration instead of running at a fixed rate. The line being typed carries a highlight band and a caret; finished lines settle; lines not yet reached do not exist yet, because the file does not contain them yet. A terminal strip underneath types the command and prints the real output on their own words.",
     use_when: "ANY beat where the viewer is meant to WRITE the code along with you - a from-scratch tutorial, a file being created, a fix being typed into an existing file. CODE_RUN reveals a block that is already on screen and CODE_WINDOW types at a fixed speed from one start; this one is the only shape where the typing itself is anchored per line, which is what makes a voiceover and a keyboard land together. Not for a finished listing nobody is asked to write (CODE_WINDOW).",

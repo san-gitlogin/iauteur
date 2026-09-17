@@ -1,0 +1,67 @@
+{
+  "slug": "ocr-setup",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ocr-blind",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1400,
+  "steps": [
+    {
+      "id": "gitv",
+      "action": "run",
+      "cmd": "git --version",
+      "label": "the one prerequisite",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "git version", "exitCode": 0},
+      "marks": [{"id": "ver", "text": "2.55.0"}]
+    },
+    {
+      "id": "install",
+      "action": "run",
+      "cmd": "npm install -g @alibaba-group/open-code-review",
+      "label": "one line to install the reviewer",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {"exitCode": 0},
+      "marks": [{"id": "pkg", "text": "@alibaba-group/open-code-review"}]
+    },
+    {
+      "id": "version",
+      "action": "run",
+      "cmd": "ocr --version",
+      "label": "it is really installed",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "open-code-review", "exitCode": 0},
+      "marks": [{"id": "v", "text": "v1.12.4"}]
+    },
+    {
+      "id": "market",
+      "action": "run",
+      "cmd": "claude plugin marketplace add alibaba/open-code-review",
+      "label": "point Claude Code at their plugin list",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {"contains": "Successfully added marketplace"},
+      "marks": [{"id": "added", "text": "Successfully added marketplace"}]
+    },
+    {
+      "id": "plugin",
+      "action": "run",
+      "cmd": "claude plugin install open-code-review@open-code-review",
+      "label": "install the plugin itself",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {"contains": "Successfully installed plugin"},
+      "marks": [{"id": "ok", "text": "Successfully installed plugin"}]
+    }
+  ]
+}

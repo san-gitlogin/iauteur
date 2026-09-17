@@ -1,0 +1,52 @@
+{
+  "slug": "ocr-rules",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ocr-blind",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "steps": [
+    {
+      "id": "gorule",
+      "action": "run",
+      "cmd": "ocr rules check stream.go | sed -n '1,8p'",
+      "label": "the checklist a Go file gets",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "Pattern", "exitCode": 0},
+      "marks": [
+        {"id": "pattern", "text": "Pattern: **/*.go"},
+        {"id": "trust", "text": "A false positive costs reviewer trust"}
+      ]
+    },
+    {
+      "id": "mdrule",
+      "action": "run",
+      "cmd": "ocr rules check README.md | sed -n '1,11p'",
+      "label": "the checklist everything else gets",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "Pattern: default", "exitCode": 0},
+      "marks": [
+        {"id": "default", "text": "Pattern: default"},
+        {"id": "generic", "text": "Is the logic correct?"}
+      ]
+    },
+    {
+      "id": "errrule",
+      "action": "run",
+      "cmd": "ocr rules check stream.go | sed -n '11,12p'",
+      "label": "the one rule that matters in a minute",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "hide a failed operation", "exitCode": 0},
+      "marks": [
+        {"id": "swallow", "text": "ignored, overwritten, or converted into success/default values that hide a failed operation"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "slug": "ocr-proof",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {"url": "https://github.com/grpc/grpc-go", "settleMs": 3500},
+  "steps": [
+    {
+      "id": "repo",
+      "action": "pause",
+      "ms": 1400,
+      "label": "the library we are about to review",
+      "marks": [{"id": "name", "text": "grpc-go"}]
+    },
+    {
+      "id": "pr",
+      "action": "goto",
+      "url": "https://github.com/grpc/grpc-go/pull/7461",
+      "settleMs": 3200,
+      "label": "the pull request, approved and merged",
+      "marks": [{"id": "merged", "text": "Merged"}]
+    },
+    {
+      "id": "fix",
+      "action": "goto",
+      "url": "https://github.com/grpc/grpc-go/commit/5c4da090bf33a937752f6e18f662d9a1efc99942",
+      "settleMs": 3200,
+      "label": "seven days later, the answer key",
+      "marks": [{"id": "msg", "text": "fix a bug introduced in #7461"}]
+    },
+    {
+      "id": "realfix",
+      "action": "scroll",
+      "target": "text=Special handling for non-server-stream rpcs",
+      "settleMs": 2400,
+      "label": "what the maintainers actually changed",
+      "marks": [{"id": "line", "text": "err == io.EOF"}]
+    }
+  ]
+}

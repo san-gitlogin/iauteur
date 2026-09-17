@@ -1,0 +1,105 @@
+{
+  "slug": "ocr-blind",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ocr-blind",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "steps": [
+    {
+      "id": "sealed",
+      "action": "run",
+      "cmd": "git log --all --oneline",
+      "label": "the whole history this copy can see",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "6d0aaae",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "two",
+          "text": "6d0aaae"
+        }
+      ]
+    },
+    {
+      "id": "preview",
+      "action": "run",
+      "cmd": "ocr delegate preview --from base --to pr7461",
+      "label": "the files in the broken pull request",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "reviewable",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "count",
+          "text": "3 reviewable / 4 total"
+        },
+        {
+          "id": "stream",
+          "text": "`stream.go` [modified] +5/-9"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "action": "run",
+      "background": true,
+      "waitFor": "\u00b7 done",
+      "timeout": 1800000,
+      "settleMs": 4000,
+      "cmd": "claude --permission-mode acceptEdits '/open-code-review:delegate-review --from base --to pr7461'",
+      "label": "the blind review, start to finish",
+      "focus": "terminal",
+      "clearFirst": true
+    },
+    {
+      "id": "changed",
+      "action": "run",
+      "cmd": "git status --short",
+      "label": "it did not just report \u2014 it edited",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "stream.go",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "mod",
+          "text": "stream.go"
+        }
+      ]
+    },
+    {
+      "id": "patch",
+      "action": "run",
+      "cmd": "git diff stream.go | sed -n '5,14p'",
+      "label": "the repair it wrote",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "err = recv",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "fix",
+          "text": "err = recv"
+        }
+      ]
+    }
+  ]
+}

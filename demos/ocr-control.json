@@ -1,0 +1,49 @@
+{
+  "slug": "ocr-control",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ocr-control",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "steps": [
+    {
+      "id": "preview",
+      "action": "run",
+      "cmd": "ocr delegate preview --from base --to pr9290",
+      "label": "which files it will read, and which it drops",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "reviewable", "exitCode": 0},
+      "marks": [
+        {"id": "count", "text": "3 reviewable / 5 total"},
+        {"id": "dropped", "text": "excluded: default_path"}
+      ]
+    },
+    {
+      "id": "bundle",
+      "action": "run",
+      "cmd": "ocr delegate rule balancer/endpointsharding/endpointsharding.go balancer/ringhash/picker.go balancer/ringhash/ringhash.go | sed -n '1,7p'",
+      "label": "three files, one shared checklist",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {"contains": "Rule Group", "exitCode": 0},
+      "marks": [{"id": "group", "text": "Rule Group 1"}]
+    },
+    {
+      "id": "review",
+      "action": "run",
+      "background": true,
+      "waitFor": "· done",
+      "timeout": 1800000,
+      "settleMs": 4000,
+      "cmd": "claude '/open-code-review:delegate-review --from base --to pr9290'",
+      "label": "the whole review of a good pull request",
+      "focus": "terminal",
+      "clearFirst": true
+    }
+  ]
+}

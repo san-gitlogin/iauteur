@@ -259,6 +259,8 @@ export const TYPES = [
   'CLAIM_CHECK',
   'COLUMN_SPLIT',
   'LIVE_CODE',
+  'VAR_SCOPE',
+  'REVIEW_YIELD',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
