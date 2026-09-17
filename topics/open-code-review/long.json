@@ -13,11 +13,11 @@
     ],
     "screenplay": "documentary",
     "seo": {
-      "title": "Alibaba's Free Code Reviewer Caught A Bug Google Shipped",
+      "title": "An Open Source CLI Tool That Beats Claude Code At Code Reviews",
       "altTitles": [
-        "I Gave Alibaba's AI Reviewer A Bug Google Missed",
-        "Open Code Review: Beats Claude Code, Then Installs Inside It",
-        "The Free AI Code Reviewer That Found What Google Missed"
+        "The #1 Trending Repo On GitHub Beats Claude Code At Code Review",
+        "20,000 Engineers Use This Free Code Reviewer \u2014 Open Code Review",
+        "This Open Source CLI Caught A Bug Google Shipped"
       ],
       "hook": "Alibaba open-sourced the code reviewer that reads Alibaba's own code \u2014 33.9% precision against Claude Code's 7.2% on the same model, on about a ninth of the tokens. Then it ships as a Claude Code plugin. We install it, point it at a correct pull request from Google's gRPC library (it stays silent), and then at one that was merged with a bug in it and fixed a week later \u2014 without letting it see the fix.",
       "description": "Open Code Review is Alibaba's internal AI code review tool, now Apache-2.0 and free. We install it, add the Claude Code plugin, read its built-in rulesets on camera, and run two tests on real pull requests from grpc/grpc-go. Includes a full beginner-level explanation of the variable-scope bug it found, and an honest look at what the benchmark numbers do and do not mean.",
@@ -74,17 +74,11 @@
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "IT CAUGHT WHAT GOOGLE MISSED",
+    "title": "BEATS CLAUDE CODE",
     "badge": "Open Code Review",
-    "note": "33.9% vs 7.2% \u00b7 free \u00b7 Apache-2.0",
-    "asset": "si:alibabacloud",
-    "logos": [
-      "si:alibabacloud",
-      "si:anthropic",
-      "si:github",
-      "si:npm",
-      "si:googlecloud"
-    ]
+    "note": "20K+ ENGINEERS",
+    "art": "img:ocr-trending.png",
+    "asset": "img:ocr-trending.png"
   },
   "scenes": [
     {

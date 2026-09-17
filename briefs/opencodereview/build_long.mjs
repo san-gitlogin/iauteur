@@ -919,7 +919,7 @@ const spec = {
     topicAxes: ['entity-novelty', 'workflow'],
     screenplay: 'documentary',
     seo: {
-      title: "Alibaba's Free Code Reviewer Caught A Bug Google Shipped",
+      title: 'An Open Source CLI Tool That Beats Claude Code At Code Reviews',
       altTitles: [
         'I Gave Alibaba\'s AI Reviewer A Bug Google Missed',
         'Open Code Review: Beats Claude Code, Then Installs Inside It',
@@ -966,11 +966,11 @@ const spec = {
   },
   brand: c.brand(),
   thumbnail: {
-    title: 'IT CAUGHT WHAT GOOGLE MISSED',
+    title: 'BEATS CLAUDE CODE',
     badge: 'Open Code Review',
-    note: '33.9% vs 7.2% · free · Apache-2.0',
-    asset: 'si:alibabacloud',
-    logos: ['si:alibabacloud', 'si:anthropic', 'si:github', 'si:npm', 'si:googlecloud'],
+    note: '20K+ ENGINEERS',
+    art: 'img:ocr-trending.png',
+    asset: 'img:ocr-trending.png',
   },
   scenes: c.S,
 };
