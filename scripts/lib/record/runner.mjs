@@ -15,6 +15,7 @@ import {chromium} from 'playwright';
 import {
   startServer, openWorkbench, applySettings, verifySurface, prep,
   recordingSettings, vscodeVersion, palette, reapStaleServers, PRIMARY, maximizeTerminalPanel,
+  terminalFullScreen, terminalFill,
 } from './vscode.mjs';
 import {openTerminal, primeTerminal, runCommand, readBuffer, readScrollback} from './terminal.mjs';
 import {startCapture} from './capture.mjs';
@@ -1218,11 +1219,27 @@ ${content.text}`, truth: 'read-back',
             verified: 'page content read from inside the webview'};
   },
 
-  /** Make the terminal tall, for a step whose output genuinely needs the room. */
+  /**
+   * Make the terminal tall, for a step whose output genuinely needs the room.
+   *
+   * MEASURES, NEVER TOGGLES. This used to fire 'View: Toggle Maximized Panel' unconditionally,
+   * so a demo carrying BOTH `maximizePanel: true` (prep) and a `maximizePanel` step maximised
+   * the panel and then immediately un-maximised it — while the run log, printed by the prep
+   * call, still said "maximized panel (42 rows)". That shipped a terminal sitting in the bottom
+   * third of every frame of the context-mode cut (owner, 2026-09-17).
+   */
   async maximizePanel(page) {
-    await palette(page, 'View: Toggle Maximized Panel');
-    await sleep(800);
-    return {sent: '(toggle maximized panel)', output: '', truth: 'no-output', verified: 'nothing to verify'};
+    const note = await maximizeTerminalPanel(page, {want: 30});
+    return {sent: '(maximize panel)', output: note, truth: 'no-output', verified: note};
+  },
+
+  /**
+   * Terminal fills the frame: sidebar hidden, panel maximised. Use on any take where no file
+   * preview is needed — an agent run, a long command, a stats read-out.
+   */
+  async fullScreenTerminal(page) {
+    const note = await terminalFullScreen(page);
+    return {sent: '(full screen terminal)', output: note, truth: 'no-output', verified: note};
   },
 
   /** A deliberate look-at-it beat. Nothing happens, on purpose (LAW 0e rule 4).
@@ -1489,8 +1506,23 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
     if (demo.prep?.openFile) await actions.openFile(page, {id: 'prep', path: demo.prep.openFile});
     console.log('  opening terminal...');
     await openTerminal(page);
-    if (demo.maximizePanel === true) {
+    if (demo.terminalOnly === true) {
+      console.log('  ' + await terminalFullScreen(page));
+    } else if (demo.maximizePanel === true) {
       console.log('  ' + await maximizeTerminalPanel(page));
+    }
+    // A TERMINAL-DRIVEN TAKE THAT DOES NOT FILL THE FRAME IS A DEFECT (owner, 2026-09-17).
+    // Nothing in this demo opens a file, so two thirds of every frame would be an empty editor
+    // and a VS Code watermark while the thing the video is about scrolls past in the bottom
+    // third. Measured here, while a re-record still costs seconds rather than a re-voice.
+    {
+      const editorful = (demo.steps ?? []).some((x) => ['openFile', 'save', 'type'].includes(x.action))
+        || !!demo.prep?.openFile;
+      const fill = await terminalFill(page);
+      if (!editorful && fill < 55) {
+        console.log(`  ⚠ TERMINAL IS ONLY ${fill}% OF FRAME and no step opens a file — set ` +
+                    `"terminalOnly": true so Claude Code fills the picture (owner, 2026-09-17).`);
+      }
     }
     await primeTerminal(page);
     for (const cmd of demo.prep?.commands ?? []) {

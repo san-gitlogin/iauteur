@@ -3,6 +3,7 @@ import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {Scene} from './types';
 import {useTheme, wordToFrame} from './themes';
 import {useScale, hexA} from './ui';
+import {AssetIcon} from './AssetIcon';
 import {arriveAt, travelAt, landAt, stagger} from './motion/system';
 
 // HOOK STAGE — the SILHOUETTE of an opening, separated from the pack's handwriting.
@@ -292,9 +293,26 @@ export const HookStage: React.FC<{scene: Scene; kit?: HookKit}> = ({scene, kit =
           fontFamily: t.fonts.display, fontWeight: t.style.displayWeight,
           fontSize: (vertical ? 800 : 980) * scale, lineHeight: 1,
           color: hexA(accent, 0.13 * swing),
+          // An SVG glyph does not inherit the text colour's alpha, so the wash goes on the
+          // WRAPPER. Without this the lucide mark rendered at full opacity and fought the
+          // headline it is supposed to sit behind.
+          opacity: d.heroAsset ? 0.16 * swing : 1,
           transform: `rotate(${(1 - swing) * -14 + 6}deg) scale(${0.86 + 0.14 * swing})`,
           userSelect: 'none',
-        }}>?</div>
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          {/* THE BACKDROP MARK IS THE VIDEO'S SUBJECT, NOT ALWAYS A QUESTION MARK.
+              Owner, 2026-09-17: *"in my previous archify video too it rendered as question
+              mark. It a subtle background component animated neat and clean, which can also
+              have other different lucide icons right? Which can match based on our hook title
+              or what our video is based on."* `ask` had been ignoring `heroAsset` entirely —
+              a field the author sets and nothing reads — so it now DRIVES this mark, and the
+              literal `?` is only the fallback for a hook that sets no asset. */}
+          {d.heroAsset ? (
+            <AssetIcon asset={d.heroAsset} size={(vertical ? 620 : 780) * scale} bare
+                       tint={accent} />
+          ) : '?'}
+        </div>
         <AbsoluteFill style={{
           alignItems: 'center', justifyContent: 'safe center', flexDirection: 'column',
           gap: 36 * scale, padding: (vertical ? 74 : 140) * scale,

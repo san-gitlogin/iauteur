@@ -1329,6 +1329,156 @@ never the plan; it opens on the map artwork now, under `reveal`.
 without a `heroAsset`. `ask` was missing from that guard and is in it now — the guard goes on the
 ARGUMENT (a variant whose copy cannot support it), so when you add a variant, add its condition.
 
+### Corollary — THE HOOK'S BACKDROP MARK IS THE SUBJECT, NOT ALWAYS A QUESTION MARK (owner, 2026-09-17)
+
+Owner: *"I also see one more thing in the beginning screen, A 15% Cheaper bill?, the intro looks
+great, promising, neat and clean to the point, but I also see a big Question mark at the top
+right which is part of the design. Here in this place, since we also ask a question, that big
+question mark makes sense, but in my previous archify video too it rendered as question mark.
+It a subtle background component animated neat and clean, which can also have other different
+lucide icons right? Which can match based on our hook title or what our video is based on."*
+
+`hookVariant: 'ask'` drew a hardcoded literal `?`, so every asking hook on the channel opened on
+the same glyph — and it **ignored `heroAsset` entirely**, which is a field the author sets and
+nothing reads (the defect LAW 0f's field-use corollary exists for). `heroAsset` now DRIVES that
+backdrop: `lucide:receipt` for a bill, `lucide:workflow` for a map, whatever the video is about.
+The `?` remains the fallback for a hook that names no asset, so existing specs are untouched.
+
+Two things the still caught that the code did not: `mark()` wraps a glyph in the pack's opaque
+tile, which is a billboard rather than a backdrop — the backdrop wants `AssetIcon … bare`. And an
+SVG glyph does not inherit a text colour's alpha, so the wash goes on the WRAPPER; tinting the
+icon alone rendered it at full opacity, fighting the headline it sits behind.
+
+### Corollary — OPEN BY SAYING WHAT THE THING IS, FROM ITS OWN PAGE (owner, 2026-09-17)
+
+Owner, on the context-mode cut: *"your narration if you see, you just are jumping straight away
+into saying context-mode saves so and so! Dude. Dont you know the viewers viewing for first
+time, would never know what context-mode is, and you gotta say something like this plugin / mcp
+/ whatever is something that could save tokens for you during your claude code sessions, showing
+the actual repo, the stars it has got, its trending, the license information etc., then going
+into README's, highlighting key informations, then going to our live demonstration."*
+
+**The shape, and it is the one `topics/archify-live-map` uses** — which the owner singled out as
+*"some beautifully crafted one which worked out well"*:
+
+| beat | what it does |
+|---|---|
+| 1 HOOK | what the thing DOES, one plain sentence — *"Archify turns one prompt into a system map you can actually explore."* |
+| 2 TITLE_CARD | greet, then *"today we're going to install X, point it at a real repository, and watch it…"* |
+| **3 RECORDED_STEP — the project's own page** | *"So, what is Archify? This is its page on GitHub, and the description is refreshingly plain: …"* Read the description, the stars, the licence, off the screen. |
+| 4 | the mechanism, in a few moves |
+| 5 CHAPTER | *"Right. Enough reading — let's point it at a real codebase."* |
+| 6+ | the live demonstration |
+
+**The page beat is scene THREE, not scene twelve.** A viewer who has never heard of the thing
+cannot evaluate a saving, a benchmark or a mechanism until they know what it IS and who made it.
+Answer *what is this, who wrote it, do people use it, can I use it* — description, stars,
+licence — before any number.
+
+### Corollary — PROVE IT WITH FOOTAGE WHEN FOOTAGE CAN PROVE IT (owner, 2026-09-17)
+
+Owner, same review: *"There is less narration or recording time with explanation, rather you
+have used more component based explanation (appreciable) but sometimes users would like to see
+live demo rather than you speaking with components and animations, whenever there is a
+possibility… you could also have prooved it via recording."*
+
+Measured, the two cuts side by side:
+
+| cut | scenes | RECORDED_STEP | share |
+|---|---|---|---|
+| `archify-live-map` (the one he liked) | 18 | 7 | **39%** |
+| `context-mode-measured` | 39 | 7 | **18%** |
+
+Components are for what a camera CANNOT show — a context window filling, a break-even, an idea.
+Anything a machine can be made to do on camera is filmed. **Before casting a drawn beat, ask:
+could this be a recording instead?** LAW 0e's over-reliance cap is a ceiling on footage, never a
+target to stay under, and it is satisfied by adding drawn beats, never by dropping takes.
+
+### Corollary — REPETITION IS THE DEFECT THE CAP CANNOT SEE, AND ZERO BUILDS IS THE CAUSE (owner, 2026-09-17)
+
+Owner: *"I also see that you are frequently using the weighing component. That shall not be used
+often. I dont know if you arent seeing all other available components or you arent choosing to
+create one of your own again and again. You are restricting yourself from creating new component
+with proper animation. You are neither looking at 300+ components… I just saw you used atleast 3
+time the weighing animation."*
+
+Measured: `TRADEOFF_SCALE` **×3 in the long cut and again in the short** — and the cut introduced
+**ZERO** new components against LAW 0e.8's *expect 2-4 builds per episode*. The casting sheet had
+specified nine purpose-built pictures; checking the manifest found honest ~90% fits for the core
+ones and I then reused for **everything**, including three beats that each deserved their own
+object. Reuse is the right call per beat and the wrong call as a policy.
+
+**This is the THIRD recording of the same argument** (LAW 0e.8, then *FIVE OF THE SAME CARD IS
+NOT A DESIGN*): the over-reliance cap measures a RATIO — 3 of 39 is 7.7% and sails through —
+while what the owner keeps describing is MONOTONY, which a ratio cannot see.
+
+**Enforced.** `lint-spec.mjs` → SAME PICTURE THRICE: any non-furniture, non-footage, non-code
+type used **3+ times** in one cut is a warning naming the beats, because by the third appearance
+the viewer has stopped seeing it. The remedy is never to merge those beats — it is to build the
+object the third one actually needed.
+
+### Corollary — SHOW THE SOURCE OF TRUTH ON CAMERA (owner, 2026-09-17) — APPLIES TO EVERY VIDEO
+
+Owner, on the context-mode cut: *"I expected you to show the official github repo of the plugin
+and show what it claims/what it is used for, how many stars it has got. For every video it is
+always recommended to show the source of truth, since its all websites, you can record and show
+and narrate something like, here is the official git repo where you can find out more details."*
+
+The cut reviewed a plugin for ten minutes, quoted its README claim, credited its repo in the
+description — and never once put that page on screen. So the viewer had to take the presenter's
+word for what the project even claims, and had nowhere to go and look.
+
+**The repo page IS the primary source.** The claim, the purpose, the star count, the licence and
+the author are on one screen the viewer can check for themselves. This is LAW 0m (*capture the
+artefact by running the tool*) pointed at the project itself, and LAW 0f's quotation corollary
+already governs what happens once it is up: say out loud that it is the official page, carry
+`recordedStep.sourceNote` for the whole beat, and move the camera like a reader — onto the
+claim, across to the stars, back out.
+
+- **Every video about a named thing shows that thing's own page**, early, before the mechanism.
+- **Say where you are**: *"this is the project's official repo, and you can read all of this
+  yourself."*
+- **Frame what a viewer would actually check**: the one-line description, the star count, the
+  licence. Those are the things that answer *should I trust this*.
+- A star count or a version is time-sensitive, so it is read off the FRAME that ships, never
+  from memory (LAW 3).
+
+**Enforced.** `scripts/lint-spec.mjs` → `checkSourceShown`: when `meta.seo.sources` credits a URL
+for the cut's own `meta.subject`, some recorded beat must have gone there. It reads the
+navigation out of the DEMO behind each clip's `ref`, because the evidence has to be the camera's,
+not the author's — a `sourceNote` is a claim a spec can make without filming anything, and a
+terminal that merely TYPES `marketplace add owner/repo` would satisfy a substring test while
+never opening the page. Break-tested both directions: it fires on the cut that skipped its
+source and stays silent on the cuts that filmed theirs. Six of 114 topics trip it today, so it
+is signal rather than noise.
+
+### Corollary — THE TERMINAL FILLS THE FRAME WHEN THERE IS NOTHING ELSE TO SEE (owner, 2026-09-17)
+
+Owner, same review: *"when you are working with claude code and you dont need to show any
+preview of any file, you can have the terminal in full screen to have more view of the claude
+code. Right now its just sitting at the bottom with usual terminal window appearance."*
+
+On an agent take this is not cosmetic. Claude Code streams tool calls, and a panel in the bottom
+third scrolls the interesting part away before the camera can frame it — while two thirds of
+every frame is an empty editor and a VS Code watermark.
+
+**The bug underneath it, and it is the more useful lesson: `maximizePanel` was a BLIND TOGGLE.**
+The demo-level `maximizePanel: true` maximised the panel during prep, and then the demo's own
+first `maximizePanel` STEP fired the same palette command again and un-maximised it. The run log
+still printed *"maximized panel (42 rows)"* — because that line came from the prep call, before
+the step undid it. **A toggle called twice is a no-op wearing a success message.** Nothing in the
+recorder toggles blind any more: every call measures the state first and acts only when it is
+wrong. The same reasoning applies to any other palette command that flips rather than sets.
+
+- `"terminalOnly": true` in a demo hides the sidebar and maximises the panel — use it on every
+  take where no file preview is needed.
+- The assertion is on the PICTURE, not the row count: 42 rows in a short panel and 42 rows
+  filling the window are the same number and a completely different frame. `terminalFill()`
+  measures the panel against the viewport.
+- **Enforced at record time**, where a re-record still costs seconds: a demo whose steps never
+  open a file and whose terminal covers under 55% of the frame prints a loud warning naming
+  `terminalOnly`.
+
 ### Corollary — SHOW THE RESULT BEFORE THE METHOD (owner, 2026-09-16) — APPLIES TO EVERY VIDEO
 
 Owner: *"On all our future videos, it would be great if we include a part of the demo at the initial

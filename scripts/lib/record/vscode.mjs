@@ -566,6 +566,51 @@ export const maximizeTerminalPanel = async (page, {want = 24} = {}) => {
   return rows >= want ? `maximized panel (${rows} rows)` : `WARNING: panel is only ${rows} rows`;
 };
 
+/**
+ * THE TERMINAL FILLS THE FRAME WHEN THERE IS NOTHING ELSE TO SEE (owner, 2026-09-17).
+ *
+ * Owner, on the context-mode cut: *"when you are working with claude code and you dont need to
+ * show any preview of any file, you can have the terminal in full screen to have more view of
+ * the claude code. Right now its just sitting at the bottom with usual terminal window
+ * appearance."* He is right, and on an agent take it is not cosmetic: Claude Code streams tool
+ * calls, and a panel in the bottom third scrolls the interesting part away before the camera
+ * ever frames it.
+ *
+ * This also fixes the bug that produced that frame. `maximizePanel` was a BLIND TOGGLE: the
+ * demo-level `maximizePanel: true` maximised the panel during prep, and then the demo's own
+ * first STEP called the same palette command again and un-maximised it. The run log still said
+ * "maximized panel (42 rows)" because that line was printed by the prep call, before the step
+ * undid it. A toggle that is called twice is a no-op wearing a success message — so nothing
+ * here toggles: every call measures first and only acts when the state is wrong.
+ */
+export const terminalFullScreen = async (page) => {
+  // The sidebar is the other third of the frame and an agent take never needs it.
+  const sideOpen = () => page.evaluate(() => {
+    const el = document.querySelector('.part.sidebar');
+    if (!el) return false;
+    const r = el.getBoundingClientRect();
+    return r.width > 20 && r.height > 20;
+  });
+  if (await sideOpen()) {
+    await palette(page, 'View: Toggle Primary Side Bar Visibility');
+    await page.waitForTimeout(500);
+  }
+  const note = await maximizeTerminalPanel(page, {want: 30});
+  return `${note}; sidebar ${(await sideOpen()) ? 'STILL OPEN' : 'hidden'} — ${await terminalFill(page)}% of frame`;
+};
+
+/**
+ * What fraction of the viewport the terminal actually covers. The thing to assert is the
+ * PICTURE, not the row count: 42 rows in a short panel and 42 rows filling the window are the
+ * same number and a completely different frame.
+ */
+export const terminalFill = (page) => page.evaluate(() => {
+  const el = document.querySelector('.part.panel');
+  if (!el) return 0;
+  const r = el.getBoundingClientRect();
+  return Math.round((r.width * r.height) / (innerWidth * innerHeight) * 100);
+});
+
 /** Is the secondary side bar (Chat/Copilot column) actually taking up frame? */
 export const auxBarOpen = async (page) =>
   page.evaluate(() => {

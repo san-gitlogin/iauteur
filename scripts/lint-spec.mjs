@@ -586,6 +586,128 @@ if (spec.thumbnail && subject) {
   }
 }
 
+checkSourceShown(spec, E, W);
+checkSamePictureThrice(spec, W);
+
+// ── THE SAME PICTURE THREE TIMES IS MONOTONY, AND THE CAP CANNOT SEE IT ──────
+//
+// Owner, 2026-09-17: *"I also see that you are frequently using the weighing component. That
+// shall not be used often... You are restricting yourself from creating new component with
+// proper animation. You are neither looking at 300+ components. I just saw you used atleast 3
+// time the weighing animation."*
+//
+// THE THIRD RECORDING OF THIS ARGUMENT (LAW 0e.8, then FIVE OF THE SAME CARD IS NOT A DESIGN).
+// The over-reliance cap measures a RATIO — TRADEOFF_SCALE three times in 39 scenes is 7.7% and
+// sails through — but what he keeps describing is MONOTONY, which a ratio cannot see. By the
+// third appearance the viewer has stopped looking at it.
+//
+// Furniture is exempt because it is SUPPOSED to recur (a chapter card is a chapter card), and
+// so are footage and code, which LAW 0e rules 2-3 actively mandate.
+function checkSamePictureThrice(spec, W) {
+  const EXEMPT = new Set([
+    'HOOK', 'TITLE_CARD', 'CHAPTER', 'RECAP', 'OUTRO_CTA', 'QUIZ_CARD', 'LOWER_THIRD',
+    'RECORDED_STEP', 'BROWSER_STEP', 'CODE_RUN', 'CODE_WINDOW', 'LIVE_CODE',
+  ]);
+  const byType = new Map();
+  for (const sc of spec.scenes ?? []) {
+    const t = String(sc.type ?? '');
+    if (!t || EXEMPT.has(t)) continue;
+    // A stage type dispatching many pictures counts per PICTURE, not per wrapper (LAW 0n).
+    const kind = sc.data?.[Object.keys(sc.data ?? {})[0]]?.kind;
+    const key = kind ? `${t}:${kind}` : t;
+    (byType.get(key) ?? byType.set(key, []).get(key)).push(sc.id);
+  }
+  // CALIBRATION, measured 2026-09-17: 65 of 114 topics trip this, which sounds like noise until
+  // you check WHICH. It is silent on every cut the owner has praised — archify-live-map,
+  // fluidram-tested, uv-getting-started — and loud on the ones he has complained about, and he
+  // has now raised this same complaint three separate times. So the back catalogue really does
+  // repeat itself; the rule is not miscalibrated, the catalogue predates it. Only the three
+  // worst offenders are reported so the output stays something an author can act on.
+  const worst = [...byType.entries()].filter(([, ids]) => ids.length >= 3)
+    .sort((a, b) => b[1].length - a[1].length).slice(0, 3);
+  for (const [type, ids] of worst) {
+    W(`SAME PICTURE THRICE: ${type} carries ${ids.length} beats (${ids.join(', ')}). The ` +
+      `over-reliance cap measures a ratio and cannot see monotony — by the third appearance ` +
+      `the viewer has stopped looking at it (owner, 2026-09-17). The remedy is NOT to merge ` +
+      `those beats: build the object the third one actually needed (LAW 0e.8 expects 2-4 ` +
+      `builds an episode, and this cut shipped zero).`);
+  }
+}
+
+
+// ── SHOW THE SOURCE OF TRUTH ON CAMERA ──────────────────────────────────────
+//
+// Owner, 2026-09-17, on the context-mode cut: *"I expected you to show the official github
+// repo of the plugin and show what it claims/what it is used for, how many stars it has got.
+// For every video it is always recommended to show the source of truth, since its all
+// websites, you can record and show and narrate something like, here is the official git repo
+// where you can find out more details."*
+//
+// A review that never opens the thing it is reviewing asks the viewer to take the presenter's
+// word for what the project even claims. The repo page IS the primary source — the claim, the
+// purpose, the star count, the licence, all on one screen the viewer can go and check. This is
+// LAW 0m ("capture the artefact by running the tool") pointed at the project itself, and the
+// LAW 0f quotation corollary already says what to do once it is on screen: name it out loud
+// and carry `sourceNote` for the whole beat.
+//
+// The gate: when a cut credits a URL in meta.seo.sources for its own SUBJECT, some recorded
+// beat has to have been there. It cannot check that the page is interesting; it can refuse to
+// let a video cite a page it never showed.
+function checkSourceShown(spec, E, W) {
+  const subject = String(spec.meta?.subject ?? '').trim();
+  if (!subject) return;
+  const sources = (spec.meta?.seo?.sources ?? []).map(String);
+  const urls = sources.flatMap((x) => x.match(/(?:https?:\/\/)?(?:www\.)?([a-z0-9.-]+\.[a-z]{2,}\/[^\s,)]+)/gi) ?? []);
+  if (!urls.length) return;
+
+  // ONLY BAKED EVIDENCE COUNTS. `sourceNote` is authored text — a claim that a page was the
+  // source, which is exactly what a spec can assert without ever filming anything. `shows`,
+  // `said` and `startUrl` are written by the CAPTURE, so they are the only fields here that
+  // can prove a camera was actually pointed at the page. (Same argument as "a label is a
+  // claim about content, so it is evidence of nothing", 2026-09-03.)
+  // ONLY A CAMERA POINTED AT THE PAGE COUNTS. `sourceNote` is authored text — a claim a spec
+  // can make without filming anything. `shows` is the terminal's own words, so a take that
+  // merely TYPES `marketplace add mksglu/context-mode` would satisfy a substring test while
+  // never opening the page. The evidence is the DEMO's own navigation: a browser take records
+  // where it went, and the clip's `ref` names the demo that went there. Read through the ref so
+  // this works on cuts that were baked before the field existed, rather than sitting
+  // permanently red until every spec is re-baked — a gate that always fires is one you learn
+  // to ignore (check-recordings, 2026-09-05).
+  const shown = [];
+  const seenSlugs = new Set();
+  for (const sc of spec.scenes ?? []) {
+    for (const c of sc.data?.recordedStep?.clips ?? []) {
+      shown.push(String(c.startUrl ?? ''));
+      const m = /^rec:([A-Za-z0-9._-]+)#/.exec(String(c.ref ?? ''));
+      if (!m || seenSlugs.has(m[1])) continue;
+      seenSlugs.add(m[1]);
+      try {
+        const demo = JSON.parse(fs.readFileSync(`demos/${m[1]}.json`, 'utf8'));
+        if (demo.surface !== 'browser') continue;
+        const walk = (v) => {
+          if (typeof v === 'string') { if (/^https?:\/\//.test(v)) shown.push(v); return; }
+          if (Array.isArray(v)) return v.forEach(walk);
+          if (v && typeof v === 'object') return Object.values(v).forEach(walk);
+        };
+        walk(demo);
+      } catch { /* no demo file on disk — nothing to prove it with, so it stays unproven */ }
+    }
+  }
+  const haystack = shown.join(' ').toLowerCase();
+  // Only the SUBJECT's own source is required; a supporting citation need not be filmed.
+  const subjectUrl = urls.find((u) => u.toLowerCase().includes(subject.toLowerCase().replace(/\s+/g, '')))
+    ?? urls.find((u) => /github\.com/i.test(u));
+  if (!subjectUrl) return;
+  const host = subjectUrl.toLowerCase().replace(/^https?:\/\//, '').split('/')[0];
+  const repo = subjectUrl.toLowerCase().split('/').slice(1, 3).join('/');
+  if (haystack.includes(host) || (repo && haystack.includes(repo))) return;
+
+  W(`SOURCE OF TRUTH NEVER SHOWN: the description credits ${subjectUrl}, and no recorded beat ` +
+    `ever goes there. Film the project's own page — what it claims, what it is for, its stars ` +
+    `and its licence — and say out loud that it is the official page (owner, 2026-09-17). A ` +
+    `review that never opens the thing it reviews asks the viewer to take your word for it.`);
+}
+
 // ── AN OVERLAY DEPICTS; A CALLOUT ONLY NAMES ────────────────────────────────
 //
 // Owner, 2026-09-04: *"when you are explaining about a code line, if needed, the overlay

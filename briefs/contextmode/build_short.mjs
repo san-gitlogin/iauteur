@@ -90,7 +90,7 @@ const spec = {
   },
   brand: { theme: 'moderndark', themeLight: 'daylight', design: 'moderndark',
            background: 'aurora', channel: 'THE NBX STUDIO', logo: 'img:channel_logo.png' },
-  cover: { title: 'CUT YOUR AI BILL', badge: 'context-mode', note: 'Measured, not claimed', art: 'img:ctxmode-bill.png' },
+  cover: { title: 'CUT YOUR AI BILL', badge: 'context-mode', note: 'Measured, not claimed', art: 'img:ctxmode-bill-vert.png' },
   scenes: S,
 };
 

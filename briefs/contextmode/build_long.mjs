@@ -93,7 +93,7 @@ const DATA_KEY = {
 
 scene('s01', 'HOOK',
   '^Context-mode promises to save ninety-eight percent of your ^context ^window. Does it?',
-  { headline: 'A 15% cheaper bill?', subtext: 'context-mode, measured over 12 runs', heroAsset: 'lucide:gauge', hookVariant: 'ask' },
+  { headline: 'A 15% cheaper bill?', subtext: 'context-mode, measured over 12 runs', heroAsset: 'lucide:receipt', hookVariant: 'ask' },
   ['atWord', 'heroAtWord', 'headlineAtWord'], { transition: 'dip' });
 
 scene('s02', 'RECORDED_STEP',

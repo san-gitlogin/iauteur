@@ -209,6 +209,46 @@ const CORRECTIONS = [
    () => has('scripts/check-narration-visual.mjs', 'IS THE VOICE TALKING ABOUT THIS') &&
          has('scripts/check-narration-visual.mjs', 'TALKING OVER THE PICTURE') &&
          has('scripts/render-topic.mjs', 'check-narration-visual')],
+  ['every asking hook opening on the same question mark', 'STRUCT',
+   '"in my previous archify video too it rendered as question mark ... which can also have other different lucide icons"',
+   // `ask` drew a hardcoded literal and ignored heroAsset — a field the author sets and nothing
+   // reads. heroAsset now drives the backdrop; `?` is only the fallback.
+   // NOTE: has() compiles its argument as a REGEX, so a pattern containing ? or ( must be
+   // escaped or avoided — a malformed pattern reads exactly like a missing mechanism.
+   () => has('src/hookStage.tsx', 'THE BACKDROP MARK IS THE VIDEO') &&
+         has('src/hookStage.tsx', 'AssetIcon asset=.d\\.heroAsset. size=')],
+  ['the same picture carrying three or more beats', 'SEAL',
+   '"you are frequently using the weighing component ... I just saw you used atleast 3 time the weighing animation"',
+   // THIRD recording of this argument (LAW 0e.8, FIVE OF THE SAME CARD). The over-reliance cap
+   // measures a RATIO — 3 of 39 scenes is 7.7% and passes — while the complaint is MONOTONY,
+   // which a ratio cannot see. Silent on every cut the owner has praised.
+   () => has('scripts/lint-spec.mjs', 'SAME PICTURE THRICE') &&
+         has('scripts/lint-spec.mjs', 'checkSamePictureThrice')],
+  ['a cover or thumbnail whose drawn art is silently deleted', 'SEAL',
+   '"for shorts, you just used a AI logo at center with normal text, it needs the same effort as the wide thumb"',
+   // The renderer read `art` all along; THUMB_KEYS did not list it, so normalize.mjs deleted it
+   // from every shorts spec it touched and the cover fell back to a lucide glyph in a tile. A
+   // field the renderer reads and a pipeline stage deletes is the same lie as a field nothing reads.
+   () => has('scripts/lib/constants.mjs', "'art'") &&
+         has('scripts/lib/constants.mjs', 'THUMB_KEYS')],
+  ['a review that never opens the page it reviews', 'SEAL',
+   '"I expected you to show the official github repo of the plugin ... for every video it is always recommended to show the source of truth"',
+   // The evidence has to be the CAMERA's, not the author's: sourceNote is a claim a spec can
+   // make without filming anything, and a terminal that merely types `add owner/repo` would
+   // satisfy a substring test. The check reads the demo's own navigation behind each clip ref.
+   () => has('scripts/lint-spec.mjs', 'SOURCE OF TRUTH NEVER SHOWN') &&
+         has('scripts/lint-spec.mjs', 'checkSourceShown') &&
+         has('scripts/lint-spec.mjs', 'ONLY A CAMERA POINTED AT THE PAGE COUNTS')],
+  ['a terminal take sitting in the bottom third of the frame', 'SEAL',
+   '"you can have the terminal in full screen to have more view of the claude code. Right now its just sitting at the bottom"',
+   // maximizePanel was a BLIND TOGGLE — prep maximised, the demo step un-maximised, and the log
+   // still said "maximized panel" because that line came from the prep call. Nothing toggles
+   // blind now: every call measures state first. The assertion is on the PICTURE (terminalFill),
+   // because 42 rows in a short panel and 42 rows filling the window are the same number.
+   () => has('scripts/lib/record/vscode.mjs', 'terminalFullScreen') &&
+         has('scripts/lib/record/vscode.mjs', 'terminalFill') &&
+         has('scripts/lib/record/runner.mjs', 'TERMINAL IS ONLY') &&
+         has('scripts/lib/record/runner.mjs', 'MEASURES, NEVER TOGGLES')],
   ['footage too soft to survive its own zoom', 'SEAL',
    '"the recording is just sitting at 1080p or 720p or even less" / "even zooming in, panning in does not degrade the quality of my video"',
    () => has('scripts/check-recordings.mjs', 'SOFT ZOOM') &&

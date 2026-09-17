@@ -138,6 +138,50 @@ truth. A cut once passed every one of these in total silence.
 
 ---
 
+## 6b. Show the source of truth, and let the terminal fill the frame
+
+Two owner corrections from 2026-09-17, both of which apply to every video:
+
+**Film the subject's own page.** A cut that reviews a thing and never opens that thing's
+official page asks the viewer to take your word for what it even claims. The repo page carries
+the claim, the purpose, the star count and the licence on one screen a viewer can go and check.
+Do it EARLY, before the mechanism, say out loud that it is the official page, and move the
+camera like a reader — onto the claim, across to the stars, back out. Crediting the URL in the
+description is not showing it, and `lint-spec.mjs` now says so.
+
+**A terminal take fills the frame.** `"terminalOnly": true` hides the sidebar and maximises the
+panel. Use it on any take with no file preview — an agent run, a long command, a stats
+read-out — because Claude Code streams tool calls and a panel in the bottom third scrolls the
+interesting part away before the camera gets there. Do not also add a `maximizePanel` step: that
+used to be a blind toggle that un-maximised what prep had just maximised, while the log still
+reported success from the earlier call. **A toggle called twice is a no-op wearing a success
+message** — check state before you flip anything.
+
+## 6c. The shape of a video about a GitHub project
+
+`topics/archify-live-map/long.json` is the reference — the owner's verdict: *"some beautifully
+crafted one which worked out well."* Eighteen scenes, seven of them footage (39%).
+
+| beat | what it does |
+|---|---|
+| 1 HOOK | what the thing DOES, one plain sentence |
+| 2 TITLE_CARD | greet, then *"today we're going to install X, point it at a real repository, and watch it…"* |
+| **3 its page on GitHub** | *"So, what is Archify? This is its page on GitHub, and the description is refreshingly plain: …"* — description, stars, licence, read off the screen |
+| 4 | the mechanism in a few moves |
+| 5 CHAPTER | *"Enough reading — let's point it at a real codebase."* |
+| 6+ | the live demonstration |
+
+**The page beat is scene THREE.** A first-time viewer cannot evaluate a saving or a benchmark
+until they know what the thing IS and who wrote it.
+
+**Three things that cut got right and are easy to lose:**
+- **39% footage.** Film anything a machine can be made to do. Components are for what a camera
+  cannot show — an idea, a budget, a break-even.
+- **No component carried three beats.** Repetition the over-reliance ratio cannot see is still
+  monotony; `lint-spec` now warns at three (SAME PICTURE THRICE).
+- **The shorts cover got the same care as the wide thumbnail.** Both draw the subject through
+  `art` — full size, no rounded tile. A generic glyph centred on black is the placeholder.
+
 ## 7. Recording
 
 - **Diagnose with a 4-step demo, never the 49-step one.** Slice `demo.steps.slice(0,4)`

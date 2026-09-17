@@ -91,7 +91,7 @@
       "data": {
         "headline": "A 15% cheaper bill?",
         "subtext": "context-mode, measured over 12 runs",
-        "heroAsset": "lucide:gauge",
+        "heroAsset": "lucide:receipt",
         "hookVariant": "ask",
         "atWord": 1,
         "heroAtWord": 8.083,

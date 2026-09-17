@@ -359,5 +359,11 @@ export const META_KEYS = [
   'screenplay', 'topicAxes', 'seo',
 ];
 export const THUMB_KEYS = [
-  'title', 'badge', 'asset', 'frames', 'note', 'logos', 'titleStruck', 'replaces',
+  // `art` draws the subject FREE — full size, no crop, no rounded tile (owner, 2026-09-12).
+  // It was MISSING here until 2026-09-17, so the normalizer silently deleted `cover.art` from
+  // every shorts spec it touched while Root.tsx, ThemedCover and CoverCard all read it — and
+  // the cover fell back to a generic lucide glyph in a tile. The wide thumbnail only escaped
+  // because long.json happened not to be normalized after the field was set. A field the
+  // renderer reads and a pipeline stage deletes is the same lie as a field nothing reads.
+  'title', 'badge', 'asset', 'art', 'frames', 'note', 'logos', 'titleStruck', 'replaces',
 ];

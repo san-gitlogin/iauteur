@@ -1,5 +1,34 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-09-17 — context-mode reviewed, and two corrections that outlive it
+
+`topics/context-mode-measured` shipped (10:05 wide, 39s short). The review itself is in
+`briefs/contextmode/` — twelve measured cells, three runs each, every number read from Claude
+Code's own session transcripts rather than from the plugin's `ctx_stats`, because a tool
+reporting on itself cannot see what its own tool definitions cost. `scripts/ctx-measure.mjs`,
+`ctx-ab.mjs`, `ctx-score.mjs` and `ctx-summary.mjs` are tracked so any of it can be re-run.
+
+**Two owner corrections came out of it, and both are sealed** (`npm run gate`, 43 seals):
+
+1. **Show the source of truth on camera.** The cut reviewed a plugin for ten minutes and never
+   put its GitHub page on screen. `lint-spec.mjs → checkSourceShown` now warns when
+   `meta.seo.sources` credits a URL for the cut's own subject and no recorded beat went there.
+   The evidence is read from the DEMO behind each clip's `ref` — a `sourceNote` is a claim a
+   spec can make without filming anything. 6 of 114 topics trip it today.
+2. **A terminal take fills the frame.** `terminalOnly: true` hides the sidebar and maximises the
+   panel; the recorder warns when a demo opens no file and the panel covers under 55% of frame.
+   The bug underneath: `maximizePanel` was a blind toggle, so prep maximised and the demo's own
+   step un-maximised, while the log still printed "maximized panel (42 rows)" from the prep
+   call. **A toggle called twice is a no-op wearing a success message** — nothing in the
+   recorder toggles blind any more.
+
+**Also corrected, and worth remembering:** `--plugin-dir` is NOT full isolation. context-mode's
+postinstall writes a global `SessionStart` hook into `~/.claude` the first time it loads, and
+`plugin uninstall` removes neither that, nor the `enabledPlugins` entry, nor the plugin cache.
+And a hash proves a file changed but cannot restore it — snapshot the CONTENT before you touch
+someone's config.
+
+
 Portable, tool-agnostic orientation for any assistant or human picking this repo up on any
 machine (Claude Code, Copilot, Cursor, a fresh clone). `CLAUDE.md` holds the **laws**; this file
 holds **current state, hard-won gotchas, and how to prove the repo is healthy.**

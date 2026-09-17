@@ -1299,6 +1299,7 @@ Longer gaps are fine and are the point — the segment FREEZES on its last frame
 | `theme` | demo | `dark` (default) / `light` (owner decision D7) |
 | `surface` | demo | `vscode` (default) / `browser` |
 | `maxHoldMs` | demo or step | dead-air cap; a frame may hold this long before the wait is cut. Default 1200ms |
+| `terminalOnly` | demo | **`true` hides the sidebar AND maximises the panel, so the terminal fills the frame.** Use it on EVERY take where no file preview is needed — an agent run, a long command, a stats read-out. Owner, 2026-09-17: *"you can have the terminal in full screen to have more view of the claude code. Right now its just sitting at the bottom with usual terminal window appearance."* The recorder warns at take time when a demo opens no file and the panel covers under 55% of the frame. ⚠ Do NOT also add a `maximizePanel` STEP: that used to be a blind toggle which un-maximised what prep had just maximised, while the log still said "maximized panel (42 rows)" because that line came from the prep call. Both paths measure state first now, but one switch is all you need. |
 | `maximizePanel` | demo | `true` runs *View: Toggle Maximized Panel* after the terminal opens — 13 rows becomes ~42. Use it on any terminal-driven demo: the default panel is too short to measure a mark in, and the editor half is empty anyway (gotcha 69) |
 | `marks` | step | `[{id, selector}]` or `[{id, text}]` — rectangles the runner MEASURES for callouts |
 | `expect` | step | `{contains, exitCode}` — the step FAILS the recording if reality disagrees |

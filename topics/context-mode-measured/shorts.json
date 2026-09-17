@@ -40,7 +40,8 @@
   "cover": {
     "title": "CUT YOUR AI BILL",
     "badge": "context-mode",
-    "note": "Measured, not claimed"
+    "note": "Measured, not claimed",
+    "art": "img:ctxmode-bill-vert.png"
   },
   "scenes": [
     {
