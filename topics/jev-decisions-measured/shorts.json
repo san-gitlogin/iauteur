@@ -5,17 +5,17 @@
     "fps": 30,
     "subject": "Jev",
     "audioPrefix": "jev-decisions-measured_shorts",
-    "onePayoff": "its spec sheet says max output tokens: zero, and that is the product rather than a bug",
+    "onePayoff": "the output column on its own listing is blank, and that is the product rather than a bug",
     "openLoop": "What does a frontier model return if it cannot return words?",
     "topicAxes": [
       "entity-novelty"
     ],
     "screenplay": "documentary",
     "seo": {
-      "title": "This AI model's spec sheet says max output tokens: 0 #ai #jev",
-      "hook": "Jev is a frontier model from a co-creator of ChatGPT that cannot write a single word. Its spec sheet lists zero output tokens, and that is the entire design.",
+      "title": "Jev cannot write a single word — and that is the point #ai #jev",
+      "hook": "Jev is a frontier model from a co-creator of ChatGPT that cannot write a single word. On its listing the output column is simply blank, and that is the entire design.",
       "description": "Jev, by TypeSafe AI: unstructured state in, typed probabilistic decisions out. $0.042 per million input tokens, output free. Full breakdown on the channel.",
-      "pinned": "Its own spec sheet lists zero output tokens. Would you trust a decision you cannot ask it to explain?",
+      "pinned": "Its output column is blank because it returns no text at all. Would you trust a decision you cannot ask it to explain?",
       "tags": [
         "jev",
         "typesafe ai",
@@ -46,7 +46,7 @@
   },
   "cover": {
     "title": "Jev",
-    "subtitle": "max output tokens: 0",
+    "subtitle": "no output column at all",
     "badge": "JEV",
     "asset": "img:jev_diogo_hero.png",
     "art": "img:jev_diogo_hero.png",
@@ -60,10 +60,10 @@
       "background": "zoneA",
       "narration": "Jev is a frontier AI model that cannot write a single word.",
       "data": {
-        "headline": "JEV: MAX OUTPUT TOKENS 0",
-        "subtext": "a frontier model that cannot talk",
+        "headline": "JEV CANNOT WRITE A WORD",
+        "subtext": "a frontier model with no text output",
         "heroAsset": "lucide:git-branch",
-        "hookVariant": "figure",
+        "hookVariant": "statement",
         "headlineAtWord": 1,
         "heroAtWord": 5.417
       },
@@ -76,19 +76,387 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Here's its listing on Vercel's AI Gateway — a company with nothing to gain by flattering it. Look at the spec sheet. Max output tokens: zero.",
+      "narration": "Here's Jev on Vercel's AI Gateway — a different company, with nothing to gain by flattering it. Input price, four cents per million tokens.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:jev-vercel#price",
+              "label": "an independent listing",
+              "focus": false,
+              "zooms": [],
+              "callouts": [],
+              "id": "price",
+              "src": "rec/jev-vercel/seg-02.mp4",
+              "frames": 138,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "p": {
+                  "x": 100,
+                  "y": 253,
+                  "w": 51,
+                  "h": 26,
+                  "covers": "$0.04",
+                  "block": {
+                    "x": 100,
+                    "y": 253,
+                    "w": 51,
+                    "h": 26
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 829,
+                  "y": 0,
+                  "w": 16,
+                  "h": 230
+                },
+                {
+                  "x": 1437,
+                  "y": 0,
+                  "w": 51,
+                  "h": 41
+                },
+                {
+                  "x": 923,
+                  "y": 0,
+                  "w": 179,
+                  "h": 9
+                },
+                {
+                  "x": 1118,
+                  "y": 0,
+                  "w": 78,
+                  "h": 9
+                },
+                {
+                  "x": 861,
+                  "y": 0,
+                  "w": 47,
+                  "h": 9
+                },
+                {
+                  "x": 1212,
+                  "y": 0,
+                  "w": 31,
+                  "h": 9
+                },
+                {
+                  "x": 1251,
+                  "y": 0,
+                  "w": 31,
+                  "h": 9
+                },
+                {
+                  "x": 100,
+                  "y": 8,
+                  "w": 50,
+                  "h": 42
+                },
+                {
+                  "x": 153,
+                  "y": 21,
+                  "w": 57,
+                  "h": 20
+                },
+                {
+                  "x": 1248,
+                  "y": 23,
+                  "w": 77,
+                  "h": 18
+                },
+                {
+                  "x": 247,
+                  "y": 23,
+                  "w": 67,
+                  "h": 18
+                },
+                {
+                  "x": 352,
+                  "y": 23,
+                  "w": 65,
+                  "h": 18
+                },
+                {
+                  "x": 441,
+                  "y": 23,
+                  "w": 44,
+                  "h": 18
+                },
+                {
+                  "x": 1361,
+                  "y": 23,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 931,
+                  "y": 33,
+                  "w": 445,
+                  "h": 137
+                },
+                {
+                  "x": 861,
+                  "y": 33,
+                  "w": 140,
+                  "h": 197
+                },
+                {
+                  "x": 861,
+                  "y": 33,
+                  "w": 55,
+                  "h": 57
+                },
+                {
+                  "x": 978,
+                  "y": 33,
+                  "w": 39,
+                  "h": 17
+                },
+                {
+                  "x": 100,
+                  "y": 67,
+                  "w": 551,
+                  "h": 141
+                },
+                {
+                  "x": 159,
+                  "y": 226,
+                  "w": 138,
+                  "h": 52
+                },
+                {
+                  "x": 99,
+                  "y": 227,
+                  "w": 84,
+                  "h": 52
+                },
+                {
+                  "x": 856,
+                  "y": 259,
+                  "w": 97,
+                  "h": 18
+                },
+                {
+                  "x": 1400,
+                  "y": 259,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 265,
+                  "y": 312,
+                  "w": 94,
+                  "h": 18
+                },
+                {
+                  "x": 141,
+                  "y": 312,
+                  "w": 76,
+                  "h": 18
+                },
+                {
+                  "x": 102,
+                  "y": 378,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 190,
+                  "y": 378,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 84,
+                  "y": 462,
+                  "w": 617,
+                  "h": 74
+                },
+                {
+                  "x": 76,
+                  "y": 470,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 114,
+                  "y": 558,
+                  "w": 57,
+                  "h": 18
+                },
+                {
+                  "x": 117,
+                  "y": 616,
+                  "w": 53,
+                  "h": 18
+                },
+                {
+                  "x": 1031,
+                  "y": 617,
+                  "w": 85,
+                  "h": 18
+                },
+                {
+                  "x": 813,
+                  "y": 617,
+                  "w": 72,
+                  "h": 18
+                },
+                {
+                  "x": 931,
+                  "y": 617,
+                  "w": 55,
+                  "h": 18
+                },
+                {
+                  "x": 448,
+                  "y": 617,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 684,
+                  "y": 617,
+                  "w": 45,
+                  "h": 18
+                },
+                {
+                  "x": 576,
+                  "y": 617,
+                  "w": 33,
+                  "h": 18
+                },
+                {
+                  "x": 753,
+                  "y": 617,
+                  "w": 27,
+                  "h": 18
+                },
+                {
+                  "x": 144,
+                  "y": 672,
+                  "w": 81,
+                  "h": 34
+                },
+                {
+                  "x": 117,
+                  "y": 678,
+                  "w": 21,
+                  "h": 21
+                },
+                {
+                  "x": 361,
+                  "y": 678,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 557,
+                  "y": 680,
+                  "w": 34,
+                  "h": 17
+                },
+                {
+                  "x": 1075,
+                  "y": 680,
+                  "w": 31,
+                  "h": 17
+                },
+                {
+                  "x": 592,
+                  "y": 680,
+                  "w": 17,
+                  "h": 17
+                },
+                {
+                  "x": 1031,
+                  "y": 680,
+                  "w": 16,
+                  "h": 17
+                },
+                {
+                  "x": 1053,
+                  "y": 680,
+                  "w": 16,
+                  "h": 17
+                },
+                {
+                  "x": 761,
+                  "y": 681,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 215,
+                  "y": 693,
+                  "w": 33,
+                  "h": 13
+                }
+              ],
+              "changes": [
+                0,
+                4,
+                5,
+                7,
+                8,
+                9,
+                11,
+                12
+              ],
+              "shows": "Jev",
+              "atWord": 3.417
+            }
+          ],
+          "sourceNote": "VERCEL AI GATEWAY — INDEPENDENT LISTING",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 286,
+      "audio": "audio/jev-decisions-measured_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02b",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Now look along that provider row. Context is a dash. And the output column is blank, because Jev returns no tokens you could be charged for.",
       "data": {
         "recordedStep": {
           "clips": [
             {
               "ref": "rec:jev-vercel#spec",
-              "label": "the spec sheet",
+              "label": "the provider row",
               "focus": false,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "o"
+                  ],
+                  "band": true,
+                  "at": "the output column is",
+                  "atWord": 10.417
+                },
+                {
+                  "at": "full",
+                  "atWord": 17.333
+                }
+              ],
               "callouts": [],
               "id": "spec",
               "src": "rec/jev-vercel/seg-03.mp4",
-              "frames": 169,
+              "frames": 168,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -360,19 +728,18 @@
               ],
               "changes": [
                 0,
+                2,
                 3,
                 4,
+                5,
                 6,
-                7,
                 8,
                 9,
-                10,
                 11,
-                12,
-                13
+                12
               ],
               "shows": "Copy link to heading Providers",
-              "atWord": 2.583
+              "atWord": 2.25
             }
           ],
           "sourceNote": "VERCEL AI GATEWAY — INDEPENDENT LISTING",
@@ -383,8 +750,8 @@
           "atWord": 1
         }
       },
-      "durationFrames": 299,
-      "audio": "audio/jev-decisions-measured_shorts_s02.mp3",
+      "durationFrames": 271,
+      "audio": "audio/jev-decisions-measured_shorts_s02b.mp3",
       "timingSource": "tts"
     },
     {
@@ -434,7 +801,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "This is TypeSafe's own demo. Two models, the same twenty-seven questions, fired at the same instant by the same code. Watch the left pane fill with finished answers while the right one is still waiting for its very first word to come back. Their published figures for that run are nought point one one four seconds, against eight point five six six.",
+      "narration": "This is TypeSafe's own demo. Two models, the same twenty-seven questions, fired at the same instant. Watch the left pane fill with finished answers while the right one is still waiting for its first word back. Their figures for that run: nought point one one four seconds, against eight point five six six.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -846,7 +1213,7 @@
                 492
               ],
               "shows": "Our side-by-side demo shows a key difference between our models and LLMs: Jev ou",
-              "atWord": 3.333
+              "atWord": 3.25
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -857,7 +1224,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 622,
+      "durationFrames": 555,
       "audio": "audio/jev-decisions-measured_shorts_s04.mp3",
       "timingSource": "tts"
     },

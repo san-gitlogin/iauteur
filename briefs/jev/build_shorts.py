@@ -21,15 +21,15 @@ META = {
     "fps": 30,
     "subject": "Jev",
     "audioPrefix": "jev-decisions-measured_shorts",
-    "onePayoff": "its spec sheet says max output tokens: zero, and that is the product rather than a bug",
+    "onePayoff": "the output column on its own listing is blank, and that is the product rather than a bug",
     "openLoop": "What does a frontier model return if it cannot return words?",
     "topicAxes": ["entity-novelty"],
     "screenplay": "documentary",
     "seo": {
-        "title": "This AI model's spec sheet says max output tokens: 0 #ai #jev",
-        "hook": "Jev is a frontier model from a co-creator of ChatGPT that cannot write a single word. Its spec sheet lists zero output tokens, and that is the entire design.",
+        "title": "Jev cannot write a single word — and that is the point #ai #jev",
+        "hook": "Jev is a frontier model from a co-creator of ChatGPT that cannot write a single word. On its listing the output column is simply blank, and that is the entire design.",
         "description": "Jev, by TypeSafe AI: unstructured state in, typed probabilistic decisions out. $0.042 per million input tokens, output free. Full breakdown on the channel.",
-        "pinned": "Its own spec sheet lists zero output tokens. Would you trust a decision you cannot ask it to explain?",
+        "pinned": "Its output column is blank because it returns no text at all. Would you trust a decision you cannot ask it to explain?",
         "tags": ["jev", "typesafe ai", "ai", "llm", "system one models", "ai news"],
         "queries": ["what is jev ai", "jev typesafe", "cheapest ai model"],
         "sources": [
@@ -45,7 +45,7 @@ BRAND = {
     "background": "grid", "channel": "THE NBX STUDIO", "logo": "img:channel_logo.png",
 }
 
-COVER = {"title": "Jev", "subtitle": "max output tokens: 0", "badge": "JEV",
+COVER = {"title": "Jev", "subtitle": "no output column at all", "badge": "JEV",
          "asset": "img:jev_diogo_hero.png", "art": "img:jev_diogo_hero.png", "frames": 2}
 
 SRC_TS = "TYPESAFE.AI — OFFICIAL SITE"
@@ -53,10 +53,13 @@ SRC_VERCEL = "VERCEL AI GATEWAY — INDEPENDENT LISTING"
 SRC_BLOG = "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026"
 
 
-def clip(ref, label):
+def clip(ref, label, zooms=None):
+    """focus=False shows the WHOLE captured window, bordered, inside the 9:16 frame. Detail is
+    reached by zooming INSIDE that container on the word that names it — not by letting the
+    renderer crop the page, which is what cost several passes here."""
     assert len(label) <= 26, label
-    # focus=false: reframe for 9:16, never crop
-    return {"ref": ref, "label": label, "focus": False, "zooms": [], "callouts": []}
+    return {"ref": ref, "label": label, "focus": False,
+            "zooms": zooms or [], "callouts": []}
 
 
 def footage(clips, note):
@@ -66,14 +69,22 @@ def footage(clips, note):
 SCENES = [
  {"id": "s01", "type": "HOOK", "transition": "dip", "background": "zoneA",
   "narration": "Jev is a frontier AI model that cannot write a single word.",
-  "data": {"headline": "JEV: MAX OUTPUT TOKENS 0", "subtext": "a frontier model that cannot talk",
-           "heroAsset": "lucide:git-branch", "hookVariant": "figure",
+  "data": {"headline": "JEV CANNOT WRITE A WORD", "subtext": "a frontier model with no text output",
+           "heroAsset": "lucide:git-branch", "hookVariant": "statement",
            "headlineAtWord": 1, "heroAtWord": 8}},
 
  {"id": "s02", "type": "RECORDED_STEP", "transition": "letterbox", "background": "zoneB",
-  "narration": "Here's its listing on Vercel's AI Gateway — a company with nothing to gain by "
-              "flattering it. Look at the spec sheet. Max output tokens: zero.",
-  "data": footage([clip("rec:jev-vercel#spec", "the spec sheet")], SRC_VERCEL)},
+  "narration": "Here's Jev on Vercel's AI Gateway — a different company, with nothing to gain by "
+              "flattering it. Input price, four cents per million tokens.",
+  "data": footage([clip("rec:jev-vercel#price", "an independent listing",
+      zooms=[])], SRC_VERCEL)},
+
+ {"id": "s02b", "type": "RECORDED_STEP", "transition": "letterbox", "background": "zoneB",
+  "narration": "Now look along that provider row. Context is a dash. And the output column is "
+              "blank, because Jev returns no tokens you could be charged for.",
+  "data": footage([clip("rec:jev-vercel#spec", "the provider row",
+      zooms=[{"marks": ["o"], "band": True, "at": "the output column is"},
+             {"at": "full"}])], SRC_VERCEL)},
 
  {"id": "s03", "type": "DECISION_SLOTS", "transition": "zoom", "background": "zoneA",
   "narration": "So what does Jev return instead? Every answer it's allowed to give is cut before the "
@@ -91,10 +102,9 @@ SCENES = [
 
  {"id": "s04", "type": "RECORDED_STEP", "transition": "letterbox", "background": "zoneB",
   "narration": "This is TypeSafe's own demo. Two models, the same twenty-seven questions, fired at "
-              "the same instant by the same code. Watch the left pane fill with finished answers "
-              "while the right one is still waiting for its very first word to come back. Their "
-              "published figures for that run are nought point one one four seconds, against eight "
-              "point five six six.",
+              "the same instant. Watch the left pane fill with finished answers while the right one "
+              "is still waiting for its first word back. Their figures for that run: nought point "
+              "one one four seconds, against eight point five six six.",
   "data": footage([clip("rec:jev-demos#sbs", "their side-by-side")], SRC_BLOG)},
 
  {"id": "s05", "type": "STAT_CALLOUT", "transition": "wipe", "background": "zoneA",

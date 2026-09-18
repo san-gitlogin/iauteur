@@ -1,20 +1,71 @@
 {
-  "slug": "jev-vercel", "surface": "browser", "theme": "light",
-  "viewport": {"width": 1600, "height": 900},
-  "deviceScaleFactor": 4, "masterWidth": 3840,
-  "quality": 96, "crf": 18, "preset": "slow", "fps": 30, "headless": false,
-  "prep": {"url": "https://vercel.com/ai-gateway/models/jev", "settleMs": 5000,
-           "dismiss": ["Accept", "Accept all", "Reject all", "Got it", "Close", "Allow all"]},
-  "maxHoldMs": 2400,
-  "steps": [
-    {"id": "listing", "action": "pause", "ms": 1400,
-     "label": "an independent listing, on somebody else's platform",
-     "marks": [{"id": "id", "text": "'typesafe-ai/jev'"}], "holdMs": 4200, "maxHoldMs": 4200},
-    {"id": "price", "action": "scroll", "target": "text=$0.04",
-     "settleMs": 1500, "label": "the same price, from a company with no stake in the claim",
-     "marks": [{"id": "p", "text": "$0.04"}], "holdMs": 4200, "maxHoldMs": 4200},
-    {"id": "spec", "action": "scroll", "target": "text=Context",
-     "settleMs": 1600, "label": "and the line in the spec sheet that gives the whole game away",
-     "marks": [{"id": "o", "text": "Output"}], "holdMs": 5200, "maxHoldMs": 5200}
+ "slug": "jev-vercel",
+ "surface": "browser",
+ "theme": "light",
+ "viewport": {
+  "width": 1600,
+  "height": 900
+ },
+ "deviceScaleFactor": 4,
+ "masterWidth": 3840,
+ "quality": 96,
+ "crf": 18,
+ "preset": "slow",
+ "fps": 30,
+ "headless": false,
+ "prep": {
+  "url": "https://vercel.com/ai-gateway/models/jev",
+  "settleMs": 5000,
+  "dismiss": [
+   "Accept",
+   "Accept all",
+   "Reject all",
+   "Got it",
+   "Close",
+   "Allow all"
   ]
+ },
+ "maxHoldMs": 2400,
+ "steps": [
+  {
+   "id": "listing",
+   "action": "scroll",
+   "label": "an independent listing, on somebody else's platform",
+   "holdMs": 4200,
+   "maxHoldMs": 4200,
+   "settleMs": 2200,
+   "by": 260,
+   "scrollMs": 800
+  },
+  {
+   "id": "price",
+   "action": "scroll",
+   "target": "text=$0.04",
+   "settleMs": 1500,
+   "label": "the same price, from a company with no stake in the claim",
+   "marks": [
+    {
+     "id": "p",
+     "text": "$0.04"
+    }
+   ],
+   "holdMs": 4200,
+   "maxHoldMs": 4200
+  },
+  {
+   "id": "spec",
+   "action": "scroll",
+   "target": "text=Context",
+   "settleMs": 1600,
+   "label": "and the line in the spec sheet that gives the whole game away",
+   "marks": [
+    {
+     "id": "o",
+     "text": "Output"
+    }
+   ],
+   "holdMs": 5200,
+   "maxHoldMs": 5200
+  }
+ ]
 }
