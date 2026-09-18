@@ -58,7 +58,7 @@ quotation rule, and it is required, not optional. Equally, we never defend our o
 | claim | receipt (on camera) | caveat (on camera) |
 |---|---|---|
 | ChatGPT's co-creator built it | **typesafe.ai/team**, sc. 8 — their own wording | "co-invented RLHF and InstructGPT, the methods that lead to ChatGPT" is a lineage claim, and we say it in those words rather than flattening it |
-| 200× faster | typesafe.ai, sc. 5 | sc. 43: their own Nuance box, "on the higher end of real world gains". LangChain quote this figure *from TypeSafe* — said that way |
+| 200× faster | the launch blog, sc. 43 — where the figure is actually stated | sc. 43: their own Nuance box, "on the higher end of real world gains". LangChain quote this figure *from TypeSafe* — said that way |
 | 400× cheaper | same | same |
 | $42 per billion input tokens | typesafe.ai, **Vercel** (sc. 48) and **OpenRouter** (sc. 49) | early-access pricing they admit they "can't prove isn't subsidised" |
 | It cannot hallucinate | the declared output space, sc. 20 | sc. 44: it can't produce a shape you didn't declare; it can absolutely pick the wrong one |
@@ -86,7 +86,7 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 | 2 | Greet, then the intent: today we go through every page TypeSafe has published about Jev — the claims, the receipts, and the caveats they printed about themselves | `TITLE_CARD` |
 | 3 | **REC — their side-by-side, four seconds of it.** Answers landing all at once on one side, a sentence typing itself out on the other. Said plainly: this is TypeSafe's own demo | `rec:jev-home#sbs` |
 | 4 | **REC** — the founder's launch thread | `rec:jev-tweet` |
-| 5 | **REC** — typesafe.ai: 193.6× faster, 444.6× cheaper, $42 per billion | `rec:jev-home` |
+| 5 | **REC** — typesafe.ai: the H1, then **$42 per billion** and **238× lower than Fable 5.1**, read off the page. (The 193.6×/444.6× pair is NOT on the homepage — it is stated on the blog, and is filmed there with its caveat) | `rec:jev-home` |
 | 6 | What we cover | `LIST_BUILD` |
 
 ### ACT 1 — who made this (7–11, 2 REC)

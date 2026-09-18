@@ -282,3 +282,39 @@ its poster.
 
 This is why the side-by-side beats now come off the HOMEPAGE rather than the blog: the blog's copy
 of the demo has no figures next to it, and the homepage's does.
+
+---
+
+## Correction from the live probe (2026-09-18) — what the homepage ACTUALLY shows
+
+Probed in a real browser, not read off the HTML. The homepage does **not** print
+"193.6× faster / 444.6× cheaper" as text anywhere. Those figures are named on the launch
+blog ("this is where the claims of 193.6x faster, 444.6x cheaper on our home page comes
+from"), and on the homepage they are inside the *Workflow Intelligence vs. Cost* chart image.
+
+What the homepage does print, with its scroll positions:
+
+| y | content |
+|---|---|
+| 616 | H1 — "The First (Public) System One Model; Jev Gives AI The Properties Of Code" |
+| 2355 | H1 — "We Took The Opposite Research Direction" |
+| 3217 | "Decisions, Not Strings" · "Calibrated Confidence" · "More Like Code" (subtexts at 3279) |
+| 4583 | "LLMs" · "Watch the real video" |
+| 4614 | **Cost $0.000081** (TypeSafe) vs **Cost $0.013880** (LLMs) |
+| 4634 | **Completed in 0.114s** vs **Completed in 8.566s** |
+| 4764 | `<video webm autoplay=TRUE loop>` — **the side-by-side. It autoplays; scroll and hold, no click** |
+| 5654 | H2 — "Jev's Intelligence Per Dollar Is Literally Off The Charts." |
+| 5942 | "Workflow Intelligence vs. Cost" · "Hallucinations" |
+| 6048 | `<video mp4 autoplay=FALSE loop>` — **the Hallucinations loop. This one needs a click** |
+| 6587 | "Zero Hallucinations" · "Machine-Native Intelligence" |
+| 7424 | **H2 "$42"** and **H2 "238x"** · 7491: "Per Billion input tokens." / "Lower input price than Claude Fable 5.1" |
+| 9319+ | the FAQ, opened by clicking each question |
+
+**The FAQ is the caveat beat, in their own voice.** The questions include, verbatim:
+*"How Is This Different From JSON Mode Or Structured Outputs?"*, *"Are These Prices Temporary
+Or Subsidized?"*, *"Can Jev Still Get Things Wrong?"*, *"What Is Jev Good At? Where Does It
+Struggle?"* and *"Is Jev Deterministic?"* — a company asking itself every question the video
+needs to ask. Film these rather than paraphrasing them.
+
+**So:** scene 5 reads $42 and 238× off the homepage; the 193.6×/444.6× pair is read off the
+blog where it is actually stated, in the same beat as the nuance that qualifies it.
