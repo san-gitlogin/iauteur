@@ -1,0 +1,238 @@
+{
+ "slug": "jev-home",
+ "surface": "browser",
+ "theme": "light",
+ "viewport": {
+  "width": 1600,
+  "height": 900
+ },
+ "deviceScaleFactor": 4,
+ "masterWidth": 3840,
+ "quality": 96,
+ "crf": 18,
+ "preset": "slow",
+ "fps": 30,
+ "headless": false,
+ "prep": {
+  "url": "https://typesafe.ai/",
+  "settleMs": 5000,
+  "dismiss": [
+   "Accept",
+   "Accept all",
+   "Reject all",
+   "Got it",
+   "Close"
+  ]
+ },
+ "maxHoldMs": 2200,
+ "steps": [
+  {
+   "id": "arrive",
+   "action": "pause",
+   "ms": 1400,
+   "label": "TypeSafe's own site, on the day it launched",
+   "holdMs": 2800
+  },
+  {
+   "id": "intro",
+   "action": "scroll",
+   "target": "text=Introducing Jev",
+   "settleMs": 1500,
+   "label": "how they introduce it",
+   "marks": [
+    {
+     "id": "intro",
+     "text": "Introducing Jev ........................ Intelligence beyond chat"
+    }
+   ],
+   "holdMs": 3200
+  },
+  {
+   "id": "direction",
+   "action": "scroll",
+   "target": "text=Decisions, not strings",
+   "settleMs": 1600,
+   "label": "the three properties they claim for it",
+   "marks": [
+    {
+     "id": "dec",
+     "text": "Decisions, not strings"
+    }
+   ],
+   "holdMs": 3200
+  },
+  {
+   "id": "faster",
+   "action": "scroll",
+   "target": "text=193.6x Faster,",
+   "settleMs": 1700,
+   "label": "the headline number",
+   "marks": [
+    {
+     "id": "f",
+     "text": "193.6x Faster,"
+    }
+   ],
+   "holdMs": 3400
+  },
+  {
+   "id": "cheaper",
+   "action": "scroll",
+   "target": "text=444.6x Cheaper.",
+   "settleMs": 1500,
+   "label": "and the second one",
+   "marks": [
+    {
+     "id": "c",
+     "text": "444.6x Cheaper."
+    }
+   ],
+   "holdMs": 3400
+  },
+  {
+   "id": "caveat",
+   "action": "pause",
+   "ms": 700,
+   "label": "with their own asterisk underneath it",
+   "marks": [
+    {
+     "id": "ast",
+     "text": "*based on workflows for System One tasks"
+    }
+   ],
+   "holdMs": 3600
+  },
+  {
+   "id": "cost",
+   "action": "scroll",
+   "target": "text=Watch the real video",
+   "settleMs": 1800,
+   "label": "their side-by-side, with the money beside it",
+   "marks": [
+    {
+     "id": "money",
+     "text": "Cost $0.000081"
+    }
+   ],
+   "holdMs": 3200
+  },
+  {
+   "id": "times",
+   "action": "pause",
+   "ms": 600,
+   "label": "nought point one one four seconds, against eight and a half",
+   "marks": [
+    {
+     "id": "t",
+     "text": "Completed in 0.114s"
+    }
+   ],
+   "holdMs": 3200
+  },
+  {
+   "id": "stringtax",
+   "action": "scroll",
+   "by": 520,
+   "scrollMs": 900,
+   "settleMs": 2200,
+   "label": "their own side-by-side, playing",
+   "holdMs": 13000,
+   "maxHoldMs": 13000
+  },
+  {
+   "id": "confidence",
+   "action": "scroll",
+   "target": "text=Built for automation",
+   "settleMs": 2000,
+   "label": "the confidence widget, running",
+   "holdMs": 11000,
+   "maxHoldMs": 11000
+  },
+  {
+   "id": "charts",
+   "action": "scroll",
+   "target": "text=Workflow Intelligence vs. Cost",
+   "settleMs": 2000,
+   "label": "their Pareto curve, and the error-rate table beside it",
+   "marks": [
+    {
+     "id": "ch",
+     "text": "Workflow Intelligence vs. Cost"
+    }
+   ],
+   "holdMs": 14000,
+   "maxHoldMs": 14000
+  },
+  {
+   "id": "zerohall",
+   "action": "scroll",
+   "target": "text=Hallucinations",
+   "settleMs": 1800,
+   "label": "structured output error rate \u2014 zero, against everyone else",
+   "marks": [
+    {
+     "id": "zh",
+     "text": "Hallucinations"
+    }
+   ],
+   "holdMs": 13000,
+   "maxHoldMs": 13000
+  },
+  {
+   "id": "jevcost",
+   "action": "scroll",
+   "target": "text=Jev.Cost",
+   "settleMs": 1800,
+   "label": "price per million tokens, every model on one table",
+   "marks": [
+    {
+     "id": "jc",
+     "text": "Jev.Cost"
+    }
+   ],
+   "holdMs": 14000,
+   "maxHoldMs": 14000
+  },
+  {
+   "id": "price",
+   "action": "scroll",
+   "target": "text=Per Billion input tokens.",
+   "settleMs": 1700,
+   "label": "forty-two dollars per billion input tokens",
+   "marks": [
+    {
+     "id": "p42",
+     "text": "Per Billion input tokens."
+    }
+   ],
+   "holdMs": 3400
+  },
+  {
+   "id": "vsfable",
+   "action": "pause",
+   "ms": 600,
+   "label": "and what that is against a frontier model",
+   "marks": [
+    {
+     "id": "x238",
+     "text": "Lower input price than Claude Fable 5.1"
+    }
+   ],
+   "holdMs": 3200
+  },
+  {
+   "id": "faq",
+   "action": "click",
+   "target": "text=Are these prices temporary or subsidized?",
+   "settleMs": 1300,
+   "label": "the question they put to themselves",
+   "marks": [
+    {
+     "id": "q",
+     "text": "Are these prices temporary or subsidized?"
+    }
+   ],
+   "holdMs": 4400
+  }
+ ]
+}
