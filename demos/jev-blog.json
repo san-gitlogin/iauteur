@@ -1,0 +1,79 @@
+{
+  "slug": "jev-blog",
+  "surface": "browser",
+  "theme": "light",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4, "masterWidth": 3840,
+  "quality": 96, "crf": 18, "preset": "slow", "fps": 30,
+  "headless": false,
+  "prep": {"url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev", "settleMs": 5000,
+           "dismiss": ["Accept", "Accept all", "Reject all", "Got it", "Close"]},
+  "maxHoldMs": 2400,
+  "steps": [
+    {"id": "opening", "action": "scroll", "target": "text=Models have been superhuman at chat for years",
+     "settleMs": 1700, "label": "the question the whole company is built on",
+     "marks": [{"id": "q", "text": "Models have been superhuman at chat for years, so where is all the automation?"}],
+     "holdMs": 5200, "maxHoldMs": 5200},
+
+    {"id": "receipts", "action": "scroll", "target": "text=Extraordinary claims require extraordinary evidence",
+     "settleMs": 1500, "label": "and how they introduce their own evidence",
+     "marks": [{"id": "r", "text": "Extraordinary claims require extraordinary evidence so see below for the receipts. 💅"}],
+     "holdMs": 4600, "maxHoldMs": 4600},
+
+    {"id": "table", "action": "scroll", "target": "text=Frontiers, Old and New",
+     "settleMs": 1600, "label": "the comparison table this video is built around",
+     "marks": [{"id": "t", "text": "Frontiers, Old and New"}],
+     "holdMs": 3600, "maxHoldMs": 3600},
+
+    {"id": "sampling", "action": "scroll", "target": "text=Parallel.",
+     "settleMs": 1600, "label": "sequential against parallel, in their own row",
+     "marks": [{"id": "p", "text": "Parallel."}],
+     "holdMs": 5000, "maxHoldMs": 5000},
+
+    {"id": "cost", "action": "scroll", "target": "text=Cost",
+     "settleMs": 1500, "label": "the cost row",
+     "marks": [{"id": "c", "text": "Cost"}],
+     "holdMs": 4400, "maxHoldMs": 4400},
+
+    {"id": "speed", "action": "scroll", "target": "text=Speed",
+     "settleMs": 1500, "label": "and the speed row",
+     "marks": [{"id": "s", "text": "Speed"}],
+     "holdMs": 4400, "maxHoldMs": 4400},
+
+    {"id": "skeptics", "action": "scroll", "target": "text=We love skeptics, and are skeptics ourselves.",
+     "settleMs": 1600, "label": "their own framing of the evidence",
+     "marks": [{"id": "sk", "text": "We love skeptics, and are skeptics ourselves."}],
+     "holdMs": 4200, "maxHoldMs": 4200},
+
+    {"id": "nuance", "action": "scroll", "target": "text=For our bolder claims, we want to provide as much nuance as we can.",
+     "settleMs": 1600, "label": "the caveats they printed about themselves",
+     "marks": [{"id": "n", "text": "For our bolder claims, we want to provide as much nuance as we can."}],
+     "holdMs": 5200, "maxHoldMs": 5200},
+
+    {"id": "evals", "action": "scroll", "target": "text=Workflow evals",
+     "settleMs": 1600, "label": "how the workflow evaluation works",
+     "marks": [{"id": "we", "text": "Workflow evals"}],
+     "holdMs": 5600, "maxHoldMs": 5600},
+
+    {"id": "typesafety", "action": "scroll", "target": "text=Hallucination and Type-safety",
+     "settleMs": 1600, "label": "what they mean by type-safe",
+     "marks": [{"id": "ht", "text": "Hallucination and Type-safety"}],
+     "holdMs": 5000, "maxHoldMs": 5000},
+
+    {"id": "doomhead", "action": "scroll", "target": "text=Doom",
+     "settleMs": 1500, "label": "the demo they led with",
+     "marks": [{"id": "dh", "text": "Doom"}], "holdMs": 3000, "maxHoldMs": 3000},
+
+    {"id": "doomplay", "action": "click", "target": "iframe >> nth=0",
+     "settleMs": 1400, "label": "a bot playing Doom off structured game state",
+     "holdMs": 13000, "maxHoldMs": 13000},
+
+    {"id": "wikihead", "action": "scroll", "target": "text=Wikiracing",
+     "settleMs": 1500, "label": "and the sharper one",
+     "marks": [{"id": "wh", "text": "Wikiracing"}], "holdMs": 3000, "maxHoldMs": 3000},
+
+    {"id": "wikiplay", "action": "click", "target": "iframe >> nth=1",
+     "settleMs": 1400, "label": "hundreds of links a hop, and it finishes in fewer steps",
+     "holdMs": 13000, "maxHoldMs": 13000}
+  ]
+}

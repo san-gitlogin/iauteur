@@ -1,5 +1,13 @@
-// THROWAWAY — validate mark needles the way the resolver does: the needle must land in ONE
-// line box (a Range with a single client rect), inside a block that fits the viewport.
+// CHECK MARK NEEDLES — validate a demo's marks BEFORE paying for a take.
+//
+//   node scripts/check-mark-needles.mjs demos/<demo>.json
+//
+// A mark is drawn as ONE rectangle around the matched characters, so the needle has to land
+// in a single line box inside a block that fits the viewport. Three ways that fails on a real
+// page, all paid for on the Jev shoot: Framer splits a heading into per-line spans so the
+// needle exists in no single text node; a needle that wraps produces two rects and cannot be
+// boxed; and a 600px-tall H1 is never WHOLLY visible in a 900px viewport. The recorder refuses
+// all three at take time and writes nothing - correct, and expensive if the take was long.
 import fs from 'node:fs';
 import {chromium} from 'playwright';
 const demo = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));

@@ -1,4 +1,11 @@
-// THROWAWAY — list every text run that a mark could actually use: one text node, one line box.
+// LIST NEEDLES — every text run on a page that a mark could actually use.
+//
+//   node scripts/list-needles.mjs <url> [filter]
+//
+// Prints y position, block height and text for each run that is ONE text node in ONE line box.
+// Author mark needles from this list rather than from the page's HTML: the DOM's text and the
+// rendered text disagree more often than you would think (on typesafe.ai the FAQ questions are
+// lowercase in the DOM and uppercased by CSS, so every capitalised needle missed).
 import {chromium} from 'playwright';
 const url = process.argv[2];
 const filter = (process.argv[3] || '').toLowerCase();

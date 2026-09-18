@@ -1,0 +1,88 @@
+{
+ "slug": "jev-team",
+ "surface": "browser",
+ "theme": "light",
+ "viewport": {
+  "width": 1600,
+  "height": 900
+ },
+ "deviceScaleFactor": 4,
+ "masterWidth": 3840,
+ "quality": 96,
+ "crf": 18,
+ "preset": "slow",
+ "fps": 30,
+ "headless": false,
+ "prep": {
+  "url": "https://typesafe.ai/team",
+  "settleMs": 4500,
+  "dismiss": [
+   "Accept",
+   "Accept all",
+   "Reject all",
+   "Got it",
+   "Close"
+  ]
+ },
+ "maxHoldMs": 2200,
+ "steps": [
+  {
+   "id": "motto",
+   "action": "scroll",
+   "target": "text=Build Prod,",
+   "settleMs": 1500,
+   "label": "the line they put above their own names",
+   "marks": [
+    {
+     "id": "bp",
+     "text": "Build Prod,"
+    }
+   ],
+   "holdMs": 3400
+  },
+  {
+   "id": "founders",
+   "action": "scroll",
+   "target": "text=founders",
+   "settleMs": 1500,
+   "label": "who is actually behind this",
+   "marks": [
+    {
+     "id": "f",
+     "text": "founders"
+    }
+   ],
+   "holdMs": 2800
+  },
+  {
+   "id": "diogo",
+   "action": "scroll",
+   "target": "text=Diogo Almeida",
+   "settleMs": 1700,
+   "label": "the claim the title of this video rests on, in their own words",
+   "marks": [
+    {
+     "id": "d",
+     "text": "Diogo Almeida"
+    }
+   ],
+   "holdMs": 7000,
+   "maxHoldMs": 7000
+  },
+  {
+   "id": "sasha",
+   "action": "scroll",
+   "target": "text=Sasha Sheng",
+   "settleMs": 1600,
+   "label": "and the co-founder, out of Meta's research lab",
+   "marks": [
+    {
+     "id": "s",
+     "text": "Sasha Sheng"
+    }
+   ],
+   "holdMs": 5500,
+   "maxHoldMs": 5500
+  }
+ ]
+}

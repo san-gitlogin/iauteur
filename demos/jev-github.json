@@ -1,0 +1,23 @@
+{
+  "slug": "jev-github", "surface": "browser", "theme": "light",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4, "masterWidth": 3840,
+  "quality": 96, "crf": 18, "preset": "slow", "fps": 30, "headless": false,
+  "prep": {"url": "https://github.com/typesafe-ai", "settleMs": 4500,
+           "dismiss": ["Accept", "Accept all", "Reject all", "Got it", "Close"]},
+  "maxHoldMs": 2400,
+  "steps": [
+    {"id": "org", "action": "pause", "ms": 1400, "label": "their official GitHub organisation",
+     "marks": [{"id": "o", "text": "TypeSafe"}], "holdMs": 3600, "maxHoldMs": 3600},
+    {"id": "sdks", "action": "scroll", "target": "text=typesafe-sdk-js",
+     "settleMs": 1600, "label": "the official SDKs, and how many people have starred them",
+     "marks": [{"id": "js", "text": "typesafe-sdk-js"}], "holdMs": 4600, "maxHoldMs": 4600},
+    {"id": "skills", "action": "pause", "ms": 800, "label": "an agent-skills repo for Claude Code",
+     "marks": [{"id": "sk", "text": "Agent skills for building with TypeSafe's System One API"}],
+     "holdMs": 4600, "maxHoldMs": 4600},
+    {"id": "adapter", "action": "scroll", "target": "text=system-one-adapter-python",
+     "settleMs": 1600, "label": "and the one that lets you run the same code against an ordinary model",
+     "marks": [{"id": "ad", "text": "Drop-in TypeSafeClient replacement backed by LLM APIs"}],
+     "holdMs": 5200, "maxHoldMs": 5200}
+  ]
+}

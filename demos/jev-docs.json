@@ -1,0 +1,121 @@
+{
+ "slug": "jev-docs",
+ "surface": "browser",
+ "theme": "light",
+ "viewport": {
+  "width": 1600,
+  "height": 900
+ },
+ "deviceScaleFactor": 4,
+ "masterWidth": 3840,
+ "quality": 96,
+ "crf": 18,
+ "preset": "slow",
+ "fps": 30,
+ "headless": false,
+ "prep": {
+  "url": "https://docs.typesafe.ai/introduction/quickstart",
+  "settleMs": 4500,
+  "dismiss": [
+   "Accept",
+   "Accept all",
+   "Got it",
+   "Close"
+  ]
+ },
+ "maxHoldMs": 2400,
+ "steps": [
+  {
+   "id": "noul",
+   "action": "scroll",
+   "by": 300,
+   "scrollMs": 800,
+   "settleMs": 1500,
+   "label": "the first of the three question types",
+   "marks": [
+    {
+     "id": "n",
+     "text": "Try a Noul question:"
+    }
+   ],
+   "holdMs": 5000,
+   "maxHoldMs": 5000
+  },
+  {
+   "id": "mix",
+   "action": "scroll",
+   "by": 260,
+   "scrollMs": 700,
+   "settleMs": 1500,
+   "label": "three question types, one request",
+   "marks": [
+    {
+     "id": "m",
+     "text": "Mix Noul, Choice, and Score in one call and see all results at once."
+    }
+   ],
+   "holdMs": 5600,
+   "maxHoldMs": 5600
+  },
+  {
+   "id": "answers",
+   "action": "scroll",
+   "by": 1780,
+   "scrollMs": 1500,
+   "settleMs": 1700,
+   "label": "and what comes back",
+   "marks": [
+    {
+     "id": "a",
+     "text": "\"answers\""
+    }
+   ],
+   "holdMs": 4200,
+   "maxHoldMs": 4200
+  },
+  {
+   "id": "probs",
+   "action": "pause",
+   "ms": 800,
+   "label": "a probability for every option",
+   "marks": [
+    {
+     "id": "p",
+     "text": "\"probabilities\""
+    }
+   ],
+   "holdMs": 4600,
+   "maxHoldMs": 4600
+  },
+  {
+   "id": "conf",
+   "action": "pause",
+   "ms": 800,
+   "label": "and a confidence beside the decision",
+   "marks": [
+    {
+     "id": "c",
+     "text": "\"confidence\""
+    }
+   ],
+   "holdMs": 4600,
+   "maxHoldMs": 4600
+  },
+  {
+   "id": "install",
+   "action": "scroll",
+   "by": 820,
+   "scrollMs": 900,
+   "settleMs": 1500,
+   "label": "the official SDK, one line to install",
+   "marks": [
+    {
+     "id": "i",
+     "text": "Install the SDK"
+    }
+   ],
+   "holdMs": 3400,
+   "maxHoldMs": 3400
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "jev-demos",
+  "surface": "browser",
+  "theme": "light",
+  "viewport": {"width": 760, "height": 428},
+  "deviceScaleFactor": 5, "masterWidth": 0,
+  "quality": 96, "crf": 18, "preset": "slow", "fps": 30,
+  "headless": false,
+  "prep": {"url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev", "settleMs": 5000,
+           "dismiss": ["Accept", "Accept all", "Reject all", "Got it", "Close"]},
+  "maxHoldMs": 2400,
+  "steps": [
+    {"id": "sbsgo", "action": "scroll", "target": "text=Side-by-side demonstration",
+     "settleMs": 1600, "label": "their side-by-side demonstration", "holdMs": 2000},
+    {"id": "sbs", "action": "click", "target": "iframe >> nth=0",
+     "settleMs": 1400, "label": "answers landing together against a sentence being typed",
+     "holdMs": 15000, "maxHoldMs": 15000},
+
+    {"id": "doomgo", "action": "scroll", "target": "text=Doom",
+     "settleMs": 1500, "label": "the Doom demo", "holdMs": 2000},
+    {"id": "doom", "action": "click", "target": "iframe >> nth=1",
+     "settleMs": 1400, "label": "a bot playing Doom off structured game state",
+     "holdMs": 15000, "maxHoldMs": 15000},
+
+    {"id": "wikigo", "action": "scroll", "target": "text=Wikiracing",
+     "settleMs": 1500, "label": "and Wikiracing", "holdMs": 2000},
+    {"id": "wiki", "action": "click", "target": "iframe >> nth=3",
+     "settleMs": 1400, "label": "hundreds of links a hop, finishing in fewer steps",
+     "holdMs": 15000, "maxHoldMs": 15000}
+  ]
+}
