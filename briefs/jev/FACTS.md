@@ -259,3 +259,26 @@ access ever arrives, and not used by this video.
 - https://www.langchain.com/blog/building-a-harness-with-jev
 - https://docs.langchain.com/oss/python/integrations/providers/typesafe · PyPI `langchain-typesafe`
 - https://openrouter.ai/typesafe/jev-1.13 · https://vercel.com/ai-gateway/models/jev
+
+---
+
+## The homepage animates the whole argument (owner spotted this, 2026-09-18)
+
+`typesafe.ai` carries **five animated assets**, all `loop muted playsinline preload="none"`
+(Framer) — so they autoplay when scrolled into view. No click needed; scroll, settle, hold.
+
+| asset | what sits with it | why it matters |
+|---|---|---|
+| `<video>` webm | **the side-by-side**, under copy reading *"TypeSafe AI · Cost $0.000081 · Completed in 0.114s"* and *"LLMs · Cost $0.013880 · Completed in 8.566s"*, with the line *"Watch the real video"* | the cost AND the time are laid out beside the animation, so one frame carries the comparison and its numbers |
+| `<video>` mp4 | the **Hallucinations** section | their own animation of the type-error / hallucination claim |
+| GIF 590×270 | immediately after *"…for calibrated decisions"* | calibration, animated by them |
+| GIF 1440×540 | full-width band | section banner |
+| GIF 1080×1080 | square, rendered at 260px | section illustration |
+
+**Recording note:** `preload="none"` means the asset only loads once it is in view. The step must
+scroll to it, settle ~1500 ms, and only then hold — with `holdMs`/`maxHoldMs` raised to 10–12 s so
+a full loop survives the take. Check the frame to confirm it is actually playing and not parked on
+its poster.
+
+This is why the side-by-side beats now come off the HOMEPAGE rather than the blog: the blog's copy
+of the demo has no figures next to it, and the homepage's does.

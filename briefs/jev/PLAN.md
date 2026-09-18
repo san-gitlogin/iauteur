@@ -73,9 +73,9 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 
 ---
 
-## 3. Shape — 64 scenes, 20 recorded (31%)
+## 3. Shape — 66 scenes, 22 recorded (33%)
 
-`OVER-RELIANCE` caps a sub-type at `ceil(0.35 × 64)` = 23, so 20 is comfortable.
+`OVER-RELIANCE` caps a sub-type at `ceil(0.35 × 66)` = 24, so 22 is comfortable.
 `REC` = footage · `★` = new component · everything else drawn.
 
 ### ACT 0 — the claim (1–6, 3 REC)
@@ -84,7 +84,7 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 |---|---|---|
 | 1 | **"Jev is a frontier AI model that cannot write a single word."** Subject in the first sentence (LAW 0g). Headline `JEV — 200× FASTER, 400× CHEAPER` | `HOOK` |
 | 2 | Greet, then the intent: today we go through every page TypeSafe has published about Jev — the claims, the receipts, and the caveats they printed about themselves | `TITLE_CARD` |
-| 3 | **REC — their side-by-side recording**, four seconds of it. Answers landing all at once on one side, a sentence typing itself out on the other. Said plainly: this is TypeSafe's own demo | `rec:jev-blog#sbs` |
+| 3 | **REC — their side-by-side, four seconds of it.** Answers landing all at once on one side, a sentence typing itself out on the other. Said plainly: this is TypeSafe's own demo | `rec:jev-home#sbs` |
 | 4 | **REC** — the founder's launch thread | `rec:jev-tweet` |
 | 5 | **REC** — typesafe.ai: 193.6× faster, 444.6× cheaper, $42 per billion | `rec:jev-home` |
 | 6 | What we cover | `LIST_BUILD` |
@@ -115,7 +115,8 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 | 21 | What we do today: generate a string, then stand a validator in front of it, and sometimes it bounces | `TYPE_GATE` (deliberate — it depicts the **LLM** mechanism) |
 | 22 | "But my model already has JSON mode." The schema constrains the decoder; the model still emits one token at a time and still bills you | `API_REQUEST_RESPONSE` |
 | 23 | RLHF trains for what a person would rather read. RLCD trains for a probability honest about itself | `MODEL_STAGES` (2nd) |
-| 24 | What "calibrated" means: a hundred decisions sorted by confidence, accuracy tracking the claim | `PICTOGRAM` |
+| 24 | **REC** — their own animation of calibrated decisions, on the homepage | `rec:jev-home#calib` |
+| 24b | What "calibrated" actually means, which their loop doesn't say: a hundred decisions sorted by confidence, accuracy tracking the claim | `PICTOGRAM` |
 | 25 | **REC** — the docs quickstart, taught line by line, and the response with `probabilities` and `confidence` | `rec:jev-docs#quickstart` |
 | 26 | The three primitives, and the Noul question answered — through Vercel's API it's just `boolean` | `API_REQUEST_RESPONSE` (2nd) |
 
@@ -124,7 +125,7 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 | # | beat | cast |
 |---|---|---|
 | 27 | Chapter: what it looks like when it runs | `CHAPTER` |
-| 28 | **REC — the side-by-side in full**, their timings on screen and read off the frame | `rec:jev-blog#sbs` |
+| 28 | **REC — the side-by-side in full**, and the figures printed beside it: $0.000081 against $0.013880, 0.114 seconds against 8.566. Read off the frame | `rec:jev-home#sbs` |
 | 29 | What you just watched, against the picture from earlier: parallel resolution versus a token stream | ★ `PARALLEL_SAMPLER` (2nd) |
 | 30 | **REC — Doom, playing.** A bot reacting to structured game state | `rec:jev-blog#doom` |
 | 31 | Ten queries a second, about seven dollars an hour — their engineer's own figure, from the post | `STAT_CALLOUT` |
@@ -145,7 +146,8 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 | 41 | Then the other columns: $0.0004 against $0.1761, 0.4 seconds against 37.8 | `COST_METER` |
 | 42 | The yardstick: reference answers are the average of Astra and Fable. Two competitors' opinions, which cuts both ways — and they say so | `TEST_MATRIX` |
 | 43 | **REC** — their own Nuance boxes, on their own page | `rec:jev-blog#nuance` |
-| 44 | What "can't hallucinate" means, and what it doesn't | ★ `DECISION_SLOTS` (2nd) |
+| 44 | **REC** — their Hallucinations section, the loop running | `rec:jev-home#halluc` |
+| 44b | What "can't hallucinate" means, and what it doesn't | ★ `DECISION_SLOTS` (2nd) |
 | 45 | Structured-output error rates: 0%, 5.73%, 45.5% — and their own admission that the 0% is derived | `EVAL_DASHBOARD` |
 | 46 | Which of these you can check yourself, and which you're taking on trust. Said plainly, with the line between them drawn | `RECAP` |
 
@@ -214,7 +216,7 @@ own `sourceNote`** — these are all other people's pages, and several beats cut
 | take | steps | notes |
 |---|---|---|
 | `jev-tweet` | the thread: tweet 1 → 2 → 3, then play the embedded clip | **needs the logged-in profile.** I'll prompt you to sign in once; x.com refuses fetchers, so it exists only as footage |
-| `jev-home` | headline → 193.6×/444.6× → $42 per billion → the chart | marks on each figure |
+| `jev-home` | headline → 193.6×/444.6× → $42 per billion → the chart → **scroll to the side-by-side loop and hold** → the calibrated-decisions GIF → the Hallucinations loop | five animated assets, all autoplay-on-view with `preload="none"`: scroll, settle ~1500 ms, then `holdMs`/`maxHoldMs` 10–12 s. Confirm from a frame that it is PLAYING, not parked on its poster. The workhorse take |
 | `jev-team` | Diogo's card read in full → Sasha's card → back out | the beat that pays the title. Frame the sentence, not the photo |
 | `jev-manifesto` | "Build Prod, Not God" → the argument under it | short, 20 seconds |
 | `jev-blog` | opening question → the "function call" line → the Frontiers table (3 scrolls) → **play the side-by-side** → the Nuance boxes → the FAQ accordion opened | the workhorse take |
