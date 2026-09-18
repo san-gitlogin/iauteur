@@ -15,7 +15,7 @@
  "headless": false,
  "prep": {
   "url": "https://docs.typesafe.ai/introduction/quickstart",
-  "settleMs": 4500,
+  "settleMs": 6000,
   "dismiss": [
    "Accept",
    "Accept all",
@@ -30,7 +30,7 @@
    "action": "scroll",
    "by": 300,
    "scrollMs": 800,
-   "settleMs": 1500,
+   "settleMs": 2600,
    "label": "the first of the three question types",
    "marks": [
     {
@@ -46,7 +46,7 @@
    "action": "scroll",
    "by": 260,
    "scrollMs": 700,
-   "settleMs": 1500,
+   "settleMs": 2600,
    "label": "three question types, one request",
    "marks": [
     {
@@ -62,7 +62,7 @@
    "action": "scroll",
    "by": 1780,
    "scrollMs": 1500,
-   "settleMs": 1700,
+   "settleMs": 2600,
    "label": "and what comes back",
    "marks": [
     {
@@ -85,7 +85,8 @@
     }
    ],
    "holdMs": 4600,
-   "maxHoldMs": 4600
+   "maxHoldMs": 4600,
+   "settleMs": 2600
   },
   {
    "id": "conf",
@@ -99,14 +100,15 @@
     }
    ],
    "holdMs": 4600,
-   "maxHoldMs": 4600
+   "maxHoldMs": 4600,
+   "settleMs": 2600
   },
   {
    "id": "install",
    "action": "scroll",
    "by": 820,
    "scrollMs": 900,
-   "settleMs": 1500,
+   "settleMs": 2600,
    "label": "the official SDK, one line to install",
    "marks": [
     {

@@ -1,22 +1,89 @@
 {
-  "slug": "jev-evals", "surface": "browser", "theme": "light",
-  "viewport": {"width": 1600, "height": 900},
-  "deviceScaleFactor": 4, "masterWidth": 3840,
-  "quality": 96, "crf": 18, "preset": "slow", "fps": 30, "headless": false,
-  "prep": {"url": "https://evals.typesafe.ai/", "settleMs": 5000,
-           "dismiss": ["Accept", "Accept all", "Got it", "Close"]},
-  "maxHoldMs": 2400,
-  "steps": [
-    {"id": "title", "action": "pause", "ms": 1400, "label": "their own workflow evaluations, published in full",
-     "marks": [{"id": "t", "text": "Workflow evals"}], "holdMs": 3600, "maxHoldMs": 3600},
-    {"id": "axes", "action": "scroll", "target": "text=Mean accuracy vs cost and time",
-     "settleMs": 1600, "label": "accuracy against cost, and against time",
-     "marks": [{"id": "a", "text": "Mean accuracy vs cost and time"}], "holdMs": 4200, "maxHoldMs": 4200},
-    {"id": "frontier", "action": "pause", "ms": 800, "label": "the line they draw through it",
-     "marks": [{"id": "f", "text": "frontier: nothing is both cheaper and more accurate"}],
-     "holdMs": 5200, "maxHoldMs": 5200},
-    {"id": "structure", "action": "scroll", "target": "text=. Structure is always better.",
-     "settleMs": 1600, "label": "and the conclusion they draw from it",
-     "marks": [{"id": "s", "text": ". Structure is always better."}], "holdMs": 4600, "maxHoldMs": 4600}
+ "slug": "jev-evals",
+ "surface": "browser",
+ "theme": "light",
+ "viewport": {
+  "width": 1600,
+  "height": 900
+ },
+ "deviceScaleFactor": 4,
+ "masterWidth": 3840,
+ "quality": 96,
+ "crf": 18,
+ "preset": "slow",
+ "fps": 30,
+ "headless": false,
+ "prep": {
+  "url": "https://evals.typesafe.ai/",
+  "settleMs": 7000,
+  "dismiss": [
+   "Accept",
+   "Accept all",
+   "Got it",
+   "Close"
   ]
+ },
+ "maxHoldMs": 2400,
+ "steps": [
+  {
+   "id": "title",
+   "action": "pause",
+   "ms": 1400,
+   "label": "their own workflow evaluations, published in full",
+   "marks": [
+    {
+     "id": "t",
+     "text": "Workflow evals"
+    }
+   ],
+   "holdMs": 3600,
+   "maxHoldMs": 3600,
+   "settleMs": 2800
+  },
+  {
+   "id": "axes",
+   "action": "scroll",
+   "target": "text=Mean accuracy vs cost and time",
+   "settleMs": 2800,
+   "label": "accuracy against cost, and against time",
+   "marks": [
+    {
+     "id": "a",
+     "text": "Mean accuracy vs cost and time"
+    }
+   ],
+   "holdMs": 4200,
+   "maxHoldMs": 4200
+  },
+  {
+   "id": "frontier",
+   "action": "pause",
+   "ms": 800,
+   "label": "the line they draw through it",
+   "marks": [
+    {
+     "id": "f",
+     "text": "frontier: nothing is both cheaper and more accurate"
+    }
+   ],
+   "holdMs": 5200,
+   "maxHoldMs": 5200,
+   "settleMs": 2800
+  },
+  {
+   "id": "structure",
+   "action": "scroll",
+   "target": "text=. Structure is always better.",
+   "settleMs": 2800,
+   "label": "and the conclusion they draw from it",
+   "marks": [
+    {
+     "id": "s",
+     "text": ". Structure is always better."
+    }
+   ],
+   "holdMs": 4600,
+   "maxHoldMs": 4600
+  }
+ ]
 }

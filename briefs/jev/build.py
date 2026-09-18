@@ -22,11 +22,11 @@ META = {
     "topicAxes": ["entity-novelty", "tribal-conflict"],
     "screenplay": "documentary",
     "seo": {
-        "title": "ChatGPT's Co-Creator Just Released This New Model — 200× Faster, 400× Cheaper",
+        "title": "Everything You Need To Know About Jev — 200× Faster, 400× Cheaper",
         "altTitles": [
-            "The AI That Can't Write A Word — And Costs $42 Per Billion Tokens",
-            "Jev, Explained From Every Page TypeSafe Published",
-            "ChatGPT's Co-Creator Deleted Text Generation. It Got 200× Faster.",
+            "Jev Explained: The AI Model That Cannot Write A Single Word",
+            "ChatGPT's Co-Creator Built An AI That Refuses To Talk — Here's Why",
+            "The AI Model That Costs $42 Per BILLION Tokens, Explained",
         ],
         "hook": "Diogo Almeida co-invented RLHF and InstructGPT — the methods behind ChatGPT. His new model, Jev, cannot write a single word, and that is the entire point. We go through every page TypeSafe has published: the claims, the receipts, and the caveats they printed about themselves.",
         "description": "Jev is TypeSafe AI's first System One Model: unstructured state goes in, typed probabilistic decisions come out. No text, no streaming, no reasoning trace. This is a full walk through the primary sources — the launch post, the homepage numbers, their own workflow evals, the docs, the price listed independently on Vercel and OpenRouter, and the demos they built for fun.",
@@ -71,14 +71,15 @@ BRAND = {
 }
 
 THUMBNAIL = {
-    # The art is a FACE, drawn free at full bleed. The first pass used the tweet screenshot:
-    # unreadable at thumbnail size, and its text fought the title for the same eye. The note is
-    # short because a long one runs under the art edge (seen, not guessed).
-    "title": "200× FASTER · 400× CHEAPER",
-    "badge": "JEV",
-    "note": "IT CANNOT TALK",
-    "asset": "img:jev_diogo_hero.png",
-    "art": "img:jev_diogo_hero.png",
+    # The art is a PRE-COMPOSITED 1920x1080 plate: the launch post kept whole and legible, parked
+    # right, faded into the ground with a real gradient, and a soft veil on the left third so the
+    # headline always has clean ground under it. The first pass let the layout hard-cut the
+    # screenshot, which read as paste-up and hid the content.
+    "title": "AN AI MODEL 200× FASTER, 400× CHEAPER",
+    "badge": "EVERYTHING YOU NEED TO KNOW ABOUT JEV",
+    "note": "BY THE CO-CREATOR OF CHATGPT",
+    "asset": "img:jev_thumb_art.png",
+    "art": "img:jev_thumb_art.png",
 }
 
 COVER = {"title": "Jev", "subtitle": "the model that cannot write a word"}
@@ -152,12 +153,11 @@ SCENES += [
   "Diogo says, he kept asking himself why superhuman chat models hadn't led to AGI. Then come the two numbers "
   "everybody screenshotted: twenty to two hundred times faster, and forty to four hundred times cheaper, with output "
   "tokens free. Hold on to both, because you will meet three different versions of them before we are finished.",
-  {"mediaCallout": {"src": "assets/jev_tweet.png", "kind": "image", "treatment": "clean",
-    "headline": "The post that started it",
+  {"mediaCallout": {"src": "assets/jev_post_plate.png", "kind": "image", "treatment": "clean",
     "callouts": [
-      {"x": 0.31, "y": 0.155, "label": "co-inventing ChatGPT", "side": "down", "color": "purple", "atWord": 17},
-      {"x": 0.20, "y": 0.385, "label": "20-200× faster", "side": "right", "color": "green", "atWord": 42},
-      {"x": 0.25, "y": 0.415, "label": "40-400× cheaper", "side": "right", "color": "blue", "atWord": 48}]}},
+      {"x": 0.398, "y": 0.122, "label": "co-inventing ChatGPT", "side": "left", "color": "purple", "atWord": 17},
+      {"x": 0.352, "y": 0.341, "label": "20-200× faster", "side": "left", "color": "green", "atWord": 42},
+      {"x": 0.380, "y": 0.364, "label": "40-400× cheaper", "side": "left", "color": "blue", "atWord": 48}]}},
   transition="slide", background="zoneB",
   anchors=["mediaCallout.callouts.0.atWord", "mediaCallout.callouts.1.atWord", "mediaCallout.callouts.2.atWord"]),
 
