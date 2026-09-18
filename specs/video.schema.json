@@ -560,7 +560,8 @@
               "COLUMN_SPLIT",
               "LIVE_CODE",
               "VAR_SCOPE",
-              "REVIEW_YIELD"
+              "REVIEW_YIELD",
+              "PARALLEL_SAMPLER"
             ]
           },
           "narration": {
@@ -630,6 +631,91 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "PARALLEL_SAMPLER"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "parallelSampler": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "per-beat title; authored from this beat's subject, never a generic stage title"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 92,
+                          "description": "the standing frame line — what the viewer is looking at and what stands for what (LAW 0l). Unanchored, on screen for the whole beat"
+                        },
+                        "question": {
+                          "type": "string",
+                          "maxLength": 74,
+                          "description": "the single state/question both lanes are answering, shown once at the top so the race is visibly fair"
+                        },
+                        "seqLabel": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "name of the sequential lane, e.g. 'One token at a time'"
+                        },
+                        "parLabel": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "name of the parallel lane, e.g. 'All answers, one pass'"
+                        },
+                        "tokens": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "the chips the sequential lane emits, in order. 6-14 reads best; each ≤14 chars"
+                        },
+                        "slots": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "the typed answers that resolve together. label = the question's name, text = the answer, value = 0..1 probability, color = its semantic colour. 2-4 slots"
+                        },
+                        "seqTime": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "elapsed figure for the sequential lane, written EXACTLY as its source prints it (e.g. '8.566 s'). Omit if no measured figure exists — never invent one"
+                        },
+                        "parTime": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "elapsed figure for the parallel lane, same rule"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "when the run starts. The empty stage is up within 38 frames regardless (BASE <= 38)"
+                        },
+                        "pulseAtWord": {
+                          "type": "number",
+                          "description": "the word on which every slot resolves. All slots land TOGETHER — simultaneity is the whole claim, so they are never staggered"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "where the figures came from; renders as the standing source strip"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

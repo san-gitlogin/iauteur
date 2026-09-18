@@ -261,6 +261,7 @@ export const TYPES = [
   'LIVE_CODE',
   'VAR_SCOPE',
   'REVIEW_YIELD',
+  'PARALLEL_SAMPLER',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

@@ -4,6 +4,7 @@
 // ./types.ts are unchanged; use SceneOf<'BITS'> when you want narrowing.
 
 export type SceneTypeName =
+  | 'PARALLEL_SAMPLER'
   | 'REVIEW_YIELD'
   | 'VAR_SCOPE'
   | 'LIVE_CODE'
@@ -386,6 +387,23 @@ export interface SceneCommon<T extends SceneTypeName> {
   pip?: Record<string, unknown>;
   audio?: string;
 }
+
+export type ParallelSamplerScene = SceneCommon<'PARALLEL_SAMPLER'> & { data: {
+    parallelSampler: {
+      caption?: string;
+      premise?: string;
+      question?: string;
+      seqLabel?: string;
+      parLabel?: string;
+      tokens?: string[];
+      slots?: Array<Record<string, unknown>>;
+      seqTime?: string;
+      parTime?: string;
+      atWord?: number;
+      pulseAtWord?: number;
+      source?: string;
+    };
+  } };
 
 export type ReviewYieldScene = SceneCommon<'REVIEW_YIELD'> & { data: {
     reviewYield: {
@@ -5598,6 +5616,7 @@ export type PhotoTimelineScene = SceneCommon<'PHOTO_TIMELINE'> & { data: {
   } };
 
 export interface SceneByType {
+  PARALLEL_SAMPLER: ParallelSamplerScene;
   REVIEW_YIELD: ReviewYieldScene;
   VAR_SCOPE: VarScopeScene;
   LIVE_CODE: LiveCodeScene;
@@ -5973,6 +5992,7 @@ export type SceneOf<T extends SceneTypeName> = SceneByType[T];
 
 // The full discriminated union (narrow on `.type`).
 export type TypedScene =
+  | ParallelSamplerScene
   | ReviewYieldScene
   | VarScopeScene
   | LiveCodeScene

@@ -376,10 +376,12 @@ import {ColumnSplit} from './scenes/ColumnSplit';
 import {LiveCode} from './scenes/LiveCode';
 import {VarScope} from './scenes/VarScope';
 import {ReviewYield} from './scenes/ReviewYield';
+import {ParallelSampler} from './scenes/ParallelSampler';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  REVIEW_YIELD: ReviewYield,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  PARALLEL_SAMPLER: ParallelSampler,
+  REVIEW_YIELD: ReviewYield,
   VAR_SCOPE: VarScope,
   LIVE_CODE: LiveCode,
   COLUMN_SPLIT: ColumnSplit,

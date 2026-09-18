@@ -16,7 +16,27 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  REVIEW_YIELD: {
+export const MANIFEST = {  PARALLEL_SAMPLER: {
+    category: "diagram", family: "model-surface", data_key: "parallelSampler",
+    purpose: "Two ways of answering the same question, racing on one stage: a token chain emitted one at a time, against a bank of typed slots that all resolve on a single pulse.",
+    use_when: "A beat turns on HOW an answer is produced rather than what it says — autoregressive generation versus parallel structured decoding, streaming versus one-shot, a sequential pipeline versus a fan-out. Use it when the contrast between the two mechanisms IS the teaching; do not use it to compare two answers.",
+    fields: {
+      caption: {t: 'string', max: 52, note: "per-beat title; authored from this beat's subject, never a generic stage title"},
+      premise: {t: 'string', max: 92, note: "the standing frame line — what the viewer is looking at and what stands for what (LAW 0l). Unanchored, on screen for the whole beat"},
+      question: {t: 'string', max: 74, note: "the single state/question both lanes are answering, shown once at the top so the race is visibly fair"},
+      seqLabel: {t: 'string', max: 30, note: "name of the sequential lane, e.g. 'One token at a time'"},
+      parLabel: {t: 'string', max: 30, note: "name of the parallel lane, e.g. 'All answers, one pass'"},
+      tokens: {t: 'string[]', note: "the chips the sequential lane emits, in order. 6-14 reads best; each ≤14 chars"},
+      slots: {t: 'items', note: "the typed answers that resolve together. label = the question's name, text = the answer, value = 0..1 probability, color = its semantic colour. 2-4 slots"},
+      seqTime: {t: 'string', max: 12, note: "elapsed figure for the sequential lane, written EXACTLY as its source prints it (e.g. '8.566 s'). Omit if no measured figure exists — never invent one"},
+      parTime: {t: 'string', max: 12, note: "elapsed figure for the parallel lane, same rule"},
+      atWord: {t: 'anchor', note: "when the run starts. The empty stage is up within 38 frames regardless (BASE <= 38)"},
+      pulseAtWord: {t: 'number', note: "the word on which every slot resolves. All slots land TOGETHER — simultaneity is the whole claim, so they are never staggered"},
+      source: {t: 'string', max: 64, note: "where the figures came from; renders as the standing source strip"},
+    },
+    example: {parallelSampler: {"caption":"Two ways to answer one question","premise":"Same state in, same instant. Top: a sentence being written. Bottom: three declared answers.","question":"Card charged twice for one order.","seqLabel":"One token at a time","parLabel":"All answers, one pass","tokens":["This","looks","like","a","billing","problem",",","so","route","it"],"slots":[{"label":"route","text":"billing","value":0.84,"color":"blue"},{"label":"urgency","text":"2.97","value":0.98,"color":"orange"},{"label":"refunded","text":"yes","value":0.99,"color":"green"}],"seqTime":"8.566 s","parTime":"0.114 s","atWord":2,"pulseAtWord":5,"source":"TYPESAFE AI — PUBLISHED SIDE-BY-SIDE DEMO"}},
+  },
+  REVIEW_YIELD: {
     category: "diagram", family: "diagram", data_key: "reviewYield",
     purpose: "EVERYTHING A CHECKER REPORTED, AND THE FEW THAT WERE REAL. Each column is one run drawn as a wall of small marks — one mark per N findings — and the marks that were genuinely correct LIGHT UP while the rest stay grey. Two walls side by side settle a precision argument without the words 'precision' or 'false positive' ever appearing: a viewer who sees sixty marks with four lit beside nine marks with three lit has understood the trade in one look. Use for any hit-rate comparison where the RAW COUNT is the argument — review findings, alerts, scan results, test flakes — and never for a plain magnitude (BAR_COMPARE owns that).",
     use_when: "",
