@@ -190,3 +190,72 @@ Ideas taken from the reference video and kept, rephrased in our own terms: the s
 if-statement framing, the health-data example, the hammer-and-screwdriver point, the
 "can't tell you why" comparison against an LLM, the multi-account routing use case, and
 the trading caveat. **No phrasing is reused.**
+
+---
+
+## Additional primary sources (added 2026-09-18, after the no-payment decision)
+
+**typesafe.ai/team — TypeSafe's own words on the founders.** This is what pays the title claim,
+and it is on their page rather than a journalist's:
+
+> "Diogo co-invented RLHF and InstructGPT, the methods that lead to ChatGPT and GPT4.
+> Previously, he was at Google Brain."
+
+COO **Sasha Sheng**, ex-research engineer at Meta/FAIR (News Feed, AI Experiences, AI Research),
+published at NeurIPS and ECCV. Manifesto page headline: **"Build Prod, Not God."**
+
+**LangChain — "Building a harness with Jev"** (third-party engineering write-up, user-supplied):
+- official integration package `langchain-typesafe` (PyPI 0.0.1a2), exposing `TypeSafeClassifier`
+- `state` accepts text, structured data, or LangChain messages
+- two middleware patterns shown: **model routing** (Jev decides fast model vs powerful model —
+  "direct lookups, extraction, and localized changes" to the fast one, "architecture and
+  high-stakes decisions" to the capable one) and **AutoModeMiddleware** (Jev risk-classifies a
+  tool call before it executes, as a guardrail on bash and similar)
+- *"Adding questions barely changes the response time and costs only the tokens for the extra
+  questions, which are cheap."*
+- named adoption: browser agents, trading, email triage
+- verdict: *"We're pretty thrilled about Jev and the possibilities that come with it."*
+- **note:** their "200x faster and 400x lower cost" line is quoted FROM TypeSafe, not measured by
+  LangChain. Attribute it that way on screen.
+
+**Every playable demo video, confirmed in the page source:**
+
+| video | host | where |
+|---|---|---|
+| side-by-side (Jev vs LLM) | Vimeo | launch blog |
+| Doom | Vimeo `1227495732` | launch blog |
+| Wikiracing | Vimeo `1227495711` | launch blog |
+| smart-home assistant | Loom `18c4dbcf8db546dfb2d7f2ef018e78e4` | docs.typesafe.ai/demos/smart-home |
+
+All are `controls: true, autoplay: false` — a click on the play control plus a long per-step
+`holdMs`/`maxHoldMs` records them playing. Confirm from the frame which Vimeo id is Doom.
+
+**Speculative fan-out** (docs/patterns) — the pattern the smart-home demo teaches: ask every
+question up front, including ones that turn out irrelevant, because they all resolve in one
+parallel request and code filters afterwards. The docs spell out the slow alternative
+(sequential API calls, each waiting on the last) — a ready-made picture.
+
+## Access: settled, with evidence
+
+There is **no free route to running Jev**. Verified from the APIs, not from marketing:
+
+- `GET https://ai-gateway.vercel.sh/v1/models` returns `typesafe-ai/jev` with
+  `pricing: {input: "0.000000042", output: "0"}`, `context_window: 0`, `max_tokens: 0`,
+  `type: "evaluation"`. Non-zero input price, so it is not a free-tier model.
+- OpenRouter carries it in beta (`~typesafe/jev-latest`, `typesafe/jev-1.13`); it is absent from
+  the public `/api/v1/models` list and is paid.
+- docs.typesafe.ai has **no** pricing, limits, quota or free-trial page. The reference video's
+  "$5 free credit" is documented nowhere and must not be said.
+- The console playground is behind `/login`; the shared playground link on the blog 307s there.
+
+Owner's decision, 2026-09-18: **no payment, no hands-on**. The cut is a sourced explainer.
+`briefs/jev/bench/probe.mjs` is PARKED — verified working against `ai@7.0.106`, ready if early
+access ever arrives, and not used by this video.
+
+## Sources, second batch
+
+- https://typesafe.ai/team · https://typesafe.ai/manifesto
+- https://docs.typesafe.ai/demos/smart-home · https://docs.typesafe.ai/llms.txt
+- https://www.langchain.com/blog/building-a-harness-with-jev
+- https://docs.langchain.com/oss/python/integrations/providers/typesafe · PyPI `langchain-typesafe`
+- https://openrouter.ai/typesafe/jev-1.13 · https://vercel.com/ai-gateway/models/jev
