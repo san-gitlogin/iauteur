@@ -35,7 +35,7 @@ ships** — never from this file. This file is what we point the camera at, not 
 | Side-by-side demo | TypeSafe $0.000081 / 0.114 s vs LLM $0.013880 / 8.566 s | vendor (the recorded demo) |
 | Input price | $0.042 / MTok = **$42 per billion** | official — and independently listed |
 | Output price | $0 — "too cheap to meter" | official |
-| Vercel AI Gateway listing | `typesafe-ai/jev`, $0.042/1M input, **Max output tokens: 0**, context window: not applicable, type: "evaluation" | **independent third party** — this is the strongest price/shape evidence in the video |
+| Vercel AI Gateway listing | `typesafe-ai/jev`, **$0.04/M input**; on the page the Providers row shows Context as a dash and the **Output cell BLANK** | **independent third party**. NOTE: the page never prints the phrase "Max output tokens: 0" — that came from a fetch summary of an API field and must not be quoted as on-screen text (caught on review, 2026-09-19) |
 | vs Fable 5.1 input price | 238× lower | vendor |
 | LLM input price range they quote | $0.20 – $10 / MTok | vendor |
 | Type errors | 0% — "schema matching is guaranteed… mathematically impossible" to falsify | official, and the blog admits "our number is not empirical" |
