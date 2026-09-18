@@ -563,7 +563,8 @@
               "REVIEW_YIELD",
               "PARALLEL_SAMPLER",
               "SMART_IF",
-              "DECISION_SLOTS"
+              "DECISION_SLOTS",
+              "JEVONS_CURVE"
             ]
           },
           "narration": {
@@ -633,6 +634,107 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "JEVONS_CURVE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "jevonsCurve": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "per-beat title, authored from this beat's subject"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 92,
+                          "description": "the standing frame line (LAW 0l) — unanchored, on screen the whole beat"
+                        },
+                        "costLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what the falling line measures, e.g. 'cost per decision'"
+                        },
+                        "costUnit": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "its unit, printed on the left axis, e.g. '$'"
+                        },
+                        "costSeries": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "the falling series, in order. 4-10 points. Declared data only"
+                        },
+                        "volLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what the rising line measures, e.g. 'decisions per day'"
+                        },
+                        "volUnit": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "its unit, printed on the right axis"
+                        },
+                        "volSeries": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "the rising series, in order. Must be the same length as costSeries"
+                        },
+                        "xLabels": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "exactly 2 or 3 x-axis ticks: first, optional middle, last"
+                        },
+                        "crossNote": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "what the crossing means, in the viewer's terms"
+                        },
+                        "assumption": {
+                          "type": "string",
+                          "maxLength": 76,
+                          "description": "the assumption the series rest on, stated so a viewer can check the slope instead of trusting it"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "when the axes are addressed. The empty plot, both axes and their units are on screen within 38 frames regardless"
+                        },
+                        "drawAtWord": {
+                          "type": "number",
+                          "description": "the word on which both lines start drawing"
+                        },
+                        "crossAtWord": {
+                          "type": "number",
+                          "description": "the word on which the crossing marker lands. Must be at or after drawAtWord"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "where the numbers came from. Required by the linter — an undeclared curve is a lie with axes on it"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

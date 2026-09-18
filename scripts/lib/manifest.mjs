@@ -16,7 +16,30 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  DECISION_SLOTS: {
+export const MANIFEST = {  JEVONS_CURVE: {
+    category: "chart", family: "chart-surface", data_key: "jevonsCurve",
+    purpose: "Induced demand, drawn: a falling unit-cost line and a rising volume line on their own axes, crossing, with the area under the rising line filling as work that was not worth doing becomes worth doing.",
+    use_when: "A beat turns on the Jevons effect — a unit getting cheap enough that total consumption rises rather than falls. Both series must be DECLARED (measured, or arithmetic on published prices with the assumption spoken out loud); never synthesise a shape. Do not use it for a simple savings comparison, which is LINE_CHART's savings variant.",
+    fields: {
+      caption: {t: 'string', max: 52, note: "per-beat title, authored from this beat's subject"},
+      premise: {t: 'string', max: 92, note: "the standing frame line (LAW 0l) — unanchored, on screen the whole beat"},
+      costLabel: {t: 'string', max: 26, note: "what the falling line measures, e.g. 'cost per decision'"},
+      costUnit: {t: 'string', max: 12, note: "its unit, printed on the left axis, e.g. '$'"},
+      costSeries: {t: 'number[]', note: "the falling series, in order. 4-10 points. Declared data only"},
+      volLabel: {t: 'string', max: 26, note: "what the rising line measures, e.g. 'decisions per day'"},
+      volUnit: {t: 'string', max: 12, note: "its unit, printed on the right axis"},
+      volSeries: {t: 'number[]', note: "the rising series, in order. Must be the same length as costSeries"},
+      xLabels: {t: 'string[]', note: "exactly 2 or 3 x-axis ticks: first, optional middle, last"},
+      crossNote: {t: 'string', max: 40, note: "what the crossing means, in the viewer's terms"},
+      assumption: {t: 'string', max: 76, note: "the assumption the series rest on, stated so a viewer can check the slope instead of trusting it"},
+      atWord: {t: 'anchor', note: "when the axes are addressed. The empty plot, both axes and their units are on screen within 38 frames regardless"},
+      drawAtWord: {t: 'number', note: "the word on which both lines start drawing"},
+      crossAtWord: {t: 'number', note: "the word on which the crossing marker lands. Must be at or after drawAtWord"},
+      source: {t: 'string', max: 64, note: "where the numbers came from. Required by the linter — an undeclared curve is a lie with axes on it"},
+    },
+    example: {jevonsCurve: {"caption":"Cheap enough to do a million times","premise":"Left axis falls, right axis climbs. The same graph, two different units.","costLabel":"cost per decision","costUnit":"$","costSeries":[0.0006,0.00042,0.00025,0.00009,0.0000126],"volLabel":"decisions per day","volUnit":"per day","volSeries":[1200,4000,19000,120000,900000],"xLabels":["then","now"],"crossNote":"the point where you stop counting calls","assumption":"Arithmetic on published per-token prices, at about 300 tokens a call.","atWord":2,"drawAtWord":5,"crossAtWord":10,"source":"TYPESAFE AI + VERCEL AI GATEWAY LISTED PRICES"}},
+  },
+  DECISION_SLOTS: {
     category: "diagram", family: "model-surface", data_key: "decisionSlots",
     purpose: "The answer space declared before the question is asked: a rack of shaped sockets, a peg that can only be one of those shapes, and a sealed region standing for everything that cannot be produced at all.",
     use_when: "A beat turns on outputs being constrained BY CONSTRUCTION rather than checked afterwards — typed decoding, an enumerated option set, a closed vocabulary. Also for the honest inverse: the peg fits its socket and is still the wrong answer. Do not use it for validation-after-generation, which is a gate (TYPE_GATE).",

@@ -264,6 +264,7 @@ export const TYPES = [
   'PARALLEL_SAMPLER',
   'SMART_IF',
   'DECISION_SLOTS',
+  'JEVONS_CURVE',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

@@ -11231,7 +11231,25 @@ export interface DecisionSlotsData {
   verdictAtWord?: number;
   source?: string;
 }
+export interface JevonsCurveData {
+  caption?: string;
+  premise?: string;
+  costLabel?: string;
+  costUnit?: string;
+  costSeries?: number[];
+  volLabel?: string;
+  volUnit?: string;
+  volSeries?: number[];
+  xLabels?: string[];
+  crossNote?: string;
+  assumption?: string;
+  atWord?: number;
+  drawAtWord?: number;
+  crossAtWord?: number;
+  source?: string;
+}
 export interface SceneData {
+  jevonsCurve?: JevonsCurveData;
   decisionSlots?: DecisionSlotsData;
   smartIf?: SmartIfData;
   parallelSampler?: ParallelSamplerData;
