@@ -24,25 +24,23 @@ OUT = "topics/jev-decisions-measured/out/thumb.png"
 POST = "/tmp/tweet_full.png"
 LOGO = "public/assets/channel_logo.png"
 
-FONTS = [
-    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-    "/System/Library/Fonts/Helvetica.ttc",
-    "/Library/Fonts/Arial Bold.ttf",
-]
-MONO = [
-    "/System/Library/Fonts/Menlo.ttc",
-    "/System/Library/Fonts/Supplemental/Courier New Bold.ttf",
-]
+# THE CHANNEL'S OWN TYPE. moderndark reads display = Space Grotesk and mono = JetBrains Mono
+# through @remotion/google-fonts. A generator outside Remotion cannot see those tokens, so the
+# first pass silently fell back to Arial and Menlo — which broke the series' typeface, because a
+# thumbnail is brand furniture and the face is part of it. The variable TTFs are vendored under
+# public/assets/fonts and the weight axis is set explicitly.
+DISPLAY = os.path.abspath("public/assets/fonts/SpaceGrotesk.ttf")
+MONOTTF = os.path.abspath("public/assets/fonts/JetBrainsMono.ttf")
 
 
-def font(paths, size):
-    for p in paths:
-        if os.path.exists(p):
-            try:
-                return ImageFont.truetype(p, size)
-            except Exception:
-                continue
-    return ImageFont.load_default(size)
+def font(path, size, variation=None):
+    f = ImageFont.truetype(path, size)
+    if variation:
+        try:
+            f.set_variation_by_name(variation)
+        except Exception:
+            pass
+    return f
 
 
 img = Image.new("RGB", (W, H), BG)
@@ -112,7 +110,7 @@ d = ImageDraw.Draw(img)
 M = int(62 * S)                      # one margin, used everywhere, so the spacing is a system
 
 # ── kicker ────────────────────────────────────────────────────────────────────────────────
-kf = font(MONO, int(23 * S))
+kf = font(MONOTTF, int(23 * S), "Medium")
 kicker = "EVERYTHING YOU NEED TO KNOW ABOUT JEV"
 kb = d.textbbox((0, 0), kicker, font=kf)
 kw, kh = kb[2] - kb[0], kb[3] - kb[1]
@@ -123,7 +121,7 @@ d.rounded_rectangle([M, ky, M + kw + pad_x * 2, ky + kh + pad_y * 2],
 d.text((M + pad_x, ky + pad_y - kb[1]), kicker, font=kf, fill=(12, 13, 26))
 
 # ── headline: three lines, generous leading ───────────────────────────────────────────────
-hf = font(FONTS, int(88 * S))
+hf = font(DISPLAY, int(92 * S), "Bold")
 lines = ["AN AI MODEL", "200× FASTER,", "400× CHEAPER"]
 lead = int(101 * S)
 y = ky + kh + pad_y * 2 + int(54 * S)
@@ -132,7 +130,7 @@ for ln in lines:
     y += lead
 
 # ── the line that carries the authority ───────────────────────────────────────────────────
-nf = font(MONO, int(27 * S))
+nf = font(MONOTTF, int(27 * S), "Medium")
 note = "BY THE CO-CREATOR OF CHATGPT"
 ny = y + int(26 * S)
 d.line([(M, ny + int(15 * S)), (M + int(34 * S), ny + int(15 * S))], fill=ACCENT, width=int(4 * S))
