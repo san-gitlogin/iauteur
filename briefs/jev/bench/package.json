@@ -1,0 +1,12 @@
+{
+  "name": "jev-bench",
+  "private": true,
+  "type": "module",
+  "description": "Probe + side-by-side bench for the Jev cut. Keys come from the environment; nothing secret is ever written here.",
+  "scripts": {
+    "probe": "node --env-file-if-exists=.env probe.mjs"
+  },
+  "dependencies": {
+    "ai": "^7.0.106"
+  }
+}
