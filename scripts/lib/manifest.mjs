@@ -16,7 +16,26 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  SMART_IF: {
+export const MANIFEST = {  DECISION_SLOTS: {
+    category: "diagram", family: "model-surface", data_key: "decisionSlots",
+    purpose: "The answer space declared before the question is asked: a rack of shaped sockets, a peg that can only be one of those shapes, and a sealed region standing for everything that cannot be produced at all.",
+    use_when: "A beat turns on outputs being constrained BY CONSTRUCTION rather than checked afterwards — typed decoding, an enumerated option set, a closed vocabulary. Also for the honest inverse: the peg fits its socket and is still the wrong answer. Do not use it for validation-after-generation, which is a gate (TYPE_GATE).",
+    fields: {
+      caption: {t: 'string', max: 52, note: "per-beat title, authored from this beat's subject"},
+      premise: {t: 'string', max: 92, note: "the standing frame line (LAW 0l) — unanchored, on screen the whole beat"},
+      options: {t: 'items', note: "the declared answer space. label = the option's name, value = 0..1 probability, color = its semantic colour. 2-5 options; each gets its own SHAPE so the rack is read by silhouette, not by reading"},
+      chosen: {t: 'number', note: "index into options of the one the model picks"},
+      verdict: {t: 'string', max: 8, note: "'ok' marks the pick correct, 'wrong' marks it shape-correct and answer-wrong. Omit for neither"},
+      verdictNote: {t: 'string', max: 38, note: "one line saying what the verdict means, e.g. 'right shape. wrong answer.'"},
+      sealedLabel: {t: 'string', max: 26, note: "what the sealed region stands for — everything outside the declared set, e.g. 'anything else'"},
+      atWord: {t: 'anchor', note: "when the rack is addressed. The empty rack and the sealed region are on screen within 38 frames regardless"},
+      pickAtWord: {t: 'number', note: "the word on which the peg seats in its socket"},
+      verdictAtWord: {t: 'number', note: "the word on which the verdict stamp lands. Must be at or after pickAtWord"},
+      source: {t: 'string', max: 64, note: "where the option set or the figures came from"},
+    },
+    example: {decisionSlots: {"caption":"The answers exist before the question","premise":"Every shape the model can return is cut before it is asked. There is no other shape.","options":[{"label":"billing","value":0.84,"color":"blue"},{"label":"technical","value":0.15,"color":"purple"},{"label":"sales","value":0.01,"color":"green"}],"chosen":0,"sealedLabel":"anything else","atWord":2,"pickAtWord":6,"source":"TYPESAFE AI — DOCS, CHOICE QUESTION"}},
+  },
+  SMART_IF: {
     category: "diagram", family: "code-surface", data_key: "smartIf",
     purpose: "A real if-statement with an empty condition socket, and a judgement travelling out of unstructured state to fill it — then the branch it controls firing.",
     use_when: "A beat turns on a decision that ordinary code cannot express: the shape of the program is known, the branch is known, and the only missing part is the judgement in the middle. Use it to show WHERE a model belongs inside code. Do not use it to explain an if-statement.",

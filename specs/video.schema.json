@@ -562,7 +562,8 @@
               "VAR_SCOPE",
               "REVIEW_YIELD",
               "PARALLEL_SAMPLER",
-              "SMART_IF"
+              "SMART_IF",
+              "DECISION_SLOTS"
             ]
           },
           "narration": {
@@ -632,6 +633,82 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "DECISION_SLOTS"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "decisionSlots": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "per-beat title, authored from this beat's subject"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 92,
+                          "description": "the standing frame line (LAW 0l) — unanchored, on screen the whole beat"
+                        },
+                        "options": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "the declared answer space. label = the option's name, value = 0..1 probability, color = its semantic colour. 2-5 options; each gets its own SHAPE so the rack is read by silhouette, not by reading"
+                        },
+                        "chosen": {
+                          "type": "number",
+                          "description": "index into options of the one the model picks"
+                        },
+                        "verdict": {
+                          "type": "string",
+                          "maxLength": 8,
+                          "description": "'ok' marks the pick correct, 'wrong' marks it shape-correct and answer-wrong. Omit for neither"
+                        },
+                        "verdictNote": {
+                          "type": "string",
+                          "maxLength": 38,
+                          "description": "one line saying what the verdict means, e.g. 'right shape. wrong answer.'"
+                        },
+                        "sealedLabel": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what the sealed region stands for — everything outside the declared set, e.g. 'anything else'"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "when the rack is addressed. The empty rack and the sealed region are on screen within 38 frames regardless"
+                        },
+                        "pickAtWord": {
+                          "type": "number",
+                          "description": "the word on which the peg seats in its socket"
+                        },
+                        "verdictAtWord": {
+                          "type": "number",
+                          "description": "the word on which the verdict stamp lands. Must be at or after pickAtWord"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "where the option set or the figures came from"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

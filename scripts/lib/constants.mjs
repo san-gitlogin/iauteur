@@ -263,6 +263,7 @@ export const TYPES = [
   'REVIEW_YIELD',
   'PARALLEL_SAMPLER',
   'SMART_IF',
+  'DECISION_SLOTS',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];
