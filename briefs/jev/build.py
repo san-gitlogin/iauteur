@@ -71,11 +71,14 @@ BRAND = {
 }
 
 THUMBNAIL = {
+    # The art is a FACE, drawn free at full bleed. The first pass used the tweet screenshot:
+    # unreadable at thumbnail size, and its text fought the title for the same eye. The note is
+    # short because a long one runs under the art edge (seen, not guessed).
     "title": "200× FASTER · 400× CHEAPER",
     "badge": "JEV",
-    "note": "IT CANNOT WRITE A WORD",
-    "asset": "img:jev_tweet.png",
-    "art": "img:jev_tweet.png",
+    "note": "IT CANNOT TALK",
+    "asset": "img:jev_diogo_hero.png",
+    "art": "img:jev_diogo_hero.png",
 }
 
 COVER = {"title": "Jev", "subtitle": "the model that cannot write a word"}
@@ -740,7 +743,7 @@ SCENES += [
   "which request gets the last of the quota — based on how urgent the work looks, and what the session is actually "
   "doing. That's a decision on every single request, which would be absurd at frontier prices — so the price is what makes the design possible at all.",
   {"stateMachine": {"headline": "A decision on every request",
-    "states": [{"label": "Request in"}, {"label": "Judge it", "color": "amber"},
+    "states": [{"label": "Request in"}, {"label": "Judge it", "color": "yellow"},
                {"label": "Serve now", "color": "green"}, {"label": "Queue it"}],
     "transitions": [{"from": 0, "to": 1, "label": "state"}, {"from": 1, "to": 2, "label": "urgent"},
                     {"from": 1, "to": 3, "label": "can wait"}, {"from": 3, "to": 0, "label": "retry"}],

@@ -5908,7 +5908,7 @@ export const MANIFEST = {  JEVONS_CURVE: {
       active: {t: 'number', note: 'highlighted state index'}, variant: {t: 'string', note: "'ring' | 'lifecycle'"},
       headline: {t: 'string', max: 48}, atWord: {t: 'anchor'},
     },
-    example: {stateMachine: {headline: 'A traffic light', states: [{label: 'Green'}, {label: 'Yellow', color: 'amber'}, {label: 'Red', color: 'red'}], transitions: [{from: 0, to: 1, label: 'timer'}, {from: 1, to: 2, label: 'timer'}, {from: 2, to: 0, label: 'timer'}], active: 0, variant: 'ring', atWord: 2}},
+    example: {stateMachine: {headline: 'A traffic light', states: [{label: 'Green'}, {label: 'Yellow', color: 'yellow'}, {label: 'Red', color: 'red'}], transitions: [{from: 0, to: 1, label: 'timer'}, {from: 1, to: 2, label: 'timer'}, {from: 2, to: 0, label: 'timer'}], active: 0, variant: 'ring', atWord: 2}},
   },
   EMBEDDING_SPACE: {
     category: 'data', family: 'data', data_key: 'embedding',

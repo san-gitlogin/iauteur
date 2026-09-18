@@ -203,5 +203,13 @@
     "bytes": 4215506,
     "contentType": "video/mp4",
     "fetchedAt": "2026-09-18T15:27:27.484630Z"
+  },
+  {
+    "file": "jev_diogo_hero.png",
+    "url": "https://x.com/CompleteSkeptic/status/2099925682726002904",
+    "note": "Portrait crop from the video attached to Diogo Almeida's launch post, supplied by the channel owner. Thumbnail art; attributed in-video and in the description.",
+    "bytes": 610041,
+    "contentType": "image/png",
+    "fetchedAt": "2026-09-18T17:32:10.090498Z"
   }
 ]

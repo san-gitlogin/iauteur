@@ -4707,6 +4707,13 @@ for (const s of spec.scenes ?? []) {
     if (len(d.confidence.reason) > 30) E(`${id}: CONFIDENCE_GATE reason > 30 chars`);
     checkColor(id, 'confidence.color', d.confidence.color);
   }
+  // STATE_MACHINE state colours were unchecked, so an invalid one (the manifest's own example
+  // shipped "amber", which is not in the semantic palette) reached the renderer and crashed
+  // hexA on frame 28868 — 40 minutes into a 10-segment render. A bad colour must fail here.
+  if (d.stateMachine) {
+    (d.stateMachine.states ?? []).forEach((st, i) => checkColor(id, `stateMachine.states[${i}].color`, st.color));
+    (d.stateMachine.transitions ?? []).forEach((tr, i) => checkColor(id, `stateMachine.transitions[${i}].color`, tr.color));
+  }
   // JEVONS_CURVE — see the PARALLEL_SAMPLER note on why this block is hand-written. The `source`
   // requirement is not a style rule: a two-axis curve with no declared provenance is the exact
   // failure the 2026-09-03 corollary is named after.

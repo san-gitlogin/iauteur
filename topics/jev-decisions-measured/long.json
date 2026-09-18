@@ -77,9 +77,9 @@
   "thumbnail": {
     "title": "200× FASTER · 400× CHEAPER",
     "badge": "JEV",
-    "note": "IT CANNOT WRITE A WORD",
-    "asset": "img:jev_tweet.png",
-    "art": "img:jev_tweet.png"
+    "note": "IT CANNOT TALK",
+    "asset": "img:jev_diogo_hero.png",
+    "art": "img:jev_diogo_hero.png"
   },
   "cover": {
     "title": "Jev",
@@ -7589,7 +7589,7 @@
             },
             {
               "label": "Judge it",
-              "color": "amber"
+              "color": "yellow"
             },
             {
               "label": "Serve now",
