@@ -133,3 +133,60 @@ outputs. It is the only number in the whole video that is ours.
 **Could not fetch programmatically:** x.com returns 402 to fetchers, and the shared
 playground link (`console.typesafe.ai/playground?share=…` on the blog) 307-redirects to
 `/login`. Both are recordable in a logged-in browser; neither is quotable from here.
+
+---
+
+## The access route (found 2026-09-18 — this changes the video)
+
+**Jev is callable today without the TypeSafe waitlist**, through Vercel AI Gateway.
+
+- Model id: `typesafe-ai/jev` · requires **AI SDK 7.0.105+** · `experimental_evaluate` from `ai`
+- Evaluation is **AI SDK only** — not available over the OpenAI-, Anthropic- or
+  Cohere-compatible endpoints
+- Billed per token at the model's rates; `result.usage` returns `{inputTokens, outputTokens}`
+- Vercel changelog: "TypeSafe AI's Jev now available on AI Gateway", Sep 16, 2026
+
+```typescript
+import { experimental_evaluate as evaluate } from 'ai';
+
+const result = await evaluate({
+  model: 'typesafe-ai/jev',
+  state: 'My card was charged twice for one order.',
+  questions: {
+    route:    { type: 'choice',  instructions: 'Route this support ticket.',
+                criteria: { billing: 'payment or charge problems',
+                            shipping: 'delivery problems',
+                            technical: 'application bugs' } },
+    urgency:  { type: 'score',   instructions: 'How urgent is this ticket?',
+                criteria: ['low', 'medium', 'high'] },
+    refunded: { type: 'boolean', instructions: 'Was a refund requested?' },
+  },
+});
+// route:    { type: 'choice',  choice: 'billing', probabilities: {billing: 1, shipping: 0, technical: 0} }
+// urgency:  { type: 'score',   score: 2.97, probabilities: {'0': 0, '1': 0, '2': 0.02, '3': 0.98} }
+// refunded: { type: 'boolean', probability: 0.99 }
+```
+
+**A naming detail worth a beat:** TypeSafe's own SDK calls the yes/no type `Noul`; the AI SDK
+surface calls it `'boolean'` and returns `probability`. The reference video asks out loud why
+it isn't just called boolean — through Vercel, it is. `state` also accepts an object or an
+array, not only a string, so structured records go in as-is.
+
+## From the reference video — VERIFY ON CAMERA BEFORE IT SHIPS
+
+These came from the transcript, not from a page I fetched. Each is useful; none goes on
+screen until it has been confirmed from a source in frame.
+
+| item | status |
+|---|---|
+| "$5 of free credit" on early access | **unverified** — no free-credit programme is documented anywhere I could find. Do not say it |
+| DeepSeek V4.1 Flash at $0.15 / M input (≈3.5× Jev) | **verify on its pricing page before the comparison beat** |
+| Playground UI wording, confidence figures (72/27/1, 58%, etc.) | those are *his* runs. Ours will differ — every number we speak comes off our own frame |
+| "150 ms model, 357 ms network, on a VPN" | the shape of the point is right and we reproduce it with our own numbers |
+| ~290 tokens of JSON in the response | ours will differ; read `result.usage` on camera instead |
+| Jev picked "technical, 87%" for the theft case | our run decides; the *teaching* point (it must answer something from the set it was given) holds regardless |
+
+Ideas taken from the reference video and kept, rephrased in our own terms: the smart
+if-statement framing, the health-data example, the hammer-and-screwdriver point, the
+"can't tell you why" comparison against an LLM, the multi-account routing use case, and
+the trading caveat. **No phrasing is reused.**
