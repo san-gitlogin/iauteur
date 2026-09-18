@@ -318,3 +318,66 @@ needs to ask. Film these rather than paraphrasing them.
 
 **So:** scene 5 reads $42 and 238× off the homepage; the 193.6×/444.6× pair is read off the
 blog where it is actually stated, in the same beat as the nuance that qualifies it.
+
+---
+
+## CORRECTION #2 — read off the homepage's own frames (2026-09-18)
+
+My earlier "the homepage doesn't print 193.6×/444.6×" was **wrong**, and so were the
+error-rate numbers I had taken from a third-party summary. Both are now read off the frame.
+
+**The claim and its caveat are in one shot.** `193.6x Faster,` / `444.6x Cheaper.` in huge type,
+with `*Based On Workflows For System One Tasks (Proof)` directly underneath it. Film both in the
+same beat — the asterisk is theirs, not ours.
+
+**Jev.Cost — "PRICE PER MILLION TOKENS [USD]", their own table, input | output:**
+
+| model | input | output |
+|---|---|---|
+| GPT-6 Astra (OpenAI) | $10.00 | $50.00 |
+| Claude Fable 5.1 (Anthropic) | $10.00 | $50.00 |
+| Claude Opus 5 | $5.00 | $25.00 |
+| GPT-5.6 Sol* | $4.00 | $20.00 |
+| GPT-5.6 Terra | $2.00 | $12.00 |
+| Claude Sonnet 5 | $2.00 | $10.00 |
+| Claude Haiku 4.5 | $1.00 | $5.00 |
+| GPT-5.6 Luna | $0.20 | $1.20 |
+| **Jev (TypeSafe AI)** | **$0.042** | **FREE** |
+
+Under it: **$42** "Per Billion input tokens." and **238x** "Lower input price than Claude Fable 5.1".
+
+**Hallucinations — "Structured Output Error Rate", their chart:**
+
+| model | rate |
+|---|---|
+| **Jev-1.0** | **0.00%** |
+| GPT-5.6 Luna | 0.49% |
+| GPT-5.6 Terra | 0.58% |
+| Gemini 3.1 Pro | 1.92% |
+| GPT-5.6 Sol | 1.93% |
+| Gemini 3.8 Flash | 2.38% |
+| Claude Opus 5 | 3.76% |
+| Claude Fable 5.1 | 7.99% |
+| Claude Sonnet 5 | 12.6% |
+
+**A second, DIFFERENT chart in the same loop — "Tool Call Error Rate":** Jev-1.0 0.00%,
+Claude Opus 5 0.34%, Claude Fable 5.1 0.80%, Gemini 3.8 Flash 1.88%, Gemini 3.1 Pro 2.64%,
+Claude Sonnet 5 3.03%, GPT-5.6 Terra 5.41%, GPT-5.6 Luna 14.3%, GPT-5.6 Sol 22.1%.
+
+**Do not conflate the two.** They measure different things and rank the models differently
+(Sonnet 5 is worst on structured output at 12.6%; Sol is worst on tool calls at 22.1%). Say
+which chart is on screen.
+
+**~~Structured-output error rate: Jev 0%, Opus 5 5.73%, Haiku 4.5 45.5%~~** — struck out. Those
+came from DataCamp's write-up and do not match TypeSafe's own published chart. The numbers above
+are the ones on the page, and the page wins.
+
+**Also on the homepage:** a "Pareto.Curve" panel (accuracy vs avg cost per workflow, log x-axis)
+placing Jev at roughly $0.0004 / ~68% against Sol, Terra, Opus 5, Sonnet 5, Luna, Haiku 4.5 and
+two DeepSeek v4 variants — the "not the smartest, and three orders of magnitude cheaper" claim in
+a single picture, from their own site. And a "String Tax" panel (TypeSafe AI vs LLM, side by
+side) sitting directly beneath the 444.6× block.
+
+**These panels live INSIDE the looping videos**, not in the DOM, so they carry no markable text
+and they cycle — a take has to hold 12-15s on each section to catch the panel it wants. The site
+renders **pink**, not dark.
