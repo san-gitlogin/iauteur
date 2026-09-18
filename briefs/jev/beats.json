@@ -1,0 +1,258 @@
+[
+ {
+  "id": "s01",
+  "intent": "\"Jev is a frontier AI model that cannot write a single word.\" Subject in the first sentence (LAW 0g). Headline JEV \u2014 200\u00d7 FASTER, 400\u00d7 CHEAPER"
+ },
+ {
+  "id": "s02",
+  "intent": "Greet, then the intent: today we go through every page TypeSafe has published about Jev \u2014 the claims, the receipts, and the caveats they printed about themselves"
+ },
+ {
+  "id": "s03",
+  "intent": "REC \u2014 their side-by-side recording, four seconds of it. Answers landing all at once on one side, a sentence typing itself out on the other. Said plainly: this is TypeSafe's own demo"
+ },
+ {
+  "id": "s04",
+  "intent": "REC \u2014 the founder's launch thread"
+ },
+ {
+  "id": "s05",
+  "intent": "REC \u2014 typesafe.ai: 193.6\u00d7 faster, 444.6\u00d7 cheaper, $42 per billion"
+ },
+ {
+  "id": "s06",
+  "intent": "What we cover"
+ },
+ {
+  "id": "s07",
+  "intent": "Chapter: before a single benchmark, who is this"
+ },
+ {
+  "id": "s08",
+  "intent": "REC \u2014 the team page. \"Diogo co-invented RLHF and InstructGPT, the methods that lead to ChatGPT and GPT4. Previously, he was at Google Brain.\" And the COO, ex-Meta FAIR"
+ },
+ {
+  "id": "s09",
+  "intent": "What RLHF actually is, in plain English \u2014 the thing that turned a text predictor into something you could talk to. You need this to understand what he changed"
+ },
+ {
+  "id": "s10",
+  "intent": "REC \u2014 the manifesto: \"Build Prod, Not God\""
+ },
+ {
+  "id": "s11",
+  "intent": "Two years in stealth, forty million dollars, and a model that won't talk"
+ },
+ {
+  "id": "s12",
+  "intent": "Chapter"
+ },
+ {
+  "id": "s13",
+  "intent": "REC \u2014 the launch post: \"superhuman at chat for years, so where is all the automation?\" and \"a frontier-intelligence function call: unstructured state in, typed probabilistic decisions out\""
+ },
+ {
+  "id": "s14",
+  "intent": "Your software doesn't want a paragraph. It wants queue = billing. An if with an empty condition slot"
+ },
+ {
+  "id": "s15",
+  "intent": "The slot filling: health readings arrive as JSON, and no rule you can write catches \"something's off here\""
+ },
+ {
+  "id": "s16",
+  "intent": "You *can* do this with an LLM. Hammer, screw \u2014 depicted, not named (LAW 0d)"
+ },
+ {
+  "id": "s17",
+  "intent": "Quiz: which of these four jobs actually needs a sentence back? Question \u2192 pause invitation \u2192 Ready? \u2192 answer (LAW 0e-q)"
+ },
+ {
+  "id": "s18",
+  "intent": "REC \u2014 \"Frontiers, Old and New,\" row by row. The spine of the video"
+ },
+ {
+  "id": "s19",
+  "intent": "The core picture. Tokens emitted one at a time, chained, a clock ticking \u2014 against four typed slots filling on one pulse"
+ },
+ {
+  "id": "s20",
+  "intent": "The answer space declared *before* the question. Nothing is rejected, because nothing else can be made"
+ },
+ {
+  "id": "s21",
+  "intent": "What we do today: generate a string, then stand a validator in front of it, and sometimes it bounces"
+ },
+ {
+  "id": "s22",
+  "intent": "\"But my model already has JSON mode.\" The schema constrains the decoder; the model still emits one token at a time and still bills you"
+ },
+ {
+  "id": "s23",
+  "intent": "RLHF trains for what a person would rather read. RLCD trains for a probability honest about itself"
+ },
+ {
+  "id": "s24",
+  "intent": "What \"calibrated\" means: a hundred decisions sorted by confidence, accuracy tracking the claim"
+ },
+ {
+  "id": "s25",
+  "intent": "REC \u2014 the docs quickstart, taught line by line, and the response with probabilities and confidence"
+ },
+ {
+  "id": "s26",
+  "intent": "The three primitives, and the Noul question answered \u2014 through Vercel's API it's just boolean"
+ },
+ {
+  "id": "s27",
+  "intent": "Chapter: what it looks like when it runs"
+ },
+ {
+  "id": "s28",
+  "intent": "REC \u2014 the side-by-side in full, their timings on screen and read off the frame"
+ },
+ {
+  "id": "s29",
+  "intent": "What you just watched, against the picture from earlier: parallel resolution versus a token stream"
+ },
+ {
+  "id": "s30",
+  "intent": "REC \u2014 Doom, playing. A bot reacting to structured game state"
+ },
+ {
+  "id": "s31",
+  "intent": "Ten queries a second, about seven dollars an hour \u2014 their engineer's own figure, from the post"
+ },
+ {
+  "id": "s32",
+  "intent": "REC \u2014 Wikiracing, playing. Hundreds of links a hop"
+ },
+ {
+  "id": "s33",
+  "intent": "Why that's the sharper demo: with high-cardinality choice a hallucinated option is fatal. The ceiling is 255 \u2014 above it, score first, then choose"
+ },
+ {
+  "id": "s34",
+  "intent": "REC \u2014 the smart-home walkthrough on the docs (the Loom nobody is showing)"
+ },
+ {
+  "id": "s35",
+  "intent": "Speculative fan-out: ask every question up front, including the ones that turn out irrelevant, because they all land in one round trip. Their docs draw the slow alternative for you"
+ },
+ {
+  "id": "s36",
+  "intent": "Chapter: extraordinary claims, and the receipts they published"
+ },
+ {
+  "id": "s37",
+  "intent": "What a \"workflow eval\" even is: a compute graph in code, and every model gets the same graph"
+ },
+ {
+  "id": "s38",
+  "intent": "REC \u2014 evals.typesafe.ai: accuracy against cost, accuracy against time, log scale"
+ },
+ {
+  "id": "s39",
+  "intent": "REC \u2014 drill into security incidents, and one disagreement"
+ },
+ {
+  "id": "s40",
+  "intent": "The row nobody quotes: Jev 67.8, Terra 67.9, Sol 74.1, Opus 5 73.1. It is not the smartest"
+ },
+ {
+  "id": "s41",
+  "intent": "Then the other columns: $0.0004 against $0.1761, 0.4 seconds against 37.8"
+ },
+ {
+  "id": "s42",
+  "intent": "The yardstick: reference answers are the average of Astra and Fable. Two competitors' opinions, which cuts both ways \u2014 and they say so"
+ },
+ {
+  "id": "s43",
+  "intent": "REC \u2014 their own Nuance boxes, on their own page"
+ },
+ {
+  "id": "s44",
+  "intent": "What \"can't hallucinate\" means, and what it doesn't"
+ },
+ {
+  "id": "s45",
+  "intent": "Structured-output error rates: 0%, 5.73%, 45.5% \u2014 and their own admission that the 0% is derived"
+ },
+ {
+  "id": "s46",
+  "intent": "Which of these you can check yourself, and which you're taking on trust. Said plainly, with the line between them drawn"
+ },
+ {
+  "id": "s47",
+  "intent": "Chapter: the number that made everyone look twice"
+ },
+ {
+  "id": "s48",
+  "intent": "REC \u2014 the Vercel listing: $0.042 per million in, and a spec line reading Max output tokens: 0"
+ },
+ {
+  "id": "s49",
+  "intent": "REC \u2014 OpenRouter: the same price, from a second party with no stake in the claim"
+ },
+ {
+  "id": "s50",
+  "intent": "Forty-two dollars for a *billion* tokens, and output free. Said the way a person says it"
+ },
+ {
+  "id": "s51",
+  "intent": "Make a decision cheap enough and you'll make millions of them \u2014 which is the paradox the model is named after"
+ },
+ {
+  "id": "s52",
+  "intent": "REC \u2014 github.com/typesafe-ai: the official SDKs, the star counts, MIT"
+ },
+ {
+  "id": "s53",
+  "intent": "Chapter: what people are actually wiring this into"
+ },
+ {
+  "id": "s54",
+  "intent": "REC \u2014 LangChain's write-up and the integration docs: TypeSafeClassifier, and state that takes messages straight from an agent"
+ },
+ {
+  "id": "s55",
+  "intent": "Model routing: Jev decides whether a request needs the fast model or the expensive one. Lookups and small edits go left; architecture goes right"
+ },
+ {
+  "id": "s56",
+  "intent": "The guardrail: risk-classify a tool call *before* it runs"
+ },
+ {
+  "id": "s57",
+  "intent": "One you could build yourself: a gateway deciding which request gets the last of the quota"
+ },
+ {
+  "id": "s58",
+  "intent": "REC \u2014 the Claude Code plugin repo, typesafe-ai/skills"
+ },
+ {
+  "id": "s59",
+  "intent": "And the thing it will never do: tell you why"
+ },
+ {
+  "id": "s60",
+  "intent": "Where that matters \u2014 a refused loan, a flagged transaction, a rejected claim. There, the explanation *is* the product"
+ },
+ {
+  "id": "s61",
+  "intent": "Their own FAQ on what it's bad at: System 2 work, specialised domains, anything generative"
+ },
+ {
+  "id": "s62",
+  "intent": "And not under a couple of hundred milliseconds \u2014 so not high-frequency anything"
+ },
+ {
+  "id": "s63",
+  "intent": "The verdict: what's proven, what's vendor-reported, and what to watch for next"
+ },
+ {
+  "id": "s64",
+  "intent": "Where to read every bit of this yourself"
+ }
+]

@@ -1,0 +1,322 @@
+[
+ {
+  "id": "s01",
+  "intent": "\"Jev is a frontier AI model that cannot write a single word.\" Subject in the first sentence (LAW 0g). Headline JEV \u2014 200\u00d7 FASTER, 400\u00d7 CHEAPER",
+  "planned": "HOOK"
+ },
+ {
+  "id": "s02",
+  "intent": "Greet, then the intent: today we go through every page TypeSafe has published about Jev \u2014 the claims, the receipts, and the caveats they printed about themselves",
+  "planned": "TITLE_CARD"
+ },
+ {
+  "id": "s03",
+  "intent": "REC \u2014 their side-by-side recording, four seconds of it. Answers landing all at once on one side, a sentence typing itself out on the other. Said plainly: this is TypeSafe's own demo",
+  "planned": "rec:jev-blog#sbs"
+ },
+ {
+  "id": "s04",
+  "intent": "REC \u2014 the founder's launch thread",
+  "planned": "rec:jev-tweet"
+ },
+ {
+  "id": "s05",
+  "intent": "REC \u2014 typesafe.ai: 193.6\u00d7 faster, 444.6\u00d7 cheaper, $42 per billion",
+  "planned": "rec:jev-home"
+ },
+ {
+  "id": "s06",
+  "intent": "What we cover",
+  "planned": "LIST_BUILD"
+ },
+ {
+  "id": "s07",
+  "intent": "Chapter: before a single benchmark, who is this",
+  "planned": "CHAPTER"
+ },
+ {
+  "id": "s08",
+  "intent": "REC \u2014 the team page. \"Diogo co-invented RLHF and InstructGPT, the methods that lead to ChatGPT and GPT4. Previously, he was at Google Brain.\" And the COO, ex-Meta FAIR",
+  "planned": "rec:jev-team"
+ },
+ {
+  "id": "s09",
+  "intent": "What RLHF actually is, in plain English \u2014 the thing that turned a text predictor into something you could talk to. You need this to understand what he changed",
+  "planned": "MODEL_STAGES"
+ },
+ {
+  "id": "s10",
+  "intent": "REC \u2014 the manifesto: \"Build Prod, Not God\"",
+  "planned": "rec:jev-manifesto"
+ },
+ {
+  "id": "s11",
+  "intent": "Two years in stealth, forty million dollars, and a model that won't talk",
+  "planned": "TIMELINE"
+ },
+ {
+  "id": "s12",
+  "intent": "Chapter",
+  "planned": "CHAPTER"
+ },
+ {
+  "id": "s13",
+  "intent": "REC \u2014 the launch post: \"superhuman at chat for years, so where is all the automation?\" and \"a frontier-intelligence function call: unstructured state in, typed probabilistic decisions out\"",
+  "planned": "rec:jev-blog#opening"
+ },
+ {
+  "id": "s14",
+  "intent": "Your software doesn't want a paragraph. It wants queue = billing. An if with an empty condition slot",
+  "planned": "\u2605 SMART_IF"
+ },
+ {
+  "id": "s15",
+  "intent": "The slot filling: health readings arrive as JSON, and no rule you can write catches \"something's off here\"",
+  "planned": "\u2605 SMART_IF (payoff)"
+ },
+ {
+  "id": "s16",
+  "intent": "You *can* do this with an LLM. Hammer, screw \u2014 depicted, not named (LAW 0d)",
+  "planned": "SPLIT_PATHS"
+ },
+ {
+  "id": "s17",
+  "intent": "Quiz: which of these four jobs actually needs a sentence back? Question \u2192 pause invitation \u2192 Ready? \u2192 answer (LAW 0e-q)",
+  "planned": "QUIZ_CARD"
+ },
+ {
+  "id": "s18",
+  "intent": "REC \u2014 \"Frontiers, Old and New,\" row by row. The spine of the video",
+  "planned": "rec:jev-blog#table"
+ },
+ {
+  "id": "s19",
+  "intent": "The core picture. Tokens emitted one at a time, chained, a clock ticking \u2014 against four typed slots filling on one pulse",
+  "planned": "\u2605 PARALLEL_SAMPLER"
+ },
+ {
+  "id": "s20",
+  "intent": "The answer space declared *before* the question. Nothing is rejected, because nothing else can be made",
+  "planned": "\u2605 DECISION_SLOTS"
+ },
+ {
+  "id": "s21",
+  "intent": "What we do today: generate a string, then stand a validator in front of it, and sometimes it bounces",
+  "planned": "TYPE_GATE (deliberate \u2014 it depicts the LLM mechanism)"
+ },
+ {
+  "id": "s22",
+  "intent": "\"But my model already has JSON mode.\" The schema constrains the decoder; the model still emits one token at a time and still bills you",
+  "planned": "API_REQUEST_RESPONSE"
+ },
+ {
+  "id": "s23",
+  "intent": "RLHF trains for what a person would rather read. RLCD trains for a probability honest about itself",
+  "planned": "MODEL_STAGES (2nd)"
+ },
+ {
+  "id": "s24",
+  "intent": "What \"calibrated\" means: a hundred decisions sorted by confidence, accuracy tracking the claim",
+  "planned": "PICTOGRAM"
+ },
+ {
+  "id": "s25",
+  "intent": "REC \u2014 the docs quickstart, taught line by line, and the response with probabilities and confidence",
+  "planned": "rec:jev-docs#quickstart"
+ },
+ {
+  "id": "s26",
+  "intent": "The three primitives, and the Noul question answered \u2014 through Vercel's API it's just boolean",
+  "planned": "API_REQUEST_RESPONSE (2nd)"
+ },
+ {
+  "id": "s27",
+  "intent": "Chapter: what it looks like when it runs",
+  "planned": "CHAPTER"
+ },
+ {
+  "id": "s28",
+  "intent": "REC \u2014 the side-by-side in full, their timings on screen and read off the frame",
+  "planned": "rec:jev-blog#sbs"
+ },
+ {
+  "id": "s29",
+  "intent": "What you just watched, against the picture from earlier: parallel resolution versus a token stream",
+  "planned": "\u2605 PARALLEL_SAMPLER (2nd)"
+ },
+ {
+  "id": "s30",
+  "intent": "REC \u2014 Doom, playing. A bot reacting to structured game state",
+  "planned": "rec:jev-blog#doom"
+ },
+ {
+  "id": "s31",
+  "intent": "Ten queries a second, about seven dollars an hour \u2014 their engineer's own figure, from the post",
+  "planned": "STAT_CALLOUT"
+ },
+ {
+  "id": "s32",
+  "intent": "REC \u2014 Wikiracing, playing. Hundreds of links a hop",
+  "planned": "rec:jev-blog#wikirace"
+ },
+ {
+  "id": "s33",
+  "intent": "Why that's the sharper demo: with high-cardinality choice a hallucinated option is fatal. The ceiling is 255 \u2014 above it, score first, then choose",
+  "planned": "RETRIEVAL_RANK"
+ },
+ {
+  "id": "s34",
+  "intent": "REC \u2014 the smart-home walkthrough on the docs (the Loom nobody is showing)",
+  "planned": "rec:jev-docs#smarthome"
+ },
+ {
+  "id": "s35",
+  "intent": "Speculative fan-out: ask every question up front, including the ones that turn out irrelevant, because they all land in one round trip. Their docs draw the slow alternative for you",
+  "planned": "DIAGRAM (flow)"
+ },
+ {
+  "id": "s36",
+  "intent": "Chapter: extraordinary claims, and the receipts they published",
+  "planned": "CHAPTER"
+ },
+ {
+  "id": "s37",
+  "intent": "What a \"workflow eval\" even is: a compute graph in code, and every model gets the same graph",
+  "planned": "DIAGRAM (2nd)"
+ },
+ {
+  "id": "s38",
+  "intent": "REC \u2014 evals.typesafe.ai: accuracy against cost, accuracy against time, log scale",
+  "planned": "rec:jev-evals"
+ },
+ {
+  "id": "s39",
+  "intent": "REC \u2014 drill into security incidents, and one disagreement",
+  "planned": "rec:jev-evals#workflow"
+ },
+ {
+  "id": "s40",
+  "intent": "The row nobody quotes: Jev 67.8, Terra 67.9, Sol 74.1, Opus 5 73.1. It is not the smartest",
+  "planned": "BAR_COMPARE"
+ },
+ {
+  "id": "s41",
+  "intent": "Then the other columns: $0.0004 against $0.1761, 0.4 seconds against 37.8",
+  "planned": "COST_METER"
+ },
+ {
+  "id": "s42",
+  "intent": "The yardstick: reference answers are the average of Astra and Fable. Two competitors' opinions, which cuts both ways \u2014 and they say so",
+  "planned": "TEST_MATRIX"
+ },
+ {
+  "id": "s43",
+  "intent": "REC \u2014 their own Nuance boxes, on their own page",
+  "planned": "rec:jev-blog#nuance"
+ },
+ {
+  "id": "s44",
+  "intent": "What \"can't hallucinate\" means, and what it doesn't",
+  "planned": "\u2605 DECISION_SLOTS (2nd)"
+ },
+ {
+  "id": "s45",
+  "intent": "Structured-output error rates: 0%, 5.73%, 45.5% \u2014 and their own admission that the 0% is derived",
+  "planned": "EVAL_DASHBOARD"
+ },
+ {
+  "id": "s46",
+  "intent": "Which of these you can check yourself, and which you're taking on trust. Said plainly, with the line between them drawn",
+  "planned": "RECAP"
+ },
+ {
+  "id": "s47",
+  "intent": "Chapter: the number that made everyone look twice",
+  "planned": "CHAPTER"
+ },
+ {
+  "id": "s48",
+  "intent": "REC \u2014 the Vercel listing: $0.042 per million in, and a spec line reading Max output tokens: 0",
+  "planned": "rec:jev-vercel"
+ },
+ {
+  "id": "s49",
+  "intent": "REC \u2014 OpenRouter: the same price, from a second party with no stake in the claim",
+  "planned": "rec:jev-openrouter"
+ },
+ {
+  "id": "s50",
+  "intent": "Forty-two dollars for a *billion* tokens, and output free. Said the way a person says it",
+  "planned": "COST_METER (2nd)"
+ },
+ {
+  "id": "s51",
+  "intent": "Make a decision cheap enough and you'll make millions of them \u2014 which is the paradox the model is named after",
+  "planned": "\u2605 JEVONS_CURVE"
+ },
+ {
+  "id": "s52",
+  "intent": "REC \u2014 github.com/typesafe-ai: the official SDKs, the star counts, MIT",
+  "planned": "rec:jev-github"
+ },
+ {
+  "id": "s53",
+  "intent": "Chapter: what people are actually wiring this into",
+  "planned": "CHAPTER"
+ },
+ {
+  "id": "s54",
+  "intent": "REC \u2014 LangChain's write-up and the integration docs: TypeSafeClassifier, and state that takes messages straight from an agent",
+  "planned": "rec:jev-langchain"
+ },
+ {
+  "id": "s55",
+  "intent": "Model routing: Jev decides whether a request needs the fast model or the expensive one. Lookups and small edits go left; architecture goes right",
+  "planned": "AGENT_HARNESS"
+ },
+ {
+  "id": "s56",
+  "intent": "The guardrail: risk-classify a tool call *before* it runs",
+  "planned": "RULE_TEST"
+ },
+ {
+  "id": "s57",
+  "intent": "One you could build yourself: a gateway deciding which request gets the last of the quota",
+  "planned": "STATE_MACHINE"
+ },
+ {
+  "id": "s58",
+  "intent": "REC \u2014 the Claude Code plugin repo, typesafe-ai/skills",
+  "planned": "rec:jev-github#skills"
+ },
+ {
+  "id": "s59",
+  "intent": "And the thing it will never do: tell you why",
+  "planned": "MODEL_SHRUG"
+ },
+ {
+  "id": "s60",
+  "intent": "Where that matters \u2014 a refused loan, a flagged transaction, a rejected claim. There, the explanation *is* the product",
+  "planned": "RESPONSIBILITY_SPLIT"
+ },
+ {
+  "id": "s61",
+  "intent": "Their own FAQ on what it's bad at: System 2 work, specialised domains, anything generative",
+  "planned": "SPLIT_PATHS (2nd)"
+ },
+ {
+  "id": "s62",
+  "intent": "And not under a couple of hundred milliseconds \u2014 so not high-frequency anything",
+  "planned": "SAD_PATHS"
+ },
+ {
+  "id": "s63",
+  "intent": "The verdict: what's proven, what's vendor-reported, and what to watch for next",
+  "planned": "QUADRANT"
+ },
+ {
+  "id": "s64",
+  "intent": "Where to read every bit of this yourself",
+  "planned": "OUTRO_CTA"
+ }
+]
