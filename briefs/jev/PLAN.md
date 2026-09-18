@@ -73,9 +73,10 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 
 ---
 
-## 3. Shape — 66 scenes, 22 recorded (33%)
+## 3. Shape — 67 scenes, 21 recorded (31%)
 
-`OVER-RELIANCE` caps a sub-type at `ceil(0.35 × 66)` = 24, so 22 is comfortable.
+`OVER-RELIANCE` caps a sub-type at `ceil(0.35 × 67)` = 24, so 21 is comfortable. The X thread is
+no longer a take — it is a screenshot plus the founder's own video, both owner-supplied.
 `REC` = footage · `★` = new component · everything else drawn.
 
 ### ACT 0 — the claim (1–6, 3 REC)
@@ -85,7 +86,7 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 | 1 | **"Jev is a frontier AI model that cannot write a single word."** Subject in the first sentence (LAW 0g). Headline `JEV — 200× FASTER, 400× CHEAPER` | `HOOK` |
 | 2 | Greet, then the intent: today we go through every page TypeSafe has published about Jev — the claims, the receipts, and the caveats they printed about themselves | `TITLE_CARD` |
 | 3 | **REC — their side-by-side, four seconds of it.** Answers landing all at once on one side, a sentence typing itself out on the other. Said plainly: this is TypeSafe's own demo | `rec:jev-home#sbs` |
-| 4 | **REC** — the founder's launch thread | `rec:jev-tweet` |
+| 4 | **The launch post itself**, with callouts landing on "co-inventing ChatGPT", "20-200x faster" and "40-400x cheaper" as the narration names them. X rate-limited the login, so this is the owner's screenshot rather than a take — sidebar cropped, attributed on screen | `MEDIA_CALLOUT` (`img:jev_tweet.png`) |
 | 5 | **REC** — typesafe.ai: the H1, then **$42 per billion** and **238× lower than Fable 5.1**, read off the page. (The 193.6×/444.6× pair is NOT on the homepage — it is stated on the blog, and is filmed there with its caveat) | `rec:jev-home` |
 | 6 | What we cover | `LIST_BUILD` |
 
@@ -94,7 +95,8 @@ architecture detail or context window (undisclosed — Vercel's API literally re
 | # | beat | cast |
 |---|---|---|
 | 7 | Chapter: before a single benchmark, who is this | `CHAPTER` |
-| 8 | **REC — the team page.** "Diogo co-invented RLHF and InstructGPT, the methods that lead to ChatGPT and GPT4. Previously, he was at Google Brain." And the COO, ex-Meta FAIR | `rec:jev-team` |
+| 8 | **The founder on camera**, from the video attached to his own post: the overlay card reads *founder of TypeSafe AI · CO-CREATED ↳ ChatGPT ↳ RLHF*. The title's claim, as footage rather than a quotation | `VIDEO_SPOTLIGHT` (`assets/video/diogo_card.mp4`) |
+| 8b | **REC — the team page**: "Diogo co-invented RLHF and InstructGPT, the methods that lead to ChatGPT and GPT4. Previously, he was at Google Brain." And the COO, ex-Meta FAIR | `rec:jev-team` |
 | 9 | What RLHF actually is, in plain English — the thing that turned a text predictor into something you could talk to. You need this to understand what he changed | `MODEL_STAGES` |
 | 10 | **REC** — the manifesto: "Build Prod, Not God" | `rec:jev-manifesto` |
 | 11 | Two years in stealth, forty million dollars, and a model that won't talk | `TIMELINE` |
@@ -215,7 +217,7 @@ own `sourceNote`** — these are all other people's pages, and several beats cut
 
 | take | steps | notes |
 |---|---|---|
-| `jev-tweet` | the thread: tweet 1 → 2 → 3, then play the embedded clip | **needs the logged-in profile.** I'll prompt you to sign in once; x.com refuses fetchers, so it exists only as footage |
+| ~~`jev-tweet`~~ | **dropped.** X rate-limited the login ("We've temporarily limited your login"). Replaced by `img:jev_tweet.png` + two silent slices of the founder's own video, both owner-supplied and attributed on screen |
 | `jev-home` | headline → 193.6×/444.6× → $42 per billion → the chart → **scroll to the side-by-side loop and hold** → the calibrated-decisions GIF → the Hallucinations loop | five animated assets, all autoplay-on-view with `preload="none"`: scroll, settle ~1500 ms, then `holdMs`/`maxHoldMs` 10–12 s. Confirm from a frame that it is PLAYING, not parked on its poster. The workhorse take |
 | `jev-team` | Diogo's card read in full → Sasha's card → back out | the beat that pays the title. Frame the sentence, not the photo |
 | `jev-manifesto` | "Build Prod, Not God" → the argument under it | short, 20 seconds |
