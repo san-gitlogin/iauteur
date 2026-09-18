@@ -6370,7 +6370,7 @@
               "callouts": [],
               "id": "price",
               "src": "rec/jev-vercel/seg-02.mp4",
-              "frames": 138,
+              "frames": 144,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -6689,8 +6689,10 @@
                 7,
                 8,
                 9,
+                10,
                 11,
-                12
+                17,
+                18
               ],
               "shows": "Jev",
               "atWord": 1.25

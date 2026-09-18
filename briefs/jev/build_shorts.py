@@ -80,11 +80,11 @@ SCENES = [
       zooms=[])], SRC_VERCEL)},
 
  {"id": "s02b", "type": "RECORDED_STEP", "transition": "letterbox", "background": "zoneB",
-  "narration": "Now look along that provider row. Context is a dash. And the output column is "
-              "blank, because Jev returns no tokens you could be charged for.",
+  "narration": "Now look along that provider row, the one TypeSafe fills in themselves. Context "
+              "is just a dash. Input, four cents per million tokens. And then the output column — "
+              "completely blank, because Jev returns no tokens you could be charged for.",
   "data": footage([clip("rec:jev-vercel#spec", "the provider row",
-      zooms=[{"marks": ["o"], "band": True, "at": "the output column is"},
-             {"at": "full"}])], SRC_VERCEL)},
+      zooms=[])], SRC_VERCEL)},
 
  {"id": "s03", "type": "DECISION_SLOTS", "transition": "zoom", "background": "zoneA",
   "narration": "So what does Jev return instead? Every answer it's allowed to give is cut before the "

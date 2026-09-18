@@ -15,7 +15,7 @@
  "headless": false,
  "prep": {
   "url": "https://vercel.com/ai-gateway/models/jev",
-  "settleMs": 5000,
+  "settleMs": 9000,
   "dismiss": [
    "Accept",
    "Accept all",
@@ -33,7 +33,7 @@
    "label": "an independent listing, on somebody else's platform",
    "holdMs": 4200,
    "maxHoldMs": 4200,
-   "settleMs": 2200,
+   "settleMs": 3800,
    "by": 260,
    "scrollMs": 800
   },
@@ -41,7 +41,7 @@
    "id": "price",
    "action": "scroll",
    "target": "text=$0.04",
-   "settleMs": 1500,
+   "settleMs": 3800,
    "label": "the same price, from a company with no stake in the claim",
    "marks": [
     {
@@ -56,7 +56,7 @@
    "id": "spec",
    "action": "scroll",
    "target": "text=Context",
-   "settleMs": 1600,
+   "settleMs": 3800,
    "label": "and the line in the spec sheet that gives the whole game away",
    "marks": [
     {

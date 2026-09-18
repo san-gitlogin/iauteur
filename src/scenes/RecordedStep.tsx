@@ -198,7 +198,28 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
   // squarish 0.8 gives the window a shape the capture can actually satisfy, and hands the
   // reclaimed height to the rail and caption.
   const MIN_ASPECT = 0.8;
-  const stageH = fullBleed ? frameH : Math.min(availH, vertical ? Math.min(availH, stageW / MIN_ASPECT) : (stageW * capH) / capW);
+  // SHOW THE WHOLE WINDOW AT ITS OWN SHAPE WHEN THE AUTHOR ASKED FOR IT (owner, 2026-09-19:
+  // *"Every recording you are trying to squeeze in a 5:9 ratio container which is where the
+  // shorts does not come in good. Have the actual size rendered, but zoom in when required"*).
+  //
+  // The 0.8 cap exists for a FOCUSED vertical clip, where the punch-in is the point and a
+  // squarish window is the shape a 16:9 capture can actually satisfy. But a clip that opts out
+  // of focus (`focus: false`) is asking for the opposite: the page, entire. Forcing that into
+  // 0.8 cover-crops a 16:9 capture to roughly four-fifths of its width, so the sides are cut,
+  // the page is never seen whole, AND every mark rectangle is measured against a frame the
+  // viewer is not looking at — which is the drift that shows up as a highlight sitting slightly
+  // off its target.
+  //
+  // Giving the stage the CAPTURE's own aspect fixes all three at once: `wide` below resolves to
+  // the entire capture (fullW = min(capW, capH * stageAspect) = capW when the aspects match),
+  // nothing is cropped, marks land where they were measured, and authored `zooms` still punch
+  // in on the detail. The reclaimed height goes back to the caption and the rail.
+  const wholeWindow = vertical && !fullBleed && cur.focus === false;
+  const stageH = fullBleed
+    ? frameH
+    : wholeWindow
+      ? Math.min(availH, (stageW * capH) / capW)
+      : Math.min(availH, vertical ? Math.min(availH, stageW / MIN_ASPECT) : (stageW * capH) / capW);
   const stageAspect = stageW / stageH;
 
   const bb = cur.bbox;

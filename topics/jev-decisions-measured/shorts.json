@@ -88,7 +88,7 @@
               "callouts": [],
               "id": "price",
               "src": "rec/jev-vercel/seg-02.mp4",
-              "frames": 138,
+              "frames": 144,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -407,8 +407,10 @@
                 7,
                 8,
                 9,
+                10,
                 11,
-                12
+                17,
+                18
               ],
               "shows": "Jev",
               "atWord": 3.417
@@ -431,7 +433,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Now look along that provider row. Context is a dash. And the output column is blank, because Jev returns no tokens you could be charged for.",
+      "narration": "Now look along that provider row, the one TypeSafe fills in themselves. Context is just a dash. Input, four cents per million tokens. And then the output column — completely blank, because Jev returns no tokens you could be charged for.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -439,24 +441,11 @@
               "ref": "rec:jev-vercel#spec",
               "label": "the provider row",
               "focus": false,
-              "zooms": [
-                {
-                  "marks": [
-                    "o"
-                  ],
-                  "band": true,
-                  "at": "the output column is",
-                  "atWord": 10.417
-                },
-                {
-                  "at": "full",
-                  "atWord": 17.333
-                }
-              ],
+              "zooms": [],
               "callouts": [],
               "id": "spec",
               "src": "rec/jev-vercel/seg-03.mp4",
-              "frames": 168,
+              "frames": 174,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -728,15 +717,9 @@
               ],
               "changes": [
                 0,
-                2,
-                3,
-                4,
-                5,
-                6,
-                8,
-                9,
-                11,
-                12
+                13,
+                17,
+                18
               ],
               "shows": "Copy link to heading Providers",
               "atWord": 2.25
@@ -750,7 +733,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 271,
+      "durationFrames": 455,
       "audio": "audio/jev-decisions-measured_shorts_s02b.mp3",
       "timingSource": "tts"
     },
