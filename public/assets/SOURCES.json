@@ -34,63 +34,63 @@
   {
     "file": "video/demo_ui.mp4",
     "url": "synthetic (scripts/_genclips.mjs)",
-    "note": "SYNTHETIC demo clip — deterministic PNG frames (moving accent bands) + WAV tone, hand-encoded in Node and muxed via Remotion's bundled ffmpeg (libx264/aac). 100% generated, no copyright, no real footage/faces. Used only as a media-family fixture/showcase placeholder; real user media arrives via props.",
+    "note": "SYNTHETIC demo clip \u2014 deterministic PNG frames (moving accent bands) + WAV tone, hand-encoded in Node and muxed via Remotion's bundled ffmpeg (libx264/aac). 100% generated, no copyright, no real footage/faces. Used only as a media-family fixture/showcase placeholder; real user media arrives via props.",
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-09"
   },
   {
     "file": "video/demo_flow.mp4",
     "url": "synthetic (scripts/_genclips.mjs)",
-    "note": "SYNTHETIC demo clip — deterministic plasma sinusoid, hand-encoded PNG frames via ffmpeg libx264. No audio. No copyright.",
+    "note": "SYNTHETIC demo clip \u2014 deterministic plasma sinusoid, hand-encoded PNG frames via ffmpeg libx264. No audio. No copyright.",
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-09"
   },
   {
     "file": "video/demo_grid.mp4",
     "url": "synthetic (scripts/_genclips.mjs)",
-    "note": "SYNTHETIC demo clip — deterministic shifting checkerboard, hand-encoded PNG frames via ffmpeg libx264. No audio. No copyright.",
+    "note": "SYNTHETIC demo clip \u2014 deterministic shifting checkerboard, hand-encoded PNG frames via ffmpeg libx264. No audio. No copyright.",
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-09"
   },
   {
     "file": "video/demo_webcam.mp4",
     "url": "synthetic (scripts/_genclips.mjs)",
-    "note": "SYNTHETIC talking-head PLACEHOLDER — a warm radial vignette (NOT a real face), deterministic PNG frames + WAV tone via ffmpeg libx264/aac. Stands in for a creator webcam PiP in fixtures/showcase; real user webcam arrives via props. No copyright, no likeness.",
+    "note": "SYNTHETIC talking-head PLACEHOLDER \u2014 a warm radial vignette (NOT a real face), deterministic PNG frames + WAV tone via ffmpeg libx264/aac. Stands in for a creator webcam PiP in fixtures/showcase; real user webcam arrives via props. No copyright, no likeness.",
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-09"
   },
   {
     "file": "snap-selftest.png",
     "url": "https://example.com",
-    "note": "screenshot for commentary — self-test",
+    "note": "screenshot for commentary \u2014 self-test",
     "bytes": 14723,
     "capturedAt": "2026-07-17T16:55:53.921Z"
   },
   {
     "file": "kimi-k3-docs.png",
     "url": "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
-    "note": "screenshot for commentary — Kimi K3 quickstart docs, platform.kimi.ai, snapped 2026-07-17",
+    "note": "screenshot for commentary \u2014 Kimi K3 quickstart docs, platform.kimi.ai, snapped 2026-07-17",
     "bytes": 250852,
     "capturedAt": "2026-07-17T17:30:19.211Z"
   },
   {
     "file": "kimi-home.png",
     "url": "https://www.kimi.com",
-    "note": "screenshot for commentary — Kimi homepage branding, kimi.com, snapped 2026-07-17",
+    "note": "screenshot for commentary \u2014 Kimi homepage branding, kimi.com, snapped 2026-07-17",
     "bytes": 59453,
     "capturedAt": "2026-07-17T17:30:28.247Z"
   },
   {
     "file": "aa-models.png",
     "url": "https://artificialanalysis.ai/models",
-    "note": "screenshot for commentary — Artificial Analysis model leaderboard, snapped 2026-07-17",
+    "note": "screenshot for commentary \u2014 Artificial Analysis model leaderboard, snapped 2026-07-17",
     "bytes": 191744,
     "capturedAt": "2026-07-17T17:30:32.436Z"
   },
   {
     "file": "market-cap-top.png",
     "url": "https://companiesmarketcap.com/",
-    "note": "screenshot for commentary — companiesmarketcap.com global market cap leaderboard, snapped 2026-07-18 — Apple vs Nvidia crown evidence",
+    "note": "screenshot for commentary \u2014 companiesmarketcap.com global market cap leaderboard, snapped 2026-07-18 \u2014 Apple vs Nvidia crown evidence",
     "bytes": 156880,
     "capturedAt": "2026-07-18T16:22:52.518Z"
   },
@@ -105,7 +105,7 @@
   {
     "file": "video/sample_market.mp4",
     "url": "(self-generated)",
-    "note": "Cut from this project's own render of apple-overtakes-nvidia, starting at 141s for 14s — a segment picked because the 2.5-billion-screens device grid, fully drawn and still filling. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "note": "Cut from this project's own render of apple-overtakes-nvidia, starting at 141s for 14s \u2014 a segment picked because the 2.5-billion-screens device grid, fully drawn and still filling. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered \u2014 covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
     "bytes": 649882,
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-26T04:54:57.991Z"
@@ -113,7 +113,7 @@
   {
     "file": "video/sample_product.mp4",
     "url": "(self-generated)",
-    "note": "Cut from this project's own render of gpt-live-full-duplex-voice, starting at 47s for 12s — a segment picked because the two-stream exchange with both arrows and packet chips on screen. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "note": "Cut from this project's own render of gpt-live-full-duplex-voice, starting at 47s for 12s \u2014 a segment picked because the two-stream exchange with both arrows and packet chips on screen. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered \u2014 covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
     "bytes": 566697,
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-26T04:54:58.145Z"
@@ -121,7 +121,7 @@
   {
     "file": "video/sample_tech.mp4",
     "url": "(self-generated)",
-    "note": "Cut from this project's own render of kimi-k3-deep-dive, starting at 178s for 10s — a segment picked because the sparse-expert activation grid at full density. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered — covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
+    "note": "Cut from this project's own render of kimi-k3-deep-dive, starting at 178s for 10s \u2014 a segment picked because the sparse-expert activation grid at full density. RE-CUT 2026-07-26: the previous 5s cuts started at the TOP of a scene, so the player showed a bare title over an empty frame and the finished output looked broken; segments are now taken from the dense MIDDLE of a scene and the player loops them. Cropped to 1780x1001 (still exactly 16:9) so the CHANNEL watermark in the bottom-right is removed entirely rather than covered \u2014 covering it added a second logo that collided with the video's own watermark. Scaled to 1280x720, silent. Own work; no third-party rights.",
     "bytes": 706896,
     "contentType": "video/mp4",
     "fetchedAt": "2026-07-26T04:54:58.145Z"
@@ -137,7 +137,7 @@
   {
     "file": "playwright_logo_sq.svg",
     "url": "(derived locally)",
-    "note": "Derived from playwright_wordmark.svg (Wikimedia Commons, Apache-2.0, artist Microsoft). Two changes, both recorded: (1) wrapped on a 952x952 square canvas with the wordmark centred at y=380, because AssetIcon renders img: assets in a square box with objectFit:cover and would otherwise crop a 5:1 wordmark; (2) the wordmark TEXT path fill #111111 recoloured to #FFFFFF for legibility on dark themes — this matches Playwright official dark-background usage on playwright.dev. Mask artwork and all mask colours unaltered.",
+    "note": "Derived from playwright_wordmark.svg (Wikimedia Commons, Apache-2.0, artist Microsoft). Two changes, both recorded: (1) wrapped on a 952x952 square canvas with the wordmark centred at y=380, because AssetIcon renders img: assets in a square box with objectFit:cover and would otherwise crop a 5:1 wordmark; (2) the wordmark TEXT path fill #111111 recoloured to #FFFFFF for legibility on dark themes \u2014 this matches Playwright official dark-background usage on playwright.dev. Mask artwork and all mask colours unaltered.",
     "bytes": 12020,
     "contentType": "image/svg+xml",
     "fetchedAt": "2026-08-09T11:01:33.840Z"
@@ -145,28 +145,28 @@
   {
     "file": "playwright_dojo_site.png",
     "url": "https://san-gitlogin.github.io/playwright-dojo/",
-    "note": "screenshot for commentary — The Playwright Dojo course site (san-gitlogin.github.io/playwright-dojo) — the owner's own site, and the course these videos follow.",
+    "note": "screenshot for commentary \u2014 The Playwright Dojo course site (san-gitlogin.github.io/playwright-dojo) \u2014 the owner's own site, and the course these videos follow.",
     "bytes": 189681,
     "capturedAt": "2026-08-09T12:18:35.191Z"
   },
   {
     "file": "the_internet_login.png",
     "url": "https://the-internet.herokuapp.com/login",
-    "note": "screenshot for commentary — the-internet.herokuapp.com/login — the free automation practice site used by the Playwright Dojo lesson 5; captured for tutorial commentary",
+    "note": "screenshot for commentary \u2014 the-internet.herokuapp.com/login \u2014 the free automation practice site used by the Playwright Dojo lesson 5; captured for tutorial commentary",
     "bytes": 46618,
     "capturedAt": "2026-08-12T12:49:26.488Z"
   },
   {
     "file": "the_internet_login_crop.png",
     "url": "https://the-internet.herokuapp.com/login",
-    "note": "DERIVED from the_internet_login.png — cropped to the form area (crop=930:523:460:20) so the page content fills a 16:9 frame; no pixels altered. Screenshot used nominatively for tutorial commentary.",
+    "note": "DERIVED from the_internet_login.png \u2014 cropped to the form area (crop=930:523:460:20) so the page content fills a 16:9 frame; no pixels altered. Screenshot used nominatively for tutorial commentary.",
     "bytes": 29529,
     "capturedAt": "2026-08-12T12:49:57.806Z"
   },
   {
     "file": "apple_iphone18pro_hero.png",
     "url": "https://www.apple.com/iphone-18-pro/",
-    "note": "screenshot for commentary — Apple product page, iPhone 18 Pro, captured 2026-09-10 for nominative commentary",
+    "note": "screenshot for commentary \u2014 Apple product page, iPhone 18 Pro, captured 2026-09-10 for nominative commentary",
     "bytes": 213591,
     "capturedAt": "2026-09-10T05:20:57.109Z",
     "engine": "playwright 1.62.1",
@@ -179,5 +179,29 @@
     "bytes": 480689,
     "capturedAt": "2026-09-11T11:11:07.150Z",
     "engine": "remotion still + playwright compose"
+  },
+  {
+    "file": "jev_tweet.png",
+    "url": "https://x.com/CompleteSkeptic/status/2099925682726002904",
+    "note": "Diogo Almeida's launch post, screenshotted by the channel owner. Left navigation column CROPPED OFF before use: it carried the owner's own X identity and unread count. Editorial use, attributed on screen.",
+    "bytes": 792635,
+    "contentType": "image/png",
+    "fetchedAt": "2026-09-18T15:27:27.484630Z"
+  },
+  {
+    "file": "video/diogo_card.mp4",
+    "url": "https://x.com/CompleteSkeptic/status/2099925682726002904",
+    "note": "12s silent slice (4s-16s) of the video attached to Diogo Almeida's launch post, supplied by the channel owner. Audio stripped - the cut carries its own narration. Attributed on screen.",
+    "bytes": 2488624,
+    "contentType": "video/mp4",
+    "fetchedAt": "2026-09-18T15:27:27.484630Z"
+  },
+  {
+    "file": "video/diogo_talk.mp4",
+    "url": "https://x.com/CompleteSkeptic/status/2099925682726002904",
+    "note": "12s silent slice (36s-48s) of the same video. Audio stripped. Attributed on screen.",
+    "bytes": 4215506,
+    "contentType": "video/mp4",
+    "fetchedAt": "2026-09-18T15:27:27.484630Z"
   }
 ]

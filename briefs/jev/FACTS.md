@@ -381,3 +381,34 @@ side) sitting directly beneath the 444.6× block.
 **These panels live INSIDE the looping videos**, not in the DOM, so they carry no markable text
 and they cycle — a take has to hold 12-15s on each section to catch the panel it wants. The site
 renders **pink**, not dark.
+
+---
+
+## The launch post, verbatim (owner-supplied screenshot, 2026-09-18)
+
+X rate-limited the owner's login, so the thread is not recordable. He supplied a screenshot and
+the attached video instead. Assets: `public/assets/jev_tweet.png` (sidebar cropped),
+`public/assets/video/diogo_card.mp4`, `public/assets/video/diogo_talk.mp4` (both silent).
+
+**Diogo Almeida (@CompleteSkeptic), verbatim:**
+
+> After co-inventing ChatGPT, I kept asking myself: why have **superhuman** chat models not led
+> to AGI?
+>
+> I've spent the last 2 years in stealth building a new way to train models (RLCD), and a new
+> type of frontier AI model that we are releasing today: Jev
+>
+> • 20-200x faster
+> • 40-400x cheaper (w/ output tokens free)
+> • Frontier composable intelligence optimized for decisions
+>
+> AFAICT the shortest path to AI-based economic revolution
+
+**Mind the figures — they are not the blog's.** The post says **20-200x faster** and
+**40-400x cheaper**; the blog says **40x-200x faster**; the homepage says **193.6x / 444.6x** on
+its own workflow evals. Three different pairs from the same company. Say which one is on screen
+and never average them.
+
+**The video's own overlay card** reads: `DIOGO ALMEIDA · founder of TypeSafe AI · CO-CREATED
+↳ ChatGPT ↳ RLHF` — the title's claim, in his own video, on his own post. That is the strongest
+receipt available for it, and it is now footage rather than a quotation.
