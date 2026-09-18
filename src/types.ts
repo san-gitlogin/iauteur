@@ -11151,7 +11151,25 @@ export interface ParallelSamplerData {
   pulseAtWord?: number;
   source?: string;
 }
+export interface SmartIfData {
+  caption?: string;
+  premise?: string;
+  stateTitle?: string;
+  stateLines?: string[];
+  ifHead?: string;
+  ifTail?: string;
+  socketHint?: string;
+  condition?: string;
+  prob?: number;
+  bodyLine?: string;
+  closeLine?: string;
+  atWord?: number;
+  fillAtWord?: number;
+  branchAtWord?: number;
+  source?: string;
+}
 export interface SceneData {
+  smartIf?: SmartIfData;
   parallelSampler?: ParallelSamplerData;
   reviewYield?: ReviewYieldData;
   varScope?: VarScopeData;

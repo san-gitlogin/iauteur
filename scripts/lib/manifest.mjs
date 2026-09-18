@@ -16,7 +16,30 @@
 // `data_root: true`  → the component reads fields directly off scene.data.
 // `data_key: 'foo'`  → the component reads scene.data.foo (a nested object).
 
-export const MANIFEST = {  PARALLEL_SAMPLER: {
+export const MANIFEST = {  SMART_IF: {
+    category: "diagram", family: "code-surface", data_key: "smartIf",
+    purpose: "A real if-statement with an empty condition socket, and a judgement travelling out of unstructured state to fill it — then the branch it controls firing.",
+    use_when: "A beat turns on a decision that ordinary code cannot express: the shape of the program is known, the branch is known, and the only missing part is the judgement in the middle. Use it to show WHERE a model belongs inside code. Do not use it to explain an if-statement.",
+    fields: {
+      caption: {t: 'string', max: 52, note: "per-beat title, authored from this beat's subject"},
+      premise: {t: 'string', max: 92, note: "the standing frame line (LAW 0l) — unanchored, on screen the whole beat"},
+      stateTitle: {t: 'string', max: 26, note: "what the incoming record IS, e.g. 'vitals.json' or 'the ticket'"},
+      stateLines: {t: 'string[]', note: "the unstructured state, verbatim as it would arrive. 2-6 lines, each <= 34 chars"},
+      ifHead: {t: 'string', max: 16, note: "the code before the socket, e.g. 'if ('"},
+      ifTail: {t: 'string', max: 16, note: "the code after the socket, e.g. ') {'"},
+      socketHint: {t: 'string', max: 30, note: "what the EMPTY socket reads before anything fills it — the question nobody can write as a rule, e.g. 'is something wrong?'"},
+      condition: {t: 'string', max: 30, note: "the judgement that lands in the socket"},
+      prob: {t: 'number', note: "0..1 confidence that rides in with the judgement"},
+      bodyLine: {t: 'string', max: 40, note: "the line the branch runs once the condition is true"},
+      closeLine: {t: 'string', max: 12, note: "the closing brace line, e.g. '}'"},
+      atWord: {t: 'anchor', note: "when the state and the code are addressed. The empty socket is on screen within 38 frames regardless"},
+      fillAtWord: {t: 'number', note: "the word on which the judgement leaves the state and lands in the socket"},
+      branchAtWord: {t: 'number', note: "the word on which the body line fires. Must be at or after fillAtWord"},
+      source: {t: 'string', max: 64, note: "where the state or the figure came from"},
+    },
+    example: {smartIf: {"caption":"The line you cannot write","premise":"The shape of the program is known. The only missing part is the judgement in the middle.","stateTitle":"vitals.json","stateLines":["heart_rate: 128","spo2: 91","temp_c: 38.4","note: \"clammy, confused\""],"ifHead":"if (","ifTail":") {","socketHint":"is something wrong?","condition":"concerning","prob":0.94,"bodyLine":"escalate(patient)","closeLine":"}","atWord":2,"fillAtWord":5,"branchAtWord":8,"source":"ILLUSTRATIVE RECORD — NOT PATIENT DATA"}},
+  },
+  PARALLEL_SAMPLER: {
     category: "diagram", family: "model-surface", data_key: "parallelSampler",
     purpose: "Two ways of answering the same question, racing on one stage: a token chain emitted one at a time, against a bank of typed slots that all resolve on a single pulse.",
     use_when: "A beat turns on HOW an answer is produced rather than what it says — autoregressive generation versus parallel structured decoding, streaming versus one-shot, a sequential pipeline versus a fan-out. Use it when the contrast between the two mechanisms IS the teaching; do not use it to compare two answers.",

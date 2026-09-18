@@ -561,7 +561,8 @@
               "LIVE_CODE",
               "VAR_SCOPE",
               "REVIEW_YIELD",
-              "PARALLEL_SAMPLER"
+              "PARALLEL_SAMPLER",
+              "SMART_IF"
             ]
           },
           "narration": {
@@ -631,6 +632,102 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "SMART_IF"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "smartIf": {
+                      "type": "object",
+                      "properties": {
+                        "caption": {
+                          "type": "string",
+                          "maxLength": 52,
+                          "description": "per-beat title, authored from this beat's subject"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "maxLength": 92,
+                          "description": "the standing frame line (LAW 0l) — unanchored, on screen the whole beat"
+                        },
+                        "stateTitle": {
+                          "type": "string",
+                          "maxLength": 26,
+                          "description": "what the incoming record IS, e.g. 'vitals.json' or 'the ticket'"
+                        },
+                        "stateLines": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "the unstructured state, verbatim as it would arrive. 2-6 lines, each <= 34 chars"
+                        },
+                        "ifHead": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "the code before the socket, e.g. 'if ('"
+                        },
+                        "ifTail": {
+                          "type": "string",
+                          "maxLength": 16,
+                          "description": "the code after the socket, e.g. ') {'"
+                        },
+                        "socketHint": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "what the EMPTY socket reads before anything fills it — the question nobody can write as a rule, e.g. 'is something wrong?'"
+                        },
+                        "condition": {
+                          "type": "string",
+                          "maxLength": 30,
+                          "description": "the judgement that lands in the socket"
+                        },
+                        "prob": {
+                          "type": "number",
+                          "description": "0..1 confidence that rides in with the judgement"
+                        },
+                        "bodyLine": {
+                          "type": "string",
+                          "maxLength": 40,
+                          "description": "the line the branch runs once the condition is true"
+                        },
+                        "closeLine": {
+                          "type": "string",
+                          "maxLength": 12,
+                          "description": "the closing brace line, e.g. '}'"
+                        },
+                        "atWord": {
+                          "type": "number",
+                          "description": "when the state and the code are addressed. The empty socket is on screen within 38 frames regardless"
+                        },
+                        "fillAtWord": {
+                          "type": "number",
+                          "description": "the word on which the judgement leaves the state and lands in the socket"
+                        },
+                        "branchAtWord": {
+                          "type": "number",
+                          "description": "the word on which the body line fires. Must be at or after fillAtWord"
+                        },
+                        "source": {
+                          "type": "string",
+                          "maxLength": 64,
+                          "description": "where the state or the figure came from"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           {
             "if": {
               "properties": {

@@ -262,6 +262,7 @@ export const TYPES = [
   'VAR_SCOPE',
   'REVIEW_YIELD',
   'PARALLEL_SAMPLER',
+  'SMART_IF',
 ];
 
 export const SEM = ['blue', 'green', 'red', 'orange', 'purple', 'yellow'];

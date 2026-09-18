@@ -377,10 +377,12 @@ import {LiveCode} from './scenes/LiveCode';
 import {VarScope} from './scenes/VarScope';
 import {ReviewYield} from './scenes/ReviewYield';
 import {ParallelSampler} from './scenes/ParallelSampler';
+import {SmartIf} from './scenes/SmartIf';
 import {ScenePipLayer} from './video';
 import {SceneStepRailLayer} from './StepRail';
 import {resolveScene, resolveOverlay, resolveKit} from './designs';
-const registry: Record<string, React.FC<{scene: Scene}>> = {  PARALLEL_SAMPLER: ParallelSampler,
+const registry: Record<string, React.FC<{scene: Scene}>> = {  SMART_IF: SmartIf,
+  PARALLEL_SAMPLER: ParallelSampler,
   REVIEW_YIELD: ReviewYield,
   VAR_SCOPE: VarScope,
   LIVE_CODE: LiveCode,

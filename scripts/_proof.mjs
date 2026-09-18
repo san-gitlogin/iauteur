@@ -1,26 +1,40 @@
-// reusable throwaway proof harness: node scripts/_proof.mjs <spec.json> <design> <tag>
-// renders each scene of <spec> at 55% through the <design>-wide and <design>-short
-// design compositions (spec injected via inputProps), one still per scene per aspect.
-import {bundle} from '@remotion/bundler';
-import {selectComposition, renderStill} from '@remotion/renderer';
+// THROWAWAY — generic stress proof. `node scripts/_proof.mjs <TYPE> <dataKey> <fixtures.json> <f1,f2,..>`
+// Fixtures file: {min:{...}, max:{...}, mix?:"@manifest"}. Delete after viewing (authoring §3.5).
 import fs from 'node:fs';
 import path from 'node:path';
+const P = (r) => path.resolve(process.cwd(), r);
+const [TYPE, KEY, fixFile, framesArg] = process.argv.slice(2);
+const {bundle} = await import('file://' + P('node_modules/@remotion/bundler/dist/index.js'));
+const {selectComposition, renderStill} = await import('file://' + P('node_modules/@remotion/renderer/dist/index.js'));
+const {MANIFEST} = await import('file://' + P('scripts/lib/manifest.mjs'));
 
-const [specPath, design = 'material', tag = 'proof'] = process.argv.slice(2);
-const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
-const outDir = `out/proof/${tag}`;
+const fixtures = JSON.parse(fs.readFileSync(P(fixFile), 'utf8'));
+for (const k of Object.keys(fixtures)) {
+  if (fixtures[k] === '@manifest') fixtures[k] = MANIFEST[TYPE].example[KEY];
+}
+const frames = framesArg.split(',').map(Number);
+
+const spec = (d) => ({meta: {topic: TYPE, format: 'long', fps: 30}, scenes: [
+  {id: 's01', type: TYPE, narration: 'proof', durationFrames: 220,
+   timingSource: 'estimated', background: 'zoneA', data: {[KEY]: d}},
+]});
+
+const outDir = P(`out/proof/${TYPE.toLowerCase()}`);
+fs.rmSync(outDir, {recursive: true, force: true});
 fs.mkdirSync(outDir, {recursive: true});
-const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts')});
-const inputProps = {spec, themeOverride: design, designOverride: design};
-
-for (const [comp, asp] of [[`${design}-wide`, 'wide'], [`${design}-short`, 'vert']]) {
-  let off = 0;
-  const c = await selectComposition({serveUrl, id: comp, inputProps});
-  for (const s of spec.scenes) {
-    const frame = off + Math.floor(s.durationFrames * 0.55);
-    off += s.durationFrames;
-    await renderStill({composition: c, serveUrl, output: path.join(outDir, `${asp}_${s.id}.png`), frame, inputProps, imageFormat: 'png'});
-    console.log('OK', asp, s.id);
+const serveUrl = await bundle({entryPoint: P('src/index.ts'), onProgress: () => {}});
+const jobs = [['material-wide', 'material'], ['material-short', 'material'],
+              ['neobrutalism-wide', 'neobrutalism'], ['neobrutalism-short', 'neobrutalism']];
+for (const [name, d] of Object.entries(fixtures)) {
+  for (const [id, design] of jobs) {
+    for (const f of frames) {
+      const inputProps = {spec: spec(d), themeOverride: design, designOverride: design};
+      const composition = await selectComposition({serveUrl, id, inputProps});
+      const out = path.join(outDir, `${name}_${id}_f${f}.png`);
+      await renderStill({composition, serveUrl, output: out, frame: f, inputProps,
+        chromiumOptions: {gl: 'angle'}, logLevel: 'error'});
+      console.log('·', path.relative(process.cwd(), out));
+    }
   }
 }
-console.log('DONE', outDir);
+console.log('done');
