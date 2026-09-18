@@ -794,7 +794,7 @@
       "type": "CHAPTER",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Before a single benchmark, the obvious question. Who is this?",
+      "narration": "Before a single benchmark, the obvious question. Who made this, and what exactly had he co-invented before it?",
       "data": {
         "chapter": {
           "number": "01",
@@ -4706,7 +4706,7 @@
       "type": "RETRIEVAL_RANK",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "That's a much harder shape than it looks. With hundreds of candidates, a model that invents a link that's not on the page loses instantly. TypeSafe say Jev handles up to two hundred and fifty five options directly, and above that it scores them first and then picks, which is where the occasional slowdown comes from.",
+      "narration": "That's a much harder shape than it looks. Every hop out of Rubber duck has to score the links that are genuinely on the page, because a model that invents one loses instantly. TypeSafe say Jev handles up to two hundred and fifty five options directly. Above that it scores every candidate first and then picks the winner, which is where the occasional slowdown comes from.",
       "data": {
         "retrieval": {
           "chunks": [
@@ -4748,7 +4748,7 @@
       "type": "CHAPTER",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Now the part that decides whether any of this holds up.",
+      "narration": "Now the receipts — including the awkward ones they published about themselves.",
       "data": {
         "chapter": {
           "number": "04",
@@ -5314,7 +5314,7 @@
       "type": "RECORDED_STEP",
       "transition": "letterbox",
       "background": "zoneB",
-      "narration": "Their own chart says the quiet part out loud. Find Jev on the left, and then look up and to the right. Sol is above it. Opus 5 is above it. On raw accuracy, Jev isn't the smartest model on this page, and TypeSafe are the ones showing you that. What Jev is, is three orders of magnitude further to the left.",
+      "narration": "Their own chart, workflow intelligence against cost, says the quiet part out loud. Find Jev on the left, then look up and to the right. Sol is above it. Opus 5 is above it. On raw accuracy, Jev isn't the smartest model on this page, and TypeSafe are the ones showing you that. What Jev is, is three orders of magnitude further to the left.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -5329,7 +5329,7 @@
                   ],
                   "band": true,
                   "at": "Find Jev on the left",
-                  "atWord": 50
+                  "atWord": 51
                 }
               ],
               "callouts": [],
@@ -6140,7 +6140,7 @@
       "type": "CHAPTER",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Which brings us to the number that made everybody look twice.",
+      "narration": "Which brings us to the price, and to checking it on somebody else's site.",
       "data": {
         "chapter": {
           "number": "05",
@@ -6688,7 +6688,7 @@
       "type": "CHAPTER",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "So where would you actually put a thing like this?",
+      "narration": "So where does a model like this actually belong, and where does it really not?",
       "data": {
         "chapter": {
           "number": "06",
@@ -7772,7 +7772,7 @@
       "type": "OUTRO_CTA",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Every link is in the description, and I'd genuinely rather you checked them than took my word for any of it. If this was useful, a like helps more than you would think, and I will see you in the next one.",
+      "narration": "Every page I showed is linked below, and I'd genuinely rather you checked the sources yourself than took my word for any of it. If this was useful, a like helps more than you would think, and I will see you in the next one.",
       "data": {
         "message": "Check the sources yourself",
         "sub": "every page is linked below"

@@ -206,7 +206,7 @@ def write():
 # ───────────────────────────────────────────────────────── ACT 1 — who made this
 SCENES += [
  scene("s07", "CHAPTER",
-  "Before a single benchmark, the obvious question. Who is this?",
+  "Before a single benchmark, the obvious question. Who made this, and what exactly had he co-invented before it?",
   {"chapter": {"number": "01", "title": "Who made this", "subtitle": "and what he co-invented"}},
   transition="dip"),
 
@@ -504,9 +504,10 @@ SCENES += [
   transition="letterbox", background="zoneB"),
 
  scene("s35", "RETRIEVAL_RANK",
-  "That's a much harder shape than it looks. With hundreds of candidates, a model that invents a link that's not "
-  "on the page loses instantly. TypeSafe say Jev handles up to two hundred and fifty five options directly, and "
-  "above that it scores them first and then picks, which is where the occasional slowdown comes from.",
+  "That's a much harder shape than it looks. Every hop out of Rubber duck has to score the links that are genuinely "
+  "on the page, because a model that invents one loses instantly. TypeSafe say Jev handles up to two hundred and "
+  "fifty five options directly. Above that it scores every candidate first and then picks the winner, which is where "
+  "the occasional slowdown comes from.",
   {"retrieval": {"chunks": [
       {"label": "Rubber duck → Physics", "scoreA": 0.31, "scoreFinal": 0.72, "vec": 0.4, "bm25": 0.3},
       {"label": "Rubber duck → Toys", "scoreA": 0.62, "scoreFinal": 0.28, "vec": 0.7, "bm25": 0.5},
@@ -519,7 +520,7 @@ SCENES += [
 # ───────────────────────────────────────────── ACT 4 — the receipts, read honestly
 SCENES += [
  scene("s36", "CHAPTER",
-  "Now the part that decides whether any of this holds up.",
+  "Now the receipts — including the awkward ones they published about themselves.",
   {"chapter": {"number": "04", "title": "The receipts", "subtitle": "including the awkward ones"}},
   transition="dip"),
 
@@ -554,8 +555,7 @@ SCENES += [
   transition="letterbox", background="zoneB"),
 
  scene("s40", "RECORDED_STEP",
-  "Their own chart says the quiet part out loud. Find Jev on the left, and then look up and to the right. Sol is "
-  "above it. Opus 5 is above it. On raw accuracy, Jev isn't the smartest model on this page, and TypeSafe are the "
+  "Their own chart, workflow intelligence against cost, says the quiet part out loud. Find Jev on the left, then look up and to the right. Sol is above it. Opus 5 is above it. On raw accuracy, Jev isn't the smartest model on this page, and TypeSafe are the "
   "ones showing you that. What Jev is, is three orders of magnitude further to the left.",
   footage([clip("rec:jev-home#charts", "their own Pareto curve",
                 zooms=[{"marks": ["ch"], "band": True, "at": "Find Jev on the left"},
@@ -645,7 +645,7 @@ SCENES += [
 # ───────────────────────────────────────────────── ACT 5 — the price, checked twice
 SCENES += [
  scene("s48", "CHAPTER",
-  "Which brings us to the number that made everybody look twice.",
+  "Which brings us to the price, and to checking it on somebody else's site.",
   {"chapter": {"number": "05", "title": "The price", "subtitle": "checked on somebody else's site"}},
   transition="dip"),
 
@@ -697,7 +697,7 @@ SCENES += [
 # ───────────────────────────────────────────── ACT 6 — where this belongs
 SCENES += [
  scene("s53", "CHAPTER",
-  "So where would you actually put a thing like this?",
+  "So where does a model like this actually belong, and where does it really not?",
   {"chapter": {"number": "06", "title": "Where it belongs", "subtitle": "and where it really does not"}},
   transition="dip"),
 
@@ -833,7 +833,7 @@ SCENES += [
   anchors=["points.0.atWord", "points.1.atWord", "points.2.atWord", "points.3.atWord"]),
 
  scene("s64", "OUTRO_CTA",
-  "Every link is in the description, and I'd genuinely rather you checked them than took my word for any of it. "
+  "Every page I showed is linked below, and I'd genuinely rather you checked the sources yourself than took my word for any of it. "
   "If this was useful, a like helps more than you would think, and I will see you in the next one.",
   {"message": "Check the sources yourself", "sub": "every page is linked below"},
   transition="fade"),
