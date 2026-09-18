@@ -91,15 +91,18 @@
       "type": "HOOK",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Jev is a frontier AI model that cannot write a single word. That's not a limitation in Jev. That is the entire product.",
+      "narration": "Jev is a frontier AI model that cannot write a single word. That is the product.",
       "data": {
         "headline": "JEV: 200× FASTER, 400× CHEAPER",
         "subtext": "and it cannot write a single word",
         "heroAsset": "lucide:git-branch",
         "hookVariant": "figure",
         "headlineAtWord": 1,
-        "heroAtWord": 12
-      }
+        "heroAtWord": 8.25
+      },
+      "durationFrames": 180,
+      "audio": "audio/jev-decisions-measured_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -110,8 +113,11 @@
       "data": {
         "title": "Jev, from the primary sources",
         "subtitle": "every claim, read off the page that makes it",
-        "atWord": 9
-      }
+        "atWord": 6.5
+      },
+      "durationFrames": 354,
+      "audio": "audio/jev-decisions-measured_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
@@ -530,7 +536,7 @@
                 492
               ],
               "shows": "Our side-by-side demo shows a key difference between our models and LLMs: Jev ou",
-              "atWord": 5
+              "atWord": 2.917
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -538,10 +544,12 @@
             "width": 760,
             "height": 428
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1251
+      "durationFrames": 650,
+      "audio": "audio/jev-decisions-measured_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -562,7 +570,7 @@
               "label": "co-inventing ChatGPT",
               "side": "down",
               "color": "purple",
-              "atWord": 17
+              "atWord": 15.583
             },
             {
               "x": 0.2,
@@ -570,7 +578,7 @@
               "label": "20-200× faster",
               "side": "right",
               "color": "green",
-              "atWord": 42
+              "atWord": 41.917
             },
             {
               "x": 0.25,
@@ -578,7 +586,7 @@
               "label": "40-400× cheaper",
               "side": "right",
               "color": "blue",
-              "atWord": 48
+              "atWord": 47.25
             }
           ]
         }
@@ -587,7 +595,10 @@
         "mediaCallout.callouts.0.atWord",
         "mediaCallout.callouts.1.atWord",
         "mediaCallout.callouts.2.atWord"
-      ]
+      ],
+      "durationFrames": 802,
+      "audio": "audio/jev-decisions-measured_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -609,11 +620,11 @@
                   ],
                   "band": true,
                   "at": "intelligence beyond chat",
-                  "atWord": 26
+                  "atWord": 24
                 },
                 {
                   "at": "full",
-                  "atWord": 33
+                  "atWord": 29.333
                 }
               ],
               "callouts": [],
@@ -734,7 +745,7 @@
                 153
               ],
               "shows": "The First (Public) System One Model; Jev Gives AI The Properties Of Code",
-              "atWord": 5
+              "atWord": 3.417
             }
           ],
           "sourceNote": "TYPESAFE.AI — OFFICIAL SITE",
@@ -742,10 +753,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 525
+      "durationFrames": 443,
+      "audio": "audio/jev-decisions-measured_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
@@ -760,25 +773,25 @@
             "icon": "lucide:user-round",
             "text": "Who built it",
             "detail": "and what he co-invented",
-            "atWord": 7
+            "atWord": 5.417
           },
           {
             "icon": "lucide:git-branch",
             "text": "What a System One model is",
             "detail": "and why it costs so little",
-            "atWord": 17
+            "atWord": 14.167
           },
           {
             "icon": "lucide:scale",
             "text": "What their own evals say",
             "detail": "including the unflattering parts",
-            "atWord": 33
+            "atWord": 25.833
           },
           {
             "icon": "lucide:wrench",
             "text": "Where it belongs",
             "detail": "in real software",
-            "atWord": 47
+            "atWord": 38.583
           }
         ]
       },
@@ -787,7 +800,10 @@
         "items.1.atWord",
         "items.2.atWord",
         "items.3.atWord"
-      ]
+      ],
+      "durationFrames": 559,
+      "audio": "audio/jev-decisions-measured_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
@@ -801,7 +817,10 @@
           "title": "Who made this",
           "subtitle": "and what he co-invented"
         }
-      }
+      },
+      "durationFrames": 235,
+      "audio": "audio/jev-decisions-measured_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
@@ -816,9 +835,12 @@
           "kicker": "FROM HIS POST",
           "name": "Diogo Almeida",
           "role": "Founder, TypeSafe AI — co-created ChatGPT and RLHF",
-          "atWord": 4
+          "atWord": 3.083
         }
-      }
+      },
+      "durationFrames": 534,
+      "audio": "audio/jev-decisions-measured_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
@@ -835,16 +857,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "d"
-                  ],
-                  "band": true,
-                  "at": "co-invented RLHF and InstructGPT",
-                  "atWord": 27
-                },
-                {
                   "at": "full",
-                  "atWord": 47
+                  "atWord": 46.167
                 }
               ],
               "callouts": [],
@@ -963,7 +977,7 @@
                 21
               ],
               "shows": "Diogo Almeida",
-              "atWord": 5
+              "atWord": 3.75
             }
           ],
           "sourceNote": "TYPESAFE.AI/TEAM — OFFICIAL",
@@ -971,10 +985,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.75
         }
       },
-      "durationFrames": 729
+      "durationFrames": 705,
+      "audio": "audio/jev-decisions-measured_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
@@ -997,9 +1013,12 @@
               "reply": "No — that is the first one guessed."
             }
           ],
-          "atWord": 44
+          "atWord": 33.25
         }
-      }
+      },
+      "durationFrames": 744,
+      "audio": "audio/jev-decisions-measured_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
@@ -1014,21 +1033,21 @@
               "date": "2022",
               "title": "InstructGPT",
               "sub": "RLHF, then ChatGPT",
-              "atWord": 4
+              "atWord": 2.833
             },
             {
               "date": "2024",
               "title": "Into stealth",
               "sub": "two years, no product",
               "color": "orange",
-              "atWord": 33
+              "atWord": 23.083
             },
             {
               "date": "2026",
               "title": "Jev ships",
               "sub": "$40M seed, no text output",
               "color": "green",
-              "atWord": 45
+              "atWord": 32.75
             }
           ]
         }
@@ -1037,7 +1056,10 @@
         "timeline.milestones.0.atWord",
         "timeline.milestones.1.atWord",
         "timeline.milestones.2.atWord"
-      ]
+      ],
+      "durationFrames": 475,
+      "audio": "audio/jev-decisions-measured_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
@@ -1051,7 +1073,10 @@
           "title": "System One",
           "subtitle": "decisions, not sentences"
         }
-      }
+      },
+      "durationFrames": 99,
+      "audio": "audio/jev-decisions-measured_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
@@ -1073,11 +1098,11 @@
                   ],
                   "band": true,
                   "at": "superhuman at chat for years",
-                  "atWord": 28
+                  "atWord": 20.25
                 },
                 {
                   "at": "full",
-                  "atWord": 49
+                  "atWord": 38.667
                 }
               ],
               "callouts": [],
@@ -1160,7 +1185,7 @@
                 30
               ],
               "shows": "Introducing System One Models & Jev",
-              "atWord": 5
+              "atWord": 3.583
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -1168,10 +1193,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 765
+      "durationFrames": 603,
+      "audio": "audio/jev-decisions-measured_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
@@ -1197,9 +1224,9 @@
           "prob": 0.94,
           "bodyLine": "escalate(patient)",
           "closeLine": "}",
-          "atWord": 6,
-          "fillAtWord": 30,
-          "branchAtWord": 44,
+          "atWord": 4.167,
+          "fillAtWord": 22.833,
+          "branchAtWord": 30.417,
           "source": "ILLUSTRATIVE RECORD — NOT PATIENT DATA"
         }
       },
@@ -1207,7 +1234,10 @@
         "smartIf.atWord",
         "smartIf.fillAtWord",
         "smartIf.branchAtWord"
-      ]
+      ],
+      "durationFrames": 429,
+      "audio": "audio/jev-decisions-measured_long_s14.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s15",
@@ -1233,9 +1263,9 @@
           "prob": 0.94,
           "bodyLine": "escalate(patient)",
           "closeLine": "}",
-          "atWord": 4,
-          "fillAtWord": 38,
-          "branchAtWord": 52,
+          "atWord": 2.417,
+          "fillAtWord": 31.417,
+          "branchAtWord": 44.417,
           "source": "ILLUSTRATIVE RECORD — NOT PATIENT DATA"
         }
       },
@@ -1243,7 +1273,10 @@
         "smartIf.atWord",
         "smartIf.fillAtWord",
         "smartIf.branchAtWord"
-      ]
+      ],
+      "durationFrames": 705,
+      "audio": "audio/jev-decisions-measured_long_s15.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16",
@@ -1254,17 +1287,17 @@
       "data": {
         "center": {
           "title": "One record, one decision",
-          "atWord": 4
+          "atWord": 1.417
         },
         "left": {
           "title": "Ask an LLM for JSON",
           "color": "orange",
-          "atWord": 16
+          "atWord": 9.583
         },
         "right": {
           "title": "Ask for the decision",
           "color": "green",
-          "atWord": 40
+          "atWord": 27.833
         },
         "source": "TYPESAFE AI — LAUNCH POST"
       },
@@ -1272,7 +1305,10 @@
         "center.atWord",
         "left.atWord",
         "right.atWord"
-      ]
+      ],
+      "durationFrames": 461,
+      "audio": "audio/jev-decisions-measured_long_s16.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s17",
@@ -1294,11 +1330,11 @@
                   ],
                   "band": true,
                   "at": "Old frontier on the left",
-                  "atWord": 22
+                  "atWord": 14.083
                 },
                 {
                   "at": "full",
-                  "atWord": 37
+                  "atWord": 23.417
                 }
               ],
               "callouts": [],
@@ -1399,7 +1435,7 @@
                 13
               ],
               "shows": "Frontiers, Old And New",
-              "atWord": 5
+              "atWord": 3.25
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -1407,10 +1443,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 585
+      "durationFrames": 387,
+      "audio": "audio/jev-decisions-measured_long_s17.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s18",
@@ -1432,11 +1470,11 @@
                   ],
                   "band": true,
                   "at": "Jev is parallel",
-                  "atWord": 23
+                  "atWord": 21.75
                 },
                 {
                   "at": "full",
-                  "atWord": 39
+                  "atWord": 35.583
                 }
               ],
               "callouts": [],
@@ -1579,7 +1617,7 @@
                 23
               ],
               "shows": "Inputs",
-              "atWord": 5
+              "atWord": 4.75
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -1587,10 +1625,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 2.75
         }
       },
-      "durationFrames": 609
+      "durationFrames": 531,
+      "audio": "audio/jev-decisions-measured_long_s18.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s19",
@@ -1639,15 +1679,18 @@
           ],
           "seqTime": "8.566 s",
           "parTime": "0.114 s",
-          "atWord": 8,
-          "pulseAtWord": 40,
+          "atWord": 4.583,
+          "pulseAtWord": 30.667,
           "source": "TIMINGS: TYPESAFE AI — PUBLISHED SIDE-BY-SIDE DEMO"
         }
       },
       "anchors": [
         "parallelSampler.atWord",
         "parallelSampler.pulseAtWord"
-      ]
+      ],
+      "durationFrames": 602,
+      "audio": "audio/jev-decisions-measured_long_s19.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s20",
@@ -1678,15 +1721,18 @@
           ],
           "chosen": 0,
           "sealedLabel": "anything else",
-          "atWord": 6,
-          "pickAtWord": 38,
+          "atWord": 2.833,
+          "pickAtWord": 29.5,
           "source": "TYPESAFE AI — DOCS, CHOICE QUESTION"
         }
       },
       "anchors": [
         "decisionSlots.atWord",
         "decisionSlots.pickAtWord"
-      ]
+      ],
+      "durationFrames": 601,
+      "audio": "audio/jev-decisions-measured_long_s20.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s21",
@@ -1703,16 +1749,19 @@
           "goodValue": "\"billing\"",
           "badValue": "Sure! Here's the JSON:",
           "errorText": "SyntaxError: Unexpected token 'S' at position 0",
-          "atWord": 5,
-          "passAtWord": 18,
-          "rejectAtWord": 34
+          "atWord": 2.75,
+          "passAtWord": 12,
+          "rejectAtWord": 22.833
         }
       },
       "anchors": [
         "typeGate.atWord",
         "typeGate.passAtWord",
         "typeGate.rejectAtWord"
-      ]
+      ],
+      "durationFrames": 464,
+      "audio": "audio/jev-decisions-measured_long_s21.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s22",
@@ -1737,9 +1786,12 @@
           ],
           "clientLabel": "your code",
           "serverLabel": "the LLM",
-          "atWord": 12
+          "atWord": 8.333
         }
-      }
+      },
+      "durationFrames": 565,
+      "audio": "audio/jev-decisions-measured_long_s22.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s23",
@@ -1762,9 +1814,12 @@
               "reply": "billing 0.84 · technical 0.15"
             }
           ],
-          "atWord": 14
+          "atWord": 11.917
         }
-      }
+      },
+      "durationFrames": 573,
+      "audio": "audio/jev-decisions-measured_long_s23.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s24",
@@ -1973,7 +2028,7 @@
                 403
               ],
               "shows": "Jev returns typed decisions with calibrated probabilities, so your software can ",
-              "atWord": 5
+              "atWord": 3.167
             }
           ],
           "sourceNote": "TYPESAFE.AI — OFFICIAL SITE",
@@ -1981,10 +2036,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.833
         }
       },
-      "durationFrames": 1025
+      "durationFrames": 480,
+      "audio": "audio/jev-decisions-measured_long_s24.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s25",
@@ -2001,19 +2058,19 @@
               "label": "Said 90% sure",
               "value": 90,
               "color": "green",
-              "atWord": 22
+              "atWord": 16.333
             },
             {
               "label": "Said 70% sure",
               "value": 70,
               "color": "blue",
-              "atWord": 32
+              "atWord": 25.583
             },
             {
               "label": "Overconfident: 90%",
               "value": 58,
               "color": "red",
-              "atWord": 44
+              "atWord": 30.333
             }
           ],
           "source": "ILLUSTRATIVE — WHAT CALIBRATION MEANS, NOT MEASURED FIGURES"
@@ -2023,7 +2080,10 @@
         "pictogram.rows.0.atWord",
         "pictogram.rows.1.atWord",
         "pictogram.rows.2.atWord"
-      ]
+      ],
+      "durationFrames": 558,
+      "audio": "audio/jev-decisions-measured_long_s25.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s26",
@@ -2045,11 +2105,11 @@
                   ],
                   "band": true,
                   "at": "The first type is a Noul",
-                  "atWord": 27
+                  "atWord": 20
                 },
                 {
                   "at": "full",
-                  "atWord": 47
+                  "atWord": 33.5
                 }
               ],
               "callouts": [],
@@ -2385,7 +2445,7 @@
                 23
               ],
               "shows": "On this page",
-              "atWord": 5
+              "atWord": 3
             }
           ],
           "sourceNote": "DOCS.TYPESAFE.AI — OFFICIAL DOCUMENTATION",
@@ -2396,7 +2456,9 @@
           "atWord": 2
         }
       },
-      "durationFrames": 741
+      "durationFrames": 522,
+      "audio": "audio/jev-decisions-measured_long_s26.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s27",
@@ -2418,11 +2480,11 @@
                   ],
                   "band": true,
                   "at": "you can mix them in one call",
-                  "atWord": 21
+                  "atWord": 13.833
                 },
                 {
                   "at": "full",
-                  "atWord": 34
+                  "atWord": 22.917
                 }
               ],
               "callouts": [],
@@ -2748,7 +2810,7 @@
                 21
               ],
               "shows": "On this page",
-              "atWord": 5
+              "atWord": 2.25
             }
           ],
           "sourceNote": "DOCS.TYPESAFE.AI — OFFICIAL DOCUMENTATION",
@@ -2756,10 +2818,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 537
+      "durationFrames": 397,
+      "audio": "audio/jev-decisions-measured_long_s27.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s28",
@@ -2776,24 +2840,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "p"
-                  ],
-                  "band": true,
-                  "at": "a probability for every option",
-                  "atWord": 20
-                },
-                {
-                  "marks": [
-                    "c"
-                  ],
-                  "band": true,
-                  "at": "a confidence sitting beside",
-                  "atWord": 31
-                },
-                {
                   "at": "full",
-                  "atWord": 43
+                  "atWord": 34.583
                 }
               ],
               "callouts": [],
@@ -3125,7 +3173,7 @@
                 44
               ],
               "shows": "On this page",
-              "atWord": 5
+              "atWord": 1.667
             }
           ],
           "sourceNote": "DOCS.TYPESAFE.AI — OFFICIAL DOCUMENTATION",
@@ -3133,10 +3181,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 669
+      "durationFrames": 521,
+      "audio": "audio/jev-decisions-measured_long_s28.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s29",
@@ -3150,7 +3200,10 @@
           "title": "Watch it run",
           "subtitle": "their demos, played in full"
         }
-      }
+      },
+      "durationFrames": 109,
+      "audio": "audio/jev-decisions-measured_long_s29.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s30",
@@ -3569,7 +3622,7 @@
                 492
               ],
               "shows": "Our side-by-side demo shows a key difference between our models and LLMs: Jev ou",
-              "atWord": 5
+              "atWord": 4.167
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -3577,10 +3630,12 @@
             "width": 760,
             "height": 428
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1251
+      "durationFrames": 610,
+      "audio": "audio/jev-decisions-measured_long_s30.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s31",
@@ -3629,15 +3684,18 @@
           ],
           "seqTime": "8.566 s",
           "parTime": "0.114 s",
-          "atWord": 6,
-          "pulseAtWord": 34,
+          "atWord": 1.917,
+          "pulseAtWord": 23.583,
           "source": "TYPESAFE AI — PUBLISHED SIDE-BY-SIDE DEMO"
         }
       },
       "anchors": [
         "parallelSampler.atWord",
         "parallelSampler.pulseAtWord"
-      ]
+      ],
+      "durationFrames": 539,
+      "audio": "audio/jev-decisions-measured_long_s31.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s32",
@@ -4144,7 +4202,7 @@
                 500
               ],
               "shows": "We love how this doomo doomonstrates real-time intelligence and what can be doon",
-              "atWord": 5
+              "atWord": 2.917
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -4152,10 +4210,12 @@
             "width": 760,
             "height": 428
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1249
+      "durationFrames": 681,
+      "audio": "audio/jev-decisions-measured_long_s32.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s33",
@@ -4168,9 +4228,12 @@
         "prefix": "$",
         "suffix": "/hr",
         "label": "ten Jev decisions a second, all day",
-        "atWord": 26,
+        "atWord": 17.667,
         "source": "TYPESAFE AI — LAUNCH POST, DOOM DEMO"
-      }
+      },
+      "durationFrames": 452,
+      "audio": "audio/jev-decisions-measured_long_s33.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s34",
@@ -4688,7 +4751,7 @@
                 501
               ],
               "shows": "The objective of the game is to start on one Wikipedia page and reach a specific",
-              "atWord": 5
+              "atWord": 2.583
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -4696,10 +4759,12 @@
             "width": 760,
             "height": 428
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1251
+      "durationFrames": 688,
+      "audio": "audio/jev-decisions-measured_long_s34.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s35",
@@ -4732,16 +4797,19 @@
               "bm25": 0.6
             }
           ],
-          "atWord": 8,
-          "rerankAtWord": 30,
-          "fuseAtWord": 46
+          "atWord": 4.083,
+          "rerankAtWord": 17.667,
+          "fuseAtWord": 31.333
         }
       },
       "anchors": [
         "retrieval.atWord",
         "retrieval.rerankAtWord",
         "retrieval.fuseAtWord"
-      ]
+      ],
+      "durationFrames": 601,
+      "audio": "audio/jev-decisions-measured_long_s35.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s36",
@@ -4755,7 +4823,10 @@
           "title": "The receipts",
           "subtitle": "including the awkward ones"
         }
-      }
+      },
+      "durationFrames": 159,
+      "audio": "audio/jev-decisions-measured_long_s36.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s37",
@@ -4770,30 +4841,30 @@
             {
               "id": "s",
               "label": "One piece of state",
-              "atWord": 20
+              "atWord": 24
             },
             {
               "id": "q",
               "label": "Many questions",
-              "atWord": 28
+              "atWord": 29.667
             },
             {
               "id": "c",
               "label": "Code branches",
               "color": "green",
-              "atWord": 36
+              "atWord": 31.917
             }
           ],
           "edges": [
             {
               "from": "s",
               "to": "q",
-              "atWord": 28
+              "atWord": 24.417
             },
             {
               "from": "q",
               "to": "c",
-              "atWord": 36
+              "atWord": 30.917
             }
           ]
         }
@@ -4802,7 +4873,10 @@
         "diagram.nodes.0.atWord",
         "diagram.nodes.1.atWord",
         "diagram.nodes.2.atWord"
-      ]
+      ],
+      "durationFrames": 568,
+      "audio": "audio/jev-decisions-measured_long_s37.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s38",
@@ -4819,16 +4893,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "a"
-                  ],
-                  "band": true,
-                  "at": "Mean accuracy plotted against cost",
-                  "atWord": 18
-                },
-                {
                   "at": "full",
-                  "atWord": 29
+                  "atWord": 26.917
                 }
               ],
               "callouts": [],
@@ -5045,7 +5111,7 @@
                 13
               ],
               "shows": "Workflow evals",
-              "atWord": 5
+              "atWord": 2.167
             }
           ],
           "sourceNote": "EVALS.TYPESAFE.AI — THEIR OWN WORKFLOW EVALS",
@@ -5053,10 +5119,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 465
+      "durationFrames": 447,
+      "audio": "audio/jev-decisions-measured_long_s38.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s39",
@@ -5078,11 +5146,11 @@
                   ],
                   "band": true,
                   "at": "nothing is both cheaper and more accurate",
-                  "atWord": 25
+                  "atWord": 21.083
                 },
                 {
                   "at": "full",
-                  "atWord": 44
+                  "atWord": 35.833
                 }
               ],
               "callouts": [],
@@ -5296,7 +5364,7 @@
                 0
               ],
               "shows": "Workflow evals",
-              "atWord": 5
+              "atWord": 3.583
             }
           ],
           "sourceNote": "EVALS.TYPESAFE.AI — THEIR OWN WORKFLOW EVALS",
@@ -5304,10 +5372,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.333
         }
       },
-      "durationFrames": 693
+      "durationFrames": 560,
+      "audio": "audio/jev-decisions-measured_long_s39.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s40",
@@ -5324,12 +5394,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "ch"
-                  ],
-                  "band": true,
-                  "at": "Find Jev on the left",
-                  "atWord": 51
+                  "at": "full",
+                  "atWord": 41.25
                 }
               ],
               "callouts": [],
@@ -5590,7 +5656,7 @@
                 520
               ],
               "shows": "Jev’s Intelligence Per Dollar Is Literally Off The Charts.",
-              "atWord": 5
+              "atWord": 4.083
             }
           ],
           "sourceNote": "TYPESAFE.AI — OFFICIAL SITE",
@@ -5598,10 +5664,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1295
+      "durationFrames": 655,
+      "audio": "audio/jev-decisions-measured_long_s40.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s41",
@@ -5618,16 +5686,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "zh"
-                  ],
-                  "band": true,
-                  "at": "Structured output error rate",
-                  "atWord": 29
-                },
-                {
                   "at": "full",
-                  "atWord": 51
+                  "atWord": 35.583
                 }
               ],
               "callouts": [],
@@ -5690,7 +5750,7 @@
                 23
               ],
               "shows": "Jev.Cost",
-              "atWord": 5
+              "atWord": 1.833
             }
           ],
           "sourceNote": "TYPESAFE.AI — OFFICIAL SITE",
@@ -5698,10 +5758,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 1046
+      "durationFrames": 550,
+      "audio": "audio/jev-decisions-measured_long_s41.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s42",
@@ -5716,27 +5778,27 @@
             "value": 0,
             "display": "0.00%",
             "color": "green",
-            "atWord": 11
+            "atWord": 7.083
           },
           {
             "label": "GPT-5.6 Sol",
             "value": 15.3,
             "display": "1.93%",
-            "atWord": 19
+            "atWord": 15.167
           },
           {
             "label": "Claude Opus 5",
             "value": 29.8,
             "display": "3.76%",
             "color": "orange",
-            "atWord": 24
+            "atWord": 19.75
           },
           {
             "label": "Claude Sonnet 5",
             "value": 100,
             "display": "12.6%",
             "color": "red",
-            "atWord": 36
+            "atWord": 33
           }
         ],
         "source": "TYPESAFE.AI — STRUCTURED OUTPUT ERROR RATE, THEIR CHART"
@@ -5746,7 +5808,10 @@
         "bars.1.atWord",
         "bars.2.atWord",
         "bars.3.atWord"
-      ]
+      ],
+      "durationFrames": 598,
+      "audio": "audio/jev-decisions-measured_long_s42.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s43",
@@ -5779,9 +5844,9 @@
           "verdict": "wrong",
           "verdictNote": "right shape. wrong answer.",
           "sealedLabel": "anything else",
-          "atWord": 8,
-          "pickAtWord": 30,
-          "verdictAtWord": 42,
+          "atWord": 5.667,
+          "pickAtWord": 21.917,
+          "verdictAtWord": 31.417,
           "source": "TYPESAFE AI — FAQ: CAN JEV STILL GET THINGS WRONG?"
         }
       },
@@ -5789,7 +5854,10 @@
         "decisionSlots.atWord",
         "decisionSlots.pickAtWord",
         "decisionSlots.verdictAtWord"
-      ]
+      ],
+      "durationFrames": 498,
+      "audio": "audio/jev-decisions-measured_long_s43.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s44",
@@ -5811,11 +5879,11 @@
                   ],
                   "band": true,
                   "at": "We love skeptics",
-                  "atWord": 16
+                  "atWord": 16.333
                 },
                 {
                   "at": "full",
-                  "atWord": 24
+                  "atWord": 20.333
                 }
               ],
               "callouts": [],
@@ -5892,7 +5960,7 @@
                 31
               ],
               "shows": "Side-by-side demonstration",
-              "atWord": 5
+              "atWord": 3.583
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -5900,10 +5968,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 455
+      "durationFrames": 337,
+      "audio": "audio/jev-decisions-measured_long_s44.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s45",
@@ -5920,16 +5990,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "n"
-                  ],
-                  "band": true,
-                  "at": "TypeSafe printed their own caveats",
-                  "atWord": 29
-                },
-                {
                   "at": "full",
-                  "atWord": 51
+                  "atWord": 41.917
                 }
               ],
               "callouts": [],
@@ -6002,7 +6064,7 @@
                 14
               ],
               "shows": "Evidence / Technical Results",
-              "atWord": 5
+              "atWord": 1.833
             }
           ],
           "sourceNote": "TYPESAFE.AI — LAUNCH POST, 15 SEP 2026",
@@ -6010,10 +6072,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 801
+      "durationFrames": 669,
+      "audio": "audio/jev-decisions-measured_long_s45.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s46",
@@ -6097,9 +6161,12 @@
               "status": "flaky"
             }
           ],
-          "atWord": 10
+          "atWord": 7.667
         }
-      }
+      },
+      "durationFrames": 541,
+      "audio": "audio/jev-decisions-measured_long_s46.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s47",
@@ -6112,19 +6179,19 @@
         "points": [
           {
             "text": "The price — listed by third parties",
-            "atWord": 9
+            "atWord": 6.75
           },
           {
             "text": "The output shape — falsifiable in one call",
-            "atWord": 14
+            "atWord": 9.333
           },
           {
             "text": "The speed multiples — their harness",
-            "atWord": 22
+            "atWord": 14
           },
           {
             "text": "The accuracy — their reference answers",
-            "atWord": 26
+            "atWord": 18.5
           }
         ]
       },
@@ -6133,7 +6200,10 @@
         "points.1.atWord",
         "points.2.atWord",
         "points.3.atWord"
-      ]
+      ],
+      "durationFrames": 309,
+      "audio": "audio/jev-decisions-measured_long_s47.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s48",
@@ -6147,7 +6217,10 @@
           "title": "The price",
           "subtitle": "checked on somebody else's site"
         }
-      }
+      },
+      "durationFrames": 146,
+      "audio": "audio/jev-decisions-measured_long_s48.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s49",
@@ -6164,16 +6237,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "jc"
-                  ],
-                  "band": true,
-                  "at": "every competitor on one table",
-                  "atWord": 26
-                },
-                {
                   "at": "full",
-                  "atWord": 47
+                  "atWord": 40.917
                 }
               ],
               "callouts": [],
@@ -6241,7 +6306,7 @@
                 11
               ],
               "shows": "Jev.Cost",
-              "atWord": 5
+              "atWord": 4.417
             }
           ],
           "sourceNote": "TYPESAFE.AI — OFFICIAL SITE",
@@ -6249,10 +6314,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.667
         }
       },
-      "durationFrames": 1087
+      "durationFrames": 609,
+      "audio": "audio/jev-decisions-measured_long_s49.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s50",
@@ -6264,9 +6331,12 @@
         "value": 42,
         "prefix": "$",
         "label": "per BILLION input tokens · output free",
-        "atWord": 8,
+        "atWord": 3.083,
         "source": "TYPESAFE.AI — PRICING, READ OFF THE PAGE"
-      }
+      },
+      "durationFrames": 459,
+      "audio": "audio/jev-decisions-measured_long_s50.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s51",
@@ -6283,16 +6353,8 @@
               "focus": true,
               "zooms": [
                 {
-                  "marks": [
-                    "p"
-                  ],
-                  "band": true,
-                  "at": "the same nought point nought four dollars",
-                  "atWord": 30
-                },
-                {
                   "at": "full",
-                  "atWord": 54
+                  "atWord": 39
                 }
               ],
               "callouts": [],
@@ -6619,7 +6681,7 @@
                 14
               ],
               "shows": "Jev",
-              "atWord": 5
+              "atWord": 1.25
             }
           ],
           "sourceNote": "VERCEL AI GATEWAY — INDEPENDENT LISTING",
@@ -6627,10 +6689,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 837
+      "durationFrames": 588,
+      "audio": "audio/jev-decisions-measured_long_s51.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s52",
@@ -6671,9 +6735,9 @@
           ],
           "crossNote": "work that was not worth doing",
           "assumption": "Arithmetic on the published per-million prices, at about 300 tokens a call.",
-          "atWord": 8,
-          "drawAtWord": 22,
-          "crossAtWord": 50,
+          "atWord": 4.833,
+          "drawAtWord": 17.167,
+          "crossAtWord": 39.25,
           "source": "TYPESAFE.AI + VERCEL AI GATEWAY LISTED PRICES"
         }
       },
@@ -6681,7 +6745,10 @@
         "jevonsCurve.atWord",
         "jevonsCurve.drawAtWord",
         "jevonsCurve.crossAtWord"
-      ]
+      ],
+      "durationFrames": 713,
+      "audio": "audio/jev-decisions-measured_long_s52.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s53",
@@ -6695,7 +6762,10 @@
           "title": "Where it belongs",
           "subtitle": "and where it really does not"
         }
-      }
+      },
+      "durationFrames": 136,
+      "audio": "audio/jev-decisions-measured_long_s53.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s54",
@@ -6717,11 +6787,11 @@
                   ],
                   "band": true,
                   "at": "Official SDKs for Python and JavaScript",
-                  "atWord": 20
+                  "atWord": 21.083
                 },
                 {
                   "at": "full",
-                  "atWord": 35
+                  "atWord": 33.333
                 }
               ],
               "callouts": [],
@@ -7049,7 +7119,7 @@
                 12
               ],
               "shows": "TypeSafe",
-              "atWord": 5
+              "atWord": 3.667
             }
           ],
           "sourceNote": "GITHUB.COM/TYPESAFE-AI — OFFICIAL",
@@ -7057,10 +7127,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1.417
         }
       },
-      "durationFrames": 549
+      "durationFrames": 502,
+      "audio": "audio/jev-decisions-measured_long_s54.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s55",
@@ -7082,11 +7154,11 @@
                   ],
                   "band": true,
                   "at": "A drop-in replacement for their client",
-                  "atWord": 33
+                  "atWord": 27.083
                 },
                 {
                   "at": "full",
-                  "atWord": 59
+                  "atWord": 46.083
                 }
               ],
               "callouts": [],
@@ -7412,7 +7484,7 @@
                 21
               ],
               "shows": "Popular repositories Loading",
-              "atWord": 5
+              "atWord": 3.667
             }
           ],
           "sourceNote": "GITHUB.COM/TYPESAFE-AI — OFFICIAL",
@@ -7420,10 +7492,12 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 921
+      "durationFrames": 714,
+      "audio": "audio/jev-decisions-measured_long_s55.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s56",
@@ -7455,9 +7529,12 @@
             "ring": 0,
             "reason": "sent to the big model"
           },
-          "atWord": 14
+          "atWord": 10.833
         }
-      }
+      },
+      "durationFrames": 617,
+      "audio": "audio/jev-decisions-measured_long_s56.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s57",
@@ -7476,23 +7553,26 @@
               "text": "ls -la ./reports",
               "title": "ok",
               "sub": "read-only, 0.02 risk",
-              "atWord": 22
+              "atWord": 15.667
             },
             {
               "text": "rm -rf /var/data",
               "title": "no",
               "sub": "destructive, 0.98 risk",
-              "atWord": 31
+              "atWord": 24.833
             }
           ],
-          "atWord": 8
+          "atWord": 5.833
         }
       },
       "anchors": [
         "ruleTest.atWord",
         "ruleTest.cases.0.atWord",
         "ruleTest.cases.1.atWord"
-      ]
+      ],
+      "durationFrames": 632,
+      "audio": "audio/jev-decisions-measured_long_s57.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s58",
@@ -7543,9 +7623,12 @@
           ],
           "active": 1,
           "variant": "ring",
-          "atWord": 10
+          "atWord": 5.25
         }
-      }
+      },
+      "durationFrames": 570,
+      "audio": "audio/jev-decisions-measured_long_s58.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s59",
@@ -7562,22 +7645,25 @@
           "said": [
             {
               "text": "queue: technical  ·  confidence 0.87",
-              "atWord": 30
+              "atWord": 18.583
             }
           ],
           "missed": [
             {
               "text": "because the source code is the asset here",
-              "atWord": 40
+              "atWord": 26.417
             },
             {
               "text": "and physical theft is not a support queue",
-              "atWord": 44
+              "atWord": 29.917
             }
           ],
-          "atWord": 6
+          "atWord": 3.167
         }
-      }
+      },
+      "durationFrames": 583,
+      "audio": "audio/jev-decisions-measured_long_s59.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s60",
@@ -7597,28 +7683,28 @@
               "text": "route this ticket",
               "title": "left",
               "sub": "costs five minutes",
-              "atWord": 12
+              "atWord": 12.333
             },
             {
               "text": "is this spam?",
               "title": "left",
               "sub": "reversible",
-              "atWord": 18
+              "atWord": 13.917
             },
             {
               "text": "refuse this loan",
               "title": "right",
               "sub": "must be explained",
-              "atWord": 26
+              "atWord": 22.333
             },
             {
               "text": "reject this claim",
               "title": "right",
               "sub": "must be explained",
-              "atWord": 33
+              "atWord": 29.917
             }
           ],
-          "atWord": 5
+          "atWord": 4
         }
       },
       "anchors": [
@@ -7627,7 +7713,10 @@
         "respSplit.lines.1.atWord",
         "respSplit.lines.2.atWord",
         "respSplit.lines.3.atWord"
-      ]
+      ],
+      "durationFrames": 609,
+      "audio": "audio/jev-decisions-measured_long_s60.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s61",
@@ -7651,24 +7740,24 @@
               "title": "empty",
               "text": "long deliberate thought",
               "sub": "use a reasoning model",
-              "atWord": 14
+              "atWord": 17.167
             },
             {
               "label": "specialist domains",
               "title": "error",
               "text": "fields it has never seen",
               "sub": "their own FAQ says so",
-              "atWord": 22
+              "atWord": 20.75
             },
             {
               "label": "generative work",
               "title": "error",
               "text": "writing, coding, explaining",
               "sub": "removed on purpose",
-              "atWord": 28
+              "atWord": 26.75
             }
           ],
-          "atWord": 6
+          "atWord": 4.583
         }
       },
       "anchors": [
@@ -7676,7 +7765,10 @@
         "sadPaths.states.0.atWord",
         "sadPaths.states.1.atWord",
         "sadPaths.states.2.atWord"
-      ]
+      ],
+      "durationFrames": 460,
+      "audio": "audio/jev-decisions-measured_long_s61.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s62",
@@ -7700,28 +7792,28 @@
               "x": 0.88,
               "y": 0.86,
               "color": "green",
-              "atWord": 10
+              "atWord": 6.75
             },
             {
               "label": "0% shape errors",
               "x": 0.8,
               "y": 0.72,
               "color": "green",
-              "atWord": 16
+              "atWord": 8.583
             },
             {
               "label": "193.6× faster",
               "x": 0.22,
               "y": 0.64,
               "color": "orange",
-              "atWord": 27
+              "atWord": 22.417
             },
             {
               "label": "accuracy parity",
               "x": 0.18,
               "y": 0.4,
               "color": "red",
-              "atWord": 36
+              "atWord": 28.5
             }
           ]
         }
@@ -7731,7 +7823,10 @@
         "quadrant.points.1.atWord",
         "quadrant.points.2.atWord",
         "quadrant.points.3.atWord"
-      ]
+      ],
+      "durationFrames": 619,
+      "audio": "audio/jev-decisions-measured_long_s62.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s63",
@@ -7744,19 +7839,19 @@
         "points": [
           {
             "text": "Not a smaller LLM — a different shape",
-            "atWord": 9
+            "atWord": 4.917
           },
           {
             "text": "Not competing with your chat model",
-            "atWord": 18
+            "atWord": 14.167
           },
           {
             "text": "Not the most accurate on their own chart",
-            "atWord": 26
+            "atWord": 20.083
           },
           {
             "text": "Accuracy was never the axis",
-            "atWord": 40
+            "atWord": 31.5
           }
         ]
       },
@@ -7765,7 +7860,10 @@
         "points.1.atWord",
         "points.2.atWord",
         "points.3.atWord"
-      ]
+      ],
+      "durationFrames": 606,
+      "audio": "audio/jev-decisions-measured_long_s63.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s64",
@@ -7776,7 +7874,10 @@
       "data": {
         "message": "Check the sources yourself",
         "sub": "every page is linked below"
-      }
+      },
+      "durationFrames": 362,
+      "audio": "audio/jev-decisions-measured_long_s64.mp3",
+      "timingSource": "tts"
     }
   ]
 }

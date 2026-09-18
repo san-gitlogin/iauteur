@@ -123,8 +123,7 @@ SCENES = []
 # ─────────────────────────────────────────────────────────────── ACT 0 — the claim
 SCENES += [
  scene("s01", "HOOK",
-  "Jev is a frontier AI model that cannot write a single word. That's not a limitation in Jev. "
-  "That is the entire product.",
+  "Jev is a frontier AI model that cannot write a single word. That is the product.",
   {"headline": "JEV: 200× FASTER, 400× CHEAPER",
    "subtext": "and it cannot write a single word",
    "heroAsset": "lucide:git-branch", "hookVariant": "figure",
@@ -225,8 +224,7 @@ SCENES += [
   "InstructGPT is the paper that turned a text predictor into something that follows an instruction. RLHF is the "
   "training method underneath it.",
   footage([clip("rec:jev-team#diogo", "the founder's own bio",
-                zooms=[{"marks": ["d"], "band": True, "at": "co-invented RLHF and InstructGPT"},
-                       {"at": "full"}])], SRC_TEAM),
+                zooms=[{"at": "full"}])], SRC_TEAM),
   transition="letterbox", background="zoneB"),
 
  scene("s10", "MODEL_STAGES",
@@ -440,9 +438,7 @@ SCENES += [
   "And this is what comes back. Not prose about the ticket. An answers object, with a probability for every option "
   "you declared, and a confidence sitting beside the decision. That confidence is the whole product, because it's what lets your code decide when to act alone and when to fetch a human.",
   footage([clip("rec:jev-docs#answers", "what comes back",
-                zooms=[{"marks": ["p"], "band": True, "at": "a probability for every option"},
-                       {"marks": ["c"], "band": True, "at": "a confidence sitting beside"},
-                       {"at": "full"}])], SRC_DOCS),
+                zooms=[{"at": "full"}])], SRC_DOCS),
   transition="letterbox", background="zoneB"),
 ]
 
@@ -542,8 +538,7 @@ SCENES += [
   "incidents, agent traces, invoice processing, customer service. Mean accuracy plotted against cost, and again "
   "against time.",
   footage([clip("rec:jev-evals#axes", "the evals, published",
-                zooms=[{"marks": ["a"], "band": True, "at": "Mean accuracy plotted against cost"},
-                       {"at": "full"}])], SRC_EVALS),
+                zooms=[{"at": "full"}])], SRC_EVALS),
   transition="letterbox", background="zoneB"),
 
  scene("s39", "RECORDED_STEP",
@@ -558,8 +553,7 @@ SCENES += [
   "Their own chart, workflow intelligence against cost, says the quiet part out loud. Find Jev on the left, then look up and to the right. Sol is above it. Opus 5 is above it. On raw accuracy, Jev isn't the smartest model on this page, and TypeSafe are the "
   "ones showing you that. What Jev is, is three orders of magnitude further to the left.",
   footage([clip("rec:jev-home#charts", "their own Pareto curve",
-                zooms=[{"marks": ["ch"], "band": True, "at": "Find Jev on the left"},
-                       {"at": "full"}])], SRC_TS),
+                zooms=[{"at": "full"}])], SRC_TS),
   transition="letterbox", background="zoneB"),
 
  scene("s41", "RECORDED_STEP",
@@ -567,8 +561,7 @@ SCENES += [
   "The question it answers is a very practical one: how often does the model hand your code something that does not "
   "fit the shape you explicitly asked for? Because every one of those is a retry, or a crash, at three in the morning.",
   footage([clip("rec:jev-home#zerohall", "structured output errors",
-                zooms=[{"marks": ["zh"], "band": True, "at": "Structured output error rate"},
-                       {"at": "full"}])], SRC_TS),
+                zooms=[{"at": "full"}])], SRC_TS),
   transition="letterbox", background="zoneB"),
 
  scene("s42", "BAR_COMPARE",
@@ -614,8 +607,7 @@ SCENES += [
   "capabilities team. The reference answers come from averaging two competitors' models. And the demo state, they "
   "admit, paints their model in an advantageous light.",
   footage([clip("rec:jev-blog#nuance", "the caveats they printed",
-                zooms=[{"marks": ["n"], "band": True, "at": "TypeSafe printed their own caveats"},
-                       {"at": "full"}])], SRC_BLOG),
+                zooms=[{"at": "full"}])], SRC_BLOG),
   transition="letterbox", background="zoneB"),
 
  scene("s46", "TEST_MATRIX",
@@ -654,8 +646,7 @@ SCENES += [
   "right. Astra and Fable 5.1 at ten dollars a million in, fifty out. Opus 5 at five and twenty-five. Then the bottom "
   "row. Jev, nought point nought four two dollars a million in, and output free.",
   footage([clip("rec:jev-home#jevcost", "their own price table",
-                zooms=[{"marks": ["jc"], "band": True, "at": "every competitor on one table"},
-                       {"at": "full"}])], SRC_TS),
+                zooms=[{"at": "full"}])], SRC_TS),
   transition="letterbox", background="zoneB"),
 
  scene("s50", "STAT_CALLOUT",
@@ -670,8 +661,7 @@ SCENES += [
   "their AI Gateway, under the model id typesafe-ai slash jev, at the same nought point nought four dollars. "
   "A second company publishing the same figure, with nothing to gain by it — which is the kind of check I'd want before repeating any price.",
   footage([clip("rec:jev-vercel#price", "an independent listing",
-                zooms=[{"marks": ["p"], "band": True, "at": "the same nought point nought four dollars"},
-                       {"at": "full"}])], SRC_VERCEL),
+                zooms=[{"at": "full"}])], SRC_VERCEL),
   transition="letterbox", background="zoneB"),
 
  scene("s52", "JEVONS_CURVE",
@@ -778,7 +768,7 @@ SCENES += [
     "rightLabel": "Needs a reason", "rightSub": "somebody must answer",
     "pileLabel": "decisions you make",
     "lines": [
-      {"text": "route this ticket", "title": "left", "sub": "costs five minutes", "atWord": 12},
+      {"text": "route this ticket", "title": "left", "sub": "costs five minutes", "atWord": 16},
       {"text": "is this spam?", "title": "left", "sub": "reversible", "atWord": 18},
       {"text": "refuse this loan", "title": "right", "sub": "must be explained", "atWord": 26},
       {"text": "reject this claim", "title": "right", "sub": "must be explained", "atWord": 33}],
