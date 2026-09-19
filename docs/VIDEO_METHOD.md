@@ -324,3 +324,27 @@ So the default is: `deviceScaleFactor: 4` with **`masterWidth: 3840`** — captu
 downsample with lanczos, which is sharper than capturing at 3840 directly — and keep the
 spec's zooms at or under 2x. Go native only when a beat genuinely needs to read one word of
 a terminal, and know you are buying it with hours.
+
+## 11. Listen to the voice, and show a phone as a phone (HID-Fi, 2026-09-19)
+
+Two cuts of the HID-Fi product demo were rejected on things no gate could see. What changed:
+
+- **The audio is audited, not assumed.** `python3 scripts/audit-voice.py <spec> <prefix>` transcribes
+  every scene (faster-whisper `medium`) and fails on swallowed openings, drift from the script, or a
+  subject name not heard as written. It stamps passing scenes; `render-topic` and `render-long` refuse
+  any voiced scene without a current stamp. Names are respelled in `meta.pronounce` (audio only, one
+  token each side), never in the narration.
+- **`render-long` runs the gates.** It used to run none; it now calls `render-topic --check-only`.
+- **A phone UI is recorded as a phone.** The browser recorder takes `mobile: true`, `mockSocket`
+  (replies captured from the real device, every command the UI sends logged) and a `gesture` action
+  that draws a fingertip and FAILS when a touch sends the device nothing. On a phone a scroll is a
+  touch swipe; a gesture refuses an off-screen target.
+- **Portrait footage is never cropped into a wide frame** (lint: portrait capture + focus in a wide
+  cut is an error). Show it in a phone frame — `HIDFI_STAGE` `phones`/`mirror`/`session`/`network`.
+- **When a drawing must match footage, measure the footage.** The `mirror` cursor walks the finger
+  track extracted from the recorded clip (`src/hidfiPadTrack.ts`), not a scripted guess.
+- **A single-clip beat cannot take camera moves** — the solver stretches its footage across the whole
+  read. Put the close-up in its own beat (`readout`: the take's last frame, lines lit on their words).
+- **Anchors authored as phrases** (`topics/hid-fi-flashing/build_v3.py`) are already exact after sync;
+  `retarget-anchors` matches LABELS and moved 8 of them onto the wrong words — review its list before
+  applying it, and prove the result with `audit-sync`.

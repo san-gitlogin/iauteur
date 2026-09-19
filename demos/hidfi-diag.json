@@ -1,0 +1,22 @@
+{
+  "slug": "hidfi-diag",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "/private/tmp/hidfi-recws",
+  "viewport": { "width": 1600, "height": 900 },
+  "deviceScaleFactor": 2,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "steps": [
+    {
+      "id": "hello",
+      "action": "run",
+      "cmd": "echo HID-Fi recorder OK",
+      "label": "vscode terminal works",
+      "focus": "terminal",
+      "clearFirst": true,
+      "marks": [ { "id": "ok", "text": "HID-Fi recorder OK" } ]
+    }
+  ]
+}

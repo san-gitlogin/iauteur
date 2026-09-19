@@ -1,0 +1,14 @@
+{
+  "slug": "hidfi-dash-rec",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": { "width": 430, "height": 932 },
+  "fps": 30,
+  "masterWidth": 1720,
+  "deviceScaleFactor": 3,
+  "prep": { "url": "http://127.0.0.1:8799/hidfi-dash-preview.html#pad", "settleMs": 2500 },
+  "steps": [
+    { "id": "pad", "action": "pause", "ms": 2600, "label": "the dashboard, on a phone",
+      "marks": [ { "id": "grab", "text": "Grab / drag" } ] }
+  ]
+}

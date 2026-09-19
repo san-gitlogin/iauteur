@@ -1,0 +1,39 @@
+{
+  "slug": "hidfi-flash",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "/private/tmp/hidfi-recws",
+  "viewport": { "width": 1600, "height": 900 },
+  "deviceScaleFactor": 2,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "steps": [
+    {
+      "id": "clone",
+      "action": "run",
+      "cmd": "git clone https://github.com/san-gitlogin/HID-Fi",
+      "label": "clone the repository",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 120000
+    },
+    {
+      "id": "ls",
+      "action": "run",
+      "cmd": "cd HID-Fi && ls",
+      "label": "the flasher and the firmware",
+      "focus": "terminal",
+      "marks": [ { "id": "sh", "text": "flash_esp.sh" } ]
+    },
+    {
+      "id": "flash",
+      "action": "run",
+      "cmd": "./flash_esp.sh -c -p /dev/cu.usbmodem5AF61071891",
+      "label": "build, flash, verify",
+      "focus": "terminal",
+      "timeout": 240000,
+      "marks": [ { "id": "ready", "text": "USB HID ready" } ]
+    }
+  ]
+}

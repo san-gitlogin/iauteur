@@ -1968,6 +1968,27 @@ export const MANIFEST = {  JEVONS_CURVE: {
     },
     example: {cmdTraceroute: {"stageTitle":"hop by hop","headline":"traceroute makes each hop [answer]","color":"blue","promptLabel":"dev@box","cwd":"~","atWord":1,"steps":[{"label":"traceroute 1.1.1.1","text":"7  * * *","detail":"the stars are the problem"}],"stage":[{"label":"send a packet","sub":"allowed one hop only"},{"label":"it expires","sub":"and that router reports back"},{"label":"hop 1","sub":"your own router"},{"label":"allow two hops","sub":"and repeat"},{"label":"hop 4","sub":"your internet provider"},{"label":"hop 7","sub":"replies with nothing at all"},{"label":"hop 9","sub":"the destination, finally"}],"verdict":"Stars are not automatically a fault","verdictSub":"plenty of routers are configured never to reply, and traffic passes anyway","verdictAtWord":1}},
   },
+  HIDFI_STAGE: {
+    category: "diagram", family: "diagram", data_key: "hidfiStage",
+    purpose: "Every DRAWN beat of the HID-Fi product demo on one scene type. The picture takes the whole frame and stands free \u2014 no pane, no card, because a product demo shows the product. `kind` chooses the depiction from hidfiViz: the board is the real render, phone screens are recorded dashboard takes, and port glows come from the board SVG's own coordinates. One type, many pictures (LAW 0n).",
+    use_when: "A HID-Fi (or similar small-hardware) product beat that is not a terminal take. Pick `kind` for the OBJECT: problem (a laptop whose peripherals are missing and trackpad dead, until the board arrives), reveal (the app tile draws its mark beside the board), plug (board into a laptop port; keyboard + mouse reported; what you do NOT need struck through; phone over WiFi), phones (1-4 phones playing recorded clips), kit (board, a cable whose far end swaps C for A, phone + tablet), connect (the phone walks WiFi \u2192 password \u2192 192.168.4.1 \u2192 dashboard), ports (board flips; COM then USB light), tools (per-OS install lanes + shared commands), driver (Windows Device Manager row vs macOS port), command (the flash command taken apart + a port scan), swap (cable moves COM\u2192USB; the Mac's two questions), network (home WiFi join + the PIN rule), devices (phone, iPad, tablet layouts), close (mark, name, board, URL), readout (a terminal's final lines cut from the take's last frame, each lit as it is named; token = 'assets/<crop>.png|<rows>|<aspect>', item.value = row), mirror (the recorded trackpad take on a phone, a laptop cursor walking the same path beside it), session (the recorded lock/unlock take, a laptop lock screen that locks, fills and clears beside it, then the detected OS).",
+    fields: {
+      kind: {t: "string", req: true, note: "problem | reveal | plug | phones | kit | connect | ports | tools | driver | command | swap | network | devices | close | readout | mirror | session. An unregistered kind renders LOUDLY in red."},
+      headline: {t: "string", note: "Optional headline, <=38 chars. Most product beats carry none \u2014 the object is the headline."},
+      stageTitle: {t: "string", note: "Small uppercase caption above the picture, <=40 chars, authored per beat."},
+      stage: {t: "items", note: "The elements, each landing on its own atWord. label <=44, sub <=64, text, detail (tools: windows|mac|both; command: part|port), value (command: 1 marks the matching port; tools: 1 marks the big download), icon, color, detailAtWord (a second moment: the cable's far end swapping, the port match, the Allow press), clips = [{src:'rec/<slug>/seg-NN.mp4', frames, atWord}] for phones/network. Per-kind caps: phones 4, problem 4, reveal 4, kit 3, driver 3, swap 4, network 4, devices 3, close 3."},
+      token: {t: "string", note: "Per-kind: reveal = the one-line description; connect = the board's SSID; command = 'windows cmd|mac cmd'."},
+      color: {t: "string", note: "Semantic accent: blue|green|red|orange|purple|yellow."}
+    },
+    example: {
+      kind: "kit",
+      stage: [
+        {label: "ESP32-S3 board", sub: "N16R8, flashed with HID-Fi", atWord: 2},
+        {label: "USB-C data cable", sub: "C to C, or C to A", atWord: 5, detailAtWord: 7},
+        {label: "A phone", sub: "or a tablet, or an iPad", atWord: 8}
+      ]
+    },
+  },
   ASTRA_STAGE: {
     category: "diagram", family: "diagram", data_key: "astraStage",
     purpose: "Every DRAWN beat of a frontier-model review on one scene type. The picture takes the whole stage \u2014 no terminal pane, because a review's evidence is a published table, a benchmark harness or a price list, not a command. `kind` chooses the depiction from the astraViz registry. One type, many pictures: registering a scene type is plumbing, the depiction is the picture (LAW 0n).",

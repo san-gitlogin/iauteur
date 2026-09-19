@@ -1,0 +1,482 @@
+{
+ "slug": "hidfi-dash-tour",
+ "surface": "browser",
+ "theme": "dark",
+ "mobile": true,
+ "viewport": {
+  "width": 430,
+  "height": 932
+ },
+ "fps": 30,
+ "deviceScaleFactor": 2,
+ "masterWidth": 860,
+ "_provenance": "Dashboard HTML = HID-Fi hid_fi/web_ui.h at v3.6+beta (byte-identical). The status reply was read from the real board over serial on 2026-09-19. Scan networks are SAMPLE names (never the owner's real neighbours); their field shape is copied from handleWifiScan(). Binary opcode names are the firmware's WS_OP_* defines (hid_fi.ino).",
+ "mockSocket": {
+  "url": "ws://192.168.4.1:81/",
+  "replies": {
+   "status": {
+    "status": "ok",
+    "reply": "status",
+    "chip": "ESP32-S3",
+    "firmware": "hid_fi_v3.6",
+    "uptime_sec": 15707,
+    "free_heap": 225140,
+    "heap_floor": 220148,
+    "heap_low": false,
+    "total_psram": 8388608,
+    "free_psram": 8369524,
+    "flash_size": 16777216,
+    "hid_ready": true,
+    "usb_mounted": true,
+    "usb_suspended": false,
+    "power_mode": "balanced",
+    "radio_awake": false,
+    "ap_auto_off": false,
+    "ap_running": true,
+    "lan_exposed": false,
+    "sta_phase": "idle",
+    "sta_error": "",
+    "sta_ip_mode": "dhcp",
+    "sta_target": "",
+    "cmd_count": 2,
+    "wifi_cmd_count": 0,
+    "wifi_connected": false,
+    "wifi_ip": "",
+    "wifi_ssid": "",
+    "wifi_rssi": 0,
+    "wifi_quality": "",
+    "ap_ssid": "ESP32-HID-09F7C8",
+    "ap_ip": "192.168.4.1",
+    "ap_clients": 1,
+    "channel": 1,
+    "mac": "DC:B4:D9:09:F7:C8",
+    "ap_mac": "DE:B4:D9:09:F7:C8",
+    "ws_clients": 1,
+    "mdns": "esp-hid-09f7c8",
+    "pc_state": "unknown",
+    "host_os": "mac",
+    "host_os_source": "auto",
+    "pointer_mode": "relative",
+    "gamepad": false,
+    "auth_set": false,
+    "verbose": false,
+    "wiggle_active": false,
+    "wiggle_mode": "idle",
+    "led_on": false,
+    "boot_button": "released"
+   }
+  },
+  "defaultReply": {
+   "status": "ok"
+  },
+  "binaryPong": {
+   "ping": 4,
+   "pong": 129
+  },
+  "binaryNames": {
+   "1": "MOVE",
+   "2": "BTN",
+   "3": "ABS",
+   "5": "GAMEPAD",
+   "6": "CONSUMER",
+   "7": "KEY"
+  }
+ },
+ "mockHttp": {
+  "http://192.168.4.1/": {
+   "file": "public/hidfi-dash-preview.html"
+  },
+  "http://192.168.4.1/api/status": {
+   "status": "ok",
+   "reply": "status",
+   "chip": "ESP32-S3",
+   "firmware": "hid_fi_v3.6",
+   "uptime_sec": 15707,
+   "free_heap": 225140,
+   "heap_floor": 220148,
+   "heap_low": false,
+   "total_psram": 8388608,
+   "free_psram": 8369524,
+   "flash_size": 16777216,
+   "hid_ready": true,
+   "usb_mounted": true,
+   "usb_suspended": false,
+   "power_mode": "balanced",
+   "radio_awake": false,
+   "ap_auto_off": false,
+   "ap_running": true,
+   "lan_exposed": false,
+   "sta_phase": "idle",
+   "sta_error": "",
+   "sta_ip_mode": "dhcp",
+   "sta_target": "",
+   "cmd_count": 2,
+   "wifi_cmd_count": 0,
+   "wifi_connected": false,
+   "wifi_ip": "",
+   "wifi_ssid": "",
+   "wifi_rssi": 0,
+   "wifi_quality": "",
+   "ap_ssid": "ESP32-HID-09F7C8",
+   "ap_ip": "192.168.4.1",
+   "ap_clients": 1,
+   "channel": 1,
+   "mac": "DC:B4:D9:09:F7:C8",
+   "ap_mac": "DE:B4:D9:09:F7:C8",
+   "ws_clients": 1,
+   "mdns": "esp-hid-09f7c8",
+   "pc_state": "unknown",
+   "host_os": "mac",
+   "host_os_source": "auto",
+   "pointer_mode": "relative",
+   "gamepad": false,
+   "auth_set": false,
+   "verbose": false,
+   "wiggle_active": false,
+   "wiggle_mode": "idle",
+   "led_on": false,
+   "boot_button": "released"
+  },
+  "http://192.168.4.1/api/scan": {
+   "status": "ok",
+   "reply": "scan",
+   "scanning": false,
+   "count": 3,
+   "networks": [
+    {
+     "ssid": "Home WiFi",
+     "rssi": -48,
+     "quality": "strong",
+     "channel": 6,
+     "encryption": "WPA2"
+    },
+    {
+     "ssid": "Office 2.4G",
+     "rssi": -63,
+     "quality": "good",
+     "channel": 11,
+     "encryption": "WPA2"
+    },
+    {
+     "ssid": "Guest",
+     "rssi": -78,
+     "quality": "weak",
+     "channel": 1,
+     "encryption": "Open"
+    }
+   ]
+  }
+ },
+ "prep": {
+  "url": "http://192.168.4.1/",
+  "settleMs": 2800
+ },
+ "steps": [
+  {
+   "id": "pad",
+   "label": "one finger moves the cursor",
+   "action": "gesture",
+   "kind": "drag",
+   "target": "#pad",
+   "path": [
+    [
+     0.3,
+     0.35
+    ],
+    [
+     0.62,
+     0.3
+    ],
+    [
+     0.72,
+     0.55
+    ],
+    [
+     0.45,
+     0.7
+    ],
+    [
+     0.28,
+     0.5
+    ],
+    [
+     0.5,
+     0.42
+    ]
+   ],
+   "ms": 2600,
+   "expect": "MOVE",
+   "holdMs": 500
+  },
+  {
+   "id": "tap",
+   "label": "a tap is a click",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#pad",
+   "path": [
+    [
+     0.5,
+     0.42
+    ]
+   ],
+   "holdMs": 700
+  },
+  {
+   "id": "deck",
+   "label": "flip the pad to a keyboard",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#btnDeck",
+   "verify": false,
+   "settleMs": 1000,
+   "holdMs": 400
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#kbd2 button:text-is(\"H\")",
+   "expect": "KEY",
+   "settleMs": 260,
+   "id": "deckH",
+   "label": "type on the flipped pad"
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#kbd2 button:text-is(\"I\")",
+   "expect": "KEY",
+   "settleMs": 260,
+   "id": "deckI",
+   "label": "type on the flipped pad",
+   "holdMs": 900
+  },
+  {
+   "id": "deckback",
+   "label": "and flip back",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#btnDeck",
+   "verify": false,
+   "settleMs": 1000
+  },
+  {
+   "id": "mouse",
+   "label": "the mouse, drawn under the pad",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#btnBtnView",
+   "verify": false,
+   "settleMs": 1200,
+   "holdMs": 500
+  },
+  {
+   "id": "wheel",
+   "label": "drag the scroll wheel",
+   "action": "gesture",
+   "kind": "drag",
+   "target": "#mWheel",
+   "path": [
+    [
+     0.5,
+     0.3
+    ],
+    [
+     0.5,
+     0.75
+    ],
+    [
+     0.5,
+     0.25
+    ],
+    [
+     0.5,
+     0.7
+    ]
+   ],
+   "ms": 2200,
+   "holdMs": 800
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#tabbar button:has-text(\"Type\")",
+   "verify": false,
+   "settleMs": 900,
+   "id": "type",
+   "label": "the full keyboard",
+   "holdMs": 600
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#kbd button:text-is(\"H\")",
+   "expect": "KEY",
+   "settleMs": 260,
+   "id": "typeH",
+   "label": "typing"
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#kbd button:text-is(\"E\")",
+   "expect": "KEY",
+   "settleMs": 260,
+   "id": "typeE",
+   "label": "typing"
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#kbd button:text-is(\"Y\")",
+   "expect": "KEY",
+   "settleMs": 260,
+   "id": "typeY",
+   "label": "typing",
+   "holdMs": 900
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#tabbar button:has-text(\"Keys\")",
+   "verify": false,
+   "settleMs": 900,
+   "id": "shortcuts",
+   "label": "hundreds of shortcuts",
+   "holdMs": 1200
+  },
+  {
+   "id": "copy",
+   "label": "tap one and it fires",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#scList button:has-text(\"Copy\")",
+   "holdMs": 1000
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#tabbar button:has-text(\"Media\")",
+   "verify": false,
+   "settleMs": 900,
+   "id": "media",
+   "label": "media",
+   "holdMs": 700
+  },
+  {
+   "id": "knob",
+   "label": "turn the volume knob",
+   "action": "gesture",
+   "kind": "drag",
+   "target": "#kp0",
+   "path": [
+    [
+     0.5,
+     0.15
+    ],
+    [
+     0.85,
+     0.35
+    ],
+    [
+     0.85,
+     0.65
+    ],
+    [
+     0.5,
+     0.85
+    ],
+    [
+     0.2,
+     0.65
+    ]
+   ],
+   "ms": 2400,
+   "holdMs": 900
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#tabbar button:has-text(\"Game\")",
+   "verify": false,
+   "settleMs": 900,
+   "id": "game",
+   "label": "the controller, in beta",
+   "holdMs": 2200
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#tabbar button:has-text(\"Power\")",
+   "verify": false,
+   "settleMs": 900,
+   "id": "power",
+   "label": "session controls",
+   "holdMs": 800
+  },
+  {
+   "id": "lock",
+   "label": "lock the computer",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#btnLock",
+   "expect": "lock",
+   "holdMs": 1200
+  },
+  {
+   "id": "pw",
+   "label": "type its password",
+   "action": "fill",
+   "target": "#unlockPw",
+   "value": "correct horse",
+   "settleMs": 500
+  },
+  {
+   "id": "unlock",
+   "label": "and unlock it",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#btnUnlock",
+   "expect": "unlock",
+   "holdMs": 1400
+  },
+  {
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#tabbar button:has-text(\"Setup\")",
+   "verify": false,
+   "settleMs": 900,
+   "id": "setup",
+   "label": "it knows it is on a Mac",
+   "holdMs": 1800
+  },
+  {
+   "id": "net",
+   "label": "the board's own network",
+   "action": "scroll",
+   "target": "#btnScan",
+   "settleMs": 1200,
+   "anchor": 0.62
+  },
+  {
+   "id": "scan",
+   "label": "find your home WiFi",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#btnScan",
+   "verify": false,
+   "settleMs": 1600,
+   "holdMs": 800
+  },
+  {
+   "id": "join",
+   "label": "join it",
+   "action": "gesture",
+   "kind": "tap",
+   "target": "#wifiList [data-ssid=\"Home WiFi\"]",
+   "verify": false,
+   "settleMs": 1400,
+   "holdMs": 2000
+  }
+ ]
+}

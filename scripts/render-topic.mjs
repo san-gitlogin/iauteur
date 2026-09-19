@@ -105,7 +105,32 @@ if (variant !== 'thumb' && variant !== 'cover') {
     console.error('Rendering it would produce a placeholder, not a video. Fix the above first.');
     process.exit(1);
   }
+  // WAS THE VOICE HEARD AS WRITTEN? PAID FOR on HID-Fi (2026-09-19): a respelled name came
+  // out as "HID5", and a scene's opening words were swallowed, with every spec gate green —
+  // nothing read the AUDIO. scripts/audit-voice.py transcribes each scene and stamps the
+  // text hash of the ones it heard correctly; this refuses any voiced scene whose CURRENT
+  // audio hash has no passing stamp, so re-voicing without re-auditing cannot slip through.
+  // Enforced for cuts voiced after the audit existed (a stamp file present, or a
+  // meta.pronounce map); the back catalogue predates it and is reported, not blocked.
+  {
+    const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
+    const prefix = spec.meta?.audioPrefix ?? `${slug}_${specFor.startsWith('shorts') ? 'shorts' : 'long'}`;
+    const tsFile = `out/tts/${prefix}_timestamps.json`;
+    const stampFile = `out/tts/${prefix}_voiceaudit.json`;
+    const enforced = fs.existsSync(stampFile) || spec.meta?.pronounce;
+    if (fs.existsSync(tsFile) && enforced) {
+      const ts = JSON.parse(fs.readFileSync(tsFile, 'utf8'));
+      const stamp = fs.existsSync(stampFile) ? JSON.parse(fs.readFileSync(stampFile, 'utf8')) : {};
+      const unheard = Object.entries(ts).filter(([sid, t]) => t.sha && stamp[sid] !== t.sha).map(([sid]) => sid);
+      if (unheard.length) {
+        console.error(`\nREFUSING TO RENDER: ${unheard.length} voiced scene(s) never passed the voice audit: ${unheard.join(', ')}`);
+        console.error(`Run: python3 scripts/audit-voice.py ${specPath} ${prefix}`);
+        process.exit(1);
+      }
+    }
+  }
 }
+if (process.argv.includes('--check-only')) { console.log('✓ pre-render gates passed'); process.exit(0); }
 
 // CALL THE CLI DIRECTLY, NOT THROUGH npx.
 //

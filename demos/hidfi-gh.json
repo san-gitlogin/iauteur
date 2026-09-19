@@ -1,0 +1,71 @@
+{
+  "slug": "hidfi-gh",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": { "width": 1600, "height": 900 },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": { "url": "https://github.com/san-gitlogin/HID-Fi", "settleMs": 3800 },
+  "steps": [
+    {
+      "id": "repo",
+      "action": "pause",
+      "ms": 1200,
+      "label": "the HID-Fi repository",
+      "marks": [
+        { "id": "name", "text": "HID-Fi" }
+      ]
+    },
+    {
+      "id": "pitch",
+      "action": "scroll",
+      "target": "text=Turn a small dev board into a wireless trackpad",
+      "settleMs": 1600,
+      "label": "what HID-Fi is, in one line",
+      "marks": [
+        { "id": "what", "text": "Turn a small dev board into a wireless trackpad, keyboard, media remote and", "to": "with nothing installed on that computer." }
+      ]
+    },
+    {
+      "id": "nodrivers",
+      "action": "scroll",
+      "target": "text=no drivers, no agent",
+      "settleMs": 1500,
+      "label": "no drivers, no admin rights",
+      "marks": [
+        { "id": "nd", "text": "no drivers, no agent and no admin" }
+      ]
+    },
+    {
+      "id": "dash",
+      "action": "scroll",
+      "target": "text=It runs in your phone's browser",
+      "settleMs": 1800,
+      "label": "the dashboard, on real screens",
+      "marks": [
+        { "id": "runs", "text": "It runs in your phone's browser, served from the board itself" }
+      ]
+    },
+    {
+      "id": "ports",
+      "action": "scroll",
+      "target": "text=The two USB ports are not interchangeable",
+      "settleMs": 1800,
+      "label": "the two ports, the thing that trips everyone",
+      "marks": [
+        { "id": "two", "text": "The two USB ports are not interchangeable" }
+      ]
+    },
+    {
+      "id": "start",
+      "action": "scroll",
+      "target": "text=Never flashed an ESP board before",
+      "settleMs": 1800,
+      "label": "where a beginner starts",
+      "marks": [
+        { "id": "beg", "text": "Never flashed an ESP board before?" }
+      ]
+    }
+  ]
+}

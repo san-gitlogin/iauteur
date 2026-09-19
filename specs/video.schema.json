@@ -468,6 +468,7 @@
               "CMD_IP",
               "UV_STAGE",
               "ASTRA_STAGE",
+              "HIDFI_STAGE",
               "CMD_PING",
               "CMD_TRACEROUTE",
               "CMD_MTR",
@@ -8143,6 +8144,56 @@
                         "color": {
                           "type": "string",
                           "description": "Semantic colour: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "HIDFI_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "hidfiStage": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "description": "problem | reveal | plug | phones | kit | connect | ports | tools | driver | command | swap | network | devices | close. An unregistered kind renders LOUDLY in red."
+                        },
+                        "headline": {
+                          "type": "string",
+                          "description": "Optional headline, <=38 chars. Most product beats carry none — the object is the headline."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Small uppercase caption above the picture, <=40 chars, authored per beat."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The elements, each landing on its own atWord. label <=44, sub <=64, text, detail (tools: windows|mac|both; command: part|port), value (command: 1 marks the matching port; tools: 1 marks the big download), icon, color, detailAtWord (a second moment: the cable's far end swapping, the port match, the Allow press), clips = [{src:'rec/<slug>/seg-NN.mp4', frames, atWord}] for phones/network. Per-kind caps: phones 4, problem 4, reveal 4, kit 3, driver 3, swap 4, network 4, devices 3, close 3."
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "Per-kind: reveal = the one-line description; connect = the board's SSID; command = 'windows cmd|mac cmd'."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic accent: blue|green|red|orange|purple|yellow."
                         }
                       }
                     }

@@ -298,6 +298,33 @@ const CORRECTIONS = [
    'capture.mjs downscaled every segment to 1920 and called it a supersample',
    () => has('scripts/lib/record/capture.mjs', 'MASTER WIDTH IS A MEASUREMENT, NOT A CONSTANT') &&
          has('scripts/lib/record/capture.mjs', 'masterWidth')],
+  // ── HID-Fi rebuild, 2026-09-19 ─────────────────────────────────────────────
+  ['a product name the voice cannot say', 'SEAL',
+   '"Why does the voice over sounds chinese?" — the script spelled "H I D Fi"; Whisper heard "HID5" ' +
+   'and "My attack using Centenna Phi". Respell in meta.pronounce, applied to the audio only.',
+   () => has('scripts/voiceover.py', 'meta.pronounce') &&
+         has('scripts/voiceover.py', 'must be ONE token') &&
+         has('scripts/lint-spec.mjs', 'A NAME IS RESPELLED FOR THE VOICE, NEVER IN THE SCRIPT')],
+  ['a voiceover nobody listened to', 'SEAL',
+   '"Why does the voice over sounds chinese?" — then, after the fix, "Introducing HID-Fi." swallowed ' +
+   'into "I didn\'t make it" on the beat that names the product. Every spec gate was green; nothing read the audio.',
+   () => has('scripts/audit-voice.py', 'OPENING HEARD') &&
+         has('scripts/audit-voice.py', 'voiceaudit.json') &&
+         has('scripts/render-topic.mjs', 'never passed the voice audit')],
+  ['the segmented renderer skipping every pre-render gate', 'STRUCT',
+   'render-long.mjs — the path VIDEO_METHOD prescribes for long cuts — called no lint, no recording, ' +
+   'no camera and no voice check, so a rejected spec could render end to end.',
+   () => has('scripts/render-long.mjs', 'THE SEGMENTED RENDERER RAN NO GATES') &&
+         has('scripts/render-long.mjs', 'check-only') &&
+         has('scripts/render-topic.mjs', 'pre-render gates passed')],
+  ['a flat scene authored nested, rendering a blank frame', 'SEAL',
+   '"after you show the flashing, you are just speaking with a blank screen on" — LIST_BUILD authored ' +
+   'as data.listBuild; the empty-data guard only covered data_key types, so the mirror case shipped.',
+   () => has('scripts/lint-spec.mjs', 'THE MIRROR IMAGE') &&
+         has('scripts/lint-spec.mjs', 'reads its fields flat off data')],
+  ['a phone capture cropped to fill a wide frame', 'SEAL',
+   '"the dashboard you display initially is very much zoomed in to fill the screen, rather than fitting right"',
+   () => has('scripts/lint-spec.mjs', 'A PORTRAIT CAPTURE IN A WIDE FRAME IS SHOWN WHOLE')],
 ];
 
 let missing = [];

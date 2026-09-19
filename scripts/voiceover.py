@@ -7,7 +7,7 @@ Voices:      en-US-AvaMultilingualNeural (default) · en-US-ChristopherNeural ·
 Outputs:     public/audio/<prefix>_<sceneId>.mp3  +  out/tts/<prefix>_timestamps.json
 NOTE: needs internet (Microsoft Edge TTS endpoint). Run on your machine.
 """
-import asyncio, json, os, sys
+import asyncio, json, os, re, sys
 import edge_tts
 
 # Windows consoles default to cp1252, which cannot encode the arrows/bullets we
@@ -49,6 +49,20 @@ async def main():
         if only and scene["id"] not in only:
             continue
         sid, text = scene["id"], scene["narration"]
+        # SAY IT THE WAY THE OWNER SAYS IT. `meta.pronounce` maps a written word to how the
+        # voice must speak it, applied ONLY to the audio: the spec, the screen and every
+        # word-overlap gate keep the real spelling. PAID FOR on HID-Fi (2026-09-19): the
+        # narration was misspelled "H I D Fi" to stop Ava saying "hid", and the multilingual
+        # voice read the lone "Fi" as a foreign syllable — Whisper heard the hook as "HID5"
+        # and one opening as "My attack using Centenna Phi". The owner: "the voice over
+        # sounds chinese". A respelling MUST stay one whitespace token, because the
+        # timestamps list is indexed by atWord and an extra token shifts every later anchor.
+        spoken = text
+        for written, say in (spec.get("meta", {}).get("pronounce") or {}).items():
+            if len(say.split()) != 1 or len(written.split()) != 1:
+                sys.exit(f"meta.pronounce[{written!r}] -> {say!r}: both sides must be ONE token "
+                         f"(an extra token shifts every later atWord)")
+            spoken = re.sub(r"(?<![\w-])" + re.escape(written) + r"(?![\w-])", say, spoken)
         mp3 = f"public/audio/{prefix}_{sid}.mp3"
         words = []
         speech_end = 0.0
@@ -73,7 +87,7 @@ async def main():
         #
         # So: pace is a scripting problem, not a playback-speed problem. Override per
         # run with a 4th argument if a cut genuinely wants a different voice speed.
-        comm = edge_tts.Communicate(text, voice, rate=RATE, boundary="WordBoundary")
+        comm = edge_tts.Communicate(spoken, voice, rate=RATE, boundary="WordBoundary")
         with open(mp3, "wb") as f:
             async for chunk in comm.stream():
                 ctype = chunk["type"]

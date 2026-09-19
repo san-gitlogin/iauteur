@@ -130,6 +130,10 @@ export const setupBrowser = async (demo) => {
     // otherwise land in the frame or make two takes differ.
     reducedMotion: demo.reducedMotion === false ? 'no-preference' : 'reduce',
     colorScheme: (demo.theme ?? 'dark') === 'light' ? 'light' : 'dark',
+    // A PHONE UI IS RECORDED AS A PHONE. `mobile: true` gives the page a touch screen and
+    // a mobile viewport, so layouts that branch on (pointer: coarse) or maxTouchPoints
+    // render the way the owner's phone renders them, not the desktop fallback.
+    ...(demo.mobile ? {hasTouch: true, isMobile: true} : {}),
   };
 
   // SOME PAGES ARE BEHIND A HUMAN CHECK, AND A HUMAN HAS TO PASS IT ONCE.
@@ -171,6 +175,51 @@ export const setupBrowser = async (demo) => {
       return noisy.test(u) ? route.abort() : route.continue();
     });
   }
+  // A DEVICE UI WITHOUT ITS DEVICE. HID-Fi's dashboard lives on the board and talks to
+  // it over a WebSocket; recording it through the board's own WiFi would take the
+  // recording machine off the internet. `mockSocket` answers that socket IN the browser
+  // with replies captured from the real board (never invented — the status reply is
+  // pasted from the board's serial port), and LOGS every command the UI sends, so a
+  // `gesture` step can prove the touch produced traffic instead of claiming it did.
+  const wsLog = [];
+  if (demo.mockSocket) {
+    const ms = demo.mockSocket;
+    await page.routeWebSocket(ms.url, (ws) => {
+      for (const m of ms.onConnect ?? []) ws.send(JSON.stringify(m));
+      ws.onMessage((msg) => {
+        if (typeof msg !== 'string') {
+          const buf = Buffer.from(msg);
+          // `binaryPong` answers the device's own ping opcode the way its firmware does
+          // (HID-Fi: 0x04 PING [u32 id] -> 0x81 PONG [u32 id]), so the latency pill shows a
+          // live figure instead of "--". Declared per demo from the firmware's protocol table.
+          const bp = ms.binaryPong;
+          if (bp && buf[0] === bp.ping && buf.length >= 5) {
+            const out = Buffer.alloc(5); out[0] = bp.pong; buf.copy(out, 1, 1, 5);
+            setTimeout(() => ws.send(out), bp.delayMs ?? 11);
+            return;
+          }
+          wsLog.push({t: Date.now(), cmd: ms.binaryNames?.[buf[0]] ?? `bin:0x${(buf[0] ?? 0).toString(16).padStart(2, '0')}`, bytes: buf.length});
+          return;
+        }
+        let o; try { o = JSON.parse(msg); } catch { return; }
+        wsLog.push({t: Date.now(), cmd: o.cmd ?? '?', body: o});
+        const r = ms.replies?.[o.cmd] ?? ms.defaultReply;
+        if (r) ws.send(JSON.stringify({...r, reply: r.reply ?? o.cmd}));
+      });
+    });
+  }
+  // `mockHttp` maps a URL glob to a JSON body, or to {file, contentType} to serve a
+  // local file AT THAT ADDRESS. Serving the dashboard at http://192.168.4.1/ rather than
+  // a localhost preview matters: the UI branches on location.hostname (the join sheet
+  // tells you WPA2 covers the password only when you are on the board's own AP), so a
+  // preview on 127.0.0.1 would put a warning on screen that a real phone never shows.
+  for (const [route, body] of Object.entries(demo.mockHttp ?? {})) {
+    await page.route(route, (r) => (body && body.file)
+      ? r.fulfill({status: 200, contentType: body.contentType ?? 'text/html; charset=utf-8', path: path.resolve(body.file)})
+      : r.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(body)}));
+  }
+  page.__wsLog = wsLog;
+  page.__mobile = !!demo.mobile;
   // PREP (never recorded): land on the start URL so the take opens on a settled page.
   if (demo.prep?.url) {
     await page.goto(demo.prep.url, {waitUntil: 'load', timeout: 60000});
@@ -272,6 +321,46 @@ export const browserActions = {
 
   /** Scroll a real element into view — the honest way to move down a page. */
   async scroll(page, step) {
+    // ON A PHONE, A SCROLL IS A FINGER. Mouse-wheel events do not scroll a mobile-emulated
+    // page at all (measured: scrollTop stayed 0 through a 900px wheel), so the old path
+    // silently did nothing and every step after it acted on the wrong screen. A touch
+    // swipe is Chrome's own synthesized touch scroll — real momentum, real overscroll —
+    // with the fingertip drawn travelling up the glass so the viewer sees who moved it.
+    if (page.__mobile) {
+      let dy = step.by ?? 500;
+      if (step.target) {
+        dy = await page.locator(step.target).first().evaluate((el, f) => {
+          const r = el.getBoundingClientRect(); return Math.round(r.top - window.innerHeight * f);
+        }, step.anchor ?? 0.12).catch(() => null);
+        if (dy == null) throw new Error(`Step "${step.id}": ${step.target} is not on the page.`);
+      }
+      const vp = page.viewportSize();
+      const x = Math.round(vp.width * 0.62), y0 = Math.round(vp.height * (dy > 0 ? 0.72 : 0.3));
+      const cdp = await page.context().newCDPSession(page);
+      await page.evaluate(([x, y]) => {
+        let f = document.getElementById('__finger');
+        if (!f) { f = document.createElement('div'); f.id = '__finger';
+          Object.assign(f.style, {position: 'fixed', width: '44px', height: '44px', margin: '-22px 0 0 -22px',
+            borderRadius: '50%', pointerEvents: 'none', zIndex: '2147483647',
+            background: 'radial-gradient(circle, rgba(255,255,255,.55) 0 38%, rgba(255,255,255,.18) 60%, rgba(255,255,255,0) 72%)',
+            boxShadow: '0 0 0 2px rgba(255,255,255,.55)'}); document.body.appendChild(f); }
+        f.style.left = x + 'px'; f.style.top = y + 'px'; f.style.opacity = '1'; f.style.transform = 'scale(.86)';
+      }, [x, y0]);
+      const ms = step.scrollMs ?? Math.min(1600, Math.max(500, Math.abs(dy) * 1.1));
+      const t0 = Date.now();
+      const anim = (async () => { while (Date.now() - t0 < ms) {
+        const u = Math.min(1, (Date.now() - t0) / ms), e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+        await page.evaluate(([x, y]) => { const f = document.getElementById('__finger'); f.style.left = x + 'px'; f.style.top = y + 'px'; },
+          [x, y0 - Math.sign(dy) * Math.min(Math.abs(dy), vp.height * 0.5) * e]).catch(() => {});
+        await sleep(16); } })();
+      await cdp.send('Input.synthesizeScrollGesture', {x, y: y0, yDistance: -dy, gestureSourceType: 'touch',
+        speed: Math.round(Math.abs(dy) / (ms / 1000)), preventFling: true, repeatCount: 1});
+      await anim;
+      await page.evaluate(() => { const f = document.getElementById('__finger'); if (f) f.style.opacity = '0'; });
+      await cdp.detach().catch(() => {});
+      await page.waitForTimeout(step.settleMs ?? 900);
+      return {sent: step.target ?? `swipe ${dy}`, output: '', truth: 'no-output', verified: 'nothing to verify'};
+    }
     if (step.target) {
       // Where is it now, and how far do we have to travel? `scrollIntoViewIfNeeded` would
       // TELEPORT there; we want the same destination, arrived at.
@@ -315,6 +404,91 @@ export const browserActions = {
     }
     await page.waitForTimeout(step.settleMs ?? 700);
     return {sent: keys.join(' '), output: '', truth: 'no-output', verified: 'nothing to verify'};
+  },
+
+  /** A TOUCH, PERFORMED AND SEEN. A phone UI demonstrated with clicks shows nothing
+   *  moving — no finger, no drag — so the viewer cannot tell a trackpad from a picture of
+   *  one (owner, 2026-09-19: "maybe touch and show in the trackpad"). This draws a
+   *  fingertip (pointer-events: none, so it never intercepts the touch it depicts), walks
+   *  it along `path` — fractions of the target's box — as a real pointer, and then reads
+   *  the mock socket's log: a gesture that sent NOTHING to the device throws, because a
+   *  finger sliding over an inert picture is exactly what this action must not record.
+   *    kind: tap | drag | hold      path: [[fx,fy], ...]      ms: travel time
+   *    expect: command name the device must receive (default: any traffic at all)   */
+  async gesture(page, step) {
+    const el = page.locator(step.target).first();
+    await el.waitFor({state: 'visible', timeout: step.timeout ?? 15000});
+    const box = await el.boundingBox();
+    if (!box) throw new Error(`Step "${step.id}": ${step.target} has no box on screen.`);
+    // A TAP AT COORDINATES OFF THE SCREEN IS A TAP ON SOMETHING ELSE. Found on the HID-Fi
+    // take: the Scan button sat below the fold, the "tap" landed outside the viewport, and
+    // the dashboard switched tabs — the recording would have narrated a scan over the
+    // Media page. Scroll first (a `scroll` step), and let this refuse rather than guess.
+    const vp = page.viewportSize();
+    if (box.y < 0 || box.x < 0 || box.y + box.height > vp.height || box.x + box.width > vp.width) {
+      throw new Error(`Step "${step.id}": ${step.target} is not fully on screen ` +
+        `(y ${Math.round(box.y)}..${Math.round(box.y + box.height)} of ${vp.height}). Add a scroll step before it.`);
+    }
+    const pts = (step.path ?? [[0.5, 0.5]]).map(([fx, fy]) => ({x: box.x + fx * box.width, y: box.y + fy * box.height}));
+    await page.evaluate(() => {
+      if (document.getElementById('__finger')) return;
+      const f = document.createElement('div');
+      f.id = '__finger';
+      Object.assign(f.style, {position: 'fixed', left: '0', top: '0', width: '44px', height: '44px',
+        margin: '-22px 0 0 -22px', borderRadius: '50%', pointerEvents: 'none', zIndex: '2147483647',
+        background: 'radial-gradient(circle, rgba(255,255,255,.55) 0 38%, rgba(255,255,255,.18) 60%, rgba(255,255,255,0) 72%)',
+        boxShadow: '0 0 0 2px rgba(255,255,255,.55)', opacity: '0', transition: 'none'});
+      document.body.appendChild(f);
+    });
+    const finger = async (x, y, down) => page.evaluate(([x, y, down]) => {
+      const f = document.getElementById('__finger');
+      f.style.left = x + 'px'; f.style.top = y + 'px';
+      f.style.opacity = down ? '1' : '0';
+      f.style.transform = `scale(${down ? 0.86 : 1.15})`;
+    }, [x, y, down]);
+    const log = page.__wsLog ?? [];
+    const before = log.length;
+    const kind = step.kind ?? (pts.length > 1 ? 'drag' : 'tap');
+    await finger(pts[0].x, pts[0].y, false);
+    await page.evaluate(() => { document.getElementById('__finger').style.opacity = '0.6'; });
+    await sleep(260);
+    await page.mouse.move(pts[0].x, pts[0].y);
+    await page.mouse.down();
+    await finger(pts[0].x, pts[0].y, true);
+    if (kind === 'hold') await sleep(step.holdMs ?? 900);
+    // Walk every leg in ~16ms steps on an ease-in-out curve: a finger accelerates and
+    // settles; a straight-line teleport between two points reads as a cursor jump.
+    const total = step.ms ?? (kind === 'tap' ? 90 : 1100);
+    const legs = Math.max(1, pts.length - 1);
+    for (let l = 0; l < pts.length - 1; l++) {
+      const a = pts[l], b = pts[l + 1];
+      const n = Math.max(4, Math.round(total / legs / 16));
+      for (let i = 1; i <= n; i++) {
+        const u = i / n, e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+        const x = a.x + (b.x - a.x) * e, y = a.y + (b.y - a.y) * e;
+        await page.mouse.move(x, y);
+        await finger(x, y, true);
+        await sleep(16);
+      }
+    }
+    if (kind === 'tap') await sleep(80);
+    const last = pts[pts.length - 1];
+    await page.mouse.up();
+    await finger(last.x, last.y, false);
+    await sleep(step.settleMs ?? 700);
+    await page.evaluate(() => { const f = document.getElementById('__finger'); if (f) f.style.opacity = '0'; });
+    const sent = log.slice(before);
+    const names = sent.map((m) => m.cmd);
+    if (step.verify !== false) {
+      if (!sent.length) throw new Error(`Step "${step.id}": the ${kind} on ${step.target} sent NOTHING to the device. ` +
+        `A finger moving over an inert UI is not a demonstration.`);
+      if (step.expect && !names.includes(step.expect)) throw new Error(`Step "${step.id}": expected the device to ` +
+        `receive "${step.expect}", got ${JSON.stringify([...new Set(names)])}`);
+    }
+    const tally = Object.entries(names.reduce((m, n) => ((m[n] = (m[n] ?? 0) + 1), m), {}))
+      .map(([k, v]) => `${k}×${v}`).join(' ');
+    return {sent: `${kind} ${step.target}`, output: `device received: ${tally || 'nothing'}`,
+            truth: 'read-back', verified: 'commands read from the mocked device socket'};
   },
 
   /** A deliberate look-at-it beat (LAW 0e rule 4). */

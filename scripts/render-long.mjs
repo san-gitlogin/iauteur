@@ -25,6 +25,15 @@ if (!slug || !comp) {
   process.exit(2);
 }
 const segments = Number(segArg || 4);
+// THE SEGMENTED RENDERER RAN NO GATES. Found 2026-09-19: lint, recordings, camera,
+// narration-visual and sync checks all lived in render-topic.mjs, and this — the path
+// VIDEO_METHOD prescribes for long cuts — called none of them, so a REJECTED spec could
+// render here end to end. One gate list, run from here before a single frame.
+{
+  const variant = String(comp).replace(`${slug}-`, '');
+  const g = spawnSync(process.execPath, ['scripts/render-topic.mjs', slug, variant, '--check-only'], {stdio: 'inherit'});
+  if (g.status !== 0) { console.error('REFUSING TO RENDER: pre-render gates failed (see above).'); process.exit(1); }
+}
 const specPath = `topics/${slug}/long.json`;
 const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 const total = spec.scenes.reduce((a, s) => a + s.durationFrames, 0);

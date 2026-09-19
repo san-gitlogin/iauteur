@@ -1,0 +1,2273 @@
+{
+  "meta": {
+    "topic": "HID-Fi — turn your phone into a keyboard and mouse for any computer",
+    "format": "long",
+    "fps": 30,
+    "subject": "HID-Fi",
+    "onePayoff": "flash a tiny ESP32-S3 board and drive any computer from your phone's browser",
+    "openLoop": "What if one small board turned any screen you own into a keyboard and mouse?",
+    "topicAxes": [
+      "entity-novelty",
+      "workflow"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "Turn Your Phone Into A Keyboard And Mouse For Any Computer — HID-Fi",
+      "altTitles": [
+        "A Pocket Keyboard And Mouse For Any Computer — HID-Fi, Flashed From Scratch",
+        "Your Phone Is The Trackpad: HID-Fi On An ESP32-S3 (Full Guide)",
+        "No Drivers, No Software — Control Any PC From Your Phone With HID-Fi"
+      ],
+      "hook": "HID-Fi is firmware for a small ESP32-S3 board. Flash it once, plug the board into any computer over USB-C, and it becomes an ordinary keyboard and mouse — no drivers, no app, no admin rights on that computer. Then drive it from your phone, a tablet or an iPad, over the board's own Wi-Fi.",
+      "description": "A product demo and beginner flashing guide for HID-Fi, open-source ESP32-S3 USB-HID firmware by Santhosh. What you need, the two USB-C ports (COM to flash, USB to control), installing arduino-cli and the ESP32 support on Windows and macOS, the CH343 driver, cloning, flashing with one command, and a tour of the dashboard: trackpad, flip-to-keys, mouse wheel, keyboard, shortcuts, media, the beta controller, lock/unlock, and joining your home Wi-Fi safely.",
+      "breakdown": "the problem it solves, what HID-Fi is, the three things you need, the two USB-C ports, the tools to install once, cloning and flashing on Windows and Mac, and a tour of the dashboard: trackpad, keyboard, shortcuts, media, controller and settings",
+      "pinned": "Flash through the COM port, then plug the USB port into the computer you want to control. And it's not just phones — any device with a browser works. What will you drive first?",
+      "tags": [
+        "HID-Fi",
+        "ESP32-S3",
+        "ESP32",
+        "USB HID",
+        "flash ESP32",
+        "arduino-cli",
+        "esptool",
+        "wireless keyboard",
+        "phone as mouse",
+        "trackpad",
+        "microcontroller",
+        "maker",
+        "open source",
+        "ESP32 tutorial",
+        "DIY",
+        "hardware",
+        "embedded",
+        "pocket keyboard",
+        "Santhosh"
+      ],
+      "queries": [
+        "how to flash an esp32-s3",
+        "turn phone into keyboard and mouse",
+        "HID-Fi tutorial",
+        "esp32 usb hid",
+        "control pc from phone browser"
+      ],
+      "sources": [
+        "github.com/san-gitlogin/HID-Fi — HID-Fi by Santhosh (PolyForm Noncommercial)",
+        "arduino.github.io/arduino-cli — arduino-cli, which builds and flashes the firmware",
+        "wch-ic.com/downloads/CH343SER_EXE.html — the CH343 USB-serial driver for Windows",
+        "brew.sh — Homebrew, used to install arduino-cli on macOS"
+      ]
+    },
+    "pronounce": {
+      "HID-Fi": "H-I-D-Fye",
+      "HID": "H-I-D",
+      "hid12345": "H-I-D-12345",
+      "N16R8": "N-sixteen-R-eight",
+      "winget": "win-get"
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "PHONE → ANY PC",
+    "badge": "HID-Fi",
+    "note": "FLASH IT YOURSELF",
+    "asset": "img:hidfi_board_front.png",
+    "art": "img:hidfi_board_front.png"
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "HID-Fi turns your phone into a keyboard and mouse for any computer.",
+      "durationFrames": 151,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "Phone → [keyboard + mouse]",
+        "subtext": "HID-Fi · for any computer",
+        "hookVariant": "reveal",
+        "heroAsset": "img:hidfi_app_icon.png",
+        "headlineAtWord": 4.667
+      },
+      "audio": "audio/hid-fi-flashing_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "HIDFI_STAGE",
+      "narration": "Ever packed your laptop, and left the mouse and keyboard at home? Or reached for the trackpad, and it just wouldn't respond? Ever wished one tiny USB stick could be your keyboard and your mouse? Well, now there's one that can, and it fits in the smallest pocket of your bag.",
+      "durationFrames": 499,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "hidfiStage": {
+          "kind": "problem",
+          "stage": [
+            {
+              "label": "left at home",
+              "atWord": 3.667
+            },
+            {
+              "label": "trackpad dead",
+              "atWord": 10.167
+            },
+            {
+              "label": "One stick for both?",
+              "atWord": 18.25
+            },
+            {
+              "label": "Now there is.",
+              "sub": "a keyboard and mouse that fits in a pocket",
+              "atWord": 28.833
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/hid-fi-flashing_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "narration": "Now, introducing HID-Fi. This is its home on GitHub, and the description says it plainly: a keyboard, mouse, media remote and gamepad, controlled from a web dashboard that any device can open over Wi-Fi. Glad you're here! In the next few minutes, we'll go from a blank board to driving a computer from your phone, and I'll show you every single step.",
+      "durationFrames": 660,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "sourceNote": "san-gitlogin · github.com/san-gitlogin/HID-Fi · PolyForm Noncommercial",
+          "atWord": 1,
+          "clips": [
+            {
+              "ref": "rec:hidfi-repo#repo",
+              "label": "the HID-Fi repository",
+              "focus": true,
+              "wantAtWord": 1,
+              "zooms": [
+                {
+                  "marks": [
+                    "about"
+                  ],
+                  "band": true,
+                  "wantAtWord": 11.417,
+                  "atWord": 11.417
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 33.75,
+                  "atWord": 33.75
+                }
+              ],
+              "callouts": [],
+              "id": "repo",
+              "src": "rec/hidfi-repo/seg-01.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "about": {
+                  "x": 1136,
+                  "y": 244,
+                  "w": 260,
+                  "h": 43,
+                  "covers": "ESP32-S3 USB HID keyboard, mouse, media remote and gamepad",
+                  "block": {
+                    "x": 1136,
+                    "y": 244,
+                    "w": 269,
+                    "h": 91
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 412,
+                  "y": 26,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 296,
+                  "y": 26,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 26,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 26,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 26,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 1464,
+                  "y": 28,
+                  "w": 51,
+                  "h": 16
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 104,
+                  "h": 23
+                },
+                {
+                  "x": 174,
+                  "y": 91,
+                  "w": 59,
+                  "h": 23
+                },
+                {
+                  "x": 1262,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 580,
+                  "y": 150,
+                  "w": 128,
+                  "h": 16
+                },
+                {
+                  "x": 241,
+                  "y": 150,
+                  "w": 83,
+                  "h": 16
+                },
+                {
+                  "x": 475,
+                  "y": 150,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 761,
+                  "y": 150,
+                  "w": 51,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 208,
+                  "w": 46,
+                  "h": 19
+                },
+                {
+                  "x": 1136,
+                  "y": 244,
+                  "w": 269,
+                  "h": 91
+                },
+                {
+                  "x": 192,
+                  "y": 272,
+                  "w": 130,
+                  "h": 186
+                },
+                {
+                  "x": 407,
+                  "y": 272,
+                  "w": 275,
+                  "h": 16
+                },
+                {
+                  "x": 984,
+                  "y": 272,
+                  "w": 106,
+                  "h": 38
+                },
+                {
+                  "x": 570,
+                  "y": 319,
+                  "w": 409,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 352,
+                  "w": 183,
+                  "h": 277
+                },
+                {
+                  "x": 570,
+                  "y": 360,
+                  "w": 409,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 401,
+                  "w": 484,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 442,
+                  "w": 275,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 483,
+                  "w": 484,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 523,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 523,
+                  "w": 61,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 564,
+                  "w": 409,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 564,
+                  "w": 80,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 605,
+                  "w": 484,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 605,
+                  "w": 111,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 646,
+                  "w": 163,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 646,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 667,
+                  "w": 68,
+                  "h": 19
+                },
+                {
+                  "x": 570,
+                  "y": 687,
+                  "w": 409,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 687,
+                  "w": 129,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 728,
+                  "w": 219,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 728,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 757,
+                  "w": 160,
+                  "h": 143
+                },
+                {
+                  "x": 570,
+                  "y": 768,
+                  "w": 484,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 768,
+                  "w": 99,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 809,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 809,
+                  "w": 81,
+                  "h": 16
+                },
+                {
+                  "x": 1262,
+                  "y": 838,
+                  "w": 73,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 850,
+                  "w": 484,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 850,
+                  "w": 81,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 891,
+                  "w": 135,
+                  "h": 9
+                },
+                {
+                  "x": 235,
+                  "y": 891,
+                  "w": 90,
+                  "h": 9
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "About",
+              "atWord": 7.75
+            },
+            {
+              "ref": "rec:hidfi-repo#pitch",
+              "label": "the idea in one line",
+              "focus": true,
+              "wantAtWord": 36.75,
+              "callouts": [],
+              "id": "pitch",
+              "src": "rec/hidfi-repo/seg-02.mp4",
+              "frames": 74,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "what": {
+                  "x": 225,
+                  "y": 252,
+                  "w": 807,
+                  "h": 43,
+                  "covers": "Turn a small dev board into a wireless trackpad, keyboard, media remote and gamepad for any computer — with nothing installed on that computer."
+                }
+              },
+              "ink": [
+                {
+                  "x": 233,
+                  "y": 0,
+                  "w": 821,
+                  "h": 157
+                },
+                {
+                  "x": 193,
+                  "y": 16,
+                  "w": 288,
+                  "h": 39
+                },
+                {
+                  "x": 1063,
+                  "y": 16,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 184,
+                  "w": 94,
+                  "h": 38
+                },
+                {
+                  "x": 201,
+                  "y": 196,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 225,
+                  "y": 252,
+                  "w": 807,
+                  "h": 43
+                },
+                {
+                  "x": 225,
+                  "y": 316,
+                  "w": 819,
+                  "h": 43
+                },
+                {
+                  "x": 225,
+                  "y": 380,
+                  "w": 687,
+                  "h": 43
+                },
+                {
+                  "x": 225,
+                  "y": 380,
+                  "w": 382,
+                  "h": 19
+                },
+                {
+                  "x": 912,
+                  "y": 380,
+                  "w": 149,
+                  "h": 19
+                },
+                {
+                  "x": 1031,
+                  "y": 456,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 241,
+                  "y": 460,
+                  "w": 606,
+                  "h": 35
+                },
+                {
+                  "x": 269,
+                  "y": 536,
+                  "w": 73,
+                  "h": 19
+                },
+                {
+                  "x": 245,
+                  "y": 537,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 245,
+                  "y": 572,
+                  "w": 789,
+                  "h": 91
+                },
+                {
+                  "x": 245,
+                  "y": 572,
+                  "w": 575,
+                  "h": 19
+                },
+                {
+                  "x": 225,
+                  "y": 726,
+                  "w": 100,
+                  "h": 28
+                },
+                {
+                  "x": 201,
+                  "y": 732,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 257,
+                  "y": 782,
+                  "w": 312,
+                  "h": 103
+                },
+                {
+                  "x": 257,
+                  "y": 894,
+                  "w": 79,
+                  "h": 6
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+              ],
+              "shows": "HID-Fi",
+              "atWord": 36.75
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/hid-fi-flashing_long_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "HIDFI_STAGE",
+      "narration": "Here's the idea. HID-Fi is firmware, which just means the little program a chip runs, and you flash it onto a small ESP32-S3 board like this one. Plug the board into your laptop or PC, and you're done, because the board does the rest. You've got a keyboard and mouse in your pocket, ready to plug in and play, wherever you are.",
+      "durationFrames": 614,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "hidfiStage": {
+          "kind": "reveal",
+          "stage": [
+            {
+              "label": "HID-Fi",
+              "atWord": 1
+            },
+            {
+              "label": "the board",
+              "atWord": 16.917
+            },
+            {
+              "label": "plug",
+              "atWord": 24.833
+            },
+            {
+              "label": "in your pocket",
+              "atWord": 40.167
+            }
+          ],
+          "token": "Firmware for a tiny ESP32-S3 board."
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/hid-fi-flashing_long_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "HIDFI_STAGE",
+      "narration": "So why does nothing need installing? Your computer sees the board as an ordinary USB keyboard and mouse, and every computer already knows how to talk to those, because USB keyboards have worked the same way for decades. So there's no driver, no app, and no admin rights needed on the machine you're controlling. Your phone talks to the board over the board's own Wi-Fi, and every touch on your phone becomes a click, a keystroke or a scroll on the computer.",
+      "durationFrames": 783,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "hidfiStage": {
+          "kind": "plug",
+          "stage": [
+            {
+              "label": "into the port",
+              "atWord": 7.833
+            },
+            {
+              "label": "Keyboard",
+              "atWord": 13
+            },
+            {
+              "label": "Mouse",
+              "atWord": 14.75
+            },
+            {
+              "label": "no driver",
+              "atWord": 32.667
+            },
+            {
+              "label": "no app",
+              "atWord": 35.083
+            },
+            {
+              "label": "no admin rights",
+              "atWord": 37
+            },
+            {
+              "label": "your phone",
+              "sub": "over the board's own Wi-Fi",
+              "atWord": 44.75
+            },
+            {
+              "label": "touch",
+              "atWord": 52.5
+            }
+          ]
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/hid-fi-flashing_long_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "HIDFI_STAGE",
+      "narration": "Here's where we're heading. On the left, the HID-Fi dashboard, open in a phone's browser. Every swipe on that trackpad moves the cursor on the computer, and a tap is a click. By the end of this video, you'll have exactly this setup, running on your own board.",
+      "durationFrames": 494,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "mirror",
+          "stage": [
+            {
+              "label": "The HID-Fi dashboard",
+              "sub": "your phone drives the cursor",
+              "atWord": 5.75,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-01.mp4",
+                  "frames": 168,
+                  "atWord": 15.167
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-02.mp4",
+                  "frames": 53,
+                  "atWord": 24.083
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/hid-fi-flashing_long_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "HIDFI_STAGE",
+      "narration": "You need just three things. First, an ESP32-S3 board, and the N16R8 is the one HID-Fi is tested on. Second, a USB-C cable that carries data, C to C, or C to A, whichever port your computer has. And third, a phone, or a tablet, or an iPad, because anything with Wi-Fi and a browser works just as well.",
+      "durationFrames": 707,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "hidfiStage": {
+          "kind": "kit",
+          "stage": [
+            {
+              "label": "ESP32-S3 board",
+              "sub": "the N16R8, the one it is tested on",
+              "atWord": 6.25
+            },
+            {
+              "label": "USB-C data cable",
+              "sub": "C to C, or C to A",
+              "atWord": 24.583,
+              "detailAtWord": 34
+            },
+            {
+              "label": "A phone",
+              "sub": "or a tablet, or an iPad",
+              "atWord": 43.667,
+              "detailAtWord": 45.25
+            }
+          ]
+        }
+      },
+      "transition": "morph",
+      "audio": "audio/hid-fi-flashing_long_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "HIDFI_STAGE",
+      "narration": "Using HID-Fi is quick. Plug the board's USB port into the computer you want to control. On your phone, open the Wi-Fi settings and join the board's network, called ESP32-HID, and the password to start with is hid12345. Then open your browser and go to 192.168.4.1. The dashboard loads, and you're driving. One warning, though: every board ships with that same password, so change the password in Settings as soon as you're in, otherwise anyone nearby who knows this project could join.",
+      "durationFrames": 1024,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "hidfiStage": {
+          "kind": "connect",
+          "stage": [
+            {
+              "label": "Plug the USB port in",
+              "sub": "to the computer you control",
+              "atWord": 5.417
+            },
+            {
+              "label": "Join ESP32-HID-…",
+              "sub": "the board's own Wi-Fi",
+              "atWord": 19.667
+            },
+            {
+              "label": "Password hid12345",
+              "sub": "the default, until you change it",
+              "atWord": 30
+            },
+            {
+              "label": "Open 192.168.4.1",
+              "sub": "in any browser",
+              "atWord": 44.583
+            },
+            {
+              "label": "loaded",
+              "atWord": 53.75
+            },
+            {
+              "label": "Same password on every board. Change it.",
+              "atWord": 62.667
+            }
+          ],
+          "token": "ESP32-HID-09F7C8"
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/hid-fi-flashing_long_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "CHAPTER",
+      "narration": "Never flashed a board before? No problem. Let's flash one together, one step at a time, on Windows or on a Mac.",
+      "durationFrames": 261,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "Flash it",
+          "subtitle": "from a blank board, on Windows or a Mac"
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/hid-fi-flashing_long_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "HIDFI_STAGE",
+      "narration": "First, the part that trips everyone up. Turn the board over, and you'll see two USB-C ports with different jobs. The one marked COM is for flashing, so plug your cable into COM and connect it to your computer now. The one marked USB becomes the keyboard and mouse later. A charge-only cable is the most common reason nothing shows up, so use a cable that carries data, otherwise you'll lose an hour to head scratching.",
+      "durationFrames": 740,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "hidfiStage": {
+          "kind": "ports",
+          "stage": [
+            {
+              "label": "flip",
+              "atWord": 6.25
+            },
+            {
+              "label": "COM",
+              "sub": "flash through this one",
+              "text": "connect it now",
+              "atWord": 17.75
+            },
+            {
+              "label": "cable",
+              "atWord": 22.167
+            },
+            {
+              "label": "USB",
+              "sub": "becomes the keyboard + mouse",
+              "text": "plug in after flashing",
+              "atWord": 31.833
+            },
+            {
+              "label": "Use a data cable, not charge-only",
+              "atWord": 40.333
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/hid-fi-flashing_long_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "HIDFI_STAGE",
+      "narration": "Now the tools. You install these once, on the computer you flash from. First comes arduino-cli, the program that builds the firmware and writes it to the board. On Windows, open PowerShell and run winget install. On a Mac, use brew install arduino-cli, which needs Homebrew. Next, four commands that are identical on both: they fetch the ESP32 support and two libraries. The ESP32 download is about a gigabyte, so give it a few minutes. Luckily, you only ever do this once.",
+      "durationFrames": 953,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "hidfiStage": {
+          "kind": "tools",
+          "stage": [
+            {
+              "label": "Windows",
+              "sub": "in PowerShell",
+              "detail": "windows",
+              "text": "winget install ArduinoSA.CLI",
+              "atWord": 26.75
+            },
+            {
+              "label": "macOS",
+              "sub": "in Terminal, with Homebrew",
+              "detail": "mac",
+              "text": "brew install arduino-cli",
+              "atWord": 33.5
+            },
+            {
+              "detail": "both",
+              "text": "arduino-cli core update-index",
+              "sub": "the list of boards",
+              "atWord": 46.333
+            },
+            {
+              "detail": "both",
+              "text": "arduino-cli core install esp32:esp32",
+              "value": 1,
+              "sub": "~1 GB · once",
+              "atWord": 53.667
+            },
+            {
+              "detail": "both",
+              "text": "arduino-cli lib install ArduinoJson",
+              "atWord": 58.5
+            },
+            {
+              "detail": "both",
+              "text": "arduino-cli lib install WebSockets",
+              "atWord": 59.083
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/hid-fi-flashing_long_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "HIDFI_STAGE",
+      "narration": "Windows needs one more piece: the USB driver. The board talks to your computer through a small chip called the CH343, and Windows only understands that chip once you install its driver, from wch-ic.com. Install the driver once, then unplug the board and plug it back in. Now it shows up under Ports, as a COM port, which means you're ready to flash. On a Mac, you usually don't need anything, because macOS already understands the CH343, and that saves you a whole step.",
+      "durationFrames": 905,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "driver",
+          "stage": [
+            {
+              "label": "CH343 driver",
+              "sub": "wch-ic.com · CH343SER",
+              "atWord": 24.667,
+              "detailAtWord": 33.833
+            },
+            {
+              "label": "shows up under Ports",
+              "text": "USB-Enhanced-SERIAL CH343 (COM13)",
+              "atWord": 45,
+              "detailAtWord": 47.583
+            },
+            {
+              "label": "Usually, nothing to install",
+              "sub": "/dev/cu.usbmodem5AF61071891",
+              "atWord": 57.083
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/hid-fi-flashing_long_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "narration": "Here's how to check everything worked. arduino-cli version prints a version number. Then core list shows the ESP32 support is installed. And lib list shows both libraries, ArduinoJson and WebSockets. My machine's a Mac, but the same three commands work in PowerShell on Windows, and they print the same thing, which means you can follow along on either.",
+      "durationFrames": 645,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "clips": [
+            {
+              "ref": "rec:hidfi-mac#ver",
+              "label": "arduino-cli is installed",
+              "focus": true,
+              "wantAtWord": 4.917,
+              "zooms": [
+                {
+                  "marks": [
+                    "v"
+                  ],
+                  "band": true,
+                  "wantAtWord": 8.25,
+                  "atWord": 12.917
+                }
+              ],
+              "callouts": [],
+              "id": "ver",
+              "src": "rec/hidfi-mac/seg-01.mp4",
+              "frames": 100,
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {
+                "v": {
+                  "x": 190,
+                  "y": 99,
+                  "w": 131,
+                  "h": 19,
+                  "covers": "Version: 1.5.1"
+                },
+                "__cmd": {
+                  "x": 227,
+                  "y": 80,
+                  "w": 178,
+                  "h": 19,
+                  "covers": "arduino-cli version"
+                }
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 80,
+                  "w": 665,
+                  "h": 57
+                }
+              ],
+              "changes": [
+                0,
+                7,
+                8,
+                10,
+                12,
+                13,
+                14,
+                15,
+                16,
+                18,
+                19,
+                22,
+                24,
+                25,
+                26,
+                27,
+                28,
+                30,
+                42,
+                43,
+                44,
+                45,
+                50,
+                65
+              ],
+              "shows": "$ arduino-cli version",
+              "said": "PS hidfi-recws2> arduino-cli version\narduino-cli Version: 1.5.1 Commit: Homebrew Date: 2026-06-05T09:39:33Z\nPS hidfi-recws2>",
+              "atWord": 4.917
+            },
+            {
+              "ref": "rec:hidfi-mac#core",
+              "label": "ESP32 support installed",
+              "focus": true,
+              "wantAtWord": 12.917,
+              "zooms": [
+                {
+                  "marks": [
+                    "esp"
+                  ],
+                  "band": true,
+                  "wantAtWord": 15.167,
+                  "atWord": 24.833
+                }
+              ],
+              "callouts": [],
+              "id": "core",
+              "src": "rec/hidfi-mac/seg-02.mp4",
+              "frames": 105,
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {
+                "esp": {
+                  "x": 68,
+                  "y": 156,
+                  "w": 103,
+                  "h": 19,
+                  "covers": "esp32:esp32"
+                },
+                "__cmd": {
+                  "x": 227,
+                  "y": 118,
+                  "w": 197,
+                  "h": 19,
+                  "covers": "arduino-cli core list"
+                }
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 80,
+                  "w": 665,
+                  "h": 95
+                },
+                {
+                  "x": 68,
+                  "y": 194,
+                  "w": 150,
+                  "h": 19
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                10,
+                12,
+                13,
+                14,
+                15,
+                17,
+                18,
+                20,
+                21,
+                24,
+                25,
+                26,
+                27,
+                29,
+                30,
+                31,
+                32,
+                34,
+                44,
+                48,
+                52,
+                53,
+                54,
+                69
+              ],
+              "shows": "$ arduino-cli core list",
+              "said": "PS hidfi-recws2> arduino-cli version\narduino-cli Version: 1.5.1 Commit: Homebrew Date: 2026-06-05T09:39:33Z\nPS hidfi-recws2> arduino-cli core list\nID Installed Latest Name\nesp32:esp32 3.3.1 3.3.11 esp32\nPS hidfi-recws2>",
+              "atWord": 19.25
+            },
+            {
+              "ref": "rec:hidfi-mac#libs",
+              "label": "both libraries",
+              "focus": true,
+              "wantAtWord": 22.167,
+              "callouts": [],
+              "id": "libs",
+              "src": "rec/hidfi-mac/seg-03.mp4",
+              "frames": 106,
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {
+                "aj": {
+                  "x": 68,
+                  "y": 232,
+                  "w": 103,
+                  "h": 19,
+                  "covers": "ArduinoJson"
+                },
+                "ws": {
+                  "x": 68,
+                  "y": 251,
+                  "w": 94,
+                  "h": 19,
+                  "covers": "WebSockets"
+                },
+                "__cmd": {
+                  "x": 227,
+                  "y": 194,
+                  "w": 187,
+                  "h": 19,
+                  "covers": "arduino-cli lib list"
+                }
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 80,
+                  "w": 665,
+                  "h": 95
+                },
+                {
+                  "x": 68,
+                  "y": 194,
+                  "w": 516,
+                  "h": 76
+                },
+                {
+                  "x": 68,
+                  "y": 289,
+                  "w": 150,
+                  "h": 19
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                4,
+                5,
+                8,
+                10,
+                12,
+                15,
+                16,
+                18,
+                19,
+                20,
+                22,
+                23,
+                24,
+                26,
+                28,
+                29,
+                31,
+                33,
+                44,
+                45,
+                49,
+                52,
+                53,
+                55,
+                70
+              ],
+              "shows": "$ arduino-cli lib list",
+              "said": "PS hidfi-recws2> arduino-cli version\narduino-cli Version: 1.5.1 Commit: Homebrew Date: 2026-06-05T09:39:33Z\nPS hidfi-recws2> arduino-cli core list\nID Installed Latest Name\nesp32:esp32 3.3.1 3.3.11 esp32\nPS hidfi-recws2> arduino-cli lib list\nName Installed Available Location Description\nArduinoJson 7.4.3 - user -\nWebSockets 2.7.2 - user -\nPS hidfi-recws2>",
+              "atWord": 34.75
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/hid-fi-flashing_long_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "RECORDED_STEP",
+      "narration": "Now get the code. git clone copies all of HID-Fi, every file, onto your computer. No git? The green Code button on the GitHub page downloads the same files as a zip. Step into the folder, and two things matter: a folder holding the firmware itself, and the flash script, which builds the firmware, writes it to the board, and checks the write worked, which means one command does all three jobs.",
+      "durationFrames": 714,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "clips": [
+            {
+              "ref": "rec:hidfi-mac#clone",
+              "label": "clone the repository",
+              "focus": true,
+              "wantAtWord": 3.5,
+              "callouts": [],
+              "id": "clone",
+              "src": "rec/hidfi-mac/seg-04.mp4",
+              "frames": 196,
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 227,
+                  "y": 80,
+                  "w": 450,
+                  "h": 19,
+                  "covers": "git clone https://github.com/san-gitlogin/HID-Fi"
+                }
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 80,
+                  "w": 703,
+                  "h": 171
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                4,
+                7,
+                9,
+                11,
+                13,
+                15,
+                17,
+                20,
+                21,
+                23,
+                25,
+                27,
+                29,
+                31,
+                32,
+                34,
+                35,
+                37,
+                39,
+                41,
+                42,
+                44,
+                46,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                57,
+                59,
+                60,
+                62,
+                63,
+                64,
+                65,
+                67,
+                68,
+                69,
+                71,
+                74,
+                76,
+                79,
+                81,
+                82,
+                84,
+                85,
+                87,
+                98,
+                99,
+                103,
+                118,
+                132,
+                133,
+                134,
+                136,
+                137,
+                138,
+                139,
+                140,
+                142,
+                143,
+                144,
+                145,
+                160
+              ],
+              "shows": "$ git clone https://github.com/san-gitlogin/HID-Fi",
+              "said": "PS hidfi-recws2> git clone https://github.com/san-gitlogin/HID-Fi\nCloning into 'HID-Fi'...\nremote: Enumerating objects: 109, done.\nremote: Counting objects: 100% (109/109), done.\nremote: Compressing objects: 100% (67/67), done.\nremote: Total 109 (delta 42), reused 107 (delta 40), pack-reused 0 (from 0)\nReceiving objects: 100% (109/109), 3.39 MiB | 10.30 MiB/s, done.\nResolving deltas: 100% (42/42), done.\nPS hidfi-recws2>",
+              "atWord": 3.5
+            },
+            {
+              "ref": "rec:hidfi-mac#ls",
+              "label": "step into the folder",
+              "focus": true,
+              "wantAtWord": 28,
+              "zooms": [
+                {
+                  "marks": [
+                    "sh"
+                  ],
+                  "band": true,
+                  "wantAtWord": 38.25,
+                  "atWord": 38.25
+                }
+              ],
+              "callouts": [],
+              "id": "ls",
+              "src": "rec/hidfi-mac/seg-05.mp4",
+              "frames": 87,
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {
+                "sh": {
+                  "x": 668,
+                  "y": 289,
+                  "w": 112,
+                  "h": 19,
+                  "covers": "flash_esp.sh"
+                },
+                "__cmd": {
+                  "x": 227,
+                  "y": 232,
+                  "w": 141,
+                  "h": 19,
+                  "covers": "cd HID-Fi && ls"
+                }
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 80,
+                  "w": 1303,
+                  "h": 247
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                7,
+                8,
+                9,
+                10,
+                11,
+                13,
+                14,
+                15,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                35,
+                36,
+                51
+              ],
+              "shows": "$ cd HID-Fi && ls",
+              "said": "PS hidfi-recws2> git clone https://github.com/san-gitlogin/HID-Fi\nCloning into 'HID-Fi'...\nremote: Enumerating objects: 109, done.\nremote: Counting objects: 100% (109/109), done.\nremote: Compressing objects: 100% (67/67), done.\nremote: Total 109 (delta 42), reused 107 (delta 40), pack-reused 0 (from 0)\nReceiving objects: 100% (109/109), 3.39 MiB | 10.30 MiB/s, done.\nResolving deltas: 100% (42/42), done.\nPS hidfi-recws2> cd HID-Fi && ls\nAGENTS.md CONTRIBUTING.md EXPLAINED.md hid_fi SECURITY.md\nCHANGELOG.md docs flash_esp.ps1 LICENSE.md tests\nCODE_OF_CONDUCT.md ESP32-S3-N16R8_User_Guide.txt flash_esp.sh README.md\nPS HID-Fi>",
+              "atWord": 28
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/hid-fi-flashing_long_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "HIDFI_STAGE",
+      "narration": "With the COM port plugged in, run the flash script. On Windows, pick the script ending in ps1, with dash Compile. On a Mac, pick the one ending in sh, with dash c. The dot and slash at the front mean run the script in this folder, and dash c means build the firmware from source first. Notice there's no port in the command. The script checks every serial port on your computer and finds your board by itself, so you never go hunting for a port name.",
+      "durationFrames": 841,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "command",
+          "stage": [
+            {
+              "detail": "part",
+              "label": "./",
+              "text": ".\\",
+              "sub": "run the script in this folder",
+              "atWord": 34
+            },
+            {
+              "detail": "part",
+              "label": "flash_esp.sh",
+              "text": "flash_esp.ps1",
+              "sub": "the flash script",
+              "color": "purple",
+              "atWord": 4.417
+            },
+            {
+              "detail": "part",
+              "label": "-c",
+              "text": "-Compile",
+              "sub": "build from source first",
+              "color": "green",
+              "atWord": 38.833
+            },
+            {
+              "detail": "port",
+              "label": "COM3",
+              "atWord": 54.083
+            },
+            {
+              "detail": "port",
+              "label": "COM13",
+              "value": 1,
+              "sub": "CH343 · your board",
+              "atWord": 55,
+              "detailAtWord": 59.583
+            }
+          ],
+          "token": ".\\flash_esp.ps1 -Compile|./flash_esp.sh -c"
+        }
+      },
+      "transition": "morph",
+      "audio": "audio/hid-fi-flashing_long_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "RECORDED_STEP",
+      "narration": "Watch the flash script work. First it finds the board's port on its own, and names the port right after the word Flashing. Then it compiles the firmware, which takes the longest, writes the firmware to the board in four parts, and leaves your saved settings untouched. If it ever says no board found, you're almost always on the wrong port, or using a charge-only cable. When the write finishes, the script resets the board and asks the board what it's running.",
+      "durationFrames": 792,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "clips": [
+            {
+              "ref": "rec:hidfi-mac#flash",
+              "label": "build, flash, verify",
+              "focus": true,
+              "wantAtWord": 1,
+              "callouts": [],
+              "id": "flash",
+              "src": "rec/hidfi-mac/seg-06.mp4",
+              "frames": 750,
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {
+                "port": {
+                  "x": 68,
+                  "y": 194,
+                  "w": 103,
+                  "h": 19,
+                  "covers": "== Flashing"
+                },
+                "ready": {
+                  "x": 293,
+                  "y": 783,
+                  "w": 122,
+                  "h": 19,
+                  "covers": "USB HID ready"
+                },
+                "dash": {
+                  "x": 96,
+                  "y": 821,
+                  "w": 94,
+                  "h": 19,
+                  "covers": "Dashboard:"
+                },
+                "__cmd": {
+                  "x": 171,
+                  "y": 65,
+                  "w": 159,
+                  "h": 19,
+                  "covers": "./flash_esp.sh -c"
+                }
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 65,
+                  "w": 1162,
+                  "h": 281
+                },
+                {
+                  "x": 68,
+                  "y": 365,
+                  "w": 291,
+                  "h": 57
+                },
+                {
+                  "x": 68,
+                  "y": 441,
+                  "w": 797,
+                  "h": 266
+                },
+                {
+                  "x": 68,
+                  "y": 726,
+                  "w": 675,
+                  "h": 152
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                2,
+                4,
+                6,
+                7,
+                9,
+                11,
+                12,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                21,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                38,
+                39,
+                42,
+                52,
+                53,
+                54,
+                55,
+                69,
+                105,
+                141,
+                150,
+                152,
+                153,
+                154,
+                170,
+                171,
+                172,
+                176,
+                177,
+                182,
+                191,
+                192,
+                194,
+                197,
+                198,
+                200,
+                206,
+                216,
+                217,
+                227,
+                247,
+                267,
+                285,
+                286,
+                296,
+                306,
+                326,
+                335,
+                346,
+                356,
+                366,
+                372,
+                383,
+                393,
+                403,
+                409,
+                416,
+                417,
+                423,
+                424,
+                430,
+                437,
+                438,
+                444,
+                451,
+                458,
+                465,
+                466,
+                471,
+                472,
+                478,
+                486,
+                492,
+                499,
+                506,
+                512,
+                519,
+                526,
+                527,
+                532,
+                539,
+                547,
+                553,
+                560,
+                567,
+                574,
+                586,
+                593,
+                600,
+                607,
+                613,
+                619,
+                624,
+                625,
+                661,
+                697,
+                698,
+                700,
+                701,
+                702,
+                703,
+                704,
+                705,
+                706,
+                707,
+                708,
+                709,
+                710,
+                711,
+                712,
+                713,
+                714,
+                715,
+                716,
+                717,
+                718,
+                719,
+                720,
+                721,
+                722,
+                723,
+                724,
+                725
+              ],
+              "shows": "$ ./flash_esp.sh -c",
+              "said": " Using /dev/cu.usbmodem5AF61071891\n== Finding esptool\n esptool\n== Compiling\nSketch uses 1347663 bytes (42%) of program storage space. Maximum is 3145728 bytes.\nGlobal variables use 68652 bytes (20%) of dynamic memory, leaving 259028 bytes for local variables. Maximum is 327680 bytes.\n== Flashing /dev/cu.usbmodem5AF61071891\n writing 4 partitions (NVS at 0x9000-0xdfff is left untouched)\nesptool v5.1.0\nConnected to ESP32-S3 on /dev/cu.usbmodem5AF61071891:\nChip type: ESP32-S3 (QFN56) (revision v0.2)\nFeatures: Wi-Fi, BT 5 (LE), Dual Core + LP Core, 240MHz, Embedded PSRAM 8MB (AP_3v3)\nCrystal frequency: 40MHz\nMAC: dc:b4:d9:09:f7:c8\nStub flasher running.\nChanging baud rate to 921600...\nChanged.\nConfiguring flash size...\nFlash will be erased from 0x00000000 to 0x00004fff...\nFlash will be erased from 0x00008000 to 0x00008fff...\nFlash will be erased from 0x0000e000 to 0x0000ffff...\nFlash will be erased from 0x00010000 to 0x00159fff...\nSHA digest in image updated.\nWrote 20224 bytes (13061 compressed) at 0x00000000 in 0.5 seconds (352.9 kbit/s).\nHash of data verified.\nWrote 3072 bytes (137 compressed) at 0x00008000 in 0.1 seconds (476.1 kbit/s).\nHash of data verified.\nWrote 8192 bytes (47 compressed) at 0x0000e000 in 0.1 seconds (645.0 kbit/s).\nHash of data verified.\nWrote 1347808 bytes (778124 compressed) at 0x00010000 in 14.1 seconds (762.5 kbit/s).\nHash of data verified.\nHard resetting via RTS pin...\n Flashed /dev/cu.usbmodem5AF61071891\n== Verifying /dev/cu.usbmodem5AF61071891\n Running hid_fi_v3.6, USB HID ready\n Host OS: unknown (pending)\n Dashboard: join WiFi 'ESP32-HID-09F7C8' then open http://192.168.4.1/\n== Done.\nPS HID-Fi>\nPS HID-Fi> ./flash_esp.sh -c",
+              "atWord": 3.333
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/hid-fi-flashing_long_s16.mp3"
+    },
+    {
+      "id": "s17",
+      "type": "HIDFI_STAGE",
+      "narration": "And here's the line you're looking for: running HID-Fi, version three-point-six, USB HID ready. Your board is alive, which means it's already acting as a keyboard and mouse. Just above, the script confirms which port it flashed. Right under the ready line, you get the Wi-Fi name and the address to open next. On Windows the output looks the same, except your port is called COM and a number, instead of a slash-dev name. The whole flash took about a minute.",
+      "durationFrames": 841,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "hidfiStage": {
+          "kind": "readout",
+          "stage": [
+            {
+              "label": "USB HID ready",
+              "sub": "the firmware is running",
+              "value": 2,
+              "atWord": 4.333,
+              "detailAtWord": 15.833
+            },
+            {
+              "label": "The port it flashed",
+              "sub": "found by itself",
+              "value": 0,
+              "atWord": 26.917
+            },
+            {
+              "label": "The Wi-Fi name and the address",
+              "sub": "join it, then open 192.168.4.1",
+              "value": 4,
+              "atWord": 38.833
+            },
+            {
+              "label": "On Windows: COM13",
+              "sub": "on a Mac: /dev/cu…",
+              "value": 0,
+              "atWord": 52.333
+            }
+          ],
+          "token": "assets/hidfi_flash_readout.png|6|6.4348",
+          "stageTitle": "the last lines of that flash"
+        }
+      },
+      "transition": "slide",
+      "audio": "audio/hid-fi-flashing_long_s17.mp3"
+    },
+    {
+      "id": "s18",
+      "type": "HIDFI_STAGE",
+      "narration": "Now move the cable. Unplug it from COM, and plug the board's USB port into the computer you want to control. On Windows and Linux, you're done. A Mac asks two quick questions the first time. Click Allow when macOS asks about the accessory, and do it while the Mac is unlocked. And if the Keyboard Setup Assistant opens, the Mac setup buttons in the dashboard's Settings answer it for you, so you never guess which key is which.",
+      "durationFrames": 742,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "swap",
+          "stage": [
+            {
+              "label": "out of COM",
+              "atWord": 4.25
+            },
+            {
+              "label": "USB",
+              "sub": "to the computer you control",
+              "atWord": 7.583
+            },
+            {
+              "label": "Allow",
+              "atWord": 28.5,
+              "detailAtWord": 28.917
+            },
+            {
+              "label": "Keyboard Setup Assistant",
+              "sub": "Settings › Mac setup answers it:",
+              "atWord": 42.25
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/hid-fi-flashing_long_s18.mp3"
+    },
+    {
+      "id": "s19",
+      "type": "CHAPTER",
+      "narration": "Your board's flashed and plugged in. Now for the fun part: what your phone can actually do with HID-Fi.",
+      "durationFrames": 225,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "What your phone can do",
+          "subtitle": "the dashboard, tab by tab"
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/hid-fi-flashing_long_s19.mp3"
+    },
+    {
+      "id": "s20",
+      "type": "HIDFI_STAGE",
+      "narration": "Open the dashboard, and first you'll see a trackpad. One finger moves the cursor, and a tap is a click. Tap the little keyboard button, and the pad flips into a keyboard, so you can click a box and type into it without leaving the page. Below the pad sits a drawn mouse, with a scroll wheel you drag, which means a long page is one flick away.",
+      "durationFrames": 602,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "hidfiStage": {
+          "kind": "phones",
+          "stage": [
+            {
+              "label": "Trackpad",
+              "sub": "move, tap, scroll",
+              "atWord": 5.333,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-01.mp4",
+                  "frames": 168,
+                  "atWord": 7.917
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-02.mp4",
+                  "frames": 53,
+                  "atWord": 13
+                }
+              ]
+            },
+            {
+              "label": "Keyboard button",
+              "sub": "flips the pad into keys",
+              "atWord": 18.5,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-03.mp4",
+                  "frames": 54,
+                  "atWord": 18.5
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-04.mp4",
+                  "frames": 41,
+                  "atWord": 28.333
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-05.mp4",
+                  "frames": 47,
+                  "atWord": 29.917
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-06.mp4",
+                  "frames": 49,
+                  "atWord": 31.083
+                }
+              ]
+            },
+            {
+              "label": "Mouse + wheel",
+              "sub": "drag the wheel to scroll",
+              "atWord": 33.417,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-07.mp4",
+                  "frames": 54,
+                  "atWord": 33.417
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-08.mp4",
+                  "frames": 153,
+                  "atWord": 38.667
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "transition": "fade",
+      "audio": "audio/hid-fi-flashing_long_s20.mp3"
+    },
+    {
+      "id": "s21",
+      "type": "HIDFI_STAGE",
+      "narration": "Next, a full keyboard, which matches your computer, so a Mac gets Mac keys and a PC gets Windows ones. Keys holds hundreds of shortcuts, grouped and searchable, and one tap fires a shortcut. Media has volume knobs you turn with your thumb. And there's a game controller too, marked beta, because nobody has fully tested the controller yet. Treat it as a bonus for now.",
+      "durationFrames": 663,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "phones",
+          "stage": [
+            {
+              "label": "Keyboard",
+              "sub": "Mac or PC keys",
+              "atWord": 1,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-09.mp4",
+                  "frames": 54,
+                  "atWord": 1
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-10.mp4",
+                  "frames": 40,
+                  "atWord": 1.417
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-11.mp4",
+                  "frames": 40,
+                  "atWord": 3.917
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-12.mp4",
+                  "frames": 46,
+                  "atWord": 6.25
+                }
+              ]
+            },
+            {
+              "label": "Shortcuts",
+              "sub": "hundreds, searchable",
+              "atWord": 15.917,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-13.mp4",
+                  "frames": 58,
+                  "atWord": 15.917
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-14.mp4",
+                  "frames": 56,
+                  "atWord": 24.667
+                }
+              ]
+            },
+            {
+              "label": "Media",
+              "sub": "volume knobs",
+              "atWord": 28.917,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-15.mp4",
+                  "frames": 61,
+                  "atWord": 28.917
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-16.mp4",
+                  "frames": 159,
+                  "atWord": 30.333
+                }
+              ]
+            },
+            {
+              "label": "Controller",
+              "sub": "beta, not fully tested",
+              "color": "orange",
+              "atWord": 36.5,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-17.mp4",
+                  "frames": 90,
+                  "atWord": 36.5
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/hid-fi-flashing_long_s21.mp3"
+    },
+    {
+      "id": "s22",
+      "type": "HIDFI_STAGE",
+      "narration": "Power can lock the computer, and unlock it again by typing its password for you. That's why a locked screen across the room is never a problem. And in Setup, HID-Fi works out on its own whether it's plugged into a Mac or a PC, and switches its keys and shortcuts to match.",
+      "durationFrames": 504,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "hidfiStage": {
+          "kind": "session",
+          "stage": [
+            {
+              "label": "phone",
+              "atWord": 1,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-18.mp4",
+                  "frames": 54,
+                  "atWord": 1
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-19.mp4",
+                  "frames": 48,
+                  "atWord": 1.583
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-20.mp4",
+                  "frames": 69,
+                  "atWord": 5.167
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-21.mp4",
+                  "frames": 75,
+                  "atWord": 9.833
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-22.mp4",
+                  "frames": 69,
+                  "atWord": 20.667
+                }
+              ]
+            },
+            {
+              "label": "lock",
+              "atWord": 1.583,
+              "detailAtWord": 5.167
+            },
+            {
+              "label": "unlocked",
+              "atWord": 9.833
+            },
+            {
+              "label": "Mac detected",
+              "sub": "keys and shortcuts switch to match",
+              "atWord": 27.25
+            }
+          ]
+        }
+      },
+      "transition": "iris",
+      "audio": "audio/hid-fi-flashing_long_s22.mp3"
+    },
+    {
+      "id": "s23",
+      "type": "HIDFI_STAGE",
+      "narration": "Setup is also where you join the board to your home Wi-Fi. Scan, pick your network, and connect. Once the board is on your home network, phones, tablets and laptops on that network can reach it too. But HID-Fi refuses any control from your home network until you set an access PIN, because every device on a home network could otherwise reach your computer. So set a PIN first.",
+      "durationFrames": 707,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "hidfiStage": {
+          "kind": "network",
+          "stage": [
+            {
+              "label": "join",
+              "atWord": 1,
+              "clips": [
+                {
+                  "src": "rec/hidfi-dash-tour/seg-23.mp4",
+                  "frames": 95,
+                  "atWord": 1
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-24.mp4",
+                  "frames": 56,
+                  "atWord": 8.917
+                },
+                {
+                  "src": "rec/hidfi-dash-tour/seg-25.mp4",
+                  "frames": 84,
+                  "atWord": 11.25
+                }
+              ]
+            },
+            {
+              "label": "Home Wi-Fi",
+              "atWord": 5.917
+            },
+            {
+              "label": "phones, tablets and laptops",
+              "atWord": 21.083
+            },
+            {
+              "label": "Set an access PIN first",
+              "sub": "control from your home network is refused until you do",
+              "atWord": 33.833
+            }
+          ]
+        }
+      },
+      "transition": "morph",
+      "audio": "audio/hid-fi-flashing_long_s23.mp3"
+    },
+    {
+      "id": "s24",
+      "type": "HIDFI_STAGE",
+      "narration": "And HID-Fi doesn't need a phone. Anything with a browser and Wi-Fi works, because the dashboard is just a web page served by the board. So an iPad or a tablet becomes your keyboard and mouse too, and the dashboard spreads out to fill the bigger screen, with a full keyboard and a sidebar.",
+      "durationFrames": 522,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "devices",
+          "stage": [
+            {
+              "label": "Phone",
+              "atWord": 1
+            },
+            {
+              "label": "iPad, on its side",
+              "sub": "the full keyboard",
+              "atWord": 21.25
+            },
+            {
+              "label": "Tablet",
+              "sub": "trackpad and sidebar",
+              "atWord": 23.083
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/hid-fi-flashing_long_s24.mp3"
+    },
+    {
+      "id": "s25",
+      "type": "HIDFI_STAGE",
+      "narration": "That's HID-Fi. Flash it once, carry it anywhere, and your phone becomes the keyboard and mouse for any computer you plug the board into. Everything's on GitHub, so no more hauling a mouse and keyboard around.",
+      "durationFrames": 388,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "hidfiStage": {
+          "kind": "close",
+          "stage": [
+            {
+              "label": "Flash it once. Carry it anywhere.",
+              "atWord": 4.333
+            },
+            {
+              "label": "github.com/san-gitlogin/HID-Fi",
+              "atWord": 20.75
+            }
+          ]
+        }
+      },
+      "transition": "slide",
+      "audio": "audio/hid-fi-flashing_long_s25.mp3"
+    },
+    {
+      "id": "s26",
+      "type": "RECAP",
+      "narration": "Here's the whole thing, one last time. Install the tools once. Plug in the COM port and run the flash script. Move the cable to the USB port. Then join the board's Wi-Fi, and open 192.168.4.1. The link to HID-Fi is in the description. Go build one, and enjoy it.",
+      "durationFrames": 585,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "heading": "HID-Fi, start to finish",
+        "points": [
+          {
+            "text": "Install the tools once",
+            "atWord": 5.5
+          },
+          {
+            "text": "COM port in, run the flash script",
+            "atWord": 9.75
+          },
+          {
+            "text": "Move the cable to USB",
+            "atWord": 16.75
+          },
+          {
+            "text": "Join the Wi-Fi, open 192.168.4.1",
+            "atWord": 22.833
+          }
+        ]
+      },
+      "transition": "fade",
+      "audio": "audio/hid-fi-flashing_long_s26.mp3"
+    }
+  ]
+}

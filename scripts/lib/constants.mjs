@@ -168,6 +168,7 @@ export const TYPES = [
   'CMD_IP',
   'UV_STAGE',
   'ASTRA_STAGE',
+  'HIDFI_STAGE',
   'CMD_PING',
   'CMD_TRACEROUTE',
   'CMD_MTR',

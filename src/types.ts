@@ -6591,6 +6591,45 @@ export interface CmdIpData {
   atWord?: number;
   color?: SemColor;
 }
+export interface HidfiClip {
+  /** A recorded segment under public/, e.g. `rec/hidfi-dash-tour/seg-01.mp4`. */
+  src: string;
+  /** The segment's frame count — the clip holds its LAST frame after this, never blanks. */
+  frames: number;
+  /** The word the clip starts playing on. */
+  atWord?: number;
+}
+
+export interface HidfiStageItem {
+  label?: string;
+  sub?: string;
+  text?: string;
+  detail?: string;
+  value?: number;
+  color?: SemColor;
+  /** `lucide:<name>` / `si:<brand>` / `img:<file>`. */
+  icon?: string;
+  atWord?: number;
+  /** A SECOND moment for this item (the cable's far end swapping C for A, a check landing
+   *  after its line types). Falls back to `atWord`. */
+  detailAtWord?: number;
+  /** Phone footage: recorded segments played in order, each on its own word. */
+  clips?: HidfiClip[];
+}
+
+/** HIDFI_STAGE — every drawn beat of the HID-Fi product demo, on one scene type. */
+export interface HidfiStageData {
+  /** Which depiction to draw. Must exist in hidfiViz HIDFI_VIZ. */
+  kind?: string;
+  headline?: string;
+  /** Small caption above the picture, authored per beat. */
+  stageTitle?: string;
+  stage?: HidfiStageItem[];
+  /** Mode switch or label for the depiction. */
+  token?: string;
+  color?: SemColor;
+}
+
 export interface AstraStageItem {
   label?: string;
   /** A SECOND moment for this item, when the beat says its two facts in two clauses:
@@ -11348,6 +11387,7 @@ export interface SceneData {
   cmdPing?: CmdPingData;
   uvStage?: UvStageData;
   astraStage?: AstraStageData;
+  hidfiStage?: HidfiStageData;
   cmdIp?: CmdIpData;
   cmdDd?: CmdDdData;
   cmdUmount?: CmdUmountData;
