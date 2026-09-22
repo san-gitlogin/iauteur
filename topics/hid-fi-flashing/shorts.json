@@ -1,22 +1,2280 @@
 {
   "meta": {
-    "topic": "Flash HID-Fi",
-    "format": "short",
+    "topic": "HID-Fi — control any PC from your phone",
+    "format": "shorts",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "subject": "HID-Fi",
+    "audioPrefix": "hid-fi-flashing-shorts",
+    "pronounce": {
+      "HID-Fi": "H-I-D-Fye",
+      "HID": "H-I-D",
+      "hid12345": "H-I-D-12345",
+      "N16R8": "N-sixteen-R-eight",
+      "winget": "win-get"
+    },
+    "onePayoff": "one small board turns any phone into a keyboard and mouse for any computer",
+    "openLoop": "What if your phone was the keyboard and mouse for every computer you touch?",
+    "topicAxes": [
+      "entity-novelty"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "Control Any PC From Your Phone — No Drivers #esp32 #diy",
+      "altTitles": [
+        "Your Phone Is The Keyboard And Mouse Now (HID-Fi, ESP32-S3)",
+        "This Tiny Board Turns Your Phone Into A Trackpad #esp32"
+      ],
+      "hook": "HID-Fi is open-source firmware for a small ESP32-S3 board. Flash it, plug the board into any computer over USB-C, and your phone becomes its keyboard and mouse — no drivers, no app, no admin rights on that machine.",
+      "description": "HID-Fi turns a small ESP32-S3 board into a USB keyboard and mouse you drive from your phone over the board's own Wi-Fi: trackpad, full keyboard, password vault, hundreds of shortcuts, media knobs, and lock/unlock. Full build and flashing guide on the channel.",
+      "breakdown": "what HID-Fi is, what it can do, how it works, and where to get it",
+      "pinned": "Full step-by-step build (Windows and macOS) is on the channel — which computer would you drive from your phone first?",
+      "tags": [
+        "HID-Fi",
+        "ESP32",
+        "ESP32-S3",
+        "USB HID",
+        "phone as mouse",
+        "wireless keyboard",
+        "maker",
+        "DIY",
+        "electronics",
+        "open source",
+        "shorts"
+      ],
+      "queries": [
+        "turn phone into keyboard and mouse",
+        "esp32 usb hid",
+        "control pc from phone"
+      ],
+      "sources": [
+        "github.com/san-gitlogin/HID-Fi — HID-Fi by Santhosh (PolyForm Noncommercial)"
+      ]
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
-    "channel": "YOUR CHANNEL",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
   "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
+    "title": "CONTROL ANY PC",
+    "badge": "HID-Fi",
+    "note": "FROM YOUR PHONE",
+    "art": "img:hidfi_board_front.png",
     "frames": 2
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "HID-Fi turns your phone into the keyboard and mouse for any computer.",
+      "durationFrames": 151,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "Control any PC",
+        "subtext": "from your phone · HID-Fi",
+        "hookVariant": "reveal",
+        "heroAsset": "img:hidfi_mark.png",
+        "headlineAtWord": 4.583
+      },
+      "audio": "audio/hid-fi-flashing-shorts_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "narration": "The HID-Fi dashboard runs in a phone's browser, and every swipe you make on that trackpad moves the cursor on the computer, straight away. A tap clicks, exactly like a trackpad would.",
+      "durationFrames": 333,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "HID-Fi dashboard · the board's own page at 192.168.4.1",
+          "clips": [
+            {
+              "ref": "rec:hidfi-dash-tour#pad",
+              "label": "the dashboard",
+              "focus": false,
+              "wantAtWord": 1,
+              "callouts": [],
+              "id": "pad",
+              "src": "rec/hidfi-dash-tour/seg-01.mp4",
+              "frames": 170,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 430,
+                "h": 932
+              },
+              "ink": [
+                {
+                  "x": 8,
+                  "y": 8,
+                  "w": 9,
+                  "h": 6
+                },
+                {
+                  "x": 340,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 388,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 48,
+                  "y": 20,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 17,
+                  "y": 21,
+                  "w": 17,
+                  "h": 17
+                },
+                {
+                  "x": 212,
+                  "y": 22,
+                  "w": 37,
+                  "h": 14
+                },
+                {
+                  "x": 282,
+                  "y": 22,
+                  "w": 14,
+                  "h": 14
+                },
+                {
+                  "x": 302,
+                  "y": 22,
+                  "w": 8,
+                  "h": 14
+                },
+                {
+                  "x": 296,
+                  "y": 69,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 337,
+                  "y": 69,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 378,
+                  "y": 69,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 145,
+                  "y": 335,
+                  "w": 70,
+                  "h": 12
+                },
+                {
+                  "x": 241,
+                  "y": 335,
+                  "w": 44,
+                  "h": 12
+                },
+                {
+                  "x": 125,
+                  "y": 364,
+                  "w": 50,
+                  "h": 12
+                },
+                {
+                  "x": 265,
+                  "y": 364,
+                  "w": 40,
+                  "h": 12
+                },
+                {
+                  "x": 201,
+                  "y": 364,
+                  "w": 38,
+                  "h": 12
+                },
+                {
+                  "x": 27,
+                  "y": 430,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 373,
+                  "y": 430,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 58,
+                  "y": 432,
+                  "w": 70,
+                  "h": 17
+                },
+                {
+                  "x": 321,
+                  "y": 486,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 197,
+                  "y": 486,
+                  "w": 35,
+                  "h": 17
+                },
+                {
+                  "x": 74,
+                  "y": 486,
+                  "w": 26,
+                  "h": 17
+                },
+                {
+                  "x": 263,
+                  "y": 536,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 80,
+                  "y": 537,
+                  "w": 77,
+                  "h": 15
+                },
+                {
+                  "x": 289,
+                  "y": 537,
+                  "w": 70,
+                  "h": 15
+                },
+                {
+                  "x": 27,
+                  "y": 593,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 58,
+                  "y": 595,
+                  "w": 77,
+                  "h": 17
+                },
+                {
+                  "x": 45,
+                  "y": 645,
+                  "w": 84,
+                  "h": 42
+                },
+                {
+                  "x": 312,
+                  "y": 645,
+                  "w": 62,
+                  "h": 42
+                },
+                {
+                  "x": 188,
+                  "y": 645,
+                  "w": 54,
+                  "h": 42
+                },
+                {
+                  "x": 57,
+                  "y": 730,
+                  "w": 60,
+                  "h": 42
+                },
+                {
+                  "x": 321,
+                  "y": 730,
+                  "w": 44,
+                  "h": 42
+                },
+                {
+                  "x": 202,
+                  "y": 730,
+                  "w": 26,
+                  "h": 42
+                },
+                {
+                  "x": 27,
+                  "y": 801,
+                  "w": 362,
+                  "h": 51
+                },
+                {
+                  "x": 57,
+                  "y": 801,
+                  "w": 67,
+                  "h": 14
+                },
+                {
+                  "x": 27,
+                  "y": 801,
+                  "w": 30,
+                  "h": 14
+                },
+                {
+                  "x": 259,
+                  "y": 882,
+                  "w": 28,
+                  "h": 39
+                },
+                {
+                  "x": 20,
+                  "y": 883,
+                  "w": 29,
+                  "h": 37
+                },
+                {
+                  "x": 201,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 324,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 386,
+                  "y": 883,
+                  "w": 27,
+                  "h": 37
+                },
+                {
+                  "x": 81,
+                  "y": 883,
+                  "w": 23,
+                  "h": 37
+                },
+                {
+                  "x": 143,
+                  "y": 883,
+                  "w": 22,
+                  "h": 37
+                },
+                {
+                  "x": 58,
+                  "y": 899,
+                  "w": 34,
+                  "h": 17
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134
+              ],
+              "shows": "Trackpad",
+              "atWord": 4.75
+            },
+            {
+              "ref": "rec:hidfi-dash-tour#tap",
+              "label": "a tap clicks",
+              "focus": false,
+              "wantAtWord": 19.083,
+              "callouts": [],
+              "id": "tap",
+              "src": "rec/hidfi-dash-tour/seg-02.mp4",
+              "frames": 53,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 430,
+                "h": 932
+              },
+              "ink": [
+                {
+                  "x": 8,
+                  "y": 8,
+                  "w": 9,
+                  "h": 6
+                },
+                {
+                  "x": 340,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 388,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 48,
+                  "y": 20,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 17,
+                  "y": 21,
+                  "w": 17,
+                  "h": 17
+                },
+                {
+                  "x": 212,
+                  "y": 22,
+                  "w": 37,
+                  "h": 14
+                },
+                {
+                  "x": 282,
+                  "y": 22,
+                  "w": 14,
+                  "h": 14
+                },
+                {
+                  "x": 302,
+                  "y": 22,
+                  "w": 8,
+                  "h": 14
+                },
+                {
+                  "x": 296,
+                  "y": 69,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 337,
+                  "y": 69,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 378,
+                  "y": 69,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 145,
+                  "y": 335,
+                  "w": 70,
+                  "h": 12
+                },
+                {
+                  "x": 241,
+                  "y": 335,
+                  "w": 44,
+                  "h": 12
+                },
+                {
+                  "x": 125,
+                  "y": 364,
+                  "w": 50,
+                  "h": 12
+                },
+                {
+                  "x": 265,
+                  "y": 364,
+                  "w": 40,
+                  "h": 12
+                },
+                {
+                  "x": 201,
+                  "y": 364,
+                  "w": 38,
+                  "h": 12
+                },
+                {
+                  "x": 27,
+                  "y": 430,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 373,
+                  "y": 430,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 58,
+                  "y": 432,
+                  "w": 70,
+                  "h": 17
+                },
+                {
+                  "x": 321,
+                  "y": 486,
+                  "w": 45,
+                  "h": 17
+                },
+                {
+                  "x": 197,
+                  "y": 486,
+                  "w": 35,
+                  "h": 17
+                },
+                {
+                  "x": 74,
+                  "y": 486,
+                  "w": 26,
+                  "h": 17
+                },
+                {
+                  "x": 263,
+                  "y": 536,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 80,
+                  "y": 537,
+                  "w": 77,
+                  "h": 15
+                },
+                {
+                  "x": 289,
+                  "y": 537,
+                  "w": 70,
+                  "h": 15
+                },
+                {
+                  "x": 27,
+                  "y": 593,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 58,
+                  "y": 595,
+                  "w": 77,
+                  "h": 17
+                },
+                {
+                  "x": 45,
+                  "y": 645,
+                  "w": 84,
+                  "h": 42
+                },
+                {
+                  "x": 312,
+                  "y": 645,
+                  "w": 62,
+                  "h": 42
+                },
+                {
+                  "x": 188,
+                  "y": 645,
+                  "w": 54,
+                  "h": 42
+                },
+                {
+                  "x": 57,
+                  "y": 730,
+                  "w": 60,
+                  "h": 42
+                },
+                {
+                  "x": 321,
+                  "y": 730,
+                  "w": 44,
+                  "h": 42
+                },
+                {
+                  "x": 202,
+                  "y": 730,
+                  "w": 26,
+                  "h": 42
+                },
+                {
+                  "x": 27,
+                  "y": 801,
+                  "w": 362,
+                  "h": 51
+                },
+                {
+                  "x": 57,
+                  "y": 801,
+                  "w": 67,
+                  "h": 14
+                },
+                {
+                  "x": 27,
+                  "y": 801,
+                  "w": 30,
+                  "h": 14
+                },
+                {
+                  "x": 259,
+                  "y": 882,
+                  "w": 28,
+                  "h": 39
+                },
+                {
+                  "x": 20,
+                  "y": 883,
+                  "w": 29,
+                  "h": 37
+                },
+                {
+                  "x": 201,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 324,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 386,
+                  "y": 883,
+                  "w": 27,
+                  "h": 37
+                },
+                {
+                  "x": 81,
+                  "y": 883,
+                  "w": 23,
+                  "h": 37
+                },
+                {
+                  "x": 143,
+                  "y": 883,
+                  "w": 22,
+                  "h": 37
+                },
+                {
+                  "x": 58,
+                  "y": 899,
+                  "w": 34,
+                  "h": 17
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                9,
+                12,
+                20
+              ],
+              "shows": "Trackpad",
+              "atWord": 20.083
+            }
+          ],
+          "capture": {
+            "width": 430,
+            "height": 932
+          }
+        }
+      },
+      "transition": "push",
+      "audio": "audio/hid-fi-flashing-shorts_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "HIDFI_STAGE",
+      "narration": "Here's how. HID-Fi is firmware you flash onto a small ESP32-S3 board. Plug that board into any computer over USB-C, and that computer just sees an ordinary keyboard and mouse — no driver, no app, no admin rights. Your phone drives the board over its own Wi-Fi, so every touch lands as a click or a keystroke.",
+      "durationFrames": 651,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "plug",
+          "stage": [
+            {
+              "label": "into the port",
+              "atWord": 16.083
+            },
+            {
+              "label": "Keyboard",
+              "atWord": 28.583
+            },
+            {
+              "label": "Mouse",
+              "atWord": 30.25
+            },
+            {
+              "label": "no driver",
+              "atWord": 31.917
+            },
+            {
+              "label": "no app",
+              "atWord": 33.833
+            },
+            {
+              "label": "no admin rights",
+              "atWord": 35.917
+            },
+            {
+              "label": "your phone",
+              "sub": "over the board's own Wi-Fi",
+              "atWord": 39.083
+            },
+            {
+              "label": "touch",
+              "atWord": 46.333
+            }
+          ]
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/hid-fi-flashing-shorts_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "narration": "So you get a full keyboard, a password vault, hundreds of shortcuts and media knobs — handy when you forgot your mouse, when the trackpad dies, or when the computer is across the room.",
+      "durationFrames": 328,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "HID-Fi dashboard · the board's own page at 192.168.4.1",
+          "clips": [
+            {
+              "ref": "rec:hidfi-dash-tour#type",
+              "label": "a full keyboard",
+              "focus": false,
+              "wantAtWord": 1,
+              "callouts": [],
+              "id": "type",
+              "src": "rec/hidfi-dash-tour/seg-09.mp4",
+              "frames": 54,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 430,
+                "h": 932
+              },
+              "ink": [
+                {
+                  "x": 340,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 388,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 48,
+                  "y": 20,
+                  "w": 70,
+                  "h": 18
+                },
+                {
+                  "x": 17,
+                  "y": 21,
+                  "w": 17,
+                  "h": 17
+                },
+                {
+                  "x": 212,
+                  "y": 22,
+                  "w": 37,
+                  "h": 14
+                },
+                {
+                  "x": 22,
+                  "y": 86,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 53,
+                  "y": 88,
+                  "w": 37,
+                  "h": 17
+                },
+                {
+                  "x": 335,
+                  "y": 136,
+                  "w": 34,
+                  "h": 17
+                },
+                {
+                  "x": 184,
+                  "y": 190,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 210,
+                  "y": 191,
+                  "w": 36,
+                  "h": 17
+                },
+                {
+                  "x": 25,
+                  "y": 252,
+                  "w": 21,
+                  "h": 14
+                },
+                {
+                  "x": 148,
+                  "y": 252,
+                  "w": 15,
+                  "h": 14
+                },
+                {
+                  "x": 188,
+                  "y": 252,
+                  "w": 15,
+                  "h": 14
+                },
+                {
+                  "x": 25,
+                  "y": 309,
+                  "w": 21,
+                  "h": 14
+                },
+                {
+                  "x": 105,
+                  "y": 309,
+                  "w": 20,
+                  "h": 14
+                },
+                {
+                  "x": 66,
+                  "y": 309,
+                  "w": 19,
+                  "h": 14
+                },
+                {
+                  "x": 389,
+                  "y": 364,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 22,
+                  "y": 423,
+                  "w": 21,
+                  "h": 14
+                },
+                {
+                  "x": 389,
+                  "y": 478,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 356,
+                  "y": 535,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 322,
+                  "y": 592,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 356,
+                  "y": 592,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 389,
+                  "y": 592,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 214,
+                  "y": 594,
+                  "w": 36,
+                  "h": 14
+                },
+                {
+                  "x": 22,
+                  "y": 594,
+                  "w": 21,
+                  "h": 14
+                },
+                {
+                  "x": 32,
+                  "y": 651,
+                  "w": 34,
+                  "h": 14
+                },
+                {
+                  "x": 166,
+                  "y": 651,
+                  "w": 32,
+                  "h": 14
+                },
+                {
+                  "x": 233,
+                  "y": 651,
+                  "w": 31,
+                  "h": 14
+                },
+                {
+                  "x": 104,
+                  "y": 651,
+                  "w": 22,
+                  "h": 14
+                },
+                {
+                  "x": 371,
+                  "y": 651,
+                  "w": 20,
+                  "h": 14
+                },
+                {
+                  "x": 305,
+                  "y": 651,
+                  "w": 19,
+                  "h": 14
+                },
+                {
+                  "x": 166,
+                  "y": 708,
+                  "w": 32,
+                  "h": 14
+                },
+                {
+                  "x": 39,
+                  "y": 708,
+                  "w": 20,
+                  "h": 14
+                },
+                {
+                  "x": 106,
+                  "y": 708,
+                  "w": 19,
+                  "h": 14
+                },
+                {
+                  "x": 333,
+                  "y": 767,
+                  "w": 37,
+                  "h": 17
+                },
+                {
+                  "x": 20,
+                  "y": 849,
+                  "w": 24,
+                  "h": 71
+                },
+                {
+                  "x": 378,
+                  "y": 849,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 53,
+                  "y": 852,
+                  "w": 63,
+                  "h": 17
+                },
+                {
+                  "x": 265,
+                  "y": 882,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 201,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 324,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 386,
+                  "y": 883,
+                  "w": 27,
+                  "h": 37
+                },
+                {
+                  "x": 81,
+                  "y": 883,
+                  "w": 23,
+                  "h": 37
+                },
+                {
+                  "x": 143,
+                  "y": 883,
+                  "w": 22,
+                  "h": 37
+                },
+                {
+                  "x": 253,
+                  "y": 909,
+                  "w": 32,
+                  "h": 22
+                },
+                {
+                  "x": 56,
+                  "y": 909,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 155,
+                  "y": 909,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 352,
+                  "y": 909,
+                  "w": 22,
+                  "h": 22
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                10,
+                13,
+                16,
+                18
+              ],
+              "shows": "Keyboard",
+              "atWord": 1.417
+            },
+            {
+              "ref": "rec:hidfi-dash-tour#shortcuts",
+              "label": "vault and shortcuts",
+              "focus": false,
+              "wantAtWord": 4,
+              "callouts": [],
+              "id": "shortcuts",
+              "src": "rec/hidfi-dash-tour/seg-13.mp4",
+              "frames": 61,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 430,
+                "h": 932
+              },
+              "ink": [
+                {
+                  "x": 340,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 388,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 48,
+                  "y": 20,
+                  "w": 35,
+                  "h": 18
+                },
+                {
+                  "x": 212,
+                  "y": 22,
+                  "w": 37,
+                  "h": 14
+                },
+                {
+                  "x": 27,
+                  "y": 94,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 373,
+                  "y": 94,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 58,
+                  "y": 96,
+                  "w": 92,
+                  "h": 17
+                },
+                {
+                  "x": 27,
+                  "y": 139,
+                  "w": 106,
+                  "h": 14
+                },
+                {
+                  "x": 27,
+                  "y": 168,
+                  "w": 374,
+                  "h": 32
+                },
+                {
+                  "x": 167,
+                  "y": 224,
+                  "w": 95,
+                  "h": 15
+                },
+                {
+                  "x": 189,
+                  "y": 302,
+                  "w": 51,
+                  "h": 14
+                },
+                {
+                  "x": 71,
+                  "y": 302,
+                  "w": 40,
+                  "h": 14
+                },
+                {
+                  "x": 324,
+                  "y": 302,
+                  "w": 30,
+                  "h": 14
+                },
+                {
+                  "x": 27,
+                  "y": 392,
+                  "w": 328,
+                  "h": 33
+                },
+                {
+                  "x": 41,
+                  "y": 454,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 73,
+                  "y": 457,
+                  "w": 83,
+                  "h": 15
+                },
+                {
+                  "x": 49,
+                  "y": 500,
+                  "w": 31,
+                  "h": 15
+                },
+                {
+                  "x": 56,
+                  "y": 528,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 237,
+                  "y": 528,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 230,
+                  "y": 578,
+                  "w": 149,
+                  "h": 15
+                },
+                {
+                  "x": 49,
+                  "y": 578,
+                  "w": 34,
+                  "h": 15
+                },
+                {
+                  "x": 289,
+                  "y": 606,
+                  "w": 26,
+                  "h": 13
+                },
+                {
+                  "x": 56,
+                  "y": 606,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 237,
+                  "y": 606,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 49,
+                  "y": 656,
+                  "w": 32,
+                  "h": 15
+                },
+                {
+                  "x": 230,
+                  "y": 656,
+                  "w": 31,
+                  "h": 15
+                },
+                {
+                  "x": 289,
+                  "y": 684,
+                  "w": 26,
+                  "h": 13
+                },
+                {
+                  "x": 56,
+                  "y": 684,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 237,
+                  "y": 684,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 49,
+                  "y": 734,
+                  "w": 55,
+                  "h": 15
+                },
+                {
+                  "x": 230,
+                  "y": 734,
+                  "w": 29,
+                  "h": 15
+                },
+                {
+                  "x": 56,
+                  "y": 762,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 237,
+                  "y": 762,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 49,
+                  "y": 812,
+                  "w": 46,
+                  "h": 15
+                },
+                {
+                  "x": 230,
+                  "y": 812,
+                  "w": 27,
+                  "h": 15
+                },
+                {
+                  "x": 108,
+                  "y": 840,
+                  "w": 26,
+                  "h": 13
+                },
+                {
+                  "x": 56,
+                  "y": 840,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 237,
+                  "y": 840,
+                  "w": 25,
+                  "h": 13
+                },
+                {
+                  "x": 259,
+                  "y": 882,
+                  "w": 28,
+                  "h": 50
+                },
+                {
+                  "x": 81,
+                  "y": 883,
+                  "w": 23,
+                  "h": 49
+                },
+                {
+                  "x": 201,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 324,
+                  "y": 883,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 386,
+                  "y": 883,
+                  "w": 27,
+                  "h": 37
+                },
+                {
+                  "x": 20,
+                  "y": 883,
+                  "w": 22,
+                  "h": 37
+                },
+                {
+                  "x": 143,
+                  "y": 883,
+                  "w": 22,
+                  "h": 37
+                },
+                {
+                  "x": 49,
+                  "y": 890,
+                  "w": 32,
+                  "h": 15
+                },
+                {
+                  "x": 230,
+                  "y": 890,
+                  "w": 29,
+                  "h": 15
+                },
+                {
+                  "x": 56,
+                  "y": 918,
+                  "w": 25,
+                  "h": 13
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                7,
+                8,
+                9,
+                12,
+                13,
+                18,
+                54
+              ],
+              "shows": "Keys",
+              "atWord": 7.417
+            },
+            {
+              "ref": "rec:hidfi-dash-tour#knob",
+              "label": "media knobs",
+              "focus": false,
+              "wantAtWord": 9.5,
+              "callouts": [],
+              "id": "knob",
+              "src": "rec/hidfi-dash-tour/seg-16.mp4",
+              "frames": 165,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 430,
+                "h": 932
+              },
+              "ink": [
+                {
+                  "x": 8,
+                  "y": 8,
+                  "w": 9,
+                  "h": 6
+                },
+                {
+                  "x": 340,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 388,
+                  "y": 18,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 48,
+                  "y": 20,
+                  "w": 45,
+                  "h": 18
+                },
+                {
+                  "x": 17,
+                  "y": 21,
+                  "w": 17,
+                  "h": 17
+                },
+                {
+                  "x": 212,
+                  "y": 22,
+                  "w": 37,
+                  "h": 14
+                },
+                {
+                  "x": 282,
+                  "y": 22,
+                  "w": 14,
+                  "h": 14
+                },
+                {
+                  "x": 302,
+                  "y": 22,
+                  "w": 8,
+                  "h": 14
+                },
+                {
+                  "x": 27,
+                  "y": 94,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 373,
+                  "y": 94,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 49,
+                  "y": 96,
+                  "w": 138,
+                  "h": 194
+                },
+                {
+                  "x": 178,
+                  "y": 149,
+                  "w": 18,
+                  "h": 18
+                },
+                {
+                  "x": 300,
+                  "y": 209,
+                  "w": 26,
+                  "h": 26
+                },
+                {
+                  "x": 283,
+                  "y": 245,
+                  "w": 58,
+                  "h": 14
+                },
+                {
+                  "x": 85,
+                  "y": 300,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 107,
+                  "y": 301,
+                  "w": 43,
+                  "h": 14
+                },
+                {
+                  "x": 27,
+                  "y": 342,
+                  "w": 376,
+                  "h": 51
+                },
+                {
+                  "x": 27,
+                  "y": 438,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 58,
+                  "y": 440,
+                  "w": 77,
+                  "h": 17
+                },
+                {
+                  "x": 183,
+                  "y": 489,
+                  "w": 65,
+                  "h": 42
+                },
+                {
+                  "x": 63,
+                  "y": 489,
+                  "w": 46,
+                  "h": 42
+                },
+                {
+                  "x": 331,
+                  "y": 489,
+                  "w": 25,
+                  "h": 42
+                },
+                {
+                  "x": 322,
+                  "y": 574,
+                  "w": 42,
+                  "h": 42
+                },
+                {
+                  "x": 201,
+                  "y": 574,
+                  "w": 27,
+                  "h": 42
+                },
+                {
+                  "x": 74,
+                  "y": 574,
+                  "w": 25,
+                  "h": 42
+                },
+                {
+                  "x": 65,
+                  "y": 659,
+                  "w": 44,
+                  "h": 42
+                },
+                {
+                  "x": 196,
+                  "y": 659,
+                  "w": 37,
+                  "h": 42
+                },
+                {
+                  "x": 27,
+                  "y": 769,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 373,
+                  "y": 769,
+                  "w": 22,
+                  "h": 22
+                },
+                {
+                  "x": 58,
+                  "y": 771,
+                  "w": 115,
+                  "h": 17
+                },
+                {
+                  "x": 62,
+                  "y": 828,
+                  "w": 49,
+                  "h": 104
+                },
+                {
+                  "x": 321,
+                  "y": 828,
+                  "w": 45,
+                  "h": 104
+                },
+                {
+                  "x": 195,
+                  "y": 828,
+                  "w": 40,
+                  "h": 104
+                },
+                {
+                  "x": 259,
+                  "y": 882,
+                  "w": 28,
+                  "h": 39
+                },
+                {
+                  "x": 386,
+                  "y": 883,
+                  "w": 27,
+                  "h": 37
+                },
+                {
+                  "x": 20,
+                  "y": 883,
+                  "w": 22,
+                  "h": 37
+                },
+                {
+                  "x": 143,
+                  "y": 883,
+                  "w": 22,
+                  "h": 37
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                160
+              ],
+              "shows": "Media",
+              "atWord": 13.417
+            }
+          ],
+          "capture": {
+            "width": 430,
+            "height": 932
+          }
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/hid-fi-flashing-shorts_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "narration": "HID-Fi is open source. Here is the project on GitHub, where the firmware and the flashing guide live.",
+      "durationFrames": 236,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "san-gitlogin · github.com/san-gitlogin/HID-Fi · PolyForm Noncommercial",
+          "clips": [
+            {
+              "ref": "rec:hidfi-repo#repo",
+              "label": "the HID-Fi repo",
+              "focus": false,
+              "wantAtWord": 1,
+              "zooms": [
+                {
+                  "marks": [
+                    "about"
+                  ],
+                  "band": true,
+                  "wantAtWord": 8.167,
+                  "atWord": 8.167
+                }
+              ],
+              "callouts": [],
+              "id": "repo",
+              "src": "rec/hidfi-repo/seg-01.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "about": {
+                  "x": 1136,
+                  "y": 244,
+                  "w": 260,
+                  "h": 43,
+                  "covers": "ESP32-S3 USB HID keyboard, mouse, media remote and gamepad",
+                  "block": {
+                    "x": 1136,
+                    "y": 244,
+                    "w": 269,
+                    "h": 91
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 412,
+                  "y": 26,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 296,
+                  "y": 26,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 26,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 26,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 26,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 1464,
+                  "y": 28,
+                  "w": 51,
+                  "h": 16
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 104,
+                  "h": 23
+                },
+                {
+                  "x": 174,
+                  "y": 91,
+                  "w": 59,
+                  "h": 23
+                },
+                {
+                  "x": 1262,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 580,
+                  "y": 150,
+                  "w": 128,
+                  "h": 16
+                },
+                {
+                  "x": 241,
+                  "y": 150,
+                  "w": 83,
+                  "h": 16
+                },
+                {
+                  "x": 475,
+                  "y": 150,
+                  "w": 53,
+                  "h": 16
+                },
+                {
+                  "x": 761,
+                  "y": 150,
+                  "w": 51,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 208,
+                  "w": 46,
+                  "h": 19
+                },
+                {
+                  "x": 1136,
+                  "y": 244,
+                  "w": 269,
+                  "h": 91
+                },
+                {
+                  "x": 192,
+                  "y": 272,
+                  "w": 123,
+                  "h": 186
+                },
+                {
+                  "x": 323,
+                  "y": 272,
+                  "w": 429,
+                  "h": 16
+                },
+                {
+                  "x": 983,
+                  "y": 272,
+                  "w": 106,
+                  "h": 38
+                },
+                {
+                  "x": 570,
+                  "y": 319,
+                  "w": 413,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 352,
+                  "w": 183,
+                  "h": 277
+                },
+                {
+                  "x": 570,
+                  "y": 360,
+                  "w": 413,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 401,
+                  "w": 413,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 442,
+                  "w": 463,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 483,
+                  "w": 463,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 523,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 523,
+                  "w": 61,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 564,
+                  "w": 463,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 564,
+                  "w": 80,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 605,
+                  "w": 463,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 605,
+                  "w": 111,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 646,
+                  "w": 163,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 646,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 667,
+                  "w": 68,
+                  "h": 19
+                },
+                {
+                  "x": 570,
+                  "y": 687,
+                  "w": 409,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 687,
+                  "w": 129,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 728,
+                  "w": 219,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 728,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 757,
+                  "w": 160,
+                  "h": 143
+                },
+                {
+                  "x": 570,
+                  "y": 768,
+                  "w": 484,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 768,
+                  "w": 99,
+                  "h": 16
+                },
+                {
+                  "x": 1262,
+                  "y": 798,
+                  "w": 73,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 809,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 809,
+                  "w": 81,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 850,
+                  "w": 429,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 850,
+                  "w": 81,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 891,
+                  "w": 413,
+                  "h": 9
+                },
+                {
+                  "x": 235,
+                  "y": 891,
+                  "w": 90,
+                  "h": 9
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "About",
+              "atWord": 6.083
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "slide",
+      "audio": "audio/hid-fi-flashing-shorts_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "HIDFI_STAGE",
+      "narration": "Flash it once and carry it anywhere.",
+      "durationFrames": 102,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "hidfiStage": {
+          "kind": "close",
+          "stage": [
+            {
+              "label": "Flash it once. Carry it anywhere.",
+              "atWord": 1
+            },
+            {
+              "label": "github.com/san-gitlogin/HID-Fi",
+              "atWord": 3.167
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/hid-fi-flashing-shorts_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "OUTRO_CTA",
+      "narration": "The full step-by-step build is on the channel.",
+      "durationFrames": 102,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "message": "Full build on the channel",
+        "sub": "flash it yourself in under 10 minutes"
+      },
+      "transition": "zoom",
+      "audio": "audio/hid-fi-flashing-shorts_s07.mp3"
+    }
+  ]
 }

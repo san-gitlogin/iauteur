@@ -191,15 +191,56 @@ const Cursor: React.FC<{x: number; y: number; size: number; color: string; dim?:
   </svg>
 );
 
-/** A USB-C plug on the end of a cable, pointing UP; `a` morphs it into a USB-A plug. */
-const Plug: React.FC<{w: number; a?: number; color?: string}> = ({w, a = 0, color = '#c7ccd4'}) => {
-  const pw = w * (1 + a * 0.55), ph = w * (0.34 - a * 0.1);
+/** A USB PLUG, drawn as the connector actually looks, pointing UP: a chromed shell with a
+ *  bevelled lip, the inner tongue, a moulded strain-relief boot with its ribs, and the cable
+ *  leaving the bottom. `kind` picks the shape — USB-C is a stadium (fully rounded, reversible,
+ *  a slot right through it); USB-A is a flat rectangle whose tongue carries four gold contacts
+ *  on one side only, which is exactly why it goes in the wrong way up twice.
+ *  Owner, on the first attempt: "the cable component is kinda not looking good... does not
+ *  actually depict how a type C or type A would look like." */
+const UsbPlug: React.FC<{w: number; kind?: 'c' | 'a'; tone?: number}> = ({w, kind = 'c', tone = 1}) => {
+  const A = kind === 'a';
+  // one coordinate space for both, so a morph between them is a straight interpolation
+  const VB = 120, shellW = A ? 104 : 78, shellH = A ? 46 : 30, shellX = (VB - shellW) / 2;
+  const r = A ? 4 : shellH / 2;
+  const id = `p${kind}`;
   return (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <div style={{width: pw, height: ph, borderRadius: (1 - a) * ph * 0.5 + a * w * 0.04, background: `linear-gradient(180deg, ${color}, #7e858f)`,
-        border: `${Math.max(1, w * 0.02)}px solid #6d737c`, boxSizing: 'border-box'}} />
-      <div style={{width: w * 0.62, height: w * 0.5, borderRadius: `0 0 ${w * 0.12}px ${w * 0.12}px`, background: '#1a1c21', marginTop: -1}} />
-    </div>
+    <svg viewBox={`0 0 ${VB} 190`} width={w} height={w * 190 / VB} style={{display: 'block', overflow: 'visible'}}>
+      <defs>
+        <linearGradient id={`${id}m`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#8d949e" /><stop offset=".18" stopColor="#eef1f5" />
+          <stop offset=".5" stopColor="#c2c8d0" /><stop offset=".82" stopColor="#eef1f5" />
+          <stop offset="1" stopColor="#848b95" />
+        </linearGradient>
+        <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#15171c" /><stop offset=".25" stopColor="#2b2f37" />
+          <stop offset=".7" stopColor="#1d2026" /><stop offset="1" stopColor="#101216" />
+        </linearGradient>
+      </defs>
+      {/* the metal shell */}
+      <rect x={shellX} y={0} width={shellW} height={shellH} rx={r} fill={`url(#${id}m)`} opacity={tone} />
+      {/* the bevelled lip at the tip */}
+      <rect x={shellX + 3} y={1.5} width={shellW - 6} height={A ? 5 : 4} rx={A ? 2 : 2} fill="#f6f8fa" opacity={0.55 * tone} />
+      {A ? (
+        <>
+          {/* USB-A: the plastic tongue sits against ONE face, with four contacts on it */}
+          <rect x={shellX + 7} y={shellH - 26} width={shellW - 14} height={18} rx={1.5} fill="#e8ebef" opacity={tone} />
+          {[0, 1, 2, 3].map((i) => (
+            <rect key={i} x={shellX + 15 + i * 18} y={shellH - 23} width={11} height={11} rx={1} fill="#caa64a" opacity={tone} />
+          ))}
+        </>
+      ) : (
+        // USB-C: the slot runs right through, so it seats either way up
+        <rect x={shellX + 9} y={shellH / 2 - 5.5} width={shellW - 18} height={11} rx={5.5} fill="#1b1e24" opacity={tone} />
+      )}
+      {/* the moulded boot, and its ribs */}
+      <rect x={14} y={shellH - 2} width={VB - 28} height={A ? 60 : 64} rx={9} fill={`url(#${id}b)`} opacity={tone} />
+      {[0, 1, 2].map((i) => (
+        <rect key={i} x={20} y={shellH + 10 + i * 13} width={VB - 40} height={3} rx={1.5} fill="#0c0e12" opacity={0.75 * tone} />
+      ))}
+      {/* the cable leaving the boot */}
+      <rect x={VB / 2 - 13} y={shellH + (A ? 56 : 60)} width={26} height={80} rx={13} fill="#191b20" opacity={tone} />
+    </svg>
   );
 };
 
@@ -365,8 +406,7 @@ const Reveal: React.FC<HidfiVizProps> = ({items, accent, token, w, h}) => {
           {/* a USB-C cable rising into the board's port on "plug" */}
           <div style={{position: 'absolute', left: FRONT.com.x * bh * FRONT.ar - v.s(36), top: bh * 0.985 + (1 - pOn) * v.s(160),
             opacity: pOn}}>
-            <div style={{transform: 'rotate(180deg)'}}><Plug w={v.s(72)} /></div>
-            <div style={{width: v.s(16), height: v.s(200), margin: '0 auto', background: '#1a1c21', borderRadius: v.s(8)}} />
+            <UsbPlug w={v.s(74)} kind="c" />
           </div>
         </div>
       </div>
@@ -387,11 +427,24 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
   const nots = [3, 4, 5].map((i) => ({on: arriveAt(frame, F(it(i).atWord)), strike: travelAt(frame, F(it(i).atWord) + 8, 14), label: it(i).label ?? ''}));
   const phOn = landAt(frame, F(it(6).atWord), 22);
   const drive = frame >= F(it(7).atWord) ? (frame - F(it(7).atWord)) / 20 : 0;
-  const lw = Math.min(w * 0.46, h * 1.05);
-  const lx = w * 0.04, ly = Math.max(0, (h - lw * 0.8) / 2);
+  // VERTICAL IS A REFRAME, NOT A SQUEEZE: in 9:16 the pair stacks (laptop above, board
+  // below) and the lead runs down between them, instead of a row shrunk to fit.
+  const lw = v.vertical ? w * 0.92 : Math.min(w * 0.46, h * 1.05);
+  const lx = v.vertical ? w * 0.04 : w * 0.04;
+  const ly = v.vertical ? h * 0.06 : Math.max(0, (h - lw * 0.8) / 2);
   const deckY = ly + lw * 0.6 + lw * 0.085 * 0.47;
-  const boardH = v.s(300);
-  const bx = interpolate(inOn, [0, 1], [lx + lw * 1.08 + v.s(220), lx + lw * 1.08 - v.s(10)]);
+  // THE BOARD IS CABLED IN, NOT WAVED AT. Owner, on the first cut of this beat: "the
+  // animation where you just move the board near to laptop is not correct. The ESP32 board
+  // must be connected via a Type C cable to the laptop." So the board stands where it would
+  // stand on a desk and a USB-C lead runs from its port to the laptop's, seating at both ends.
+  const boardH = v.vertical ? Math.min(h * 0.3, v.s(520)) : Math.min(h * 0.5, v.s(330));
+  const boardW = boardH * FRONT.ar;
+  const boardX = v.vertical ? w * 0.62 : w - boardW - v.s(30);
+  const boardY = v.vertical ? ly + lw * 0.76 + v.s(120) : ly + v.s(6);
+  const portX = boardX + FRONT.usb.x * boardW;        // the board's USB port, bottom edge
+  const portY = boardY + boardH;
+  const lapX = lx + lw * 1.08;                        // the laptop's right-hand side port
+  const seat = v.s(26) * (1 - inOn);                  // both plugs slide home together
   const green = v.sem('green');
   const fx = Math.sin(drive) * 0.3, fy = Math.cos(drive * 1.3) * 0.22;
   const ph = Math.min(h * 0.62, v.s(560));
@@ -412,9 +465,28 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
             <Cursor x={lw * (0.5 + fx)} y={lw * (0.3 + fy)} size={lw * 0.05} color="#fff" />
           </>} />
       </div>
-      {/* the board travelling into the port — rotated so its USB edge faces the laptop */}
-      <div style={{position: 'absolute', left: bx, top: deckY - boardH * FRONT.ar * 0.5, transform: 'rotate(90deg)', transformOrigin: 'top left'}}>
-        <div style={{position: 'absolute', left: 0, top: -boardH * FRONT.ar}}><Board face="front" h={boardH} /></div>
+      {/* the board, standing */}
+      <div style={{position: 'absolute', left: boardX, top: boardY,
+        filter: v.t.style.glow > 0 ? `drop-shadow(0 ${v.s(18)}px ${v.s(26)}px rgba(0,0,0,.5))` : undefined}}>
+        <Board face="front" h={boardH} />
+      </div>
+      {/* the USB-C lead between them: it draws from the laptop's port across to the board's */}
+      <svg width={w} height={h} style={{position: 'absolute', inset: 0, pointerEvents: 'none'}}>
+        {[{c: '#191b20', sw: v.s(11)}, {c: '#2b2f37', sw: v.s(3.5)}].map((l, i) => (
+          <path key={i}
+            d={`M ${lapX + v.s(30)} ${deckY} C ${lapX + v.s(150)} ${deckY}, ${portX} ${deckY + v.s(120)}, ${portX} ${portY + v.s(64)}`}
+            fill="none" stroke={l.c} strokeWidth={l.sw} strokeLinecap="round"
+            pathLength={1} strokeDasharray={1} strokeDashoffset={1 - inOn} />
+        ))}
+      </svg>
+      {/* the plug going into the laptop, tip pointing at the port */}
+      <div style={{position: 'absolute', left: lapX + seat, top: deckY, transform: 'translate(0, -50%) rotate(-90deg)',
+        transformOrigin: 'left center', opacity: Math.min(1, inOn * 2)}}>
+        <UsbPlug w={v.s(58)} kind="c" />
+      </div>
+      {/* and the plug going up into the board's own port */}
+      <div style={{position: 'absolute', left: portX - v.s(29), top: portY + seat, opacity: Math.min(1, inOn * 2)}}>
+        <UsbPlug w={v.s(58)} kind="c" />
       </div>
       {/* what you do NOT need */}
       <div style={{position: 'absolute', left: lx, top: ly + lw * 0.72, display: 'flex', gap: v.s(40)}}>
@@ -507,17 +579,35 @@ const Kit: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
       {col(bOn, 0, <Board face="front" h={objH} />, b)}
       {col(cOn, 1, (
         <div style={{width: cw, height: objH, position: 'relative'}}>
-          <svg width={cw} height={objH} viewBox="0 0 100 140" style={{position: 'absolute', inset: 0}} preserveAspectRatio="xMidYMid meet">
-            <path d="M22 118 C 22 60, 30 30, 50 30 C 78 30, 78 78, 50 78 C 26 78, 36 22, 78 26 L 78 118" fill="none" stroke="#1b1e24" strokeWidth={5.5} strokeLinecap="round"
+          {/* THE CABLE IS THE OBJECT: a real lead with a connector on each end, lying in a
+              loose curve, drawn on as the beat names it. The far end swaps C for A on its
+              own word — the same cable, the other plug — so "C to C, or C to A" is a thing
+              the viewer watches happen rather than a caption. */}
+          <svg width={cw} height={objH * 0.62} viewBox="0 0 200 120" preserveAspectRatio="none"
+            style={{position: 'absolute', left: 0, top: objH * 0.2}}>
+            <path d="M24 6 C 24 70, 70 112, 100 112 C 130 112, 176 70, 176 6" fill="none"
+              stroke="#191b20" strokeWidth={9} strokeLinecap="round"
+              pathLength={1} strokeDasharray={1} strokeDashoffset={1 - Math.min(1, cOn)} />
+            <path d="M24 6 C 24 70, 70 112, 100 112 C 130 112, 176 70, 176 6" fill="none"
+              stroke="#2b2f37" strokeWidth={3} strokeLinecap="round"
               pathLength={1} strokeDasharray={1} strokeDashoffset={1 - Math.min(1, cOn)} />
           </svg>
-          <div style={{position: 'absolute', left: cw * 0.22 - v.s(36), bottom: 0}}><div style={{transform: 'rotate(180deg)'}}><Plug w={v.s(72)} /></div></div>
-          <div style={{position: 'absolute', left: cw * 0.78 - v.s(36) * (1 + aSwap * 0.55), bottom: 0}}>
-            <div style={{transform: 'rotate(180deg)'}}><Plug w={v.s(72)} a={aSwap} /></div>
+          {/* both ends stand upright at the top of the curve, tips pointing up */}
+          <div style={{position: 'absolute', left: cw * 0.12 - v.s(40), top: objH * 0.2 - v.s(62), opacity: Math.min(1, cOn * 1.6)}}>
+            <UsbPlug w={v.s(80)} kind="c" />
           </div>
-          <div style={{position: 'absolute', left: cw * 0.22, bottom: v.s(64), transform: 'translateX(-50%)', fontFamily: v.t.fonts.mono, fontSize: v.s(26), color: v.t.colors.muted}}>C</div>
-          <div style={{position: 'absolute', left: cw * 0.78, bottom: v.s(64), transform: 'translateX(-50%)', fontFamily: v.t.fonts.mono, fontSize: v.s(26),
-            color: aSwap > 0.5 ? v.a : v.t.colors.muted}}>{aSwap > 0.5 ? 'A' : 'C'}</div>
+          <div style={{position: 'absolute', left: cw * 0.88 - v.s(40) - aSwap * v.s(14), top: objH * 0.2 - v.s(62), opacity: Math.min(1, cOn * 1.6)}}>
+            {/* the swap itself: C fades out as A fades in, on the same spot */}
+            <div style={{position: 'absolute', inset: 0}}><UsbPlug w={v.s(80)} kind="c" tone={1 - aSwap} /></div>
+            <UsbPlug w={v.s(80) * (1 + aSwap * 0.08)} kind="a" tone={aSwap} />
+          </div>
+          <div style={{position: 'absolute', left: cw * 0.12, top: objH * 0.2 + v.s(46), transform: 'translateX(-50%)',
+            whiteSpace: 'nowrap', fontFamily: v.t.fonts.mono, fontSize: v.s(26), fontWeight: 700, color: v.a}}>USB-C</div>
+          <div style={{position: 'absolute', left: cw * 0.88, top: objH * 0.2 + v.s(46), transform: 'translateX(-50%)',
+            whiteSpace: 'nowrap', fontFamily: v.t.fonts.mono, fontSize: v.s(26), fontWeight: 700,
+            color: aSwap > 0.5 ? v.sem('green') : v.a}}>
+            {aSwap > 0.5 ? 'USB-A' : 'USB-C'}
+          </div>
         </div>
       ), c)}
       {col(dOn, 2, (
@@ -654,8 +744,7 @@ const Ports: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
           {portBox(BACK.usb, usb, green)}
           {/* the cable rising into COM */}
           <div style={{position: 'absolute', left: BACK.com.x * bw - v.s(33), top: BACK.com.y * bh + v.s(8) + (1 - cable) * v.s(180), opacity: cable}}>
-            <div style={{transform: 'rotate(180deg)'}}><Plug w={v.s(66)} /></div>
-            <div style={{width: v.s(14), height: v.s(260), margin: '0 auto', background: '#1a1c21', borderRadius: v.s(7)}} />
+            <UsbPlug w={v.s(68)} kind="c" />
           </div>
         </div>
       </div>
@@ -868,8 +957,7 @@ const Swap: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
   const cyan = v.sem('blue'), green = v.sem('green');
   const cableAt = (p: {x: number; y: number}, drop: number, on: number) => (
     <div style={{position: 'absolute', left: p.x * bw - v.s(33), top: p.y * bh + v.s(8) + drop * v.s(200), opacity: on}}>
-      <div style={{transform: 'rotate(180deg)'}}><Plug w={v.s(66)} /></div>
-      <div style={{width: v.s(14), height: v.s(300), margin: '0 auto', background: '#1a1c21', borderRadius: v.s(7)}} />
+      <UsbPlug w={v.s(68)} kind="c" />
     </div>
   );
   const card = (on: number, children: React.ReactNode) => (
@@ -1010,14 +1098,16 @@ const Close: React.FC<HidfiVizProps> = ({items, accent, token, w, h}) => {
   const out = leaveAt(frame, F(it(2).atWord) + 40, 30) * 0;
   const bh = Math.min(h * 0.82, v.s(760));
   return (
-    <div style={{width: w, height: h, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: v.s(90), opacity: 1 - out}}>
-      <div style={{display: 'flex', flexDirection: 'column', gap: v.s(34)}}>
+    <div style={{width: w, height: h, display: 'flex', alignItems: 'center', justifyContent: 'center',
+      flexDirection: v.vertical ? 'column-reverse' : 'row', gap: v.s(v.vertical ? 50 : 90), opacity: 1 - out}}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: v.s(34), alignItems: v.vertical ? 'center' : 'flex-start'}}>
         <div style={{display: 'flex', alignItems: 'center', gap: v.s(30)}}>
           <LogoTile v={v} size={v.s(150)} draw={draw} />
           <div style={{fontFamily: v.t.fonts.display, fontWeight: 800, fontSize: v.s(128), color: v.t.colors.text, opacity: word, lineHeight: 1}}>HID-Fi</div>
         </div>
         <div style={{fontFamily: v.t.fonts.display, fontSize: v.s(46), fontWeight: 700, color: v.a, opacity: tag,
-          transform: `translateY(${(1 - tag) * v.s(12)}px)`, maxWidth: w * 0.5, lineHeight: 1.2}}>{it(0).label ?? token}</div>
+          transform: `translateY(${(1 - tag) * v.s(12)}px)`, maxWidth: v.vertical ? w * 0.92 : w * 0.5,
+          textAlign: v.vertical ? 'center' : 'left', lineHeight: 1.2}}>{it(0).label ?? token}</div>
         <div style={{display: 'flex', alignItems: 'center', gap: v.s(16), opacity: Math.min(1, url), transform: `translateY(${(1 - Math.min(1, url)) * v.s(20)}px)`}}>
           <AssetIcon asset="si:github" size={v.s(46)} bare tint={v.t.colors.text} />
           <span style={{fontFamily: v.t.fonts.mono, fontSize: v.s(40), color: v.t.colors.text}}>{it(1).label ?? 'github.com/san-gitlogin/HID-Fi'}</span>
@@ -1025,7 +1115,7 @@ const Close: React.FC<HidfiVizProps> = ({items, accent, token, w, h}) => {
       </div>
       <div style={{transform: `translateY(${Math.sin(frame / 40) * v.s(10)}px) rotate(${-4 + Math.sin(frame / 60) * 1.5}deg)`,
         filter: v.t.style.glow > 0 ? `drop-shadow(0 ${v.s(30)}px ${v.s(40)}px rgba(0,0,0,.55))` : undefined}}>
-        <Board face="front" h={bh} />
+        <Board face="front" h={v.vertical ? Math.min(h * 0.42, v.s(620)) : bh} />
       </div>
     </div>
   );

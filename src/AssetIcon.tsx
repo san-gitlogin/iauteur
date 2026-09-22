@@ -69,8 +69,12 @@ export const AssetIcon: React.FC<{
         style={{
           width: size,
           height: size,
-          borderRadius: size * 0.22 * t.style.cornerRadius,
-          objectFit: 'cover',
+          // A BARE IMAGE IS ARTWORK, NOT AN AVATAR. `cover` + a radius crops a supplied
+          // logo or object into a rounded square — the boxed-thumbnail defect, on another
+          // surface. Bare draws it WHOLE (contain, no radius, no shadow); the tiled look
+          // stays the default for icons sitting in cards.
+          borderRadius: bare ? 0 : size * 0.22 * t.style.cornerRadius,
+          objectFit: bare ? 'contain' : 'cover',
           boxShadow: bare ? undefined : '0 12px 40px rgba(0,0,0,0.35)',
         }}
       />

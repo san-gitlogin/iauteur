@@ -37,6 +37,13 @@ export const MdHook: React.FC<{scene: Scene}> = ({scene}) => {
         mark: (size) => {
           const icon = size * 0.58;
           const pad = Math.max(8 * scale, size * 0.14);
+          // SUPPLIED ARTWORK STANDS FREE. Owner, on the HID-Fi opening: "if its possible not
+          // to contain the logo under a container, instead show it without the container
+          // would look way better." A lucide glyph still gets the glass + tile, which is what
+          // gives a generic icon presence; a real mark does not need a box around it.
+          if (String(scene.data.heroAsset ?? '').startsWith('img:')) {
+            return <AssetIcon asset={scene.data.heroAsset ?? undefined} size={size * 1.25} bare />;
+          }
           return (
             <Glass
               glow
