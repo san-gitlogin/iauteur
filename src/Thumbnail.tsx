@@ -132,8 +132,12 @@ const ThumbInner: React.FC<{
       {art ? (
         <Img
           src={staticFile('assets/' + art.replace(/^img:/, ''))}
+          // FIT BOTH AXES. `width: 800` suits a WIDE object (the DDR5 module this was built
+          // for) and crops a TALL one: the HID-Fi board is 500x1085, so 800 wide rendered
+          // 1736 tall in an 891 frame and the thumbnail showed a strip of pins instead of a
+          // board. The subject is drawn FREE and WHOLE, so whichever axis binds, binds.
           style={{position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
-                   width: 800, height: 'auto'}}
+                   width: 'auto', height: 'auto', maxWidth: 800, maxHeight: '92%'}}
         />
       ) : null}
       <AbsoluteFill

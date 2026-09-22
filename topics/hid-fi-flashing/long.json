@@ -20,7 +20,7 @@
       ],
       "hook": "HID-Fi is firmware for a small ESP32-S3 board. Flash it once, plug the board into any computer over USB-C, and it becomes an ordinary keyboard and mouse — no drivers, no app, no admin rights on that computer. Then drive it from your phone, a tablet or an iPad, over the board's own Wi-Fi.",
       "description": "A product demo and beginner flashing guide for HID-Fi, open-source ESP32-S3 USB-HID firmware by Santhosh. What you need, the two USB-C ports (COM to flash, USB to control), installing arduino-cli and the ESP32 support on Windows and macOS, the CH343 driver, cloning, flashing with one command, and a tour of the dashboard: trackpad, flip-to-keys, mouse wheel, keyboard, shortcuts, media, the beta controller, lock/unlock, and joining your home Wi-Fi safely.",
-      "breakdown": "the problem it solves, what HID-Fi is, the three things you need, the two USB-C ports, the tools to install once, cloning and flashing on Windows and Mac, and a tour of the dashboard: trackpad, keyboard, shortcuts, media, controller and settings",
+      "breakdown": "the problem it solves, what HID-Fi is, the three things you need, the two USB-C ports, the tools to install once, the CH343 driver, cloning and flashing on Windows and macOS, and a tour of the dashboard: trackpad, flip-to-keys, mouse wheel, keyboard, the password vault, shortcuts, media, the beta controller, lock and unlock, and joining your home Wi-Fi safely",
       "pinned": "Flash through the COM port, then plug the USB port into the computer you want to control. And it's not just phones — any device with a browser works. What will you drive first?",
       "tags": [
         "HID-Fi",
