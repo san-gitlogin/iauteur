@@ -792,6 +792,20 @@ export const RecordedStep: React.FC<{scene: Scene}> = ({scene}) => {
               height: innerH,
             }}
           >
+            {/* A BEAT NEVER OPENS ON NOTHING. Every clip mounts at its own word, so for the
+                lead-in words before the FIRST clip the pane rendered empty — measured on the
+                HID-Fi repo beat, 3.5s of near-blank frame under the opening sentence, which is
+                the "speaking with a blank screen" defect in miniature and breaks the base-visual
+                rule (a beat's picture is up within ~38 frames). The first clip's first frame is
+                held as a poster until its anchor arrives: the viewer sees the page they are
+                about to be walked through, frozen, instead of black. */}
+            {frame < starts[0] ? (
+              <Freeze frame={0}>
+                <ClipVideo src={clips[0].src} fit="cover" muted endBehavior="freeze"
+                  placeholderLabel={clips[0].src ? 'CLIP MISSING' : 'NOT BAKED'}
+                  style={{background: t.colors.panel, position: 'absolute', inset: 0}} />
+              </Freeze>
+            ) : null}
             {/* Sequence.from = this segment's OWN anchor, so the clip's internal
                 time starts at 0 exactly when its word is spoken. endBehavior
                 'freeze' holds the last decoded frame once the footage runs out. */}

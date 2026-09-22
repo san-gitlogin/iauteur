@@ -981,7 +981,14 @@ const Devices: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
   const col = (k: number, body: React.ReactNode) => (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: v.s(22), opacity: Math.min(1, on[k] * 1.3),
       transform: `translateY(${(1 - Math.min(1, on[k])) * v.s(60)}px)`}}>
-      {body}<Caption v={v} title={it(k).label} sub={it(k).sub} size={30} /></div>
+      {body}
+      {/* the device arrives on its own word; what that SIZE of screen earns is a second
+          moment, so the sub lands when the voice names it (detailAtWord), not before. */}
+      <Caption v={v} title={it(k).label} size={30} />
+      <div style={{marginTop: -v.s(14)}}>
+        <Caption v={v} sub={it(k).sub} size={30} on={arriveAt(frame, F(it(k).detailAtWord ?? it(k).atWord))} />
+      </div>
+    </div>
   );
   return (
     <div style={{width: w, height: h, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: v.s(56), paddingBottom: v.s(10)}}>

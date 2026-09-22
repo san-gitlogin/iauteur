@@ -82,6 +82,21 @@ const free = () => {
   } catch { return '?'; }
 };
 
+// THE AUDIO PREFIX IS CHECKED BEFORE THE HOUR, NOT AFTER IT. PAID FOR on HID-Fi (2026-09-19):
+// the slug `hid-fi-flashing` defaulted to prefix `hid_long`, all eight segments rendered, and only
+// then did build-audio-track find no audio — 30 minutes spent to learn a filename. Every narrated
+// scene's mp3 must exist under the prefix this run will use, or nothing renders.
+{
+  const prefix = spec.meta?.audioPrefix || `${slug.split('-')[0]}_long`;
+  const missing = spec.scenes.filter((s) => s.narration && !fs.existsSync(`public/audio/${prefix}_${s.id}.mp3`));
+  if (missing.length) {
+    const alt = `${slug}_long`;
+    const altOk = spec.scenes.every((s) => !s.narration || fs.existsSync(`public/audio/${alt}_${s.id}.mp3`));
+    console.error(`REFUSING TO RENDER: ${missing.length} narrated scene(s) have no audio under prefix "${prefix}".` +
+      (altOk ? ` They exist under "${alt}" — set meta.audioPrefix: "${alt}".` : ''));
+    process.exit(1);
+  }
+}
 console.log(`${slug} / ${comp} — ${total} frames in ${segments} segment(s). Free: ${free()} GB`);
 
 const per = Math.ceil(total / segments);

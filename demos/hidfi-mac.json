@@ -1,25 +1,106 @@
 {
-  "slug": "hidfi-mac",
-  "surface": "vscode",
-  "theme": "dark",
-  "workspace": "/private/tmp/hidfi-recws2",
-  "viewport": { "width": 1600, "height": 900 },
-  "deviceScaleFactor": 2,
-  "masterWidth": 3840,
-  "fps": 30,
-  "terminalOnly": true,
-  "_note": "Fresh take for the rebuild. Flash WITHOUT -p: the script finds the board's port itself (owner: beginners will not know why you pass -p /dev/cu.usb...). Tools are CHECKED, not installed: core install would upgrade this Mac's esp32 core 3.3.1 -> 3.3.11, which the firmware was not tested on.",
-  "steps": [
-    { "id": "ver", "action": "run", "cmd": "arduino-cli version", "label": "arduino-cli is installed", "focus": "terminal", "clearFirst": true,
-      "marks": [ { "id": "v", "text": "Version: 1.5.1" } ] },
-    { "id": "core", "action": "run", "cmd": "arduino-cli core list", "label": "the ESP32 support is installed", "focus": "terminal",
-      "marks": [ { "id": "esp", "text": "esp32:esp32" } ] },
-    { "id": "libs", "action": "run", "cmd": "arduino-cli lib list", "label": "the two libraries", "focus": "terminal",
-      "marks": [ { "id": "aj", "text": "ArduinoJson" }, { "id": "ws", "text": "WebSockets" } ] },
-    { "id": "clone", "action": "run", "cmd": "git clone https://github.com/san-gitlogin/HID-Fi", "label": "clone the repository", "focus": "terminal", "clearFirst": true, "timeout": 120000 },
-    { "id": "ls", "action": "run", "cmd": "cd HID-Fi && ls", "label": "the firmware and the flasher", "focus": "terminal",
-      "marks": [ { "id": "sh", "text": "flash_esp.sh" } ] },
-    { "id": "flash", "action": "run", "cmd": "./flash_esp.sh -c", "label": "build, flash, verify", "focus": "terminal", "clearFirst": true, "timeout": 300000,
-      "marks": [ { "id": "port", "text": "== Flashing" }, { "id": "ready", "text": "USB HID ready" }, { "id": "dash", "text": "Dashboard:" } ] }
-  ]
+ "slug": "hidfi-mac",
+ "surface": "vscode",
+ "theme": "dark",
+ "workspace": "/private/tmp/hidfi-recws3",
+ "viewport": {
+  "width": 1600,
+  "height": 900
+ },
+ "deviceScaleFactor": 2,
+ "masterWidth": 3840,
+ "fps": 30,
+ "terminalOnly": true,
+ "_note": "Re-take at v3.8 (2026-09-22). Flash WITHOUT -p: the script finds the board's port itself (owner: beginners will not know why you pass -p /dev/cu.usb...). Tools are CHECKED, not installed: core install would upgrade this Mac's esp32 core 3.3.1 -> 3.3.11, which the firmware was not tested on.",
+ "steps": [
+  {
+   "id": "ver",
+   "action": "run",
+   "cmd": "arduino-cli version",
+   "label": "arduino-cli is installed",
+   "focus": "terminal",
+   "clearFirst": true,
+   "marks": [
+    {
+     "id": "v",
+     "text": "Version: 1.5.1"
+    }
+   ]
+  },
+  {
+   "id": "core",
+   "action": "run",
+   "cmd": "arduino-cli core list",
+   "label": "the ESP32 support is installed",
+   "focus": "terminal",
+   "marks": [
+    {
+     "id": "esp",
+     "text": "esp32:esp32"
+    }
+   ]
+  },
+  {
+   "id": "libs",
+   "action": "run",
+   "cmd": "arduino-cli lib list",
+   "label": "the two libraries",
+   "focus": "terminal",
+   "marks": [
+    {
+     "id": "aj",
+     "text": "ArduinoJson"
+    },
+    {
+     "id": "ws",
+     "text": "WebSockets"
+    }
+   ]
+  },
+  {
+   "id": "clone",
+   "action": "run",
+   "cmd": "git clone https://github.com/san-gitlogin/HID-Fi",
+   "label": "clone the repository",
+   "focus": "terminal",
+   "clearFirst": true,
+   "timeout": 120000
+  },
+  {
+   "id": "ls",
+   "action": "run",
+   "cmd": "cd HID-Fi && ls",
+   "label": "the firmware and the flasher",
+   "focus": "terminal",
+   "marks": [
+    {
+     "id": "sh",
+     "text": "flash_esp.sh"
+    }
+   ]
+  },
+  {
+   "id": "flash",
+   "action": "run",
+   "cmd": "./flash_esp.sh -c",
+   "label": "build, flash, verify",
+   "focus": "terminal",
+   "clearFirst": true,
+   "timeout": 300000,
+   "marks": [
+    {
+     "id": "port",
+     "text": "== Flashing"
+    },
+    {
+     "id": "ready",
+     "text": "USB HID ready"
+    },
+    {
+     "id": "dash",
+     "text": "Dashboard:"
+    }
+   ]
+  }
+ ]
 }

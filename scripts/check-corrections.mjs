@@ -305,6 +305,12 @@ const CORRECTIONS = [
    () => has('scripts/voiceover.py', 'meta.pronounce') &&
          has('scripts/voiceover.py', 'must be ONE token') &&
          has('scripts/lint-spec.mjs', 'A NAME IS RESPELLED FOR THE VOICE, NEVER IN THE SCRIPT')],
+  ['a footage beat that opens on an empty pane', 'STRUCT',
+   'HID-Fi, 2026-09-22: every clip mounts at its own word, so the lead-in words before the FIRST clip ' +
+   'rendered nothing — measured at 3.5s of near-blank frame under the opening sentence of the repo beat. ' +
+   'The first clip\'s first frame is now held as a poster until its anchor.',
+   () => has('scripts/../src/scenes/RecordedStep.tsx', 'A BEAT NEVER OPENS ON NOTHING') &&
+         has('src/scenes/RecordedStep.tsx', 'frame < starts\\[0\\]')],
   ['a voiceover nobody listened to', 'SEAL',
    '"Why does the voice over sounds chinese?" — then, after the fix, "Introducing HID-Fi." swallowed ' +
    'into "I didn\'t make it" on the beat that names the product. Every spec gate was green; nothing read the audio.',
