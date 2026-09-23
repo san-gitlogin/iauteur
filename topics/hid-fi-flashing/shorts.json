@@ -60,10 +60,10 @@
     "logo": "img:channel_logo.png"
   },
   "cover": {
-    "title": "CONTROL ANY PC",
+    "title": "KEYBOARD AND MOUSE IN YOUR POCKET",
     "badge": "HID-Fi",
-    "note": "FROM YOUR PHONE",
-    "art": "img:hidfi_board_front.png",
+    "note": "A PORTABLE HID",
+    "art": "img:hidfi_cover_art.png",
     "frames": 2
   },
   "scenes": [

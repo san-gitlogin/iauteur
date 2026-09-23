@@ -46,8 +46,12 @@ export const CoverCard: React.FC<{cover: CoverConfig}> = ({cover}) => {
         ) : null}
         {/* `art` is drawn free at full width — no rounded tile (owner, 2026-09-12) */}
         {cover.art ? (
+          // FIT BOTH AXES. `width: 100%` + auto height blew a TALL object (the ESP32-S3 board
+          // is 500x1085) far past the frame, so the cover showed nothing but board — owner:
+          // "the shorts thumb is even worse, where only the ESP32 Board is visible and nothing
+          // else". Whichever axis binds, binds, and the title keeps its room.
           <Img src={staticFile('assets/' + cover.art.replace(/^img:/, ''))}
-            style={{width: '100%', height: 'auto'}} />
+            style={{width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: vertical ? '52%' : '44%'}} />
         ) : cover.asset ? <AssetIcon asset={cover.asset} size={(vertical ? 240 : 200) * scale} /> : null}
         <div
           style={{

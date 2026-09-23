@@ -404,9 +404,9 @@ const Reveal: React.FC<HidfiVizProps> = ({items, accent, token, w, h}) => {
           filter: v.t.style.glow > 0 ? `drop-shadow(0 ${v.s(30)}px ${v.s(40)}px rgba(0,0,0,.55))` : undefined, position: 'relative'}}>
           <Board face="front" h={bh} />
           {/* a USB-C cable rising into the board's port on "plug" */}
-          <div style={{position: 'absolute', left: FRONT.com.x * bh * FRONT.ar - v.s(36), top: bh * 0.985 + (1 - pOn) * v.s(160),
+          <div style={{position: 'absolute', left: FRONT.com.x * bh * FRONT.ar - v.s(30), top: bh * 0.995 + (1 - pOn) * v.s(120),
             opacity: pOn}}>
-            <UsbPlug w={v.s(74)} kind="c" />
+            <UsbPlug w={v.s(60)} kind="c" />
           </div>
         </div>
       </div>
@@ -429,25 +429,29 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
   const drive = frame >= F(it(7).atWord) ? (frame - F(it(7).atWord)) / 20 : 0;
   // VERTICAL IS A REFRAME, NOT A SQUEEZE: in 9:16 the pair stacks (laptop above, board
   // below) and the lead runs down between them, instead of a row shrunk to fit.
-  const lw = v.vertical ? w * 0.92 : Math.min(w * 0.46, h * 1.05);
-  const lx = v.vertical ? w * 0.04 : w * 0.04;
+  const lw = v.vertical ? w * 0.92 : Math.min(w * 0.42, h * 0.98);
+  const lx = v.vertical ? w * 0.04 : w * 0.02;
   const ly = v.vertical ? h * 0.06 : Math.max(0, (h - lw * 0.8) / 2);
   const deckY = ly + lw * 0.6 + lw * 0.085 * 0.47;
   // THE BOARD IS CABLED IN, NOT WAVED AT. Owner, on the first cut of this beat: "the
   // animation where you just move the board near to laptop is not correct. The ESP32 board
   // must be connected via a Type C cable to the laptop." So the board stands where it would
   // stand on a desk and a USB-C lead runs from its port to the laptop's, seating at both ends.
-  const boardH = v.vertical ? Math.min(h * 0.3, v.s(520)) : Math.min(h * 0.5, v.s(330));
+  const boardH = v.vertical ? Math.min(h * 0.26, v.s(430)) : Math.min(h * 0.44, v.s(300));
   const boardW = boardH * FRONT.ar;
-  const boardX = v.vertical ? w * 0.62 : w - boardW - v.s(30);
-  const boardY = v.vertical ? ly + lw * 0.76 + v.s(120) : ly + v.s(6);
-  const portX = boardX + FRONT.usb.x * boardW;        // the board's USB port, bottom edge
-  const portY = boardY + boardH;
-  const lapX = lx + lw * 1.08;                        // the laptop's right-hand side port
-  const seat = v.s(26) * (1 - inOn);                  // both plugs slide home together
+  const lapX = lx + lw * 1.08;                        // the laptop's right-hand edge
+  // THE BOARD SITS NEXT TO THE MACHINE, ON A SHORT LEAD. Owner: "You need not show that
+  // much distance with cable and the board. Place the board near to the computer and have a
+  // small cable connected to it." A metre of drawn cable across the frame says nothing; the
+  // two objects reading as one connected pair says everything.
+  const boardX = v.vertical ? w * 0.60 : lapX + v.s(150);
+  const boardY = v.vertical ? ly + lw * 0.76 + v.s(120) : ly + lw * 0.30;
+  const portX = boardX + FRONT.usb.x * boardW;        // the board's USB port
+  const portY = boardY + boardH * 0.985;              // its outer edge — the plug stops here
+  const seat = v.s(20) * (1 - inOn);                  // both ends settle together
   const green = v.sem('green');
   const fx = Math.sin(drive) * 0.3, fy = Math.cos(drive * 1.3) * 0.22;
-  const ph = Math.min(h * 0.62, v.s(560));
+  const ph = Math.min(h * 0.58, v.s(520));
   return (
     <div style={{position: 'relative', width: w, height: h}}>
       <div style={{position: 'absolute', left: lx, top: ly}}>
@@ -470,23 +474,26 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
         filter: v.t.style.glow > 0 ? `drop-shadow(0 ${v.s(18)}px ${v.s(26)}px rgba(0,0,0,.5))` : undefined}}>
         <Board face="front" h={boardH} />
       </div>
-      {/* the USB-C lead between them: it draws from the laptop's port across to the board's */}
+      {/* THE LEAD: a short run from the laptop's edge to the board's port. Each end STOPS at
+          the edge it plugs into — a connector drawn overlapping the machine reads as broken
+          (owner: "you can just place the cable's end near the port's end of the board/laptop
+          which will obviously be understood as connected"). */}
       <svg width={w} height={h} style={{position: 'absolute', inset: 0, pointerEvents: 'none'}}>
-        {[{c: '#191b20', sw: v.s(11)}, {c: '#2b2f37', sw: v.s(3.5)}].map((l, i) => (
+        {[{c: '#191b20', sw: v.s(10)}, {c: '#2b2f37', sw: v.s(3)}].map((l, i) => (
           <path key={i}
-            d={`M ${lapX + v.s(30)} ${deckY} C ${lapX + v.s(150)} ${deckY}, ${portX} ${deckY + v.s(120)}, ${portX} ${portY + v.s(64)}`}
+            d={`M ${lapX + v.s(34)} ${deckY} C ${lapX + v.s(96)} ${deckY}, ${portX} ${deckY + v.s(40)}, ${portX} ${portY + v.s(46)}`}
             fill="none" stroke={l.c} strokeWidth={l.sw} strokeLinecap="round"
             pathLength={1} strokeDasharray={1} strokeDashoffset={1 - inOn} />
         ))}
       </svg>
-      {/* the plug going into the laptop, tip pointing at the port */}
+      {/* the laptop end: the connector's TIP meets the side of the deck, body outside */}
       <div style={{position: 'absolute', left: lapX + seat, top: deckY, transform: 'translate(0, -50%) rotate(-90deg)',
         transformOrigin: 'left center', opacity: Math.min(1, inOn * 2)}}>
-        <UsbPlug w={v.s(58)} kind="c" />
+        <UsbPlug w={v.s(46)} kind="c" />
       </div>
-      {/* and the plug going up into the board's own port */}
-      <div style={{position: 'absolute', left: portX - v.s(29), top: portY + seat, opacity: Math.min(1, inOn * 2)}}>
-        <UsbPlug w={v.s(58)} kind="c" />
+      {/* the board end: tip at the board's own edge, never across it */}
+      <div style={{position: 'absolute', left: portX - v.s(23), top: portY + seat, opacity: Math.min(1, inOn * 2)}}>
+        <UsbPlug w={v.s(46)} kind="c" />
       </div>
       {/* what you do NOT need */}
       <div style={{position: 'absolute', left: lx, top: ly + lw * 0.72, display: 'flex', gap: v.s(40)}}>
@@ -500,7 +507,8 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
         ))}
       </div>
       {/* the phone, joined over the board's own WiFi */}
-      <div style={{position: 'absolute', right: w * 0.03, top: h * 0.5 - ph / 2, opacity: Math.min(1, phOn * 1.3),
+      {/* the phone sits clear of the board — they used to overlap at the right edge */}
+      <div style={{position: 'absolute', right: 0, top: h * 0.5 - ph / 2, opacity: Math.min(1, phOn * 1.3),
         transform: `translateY(${(1 - phOn) * v.s(80)}px)`}}>
         <Phone v={v} h={ph}>
           <Img src={staticFile('assets/hidfi-screens/01-trackpad.png')} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
@@ -509,8 +517,8 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
             opacity: drive > 0 ? 1 : 0}} />
         </Phone>
       </div>
-      <Waves x={w - w * 0.03 - ph * 0.49 - v.s(70)} y={h * 0.5} size={v.s(120)} color={v.a} on={phOn} dir={-90} />
-      <div style={{position: 'absolute', right: w * 0.03, top: h * 0.5 + ph / 2 + v.s(16), width: ph * 0.49, opacity: phOn}}>
+      <Waves x={w - ph * 0.49 - v.s(60)} y={h * 0.5} size={v.s(110)} color={v.a} on={phOn} dir={-90} />
+      <div style={{position: 'absolute', right: 0, top: h * 0.5 + ph / 2 + v.s(16), width: ph * 0.49, opacity: phOn}}>
         <Caption v={v} title={it(6).label ?? 'your phone'} sub={it(6).sub} size={26} />
       </div>
     </div>
@@ -743,8 +751,8 @@ const Ports: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
           {portBox(BACK.com, com, cyan)}
           {portBox(BACK.usb, usb, green)}
           {/* the cable rising into COM */}
-          <div style={{position: 'absolute', left: BACK.com.x * bw - v.s(33), top: BACK.com.y * bh + v.s(8) + (1 - cable) * v.s(180), opacity: cable}}>
-            <UsbPlug w={v.s(68)} kind="c" />
+          <div style={{position: 'absolute', left: BACK.com.x * bw - v.s(28), top: (BACK.com.y + BACK.portW * BACK.ar * 0.62) * bh + (1 - cable) * v.s(150), opacity: cable}}>
+            <UsbPlug w={v.s(56)} kind="c" />
           </div>
         </div>
       </div>
@@ -956,8 +964,8 @@ const Swap: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
   const bh = Math.min(h * 0.86, v.s(820)), bw = bh * BACK.ar;
   const cyan = v.sem('blue'), green = v.sem('green');
   const cableAt = (p: {x: number; y: number}, drop: number, on: number) => (
-    <div style={{position: 'absolute', left: p.x * bw - v.s(33), top: p.y * bh + v.s(8) + drop * v.s(200), opacity: on}}>
-      <UsbPlug w={v.s(68)} kind="c" />
+    <div style={{position: 'absolute', left: p.x * bw - v.s(28), top: (p.y + BACK.portW * BACK.ar * 0.62) * bh + drop * v.s(170), opacity: on}}>
+      <UsbPlug w={v.s(56)} kind="c" />
     </div>
   );
   const card = (on: number, children: React.ReactNode) => (
