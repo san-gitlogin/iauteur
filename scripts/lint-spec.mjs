@@ -4,6 +4,7 @@
 // Usage: node scripts/lint-spec.mjs topics/<slug>/long.json
 
 import fs from 'node:fs';
+import path from 'node:path';
 import {SCREENPLAY_NAMES, SCREENPLAYS} from './screenplays.mjs';
 import {resolveSi} from './lib/si-resolve.mjs';
 import {MANIFEST} from './lib/manifest.mjs';
@@ -46,6 +47,50 @@ if (!spec.brand?.logo) W('brand.logo missing — the video will render with NO w
 const bgv = spec.brand?.background;
 if (bgv && !BACKGROUNDS.includes(bgv))
   E(`brand.background "${bgv}" unknown. Known: aurora, grid, aurora-grid, plain, bokeh, starfield, grid-pulse, wave, ripple, gradient, geo, matrix-rain, noise, ember (omit for theme default)`);
+// AN ART ASSET THAT CANNOT RESOLVE CANCELS THE RENDER — it does not degrade.
+//
+// `thumbnail.art` / `cover.art` are drawn FREE (owner, 2026-09-12), and the code that draws
+// them handled only `img:`: anything else had its prefix left alone and was handed to
+// staticFile, so a perfectly legal `si:anthropic` became a request for
+// public/assets/si:anthropic. Remotion treats a failed image as a CancelledError, so the cut
+// died two segments into a five-minute render — after the gates, after the voice, after the
+// sync. Both surfaces draw si:/lucide: properly now; this refuses the third case, an `img:`
+// naming a file that is not there, while there is still nothing at stake.
+for (const [where, art] of [['thumbnail.art', spec.thumbnail?.art], ['cover.art', spec.cover?.art]]) {
+  if (!art) continue;
+  if (String(art).startsWith('img:')) {
+    if (!fs.existsSync(path.join(IMG_DIR, String(art).slice(4))))
+      E(`${where} "${art}" — no such file in ${IMG_DIR}/. A missing image CANCELS the render rather than degrading, so it is caught here.`);
+  } else if (!/^(si|lucide):/.test(String(art))) {
+    E(`${where} "${art}" must be img:<file in ${IMG_DIR}/>, si:<brand> or lucide:<name>.`);
+  }
+}
+// AN OVERLAY WITH THE WRONG SHAPE CRASHES THE RENDER MID-SEGMENT.
+//
+// `clips[].overlay` dispatches on `kind`, and each kind reads its own fields — `chain` maps
+// `steps` straight into a text chip. Authored as `[{label: 'one HTML file'}, …]` (the shape
+// every OTHER items[] field in this repo uses) React threw #31, "objects are not valid as a
+// React child", and Remotion turned that into a CancelledError that killed a four-segment
+// render at frame 502 — after lint, after tsc, after the voice and the sync. The shapes are
+// cheap to check and the render is not.
+const OVERLAY_KINDS = {
+  swap: ['from', 'to'], chain: ['steps'], split: ['left', 'right'], tally: ['value'], rows: ['rows'],
+};
+for (const sc of spec.scenes ?? []) {
+  for (const [ci, c] of (sc.data?.recordedStep?.clips ?? []).entries()) {
+    const o = c.overlay;
+    if (!o) continue;
+    const need = OVERLAY_KINDS[o.kind];
+    if (!need) { E(`${sc.id}: clip ${ci + 1} overlay kind "${o.kind}" unknown. Known: ${Object.keys(OVERLAY_KINDS).join(', ')}.`); continue; }
+    for (const k of need) if (o[k] == null) E(`${sc.id}: clip ${ci + 1} overlay kind "${o.kind}" needs "${k}".`);
+    if (o.kind === 'chain' && (o.steps ?? []).some((x) => typeof x !== 'string'))
+      E(`${sc.id}: clip ${ci + 1} overlay chain.steps must be plain STRINGS — an object renders as a React error that cancels the whole render.`);
+    if (o.kind === 'tally' && typeof o.value !== 'number')
+      E(`${sc.id}: clip ${ci + 1} overlay tally.value must be a number.`);
+    for (const k of ['from', 'to', 'left', 'right']) if (o[k] != null && typeof o[k] !== 'string')
+      E(`${sc.id}: clip ${ci + 1} overlay ${o.kind}.${k} must be a string.`);
+  }
+}
 if (!spec.scenes?.length) E('no scenes');
 const n = spec.scenes?.length ?? 0;
 // Scene-count expectations are screenplay-aware: long-form presets (documentary)
@@ -96,6 +141,9 @@ const subTypeOf = (s) => {
   if (s.type === 'ASTRA_STAGE') return `ASTRA_STAGE:${s.data?.astraStage?.kind ?? '?'}`;
   // HIDFI_STAGE: one type, fourteen pictures — counted per picture, like the two above.
   if (s.type === 'HIDFI_STAGE') return `HIDFI_STAGE:${s.data?.hidfiStage?.kind ?? '?'}`;
+  // O55_STAGE: one type, seven pictures — a board, a podium, callipers, a price rack,
+  // a turnstile, a thread and a switchboard. Counted per picture, like the four above.
+  if (s.type === 'O55_STAGE') return `O55_STAGE:${s.data?.o55Stage?.kind ?? '?'}`;
   // APPLE_STAGE, same shape again: one registered type dispatching a different DEPICTION
   // per `kind` — a phone drawn from its own dimensions, a six-blade iris, a chip
   // floorplan, a price ladder. Counting the type alone would read ten distinct pictures
@@ -668,7 +716,16 @@ function checkSamePictureThrice(spec, W) {
     const t = String(sc.type ?? '');
     if (!t || EXEMPT.has(t)) continue;
     // A stage type dispatching many pictures counts per PICTURE, not per wrapper (LAW 0n).
-    const kind = sc.data?.[Object.keys(sc.data ?? {})[0]]?.kind;
+    //
+    // ⚠ THE DATA KEY IS NOT ALWAYS THE FIRST KEY. This read `Object.keys(sc.data)[0]`, so a
+    // scene that also carries `source` (the standing credit, authored first in several
+    // builders) resolved `kind` off a STRING and fell back to the bare wrapper — which is
+    // how seven distinct pictures came to be reported as one component used five times.
+    // The guard then fires on the cuts that did the work and is silent on the ones that did
+    // not, which is worse than not having it. Find the key that actually names a picture.
+    const kind = Object.values(sc.data ?? {})
+      .map((v) => (v && typeof v === 'object' ? v.kind : null))
+      .find((k) => typeof k === 'string' && k);
     const key = kind ? `${t}:${kind}` : t;
     (byType.get(key) ?? byType.set(key, []).get(key)).push(sc.id);
   }

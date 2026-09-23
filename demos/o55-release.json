@@ -1,0 +1,90 @@
+{
+ "slug": "o55-release",
+ "surface": "browser",
+ "theme": "dark",
+ "viewport": {
+  "width": 1600,
+  "height": 900
+ },
+ "fps": 30,
+ "masterWidth": 3840,
+ "deviceScaleFactor": 2.4,
+ "prep": {
+  "url": "https://www.anthropic.com/claude-opus-5-5",
+  "settleMs": 4000
+ },
+ "steps": [
+  {
+   "id": "top",
+   "action": "pause",
+   "ms": 1800,
+   "label": "the announcement page"
+  },
+  {
+   "id": "claim",
+   "action": "scroll",
+   "target": "text=It performs at the level",
+   "settleMs": 1500,
+   "label": "the claim, in their words",
+   "marks": [
+    {
+     "id": "claim",
+     "text": "It performs at the level of Claude Fable 5.1 on most work and costs 40% less to run than Opus 5."
+    }
+   ]
+  },
+  {
+   "id": "bench",
+   "action": "scroll",
+   "target": "text=66.4%",
+   "settleMs": 1600,
+   "label": "the benchmark table",
+   "marks": [
+    {
+     "id": "tb",
+     "text": "66.4%"
+    }
+   ],
+   "anchor": 0.3
+  },
+  {
+   "id": "caveat",
+   "action": "scroll",
+   "target": "text=benchmark margins have become",
+   "settleMs": 1500,
+   "label": "their own caveat",
+   "marks": [
+    {
+     "id": "narrow",
+     "text": "the gap between Opus 5.5 and Claude Fable 5.1 is narrower than these scores suggest"
+    }
+   ]
+  },
+  {
+   "id": "price",
+   "action": "scroll",
+   "target": "text=Input and output tokens are",
+   "settleMs": 1500,
+   "label": "what it costs",
+   "marks": [
+    {
+     "id": "cost",
+     "text": "Input and output tokens are $4 and $20 per million, 20% less than Opus 5."
+    }
+   ]
+  },
+  {
+   "id": "limits",
+   "action": "scroll",
+   "target": "text=increasing five-hour usage limits",
+   "settleMs": 1400,
+   "label": "higher usage limits",
+   "marks": [
+    {
+     "id": "lim",
+     "text": "increasing five-hour usage limits"
+    }
+   ]
+  }
+ ]
+}

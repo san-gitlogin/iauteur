@@ -1,0 +1,28 @@
+{
+  "slug": "o55-live",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "o55-live",
+  "viewport": { "width": 1600, "height": 900 },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": { "workbench.startupEditor": "none" },
+  "_note": "The expensive take, in its own slug (owner's tokens). Interactive TUI so the tool calls stream on camera; waitFor is the WRITE TOOL's own receipt line, never a sentinel from the prompt.",
+  "steps": [
+    {
+      "id": "build",
+      "action": "run",
+      "background": true,
+      "waitFor": "Wrote",
+      "timeout": 1200000,
+      "settleMs": 5000,
+      "cmd": "claude --model claude-opus-5-5 --permission-mode bypassPermissions 'Build orbit.html: one self-contained HTML file, no libraries, no network. A canvas animation of a small solar system — a glowing star, three planets on elliptical orbits at different speeds, faint trails behind each planet, and a parallax starfield. Make it look good on a dark page. Write the file, then stop.'",
+      "label": "Opus 5.5, building it live",
+      "focus": "terminal",
+      "clearFirst": true
+    }
+  ]
+}

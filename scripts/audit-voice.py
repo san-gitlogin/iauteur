@@ -19,6 +19,8 @@ A fail exits 1 and names the scene; re-voice just those with ONLY=sNN.
 Usage: python3 scripts/audit-voice.py topics/<slug>/long.json <prefix> [--model small]
 """
 import sys, json, re, difflib, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lib'))
+from numwords import fold_numbers  # noqa: E402
 
 spec_path, prefix = sys.argv[1], sys.argv[2]
 model_name = sys.argv[sys.argv.index('--model') + 1] if '--model' in sys.argv else 'medium'
@@ -27,7 +29,10 @@ from faster_whisper import WhisperModel  # noqa: E402
 spec = json.load(open(spec_path))
 subject = re.sub(r'[^a-z0-9]', '', str(spec.get('meta', {}).get('subject', '')).lower())
 STOP = {'the', 'a', 'an', 'and', 'so', 'now', 'well', 'or', 'but', 'then', 'this', 'that', 'its', "it's", 'to', 'of'}
-toks = lambda t: [w for w in re.sub(r"[^a-z0-9' ]", ' ', t.lower().replace('-', ' ')).split() if w]
+# A FIGURE IS SPOKEN AS WORDS AND TRANSCRIBED AS DIGITS, and comparing the two as strings
+# scores a perfect read at 0.80 and reports its opening word as never spoken. Both sides fold
+# through the same table before anything is compared (see scripts/lib/numwords.py).
+toks = lambda t: [w for w in re.sub(r"[^a-z0-9' ]", ' ', fold_numbers(t).lower().replace('-', ' ')).split() if w]
 squash = lambda t: re.sub(r'[^a-z0-9]', '', t.lower())
 
 m = WhisperModel(model_name, device='cpu', compute_type='int8')

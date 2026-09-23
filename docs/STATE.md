@@ -1,5 +1,73 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-09-23 — Claude Opus 5.5 (18 scenes, 5:04 + 57s short) · `O55_STAGE`, 7 new pictures
+
+**The brief had a hard cap, and that was the shaping constraint.** Owner: *"The video must not
+prolong. Must be short and sweet. 4-5 mins max."* Everything below is downstream of that — the
+cut is a review, not a course, and two beats that were genuinely good came out to make the
+number. Note the arithmetic, because it is the thing to plan with next time: **sync lands at
+~0.363 s per written word**, tails included, so 4:55 is ~815 words and no amount of trimming
+inside a beat buys back a whole beat. Budget beats, then write to them.
+
+**Sources, all primary, all filmed.** `anthropic.com/claude-opus-5-5` for the claim, the
+benchmark table, the prices and the caveat; `platform.claude.com/docs` for the three price tags;
+`artificialanalysis.ai` for the independent index; the r/ClaudeAI release thread from the owner's
+screenshots (Reddit blocked both headless and headed — *"Prove your humanity"*). Every spoken
+figure is a mark the runner MEASURED, so what is said is what the camera framed.
+
+**The live demo is the spine.** `demos/o55-live.json` runs one prompt through Claude Code with
+`--model claude-opus-5-5` and films it writing `orbit.html` — 328 lines, first try, ~50s. The
+take is one 75s segment, and an interactive agent run must be the LAST step of its demo, so it
+cannot be captured in pieces. `scripts/split-rec-step.mjs` cuts it into `ask` / `start` / `wrote`
+after the fact, which is what makes it authorable across three beats. The artefact itself is a
+separate cheap slug (`o55-orbit`) so any reframing re-records for free.
+
+**Seven purpose-built pictures, `src/o55Viz.tsx` behind one `O55_STAGE` type.** These are all
+ARITHMETIC beats — a score, a price, a percentage — which are exactly the beats that default to
+a card, because a card can hold any number. So each names an object: `ladder` (the release as one
+MOVE on a cost/capability board), `podium` (the two tests it loses, rival on the top step),
+`callipers` (a published gap measured, then closed), `price-rack` (tags on a rail, one struck
+through), `turnstile` (cached tokens passing a meter a second time), `thread` (the screenshots
+quoted), `switchboard` (who should switch, and who should not).
+
+### ★ What the still pass caught that the code did not
+
+Six of the seven under-filled their pane on the first render, and one printed the wrong string
+in the place a score belongs. All of it was invisible in the spec, in `tsc` and in the linter:
+
+| defect | cause |
+|---|---|
+| bars printing their event's NAME where the figure goes | one field (`text`) used both to join a bar to its event and to print its value |
+| a podium bar 108px wide and 880px tall in 9:16 | height capped against the pane, width against a constant — a bar needs BOTH axes |
+| rack, turnstile, switchboard, ladder floating in the top third | every size written in `v.s()` units, which is a guess at the room there will be |
+| the second screenshot sliced by the frame edge | a supplied image keeps its own aspect and will happily run off the pane |
+| the stage title printing through the 9:16 watermark | both want the top-left corner; in vertical the title drops below it |
+
+The join key then leaked a THIRD time: moved to `sub`, it made `audit-sync` report a bar landing
+away from its own words, because `sub` is a field the gates read as words ON SCREEN. It is
+`group` now — plumbing, never drawn — and the manifest says so.
+
+### ★ Three gates were wrong, and all three are sealed
+
+Each was found by it firing on work that was correct, which is the expensive direction: a gate
+that cries wolf is one an author learns to skip.
+
+1. **`inkFor()` measured a canvas page as an empty screen.** A full-bleed `<img>`/`<canvas>` is
+   dropped as a BACKDROP — correct when there is text in front of it, wrong when the page IS
+   the picture. It was dropped twice, before the merge and again after, so `check-recordings`
+   called a perfectly good take defective. Kept now only when nothing smaller survives; the hero
+   case measured 27 rects before and 27 after.
+2. **`checkSamePictureThrice` read `Object.keys(data)[0]`.** Any scene that also carries
+   `source` lost its `kind`, so seven distinct pictures counted as one component used five
+   times. The monotony guard was firing on the cuts that did the work.
+3. **`check-camera` could not match `66.4%` to "sixty-six point four".** It split the mark into
+   `66` and `4` and dropped both as too short. `scripts/lib/numwords.mjs` folds spoken figures
+   into digits the same way `UNIT` already folds `gb` into "gigabyte"; break-tested both ways —
+   it passes the real move and rejects the same move pushed onto the wrong words.
+
+`npm run gate` is **59/59**.
+
+
 ## 2026-09-18 — Open Code Review SHIPPED (21:27 wide + 51s short)
 
 `topics/open-code-review/out/wide-dark.mp4` — 38,619 frames EXACT, drift 0 ms, audio mean −22.6 dB.

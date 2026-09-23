@@ -129,7 +129,21 @@ const ThumbInner: React.FC<{
           within a rounded rectangle container ... i want it to flow free"*). AssetIcon crops an
           img: into a rounded square with a shadow box; this draws the whole transparent PNG at
           size, behind the text so a title that reaches it stays on top. */}
-      {art ? (
+      {/* A BRAND MARK IS A VALID SUBJECT, AND `art` USED TO 404 ON ONE. This stripped `img:`
+          and handed whatever was left to staticFile, so a perfectly legal `si:anthropic`
+          became a request for public/assets/si:anthropic — a 404 that CANCELS the render, two
+          segments into a five-minute cut. A si:/lucide: asset is drawn free here too: the
+          glyph itself, at size, with no tile and no shadow box. */}
+      {art && !art.startsWith('img:') ? (
+        // A GLYPH IS NOT A PHOTOGRAPH: a brand mark is solid ink edge to edge, so the
+        // maxWidth that suits a transparent product render (800) drew a wordmark straight
+        // through the headline and the note. Sized to the frame's right third, clear of the
+        // copy column.
+        <div style={{position: 'absolute', right: 56, top: '50%', transform: 'translateY(-50%)',
+          display: 'flex', alignItems: 'center'}}>
+          <AssetIcon asset={art} size={400} bare />
+        </div>
+      ) : art ? (
         <Img
           src={staticFile('assets/' + art.replace(/^img:/, ''))}
           // FIT BOTH AXES. `width: 800` suits a WIDE object (the DDR5 module this was built

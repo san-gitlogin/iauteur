@@ -43,6 +43,8 @@ const tsPath = opt('--timestamps') ?? [
   `out/tts/${slug}_timestamps.json`,
 ].filter(Boolean).find((p) => fs.existsSync(p));
 
+import {foldNumbers} from './lib/numwords.mjs';
+
 const STOP = new Set(['the', 'and', 'for', 'with', 'that', 'this', 'are', 'was', 'you', 'your', 'can',
   'one', 'two', 'not', 'has', 'have', 'its', 'but', 'from', 'self', 'return', 'if', 'int', 'u8']);
 const stem = (w) => {
@@ -55,8 +57,13 @@ const stem = (w) => {
 // gigabyte" over "1 GB", "microseconds" over "us". Both sides go through the same table.
 const UNIT = {gb: 'gigabyte', mb: 'megabyte', kb: 'kilobyte', tb: 'terabyte', ms: 'millisecond',
   us: 'microsecond', ns: 'nanosecond', ghz: 'gigahertz', mhz: 'megahertz', vm: 'virtual', io: 'input'};
-const toks = (s) => String(s ?? '').toLowerCase().split(/[^a-z0-9]+/).map((w) => UNIT[w] ?? w)
-  .filter((w) => w.length >= 3 && !STOP.has(w)).map(stem);
+// A FIGURE IS AN ABBREVIATION TOO. The screen prints `66.4%` and the presenter says "sixty-six
+// point four", so the same folding that maps `gb` to "gigabyte" maps the spoken figure to the
+// printed one — and a numeric token is kept whatever its length, because `66` is three
+// characters of meaning in two. Without both halves this gate rejected a camera move that was
+// sitting on exactly the right words (2026-09-23).
+const toks = (s) => foldNumbers(String(s ?? '')).toLowerCase().split(/[^a-z0-9]+/).map((w) => UNIT[w] ?? w)
+  .filter((w) => w && !STOP.has(w) && (w.length >= 3 || /^\d/.test(w))).map(stem);
 const same = (a, b) => a === b || (a.length >= 4 && b.startsWith(a)) || (b.length >= 4 && a.startsWith(b));
 
 const scenes = (spec.scenes ?? []).filter((s) => s.type === 'RECORDED_STEP');

@@ -331,6 +331,50 @@ const CORRECTIONS = [
   ['a phone capture cropped to fill a wide frame', 'SEAL',
    '"the dashboard you display initially is very much zoomed in to fill the screen, rather than fitting right"',
    () => has('scripts/lint-spec.mjs', 'A PORTRAIT CAPTURE IN A WIDE FRAME IS SHOWN WHOLE')],
+  ['a long render killed by a slow frame it called a hung one', 'STRUCT',
+   'render-long.mjs never passed --timeout, so every long cut ran on Remotion\'s 30s-per-frame ' +
+   'default — while this repo deliberately captures masters at 4x delivery so camera moves stay ' +
+   'sharp. Frame 6347 of the Opus 5.5 cut took longer than that on a 3840px source and killed ' +
+   'segment 3 of 4, an hour in.',
+   () => has('scripts/render-long.mjs', 'THE PER-FRAME TIMEOUT IS A SETTING TOO') &&
+         has('scripts/render-long.mjs', 'RENDER_FRAME_TIMEOUT')],
+  ['an art asset that cancels the render instead of degrading', 'SEAL',
+   'thumbnail.art / cover.art stripped only `img:` and handed the rest to staticFile, so a legal ' +
+   '`si:anthropic` became a 404 on public/assets/si:anthropic — and Remotion turns a failed image ' +
+   'into a CancelledError, which killed a five-minute render two segments in.',
+   () => has('src/Thumbnail.tsx', 'A BRAND MARK IS A VALID SUBJECT') &&
+         has('scripts/lint-spec.mjs', 'AN ART ASSET THAT CANNOT RESOLVE CANCELS THE RENDER')],
+  ['an overlay shape that crashes React mid-segment', 'SEAL',
+   'clips[].overlay dispatches on `kind` and each kind reads its own fields; `chain.steps` authored ' +
+   'as [{label}] (the shape every other items[] uses) threw React #31 and cancelled the render at ' +
+   'frame 502, after lint, tsc, the voice and the sync had all passed.',
+   () => has('scripts/lint-spec.mjs', 'AN OVERLAY WITH THE WRONG SHAPE CRASHES THE RENDER') &&
+         has('scripts/lint-spec.mjs', 'OVERLAY_KINDS')],
+  ['a page that is one picture measured as an empty screen', 'STRUCT',
+   'inkFor() drops a full-bleed <img>/<canvas> as a BACKDROP, which is right only when there is text ' +
+   'in front of it. A generated canvas page has none, so the measurement came back empty twice over ' +
+   '(once before the merge, once after) and check-recordings called a perfectly good take defective.',
+   () => has('scripts/lib/record/runner.mjs', 'BACKDROP" ASSUMES THERE IS SOMETHING IN FRONT OF IT') &&
+         has('scripts/lib/record/runner.mjs', 'out\\.push\\(\\.\\.\\.fullBleed\\)') &&
+         has('scripts/lib/record/runner.mjs', 'UNLESS DROPPING IT LEAVES NOTHING')],
+  ['the monotony guard reading a scene\'s first key instead of its picture', 'STRUCT',
+   'checkSamePictureThrice took Object.keys(data)[0], so any scene that also carries `source` lost its ' +
+   '`kind` and seven distinct depictions counted as one component used five times — the guard firing on ' +
+   'the cuts that did the work and silent on the ones that did not.',
+   () => has('scripts/lint-spec.mjs', 'THE DATA KEY IS NOT ALWAYS THE FIRST KEY') &&
+         has('scripts/lint-spec.mjs', 'Object\\.values\\(sc\\.data')],
+  ['a camera move rejected for framing the figure it was naming', 'STRUCT',
+   'the screen prints 66.4% and the presenter says "sixty-six point four": check-camera split the mark ' +
+   'into 66 and 4, dropped both as too short, and reported that nothing framed was being said.',
+   () => has('scripts/lib/numwords.mjs', 'THE SCREEN PRINTS A FIGURE') &&
+         has('scripts/check-camera.mjs', 'A FIGURE IS AN ABBREVIATION TOO') &&
+         has('scripts/check-camera.mjs', 'foldNumbers') &&
+         // ...and the same gap at the other end of the pipeline: faster-whisper transcribes
+         // numbers as digits, so a perfect read of "Fifty seconds later, three hundred and
+         // twenty-eight lines" scored 0.80 against its own script and reported "fifty" as
+         // never spoken. Both gates fold through the same table now.
+         has('scripts/lib/numwords.py', 'THE SCREEN \\(AND WHISPER\\) PRINT A FIGURE') &&
+         has('scripts/audit-voice.py', 'fold_numbers')],
 ];
 
 let missing = [];

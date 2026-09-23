@@ -6617,6 +6617,40 @@ export interface HidfiStageItem {
   clips?: HidfiClip[];
 }
 
+export interface O55StageItem {
+  label?: string;
+  sub?: string;
+  /** PLUMBING, NEVER TEXT: which group inside the picture this item belongs to (the podium's
+   *  event). It was `sub` at first, and `sub` is a field the gates read as words ON SCREEN —
+   *  so audit-sync reported a bar landing away from "agentic scientific research" when what
+   *  the bar actually shows is a model and a score. A join key needs its own name. */
+  group?: string;
+  text?: string;
+  /** Which lane of the picture this item belongs to (`event`, `note`, `moves`). */
+  detail?: string;
+  /** The picture's own number: a position on the board, a bar height, a switch state. */
+  value?: number;
+  color?: SemColor;
+  /** `lucide:<name>` / `si:<brand>` / `img:<file>` — also the percentage chip on a price tag. */
+  icon?: string;
+  atWord?: number;
+  /** A SECOND moment for this item (the old price striking through after the tag lands). */
+  detailAtWord?: number;
+}
+
+/** O55_STAGE — the drawn beats of the Claude Opus 5.5 release video. */
+export interface O55StageData {
+  /** Which depiction to draw. Must exist in o55Viz O55_VIZ. */
+  kind?: string;
+  headline?: string;
+  /** Small caption above the picture, authored per beat. */
+  stageTitle?: string;
+  stage?: O55StageItem[];
+  /** Mode switch or label for the depiction. */
+  token?: string;
+  color?: SemColor;
+}
+
 /** HIDFI_STAGE — every drawn beat of the HID-Fi product demo, on one scene type. */
 export interface HidfiStageData {
   /** Which depiction to draw. Must exist in hidfiViz HIDFI_VIZ. */
@@ -11388,6 +11422,7 @@ export interface SceneData {
   uvStage?: UvStageData;
   astraStage?: AstraStageData;
   hidfiStage?: HidfiStageData;
+  o55Stage?: O55StageData;
   cmdIp?: CmdIpData;
   cmdDd?: CmdDdData;
   cmdUmount?: CmdUmountData;

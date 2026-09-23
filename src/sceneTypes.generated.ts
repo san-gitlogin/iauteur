@@ -100,6 +100,7 @@ export type SceneTypeName =
   | 'CMD_NETSTAT'
   | 'CMD_MTR'
   | 'CMD_TRACEROUTE'
+  | 'O55_STAGE'
   | 'HIDFI_STAGE'
   | 'ASTRA_STAGE'
   | 'UV_STAGE'
@@ -2036,6 +2037,17 @@ export type CmdTracerouteScene = SceneCommon<'CMD_TRACEROUTE'> & { data: {
       cwd?: string;
       highlight?: string;
       atWord?: number;
+      color?: string;
+    };
+  } };
+
+export type O55StageScene = SceneCommon<'O55_STAGE'> & { data: {
+    o55Stage: {
+      kind: string;
+      headline?: string;
+      stageTitle?: string;
+      stage?: Array<Record<string, unknown>>;
+      token?: string;
       color?: string;
     };
   } };
@@ -5783,6 +5795,7 @@ export interface SceneByType {
   CMD_NETSTAT: CmdNetstatScene;
   CMD_MTR: CmdMtrScene;
   CMD_TRACEROUTE: CmdTracerouteScene;
+  O55_STAGE: O55StageScene;
   HIDFI_STAGE: HidfiStageScene;
   ASTRA_STAGE: AstraStageScene;
   UV_STAGE: UvStageScene;
@@ -6163,6 +6176,7 @@ export type TypedScene =
   | CmdNetstatScene
   | CmdMtrScene
   | CmdTracerouteScene
+  | O55StageScene
   | HidfiStageScene
   | AstraStageScene
   | UvStageScene

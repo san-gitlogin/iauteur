@@ -1,0 +1,447 @@
+{
+  "meta": {
+    "topic": "Claude Opus 5.5 — same work, 40% less to run",
+    "format": "shorts",
+    "fps": 30,
+    "subject": "Claude Opus 5.5",
+    "audioPrefix": "claude-opus-5-5-shorts",
+    "pronounce": {
+      "GPT-6": "GPT-six"
+    },
+    "onePayoff": "Fable-level work at 40% less to run, proved on one live job",
+    "openLoop": "What does a model that undercuts its own flagship actually cost?",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "Claude Opus 5.5: Same Work, 40% Less #claude #ai",
+      "altTitles": [
+        "Anthropic Just Undercut Its Own Top Model #claude",
+        "Claude Opus 5.5 Built This In 50 Seconds #ai"
+      ],
+      "hook": "Anthropic says Claude Opus 5.5 performs at the level of Claude Fable 5.1 on most work and costs 40% less to run than Opus 5 — here are the prices, one live build, and the test it still loses.",
+      "description": "Prices from Anthropic's own pricing docs, benchmarks from the Claude Opus 5.5 release page, and a single unedited run of Claude Code with Opus 5.5 selected. Full breakdown on the channel.",
+      "breakdown": "the claim, the price list, a live build, and the benchmark it loses",
+      "pinned": "Full 5-minute breakdown is on the channel — what would you hand it first?",
+      "tags": [
+        "Claude Opus 5.5",
+        "Anthropic",
+        "Claude",
+        "Claude Code",
+        "AI",
+        "LLM",
+        "AI pricing",
+        "coding agents",
+        "shorts"
+      ],
+      "queries": [
+        "claude opus 5.5 price",
+        "claude opus 5.5 vs fable 5.1",
+        "claude opus 5.5 benchmarks"
+      ],
+      "sources": [
+        "anthropic.com/claude-opus-5-5 — Claude Opus 5.5 release announcement",
+        "platform.claude.com/docs/en/about-claude/pricing — Anthropic model pricing"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "SAME WORK. 40% LESS.",
+    "badge": "Claude Opus 5.5",
+    "note": "ANTHROPIC UNDERCUT ITSELF",
+    "art": "si:anthropic",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Claude Opus 5.5 does the work of the model above it, for forty percent less.",
+      "durationFrames": 182,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "40% LESS TO RUN",
+        "subtext": "Claude Opus 5.5",
+        "hookVariant": "reveal",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 9.5,
+        "heroAtWord": 1
+      },
+      "audio": "audio/claude-opus-5-5-shorts_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "O55_STAGE",
+      "narration": "Claude Opus 5.5 is four dollars in and twenty out, per million tokens. Claude Fable 5.1, the model it matches, is ten and fifty. Opus 5 was five and twenty-five — so the only tag that moved, moved down. Everything else on that list held.",
+      "durationFrames": 509,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "source": "List prices · platform.claude.com/docs — pricing",
+        "o55Stage": {
+          "kind": "price-rack",
+          "stageTitle": "input / output, per million tokens",
+          "stage": [
+            {
+              "label": "Claude Fable 5.1",
+              "text": "$10 / $50",
+              "atWord": 13.083
+            },
+            {
+              "label": "Claude Opus 5",
+              "text": "$5 / $25",
+              "atWord": 24.75
+            },
+            {
+              "label": "Claude Opus 5.5",
+              "text": "$4 / $20",
+              "sub": "$5 / $25",
+              "icon": "-20%",
+              "atWord": 1,
+              "detailAtWord": 32.333
+            }
+          ]
+        }
+      },
+      "transition": "push",
+      "audio": "audio/claude-opus-5-5-shorts_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "narration": "Here it is on a real job. One prompt: build a solar system that runs in a browser, no libraries. Fifty seconds later, three hundred and twenty-eight lines, and this is what opens. First try, no corrections.",
+      "durationFrames": 423,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "orbit.html — written by Claude Opus 5.5 in one run",
+          "clips": [
+            {
+              "ref": "rec:o55-live#wrote",
+              "src": "rec/o55-live/seg-01-wrote.mp4",
+              "frames": 62,
+              "label": "the receipt",
+              "focus": false,
+              "wantAtWord": 16.333,
+              "callouts": [],
+              "id": "wrote",
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 73,
+                  "w": 1509,
+                  "h": 115
+                },
+                {
+                  "x": 87,
+                  "y": 207,
+                  "w": 1012,
+                  "h": 19
+                },
+                {
+                  "x": 68,
+                  "y": 245,
+                  "w": 1500,
+                  "h": 39
+                },
+                {
+                  "x": 68,
+                  "y": 303,
+                  "w": 722,
+                  "h": 249
+                },
+                {
+                  "x": 68,
+                  "y": 571,
+                  "w": 347,
+                  "h": 19
+                },
+                {
+                  "x": 68,
+                  "y": 610,
+                  "w": 1509,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                7,
+                13,
+                17,
+                20,
+                21,
+                23,
+                24,
+                27,
+                30,
+                33,
+                34,
+                35,
+                36,
+                37,
+                40,
+                43,
+                47,
+                50,
+                54,
+                57,
+                60
+              ],
+              "shows": "$ claude --model claude-opus-5-5 --permission-mode bypassPermissions ",
+              "said": "PS o55-live> claude --model claude-opus-5-5 --permission-mode bypassPermissions 'Build orbit.html: one self-contained HTML file, no libraries, no network. A canv\nas animation of a small solar system — a glowing star, three planets on elliptical orbits at different speeds, faint trails behind each planet, and a parallax st\narfield. Make it look good on a dark page. Write the file, then stop.'\n ▐▛███▛█ Claude Code v2.1.280\n▝▜██████▀ Opus 5.5 · Claude Pro\n ▝▝ ▝▝ /private/tmp/iauteur-rec/o55-live\n Opus 5.5 is now your default model and it draws down usage faster than Sonnet 5. Switch anytime with /model.\n❯ Build orbit.html: one self-contained HTML file, no libraries, no network. A canvas animation of a small solar system — a glowing star, three planets on\n elliptical orbits at different speeds, faint trails behind each planet, and a parallax starfield. Make it look good on a dark page. Write the file, then stop.\n⏺ Write(orbit.html)\n ⎿  Wrote 328 lines to orbit.html\n 1 <!DOCTYPE html>\n 2 <html lang=\"en\">\n 3 <head>\n 4 <meta charset=\"utf-8\">\n 5 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n 6 <title>Orbit</title>\n 7 <style>\n 8 html, body {\n 9 margin: 0;\n 10 height: 100%;\n … +318 lines (ctrl+o to expand)\n· Whirlpooling… (51s · ↓ 6.5k tokens)\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ bypass permissions on (shift+tab to cycle) · esc to interrupt",
+              "atWord": 1.583
+            },
+            {
+              "ref": "rec:o55-orbit#orbit",
+              "src": "rec/o55-orbit/seg-01.mp4",
+              "frames": 141,
+              "label": "the file, running",
+              "focus": false,
+              "wantAtWord": 24.5,
+              "callouts": [],
+              "id": "orbit",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 1600,
+                  "h": 900
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ],
+              "atWord": 16.333
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/claude-opus-5-5-shorts_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "O55_STAGE",
+      "narration": "It doesn't win everything, though. On agentic scientific research, GPT-6 Astra is still well ahead — sixty-four point six against fifty-eight point seven. Cheaper is not better at everything.",
+      "durationFrames": 396,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "source": "Benchmark table · anthropic.com/claude-opus-5-5",
+        "o55Stage": {
+          "kind": "podium",
+          "stageTitle": "one test it still loses",
+          "stage": [
+            {
+              "detail": "event",
+              "label": "Agentic scientific research",
+              "text": "Terminal-Bench Science",
+              "atWord": 5.167
+            },
+            {
+              "group": "Agentic scientific research",
+              "label": "GPT-6 Astra",
+              "text": "64.6%",
+              "value": 64.6,
+              "detail": "rival",
+              "atWord": 18.917
+            },
+            {
+              "group": "Agentic scientific research",
+              "label": "Opus 5.5",
+              "text": "58.7%",
+              "value": 58.7,
+              "atWord": 22.667
+            }
+          ]
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/claude-opus-5-5-shorts_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "narration": "The full breakdown — the benchmarks, the caveat Anthropic printed themselves, and the whole live build — is on the channel.",
+      "durationFrames": 210,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "message": "Full breakdown on the channel",
+        "sub": "benchmarks, price and a live run"
+      },
+      "transition": "wipe",
+      "audio": "audio/claude-opus-5-5-shorts_s05.mp3"
+    }
+  ]
+}

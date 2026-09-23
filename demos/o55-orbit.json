@@ -1,0 +1,14 @@
+{
+  "slug": "o55-orbit",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": { "width": 1600, "height": 900 },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": { "url": "file:///tmp/iauteur-rec/o55-live/orbit.html", "settleMs": 2500 },
+  "steps": [
+    { "id": "orbit", "action": "pause", "ms": 4000, "label": "the page it wrote, running" },
+    { "id": "orbit2", "action": "pause", "ms": 4000, "label": "three planets, trails, parallax stars" }
+  ]
+}

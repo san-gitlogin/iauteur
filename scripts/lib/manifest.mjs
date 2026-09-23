@@ -1968,6 +1968,27 @@ export const MANIFEST = {  JEVONS_CURVE: {
     },
     example: {cmdTraceroute: {"stageTitle":"hop by hop","headline":"traceroute makes each hop [answer]","color":"blue","promptLabel":"dev@box","cwd":"~","atWord":1,"steps":[{"label":"traceroute 1.1.1.1","text":"7  * * *","detail":"the stars are the problem"}],"stage":[{"label":"send a packet","sub":"allowed one hop only"},{"label":"it expires","sub":"and that router reports back"},{"label":"hop 1","sub":"your own router"},{"label":"allow two hops","sub":"and repeat"},{"label":"hop 4","sub":"your internet provider"},{"label":"hop 7","sub":"replies with nothing at all"},{"label":"hop 9","sub":"the destination, finally"}],"verdict":"Stars are not automatically a fault","verdictSub":"plenty of routers are configured never to reply, and traffic passes anyway","verdictAtWord":1}},
   },
+  O55_STAGE: {
+    category: "diagram", family: "diagram", data_key: "o55Stage",
+    purpose: "Every DRAWN beat of the Claude Opus 5.5 release video on one scene type. These are arithmetic beats \u2014 a score, a price, a percentage \u2014 which are the ones that quietly default to a card, so each `kind` names an OBJECT instead: a board with model pucks travelling on it, a podium with somebody else on the top step, a pair of callipers closing, a rack of hanging price tags, a turnstile counting cached tokens, a quoted thread, a row of switches being thrown. One type, seven pictures (LAW 0n).",
+    use_when: "A release/benchmark/pricing beat a camera cannot film. Pick `kind` for the OBJECT: ladder (capability up, cost right; the new model TRAVELS from the old flagship's place to its own, so the flip is a movement), podium (the events it does NOT win \u2014 bars grow per event and the rival's is taller), callipers (a published gap measured, then CLOSED to the narrower real one, with the source's own caveat quoted under it), price-rack (tags on a rail; the tags that held stay still, the one that moved is struck through and reprices), turnstile (tokens you already sent passing a meter a second time, the money counting down, a needle sweeping to the speed figure), thread (supplied screenshots of somebody else's discussion, shown as a quotation with a pulled line beside them), switchboard (who should switch \u2014 each handle is thrown or deliberately not).",
+    fields: {
+      kind: {t: "string", req: true, note: "ladder | podium | callipers | price-rack | turnstile | thread | switchboard. An unregistered kind renders LOUDLY in red."},
+      headline: {t: "string", note: "Optional headline, <=38 chars. Most beats carry none \u2014 the object is the headline."},
+      stageTitle: {t: "string", note: "Small uppercase caption above the picture, <=40 chars, authored per beat."},
+      stage: {t: "items", note: "The elements, each landing on its own atWord. ladder: one item per model with value = cost fraction 0-1, sub = capability fraction 0-1, detail = the figure shown on the puck, text:'from' marks where the mover starts and detail:'moves' marks the mover. podium: detail:'event' items name the events (label = the event, text = its one-line gloss), and each bar joins its event with group:'<event label>' (plumbing, never drawn), printing text (the figure) at value (its height), label = the model, detail:'rival' when the bar is somebody else's. callipers: [left rule, right rule, {sub: closed fraction, text: the unit suffix}, {label: the quote, sub: who said it}]; a rule sets text = its score and label = its model. price-rack: label = the model, text = the price now, sub = the old price when it moved, icon = the percentage chip, value = the unit line, detailAtWord = when the strike draws; detail:'note' is the standing line underneath. turnstile: [the flow, the meter {sub: from, text: to, label, icon}, the speed {text, label}]. thread: icon:'img:<file>' items are the screenshots, the rest are pulled quotes. switchboard: value 1 = throw it, 0 = stay; detail:'note' is the line underneath."},
+      token: {t: "string", note: "Per-kind mode switch; unused by the seven current pictures."},
+      color: {t: "string", note: "Semantic accent: blue|green|red|orange|purple|yellow."}
+    },
+    example: {
+      kind: "price-rack",
+      stage: [
+        {label: "Claude Fable 5.1", text: "$10 / $50", atWord: 4},
+        {label: "Claude Opus 5.5", text: "$4 / $20", sub: "$5 / $25", icon: "-20%", atWord: 9, detailAtWord: 13},
+        {detail: "note", label: "Same shelf, one tag moved", atWord: 17}
+      ]
+    },
+  },
   HIDFI_STAGE: {
     category: "diagram", family: "diagram", data_key: "hidfiStage",
     purpose: "Every DRAWN beat of the HID-Fi product demo on one scene type. The picture takes the whole frame and stands free \u2014 no pane, no card, because a product demo shows the product. `kind` chooses the depiction from hidfiViz: the board is the real render, phone screens are recorded dashboard takes, and port glows come from the board SVG's own coordinates. One type, many pictures (LAW 0n).",

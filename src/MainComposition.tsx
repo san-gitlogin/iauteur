@@ -284,6 +284,7 @@ import {CmdIp} from './scenes/CmdIp';
 import {CmdPing} from './scenes/CmdPing';
 import {UvStage} from './scenes/UvStage';
 import {HidfiStage} from './scenes/HidfiStage';
+import {O55Stage} from './scenes/O55Stage';
 import {AstraStage} from './scenes/AstraStage';
 import {CmdTraceroute} from './scenes/CmdTraceroute';
 import {CmdMtr} from './scenes/CmdMtr';
@@ -484,6 +485,7 @@ const registry: Record<string, React.FC<{scene: Scene}>> = {  JEVONS_CURVE: Jevo
   CMD_PING: CmdPing,
   UV_STAGE: UvStage,
   HIDFI_STAGE: HidfiStage,
+  O55_STAGE: O55Stage,
   ASTRA_STAGE: AstraStage,
   CMD_IP: CmdIp,
   CMD_DD: CmdDd,

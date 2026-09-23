@@ -1,0 +1,3494 @@
+{
+  "meta": {
+    "topic": "Claude Opus 5.5 — the claim, the price, and a live run",
+    "format": "long",
+    "fps": 30,
+    "subject": "Claude Opus 5.5",
+    "audioPrefix": "claude-opus-5-5_long",
+    "pronounce": {
+      "GPT-6": "GPT-six"
+    },
+    "onePayoff": "Fable-level work at 40% less to run — with two benchmarks it still loses",
+    "openLoop": "Why would a company tell you its own benchmark margins mean less than they look?",
+    "topicAxes": [
+      "entity-novelty",
+      "economic-pain"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "Claude Opus 5.5: Same Work, 40% Less To Run (Tested Live)",
+      "altTitles": [
+        "Claude Opus 5.5 — Anthropic Just Undercut Its Own Top Model",
+        "Claude Opus 5.5 Benchmarks, Price And A Live Run In Under 5 Minutes"
+      ],
+      "hook": "Anthropic says Claude Opus 5.5 performs at the level of Claude Fable 5.1 on most work and costs 40% less to run than Opus 5. This goes through the official release page, the benchmark table (including the two tests it loses), the new prices, an independent evaluation, what the Claude subreddit made of it — and then hands Opus 5.5 one prompt and films what comes back.",
+      "description": "Everything in this video is read off primary sources on screen: Anthropic's release page, Anthropic's own pricing docs, Artificial Analysis, and the r/ClaudeAI release thread. The live run is a single prompt to Claude Code with Opus 5.5 selected, recorded start to finish.",
+      "breakdown": "the claim, the benchmarks it wins and loses, the prices, an independent index, the community reaction, and a live build",
+      "pinned": "Which job would you hand Opus 5.5 first — and has the price drop actually changed what you run?",
+      "tags": [
+        "Claude Opus 5.5",
+        "Anthropic",
+        "Claude",
+        "Claude Code",
+        "AI models",
+        "LLM",
+        "benchmarks",
+        "Terminal-Bench",
+        "AI pricing",
+        "coding agents",
+        "Artificial Analysis",
+        "Claude Fable 5.1",
+        "AI news"
+      ],
+      "queries": [
+        "claude opus 5.5 benchmarks",
+        "claude opus 5.5 price",
+        "is claude opus 5.5 worth it",
+        "claude opus 5.5 vs fable 5.1"
+      ],
+      "sources": [
+        "anthropic.com/claude-opus-5-5 — Claude Opus 5.5 release announcement",
+        "platform.claude.com/docs/en/about-claude/pricing — Anthropic model pricing",
+        "artificialanalysis.ai/models/releases/claude-opus-5-5 — independent evaluation",
+        "reddit.com/r/ClaudeAI — the Claude Opus 5.5 release thread"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "aurora",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "thumbnail": {
+    "title": "SAME WORK. 40% LESS.",
+    "badge": "Claude Opus 5.5",
+    "note": "ANTHROPIC JUST UNDERCUT ITSELF",
+    "art": "si:anthropic"
+  },
+  "cover": {
+    "title": "CLAUDE OPUS 5.5",
+    "badge": "tested live",
+    "note": "SAME WORK · 40% LESS TO RUN",
+    "art": "si:anthropic",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "narration": "Claude Opus 5.5 is Anthropic's new top model, and it costs forty percent less to run.",
+      "durationFrames": 209,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "headline": "40% LESS TO RUN",
+        "subtext": "Claude Opus 5.5 · same work, smaller bill",
+        "hookVariant": "reveal",
+        "heroAsset": "si:anthropic",
+        "headlineAtWord": 10.5,
+        "heroAtWord": 1
+      },
+      "audio": "audio/claude-opus-5-5_long_s01.mp3"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "narration": "Opus 5.5 does that work for a smaller bill — and before a single number, here's what that buys. One instruction: build a solar system that runs in a browser, no libraries, no network. This came back. Three hundred and twenty-eight lines, in a minute.",
+      "durationFrames": 488,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "orbit.html — written by Claude Opus 5.5 in the run later in this video",
+          "clips": [
+            {
+              "ref": "rec:o55-orbit#orbit",
+              "src": "rec/o55-orbit/seg-01.mp4",
+              "frames": 141,
+              "label": "what it built",
+              "focus": false,
+              "wantAtWord": 12.75,
+              "callouts": [],
+              "overlay": {
+                "kind": "chain",
+                "atWord": 25.25,
+                "steps": [
+                  "one HTML file",
+                  "no libraries",
+                  "no network"
+                ]
+              },
+              "id": "orbit",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 1600,
+                  "h": 900
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ],
+              "atWord": 12.75
+            },
+            {
+              "ref": "rec:o55-live#wrote",
+              "src": "rec/o55-live/seg-01-wrote.mp4",
+              "frames": 62,
+              "label": "the receipt",
+              "focus": false,
+              "wantAtWord": 33.333,
+              "callouts": [],
+              "sourceNote": "Claude Code · Opus 5.5, recorded in one run",
+              "id": "wrote",
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 73,
+                  "w": 1509,
+                  "h": 115
+                },
+                {
+                  "x": 87,
+                  "y": 207,
+                  "w": 1012,
+                  "h": 19
+                },
+                {
+                  "x": 68,
+                  "y": 245,
+                  "w": 1500,
+                  "h": 39
+                },
+                {
+                  "x": 68,
+                  "y": 303,
+                  "w": 722,
+                  "h": 249
+                },
+                {
+                  "x": 68,
+                  "y": 571,
+                  "w": 347,
+                  "h": 19
+                },
+                {
+                  "x": 68,
+                  "y": 610,
+                  "w": 1509,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                7,
+                13,
+                17,
+                20,
+                21,
+                23,
+                24,
+                27,
+                30,
+                33,
+                34,
+                35,
+                36,
+                37,
+                40,
+                43,
+                47,
+                50,
+                54,
+                57,
+                60
+              ],
+              "shows": "$ claude --model claude-opus-5-5 --permission-mode bypassPermissions ",
+              "said": "PS o55-live> claude --model claude-opus-5-5 --permission-mode bypassPermissions 'Build orbit.html: one self-contained HTML file, no libraries, no network. A canv\nas animation of a small solar system — a glowing star, three planets on elliptical orbits at different speeds, faint trails behind each planet, and a parallax st\narfield. Make it look good on a dark page. Write the file, then stop.'\n ▐▛███▛█ Claude Code v2.1.280\n▝▜██████▀ Opus 5.5 · Claude Pro\n ▝▝ ▝▝ /private/tmp/iauteur-rec/o55-live\n Opus 5.5 is now your default model and it draws down usage faster than Sonnet 5. Switch anytime with /model.\n❯ Build orbit.html: one self-contained HTML file, no libraries, no network. A canvas animation of a small solar system — a glowing star, three planets on\n elliptical orbits at different speeds, faint trails behind each planet, and a parallax starfield. Make it look good on a dark page. Write the file, then stop.\n⏺ Write(orbit.html)\n ⎿  Wrote 328 lines to orbit.html\n 1 <!DOCTYPE html>\n 2 <html lang=\"en\">\n 3 <head>\n 4 <meta charset=\"utf-8\">\n 5 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n 6 <title>Orbit</title>\n 7 <style>\n 8 html, body {\n 9 margin: 0;\n 10 height: 100%;\n … +318 lines (ctrl+o to expand)\n· Whirlpooling… (51s · ↓ 6.5k tokens)\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ bypass permissions on (shift+tab to cycle) · esc to interrupt",
+              "atWord": 33.333
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "push",
+      "audio": "audio/claude-opus-5-5_long_s02.mp3"
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "narration": "Welcome to The NBX Studio. Anthropic's own page says something odd about its benchmark numbers — so what is it? Today we're reading the release page, an independent lab, the subreddit, and then a real job.",
+      "durationFrames": 391,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "title": "Claude Opus 5.5",
+        "subtitle": "the release page, an independent lab, and a live job"
+      },
+      "transition": "dip",
+      "audio": "audio/claude-opus-5-5_long_s03.mp3"
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "narration": "Here's Anthropic's official page, and the claim sits right at the top. Opus 5.5 performs at the level of Claude Fable 5.1 — their big, expensive model — and costs forty percent less to run than Opus 5. Their benchmark table leads with Terminal-Bench, scoring how often a model finishes a real job in a terminal. Sixty-six point four, which is why that headline reads the way it does.",
+      "durationFrames": 718,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "Source: anthropic.com/claude-opus-5-5",
+          "clips": [
+            {
+              "ref": "rec:o55-release#top",
+              "src": "rec/o55-release/seg-01.mp4",
+              "frames": 36,
+              "label": "the announcement page",
+              "focus": false,
+              "wantAtWord": 1,
+              "callouts": [],
+              "id": "top",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 247,
+                  "h": 36
+                },
+                {
+                  "x": 992,
+                  "y": 24,
+                  "w": 100,
+                  "h": 19
+                },
+                {
+                  "x": 816,
+                  "y": 24,
+                  "w": 66,
+                  "h": 19
+                },
+                {
+                  "x": 926,
+                  "y": 24,
+                  "w": 41,
+                  "h": 19
+                },
+                {
+                  "x": 1136,
+                  "y": 24,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 1220,
+                  "y": 24,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 1300,
+                  "y": 25,
+                  "w": 76,
+                  "h": 19
+                },
+                {
+                  "x": 164,
+                  "y": 26,
+                  "w": 143,
+                  "h": 16
+                },
+                {
+                  "x": 714,
+                  "y": 305,
+                  "w": 173,
+                  "h": 174
+                },
+                {
+                  "x": 397,
+                  "y": 344,
+                  "w": 366,
+                  "h": 145
+                },
+                {
+                  "x": 862,
+                  "y": 347,
+                  "w": 75,
+                  "h": 133
+                },
+                {
+                  "x": 930,
+                  "y": 348,
+                  "w": 71,
+                  "h": 134
+                },
+                {
+                  "x": 996,
+                  "y": 350,
+                  "w": 52,
+                  "h": 134
+                },
+                {
+                  "x": 1059,
+                  "y": 352,
+                  "w": 65,
+                  "h": 135
+                },
+                {
+                  "x": 1043,
+                  "y": 352,
+                  "w": 21,
+                  "h": 133
+                },
+                {
+                  "x": 1117,
+                  "y": 355,
+                  "w": 29,
+                  "h": 133
+                },
+                {
+                  "x": 1139,
+                  "y": 357,
+                  "w": 67,
+                  "h": 136
+                },
+                {
+                  "x": 843,
+                  "y": 556,
+                  "w": 138,
+                  "h": 91
+                },
+                {
+                  "x": 620,
+                  "y": 559,
+                  "w": 20,
+                  "h": 14
+                },
+                {
+                  "x": 620,
+                  "y": 583,
+                  "w": 20,
+                  "h": 14
+                },
+                {
+                  "x": 620,
+                  "y": 608,
+                  "w": 20,
+                  "h": 14
+                },
+                {
+                  "x": 620,
+                  "y": 632,
+                  "w": 20,
+                  "h": 14
+                },
+                {
+                  "x": 1184,
+                  "y": 640,
+                  "w": 138,
+                  "h": 24
+                },
+                {
+                  "x": 1184,
+                  "y": 678,
+                  "w": 352,
+                  "h": 78
+                },
+                {
+                  "x": 1357,
+                  "y": 782,
+                  "w": 114,
+                  "h": 20
+                },
+                {
+                  "x": 1274,
+                  "y": 782,
+                  "w": 84,
+                  "h": 20
+                },
+                {
+                  "x": 1263,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1458,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1400,
+                  "y": 830,
+                  "w": 58,
+                  "h": 20
+                },
+                {
+                  "x": 1211,
+                  "y": 830,
+                  "w": 52,
+                  "h": 20
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "Cookie Settings",
+              "atWord": 4.75
+            },
+            {
+              "ref": "rec:o55-release#claim",
+              "src": "rec/o55-release/seg-02.mp4",
+              "frames": 64,
+              "label": "the claim, in their words",
+              "focus": false,
+              "wantAtWord": 9.583,
+              "callouts": [],
+              "zooms": [
+                {
+                  "mark": "claim",
+                  "band": true,
+                  "wantAtWord": 9.583,
+                  "atWord": 13.333
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 34.583,
+                  "atWord": 34.583
+                }
+              ],
+              "id": "claim",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "claim": {
+                  "x": 480,
+                  "y": 289,
+                  "w": 634,
+                  "h": 107,
+                  "covers": "It performs at the level of Claude Fable 5.1 on most work and costs 40% less to run than Opus 5.",
+                  "block": {
+                    "x": 480,
+                    "y": 253,
+                    "w": 634,
+                    "h": 143
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 1600,
+                  "h": 124
+                },
+                {
+                  "x": 480,
+                  "y": 253,
+                  "w": 634,
+                  "h": 143
+                },
+                {
+                  "x": 480,
+                  "y": 447,
+                  "w": 429,
+                  "h": 73
+                },
+                {
+                  "x": 903,
+                  "y": 447,
+                  "w": 147,
+                  "h": 47
+                },
+                {
+                  "x": 1050,
+                  "y": 447,
+                  "w": 54,
+                  "h": 21
+                },
+                {
+                  "x": 480,
+                  "y": 473,
+                  "w": 625,
+                  "h": 100
+                },
+                {
+                  "x": 480,
+                  "y": 594,
+                  "w": 522,
+                  "h": 21
+                },
+                {
+                  "x": 480,
+                  "y": 637,
+                  "w": 638,
+                  "h": 232
+                },
+                {
+                  "x": 480,
+                  "y": 637,
+                  "w": 112,
+                  "h": 21
+                },
+                {
+                  "x": 1184,
+                  "y": 640,
+                  "w": 138,
+                  "h": 24
+                },
+                {
+                  "x": 1184,
+                  "y": 678,
+                  "w": 352,
+                  "h": 78
+                },
+                {
+                  "x": 1357,
+                  "y": 782,
+                  "w": 114,
+                  "h": 20
+                },
+                {
+                  "x": 1274,
+                  "y": 782,
+                  "w": 84,
+                  "h": 20
+                },
+                {
+                  "x": 1263,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1458,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1400,
+                  "y": 830,
+                  "w": 58,
+                  "h": 20
+                },
+                {
+                  "x": 1211,
+                  "y": 830,
+                  "w": 52,
+                  "h": 20
+                },
+                {
+                  "x": 537,
+                  "y": 890,
+                  "w": 571,
+                  "h": 10
+                },
+                {
+                  "x": 480,
+                  "y": 890,
+                  "w": 57,
+                  "h": 10
+                }
+              ],
+              "changes": [
+                0,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28
+              ],
+              "shows": "Cookie Settings",
+              "atWord": 9.583
+            },
+            {
+              "ref": "rec:o55-release#bench",
+              "src": "rec/o55-release/seg-03.mp4",
+              "frames": 83,
+              "label": "the first row",
+              "focus": false,
+              "wantAtWord": 36.167,
+              "callouts": [],
+              "zooms": [
+                {
+                  "mark": "tb",
+                  "band": true,
+                  "wantAtWord": 49.917,
+                  "atWord": 49.25
+                }
+              ],
+              "id": "bench",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "tb": {
+                  "x": 613,
+                  "y": 252,
+                  "w": 42,
+                  "h": 18,
+                  "covers": "66.4%",
+                  "block": {
+                    "x": 613,
+                    "y": 252,
+                    "w": 42,
+                    "h": 18
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 34,
+                  "w": 632,
+                  "h": 126
+                },
+                {
+                  "x": 997,
+                  "y": 207,
+                  "w": 78,
+                  "h": 18
+                },
+                {
+                  "x": 1125,
+                  "y": 207,
+                  "w": 73,
+                  "h": 18
+                },
+                {
+                  "x": 613,
+                  "y": 207,
+                  "w": 58,
+                  "h": 18
+                },
+                {
+                  "x": 740,
+                  "y": 207,
+                  "w": 55,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 207,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 252,
+                  "w": 127,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 252,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 740,
+                  "y": 252,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 252,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 324,
+                  "w": 156,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 324,
+                  "w": 43,
+                  "h": 18
+                },
+                {
+                  "x": 740,
+                  "y": 324,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 324,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 997,
+                  "y": 324,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 1125,
+                  "y": 324,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 396,
+                  "w": 108,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 396,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 396,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 468,
+                  "w": 111,
+                  "h": 41
+                },
+                {
+                  "x": 373,
+                  "y": 540,
+                  "w": 132,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 540,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 540,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 612,
+                  "w": 180,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 612,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 740,
+                  "y": 612,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 869,
+                  "y": 612,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 997,
+                  "y": 612,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 1184,
+                  "y": 640,
+                  "w": 138,
+                  "h": 24
+                },
+                {
+                  "x": 1184,
+                  "y": 678,
+                  "w": 352,
+                  "h": 78
+                },
+                {
+                  "x": 373,
+                  "y": 684,
+                  "w": 180,
+                  "h": 41
+                },
+                {
+                  "x": 997,
+                  "y": 684,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 684,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 1125,
+                  "y": 684,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 756,
+                  "w": 94,
+                  "h": 41
+                },
+                {
+                  "x": 740,
+                  "y": 756,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 869,
+                  "y": 756,
+                  "w": 40,
+                  "h": 34
+                },
+                {
+                  "x": 613,
+                  "y": 756,
+                  "w": 39,
+                  "h": 34
+                },
+                {
+                  "x": 1357,
+                  "y": 782,
+                  "w": 114,
+                  "h": 20
+                },
+                {
+                  "x": 1274,
+                  "y": 782,
+                  "w": 84,
+                  "h": 20
+                },
+                {
+                  "x": 373,
+                  "y": 828,
+                  "w": 158,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 828,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 740,
+                  "y": 828,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 869,
+                  "y": 828,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 1263,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1458,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1400,
+                  "y": 830,
+                  "w": 58,
+                  "h": 20
+                },
+                {
+                  "x": 1211,
+                  "y": 830,
+                  "w": 52,
+                  "h": 20
+                }
+              ],
+              "changes": [
+                0,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47
+              ],
+              "shows": "Cookie Settings",
+              "atWord": 36.167
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/claude-opus-5-5_long_s04.mp3"
+    },
+    {
+      "id": "s05",
+      "type": "O55_STAGE",
+      "narration": "Here's that on one board. Across is what a model costs to run, and up is how much it can do. Opus 5 sat down here. Fable 5.1 sits up and to the right, because more capability has always meant a bigger bill. Opus 5.5 lands up here, at the cheap end.",
+      "durationFrames": 511,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "source": "Terminal-Bench 4.0 scores + list prices · anthropic.com",
+        "o55Stage": {
+          "kind": "ladder",
+          "stageTitle": "what it can do, against what it costs",
+          "stage": [
+            {
+              "label": "Opus 5",
+              "detail": "52.3%",
+              "value": 0.42,
+              "sub": "0.41",
+              "text": "from",
+              "atWord": 14.583
+            },
+            {
+              "label": "Claude Fable 5.1",
+              "detail": "55.8%",
+              "value": 0.83,
+              "sub": "0.53",
+              "atWord": 18.917
+            },
+            {
+              "label": "Claude Opus 5.5",
+              "detail": "66.4%",
+              "value": 0.33,
+              "sub": "0.88",
+              "text": "moves",
+              "atWord": 32.333
+            }
+          ]
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/claude-opus-5-5_long_s05.mp3"
+    },
+    {
+      "id": "s06",
+      "type": "O55_STAGE",
+      "narration": "Nothing wins everything, so Anthropic print the losses in the same table. On AutomationBench, meaning business workflows end to end, Opus 5.5 gets forty percent and GPT-6 Astra is ahead at forty-one point four. On agentic scientific research Astra leads again — sixty-four point six, against Opus 5.5 at fifty-eight point seven. Two clear losses, printed by the seller.",
+      "durationFrames": 814,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "source": "Benchmark table · anthropic.com/claude-opus-5-5",
+        "o55Stage": {
+          "kind": "podium",
+          "stageTitle": "where another model is still on the top step",
+          "stage": [
+            {
+              "detail": "event",
+              "label": "AutomationBench",
+              "text": "business workflows, end to end",
+              "atWord": 12.25
+            },
+            {
+              "group": "AutomationBench",
+              "label": "Opus 5.5",
+              "text": "40.0%",
+              "value": 40,
+              "atWord": 24.667
+            },
+            {
+              "group": "AutomationBench",
+              "label": "GPT-6 Astra",
+              "text": "41.4%",
+              "value": 41.4,
+              "detail": "rival",
+              "atWord": 34
+            },
+            {
+              "detail": "event",
+              "label": "Agentic scientific research",
+              "text": "Terminal-Bench Science",
+              "atWord": 37.833
+            },
+            {
+              "group": "Agentic scientific research",
+              "label": "GPT-6 Astra",
+              "text": "64.6%",
+              "value": 64.6,
+              "detail": "rival",
+              "atWord": 47.667
+            },
+            {
+              "group": "Agentic scientific research",
+              "label": "Opus 5.5",
+              "text": "58.7%",
+              "value": 58.7,
+              "atWord": 51.083
+            }
+          ]
+        }
+      },
+      "transition": "morph",
+      "audio": "audio/claude-opus-5-5_long_s06.mp3"
+    },
+    {
+      "id": "s07",
+      "type": "RECORDED_STEP",
+      "narration": "And then there's this paragraph, which I didn't expect on a launch page. Benchmark margins, they write, have become a less reliable guide — and the gap between Opus 5.5 and Claude Fable 5.1 is narrower than these scores suggest. That's the seller talking down its own headline.",
+      "durationFrames": 508,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "Source: anthropic.com/claude-opus-5-5",
+          "clips": [
+            {
+              "ref": "rec:o55-release#caveat",
+              "src": "rec/o55-release/seg-04.mp4",
+              "frames": 49,
+              "label": "their own caveat",
+              "focus": false,
+              "wantAtWord": 1.083,
+              "callouts": [],
+              "zooms": [
+                {
+                  "mark": "narrow",
+                  "band": true,
+                  "wantAtWord": 19.917,
+                  "atWord": 19.917
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 30.083,
+                  "atWord": 30.083
+                }
+              ],
+              "id": "caveat",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "narrow": {
+                  "x": 480,
+                  "y": 333,
+                  "w": 626,
+                  "h": 48,
+                  "covers": "the gap between Opus 5.5 and Claude Fable 5.1 is narrower than these scores suggest",
+                  "block": {
+                    "x": 480,
+                    "y": 254,
+                    "w": 632,
+                    "h": 127
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 0,
+                  "w": 612,
+                  "h": 46
+                },
+                {
+                  "x": 1136,
+                  "y": 24,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 1220,
+                  "y": 24,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 1300,
+                  "y": 25,
+                  "w": 76,
+                  "h": 19
+                },
+                {
+                  "x": 164,
+                  "y": 26,
+                  "w": 143,
+                  "h": 16
+                },
+                {
+                  "x": 480,
+                  "y": 67,
+                  "w": 612,
+                  "h": 47
+                },
+                {
+                  "x": 480,
+                  "y": 180,
+                  "w": 538,
+                  "h": 40
+                },
+                {
+                  "x": 480,
+                  "y": 254,
+                  "w": 632,
+                  "h": 126
+                },
+                {
+                  "x": 997,
+                  "y": 427,
+                  "w": 78,
+                  "h": 18
+                },
+                {
+                  "x": 1125,
+                  "y": 427,
+                  "w": 73,
+                  "h": 18
+                },
+                {
+                  "x": 613,
+                  "y": 427,
+                  "w": 58,
+                  "h": 18
+                },
+                {
+                  "x": 740,
+                  "y": 427,
+                  "w": 55,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 427,
+                  "w": 46,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 472,
+                  "w": 127,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 472,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 740,
+                  "y": 472,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 472,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 997,
+                  "y": 472,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 1125,
+                  "y": 472,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 544,
+                  "w": 156,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 544,
+                  "w": 43,
+                  "h": 18
+                },
+                {
+                  "x": 740,
+                  "y": 544,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 544,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 997,
+                  "y": 544,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 1125,
+                  "y": 544,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 373,
+                  "y": 616,
+                  "w": 108,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 616,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 616,
+                  "w": 41,
+                  "h": 18
+                },
+                {
+                  "x": 1184,
+                  "y": 640,
+                  "w": 138,
+                  "h": 24
+                },
+                {
+                  "x": 1184,
+                  "y": 678,
+                  "w": 352,
+                  "h": 78
+                },
+                {
+                  "x": 373,
+                  "y": 688,
+                  "w": 111,
+                  "h": 41
+                },
+                {
+                  "x": 373,
+                  "y": 760,
+                  "w": 132,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 760,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 869,
+                  "y": 760,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 997,
+                  "y": 760,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 1125,
+                  "y": 760,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 740,
+                  "y": 760,
+                  "w": 38,
+                  "h": 18
+                },
+                {
+                  "x": 1357,
+                  "y": 782,
+                  "w": 114,
+                  "h": 20
+                },
+                {
+                  "x": 1274,
+                  "y": 782,
+                  "w": 84,
+                  "h": 20
+                },
+                {
+                  "x": 1263,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1458,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1400,
+                  "y": 830,
+                  "w": 58,
+                  "h": 20
+                },
+                {
+                  "x": 1211,
+                  "y": 830,
+                  "w": 52,
+                  "h": 20
+                },
+                {
+                  "x": 373,
+                  "y": 832,
+                  "w": 180,
+                  "h": 41
+                },
+                {
+                  "x": 613,
+                  "y": 832,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 740,
+                  "y": 832,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 869,
+                  "y": 832,
+                  "w": 49,
+                  "h": 34
+                },
+                {
+                  "x": 997,
+                  "y": 832,
+                  "w": 49,
+                  "h": 34
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13
+              ],
+              "shows": "Performance and cost-effectiveness",
+              "atWord": 2.083
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "whippan",
+      "audio": "audio/claude-opus-5-5_long_s07.mp3"
+    },
+    {
+      "id": "s08",
+      "type": "CHAPTER",
+      "narration": "So much for capability. Now what it costs, because the price list is the part that lands on your bill.",
+      "durationFrames": 207,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "01",
+          "title": "What it costs",
+          "subtitle": "the numbers on the price list"
+        }
+      },
+      "transition": "slide",
+      "audio": "audio/claude-opus-5-5_long_s08.mp3"
+    },
+    {
+      "id": "s09",
+      "type": "RECORDED_STEP",
+      "narration": "Same page, further down. Input and output tokens are four dollars and twenty dollars per million, twenty percent less than Opus 5. And alongside the price cut they're raising the five-hour usage limits on Pro, Max and Team plans, so the same subscription stretches further.",
+      "durationFrames": 526,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "Source: anthropic.com/claude-opus-5-5",
+          "clips": [
+            {
+              "ref": "rec:o55-release#price",
+              "src": "rec/o55-release/seg-05.mp4",
+              "frames": 58,
+              "label": "what it costs",
+              "focus": false,
+              "wantAtWord": 6,
+              "callouts": [],
+              "zooms": [
+                {
+                  "mark": "cost",
+                  "band": true,
+                  "wantAtWord": 10,
+                  "atWord": 10
+                }
+              ],
+              "id": "price",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "cost": {
+                  "x": 480,
+                  "y": 307,
+                  "w": 611,
+                  "h": 48,
+                  "covers": "Input and output tokens are $4 and $20 per million, 20% less than Opus 5.",
+                  "block": {
+                    "x": 480,
+                    "y": 254,
+                    "w": 631,
+                    "h": 153
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 0,
+                  "w": 621,
+                  "h": 59
+                },
+                {
+                  "x": 1136,
+                  "y": 24,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 1220,
+                  "y": 24,
+                  "w": 40,
+                  "h": 19
+                },
+                {
+                  "x": 1300,
+                  "y": 25,
+                  "w": 76,
+                  "h": 19
+                },
+                {
+                  "x": 164,
+                  "y": 26,
+                  "w": 143,
+                  "h": 16
+                },
+                {
+                  "x": 480,
+                  "y": 80,
+                  "w": 623,
+                  "h": 153
+                },
+                {
+                  "x": 480,
+                  "y": 254,
+                  "w": 631,
+                  "h": 153
+                },
+                {
+                  "x": 480,
+                  "y": 254,
+                  "w": 129,
+                  "h": 21
+                },
+                {
+                  "x": 480,
+                  "y": 429,
+                  "w": 634,
+                  "h": 73
+                },
+                {
+                  "x": 480,
+                  "y": 524,
+                  "w": 638,
+                  "h": 179
+                },
+                {
+                  "x": 480,
+                  "y": 524,
+                  "w": 140,
+                  "h": 21
+                },
+                {
+                  "x": 1184,
+                  "y": 640,
+                  "w": 138,
+                  "h": 24
+                },
+                {
+                  "x": 1184,
+                  "y": 678,
+                  "w": 352,
+                  "h": 78
+                },
+                {
+                  "x": 480,
+                  "y": 724,
+                  "w": 612,
+                  "h": 47
+                },
+                {
+                  "x": 1357,
+                  "y": 782,
+                  "w": 114,
+                  "h": 20
+                },
+                {
+                  "x": 1274,
+                  "y": 782,
+                  "w": 84,
+                  "h": 20
+                },
+                {
+                  "x": 1263,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1458,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1400,
+                  "y": 830,
+                  "w": 58,
+                  "h": 20
+                },
+                {
+                  "x": 1211,
+                  "y": 830,
+                  "w": 52,
+                  "h": 20
+                },
+                {
+                  "x": 480,
+                  "y": 837,
+                  "w": 538,
+                  "h": 40
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22
+              ],
+              "shows": "Performance and cost-effectiveness",
+              "atWord": 6
+            },
+            {
+              "ref": "rec:o55-release#limits",
+              "src": "rec/o55-release/seg-06.mp4",
+              "frames": 49,
+              "label": "and the usage limits",
+              "focus": false,
+              "wantAtWord": 25.417,
+              "callouts": [],
+              "zooms": [
+                {
+                  "mark": "lim",
+                  "band": true,
+                  "wantAtWord": 27.083,
+                  "atWord": 27.083
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 30.5,
+                  "atWord": 30.5
+                }
+              ],
+              "id": "limits",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "lim": {
+                  "x": 752,
+                  "y": 255,
+                  "w": 260,
+                  "h": 21,
+                  "covers": "increasing five-hour usage limits",
+                  "block": {
+                    "x": 480,
+                    "y": 255,
+                    "w": 634,
+                    "h": 74
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 480,
+                  "y": 0,
+                  "w": 617,
+                  "h": 59
+                },
+                {
+                  "x": 480,
+                  "y": 0,
+                  "w": 69,
+                  "h": 7
+                },
+                {
+                  "x": 480,
+                  "y": 81,
+                  "w": 631,
+                  "h": 152
+                },
+                {
+                  "x": 480,
+                  "y": 81,
+                  "w": 129,
+                  "h": 21
+                },
+                {
+                  "x": 480,
+                  "y": 255,
+                  "w": 634,
+                  "h": 74
+                },
+                {
+                  "x": 480,
+                  "y": 350,
+                  "w": 638,
+                  "h": 179
+                },
+                {
+                  "x": 480,
+                  "y": 350,
+                  "w": 140,
+                  "h": 21
+                },
+                {
+                  "x": 480,
+                  "y": 550,
+                  "w": 612,
+                  "h": 48
+                },
+                {
+                  "x": 1184,
+                  "y": 640,
+                  "w": 138,
+                  "h": 24
+                },
+                {
+                  "x": 480,
+                  "y": 664,
+                  "w": 538,
+                  "h": 40
+                },
+                {
+                  "x": 1184,
+                  "y": 678,
+                  "w": 352,
+                  "h": 78
+                },
+                {
+                  "x": 480,
+                  "y": 737,
+                  "w": 632,
+                  "h": 127
+                },
+                {
+                  "x": 1357,
+                  "y": 782,
+                  "w": 114,
+                  "h": 20
+                },
+                {
+                  "x": 1274,
+                  "y": 782,
+                  "w": 84,
+                  "h": 20
+                },
+                {
+                  "x": 1263,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1458,
+                  "y": 830,
+                  "w": 78,
+                  "h": 20
+                },
+                {
+                  "x": 1400,
+                  "y": 830,
+                  "w": 58,
+                  "h": 20
+                },
+                {
+                  "x": 1211,
+                  "y": 830,
+                  "w": 52,
+                  "h": 20
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13
+              ],
+              "shows": "Performance and cost-effectiveness",
+              "atWord": 25.417
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "push",
+      "audio": "audio/claude-opus-5-5_long_s09.mp3"
+    },
+    {
+      "id": "s10",
+      "type": "O55_STAGE",
+      "narration": "Put the three tags side by side. Claude Fable 5.1: ten dollars in, fifty out, per million tokens. Opus 5 was five and twenty-five. The new one is four and twenty — the only tag on the rail that moved, which means everything else held. One model got cheaper this week, and that is all.",
+      "durationFrames": 602,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "source": "List prices · platform.claude.com/docs — pricing",
+        "o55Stage": {
+          "kind": "price-rack",
+          "stageTitle": "input / output, per million tokens",
+          "stage": [
+            {
+              "label": "Claude Fable 5.1",
+              "text": "$10 / $50",
+              "atWord": 5.833
+            },
+            {
+              "label": "Claude Opus 5",
+              "text": "$5 / $25",
+              "atWord": 20.167
+            },
+            {
+              "label": "Claude Opus 5.5",
+              "text": "$4 / $20",
+              "sub": "$5 / $25",
+              "icon": "-20%",
+              "atWord": 26.75,
+              "detailAtWord": 35
+            },
+            {
+              "detail": "note",
+              "label": "One line on the list moved, and it moved down",
+              "atWord": 38.917
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/claude-opus-5-5_long_s10.mp3"
+    },
+    {
+      "id": "s11",
+      "type": "O55_STAGE",
+      "narration": "There's a quieter line underneath, and for coding agents it matters more, because it's the one they pay most often. When a tool sends the same context back again, that's a cache read — and a cache read now costs twenty cents a million instead of fifty. Sixty percent off, and output comes out over thirty percent faster. That is the line agents lean on hardest.",
+      "durationFrames": 636,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "source": "Cost and speed · anthropic.com/claude-opus-5-5",
+        "o55Stage": {
+          "kind": "turnstile",
+          "stageTitle": "what a re-read of the same context costs",
+          "stage": [
+            {
+              "label": "context you already sent",
+              "atWord": 17.333
+            },
+            {
+              "sub": 0.5,
+              "text": 0.2,
+              "label": "per million cached tokens",
+              "icon": "-60%",
+              "atWord": 29.583,
+              "detailAtWord": 35.667
+            },
+            {
+              "text": "30% faster",
+              "label": "output, against Opus 5",
+              "atWord": 42
+            }
+          ]
+        }
+      },
+      "transition": "zoom",
+      "audio": "audio/claude-opus-5-5_long_s11.mp3"
+    },
+    {
+      "id": "s12",
+      "type": "RECORDED_STEP",
+      "narration": "Anthropic grading their own homework is worth only so much, so here's Artificial Analysis, running the same models independently. Their index puts Opus 5.5 top at fifty-eight — but only at maximum effort; turn it down and the same model scores forty-two. One task costs fifty-five cents at the low setting, and five ninety-eight at the top. Effort is a budget decision, not a detail.",
+      "durationFrames": 743,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "Source: artificialanalysis.ai — independent evaluation",
+          "clips": [
+            {
+              "ref": "rec:o55-aa#top",
+              "src": "rec/o55-aa/seg-01.mp4",
+              "frames": 36,
+              "label": "an independent index",
+              "focus": false,
+              "wantAtWord": 9.667,
+              "callouts": [],
+              "id": "top",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 136,
+                  "y": 31,
+                  "w": 124,
+                  "h": 21
+                },
+                {
+                  "x": 606,
+                  "y": 33,
+                  "w": 141,
+                  "h": 18
+                },
+                {
+                  "x": 486,
+                  "y": 33,
+                  "w": 96,
+                  "h": 18
+                },
+                {
+                  "x": 856,
+                  "y": 33,
+                  "w": 91,
+                  "h": 18
+                },
+                {
+                  "x": 771,
+                  "y": 33,
+                  "w": 61,
+                  "h": 18
+                },
+                {
+                  "x": 1033,
+                  "y": 33,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 1247,
+                  "y": 33,
+                  "w": 58,
+                  "h": 18
+                },
+                {
+                  "x": 414,
+                  "y": 33,
+                  "w": 48,
+                  "h": 18
+                },
+                {
+                  "x": 971,
+                  "y": 33,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 33,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 100,
+                  "y": 130,
+                  "w": 574,
+                  "h": 110
+                },
+                {
+                  "x": 116,
+                  "y": 130,
+                  "w": 67,
+                  "h": 15
+                },
+                {
+                  "x": 320,
+                  "y": 130,
+                  "w": 60,
+                  "h": 15
+                },
+                {
+                  "x": 237,
+                  "y": 130,
+                  "w": 54,
+                  "h": 15
+                },
+                {
+                  "x": 454,
+                  "y": 130,
+                  "w": 52,
+                  "h": 15
+                },
+                {
+                  "x": 1312,
+                  "y": 135,
+                  "w": 60,
+                  "h": 18
+                },
+                {
+                  "x": 1410,
+                  "y": 135,
+                  "w": 54,
+                  "h": 18
+                },
+                {
+                  "x": 1396,
+                  "y": 176,
+                  "w": 104,
+                  "h": 15
+                },
+                {
+                  "x": 1438,
+                  "y": 206,
+                  "w": 54,
+                  "h": 15
+                },
+                {
+                  "x": 128,
+                  "y": 298,
+                  "w": 75,
+                  "h": 18
+                },
+                {
+                  "x": 600,
+                  "y": 298,
+                  "w": 42,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 339,
+                  "w": 231,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 339,
+                  "w": 230,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 339,
+                  "w": 225,
+                  "h": 18
+                },
+                {
+                  "x": 1447,
+                  "y": 339,
+                  "w": 37,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 371,
+                  "w": 252,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 371,
+                  "w": 235,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 371,
+                  "w": 221,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 403,
+                  "w": 252,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 403,
+                  "w": 228,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 403,
+                  "w": 228,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 435,
+                  "w": 252,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 435,
+                  "w": 235,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 435,
+                  "w": 235,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 467,
+                  "w": 227,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 467,
+                  "w": 227,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 467,
+                  "w": 221,
+                  "h": 18
+                },
+                {
+                  "x": 116,
+                  "y": 511,
+                  "w": 193,
+                  "h": 15
+                },
+                {
+                  "x": 1060,
+                  "y": 511,
+                  "w": 147,
+                  "h": 15
+                },
+                {
+                  "x": 588,
+                  "y": 511,
+                  "w": 76,
+                  "h": 15
+                },
+                {
+                  "x": 100,
+                  "y": 584,
+                  "w": 660,
+                  "h": 38
+                },
+                {
+                  "x": 931,
+                  "y": 584,
+                  "w": 180,
+                  "h": 21
+                },
+                {
+                  "x": 116,
+                  "y": 640,
+                  "w": 623,
+                  "h": 170
+                },
+                {
+                  "x": 952,
+                  "y": 641,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 1281,
+                  "y": 643,
+                  "w": 319,
+                  "h": 155
+                },
+                {
+                  "x": 952,
+                  "y": 680,
+                  "w": 91,
+                  "h": 18
+                },
+                {
+                  "x": 952,
+                  "y": 722,
+                  "w": 102,
+                  "h": 18
+                },
+                {
+                  "x": 952,
+                  "y": 761,
+                  "w": 102,
+                  "h": 18
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "Claude Opus 5.5: Release Intelligence, Performance & Price",
+              "atWord": 9.667
+            },
+            {
+              "ref": "rec:o55-aa#intel",
+              "src": "rec/o55-aa/seg-02.mp4",
+              "frames": 54,
+              "label": "where it ranks",
+              "focus": false,
+              "wantAtWord": 19.333,
+              "callouts": [],
+              "zooms": [
+                {
+                  "mark": "idx",
+                  "band": true,
+                  "wantAtWord": 24.417,
+                  "atWord": 24.417
+                }
+              ],
+              "id": "intel",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "idx": {
+                  "x": 116,
+                  "y": 261,
+                  "w": 193,
+                  "h": 15,
+                  "covers": "Artificial Analysis Intelligence Index",
+                  "block": {
+                    "x": 116,
+                    "y": 261,
+                    "w": 193,
+                    "h": 15
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 128,
+                  "y": 31,
+                  "w": 132,
+                  "h": 35
+                },
+                {
+                  "x": 600,
+                  "y": 33,
+                  "w": 147,
+                  "h": 33
+                },
+                {
+                  "x": 1033,
+                  "y": 33,
+                  "w": 69,
+                  "h": 33
+                },
+                {
+                  "x": 486,
+                  "y": 33,
+                  "w": 96,
+                  "h": 18
+                },
+                {
+                  "x": 856,
+                  "y": 33,
+                  "w": 91,
+                  "h": 18
+                },
+                {
+                  "x": 771,
+                  "y": 33,
+                  "w": 61,
+                  "h": 18
+                },
+                {
+                  "x": 1247,
+                  "y": 33,
+                  "w": 58,
+                  "h": 18
+                },
+                {
+                  "x": 414,
+                  "y": 33,
+                  "w": 48,
+                  "h": 18
+                },
+                {
+                  "x": 971,
+                  "y": 33,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 1334,
+                  "y": 33,
+                  "w": 39,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 89,
+                  "w": 231,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 89,
+                  "w": 230,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 89,
+                  "w": 225,
+                  "h": 18
+                },
+                {
+                  "x": 1447,
+                  "y": 89,
+                  "w": 37,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 121,
+                  "w": 252,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 121,
+                  "w": 235,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 121,
+                  "w": 221,
+                  "h": 18
+                },
+                {
+                  "x": 1451,
+                  "y": 121,
+                  "w": 33,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 153,
+                  "w": 252,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 153,
+                  "w": 228,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 153,
+                  "w": 228,
+                  "h": 18
+                },
+                {
+                  "x": 1451,
+                  "y": 153,
+                  "w": 33,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 185,
+                  "w": 252,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 185,
+                  "w": 235,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 185,
+                  "w": 235,
+                  "h": 18
+                },
+                {
+                  "x": 1448,
+                  "y": 185,
+                  "w": 37,
+                  "h": 18
+                },
+                {
+                  "x": 610,
+                  "y": 217,
+                  "w": 227,
+                  "h": 18
+                },
+                {
+                  "x": 1082,
+                  "y": 217,
+                  "w": 227,
+                  "h": 18
+                },
+                {
+                  "x": 138,
+                  "y": 217,
+                  "w": 221,
+                  "h": 18
+                },
+                {
+                  "x": 1447,
+                  "y": 217,
+                  "w": 37,
+                  "h": 18
+                },
+                {
+                  "x": 116,
+                  "y": 261,
+                  "w": 193,
+                  "h": 15
+                },
+                {
+                  "x": 1060,
+                  "y": 261,
+                  "w": 147,
+                  "h": 15
+                },
+                {
+                  "x": 588,
+                  "y": 261,
+                  "w": 76,
+                  "h": 15
+                },
+                {
+                  "x": 100,
+                  "y": 334,
+                  "w": 660,
+                  "h": 38
+                },
+                {
+                  "x": 931,
+                  "y": 334,
+                  "w": 180,
+                  "h": 21
+                },
+                {
+                  "x": 116,
+                  "y": 390,
+                  "w": 623,
+                  "h": 170
+                },
+                {
+                  "x": 952,
+                  "y": 391,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 1281,
+                  "y": 393,
+                  "w": 319,
+                  "h": 155
+                },
+                {
+                  "x": 952,
+                  "y": 430,
+                  "w": 91,
+                  "h": 18
+                },
+                {
+                  "x": 952,
+                  "y": 472,
+                  "w": 102,
+                  "h": 18
+                },
+                {
+                  "x": 952,
+                  "y": 511,
+                  "w": 102,
+                  "h": 18
+                },
+                {
+                  "x": 116,
+                  "y": 678,
+                  "w": 64,
+                  "h": 15
+                },
+                {
+                  "x": 370,
+                  "y": 693,
+                  "w": 148,
+                  "h": 39
+                },
+                {
+                  "x": 116,
+                  "y": 734,
+                  "w": 94,
+                  "h": 15
+                },
+                {
+                  "x": 116,
+                  "y": 762,
+                  "w": 96,
+                  "h": 15
+                },
+                {
+                  "x": 116,
+                  "y": 790,
+                  "w": 114,
+                  "h": 15
+                },
+                {
+                  "x": 371,
+                  "y": 796,
+                  "w": 466,
+                  "h": 78
+                },
+                {
+                  "x": 1147,
+                  "y": 842,
+                  "w": 112,
+                  "h": 18
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                17,
+                18
+              ],
+              "shows": "Intelligence",
+              "atWord": 19.333
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "wipe",
+      "audio": "audio/claude-opus-5-5_long_s12.mp3"
+    },
+    {
+      "id": "s13",
+      "type": "O55_STAGE",
+      "narration": "The release thread on the Claude subreddit ran past two hundred comments in hours, and the mood isn't about benchmarks. Top replies are about the rate-limit reset you can now save up and spend when you choose. The thread's own summary is blunter: Opus 5.5 has been cured of its word vomit. Which is, I think, a compliment.",
+      "durationFrames": 586,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "source": "r/ClaudeAI — the Claude Opus 5.5 release thread",
+        "o55Stage": {
+          "kind": "thread",
+          "stageTitle": "what the people using it said",
+          "stage": [
+            {
+              "icon": "img:o55_reddit_comments.png",
+              "atWord": 16.167
+            },
+            {
+              "icon": "img:o55_reddit_tldr.png",
+              "atWord": 28.417
+            },
+            {
+              "label": "finally they are doing reset saving!!!",
+              "sub": "167 upvotes",
+              "atWord": 22.417
+            },
+            {
+              "label": "Opus 5.5 has been cured of its word vomit.",
+              "sub": "the thread's own auto-summary",
+              "atWord": 30.167
+            }
+          ]
+        }
+      },
+      "transition": "morph",
+      "audio": "audio/claude-opus-5-5_long_s13.mp3"
+    },
+    {
+      "id": "s14",
+      "type": "CHAPTER",
+      "narration": "So much for what everyone else says. Let's watch it work — one prompt, one file, no help.",
+      "durationFrames": 208,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "chapter": {
+          "number": "02",
+          "title": "Watching it work",
+          "subtitle": "one prompt, one file, no help"
+        }
+      },
+      "transition": "whippan",
+      "audio": "audio/claude-opus-5-5_long_s14.mp3"
+    },
+    {
+      "id": "s15",
+      "type": "RECORDED_STEP",
+      "narration": "Here's the whole request, typed into Claude Code with Opus 5.5 picked as the model: one self-contained HTML file, no libraries, no network, a canvas animation of a small solar system with three planets and a parallax starfield. Then it's off. The model reads the brief back, picks an approach, and writes — one instruction, an empty folder.",
+      "durationFrames": 650,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "clips": [
+            {
+              "ref": "rec:o55-live#ask",
+              "src": "rec/o55-live/seg-01-ask.mp4",
+              "frames": 225,
+              "label": "the whole request",
+              "focus": false,
+              "wantAtWord": 1,
+              "callouts": [],
+              "overlay": {
+                "kind": "swap",
+                "atWord": 9.667,
+                "from": "default model",
+                "to": "claude-opus-5-5"
+              },
+              "id": "ask",
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {},
+              "ink": [],
+              "changes": [
+                0,
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                12,
+                13,
+                15,
+                16,
+                18,
+                19,
+                21,
+                22,
+                23,
+                25,
+                26,
+                27,
+                29,
+                30,
+                31,
+                32,
+                33,
+                35,
+                38,
+                40,
+                41,
+                42,
+                44,
+                45,
+                46,
+                48,
+                50,
+                52,
+                54,
+                56,
+                57,
+                59,
+                61,
+                62,
+                64,
+                66,
+                68,
+                71,
+                73,
+                75,
+                76,
+                78,
+                80,
+                83,
+                85,
+                86,
+                87,
+                89,
+                90,
+                93,
+                95,
+                96,
+                97,
+                98,
+                100,
+                101,
+                103,
+                106,
+                108,
+                109,
+                111,
+                112,
+                114,
+                116,
+                117,
+                119,
+                120,
+                122,
+                123,
+                125,
+                127,
+                129,
+                131,
+                134,
+                135,
+                136,
+                137,
+                139,
+                140,
+                141,
+                143,
+                145,
+                146,
+                147,
+                148,
+                150,
+                153,
+                154,
+                155,
+                156,
+                158,
+                161,
+                162,
+                165,
+                167,
+                168,
+                170,
+                172,
+                174,
+                175,
+                176,
+                178,
+                180,
+                183,
+                184,
+                186,
+                187,
+                189,
+                190,
+                192,
+                194,
+                196,
+                197,
+                200,
+                202,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209,
+                210,
+                212,
+                213,
+                214,
+                215,
+                216,
+                217,
+                218,
+                219,
+                220,
+                221,
+                222
+              ],
+              "shows": "$ claude --model claude-opus-5-5 --permission-mode bypassPermissions ",
+              "atWord": 3.5
+            },
+            {
+              "ref": "rec:o55-live#start",
+              "src": "rec/o55-live/seg-01-start.mp4",
+              "frames": 195,
+              "label": "and it goes",
+              "focus": false,
+              "wantAtWord": 36.417,
+              "callouts": [],
+              "overlay": {
+                "kind": "chain",
+                "atWord": 43.5,
+                "steps": [
+                  "reads the brief",
+                  "picks an approach",
+                  "writes the file"
+                ]
+              },
+              "id": "start",
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "marks": {},
+              "ink": [],
+              "changes": [
+                8,
+                9,
+                12,
+                13,
+                14,
+                19,
+                20,
+                30,
+                32,
+                33,
+                37,
+                38,
+                40,
+                41,
+                46,
+                47,
+                48,
+                56,
+                57,
+                64,
+                65,
+                66,
+                67,
+                69,
+                71,
+                77,
+                80,
+                84,
+                85,
+                87,
+                94,
+                95,
+                97,
+                100,
+                103,
+                104,
+                107,
+                110,
+                111,
+                114,
+                115,
+                117,
+                120,
+                123,
+                124,
+                125,
+                127,
+                131,
+                134,
+                137,
+                140,
+                141,
+                144,
+                147,
+                151,
+                152,
+                154,
+                158,
+                161,
+                164,
+                167,
+                168,
+                171,
+                174,
+                178,
+                181,
+                188,
+                191,
+                194
+              ],
+              "shows": "$ claude --model claude-opus-5-5 --permission-mode bypassPermissions ",
+              "atWord": 32.667
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "slide",
+      "audio": "audio/claude-opus-5-5_long_s15.mp3"
+    },
+    {
+      "id": "s16",
+      "type": "RECORDED_STEP",
+      "narration": "Fifty seconds later, one receipt: three hundred and twenty-eight lines written to orbit dot html. Open the file, and there it is — three planets on real elliptical orbits, trails behind them, a ringed one on the wide orbit, and a starfield in three layers. First try, and no corrections.",
+      "durationFrames": 566,
+      "timingSource": "tts",
+      "background": "zoneA",
+      "data": {
+        "recordedStep": {
+          "atWord": 1,
+          "sourceNote": "Claude Code · Opus 5.5, recorded in one run",
+          "clips": [
+            {
+              "ref": "rec:o55-live#wrote",
+              "src": "rec/o55-live/seg-01-wrote.mp4",
+              "frames": 62,
+              "label": "the receipt",
+              "focus": false,
+              "wantAtWord": 1,
+              "callouts": [],
+              "id": "wrote",
+              "bbox": {
+                "x": 48,
+                "y": 30,
+                "w": 1552,
+                "h": 848
+              },
+              "ink": [
+                {
+                  "x": 68,
+                  "y": 73,
+                  "w": 1509,
+                  "h": 115
+                },
+                {
+                  "x": 87,
+                  "y": 207,
+                  "w": 1012,
+                  "h": 19
+                },
+                {
+                  "x": 68,
+                  "y": 245,
+                  "w": 1500,
+                  "h": 39
+                },
+                {
+                  "x": 68,
+                  "y": 303,
+                  "w": 722,
+                  "h": 249
+                },
+                {
+                  "x": 68,
+                  "y": 571,
+                  "w": 347,
+                  "h": 19
+                },
+                {
+                  "x": 68,
+                  "y": 610,
+                  "w": 1509,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                7,
+                13,
+                17,
+                20,
+                21,
+                23,
+                24,
+                27,
+                30,
+                33,
+                34,
+                35,
+                36,
+                37,
+                40,
+                43,
+                47,
+                50,
+                54,
+                57,
+                60
+              ],
+              "shows": "$ claude --model claude-opus-5-5 --permission-mode bypassPermissions ",
+              "said": "PS o55-live> claude --model claude-opus-5-5 --permission-mode bypassPermissions 'Build orbit.html: one self-contained HTML file, no libraries, no network. A canv\nas animation of a small solar system — a glowing star, three planets on elliptical orbits at different speeds, faint trails behind each planet, and a parallax st\narfield. Make it look good on a dark page. Write the file, then stop.'\n ▐▛███▛█ Claude Code v2.1.280\n▝▜██████▀ Opus 5.5 · Claude Pro\n ▝▝ ▝▝ /private/tmp/iauteur-rec/o55-live\n Opus 5.5 is now your default model and it draws down usage faster than Sonnet 5. Switch anytime with /model.\n❯ Build orbit.html: one self-contained HTML file, no libraries, no network. A canvas animation of a small solar system — a glowing star, three planets on\n elliptical orbits at different speeds, faint trails behind each planet, and a parallax starfield. Make it look good on a dark page. Write the file, then stop.\n⏺ Write(orbit.html)\n ⎿  Wrote 328 lines to orbit.html\n 1 <!DOCTYPE html>\n 2 <html lang=\"en\">\n 3 <head>\n 4 <meta charset=\"utf-8\">\n 5 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n 6 <title>Orbit</title>\n 7 <style>\n 8 html, body {\n 9 margin: 0;\n 10 height: 100%;\n … +318 lines (ctrl+o to expand)\n· Whirlpooling… (51s · ↓ 6.5k tokens)\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⚠ Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker · restart with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 to keep future transcripts\n ⏵⏵ bypass permissions on (shift+tab to cycle) · esc to interrupt",
+              "atWord": 4
+            },
+            {
+              "ref": "rec:o55-orbit#orbit2",
+              "src": "rec/o55-orbit/seg-02.mp4",
+              "frames": 141,
+              "label": "the file, running",
+              "focus": false,
+              "wantAtWord": 15.75,
+              "callouts": [],
+              "sourceNote": "orbit.html — that run's own file, opened in a browser",
+              "overlay": {
+                "kind": "tally",
+                "atWord": 15.75,
+                "value": 328,
+                "label": "lines, first try"
+              },
+              "id": "orbit2",
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 1600,
+                  "h": 900
+                }
+              ],
+              "changes": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140
+              ],
+              "atWord": 15.75
+            }
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          }
+        }
+      },
+      "transition": "push",
+      "audio": "audio/claude-opus-5-5_long_s16.mp3"
+    },
+    {
+      "id": "s17",
+      "type": "O55_STAGE",
+      "narration": "So who should move? If you run coding agents or long terminal sessions, this is the easy yes, because it's cheaper per run than what you're on. But if your work is scientific research or automation, read that table again, because another model still wins those. Cheaper is not the same as better.",
+      "durationFrames": 528,
+      "timingSource": "tts",
+      "background": "zoneB",
+      "data": {
+        "o55Stage": {
+          "kind": "switchboard",
+          "stageTitle": "two answers, and they are not the same",
+          "stage": [
+            {
+              "label": "Coding agents",
+              "sub": "long terminal sessions",
+              "value": 1,
+              "atWord": 4.083
+            },
+            {
+              "label": "Scientific research",
+              "sub": "another model still leads",
+              "value": 0,
+              "atWord": 22.083
+            },
+            {
+              "label": "Business automation",
+              "sub": "another model still leads",
+              "value": 0,
+              "atWord": 24.75
+            },
+            {
+              "detail": "note",
+              "label": "Cheaper is not the same as better at everything",
+              "atWord": 33.417
+            }
+          ]
+        }
+      },
+      "transition": "dip",
+      "audio": "audio/claude-opus-5-5_long_s17.mp3"
+    },
+    {
+      "id": "s18",
+      "type": "OUTRO_CTA",
+      "narration": "If that was useful, a like really helps, and subscribe for the next one. Tell me in the comments what you'd hand it first.",
+      "durationFrames": 227,
+      "timingSource": "tts",
+      "background": "zoneC",
+      "data": {
+        "message": "Like, share and subscribe",
+        "sub": "what would you hand it first?"
+      },
+      "transition": "zoom",
+      "audio": "audio/claude-opus-5-5_long_s18.mp3"
+    }
+  ]
+}

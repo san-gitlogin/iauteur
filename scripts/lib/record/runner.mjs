@@ -174,6 +174,7 @@ export const inkFor = async (page) => {
         if (b && b.w >= 6 && b.h >= 3) out.push(b);
       }
     }
+    const fullBleed = [];
     for (const el of document.querySelectorAll('img,svg,canvas,video,picture')) {
       const cs = getComputedStyle(el);
       if (cs.visibility === 'hidden' || cs.display === 'none' || Number(cs.opacity) < 0.05) continue;
@@ -184,9 +185,16 @@ export const inkFor = async (page) => {
       // same — which is the no-ink blindness again, wearing a number. What an overlay has
       // to stay off is the TEXT sitting on the backdrop, and that is already collected
       // above. Measured: the Anthropic hero returned exactly one 1600x900 rect.
-      if (b.w >= 0.92 * VP.w && b.h >= 0.6 * VP.h) continue;
+      //
+      // ⚠ "BACKDROP" ASSUMES THERE IS SOMETHING IN FRONT OF IT. A page whose whole body is
+      // one <canvas> — a generated animation, a game, a map — has no text at all, so this
+      // skip emptied the list and check-recordings called the take defective. It is not a
+      // backdrop there, it is THE PICTURE. Held back and pushed below only if nothing else
+      // was found, which keeps the hero case exactly as it was.
+      if (b.w >= 0.92 * VP.w && b.h >= 0.6 * VP.h) { fullBleed.push(b); continue; }
       out.push(b);
     }
+    if (!out.length) out.push(...fullBleed);
     return {rects: out, vp: VP};
   }).catch(() => ({rects: [], vp: null}));
 
@@ -252,8 +260,15 @@ export const inkFor = async (page) => {
   const useful = vp
     ? blocks.filter((b) => !(b.w >= 0.92 * vp.w && b.h >= 0.6 * vp.h))
     : blocks;
-  return useful.length
-    ? useful.sort((a, b) => b.w * b.h - a.w * a.h).slice(0, 48).sort((a, b) => a.y - b.y)
+  // ...UNLESS DROPPING IT LEAVES NOTHING, which is the second half of the canvas case
+  // handled above: a page that is one full-bleed picture arrives here as a single
+  // viewport-sized block, and this filter turned it straight back into `null` — "nothing
+  // was measured", the answer check-recordings exists to reject. A screen that is full IS
+  // a measurement; it tells the solver to corner the overlay instead of centring it on the
+  // artwork. Keep it when it is all there is, drop it whenever anything smaller survived.
+  const kept = useful.length ? useful : blocks;
+  return kept.length
+    ? kept.sort((a, b) => b.w * b.h - a.w * a.h).slice(0, 48).sort((a, b) => a.y - b.y)
     : null;
 };
 

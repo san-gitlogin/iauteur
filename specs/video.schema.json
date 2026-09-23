@@ -469,6 +469,7 @@
               "UV_STAGE",
               "ASTRA_STAGE",
               "HIDFI_STAGE",
+              "O55_STAGE",
               "CMD_PING",
               "CMD_TRACEROUTE",
               "CMD_MTR",
@@ -8156,6 +8157,56 @@
             "if": {
               "properties": {
                 "type": {
+                  "const": "O55_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "o55Stage": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "description": "ladder | podium | callipers | price-rack | turnstile | thread | switchboard. An unregistered kind renders LOUDLY in red."
+                        },
+                        "headline": {
+                          "type": "string",
+                          "description": "Optional headline, <=38 chars. Most beats carry none — the object is the headline."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Small uppercase caption above the picture, <=40 chars, authored per beat."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The elements, each landing on its own atWord. ladder: one item per model with value = cost fraction 0-1, sub = capability fraction 0-1, detail = the figure shown on the puck, text:'from' marks where the mover starts and detail:'moves' marks the mover. podium: detail:'event' items name the events (label = the event, text = its one-line gloss), and each bar joins its event with group:'<event label>' (plumbing, never drawn), printing text (the figure) at value (its height), label = the model, detail:'rival' when the bar is somebody else's. callipers: [left rule, right rule, {sub: closed fraction, text: the unit suffix}, {label: the quote, sub: who said it}]; a rule sets text = its score and label = its model. price-rack: label = the model, text = the price now, sub = the old price when it moved, icon = the percentage chip, value = the unit line, detailAtWord = when the strike draws; detail:'note' is the standing line underneath. turnstile: [the flow, the meter {sub: from, text: to, label, icon}, the speed {text, label}]. thread: icon:'img:<file>' items are the screenshots, the rest are pulled quotes. switchboard: value 1 = throw it, 0 = stay; detail:'note' is the line underneath."
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "Per-kind mode switch; unused by the seven current pictures."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic accent: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
                   "const": "HIDFI_STAGE"
                 }
               }
@@ -8170,7 +8221,7 @@
                       "properties": {
                         "kind": {
                           "type": "string",
-                          "description": "problem | reveal | plug | phones | kit | connect | ports | tools | driver | command | swap | network | devices | close. An unregistered kind renders LOUDLY in red."
+                          "description": "problem | reveal | plug | phones | kit | connect | ports | tools | driver | command | swap | network | devices | close | readout | mirror | session. An unregistered kind renders LOUDLY in red."
                         },
                         "headline": {
                           "type": "string",

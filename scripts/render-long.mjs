@@ -146,9 +146,20 @@ for (let i = 0; i < segments; i++) {
   // AND THE PROGRESS HAS TO BE VISIBLE. `--log=error` prints nothing at all when stdout is
   // not a TTY, so a backgrounded render is a black box for hours — there is no way to tell
   // a slow segment from a hung one. `info` prints plain progress lines that survive a pipe.
+  //
+  // AND THE PER-FRAME TIMEOUT IS A SETTING TOO, which nothing here had ever passed — so every
+  // long cut this repo has rendered ran on Remotion's 30-SECOND default. That is fine for a
+  // drawn beat and marginal for the ones this repo deliberately makes expensive: masters are
+  // captured at 4x delivery so a camera move does not soften (THE MASTER MUST OUTLIVE THE
+  // ZOOM), and a 3840px source being decoded, warped and re-sampled under a loaded machine
+  // does not always make it. Measured 2026-09-23: frame 6347 of the Opus 5.5 cut timed out on
+  // an artificialanalysis.ai clip and killed segment 3 of 4, an hour into the render — the
+  // frame was not stuck, it was slow, and the difference cost the whole pass. A generous
+  // ceiling still catches a genuine hang; it just stops calling a slow frame a dead one.
   execFileSync('node', [REMOTION, 'render', comp, part,
     `--frames=${start}-${end}`, '--muted',
     `--concurrency=${process.env.RENDER_CONCURRENCY || 2}`,
+    `--timeout=${process.env.RENDER_FRAME_TIMEOUT || 180000}`,
     '--log=info'], {stdio: 'inherit'});
   parts.push(part);
   // DELETE THE SCRATCH BETWEEN PASSES. Peak usage is then one segment, not the whole timeline —

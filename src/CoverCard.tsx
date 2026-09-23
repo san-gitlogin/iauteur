@@ -50,8 +50,12 @@ export const CoverCard: React.FC<{cover: CoverConfig}> = ({cover}) => {
           // is 500x1085) far past the frame, so the cover showed nothing but board — owner:
           // "the shorts thumb is even worse, where only the ESP32 Board is visible and nothing
           // else". Whichever axis binds, binds, and the title keeps its room.
-          <Img src={staticFile('assets/' + cover.art.replace(/^img:/, ''))}
-            style={{width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: vertical ? '52%' : '44%'}} />
+          cover.art.startsWith('img:')
+            ? <Img src={staticFile('assets/' + cover.art.replace(/^img:/, ''))}
+                style={{width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: vertical ? '52%' : '44%'}} />
+            // …and a si:/lucide: mark is drawn free rather than fetched as a file (it used to
+            // 404 on public/assets/si:<brand>, which cancels the render rather than degrading).
+            : <AssetIcon asset={cover.art} size={(vertical ? 360 : 300) * scale} bare />
         ) : cover.asset ? <AssetIcon asset={cover.asset} size={(vertical ? 240 : 200) * scale} /> : null}
         <div
           style={{
