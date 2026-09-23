@@ -437,21 +437,23 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
   // animation where you just move the board near to laptop is not correct. The ESP32 board
   // must be connected via a Type C cable to the laptop." So the board stands where it would
   // stand on a desk and a USB-C lead runs from its port to the laptop's, seating at both ends.
-  const boardH = v.vertical ? Math.min(h * 0.26, v.s(430)) : Math.min(h * 0.44, v.s(300));
+  const boardH = v.vertical ? Math.min(h * 0.30, v.s(820)) : Math.min(h * 0.44, v.s(300));
   const boardW = boardH * FRONT.ar;
   const lapX = lx + lw * 1.08;                        // the laptop's right-hand edge
   // THE BOARD SITS NEXT TO THE MACHINE, ON A SHORT LEAD. Owner: "You need not show that
   // much distance with cable and the board. Place the board near to the computer and have a
   // small cable connected to it." A metre of drawn cable across the frame says nothing; the
   // two objects reading as one connected pair says everything.
-  const boardX = v.vertical ? w * 0.60 : lapX + v.s(150);
-  const boardY = v.vertical ? ly + lw * 0.76 + v.s(120) : ly + lw * 0.30;
+  // 9:16: the laptop takes the top, and the board and the phone share the row beneath it —
+  // side by side, never on top of each other.
+  const boardX = v.vertical ? w * 0.06 : lapX + v.s(150);
+  const boardY = v.vertical ? ly + lw * 0.74 : ly + lw * 0.30;
   const portX = boardX + FRONT.usb.x * boardW;        // the board's USB port
   const portY = boardY + boardH * 0.985;              // its outer edge — the plug stops here
   const seat = v.s(20) * (1 - inOn);                  // both ends settle together
   const green = v.sem('green');
   const fx = Math.sin(drive) * 0.3, fy = Math.cos(drive * 1.3) * 0.22;
-  const ph = Math.min(h * 0.58, v.s(520));
+  const ph = v.vertical ? Math.min(h * 0.34, v.s(980)) : Math.min(h * 0.58, v.s(520));
   return (
     <div style={{position: 'relative', width: w, height: h}}>
       <div style={{position: 'absolute', left: lx, top: ly}}>
@@ -481,13 +483,16 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
       <svg width={w} height={h} style={{position: 'absolute', inset: 0, pointerEvents: 'none'}}>
         {[{c: '#191b20', sw: v.s(10)}, {c: '#2b2f37', sw: v.s(3)}].map((l, i) => (
           <path key={i}
-            d={`M ${lapX + v.s(34)} ${deckY} C ${lapX + v.s(96)} ${deckY}, ${portX} ${deckY + v.s(40)}, ${portX} ${portY + v.s(46)}`}
+            d={v.vertical
+              ? `M ${lx + v.s(26)} ${deckY} C ${lx - v.s(40)} ${deckY + v.s(120)}, ${portX - v.s(90)} ${portY - v.s(40)}, ${portX} ${portY + v.s(46)}`
+              : `M ${lapX + v.s(34)} ${deckY} C ${lapX + v.s(96)} ${deckY}, ${portX} ${deckY + v.s(40)}, ${portX} ${portY + v.s(46)}`}
             fill="none" stroke={l.c} strokeWidth={l.sw} strokeLinecap="round"
             pathLength={1} strokeDasharray={1} strokeDashoffset={1 - inOn} />
         ))}
       </svg>
       {/* the laptop end: the connector's TIP meets the side of the deck, body outside */}
-      <div style={{position: 'absolute', left: lapX + seat, top: deckY, transform: 'translate(0, -50%) rotate(-90deg)',
+      <div style={{position: 'absolute', left: v.vertical ? lx - seat : lapX + seat, top: deckY,
+        transform: `translate(0, -50%) rotate(${v.vertical ? 90 : -90}deg)`,
         transformOrigin: 'left center', opacity: Math.min(1, inOn * 2)}}>
         <UsbPlug w={v.s(46)} kind="c" />
       </div>
@@ -508,8 +513,8 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
       </div>
       {/* the phone, joined over the board's own WiFi */}
       {/* the phone sits clear of the board — they used to overlap at the right edge */}
-      <div style={{position: 'absolute', right: 0, top: h * 0.5 - ph / 2, opacity: Math.min(1, phOn * 1.3),
-        transform: `translateY(${(1 - phOn) * v.s(80)}px)`}}>
+      <div style={{position: 'absolute', right: 0, top: v.vertical ? ly + lw * 0.70 : h * 0.5 - ph / 2,
+        opacity: Math.min(1, phOn * 1.3), transform: `translateY(${(1 - phOn) * v.s(80)}px)`}}>
         <Phone v={v} h={ph}>
           <Img src={staticFile('assets/hidfi-screens/01-trackpad.png')} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
           <div style={{position: 'absolute', left: `${50 + fx * 90}%`, top: `${22 + fy * 50}%`, width: v.s(36), height: v.s(36),
@@ -517,8 +522,10 @@ const PlugIn: React.FC<HidfiVizProps> = ({items, accent, w, h}) => {
             opacity: drive > 0 ? 1 : 0}} />
         </Phone>
       </div>
-      <Waves x={w - ph * 0.49 - v.s(60)} y={h * 0.5} size={v.s(110)} color={v.a} on={phOn} dir={-90} />
-      <div style={{position: 'absolute', right: 0, top: h * 0.5 + ph / 2 + v.s(16), width: ph * 0.49, opacity: phOn}}>
+      <Waves x={w - ph * 0.49 - v.s(60)} y={v.vertical ? ly + lw * 0.70 + ph * 0.4 : h * 0.5}
+        size={v.s(110)} color={v.a} on={phOn} dir={-90} />
+      <div style={{position: 'absolute', right: 0, top: (v.vertical ? ly + lw * 0.70 : h * 0.5 - ph / 2) + ph + v.s(16),
+        width: ph * 0.49, opacity: phOn}}>
         <Caption v={v} title={it(6).label ?? 'your phone'} sub={it(6).sub} size={26} />
       </div>
     </div>
