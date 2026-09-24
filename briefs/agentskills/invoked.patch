@@ -1,0 +1,81 @@
+diff --git a/index.js b/index.js
+index 7fb8db5..472c08b 100644
+--- a/index.js
++++ b/index.js
+@@ -125,6 +125,8 @@ export default function slugify(string, options) {
+ 
+ export function slugifyWithCounter() {
+ 	const occurrences = new Map();
++	// Every slug handed out so far, as a different input can slugify to a suffixed slug that was already given out, such as `foo 2` after `foo` was seen twice.
++	const usedSlugs = new Set();
+ 
+ 	const countable = (string, options) => {
+ 		string = slugify(string, options);
+@@ -135,18 +137,26 @@ export function slugifyWithCounter() {
+ 
+ 		const stringLower = string.toLowerCase();
+ 		const numberless = occurrences.get(removeCounterSuffix(stringLower)) || 0;
+-		const counter = occurrences.get(stringLower);
+-		occurrences.set(stringLower, typeof counter === 'number' ? counter + 1 : 1);
+-		const newCounter = occurrences.get(stringLower) || 2;
+-		if (newCounter >= 2 || numberless > 2) {
+-			string = `${string}-${newCounter}`;
++		let counter = (occurrences.get(stringLower) || 0) + 1;
++		let result = string;
++		if (counter >= 2 || numberless > 2 || usedSlugs.has(stringLower)) {
++			result = `${string}-${counter}`;
+ 		}
+ 
+-		return string;
++		while (usedSlugs.has(result.toLowerCase())) {
++			counter++;
++			result = `${string}-${counter}`;
++		}
++
++		occurrences.set(stringLower, counter);
++		usedSlugs.add(result.toLowerCase());
++
++		return result;
+ 	};
+ 
+ 	countable.reset = () => {
+ 		occurrences.clear();
++		usedSlugs.clear();
+ 	};
+ 
+ 	return countable;
+diff --git a/test.js b/test.js
+index 6edb10c..b2883f3 100644
+--- a/test.js
++++ b/test.js
+@@ -262,6 +262,30 @@ test('counter', t => {
+ 	t.is(slugify2(''), '');
+ });
+ 
++test('counter never hands out the same slug twice', t => {
++	const slugify = slugifyWithCounter();
++	t.is(slugify('foo'), 'foo');
++	t.is(slugify('foo'), 'foo-2');
++	t.is(slugify('foo 2'), 'foo-2-1');
++	t.is(slugify('foo 2'), 'foo-2-2');
++	t.is(slugify('foo'), 'foo-3');
++});
++
++test('counter skips a suffixed slug that an earlier literal input already took', t => {
++	const slugify = slugifyWithCounter();
++	t.is(slugify('foo 2'), 'foo-2');
++	t.is(slugify('foo'), 'foo');
++	t.is(slugify('foo'), 'foo-3');
++	t.is(slugify('foo'), 'foo-4');
++});
++
++test('counter output stays unique across many mixed inputs', t => {
++	const slugify = slugifyWithCounter();
++	const inputs = ['foo', 'foo 2', 'foo', 'foo-2', 'foo 2 1', 'foo', 'foo-3', 'foo 2', 'foo-2-2', 'foo', 'foo-1', 'foo 1', 'foo'];
++	const slugs = inputs.map(input => slugify(input));
++	t.is(new Set(slugs).size, slugs.length, `Duplicate slug in: ${slugs.join(', ')}`);
++});
++
+ test('preserve characters', t => {
+ 	t.is(slugify('foo#bar', {preserveCharacters: []}), 'foo-bar');
+ 	t.is(slugify('foo.bar', {preserveCharacters: []}), 'foo-bar');

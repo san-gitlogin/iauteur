@@ -975,6 +975,58 @@ export const assertAgentRunCannotPrompt = (demo) => {
   }
 };
 
+/**
+ * A `waitFor` NEEDLE THAT THE INPUT ALREADY CONTAINS MATCHES THE ECHO, NOT THE WORK.
+ *
+ * Recorded 2026-09-24 on the agent-skills cut. The take asked the agent to "print exactly:
+ * RUN COMPLETE" and waited for `RUN COMPLETE`. Claude Code's interactive UI echoes the
+ * SUBMITTED PROMPT back into the terminal above its answer, so the needle appeared while the
+ * banner still said "Bootstrapping…". The step ended after 7.2 seconds, reported `exit=0`,
+ * wrote three clean segments and passed every gate — and the agent had not done anything yet.
+ * It then went on working for minutes AFTER the camera stopped, so the workspace ended up
+ * modified by a run that exists in no footage. Found by noticing 7.2s where a rehearsal took
+ * minutes; nothing in the manifest said a word about it.
+ *
+ * This is the completion-signal twin of the trust-prompt hang: both are a take that "succeeds"
+ * while capturing none of the work. The general rule is that a completion signal may not be
+ * derivable from the input — not from the command line, and not from any file the take writes,
+ * because an agent echoes its prompt and a demo often `cat`s that prompt on camera first.
+ *
+ * Describe the marker in words and match the literal it produces:
+ *     prompt   "…print a line containing only three dollar signs followed by the word OK."
+ *     waitFor  "$$$"
+ */
+export const assertWaitForCannotSelfMatch = (demo) => {
+  const prepFiles = Object.entries(demo.prep?.files ?? {});
+  for (const s of demo.steps ?? []) {
+    const needle = s.waitFor;
+    if (typeof needle !== 'string' || !needle) continue;
+
+    if (typeof s.cmd === 'string' && s.cmd.includes(needle)) {
+      throw new Error(
+        `Step "${s.id}" waits for ${JSON.stringify(needle)}, but its own command already contains it:\n` +
+        `    ${s.cmd}\n\n` +
+        `The terminal echoes the command, so the wait is satisfied before anything runs — the step ` +
+        `ends in seconds, reports success, and captures none of the work (recorded 2026-09-24).\n\n` +
+        `Describe the marker in words and match the literal it produces.`);
+    }
+
+    for (const [rel, content] of prepFiles) {
+      if (typeof content === 'string' && content.includes(needle)) {
+        throw new Error(
+          `Step "${s.id}" waits for ${JSON.stringify(needle)}, but prep writes it into "${rel}":\n\n` +
+          `    ${content.split('\n').find((l) => l.includes(needle))?.trim().slice(0, 120)}\n\n` +
+          `An agent echoes the prompt it was given, and a take usually \`cat\`s that file on camera ` +
+          `first — either way the needle is on screen before the work starts, so the take ends early ` +
+          `while reporting success (recorded 2026-09-24, agent-skills cut).\n\n` +
+          `Describe the marker in words and match the literal it produces, e.g.\n` +
+          `    prompt.txt  "…print a line containing only three dollar signs followed by the word OK."\n` +
+          `    waitFor     "$$$"`);
+      }
+    }
+  }
+};
+
 // ── step actions ─────────────────────────────────────────────────────────────
 
 const actions = {
@@ -1054,10 +1106,18 @@ const actions = {
     await sleep(1100);
     await page.keyboard.press('Enter');
     await sleep(1600);
-    const want = path.basename(step.path).toLowerCase();
+    // A TAB LABEL IS NOT ONE TEXT NODE. VS Code renders the basename and the extension as
+    // SEPARATE spans, so `innerText` on the active tab comes back as "triage\n.py" and a
+    // plain `.includes("triage.py")` is false while the correct file is plainly open — a
+    // gate failing a take that did exactly what it was told. Measured 2026-09-23 on the
+    // Laya cut: the file opened, the tab was right, and the recording was thrown away.
+    // Same reasoning as the U+00A0 note in `reveal` below: NORMALISE BOTH SIDES before
+    // comparing, because what the DOM stores is not what a human typed into the demo.
+    const flat = (s) => String(s || '').replace(/\s+/g, '').toLowerCase();
+    const want = flat(path.basename(step.path));
     const tabs = await page.locator('.part.editor .tab').allInnerTexts().catch(() => []);
     const active = await page.locator('.part.editor .tab.active').first().innerText().catch(() => '');
-    if (!active.toLowerCase().includes(want)) {
+    if (!flat(active).includes(want)) {
       const shot = path.resolve('out/rec-proof', `openfile-fail-${step.id}.png`);
       await page.screenshot({path: shot}).catch(() => {});
       throw new Error(
@@ -1573,6 +1633,7 @@ export const recordDemo = async (demo, {outDir, keepFrames = false, headless = f
   // minutes, and a prompt on camera is a defect even when it does not hang.
   assertAgentWorkspaceTrusted(demo, ws);
   assertAgentRunCannotPrompt(demo);
+  assertWaitForCannotSelfMatch(demo);
 
   const rec = path.resolve(outDir || path.join('public/rec', slug));
   freshRecDir(rec, slug);

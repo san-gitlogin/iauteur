@@ -1,0 +1,728 @@
+{
+  "meta": {
+    "topic": "Agent Skills \u2014 the Prove-It pattern",
+    "format": "short",
+    "fps": 30,
+    "subject": "Agent Skills",
+    "audioPrefix": "agent-skills-prove-it_short",
+    "pronounce": {
+      "slugify": "slug-ih-fy"
+    },
+    "onePayoff": "an agent with 25 skills installed reported a test result it never measured",
+    "openLoop": "Twenty-four tests passed and the bug was still there.",
+    "topicAxes": [
+      "entity-novelty",
+      "workflow"
+    ],
+    "screenplay": "explainer",
+    "seo": {
+      "title": "24 Tests Passed. The Bug Was Still There. #ai #coding",
+      "altTitles": [
+        "The AI Said The Tests Passed. It Never Ran Them."
+      ],
+      "hook": "An AI agent with 25 engineering skills installed fixed a real bug \u2014 and reported a test result it never measured.",
+      "description": "Agent Skills (addyosmani/agent-skills, MIT) installed on a sealed copy of sindresorhus/slugify at commit 2acf5b3. Same bug, two runs, one sentence apart. Full breakdown on the channel.",
+      "pinned": "Does your green test suite actually prove anything?",
+      "sources": [
+        "Agent Skills \u2014 github.com/addyosmani/agent-skills (MIT)",
+        "slugify \u2014 github.com/sindresorhus/slugify (MIT), commit 2acf5b3"
+      ],
+      "queries": [
+        "agent skills",
+        "ai coding agent tests",
+        "tdd with ai"
+      ],
+      "tags": "agent skills,addy osmani,claude code,ai coding,tdd,test driven development,shorts"
+    }
+  },
+  "brand": {
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
+    "channel": "YOUR CHANNEL",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "STILL BROKEN",
+    "badge": "Agent Skills",
+    "note": "24 TESTS PASSED",
+    "asset": "img:askills-green-wall.png",
+    "art": "img:askills-green-wall.png",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Agent Skills is installed. Twenty-four tests passed. The bug was still there.",
+      "data": {
+        "headline": "Agent Skills, tested",
+        "subtext": "twenty-four passed \u2014 still broken",
+        "heroAsset": "lucide:flask-conical",
+        "hookVariant": "statement",
+        "headlineAtWord": 1,
+        "heroAtWord": 7
+      },
+      "durationFrames": 171,
+      "audio": "audio/agent-skills-prove-it_short_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "This library turns a title into a web address. Ask twice and it hands back the same address twice \u2014 the one thing it exists to prevent. Now run its own tests. Twenty-four passed.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:askills-bug#repro",
+              "label": "the same slug, twice",
+              "focus": false,
+              "atWord": 3.083,
+              "zooms": [],
+              "callouts": [],
+              "id": "repro",
+              "src": "rec/askills-bug/seg-03.mp4",
+              "frames": 93,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "dupe": {
+                  "x": 73,
+                  "y": 128,
+                  "w": 47,
+                  "h": 19,
+                  "covers": "foo-2"
+                },
+                "__cmd": {
+                  "x": 242,
+                  "y": 71,
+                  "w": 131,
+                  "h": 19,
+                  "covers": "node repro.mjs"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 300,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                3,
+                6,
+                7,
+                9,
+                11,
+                12,
+                13,
+                15,
+                16,
+                17,
+                18,
+                20,
+                22,
+                23,
+                24,
+                25,
+                35,
+                36,
+                38,
+                39,
+                54
+              ],
+              "shows": "$ node repro.mjs",
+              "said": "PS askills-bench> node repro.mjs\nfoo\nfoo-2\nfoo-2\nPS askills-bench>"
+            },
+            {
+              "ref": "rec:askills-bug#suite",
+              "label": "and the suite is green",
+              "focus": false,
+              "atWord": 14.333,
+              "zooms": [],
+              "callouts": [],
+              "id": "suite",
+              "src": "rec/askills-bug/seg-04.mp4",
+              "frames": 144,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "green": {
+                  "x": 92,
+                  "y": 698,
+                  "w": 141,
+                  "h": 19,
+                  "covers": "24 tests passed"
+                },
+                "__cmd": {
+                  "x": 242,
+                  "y": 71,
+                  "w": 75,
+                  "h": 19,
+                  "covers": "npm test"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 244,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 109,
+                  "w": 319,
+                  "h": 38
+                },
+                {
+                  "x": 92,
+                  "y": 204,
+                  "w": 459,
+                  "h": 475
+                },
+                {
+                  "x": 73,
+                  "y": 698,
+                  "w": 160,
+                  "h": 38
+                }
+              ],
+              "changes": [
+                0,
+                2,
+                4,
+                6,
+                7,
+                9,
+                10,
+                12,
+                13,
+                15,
+                16,
+                26,
+                27,
+                32,
+                41,
+                78,
+                83,
+                84,
+                87,
+                88,
+                92,
+                108
+              ],
+              "shows": "$ xo && ava",
+              "said": "PS askills-bench> npm test\n> @sindresorhus/slugify@3.0.1 test\n> xo && ava\n \u2714 main\n \u2714 decamelize acronyms\n \u2714 possessives and contractions\n \u2714 custom separator\n \u2714 custom replacements\n \u2714 lowercase option\n \u2714 decamelize option\n \u2714 supports German umlauts\n \u2714 supports Vietnamese\n \u2714 supports Arabic\n \u2714 supports Persian / Farsi\n \u2714 supports Urdu\n \u2714 supports Pashto\n \u2714 supports Russian\n \u2714 supports Romanian\n \u2714 supports Turkish\n \u2714 supports Armenian\n \u2714 leading underscore\n \u2714 trailing dash\n \u2714 counter\n \u2714 preserve characters\n \u2714 locale option\n \u2714 transliterate option disabled\n \u2714 slugifyWithCounter() is not vulnerable to ReDoS\n \u2500\n 24 tests passed\nPS askills-bench>"
+            }
+          ],
+          "sourceNote": "sindresorhus/slugify \u00b7 MIT \u00b7 commit 2acf5b3",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 355,
+      "audio": "audio/agent-skills-prove-it_short_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "That's Agent Skills on its official GitHub page \u2014 twenty-five workflows, free. We installed them, then told an AI agent to fix it. Here's every tool call it made. Three. It read the code, wrote the fix, then checked itself with a script it invented.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:askills-gh#repo",
+              "label": "the official page",
+              "focus": false,
+              "atWord": 3.417,
+              "zooms": [],
+              "callouts": [],
+              "id": "repo",
+              "src": "rec/askills-gh/seg-01.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "owner": {
+                  "x": 56,
+                  "y": 91,
+                  "w": 106,
+                  "h": 23,
+                  "covers": "addyosmani",
+                  "block": {
+                    "x": 56,
+                    "y": 91,
+                    "w": 106,
+                    "h": 23
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 412,
+                  "y": 26,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 296,
+                  "y": 26,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 26,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 26,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 26,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 176,
+                  "y": 91,
+                  "w": 108,
+                  "h": 23
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 106,
+                  "h": 23
+                },
+                {
+                  "x": 1211,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 655,
+                  "y": 150,
+                  "w": 128,
+                  "h": 16
+                },
+                {
+                  "x": 278,
+                  "y": 150,
+                  "w": 83,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 208,
+                  "w": 46,
+                  "h": 19
+                },
+                {
+                  "x": 354,
+                  "y": 214,
+                  "w": 62,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 244,
+                  "w": 258,
+                  "h": 43
+                },
+                {
+                  "x": 192,
+                  "y": 272,
+                  "w": 142,
+                  "h": 186
+                },
+                {
+                  "x": 403,
+                  "y": 272,
+                  "w": 299,
+                  "h": 16
+                },
+                {
+                  "x": 968,
+                  "y": 272,
+                  "w": 107,
+                  "h": 38
+                },
+                {
+                  "x": 1136,
+                  "y": 304,
+                  "w": 112,
+                  "h": 83
+                },
+                {
+                  "x": 570,
+                  "y": 319,
+                  "w": 307,
+                  "h": 16
+                },
+                {
+                  "x": 1246,
+                  "y": 340,
+                  "w": 63,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 360,
+                  "w": 307,
+                  "h": 16
+                },
+                {
+                  "x": 649,
+                  "y": 401,
+                  "w": 233,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 407,
+                  "w": 183,
+                  "h": 248
+                },
+                {
+                  "x": 570,
+                  "y": 442,
+                  "w": 307,
+                  "h": 16
+                },
+                {
+                  "x": 731,
+                  "y": 483,
+                  "w": 299,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 483,
+                  "w": 121,
+                  "h": 16
+                },
+                {
+                  "x": 286,
+                  "y": 483,
+                  "w": 71,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 523,
+                  "w": 278,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 564,
+                  "w": 328,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 564,
+                  "w": 68,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 605,
+                  "w": 451,
+                  "h": 16
+                },
+                {
+                  "x": 731,
+                  "y": 646,
+                  "w": 299,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 646,
+                  "w": 121,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 646,
+                  "w": 71,
+                  "h": 16
+                },
+                {
+                  "x": 648,
+                  "y": 687,
+                  "w": 384,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 694,
+                  "w": 148,
+                  "h": 53
+                },
+                {
+                  "x": 570,
+                  "y": 728,
+                  "w": 449,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 768,
+                  "w": 418,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 782,
+                  "w": 73,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 809,
+                  "w": 473,
+                  "h": 16
+                },
+                {
+                  "x": 235,
+                  "y": 809,
+                  "w": 69,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 834,
+                  "w": 96,
+                  "h": 66
+                },
+                {
+                  "x": 649,
+                  "y": 850,
+                  "w": 386,
+                  "h": 16
+                },
+                {
+                  "x": 1216,
+                  "y": 868,
+                  "w": 32,
+                  "h": 32
+                },
+                {
+                  "x": 1256,
+                  "y": 868,
+                  "w": 32,
+                  "h": 32
+                },
+                {
+                  "x": 1296,
+                  "y": 868,
+                  "w": 32,
+                  "h": 32
+                },
+                {
+                  "x": 1336,
+                  "y": 868,
+                  "w": 32,
+                  "h": 32
+                },
+                {
+                  "x": 570,
+                  "y": 891,
+                  "w": 466,
+                  "h": 9
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "About"
+            },
+            {
+              "ref": "rec:askills-control-diff#order",
+              "label": "three tool calls",
+              "focus": false,
+              "atWord": 27.833,
+              "zooms": [],
+              "callouts": [],
+              "id": "order",
+              "src": "rec/askills-control-diff/seg-01.mp4",
+              "frames": 104,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 242,
+                  "y": 71,
+                  "w": 178,
+                  "h": 19,
+                  "covers": "node .rec/order.mjs"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 515,
+                  "h": 95
+                }
+              ],
+              "changes": [
+                0,
+                3,
+                4,
+                6,
+                8,
+                11,
+                12,
+                14,
+                17,
+                20,
+                21,
+                24,
+                25,
+                26,
+                27,
+                30,
+                33,
+                34,
+                35,
+                46,
+                47,
+                48,
+                49,
+                53,
+                69
+              ],
+              "shows": "$ node .rec/order.mjs",
+              "said": "PS askills-bench> node .rec/order.mjs\n 1. Bash ls && cat index.js && grep -n \"Counter\" -A30\n 2. Bash python3 - <<'EOF'\n 3. Bash node -e \"\nPS askills-bench>"
+            }
+          ],
+          "sourceNote": "addyosmani/agent-skills \u00b7 MIT",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1.083
+        }
+      },
+      "durationFrames": 483,
+      "audio": "audio/agent-skills-prove-it_short_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "CLAIM_CHECK",
+      "transition": "morph",
+      "background": "zoneA",
+      "narration": "Then it told us all the old tests still pass. That's true. It never ran them.",
+      "data": {
+        "claimCheck": {
+          "headline": "True. And never measured.",
+          "subject": "test runs",
+          "tallyLabel": "every tool call, counted",
+          "hitLabel": "used",
+          "claims": [
+            {
+              "text": "All the old counter tests pass as before.",
+              "tag": "it said",
+              "color": "green",
+              "atWord": 1
+            }
+          ],
+          "tally": [
+            {
+              "label": "reads",
+              "value": 1,
+              "threshold": 3,
+              "atWord": 1.833
+            },
+            {
+              "label": "edits",
+              "value": 1,
+              "threshold": 3,
+              "atWord": 2.25
+            },
+            {
+              "label": "own fuzz check",
+              "value": 1,
+              "threshold": 3,
+              "atWord": 2.25
+            },
+            {
+              "label": "test runs",
+              "value": 0,
+              "threshold": 3,
+              "color": "red",
+              "atWord": 4
+            }
+          ],
+          "atWord": 1
+        }
+      },
+      "durationFrames": 169,
+      "audio": "audio/agent-skills-prove-it_short_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "OUTRO_CTA",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "We ran it again with one sentence added: use the testing skill. That time it wrote a failing test first. Installed is not invoked. Full breakdown on the channel.",
+      "data": {
+        "message": "Installed is not invoked.",
+        "sub": "addyosmani/agent-skills \u00b7 MIT"
+      },
+      "durationFrames": 341,
+      "audio": "audio/agent-skills-prove-it_short_s05.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

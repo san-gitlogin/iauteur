@@ -1,0 +1,121 @@
+{
+  "slug": "askills-gh",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "https://github.com/addyosmani/agent-skills",
+    "settleMs": 4000
+  },
+  "steps": [
+    {
+      "id": "repo",
+      "action": "pause",
+      "ms": 1800,
+      "label": "the official repository, and who wrote it",
+      "marks": [
+        {
+          "id": "owner",
+          "text": "addyosmani",
+          "copy": 1
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "action": "scroll",
+      "target": "text=Production-grade engineering skills for AI coding agents.",
+      "settleMs": 1800,
+      "label": "the one-line description, in their own words",
+      "marks": [
+        {
+          "id": "desc",
+          "text": "Production-grade engineering skills for AI coding agents."
+        }
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "action": "scroll",
+      "target": "text=DEFINE",
+      "settleMs": 2200,
+      "label": "their own drawing of the six phases",
+      "marks": [
+        {
+          "id": "phases",
+          "text": "DEFINE",
+          "to": "SHIP"
+        }
+      ]
+    },
+    {
+      "id": "commands",
+      "action": "scroll",
+      "target": "text=9 slash commands that map to the development lifecycle",
+      "settleMs": 2000,
+      "label": "nine slash commands",
+      "marks": [
+        {
+          "id": "nine",
+          "text": "9 slash commands that map to the development lifecycle"
+        }
+      ]
+    },
+    {
+      "id": "all25",
+      "action": "scroll",
+      "target": "text=All 25 Skills",
+      "settleMs": 2000,
+      "label": "twenty-five skills, grouped by phase"
+    },
+    {
+      "id": "anatomy",
+      "action": "scroll",
+      "target": "text=Every skill follows a consistent anatomy",
+      "settleMs": 2400,
+      "label": "what is actually inside one skill file",
+      "marks": [
+        {
+          "id": "fm",
+          "text": "description: Guides agents through [task]."
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "action": "scroll",
+      "target": "text=Anti-rationalization.",
+      "settleMs": 2400,
+      "label": "the design choice worth stealing",
+      "marks": [
+        {
+          "id": "anti",
+          "text": "Anti-rationalization."
+        },
+        {
+          "id": "seems",
+          "text": "Seems right"
+        }
+      ]
+    },
+    {
+      "id": "licence",
+      "action": "scroll",
+      "target": "text=MIT - use these skills in your projects",
+      "settleMs": 1600,
+      "label": "the licence",
+      "marks": [
+        {
+          "id": "mit",
+          "text": "MIT - use these skills in your projects, teams, and tools."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "askills-bug",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "askills-bench",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1800,
+  "settings": {"workbench.startupEditor": "none"},
+  "prep": {
+    "files": {
+      "repro.mjs": "import {slugifyWithCounter} from './index.js';\n\nconst slugify = slugifyWithCounter();\n\nconsole.log(slugify('foo'));\nconsole.log(slugify('foo'));\nconsole.log(slugify('foo 2'));\n"
+    }
+  },
+  "steps": [
+    {"id": "sealed", "action": "run", "cmd": "git log --oneline -1", "label": "where this copy of the library stands",
+     "focus": "terminal", "clearFirst": true, "expect": {"contains": "2acf5b3", "exitCode": 0},
+     "marks": [{"id": "sha", "text": "2acf5b3"}]},
+    {"id": "what", "action": "run", "cmd": "cat repro.mjs", "label": "three calls, and what each should give back",
+     "focus": "terminal", "clearFirst": true, "expect": {"contains": "slugifyWithCounter", "exitCode": 0}},
+    {"id": "repro", "action": "run", "cmd": "node repro.mjs", "label": "the bug, in three lines",
+     "focus": "terminal", "clearFirst": true, "expect": {"contains": "foo-2", "exitCode": 0},
+     "marks": [{"id": "dupe", "text": "foo-2"}]},
+    {"id": "suite", "action": "run", "cmd": "npm test", "label": "and now the part that matters",
+     "focus": "terminal", "clearFirst": true, "timeout": 300000,
+     "expect": {"contains": "24 tests passed", "exitCode": 0},
+     "marks": [{"id": "green", "text": "24 tests passed"}]},
+    {"id": "exit", "action": "run", "cmd": "echo $?", "label": "a clean exit code, with the bug still in the code",
+     "focus": "terminal", "clearFirst": true, "expect": {"contains": "0", "exitCode": 0},
+     "marks": [{"id": "zero", "text": "0"}]}
+  ]
+}

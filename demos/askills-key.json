@@ -1,0 +1,80 @@
+{
+  "slug": "askills-key",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "askills-bench2",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 2000,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      ".rec/order.mjs": "import fs from 'node:fs';\nimport os from 'node:os';\nimport path from 'node:path';\n\n// Claude Code's own session transcript for this workspace. Nothing here is ours\n// except the printing: the tool calls are what the agent actually did, in order.\nconst dir = path.join(os.homedir(), '.claude', 'projects', '-private-tmp-iauteur-rec-askills-bench2');\nconst files = fs.existsSync(dir)\n  ? fs.readdirSync(dir).filter(f => f.endsWith('.jsonl')).map(f => path.join(dir, f))\n  : [];\n// FAIL LOUDLY. An empty read-out looks exactly like \"the agent used no tools\", and a\n// transcript is silently absent whenever CLAUDE_CODE_CHILD_SESSION is inherited.\nif (!files.length) {\n  console.error('NO TRANSCRIPT in ' + dir +\n    ' \u2014 run the agent with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1');\n  process.exit(1);\n}\nconst newest = files.sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)[0];\n\nlet n = 0;\nfor (const line of fs.readFileSync(newest, 'utf8').split('\\n')) {\n  if (!line.trim()) continue;\n  let d; try { d = JSON.parse(line); } catch { continue; }\n  const c = d.message?.content;\n  if (!Array.isArray(c)) continue;\n  for (const b of c) {\n    if (b.type !== 'tool_use') continue;\n    n++;\n    const i = b.input || {};\n    const what = b.name === 'Skill' ? i.skill\n      : (b.name === 'Edit' || b.name === 'Write') ? path.basename(i.file_path || '')\n      : String(i.command || '').split('\\n')[0].slice(0, 44);\n    console.log(String(n).padStart(2) + '. ' + b.name.padEnd(6) + ' ' + what);\n  }\n}\nif (!n) { console.error('TRANSCRIPT HAS NO TOOL CALLS \u2014 that is not a result, that is a bug'); process.exit(1); }\n"
+    },
+    "copy": {
+      "upstream.patch": "briefs/agentskills/upstream.patch"
+    }
+  },
+  "steps": [
+    {
+      "id": "order",
+      "action": "run",
+      "cmd": "node .rec/order.mjs",
+      "label": "the same read-out, for the run that was told to use the skill",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Skill",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "skill",
+          "text": "Skill"
+        }
+      ]
+    },
+    {
+      "id": "stat",
+      "action": "run",
+      "cmd": "git diff --stat",
+      "label": "what it changed - and what it left alone",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "test.js",
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "mine",
+      "action": "run",
+      "cmd": "git diff index.js | sed -n '8,28p'",
+      "label": "the fix it wrote",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "theirs",
+      "action": "run",
+      "cmd": "sed -n '6,26p' upstream.patch",
+      "label": "and the fix the maintainer actually shipped",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      }
+    }
+  ]
+}

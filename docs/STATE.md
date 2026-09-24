@@ -1,5 +1,183 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-09-24 — Agent Skills / the Prove-It pattern (28 scenes, 15:44 wide + 50s short)
+
+`topics/agent-skills-prove-it` reviews **addyosmani/agent-skills** (98,799 stars, MIT) and tests it
+against a REAL bug with an answer key: `sindresorhus/slugify` parked at `2acf5b3`, one commit before
+the maintainer's own fix `6d97501`. Builders: `briefs/agentskills/build_long.mjs` + `build_shorts.mjs`.
+Facts: `briefs/agentskills/00-dossier.md`. The A/B evidence: `briefs/agentskills/01-ab-finding.md`.
+
+**The finding that shaped the cut.** With all 25 skills installed and advertised, a plain bug report
+did NOT use them: three tool calls — read, rewrite `index.js`, then a self-invented fuzz loop. It
+never ran the test suite, and then reported *"all the old counter tests pass as before."* That
+sentence is true and it never measured it. Adding one sentence ("Use the test-driven-development
+skill") to the identical prompt produced: Skill tool first, failing tests written and run (RED), then
+the fix, then `npm test` green at 27. Both arms landed on the maintainer's own mechanism — a Set of
+already-issued slugs plus a bump loop — so the honest claim is NOT "better code", it is "an answer
+with proof attached". The cut says so out loud in s27 and names what two runs cannot support.
+
+**Eight takes:** `askills-gh` (browser, the repo page), `askills-files`, `askills-install`,
+`askills-bug` (the sealed bench: `2acf5b3`, the 3-line repro, **24 tests passed, exit 0**),
+`askills-control` + `askills-control-diff` (run one), `askills-invoked` (run two), `askills-key`
+(both fixes vs upstream). Workspaces `/private/tmp/iauteur-rec/askills-bench` and `-bench2`, both
+levelled before the A/B (same HEAD, zero dirty tracked files, 25 skills each).
+
+**Two recording defects found and SEALED this session** (both produce a take that reports success
+while capturing nothing):
+
+1. **`waitFor` matched the echoed prompt.** Claude Code echoes the submitted prompt above its answer,
+   so waiting on `RUN COMPLETE` resolved at "Bootstrapping…": the step ended in 7.2s with `exit=0`,
+   cut three clean segments of an agent that had not started, then kept working AFTER the camera
+   stopped and left the workspace modified by a run in no footage. **CLAUDE.md had already carried
+   this law since 2026-09-12 (Archify) with no gate** — a law with no gate is a habit. Now
+   `assertWaitForCannotSelfMatch` in `scripts/lib/record/runner.mjs` refuses any `waitFor` whose
+   needle appears in the step's own `cmd` **or in any `prep.files` content** (a demo usually `cat`s
+   the prompt on camera, so the file is a second echo path). Correction #65, break-tested both ways.
+   The working pattern: describe the marker in WORDS, match the literal —
+   *"print a line containing only three dollar signs followed by the word OK"* → `waitFor: "$$$"`.
+2. **Transcript saving silently off.** A `claude` launched from inside another Claude Code session
+   inherits `CLAUDE_CODE_CHILD_SESSION`, so no `.jsonl` is written and the tool-call read-out comes
+   back EMPTY — which reads as "the agent used no tools", the very claim the video makes. Fixed with
+   `CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1` on the demo's command; the reader (`.rec/order.mjs`)
+   now exits non-zero rather than printing an empty list.
+
+**Three traps worth knowing for the next cut:**
+- **Post-sync `atWord` is still a WORD index, not frames.** Hand-editing anchors with frame numbers
+  puts them past the end of the read; the linter reports it as "last anchor fires -94s before the
+  scene ends". Convert, or let `retarget-anchors` do it.
+- **`retarget-anchors` matches LABELS and takes a late occurrence.** It moved `slugify` from 5.5s to
+  23.0s — twenty seconds after the voice named it. Dry-run it, read the list, revert the bad ones.
+- **A helper written into the recording workspace is linted by the project under test.** `order.mjs`
+  in the repo root made `npm test` print `46 errors` (xo). It lives in `.rec/` now.
+
+**Where it landed:** 28 scenes, 8 footage (29%), 16 distinct scene types, no component on 3 beats.
+Thumbnail + shorts cover draw the real artefact — `public/assets/askills-green-wall.png`, the wall of
+24 green ticks cropped from `askills-bug/seg-04`, with provenance in `public/assets/SOURCES.json`.
+Five camera zooms were dropped rather than left pointing at things the voice never named
+(`check-camera` green at 7 of 7). Voice audit: every scene heard as written.
+
+## 2026-09-23 — Laya SHIPPED (33 scenes, 12:08 wide + 54s short) · `LAYA_STAGE`, 7 new pictures
+
+`topics/laya-decisions-open/out/wide-dark.mp4` — **21,851 frames EXACT, drift 0 ms, audio mean
+−22.6 dB**. Plus `short-dark.mp4` (54.1 s, −22.8 dB), `thumb.png`, `cover.png` and both upload kits.
+
+**The subject runs, so the cut runs it.** `laya` installs from PyPI in one command and loads on
+a CPU, so the spine of this video is a real install and a real run on this machine, not a tour of
+somebody's README. Every performance figure spoken is one the camera framed:
+**80 ms for three typed questions** on a laptop CPU (the repo's 32.8 ms is a **T4** number and is
+always attributed to the repo), a 7.1 s first call that is almost entirely model build, routing
+decisions at **0.08–0.11 ms**, and `laya 0.3.7` installed on screen.
+
+**★ The best thing in the cut is a limitation we reproduced.** The README has a section headed
+*"Honest limits"* saying `laya-multilingual` ships with **no fitted temperatures at all**. Our own
+take then shows it: the same churn question returns **0.918** on English and **0.041** on the
+Hindi that says the same thing — correctly ranked, but nowhere near a 0.5 threshold. The narration
+is careful about this: the model is not "wrong", the scale is unfitted, and the instruction is the
+repo's own. A review that only reads the wins is an advert.
+
+**Seven purpose-built pictures, `src/layaViz.tsx` behind one `LAYA_STAGE` type** (the `O55_STAGE` /
+`UV_STAGE` pattern — LAW 0n says plan PICTURES, not scene types):
+`one-pass` (one clock, two lanes — one spreads along it, one is a single column), `mask-slots`
+(**the** picture of the video: a socket per option inside the sequence, a bidirectional reading
+band, risers gathering the answer back out AT the sockets), `entropy-dial`, `proper-score`,
+`router-gate`, `budget-split`, `free-swap`.
+
+**The neighbouring cut shaped the casting.** `topics/jev-decisions-measured` shipped three days
+earlier on the same subject area, so the rule was "the best component this channel did not just
+use". Exactly one Jev-era build (`DECISION_SLOTS`) is reused, once; pack is `terminalcli` rather
+than moderndark.
+
+### ★ ANCHORS ARE AUTHORED AS PHRASES NOW, AND THAT SHOULD SPREAD
+
+`briefs/laya/build.py` has an `at(narration, phrase)` helper that resolves an anchor to a word
+INDEX at build time. Hand-counted integers were the old way, and they have a silent failure mode:
+edit a sentence and every anchor after it moves onto the wrong word, with nothing failing anywhere
+— the picture just lands late. Three separate rounds of narration edits (voice-guard fixes,
+payoff-anchor fixes, a voice/visual fix) went through this cut, and not one of them could break an
+anchor, because a missing phrase raises instead. It also made `retarget-anchors` unnecessary:
+VIDEO_METHOD §11 already says phrase-authored anchors are exact after sync, and its preflight only
+flagged four LABELS spoken late, which is a different thing.
+
+**The matcher's one trap, paid for immediately:** normalise punctuation at the ENDS of a word only.
+Stripping all non-word characters kills `0.95` and `n-o-u-l`; keeping them means `GitHub.` never
+matches `GitHub`.
+
+
+### ★ Two failures on the way out that cost real time
+
+**The voiceover HUNG, and it writes its timings only at the end.** edge-tts blocked on a socket
+read with no timeout of its own: 88 minutes at 0% CPU, 13 finished mp3s, and NO timestamps file —
+so the audio existed and the spec could not be synced to it. Re-run in **5-scene chunks with a
+420 s timeout and a retry**, the same 22 scenes finished in four minutes. `ONLY=` merges into the
+existing timestamps, which is what makes chunking safe. Chunk any long TTS run.
+
+**The render died on DISK, not on content.** Remotion buffers a whole segment of frames before
+encoding, and at ~5 GB free Chrome started refusing to fetch the recordings —
+*"Failed to fetch … This could be caused by Chrome rejecting the request because the disk space is
+low."* Segments 0–4 had already been written, and because the cache keys on frame count, the
+resumed run reused them and re-rendered only 5–9. **Peak scratch is about 1.7 GB per segment at
+10 segments**, so the lever when space is short is MORE segments, not fewer.
+
+### ★ `CoverCard` never reads `subtitle`
+
+The shorts cover authored one, and the rendered PNG simply did not have it — the
+"field nothing reads" defect, in a CORE component this time, where `check-field-use --spec`
+does not look (it checks design packs). The claim moved into `badge`, which is drawn. Worth a
+guard the next time someone is in that file.
+
+### ★ Choose a name's respelling by TRANSCRIBING candidates, never by guessing
+
+`audit-voice.py` failed eight scenes with *subject "laya" said 2x, heard 0x*, and the fix took
+four attempts because every one of them was a guess until the last. What Ava actually does:
+
+| `meta.pronounce` | what the transcriber heard back |
+|---|---|
+| *(none — the raw name)* | **"Leia"** / "Lea" — she mispronounces it unaided |
+| `Lah-yah` | **"wayao"** |
+| `LAH-yuh` | **"Aletia"** |
+| `Laiya` | "Liya" |
+| **`Lahya`** | **"Laya"** ✓ |
+
+`Lahya` is the one that is both correct out loud (LAH-yah, as the author says it) and heard back
+as the written name. **The method is the lesson:** generate the candidate through edge-tts,
+transcribe it, and read the result — six candidates cost about a minute, and the alternative was
+three rounds of re-voicing 22 scenes. A homophone needs the same treatment from the other side:
+*"theirs"* came back as *"there's"*, and that is fixed in the SCRIPT, not the voice.
+
+### ★ A gate that fails correct work is the expensive kind (sealed)
+
+`openFile` refused a take that had done exactly what it was told: VS Code renders a tab's basename
+and extension as SEPARATE spans, so `innerText` reads `"triage\n.py"` and
+`.includes("triage.py")` is false while the right file is plainly open. **The recording was thrown
+away.** Same class as the U+00A0 note already in `reveal`: what the DOM stores is not what a human
+typed into the demo, so a read-back gate NORMALISES BOTH SIDES. Sealed in `check-corrections.mjs`
+(now **63/63**) and break-tested in both directions.
+
+### What the pipeline caught before a frame was rendered
+
+| gate | what it refused |
+|---|---|
+| `anchor-spec` | 4 beats whose footage outran the narration — fixed with MORE EXPLANATION, and by moving 3 trailing camera moves off the last clip of their beat (a move there has no words left to live in) |
+| `lint-spec` | 18 errors, including a HOOK card that never said "Laya" and two sentences narrating that our own footage was REAL |
+| voice guard | PRONOUN FOG / PRONOUN DENSITY / FEW REASONS, then REPEATED OPENER twice — first "the" ×19, then "Laya" ×16 after the first fix overcorrected |
+| `check-narration-visual` | 4 beats where the voice and the picture shared no content word. It does **not** stem: `belong` never matches `belongs` |
+| `check-field-use --spec` | `LIST_BUILD.icon` authored and never drawn — the `terminalcli` pack does not read it. Dropped from the spec, because a pack change is its own approved job (LAW 6) |
+
+### Two beats cast, built and then cut
+
+Recorded because the reason is reusable. **`BAR_COMPARE`** (four benchmark wins) was cut because
+the beat before it FILMS the table those rows live in, and reading them aloud after is the
+duplication LAW 0f.3 names. **The `omp-laya-judge` adoption beat** was cut purely for runtime, and
+that is the weaker reason of the two.
+
+### Disk
+
+An 11-minute render plus a 2.4 GB model download does not fit on a machine at 99%. Cleared with the
+owner's approval: `out/hookbundle` (1.1 GB, a regenerable webpack cache), old render segment caches,
+and non-Laya Hugging Face models — **keeping `faster-whisper-medium`, which `audit-voice.py`
+requires** and whose own comment says `small` mishears names.
+
+
 ## 2026-09-23 — Claude Opus 5.5 (18 scenes, 5:04 + 57s short) · `O55_STAGE`, 7 new pictures
 
 **The brief had a hard cap, and that was the shaping constraint.** Owner: *"The video must not

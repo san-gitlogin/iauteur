@@ -1,0 +1,67 @@
+{
+  "slug": "askills-control",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "askills-bench",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1800,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "prompt.txt": "In this repo, slugifyWithCounter() can hand out the same slug twice. slugify('foo') returns foo, calling it again returns foo-2, and then slugify('foo 2') also returns foo-2 - two different inputs, one slug. Please fix it. When you are completely finished, print a line containing only three dollar signs followed by the word OK.\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "ask",
+      "action": "run",
+      "cmd": "cat prompt.txt",
+      "label": "exactly what we asked for - nothing about skills",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "same slug twice",
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "skills",
+      "action": "run",
+      "cmd": "ls .claude/skills | wc -l",
+      "label": "the skills are installed and visible the whole time",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "25",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "n",
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "action": "run",
+      "background": true,
+      "waitFor": "$$$",
+      "timeout": 1800000,
+      "settleMs": 6000,
+      "cmd": "CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1 claude --permission-mode bypassPermissions \"$(cat prompt.txt)\"",
+      "label": "we just tell it what is broken",
+      "focus": "terminal",
+      "clearFirst": true
+    }
+  ]
+}

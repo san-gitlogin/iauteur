@@ -1256,6 +1256,19 @@ PRODUCT DID THE THING.
 6. **`waitFor` MATCHES TOOL OUTPUT, NEVER YOUR OWN PROMPT.** An interactive agent echoes the
    request on screen, so waiting for a sentinel you wrote into the prompt resolves instantly and
    cuts the take at second 44. Wait for something the TOOL prints — a receipt line, a sha256.
+   **This law was written on 2026-09-12 and broken again on 2026-09-24** (agent-skills cut: a
+   take asked for "print exactly: RUN COMPLETE" and waited on `RUN COMPLETE`, ended in 7.2s
+   reporting `exit=0`, and cut three clean segments of an agent that had not started — which then
+   kept working for minutes after the camera stopped, leaving the workspace changed by a run in no
+   footage). It was a LAW WITH NO GATE, so it was a habit, and habits lapse.
+   **Now enforced:** `assertWaitForCannotSelfMatch` in `scripts/lib/record/runner.mjs` refuses any
+   `waitFor` whose needle appears in the step's own `cmd` **or in any `prep.files` content** —
+   because a demo usually `cat`s the prompt on camera first, so the file is a second echo path.
+   Sealed in `check-corrections.mjs`; break-tested in both directions.
+   The marker is described in WORDS and matched as the literal it produces:
+   `"…print a line containing only three dollar signs followed by the word OK."` → `waitFor: "$$$"`.
+   The same reasoning applies to `expect.contains` on any step whose command quotes its own
+   expectation, and to any future completion signal derived from input rather than from work.
 7. **PRINT MODE IS INVISIBLE.** `claude -p` buffers and shows nothing for the whole run; the
    interactive TUI streams tool calls and is what a viewer recognises. Owner: *"I dont see any
    streaming output and it is just blank. Why so?"*

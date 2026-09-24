@@ -1,0 +1,79 @@
+{
+  "slug": "askills-control-diff",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "askills-bench",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1800,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      ".rec/order.mjs": "import fs from 'node:fs';\nimport os from 'node:os';\nimport path from 'node:path';\n\n// Claude Code's own session transcript for this workspace. Nothing here is ours\n// except the printing: the tool calls are what the agent actually did, in order.\nconst dir = path.join(os.homedir(), '.claude', 'projects', '-private-tmp-iauteur-rec-askills-bench');\nconst files = fs.existsSync(dir)\n  ? fs.readdirSync(dir).filter(f => f.endsWith('.jsonl')).map(f => path.join(dir, f))\n  : [];\n// FAIL LOUDLY. An empty read-out looks exactly like \"the agent used no tools\", and a\n// transcript is silently absent whenever CLAUDE_CODE_CHILD_SESSION is inherited.\nif (!files.length) {\n  console.error('NO TRANSCRIPT in ' + dir +\n    ' \u2014 run the agent with CLAUDE_CODE_FORCE_SESSION_PERSISTENCE=1');\n  process.exit(1);\n}\nconst newest = files.sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)[0];\n\nlet n = 0;\nfor (const line of fs.readFileSync(newest, 'utf8').split('\\n')) {\n  if (!line.trim()) continue;\n  let d; try { d = JSON.parse(line); } catch { continue; }\n  const c = d.message?.content;\n  if (!Array.isArray(c)) continue;\n  for (const b of c) {\n    if (b.type !== 'tool_use') continue;\n    n++;\n    const i = b.input || {};\n    const what = b.name === 'Skill' ? i.skill\n      : (b.name === 'Edit' || b.name === 'Write') ? path.basename(i.file_path || '')\n      : String(i.command || '').split('\\n')[0].slice(0, 44);\n    console.log(String(n).padStart(2) + '. ' + b.name.padEnd(6) + ' ' + what);\n  }\n}\nif (!n) { console.error('TRANSCRIPT HAS NO TOOL CALLS \u2014 that is not a result, that is a bug'); process.exit(1); }\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "order",
+      "action": "run",
+      "cmd": "node .rec/order.mjs",
+      "label": "every tool call it made, in the order it made them",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Bash",
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "stat",
+      "action": "run",
+      "cmd": "git diff --stat",
+      "label": "and what it changed",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "index.js",
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "howverified",
+      "action": "run",
+      "cmd": "node .rec/order.mjs | tail -1",
+      "label": "how it satisfied itself the fix worked",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "suite",
+      "action": "run",
+      "cmd": "npm test 2>&1 | tail -3",
+      "label": "the suite it never ran",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "contains": "tests passed",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "count",
+          "text": "24 tests passed"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "slug": "askills-files",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "askills-repo",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "steps": [
+    {
+      "id": "count",
+      "action": "run",
+      "cmd": "ls skills | wc -l",
+      "label": "how many skills ship in the pack",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "25",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "n",
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "id": "onedir",
+      "action": "run",
+      "cmd": "ls skills/test-driven-development && wc -c < skills/test-driven-development/SKILL.md",
+      "label": "one file, and how big it is",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "SKILL.md",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "only",
+          "text": "SKILL.md"
+        },
+        {
+          "id": "bytes",
+          "text": "16517"
+        }
+      ]
+    },
+    {
+      "id": "open",
+      "action": "openFile",
+      "path": "skills/test-driven-development/SKILL.md",
+      "typePath": true,
+      "label": "the whole skill \u2014 one markdown file"
+    },
+    {
+      "id": "frontmatter",
+      "action": "reveal",
+      "text": "name: test-driven-development",
+      "settleMs": 1400,
+      "label": "its name, and the line that decides when it fires",
+      "marks": [
+        {
+          "id": "name",
+          "text": "name: test-driven-development"
+        }
+      ]
+    },
+    {
+      "id": "trigger",
+      "action": "reveal",
+      "settleMs": 1600,
+      "label": "the rule the whole skill exists to enforce",
+      "marks": [
+        {
+          "id": "rule",
+          "text": "A test that passes immediately proves nothing."
+        }
+      ],
+      "line": 51
+    },
+    {
+      "id": "stack",
+      "action": "reveal",
+      "settleMs": 1600,
+      "label": "it refuses to guess your toolchain",
+      "marks": [
+        {
+          "id": "assume",
+          "text": "Never assume a default like"
+        }
+      ],
+      "line": 34
+    }
+  ]
+}

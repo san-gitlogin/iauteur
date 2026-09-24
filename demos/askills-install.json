@@ -1,0 +1,97 @@
+{
+  "slug": "askills-install",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "askills-bench",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "steps": [
+    {
+      "id": "before",
+      "action": "run",
+      "cmd": "ls -a | head -12",
+      "label": "the project before we touch it",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "index.js",
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "add",
+      "action": "run",
+      "cmd": "npx --yes skills add addyosmani/agent-skills < /dev/null",
+      "label": "one line installs the whole pack",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "contains": "test-driven-development"
+      },
+      "marks": [
+        {
+          "id": "tdd",
+          "text": "test-driven-development"
+        }
+      ]
+    },
+    {
+      "id": "count",
+      "action": "run",
+      "cmd": "ls .agents/skills | wc -l",
+      "label": "how many landed",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "25",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "n",
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "id": "wired",
+      "action": "run",
+      "cmd": "ls -l .claude/skills | sed -n 2,4p | awk '{print $1, $9, $10, $11}'",
+      "label": "how Claude Code sees them \u2014 symlinks, not copies",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "agents/skills",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "link",
+          "text": "../../.agents/skills/api-and-interface-design"
+        }
+      ]
+    },
+    {
+      "id": "lock",
+      "action": "run",
+      "cmd": "head -8 skills-lock.json",
+      "label": "and a lockfile, so the pack is pinned",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "exitCode": 0
+      }
+    }
+  ]
+}

@@ -48,12 +48,32 @@ const CORRECTIONS = [
    'take captured an empty input box, which looks exactly like a hang. Found by pulling the frame.',
    () => has('scripts/lib/record/runner.mjs', 'A VARIADIC FLAG EATS THE PROMPT') &&
          has('scripts/lib/record/runner.mjs', 'allowed-\\?\\[Tt\\]ools')],
+  ['a completion marker the take could match from its own input', 'SEAL',
+   'agent-skills cut, 2026-09-24: the take asked the agent to "print exactly: RUN COMPLETE" and ' +
+   'waited for `RUN COMPLETE`. Claude Code echoes the SUBMITTED PROMPT above its answer, so the ' +
+   'needle was on screen while the banner still read "Bootstrapping…". The step ended after 7.2s, ' +
+   'reported exit=0, cut three clean segments and passed every gate with the agent yet to do a ' +
+   'single thing — then kept working for minutes after the camera stopped, leaving the workspace ' +
+   'modified by a run that exists in no footage. A completion signal may not be derivable from the ' +
+   'input: not from the command, and not from any file prep writes.',
+   () => has('scripts/lib/record/runner.mjs', 'assertWaitForCannotSelfMatch\\(demo\\);') &&
+         has('scripts/lib/record/runner.mjs', 'MATCHES THE ECHO, NOT THE WORK')],
   ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
    'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
    '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +
    'NOT commands. The rule is the general one — a recorded agent run must be unable to stop and ask.',
    () => has('scripts/lib/record/runner.mjs', 'assertAgentRunCannotPrompt\\(demo\\);') &&
          has('scripts/lib/record/runner.mjs', 'is NOT enough — it covers file edits')],
+  ['a correct take thrown away because a tab label is two text nodes', 'STRUCT',
+   'Laya cut, 2026-09-23: `openFile` opened triage.py, the right tab was active, and the gate ' +
+   'refused the take because VS Code renders the basename and the extension as SEPARATE spans — ' +
+   'innerText reads "triage\\n.py", which does not `.includes("triage.py")`. Same class as the ' +
+   'U+00A0 bug in `reveal`: what the DOM stores is not what a human typed into the demo, so a ' +
+   'read-back gate must NORMALISE BOTH SIDES before comparing. A gate that fails correct work ' +
+   'is the expensive kind — it teaches the author to stop trusting it.',
+   () => has('scripts/lib/record/runner.mjs', 'A TAB LABEL IS NOT ONE TEXT NODE') &&
+         has('scripts/lib/record/runner.mjs', 'const flat = \\(s\\) => String\\(s \\|\\| \'\'\\)\\.replace\\(/\\\\s\\+/g, \'\'\\)\\.toLowerCase\\(\\);') &&
+         has('scripts/lib/record/runner.mjs', '!flat\\(active\\)\\.includes\\(want\\)')],
   // ── the voice ──────────────────────────────────────────────────────────────
   ['the voice speed used as a pacing knob', 'SEAL',
    '"why does ava sound slow!!! it was perfect before" / "never adjust the pace of the voice to match"',

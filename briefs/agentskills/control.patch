@@ -1,0 +1,68 @@
+diff --git a/index.js b/index.js
+index 7fb8db5..0872f68 100644
+--- a/index.js
++++ b/index.js
+@@ -125,6 +125,8 @@ export default function slugify(string, options) {
+ 
+ export function slugifyWithCounter() {
+ 	const occurrences = new Map();
++	// Every slug handed out so far, lowercased. The counter alone cannot guarantee uniqueness, as a generated slug like `foo-2` can also be the plain slug of a different input such as `foo 2`.
++	const issued = new Set();
+ 
+ 	const countable = (string, options) => {
+ 		string = slugify(string, options);
+@@ -135,18 +137,23 @@ export function slugifyWithCounter() {
+ 
+ 		const stringLower = string.toLowerCase();
+ 		const numberless = occurrences.get(removeCounterSuffix(stringLower)) || 0;
+-		const counter = occurrences.get(stringLower);
+-		occurrences.set(stringLower, typeof counter === 'number' ? counter + 1 : 1);
+-		const newCounter = occurrences.get(stringLower) || 2;
+-		if (newCounter >= 2 || numberless > 2) {
+-			string = `${string}-${newCounter}`;
++		let counter = (occurrences.get(stringLower) || 0) + 1;
++		let slug = counter >= 2 || numberless > 2 ? `${string}-${counter}` : string;
++
++		while (issued.has(slug.toLowerCase())) {
++			counter = Math.max(counter + 1, 2);
++			slug = `${string}-${counter}`;
+ 		}
+ 
+-		return string;
++		occurrences.set(stringLower, counter);
++		issued.add(slug.toLowerCase());
++
++		return slug;
+ 	};
+ 
+ 	countable.reset = () => {
+ 		occurrences.clear();
++		issued.clear();
+ 	};
+ 
+ 	return countable;
+diff --git a/test.js b/test.js
+index 6edb10c..396eaf3 100644
+--- a/test.js
++++ b/test.js
+@@ -254,6 +254,20 @@ test('counter', t => {
+ 	t.is(slugify('_foo', {preserveLeadingUnderscore: true}), '_foo');
+ 	t.is(slugify('_foo', {preserveLeadingUnderscore: true}), '_foo-2');
+ 
++	// A generated slug must not be handed out again for a different input, and vice versa.
++	const slugify3 = slugifyWithCounter();
++	t.is(slugify3('foo'), 'foo');
++	t.is(slugify3('foo'), 'foo-2');
++	t.is(slugify3('foo 2'), 'foo-2-2');
++	t.is(slugify3('foo 2'), 'foo-2-3');
++	t.is(slugify3('foo'), 'foo-3');
++
++	const slugify4 = slugifyWithCounter();
++	t.is(slugify4('foo 2'), 'foo-2');
++	t.is(slugify4('foo'), 'foo');
++	t.is(slugify4('foo'), 'foo-3');
++	t.is(slugify4('Foo', {lowercase: false}), 'Foo-4');
++
+ 	const slugify2 = slugifyWithCounter();
+ 	t.is(slugify2('foo'), 'foo');
+ 	t.is(slugify2('foo'), 'foo-2');
