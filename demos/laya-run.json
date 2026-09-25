@@ -1,0 +1,45 @@
+{
+  "slug": "laya-run",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "laya-demo",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 2400,
+  "steps": [
+    {
+      "id": "go",
+      "action": "run",
+      "cmd": ".venv/bin/python triage.py",
+      "label": "ask it",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": {
+        "contains": "department :"
+      },
+      "marks": [
+        {
+          "id": "dept",
+          "text": "department : billing"
+        },
+        {
+          "id": "churn",
+          "text": "churn risk :"
+        },
+        {
+          "id": "ms",
+          "text": "decision   :"
+        }
+      ],
+      "holdMs": 7000,
+      "maxHoldMs": 7000
+    }
+  ]
+}

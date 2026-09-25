@@ -1,0 +1,95 @@
+{
+  "slug": "laya-code",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "laya-demo",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "maxHoldMs": 2400,
+  "_note": "The editor beat. Taught line by line (LAW 0e.2) \u2014 every reveal is a line the narration names in the same breath.",
+  "prep": {
+    "files": {
+      "triage.py": "import time\nfrom laya import Router\n\nrouter = Router()\n\nemail = {\n    \"from\": \"priya@northwind.io\",\n    \"subject\": \"Duplicate charge on invoice #4411\",\n    \"body\": \"We were billed twice for March. Refund the duplicate \"\n            \"today or we cancel our plan.\",\n}\n\nquestions = {\n    \"department\": {\n        \"type\": \"choice\",\n        \"instructions\": \"Which department should handle this?\",\n        \"criteria\": {\n            \"billing\": \"invoices, payments, refunds\",\n            \"technical\": \"bugs, outages, errors\",\n            \"sales\": \"pricing, new contracts\",\n        },\n    },\n    \"urgency\": {\n        \"type\": \"score\",\n        \"instructions\": \"How urgent is this?\",\n        \"criteria\": [\"not urgent\", \"soon\", \"blocking\"],\n    },\n    \"churn_risk\": {\n        \"type\": \"noul\",\n        \"instructions\": \"Does the user threaten to cancel?\",\n    },\n}\n\nt = time.perf_counter()\nrouter.predict(email, questions)\ncold = (time.perf_counter() - t) * 1000\n\nt = time.perf_counter()\nres = router.predict(email, questions)\nwarm = (time.perf_counter() - t) * 1000\n\na = res[\"answers\"]\nprint(\"department :\", a[\"department\"][\"choice\"])\nprint(\"confidence :\", round(a[\"department\"][\"confidence\"], 3))\nprint(\"urgency    :\", round(a[\"urgency\"][\"score\"], 2))\nprint(\"churn risk :\", round(a[\"churn_risk\"][\"noul\"], 3))\nprint(\"routed to  :\", res[\"routing\"][\"model\"])\nprint(\"first call : %.0f ms\" % cold)\nprint(\"decision   : %.0f ms\" % warm)\n",
+      "route.py": "import time\nfrom laya import Router\n\nrouter = Router()\n\nquestion = {\n    \"churn_risk\": {\n        \"type\": \"noul\",\n        \"instructions\": \"Does the user threaten to cancel?\",\n    },\n}\n\nenglish = {\"body\": \"Refund the duplicate today or we cancel our plan.\"}\nhindi = {\"body\": \"\u0906\u091c \u0939\u0940 \u092a\u0948\u0938\u0947 \u0935\u093e\u092a\u0938 \u0915\u0930\u0947\u0902, \u0935\u0930\u0928\u093e \u0939\u092e \u092a\u094d\u0932\u093e\u0928 \u0930\u0926\u094d\u0926 \u0915\u0930 \u0926\u0947\u0902\u0917\u0947\u0964\"}\n\n# build both checkpoints first, so the times below are decisions, not downloads\nrouter.predict(english, question)\nrouter.predict(hindi, question)\nprint(\"both checkpoints loaded\\n\")\n\nfor name, state in ((\"english\", english), (\"hindi  \", hindi)):\n    t = time.perf_counter()\n    res = router.predict(state, question)\n    ms = (time.perf_counter() - t) * 1000\n    print(\"%s  ->  %-12s  churn %.3f   %3.0f ms\" % (\n        name, res[\"routing\"][\"model\"], res[\"answers\"][\"churn_risk\"][\"noul\"], ms))\n\nprint(\"\\nwhy it chose that, without running the model:\")\nfor state in (english, hindi):\n    t = time.perf_counter()\n    d = router.route(state)\n    print(\"  %-12s  %.2f ms  %s\" % (d.model, (time.perf_counter() - t) * 1000, d.reason))\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "open",
+      "action": "openFile",
+      "path": "triage.py",
+      "label": "the whole script",
+      "focus": "editor",
+      "holdMs": 4200,
+      "maxHoldMs": 4200
+    },
+    {
+      "id": "import",
+      "action": "reveal",
+      "target": "editor",
+      "text": "from laya import Router",
+      "label": "the import",
+      "focus": "editor",
+      "holdMs": 3600
+    },
+    {
+      "id": "state",
+      "action": "reveal",
+      "target": "editor",
+      "text": "\"subject\": \"Duplicate charge on invoice #4411\",",
+      "label": "the state: a real email",
+      "focus": "editor",
+      "holdMs": 4600
+    },
+    {
+      "id": "choice",
+      "action": "reveal",
+      "target": "editor",
+      "text": "\"type\": \"choice\",",
+      "label": "question one: choice",
+      "focus": "editor",
+      "holdMs": 4600
+    },
+    {
+      "id": "criteria",
+      "action": "reveal",
+      "target": "editor",
+      "text": "\"billing\": \"invoices, payments, refunds\",",
+      "label": "the options it may pick",
+      "focus": "editor",
+      "holdMs": 4600
+    },
+    {
+      "id": "score",
+      "action": "reveal",
+      "target": "editor",
+      "text": "\"criteria\": [\"not urgent\", \"soon\", \"blocking\"],",
+      "label": "question two: a rubric",
+      "focus": "editor",
+      "holdMs": 4600
+    },
+    {
+      "id": "noul",
+      "action": "reveal",
+      "target": "editor",
+      "text": "\"instructions\": \"Does the user threaten to cancel?\",",
+      "label": "question three: yes or no",
+      "focus": "editor",
+      "holdMs": 4600
+    },
+    {
+      "id": "predict",
+      "action": "reveal",
+      "target": "editor",
+      "text": "res = router.predict(email, questions)",
+      "label": "all three, one call",
+      "focus": "editor",
+      "holdMs": 4800
+    }
+  ]
+}

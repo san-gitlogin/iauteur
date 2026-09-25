@@ -33,7 +33,12 @@ STOP = {'the', 'a', 'an', 'and', 'so', 'now', 'well', 'or', 'but', 'then', 'this
 # scores a perfect read at 0.80 and reports its opening word as never spoken. Both sides fold
 # through the same table before anything is compared (see scripts/lib/numwords.py).
 toks = lambda t: [w for w in re.sub(r"[^a-z0-9' ]", ' ', fold_numbers(t).lower().replace('-', ' ')).split() if w]
-squash = lambda t: re.sub(r'[^a-z0-9]', '', t.lower())
+# `y` AND `i` SPELL THE SAME VOWEL, and a transcriber picks between them freely on a proper
+# noun it has never seen: "Laya" comes back as "Laia" in one sentence and "Laya" in the next,
+# from the SAME audio pronunciation. This check exists to catch a name that is SAID wrong
+# (HID-Fi heard as "HID5"), not one that is spelled two ways — folding y->i on both sides
+# keeps the first and forgives the second. Break-tested both directions.
+squash = lambda t: re.sub(r'[^a-z0-9]', '', t.lower()).replace('y', 'i')
 
 m = WhisperModel(model_name, device='cpu', compute_type='int8')
 only = {x for x in os.environ.get('ONLY', '').split(',') if x}

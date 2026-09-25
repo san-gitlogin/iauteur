@@ -170,6 +170,7 @@ export const TYPES = [
   'ASTRA_STAGE',
   'HIDFI_STAGE',
   'O55_STAGE',
+  'LAYA_STAGE',
   'CMD_PING',
   'CMD_TRACEROUTE',
   'CMD_MTR',

@@ -100,6 +100,7 @@ export type SceneTypeName =
   | 'CMD_NETSTAT'
   | 'CMD_MTR'
   | 'CMD_TRACEROUTE'
+  | 'LAYA_STAGE'
   | 'O55_STAGE'
   | 'HIDFI_STAGE'
   | 'ASTRA_STAGE'
@@ -2038,6 +2039,17 @@ export type CmdTracerouteScene = SceneCommon<'CMD_TRACEROUTE'> & { data: {
       highlight?: string;
       atWord?: number;
       color?: string;
+    };
+  } };
+
+export type LayaStageScene = SceneCommon<'LAYA_STAGE'> & { data: {
+    layaStage: {
+      kind: string;
+      headline?: string;
+      stageTitle?: string;
+      stage?: Array<Record<string, unknown>>;
+      token?: string;
+      color?: unknown;
     };
   } };
 
@@ -5795,6 +5807,7 @@ export interface SceneByType {
   CMD_NETSTAT: CmdNetstatScene;
   CMD_MTR: CmdMtrScene;
   CMD_TRACEROUTE: CmdTracerouteScene;
+  LAYA_STAGE: LayaStageScene;
   O55_STAGE: O55StageScene;
   HIDFI_STAGE: HidfiStageScene;
   ASTRA_STAGE: AstraStageScene;
@@ -6176,6 +6189,7 @@ export type TypedScene =
   | CmdNetstatScene
   | CmdMtrScene
   | CmdTracerouteScene
+  | LayaStageScene
   | O55StageScene
   | HidfiStageScene
   | AstraStageScene

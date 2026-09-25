@@ -1,0 +1,27 @@
+{
+  "slug": "laya-gh", "surface": "browser", "theme": "light",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4, "masterWidth": 3840,
+  "quality": 96, "crf": 18, "preset": "slow", "fps": 30, "headless": false,
+  "prep": {"url": "https://github.com/NandhaKishorM/laya", "settleMs": 5000,
+           "dismiss": ["Accept", "Accept all", "Reject all", "Got it", "Close"]},
+  "maxHoldMs": 2600,
+  "steps": [
+    {"id": "arrive", "action": "pause", "ms": 1400,
+     "label": "the repository itself",
+     "marks": [{"id": "name", "text": "laya"}],
+     "holdMs": 3400, "maxHoldMs": 3400},
+    {"id": "what", "action": "pause", "ms": 900,
+     "label": "what its author says it is",
+     "marks": [{"id": "desc", "text": "Non-autoregressive System 1 decision engine"}],
+     "holdMs": 5200, "maxHoldMs": 5200},
+    {"id": "licence", "action": "scroll", "target": "text=Apache-2.0 license", "settleMs": 1500,
+     "label": "the licence, in full",
+     "marks": [{"id": "lic", "text": "Apache-2.0 license"}],
+     "holdMs": 4200, "maxHoldMs": 4200},
+    {"id": "install", "action": "scroll", "target": "text=python -m pip install laya", "settleMs": 1600,
+     "label": "one command to install it",
+     "marks": [{"id": "pip", "text": "pip install laya"}],
+     "holdMs": 4600, "maxHoldMs": 4600}
+  ]
+}

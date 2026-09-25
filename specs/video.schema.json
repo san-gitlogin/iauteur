@@ -470,6 +470,7 @@
               "ASTRA_STAGE",
               "HIDFI_STAGE",
               "O55_STAGE",
+              "LAYA_STAGE",
               "CMD_PING",
               "CMD_TRACEROUTE",
               "CMD_MTR",
@@ -8145,6 +8146,55 @@
                         "color": {
                           "type": "string",
                           "description": "Semantic colour: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "LAYA_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "layaStage": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "description": "one-pass | mask-slots | entropy-dial | proper-score | router-gate | budget-split | free-swap. An unregistered kind renders LOUDLY in red."
+                        },
+                        "headline": {
+                          "type": "string",
+                          "description": "Optional headline, <=38 chars. Most beats carry none — the object is the headline."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Small uppercase caption above the picture, <=40 chars, authored per beat."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The elements, each landing on its own atWord. `group` is the LANE (plumbing, never drawn as words): one-pass gen|laya|time; mask-slots cell|read|gather; entropy-dial bar|dial; proper-score naive|proper|truth; router-gate in|lane|gate|fail; budget-split row|note; free-swap line|server|wire. `text` is the second plumbing slot: slot marks a socket cell, from/to mark the two sides of free-swap, and on budget-split it is the word printed inside each slice. `value` is the picture own number — a position on the clock, a probability, an option count, a meter fraction. label <=46, sub <=64, text <=24."
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "Mode switch or label for the depiction."
+                        },
+                        "color": {
+                          "description": "Accent."
                         }
                       }
                     }

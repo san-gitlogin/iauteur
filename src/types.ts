@@ -6651,6 +6651,40 @@ export interface O55StageData {
   color?: SemColor;
 }
 
+/** LAYA_STAGE — one element of a Laya depiction. */
+export interface LayaStageItem {
+  label?: string;
+  sub?: string;
+  /** PLUMBING, NEVER TEXT: which lane/row of the picture this item belongs to
+   *  (`gen`/`laya`, `cell`/`gather`, `naive`/`proper`, `line`/`server`). It is `group`
+   *  and not `detail` for the reason O55StageItem records: `audit-sync`'s HUMAN field
+   *  list contains `label`, `title`, `detail` and `sub`, so a lane key stored in any of
+   *  them is read back as WORDS ON SCREEN — measured here, it reported five elements
+   *  landing away from their own words when the "word" was the string `laya`. */
+  group?: string;
+  /** A second plumbing slot: a cell's role (`slot`), a server's side (`from`/`to`),
+   *  the word printed inside a budget slice. */
+  text?: string;
+  /** The picture's own number: a position on a clock, a probability, an option count. */
+  value?: number;
+  color?: SemColor;
+  /** The word this element lands on. Every moment in layaViz resolves from one of these. */
+  atWord?: number;
+}
+
+/** LAYA_STAGE — every drawn beat of the Laya video, on one scene type. */
+export interface LayaStageData {
+  /** Which depiction to draw. Must exist in layaViz LAYA_VIZ. */
+  kind?: string;
+  headline?: string;
+  /** Small caption above the picture, authored per beat. */
+  stageTitle?: string;
+  stage?: LayaStageItem[];
+  /** Mode switch or label for the depiction. */
+  token?: string;
+  color?: SemColor;
+}
+
 /** HIDFI_STAGE — every drawn beat of the HID-Fi product demo, on one scene type. */
 export interface HidfiStageData {
   /** Which depiction to draw. Must exist in hidfiViz HIDFI_VIZ. */
@@ -11423,6 +11457,7 @@ export interface SceneData {
   astraStage?: AstraStageData;
   hidfiStage?: HidfiStageData;
   o55Stage?: O55StageData;
+  layaStage?: LayaStageData;
   cmdIp?: CmdIpData;
   cmdDd?: CmdDdData;
   cmdUmount?: CmdUmountData;

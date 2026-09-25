@@ -1,0 +1,76 @@
+{
+  "slug": "laya-devto",
+  "surface": "browser",
+  "theme": "light",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "quality": 96,
+  "crf": 18,
+  "preset": "slow",
+  "fps": 30,
+  "headless": false,
+  "prep": {
+    "url": "https://dev.to/nandakishor_m_6cc0adfde9f/i-built-non-autoregressive-decision-models-a-year-ago-then-a-frontier-lab-called-it-a-18me",
+    "settleMs": 5000,
+    "dismiss": [
+      "Accept",
+      "Accept all",
+      "Reject all",
+      "Got it",
+      "Close",
+      "I accept"
+    ]
+  },
+  "maxHoldMs": 2600,
+  "steps": [
+    {
+      "id": "title",
+      "action": "scroll",
+      "target": "text=Then a Frontier Lab",
+      "settleMs": 1700,
+      "label": "his own write-up",
+      "marks": [
+        {
+          "id": "t",
+          "text": "a Year Ago"
+        }
+      ],
+      "holdMs": 5200,
+      "maxHoldMs": 5200
+    },
+    {
+      "id": "papers",
+      "action": "scroll",
+      "target": "text=arXiv:2503.23303",
+      "settleMs": 1700,
+      "label": "the papers, with dates",
+      "marks": [
+        {
+          "id": "ax",
+          "text": "arXiv:2503.23303"
+        }
+      ],
+      "holdMs": 5200,
+      "maxHoldMs": 5200
+    },
+    {
+      "id": "frustrating",
+      "action": "scroll",
+      "target": "text=incredibly frustrating",
+      "settleMs": 1700,
+      "label": "the paragraph in his words",
+      "marks": [
+        {
+          "id": "fr",
+          "text": "incredibly frustrating"
+        }
+      ],
+      "holdMs": 6000,
+      "maxHoldMs": 6000
+    }
+  ]
+}

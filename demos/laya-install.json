@@ -1,0 +1,84 @@
+{
+  "slug": "laya-install",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "laya-demo",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2.4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 2000,
+  "_note": "Warm pip cache: the download is not the teaching. The commands are real and the output is what this machine printed. .venv is removed by hand before the take so the install is a real install.",
+  "steps": [
+    {
+      "id": "py",
+      "action": "run",
+      "cmd": "python3 -V",
+      "label": "Python 3.10 or newer",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Python 3."
+      },
+      "marks": [
+        {
+          "id": "v",
+          "text": "Python 3.12"
+        }
+      ],
+      "holdMs": 3000
+    },
+    {
+      "id": "venv",
+      "action": "run",
+      "cmd": "python3 -m venv .venv",
+      "label": "a clean environment",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "holdMs": 2600
+    },
+    {
+      "id": "install",
+      "action": "run",
+      "cmd": ".venv/bin/python -m pip install laya",
+      "label": "one package, everything",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 900000,
+      "expect": {
+        "contains": "Successfully installed"
+      },
+      "marks": [
+        {
+          "id": "ok",
+          "text": "laya-0.3.7"
+        }
+      ],
+      "holdMs": 5200,
+      "maxHoldMs": 5200
+    },
+    {
+      "id": "check",
+      "action": "run",
+      "cmd": ".venv/bin/python -I -c \"import laya; print(laya.__version__)\"",
+      "label": "prove it is really there",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "0.3.7"
+      },
+      "marks": [
+        {
+          "id": "ver",
+          "text": "0.3.7"
+        }
+      ],
+      "holdMs": 3600
+    }
+  ]
+}

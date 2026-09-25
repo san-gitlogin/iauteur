@@ -1,0 +1,641 @@
+{
+  "meta": {
+    "topic": "Laya — the free decision engine",
+    "format": "short",
+    "fps": 30,
+    "subject": "Laya",
+    "audioPrefix": "laya-decisions-open_shorts",
+    "pronounce": {
+      "Laya": "Lah-yah"
+    },
+    "onePayoff": "three typed questions answered in eighty milliseconds on a laptop CPU, by a model that is free to run",
+    "openLoop": "What does an AI model look like when it is not allowed to write a single word?",
+    "topicAxes": [
+      "entity-novelty"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "This free AI model cannot write a word #ai #opensource",
+      "hook": "Laya is an open-source decision engine that cannot write a single word. It answered three questions about a support email in eighty milliseconds, on a laptop CPU, for nothing.",
+      "description": "Laya: typed choice, score and yes/no decisions in a single forward pass. Apache 2.0, runs on CPU, and speaks the same HTTP protocol as the paid Jev API. Full breakdown on the channel.",
+      "pinned": "Eighty milliseconds for three questions, on a laptop with no GPU. What would you point it at first?",
+      "tags": [
+        "laya",
+        "open source ai",
+        "jev alternative",
+        "ai",
+        "machine learning",
+        "python"
+      ],
+      "queries": [
+        "laya ai model",
+        "free jev alternative",
+        "open source decision model"
+      ],
+      "sources": [
+        "GitHub — NandhaKishorM/laya — https://github.com/NandhaKishorM/laya",
+        "Hugging Face — convaiinnovations/laya — https://huggingface.co/convaiinnovations/laya",
+        "laya — the package installed on camera — https://pypi.org/project/laya/"
+      ]
+    }
+  },
+  "brand": {
+    "theme": "terminalcli",
+    "themeLight": "daylight",
+    "design": "terminalcli",
+    "background": "geo",
+    "channel": "THE NBX STUDIO",
+    "logo": "img:channel_logo.png"
+  },
+  "cover": {
+    "title": "Laya",
+    "badge": "19,000 STARS IN 5 DAYS",
+    "asset": "img:laya_cover_art.png",
+    "art": "img:laya_cover_art.png",
+    "frames": 2
+  },
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Laya is an AI model that cannot write a single word. In five days it collected nineteen thousand stars on GitHub.",
+      "data": {
+        "headline": "LAYA CANNOT WRITE A WORD",
+        "subtext": "19,000 stars in five days",
+        "heroAsset": "lucide:star",
+        "hookVariant": "statement",
+        "headlineAtWord": 1,
+        "heroAtWord": 11.167
+      },
+      "durationFrames": 236,
+      "audio": "audio/laya-decisions-open_shorts_s01.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Here it is on GitHub — a System 1 decision engine, Apache 2.0, which means you can run it and ship it without asking anyone.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:laya-gh#what",
+              "label": "its page on GitHub",
+              "focus": false,
+              "zooms": [],
+              "callouts": [],
+              "id": "what",
+              "src": "rec/laya-gh/seg-02.mp4",
+              "frames": 156,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "desc": {
+                  "x": 1136,
+                  "y": 245,
+                  "w": 213,
+                  "h": 43,
+                  "covers": "Non-autoregressive System 1 decision engine",
+                  "block": {
+                    "x": 1136,
+                    "y": 245,
+                    "w": 268,
+                    "h": 139
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 2,
+                  "w": 184,
+                  "h": 50
+                },
+                {
+                  "x": 413,
+                  "y": 27,
+                  "w": 99,
+                  "h": 19
+                },
+                {
+                  "x": 297,
+                  "y": 27,
+                  "w": 80,
+                  "h": 19
+                },
+                {
+                  "x": 547,
+                  "y": 27,
+                  "w": 79,
+                  "h": 19
+                },
+                {
+                  "x": 189,
+                  "y": 27,
+                  "w": 71,
+                  "h": 19
+                },
+                {
+                  "x": 662,
+                  "y": 27,
+                  "w": 53,
+                  "h": 19
+                },
+                {
+                  "x": 1464,
+                  "y": 28,
+                  "w": 51,
+                  "h": 17
+                },
+                {
+                  "x": 56,
+                  "y": 91,
+                  "w": 141,
+                  "h": 24
+                },
+                {
+                  "x": 210,
+                  "y": 91,
+                  "w": 37,
+                  "h": 24
+                },
+                {
+                  "x": 1220,
+                  "y": 95,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 655,
+                  "y": 150,
+                  "w": 128,
+                  "h": 17
+                },
+                {
+                  "x": 278,
+                  "y": 150,
+                  "w": 83,
+                  "h": 17
+                },
+                {
+                  "x": 550,
+                  "y": 150,
+                  "w": 53,
+                  "h": 17
+                },
+                {
+                  "x": 836,
+                  "y": 150,
+                  "w": 51,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 209,
+                  "w": 46,
+                  "h": 19
+                },
+                {
+                  "x": 347,
+                  "y": 214,
+                  "w": 62,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 245,
+                  "w": 268,
+                  "h": 139
+                },
+                {
+                  "x": 570,
+                  "y": 272,
+                  "w": 505,
+                  "h": 65
+                },
+                {
+                  "x": 192,
+                  "y": 273,
+                  "w": 122,
+                  "h": 187
+                },
+                {
+                  "x": 312,
+                  "y": 273,
+                  "w": 474,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 361,
+                  "w": 459,
+                  "h": 17
+                },
+                {
+                  "x": 1160,
+                  "y": 400,
+                  "w": 262,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 401,
+                  "w": 105,
+                  "h": 83
+                },
+                {
+                  "x": 570,
+                  "y": 402,
+                  "w": 448,
+                  "h": 17
+                },
+                {
+                  "x": 1240,
+                  "y": 437,
+                  "w": 78,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 443,
+                  "w": 379,
+                  "h": 17
+                },
+                {
+                  "x": 1269,
+                  "y": 470,
+                  "w": 74,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 484,
+                  "w": 379,
+                  "h": 17
+                },
+                {
+                  "x": 1149,
+                  "y": 504,
+                  "w": 70,
+                  "h": 14
+                },
+                {
+                  "x": 1247,
+                  "y": 504,
+                  "w": 69,
+                  "h": 14
+                },
+                {
+                  "x": 570,
+                  "y": 525,
+                  "w": 413,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 525,
+                  "w": 65,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 566,
+                  "w": 332,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 571,
+                  "w": 153,
+                  "h": 76
+                },
+                {
+                  "x": 570,
+                  "y": 607,
+                  "w": 474,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 648,
+                  "w": 469,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 659,
+                  "w": 76,
+                  "h": 62
+                },
+                {
+                  "x": 1136,
+                  "y": 688,
+                  "w": 139,
+                  "h": 104
+                },
+                {
+                  "x": 570,
+                  "y": 689,
+                  "w": 403,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 689,
+                  "w": 68,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 730,
+                  "w": 476,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 730,
+                  "w": 56,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 771,
+                  "w": 474,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 812,
+                  "w": 413,
+                  "h": 17
+                },
+                {
+                  "x": 235,
+                  "y": 812,
+                  "w": 89,
+                  "h": 17
+                },
+                {
+                  "x": 1136,
+                  "y": 829,
+                  "w": 68,
+                  "h": 54
+                },
+                {
+                  "x": 570,
+                  "y": 853,
+                  "w": 469,
+                  "h": 17
+                },
+                {
+                  "x": 570,
+                  "y": 894,
+                  "w": 472,
+                  "h": 6
+                }
+              ],
+              "changes": [
+                0
+              ],
+              "shows": "About",
+              "atWord": 1.667
+            }
+          ],
+          "sourceNote": "GITHUB.COM/NANDHAKISHORM/LAYA — OFFICIAL",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 248,
+      "audio": "audio/laya-decisions-open_shorts_s02.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s03",
+      "type": "LAYA_STAGE",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Instead of writing, Laya scores every option you gave it at once, in a single pass, so there is no sentence to parse afterwards and nothing to go wrong in the parsing.",
+      "data": {
+        "layaStage": {
+          "kind": "one-pass",
+          "stageTitle": "one clock, two lanes",
+          "stage": [
+            {
+              "group": "gen",
+              "label": "{\"team\"",
+              "value": 0.08,
+              "atWord": 1
+            },
+            {
+              "group": "gen",
+              "label": ": \"bill",
+              "value": 0.3,
+              "atWord": 2.833
+            },
+            {
+              "group": "gen",
+              "label": "ing\"}",
+              "value": 0.52,
+              "atWord": 4.833
+            },
+            {
+              "group": "time",
+              "text": "gen",
+              "sub": "then parse it",
+              "atWord": 6.25
+            },
+            {
+              "group": "laya",
+              "label": "billing",
+              "value": 0.2,
+              "atWord": 7.083
+            },
+            {
+              "group": "laya",
+              "label": "technical",
+              "value": 0.2,
+              "atWord": 8.917
+            },
+            {
+              "group": "laya",
+              "label": "sales",
+              "value": 0.2,
+              "atWord": 12.583
+            },
+            {
+              "group": "time",
+              "text": "laya",
+              "sub": "one pass",
+              "atWord": 15.167
+            }
+          ]
+        }
+      },
+      "durationFrames": 281,
+      "audio": "audio/laya-decisions-open_shorts_s03.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "transition": "letterbox",
+      "background": "zoneB",
+      "narration": "Three questions about one support email — which team, how urgent, are they about to cancel. Eighty milliseconds, on a laptop processor, with no graphics card at all.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:laya-run#answers",
+              "label": "three questions, one pass",
+              "focus": false,
+              "zooms": [],
+              "callouts": [],
+              "id": "answers",
+              "src": "rec/laya-run/seg-01-answers.mp4",
+              "frames": 236,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "dept": {
+                  "x": 73,
+                  "y": 205,
+                  "w": 187,
+                  "h": 19,
+                  "covers": "department : billing"
+                },
+                "churn": {
+                  "x": 73,
+                  "y": 262,
+                  "w": 112,
+                  "h": 19,
+                  "covers": "churn risk :"
+                },
+                "ms": {
+                  "x": 73,
+                  "y": 320,
+                  "w": 112,
+                  "h": 19,
+                  "covers": "decision   :"
+                },
+                "__cmd": {
+                  "x": 204,
+                  "y": 71,
+                  "w": 244,
+                  "h": 19,
+                  "covers": ".venv/bin/python triage.py"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 1509,
+                  "h": 287
+                }
+              ],
+              "changes": [
+                9,
+                11,
+                26
+              ],
+              "shows": "$ 0.5. Treat confide",
+              "said": "PS laya-demo> .venv/bin/python triage.py\nFetching 5 files: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:00<00:00, 1533.12it/s]\nDownload complete: | 0.00B\nReconstruction complete: | | 0.00B / 0.00B\n/private/tmp/iauteur-rec/laya-demo/.venv/lib/python3.12/site-packages/laya/router.py:226: RuntimeWarning: laya: this checkpoint ships invalid temperatures or val\nues outside [0.5, 5]; using choice:11+=0.10058280825614929 -> 0.5. Treat confidence from the affected entries as uncalibrated.\n agent = Agent(repo, device=self.device, token=self.token, subfolder=sub)\ndepartment : billing\nconfidence : 0.853\nurgency : 1.77\nchurn risk : 0.822\nrouted to : english\nfirst call : 7123 ms\ndecision : 80 ms\nPS laya-demo>",
+              "atWord": 3.333
+            }
+          ],
+          "sourceNote": null,
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
+        }
+      },
+      "durationFrames": 341,
+      "audio": "audio/laya-decisions-open_shorts_s04.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s05",
+      "type": "LAYA_STAGE",
+      "transition": "wipe",
+      "background": "zoneA",
+      "narration": "And it is free. Laya serves the same message format as the paid API, so a client already written against Jev changes one string and keeps everything else.",
+      "data": {
+        "layaStage": {
+          "kind": "free-swap",
+          "stageTitle": "one string, and nothing else",
+          "stage": [
+            {
+              "group": "line",
+              "text": "from",
+              "label": "baseUrl = api.typesafe.ai",
+              "sub": "billed per million tokens",
+              "atWord": 9.083
+            },
+            {
+              "group": "server",
+              "text": "from",
+              "label": "the paid API",
+              "sub": "$0.042 per million tokens",
+              "atWord": 12.333
+            },
+            {
+              "group": "wire",
+              "label": "POST /v1/systemone",
+              "sub": "the same message, either way",
+              "atWord": 5.75
+            },
+            {
+              "group": "line",
+              "text": "to",
+              "label": "baseUrl = localhost:8000",
+              "sub": "your own machine",
+              "atWord": 16.833
+            },
+            {
+              "group": "server",
+              "text": "to",
+              "label": "laya-serve",
+              "sub": "your hardware, no bill",
+              "atWord": 16.833
+            }
+          ]
+        }
+      },
+      "durationFrames": 311,
+      "audio": "audio/laya-decisions-open_shorts_s05.mp3",
+      "timingSource": "tts"
+    },
+    {
+      "id": "s06",
+      "type": "OUTRO_CTA",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Full breakdown on the channel — who wrote Laya, what the benchmarks say, and the limits its own README prints.",
+      "data": {
+        "message": "Full breakdown on the channel",
+        "sub": "every source linked"
+      },
+      "durationFrames": 201,
+      "audio": "audio/laya-decisions-open_shorts_s06.mp3",
+      "timingSource": "tts"
+    }
+  ]
+}

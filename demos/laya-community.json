@@ -1,0 +1,15 @@
+{
+  "slug": "laya-community", "surface": "browser", "theme": "light",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4, "masterWidth": 3840,
+  "quality": 96, "crf": 18, "preset": "slow", "fps": 30, "headless": false,
+  "prep": {"url": "https://github.com/F0Rextasy/omp-laya-judge", "settleMs": 5000,
+           "dismiss": ["Accept", "Accept all", "Reject all", "Got it", "Close"]},
+  "maxHoldMs": 2600,
+  "steps": [
+    {"id": "repo", "action": "pause", "ms": 1500,
+     "label": "somebody else's project",
+     "marks": [{"id": "n", "text": "omp-laya-judge"}],
+     "holdMs": 5200, "maxHoldMs": 5200}
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "laya-readme", "surface": "browser", "theme": "light",
+  "viewport": {"width": 1600, "height": 900},
+  "deviceScaleFactor": 4, "masterWidth": 3840,
+  "quality": 96, "crf": 18, "preset": "slow", "fps": 30, "headless": false,
+  "prep": {"url": "https://github.com/NandhaKishorM/laya", "settleMs": 5000,
+           "dismiss": ["Accept", "Accept all", "Reject all", "Got it", "Close"]},
+  "maxHoldMs": 2600,
+  "steps": [
+    {"id": "speed", "action": "scroll", "target": "text=Speed (Tesla T4, measured)", "settleMs": 1700,
+     "label": "their speed table",
+     "marks": [{"id": "t4", "text": "Speed (Tesla T4, measured)"}],
+     "holdMs": 5200, "maxHoldMs": 5200},
+    {"id": "vsjev", "action": "scroll", "target": "text=Laya (with routing) vs Jev", "settleMs": 1700,
+     "label": "the comparison, and its caveat",
+     "marks": [{"id": "vs", "text": "Laya (with routing) vs Jev"}],
+     "holdMs": 5600, "maxHoldMs": 5600},
+    {"id": "banking", "action": "scroll", "target": "text=Where Jev leads", "settleMs": 1600,
+     "label": "the heading where they lose",
+     "marks": [{"id": "wjl", "text": "Where Jev leads"}],
+     "holdMs": 5200, "maxHoldMs": 5200},
+    {"id": "limits", "action": "scroll", "target": "text=Honest limits", "settleMs": 1700,
+     "label": "a heading called Honest limits",
+     "marks": [{"id": "hl", "text": "Honest limits"}],
+     "holdMs": 5600, "maxHoldMs": 5600},
+    {"id": "temps", "action": "scroll", "target": "text=ships with no fitted temperatures", "settleMs": 1600,
+     "label": "the line our own run proved",
+     "marks": [{"id": "tmp", "text": "ships with no fitted temperatures"}],
+     "holdMs": 5600, "maxHoldMs": 5600}
+  ]
+}
