@@ -1,78 +1,103 @@
 {
-  "_README": [
-    "Findings the owner has EXPLICITLY ACCEPTED. Read by scripts/check-publish-safety.mjs.",
+ "_README": [
+  "Findings the owner has EXPLICITLY ACCEPTED. Read by scripts/check-publish-safety.mjs.",
+  "",
+  "Entries name a RULE and a PATH GLOB \u2014 never a value. A file that spells out the",
+  "string it is allowing would be the leak it is meant to document.",
+  "",
+  "Accepted is NOT hidden: the gate still prints a running count of accepted findings on",
+  "every run, so this list stays visible and can be revisited. Adding an entry needs an",
+  "owner decision and a reason, not a convenient silence.",
+  "",
+  "To see everything including accepted:  npm run publish-safety:all -- --show-accepted"
+ ],
+ "accept": [
+  {
+   "rule": "ENV:IAUTEUR_CHANNEL",
+   "paths": [
+    "**"
+   ],
+   "decidedOn": "2026-08-21",
+   "decidedBy": "owner",
+   "reason": [
+    "The channel name is in 182 lines across 136 tracked files \u2014 the briefs, every",
+    "topics/*/long.json, channel_profile.md, docs/CONTINUE_HERE.md, and hardcoded in",
+    "scripts/build-linux-spec.mjs. It re-entered when the specs and briefs became",
+    "tracked (fa533ec), undoing part of what e746553 stripped.",
     "",
-    "Entries name a RULE and a PATH GLOB — never a value. A file that spells out the",
-    "string it is allowing would be the leak it is meant to document.",
+    "Owner ruling: LEAVE IT. The channel is public on YouTube, so this is linkage",
+    "between the repo and a public brand, not exposure of a secret. Scrubbing forward",
+    "would leave it in history anyway, and a rewrite was judged disproportionate.",
     "",
-    "Accepted is NOT hidden: the gate still prints a running count of accepted findings on",
-    "every run, so this list stays visible and can be revisited. Adding an entry needs an",
-    "owner decision and a reason, not a convenient silence.",
+    "A future session must NOT 'helpfully' scrub this. It is a decision, not an",
+    "oversight. Reopen it only if the owner says so."
+   ]
+  },
+  {
+   "rule": "HOME_PATH",
+   "paths": [
+    "briefs/**",
+    "topics/**",
+    "scripts/lib/manifest.mjs",
+    "src/showcaseSpec.ts"
+   ],
+   "decidedOn": "2026-08-21",
+   "decidedBy": "owner",
+   "reason": [
+    "A personal handle is used as the sample home directory and shell prompt in the",
+    "Linux course content and in component fixtures \u2014 it is on screen in the shipped",
+    "video, so it is already public. Accepted under the same ruling as the channel name.",
     "",
-    "To see everything including accepted:  npm run publish-safety:all -- --show-accepted"
-  ],
-  "accept": [
-    {
-      "rule": "ENV:IAUTEUR_CHANNEL",
-      "paths": [
-        "**"
-      ],
-      "decidedOn": "2026-08-21",
-      "decidedBy": "owner",
-      "reason": [
-        "The channel name is in 182 lines across 136 tracked files — the briefs, every",
-        "topics/*/long.json, channel_profile.md, docs/CONTINUE_HERE.md, and hardcoded in",
-        "scripts/build-linux-spec.mjs. It re-entered when the specs and briefs became",
-        "tracked (fa533ec), undoing part of what e746553 stripped.",
-        "",
-        "Owner ruling: LEAVE IT. The channel is public on YouTube, so this is linkage",
-        "between the repo and a public brand, not exposure of a secret. Scrubbing forward",
-        "would leave it in history anyway, and a rewrite was judged disproportionate.",
-        "",
-        "A future session must NOT 'helpfully' scrub this. It is a decision, not an",
-        "oversight. Reopen it only if the owner says so."
-      ]
-    },
-    {
-      "rule": "HOME_PATH",
-      "paths": [
-        "briefs/**",
-        "topics/**",
-        "scripts/lib/manifest.mjs",
-        "src/showcaseSpec.ts"
-      ],
-      "decidedOn": "2026-08-21",
-      "decidedBy": "owner",
-      "reason": [
-        "A personal handle is used as the sample home directory and shell prompt in the",
-        "Linux course content and in component fixtures — it is on screen in the shipped",
-        "video, so it is already public. Accepted under the same ruling as the channel name.",
-        "",
-        "Scoped deliberately to course content and fixtures: a real home path appearing in",
-        "docs/, webui/ or anywhere else still BLOCKS, because that would be new disclosure",
-        "rather than this accepted one."
-      ]
-    },
-    {
-      "rule": "EMAIL",
-      "paths": [
-        "topics/pw-dojo-*/long.json",
-        "topics/pw-dojo-*/shorts.json"
-      ],
-      "decidedOn": "2026-09-02",
-      "decidedBy": "owner",
-      "reason": [
-        "The Playwright Dojo specs demonstrate filling a login form, and the fixture address is",
-        "a Matrix joke. All ten flagged lines are the SAME invented address; every one was read",
-        "before this entry was written, and none is a real mailbox or the operator's.",
-        "",
-        "Scoped to the pw-dojo topic specs on purpose. An email anywhere else — briefs/, docs/,",
-        "scripts/, another topic — still BLOCKS, because that would be a new disclosure rather",
-        "than this reviewed one.",
-        "",
-        "These 96 specs lived only on the Windows laptop and were in no git history on any",
-        "machine; tracking them is what this entry unblocks."
-      ]
-    }
-  ]
+    "Scoped deliberately to course content and fixtures: a real home path appearing in",
+    "docs/, webui/ or anywhere else still BLOCKS, because that would be new disclosure",
+    "rather than this accepted one."
+   ]
+  },
+  {
+   "rule": "EMAIL",
+   "paths": [
+    "topics/pw-dojo-*/long.json",
+    "topics/pw-dojo-*/shorts.json"
+   ],
+   "decidedOn": "2026-09-02",
+   "decidedBy": "owner",
+   "reason": [
+    "The Playwright Dojo specs demonstrate filling a login form, and the fixture address is",
+    "a Matrix joke. All ten flagged lines are the SAME invented address; every one was read",
+    "before this entry was written, and none is a real mailbox or the operator's.",
+    "",
+    "Scoped to the pw-dojo topic specs on purpose. An email anywhere else \u2014 briefs/, docs/,",
+    "scripts/, another topic \u2014 still BLOCKS, because that would be a new disclosure rather",
+    "than this reviewed one.",
+    "",
+    "These 96 specs lived only on the Windows laptop and were in no git history on any",
+    "machine; tracking them is what this entry unblocks."
+   ]
+  },
+  {
+   "rule": "EMAIL",
+   "paths": [
+    "demos/laya-code.json",
+    "topics/laya-decisions-open/**"
+   ],
+   "decidedOn": "2026-09-25",
+   "decidedBy": "owner",
+   "reason": [
+    "Five findings, all the same string: an address in the support-email sample that the",
+    "Laya demo script triages on camera. It is INVENTED data, not a person's address \u2014",
+    "the domain does not resolve and has no MX record (SERVFAIL on both), and the local",
+    "part belongs to a fictional customer in a fictional duplicate-charge complaint.",
+    "'Northwind' is the classic sample-database name, which is where the shape came from.",
+    "",
+    "It is also already public: the string is baked into the filmed footage at s20 of the",
+    "shipped cut, which is on YouTube. Removing it from the repo would hide nothing.",
+    "",
+    "Owner ruling, asked directly: accept \u2014 'I dont want you to re record anything.' The",
+    "only alternative was re-recording the Laya take, since the address is in the frame.",
+    "",
+    "Scope is deliberately narrow: this topic and its demo, not '**'. A NEW email in any",
+    "other file must still block. Do not widen this entry to make a future push pass."
+   ]
+  }
+ ]
 }
