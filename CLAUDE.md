@@ -1517,6 +1517,77 @@ the next ten minutes are worth it, and the honest way to win that is to show the
 within its first three scenes. A spec with no footage at all is exempt — but it still owes the viewer
 an animated component showing the end state, which no linter can judge for you.
 
+## LAW 0q — YOU KNOW MORE THAN THE VIEWER. WRITE FOR A PERSON, NOT A COMPUTER (owner, 2026-09-24)
+
+Owner, on a thumbnail reading **98,799 STARS TESTED**: *"Dude, nobody will get it when they see 98k
+stars tested. What do you think a first time viewer would get when they see that thumb? We need to
+have a strict rule that we shall be aware that, as an AI model and as a owner (me) I or you will be
+aware of the context MORE THAN A PERSON WHO IS SEEING THE THUMB/TITLE/EVEN THE VIDEO for the first
+time... you are not explaining to a computer, you are explaining to a human who can be any, of any
+age, any gender, anywhere in the world."*
+
+**The asymmetry is the defect.** By the time the thumbnail is written, the author has read the repo,
+run the tool and watched the footage. The viewer has a two-inch picture and one line of text. Copy
+that is clear to the author and opaque to a stranger is the single easiest mistake to make, because
+it never *feels* wrong from the inside.
+
+**The surfaces this governs — all of them, every video:**
+1. `thumbnail.title` / `cover.title` (wide AND shorts)
+2. `meta.seo.title` (wide AND shorts — a short is not exempt)
+3. **Scene 1**, the HOOK: its narration AND its headline
+4. `meta.seo.hook`, which is what the description opens with
+
+**Every one of them must carry a PERSON.** One of these three shapes, always:
+- **First person — somebody did this.** *"I tested the repo everyone is starring."* *"I came across
+  this and had to try it."* Not *"Agent Skills, tested"*, which nobody did.
+- **Second person — the viewer is addressed.** *"You're missing this."* *"If you work at a startup,
+  you'll want this."* *"If you ship products, this is for you."*
+- **First person plural — we're in it together.** *"We put it on a real bug."*
+
+**And it must be understandable cold**, by someone who has never heard of the subject, in any country,
+of any age. Test: hand the line to somebody who has not seen the video. If their reaction is *"…what?"*
+the line has failed, however true and however clever it is. A number without a subject
+(*98,799 STARS TESTED*) is the classic failure — the author reads it as a claim, a stranger reads it
+as noise. Numbers EARN a click only once the thing they measure is named in plain words.
+
+**Jargon is measured from the viewer's side, not ours.** "Repo", "commit", "MIT", "agentic", "CLI"
+are all opaque cold. Either avoid them on these four surfaces or say what they are in the same breath.
+
+**Enforced.** `scripts/lint-spec.mjs` → **SPEAKS TO NOBODY**: the thumbnail/cover title, `meta.seo.title`
+and scene 1's narration must each contain a first- or second-person word (I / my / we / our / us /
+you / your / let's). Warnings are rejections (LAW 0f). It cannot check whether a stranger would
+UNDERSTAND the line — that judgement is yours, and it is the one that matters. Ask it out loud before
+you write: *what would somebody who has never heard of this get from this line, alone, in two seconds?*
+
+### Corollary — CLARITY BEATS BREVITY, AND ONE LAYOUT IS NOT A DESIGN (owner, 2026-09-24)
+
+Owner, rejecting a second attempt (`I TESTED IT MYSELF / WORTH TRYING?`): *"Again, who will know
+what AgentSkills is bro? I guess you are getting limited by the cutshort rules of thumb. Its good to
+have shorter thumb texts, but at what cost — the user is not able to get it and builds eager to click
+the video. You need to have varieties. Also I see all our thumb follows the same rules of Text on
+left, picture, logo or something on the right."*
+
+Three things, and the first is the trap:
+
+1. **A character cap is not a design goal.** The cap existed because the SPLIT layout gives the copy
+   half the frame. Writing to fit six characters produced a line nobody could act on — the cap was
+   protecting the layout at the cost of the message. When the words do not fit, change the LAYOUT,
+   not the sentence. `thumbnail.layout: 'stack'` puts the art above the copy and hands the copy the
+   whole frame; the linter's cap follows the layout (64 chars there, 40 in a split).
+2. **The shapes that worked on this channel are SENTENCES about the viewer**, and they name the
+   thing: *"If You Design Systems, You Are Missing This — Archify + Claude"*, *"Open Code Review: A
+   hands-on with Alibaba's Free Code Reviewer"*. Copy the shape: **who you are → what you are
+   missing → what it is called.** A stranger must be able to tell what the video is about from the
+   thumbnail alone.
+3. **Vary the layout between videos.** Text-left/art-right on every thumbnail makes a channel look
+   templated, which is LAW 0e.8's monotony argument pointed at the one surface people see first.
+   `layout` is the knob; use it, and place the art so it never crosses the type.
+
+**Highlight the phrase that carries the click.** `[square brackets]` inside a thumbnail title render
+in the pack's accent with a soft outer glow — *"If AI Writes Your Code, [You Are Missing This]"*.
+Subtle, not a highlighter box: the sentence still reads as one sentence. Brackets are stripped from
+the rendered text and do not count against the cap.
+
 ## LAW 0e-q — A QUIZ WITHOUT A GAP IS NOT A QUIZ (owner, 2026-08-17)
 Owner, on a shipped episode: *"there is no gap at all between you asking the question and the
 answer getting highlighted."* Correct, and it made the quiz beat worthless — a viewer who is never

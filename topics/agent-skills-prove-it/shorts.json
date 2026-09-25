@@ -16,11 +16,11 @@
     ],
     "screenplay": "explainer",
     "seo": {
-      "title": "24 Tests Passed. The Bug Was Still There. #ai #coding",
+      "title": "I Gave AI A Real Bug To Fix. It Said The Tests Passed. #ai #coding",
       "altTitles": [
-        "The AI Said The Tests Passed. It Never Ran Them."
+        "If You Let AI Fix Your Bugs, Watch This First"
       ],
-      "hook": "An AI agent with 25 engineering skills installed fixed a real bug \u2014 and reported a test result it never measured.",
+      "hook": "I gave this AI coding tool a library with a real bug in it, and it told me the tests passed. It never ran them.",
       "description": "Agent Skills (addyosmani/agent-skills, MIT) installed on a sealed copy of sindresorhus/slugify at commit 2acf5b3. Same bug, two runs, one sentence apart. Full breakdown on the channel.",
       "pinned": "Does your green test suite actually prove anything?",
       "sources": [
@@ -44,11 +44,11 @@
     "logo": "img:channel_logo.png"
   },
   "cover": {
-    "title": "STILL BROKEN",
-    "badge": "Agent Skills",
-    "note": "24 TESTS PASSED",
-    "asset": "img:askills-green-wall.png",
-    "art": "img:askills-green-wall.png",
+    "title": "If AI Writes Your Code, Watch This",
+    "badge": "98,000 STARS ON GITHUB",
+    "note": "AGENT SKILLS, TESTED",
+    "asset": "img:askills-banner.jpg",
+    "art": "img:askills-banner.jpg",
     "frames": 2
   },
   "scenes": [
@@ -57,10 +57,10 @@
       "type": "HOOK",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Agent Skills is installed. Twenty-four tests passed. The bug was still there.",
+      "narration": "I gave Agent Skills a real bug to fix. Twenty-four tests passed anyway.",
       "data": {
-        "headline": "Agent Skills, tested",
-        "subtext": "twenty-four passed \u2014 still broken",
+        "headline": "I tested Agent Skills",
+        "subtext": "98,000 stars. One real bug.",
         "heroAsset": "lucide:flask-conical",
         "hookVariant": "statement",
         "headlineAtWord": 1,

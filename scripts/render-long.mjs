@@ -47,7 +47,24 @@ const total = spec.scenes.reduce((a, s) => a + s.durationFrames, 0);
 // The lock is advisory (bake-rec, anchor-spec and sync refuse while it exists) and the hash
 // below is the real seal: every segment re-reads the spec and stops if it has moved.
 const lockPath = path.resolve(`topics/${slug}/.rendering`);
-const specHash = () => crypto.createHash('sha1').update(fs.readFileSync(specPath)).digest('hex');
+// HASH WHAT THE FRAMES ACTUALLY COME FROM.
+//
+// The seal used to hash the whole file, which made it fire on edits that cannot change a
+// single rendered frame. `thumbnail` is a SEPARATE composition (<slug>-thumb) and the wide
+// cut never reads it; `meta.seo` only feeds the upload kit. Iterating on a thumbnail while a
+// 40-minute render runs is exactly the thing an author does, and twice on 2026-09-24 it threw
+// the render away for no reason (owner was waiting both times).
+//
+// `cover` is NOT excluded: a short renders it as a real in-video frame (MainComposition's
+// "cover · thumbnail frame" sequence), so it changes pixels and must still trip the seal.
+const RENDER_IRRELEVANT = ['thumbnail', 'seo'];
+const renderRelevant = () => {
+  const raw = JSON.parse(fs.readFileSync(specPath, 'utf8'));
+  delete raw.thumbnail;
+  if (raw.meta) delete raw.meta.seo;
+  return JSON.stringify(raw);
+};
+const specHash = () => crypto.createHash('sha1').update(renderRelevant()).digest('hex');
 const startedWith = specHash();
 fs.writeFileSync(lockPath, JSON.stringify({pid: process.pid, sha: startedWith, at: new Date().toISOString()}, null, 2));
 const releaseLock = () => { try { fs.unlinkSync(lockPath); } catch {} };

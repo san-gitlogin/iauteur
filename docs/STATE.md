@@ -56,6 +56,93 @@ Thumbnail + shorts cover draw the real artefact — `public/assets/askills-green
 Five camera zooms were dropped rather than left pointing at things the voice never named
 (`check-camera` green at 7 of 7). Voice audit: every scene heard as written.
 
+
+**LAW 0q — WRITE FOR A STRANGER (owner, same day, second review).** Owner, on a thumbnail reading
+"98,799 STARS TESTED": *"nobody will get it... what do you think a first time viewer would get when
+they see that thumb? ... you are not explaining to a computer, you are explaining to a human who can
+be any, of any age, any gender, anywhere in the world."*
+
+The asymmetry is the defect: when the thumbnail gets written the author has read the repo, run the
+tool and watched every frame; the viewer has a two-inch picture and one line. Copy clear to the author
+and opaque to a stranger never feels wrong from the inside. Four surfaces now governed — thumbnail /
+cover card, `meta.seo.title` (wide AND shorts), scene 1's narration and headline, and `meta.seo.hook`.
+Each must carry a PERSON (I / we / you) and land cold.
+
+Written up as **LAW 0q** in CLAUDE.md, as a section in the director skill's `content_rules.md`, and
+enforced by **SPEAKS TO NOBODY** in `lint-spec.mjs` (correction #66, break-tested). The guard reads the
+thumbnail card WHOLE — badge + title + note — because the title column is only ~6 characters wide
+whenever `art` is present, so the person usually has to live in the badge. It checks only the
+mechanical half; whether a stranger would UNDERSTAND the line is the author's judgement.
+
+What shipped: card `I TESTED IT MYSELF` / `WORTH TRYING?` / `AGENT SKILLS` over the project's official
+banner; title *"Everyone's Installing This AI Coding Tool — So I Tested It On A Real Bug"*; shorts title
+*"I Gave AI A Real Bug To Fix. It Said The Tests Passed."*; and s01 re-voiced to *"I gave Agent Skills a
+real bug to fix. Twenty-four tests passed anyway."*
+
+Two things learned the hard way while fixing it: the thumbnail wrapper breaks at ~11 characters but the
+art leaves ~6, so long titles overflow into the art no matter how they are worded — pick two words of
+5-6 characters; and LAW 0f's "never narrate that your own work is real" guard fires on the word
+*REALLY*, which is a mild false positive on a title like "REALLY WORKS?" but the rule is right in spirit.
+
+
+**THUMBNAIL SYSTEM — second correction, same day.** Owner rejected `I TESTED IT MYSELF / WORTH
+TRYING?`: *"Again, who will know what AgentSkills is bro? I guess you are getting limited by the
+cutshort rules of thumb... You need to have varieties. Also I see all our thumb follows the same
+rules of Text on left, picture, logo or something on the right."*
+
+The cap was protecting the LAYOUT at the cost of the message. `src/Thumbnail.tsx` gained:
+
+- **`thumbnail.layout: 'split' | 'stack'`** — `split` is the old behaviour and every existing
+  thumbnail renders byte-identically. `stack` puts the art across the top and hands the copy the
+  WHOLE frame width (`fitWidth` 1500 vs 900), which is what lets a sentence exist at all.
+- **`[accent spans]`** — bracketed text in a title renders in the pack accent with a soft outer
+  glow. Brackets are stripped and do not count against the cap. Titles without brackets are untouched.
+- **`artFade`** — opacity on the art, for when a mark needs to sit behind type.
+- `lint-spec.mjs`: the title cap follows the layout — **64 chars on `stack`, 40 on `split`** — and
+  says so in the error, so the next author changes the layout instead of the sentence.
+
+Shipped: `98,000 STARS · TRENDING ON GITHUB` / **If AI Writes Your Code, [You Are Missing This]** /
+`AGENT SKILLS, TESTED ON A REAL BUG`, with the official banner across the top. Shorts cover:
+`98,000 STARS ON GITHUB` / *If AI Writes Your Code, Watch This* (CoverCard is a separate vertical
+component and keeps its own 40-char cap — not widened, because it was not proven at that width).
+
+The shape to copy, from the two that performed: **who you are → what you are missing → what it is
+called.** *"If You Design Systems, You Are Missing This — Archify + Claude"*.
+
+Note: `Thumbnail.tsx` is NOT used by the wide video (the long spec has `thumbnail`, the short has
+`cover`, and only `cover` renders an in-video frame via `CoverCard`), so editing it mid-render was
+safe — checked before relying on it, not assumed.
+
+
+**CORRECTION PASS (same day, after owner review).** Three things were wrong and are fixed:
+
+1. **The cut was unfair to the project.** It never said that agent-skills ships nine slash commands
+   (`/test` among them) as the INTENDED way to invoke a skill, that the plugin installer needs an SSH
+   key this machine lacks — so only the skills were installed, via `npx skills add`, and the skill was
+   named by hand — or that `hooks/session-start.sh` says in its own comment that the pack deliberately
+   ships NO router for Claude Code because the host already routes skills from their descriptions.
+   So "run one never reached for the skill" is HOST routing, not a promise the project broke. A new
+   beat, **s29** (`FILE_TREE`, "The door we did not use"), says all of this out loud before the verdict,
+   and `meta.seo.description` carries it too. 98k stars is real work; the review says what it tested.
+2. **The thumbnail was hostile and uninformative** ("STILL BROKEN"). It now reads badge `GITHUB` ·
+   title `98,799 STARS TESTED` · note `AGENT SKILLS`, with the project's OFFICIAL banner
+   (`public/assets/askills-banner.jpg`, fetched from the author's own site, provenance in SOURCES.json)
+   in its own panel, clear of the text. The precise star count is what forces the line break — "98K
+   STARS" packs onto one line and collides with the art.
+3. **Clip captions drifted against the narration.** Cause: the `rec()` helper in the builder dropped
+   archify's `pivot` field, so clips were anchored by FRACTION instead of by the phrase that names them.
+   Fixed by solving each clip's anchor against the words that name it, inside the footage-fit window —
+   **27 of 34 clips now land on their own words** (was ~14 adrift). The remaining 7 are structural: a
+   42-second take has to START early enough to fit its scene, so its caption necessarily precedes the
+   sentence naming it. `s24` and `s27` were rewritten so their payoff is named early rather than in the
+   last 15%, and re-voiced with `ONLY=s24,s27` (which merges timings and leaves every other scene's
+   audio untouched — the cheap way to fix narration after sync).
+
+**THE VOICE RATE WAS NOT TOUCHED, and must never be.** Owner, this session: *"Dont ever adjust the
+voice speed of ava to sync with. Its something I would hate to see/hear because the current voice and
+pace is what all my videos in my channel holds."* Drift is fixed by moving anchors onto words, never by
+playback speed. The rate stays `+8%` and `check-corrections.mjs` seals it.
+
 ## 2026-09-23 — Laya SHIPPED (33 scenes, 12:08 wide + 54s short) · `LAYA_STAGE`, 7 new pictures
 
 `topics/laya-decisions-open/out/wide-dark.mp4` — **21,851 frames EXACT, drift 0 ms, audio mean

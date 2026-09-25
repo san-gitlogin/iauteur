@@ -144,6 +144,8 @@ const subTypeOf = (s) => {
   // O55_STAGE: one type, seven pictures — a board, a podium, callipers, a price rack,
   // a turnstile, a thread and a switchboard. Counted per picture, like the four above.
   if (s.type === 'O55_STAGE') return `O55_STAGE:${s.data?.o55Stage?.kind ?? '?'}`;
+  // LAYA_STAGE: one type, seven pictures — counted per picture, like the three above.
+  if (s.type === 'LAYA_STAGE') return `LAYA_STAGE:${s.data?.layaStage?.kind ?? '?'}`;
   // APPLE_STAGE, same shape again: one registered type dispatching a different DEPICTION
   // per `kind` — a phone drawn from its own dimensions, a six-blade iris, a chip
   // floorplan, a price ladder. Counting the type alone would read ten distinct pictures
@@ -246,7 +248,7 @@ if (n >= 8) {
     if (traceExempt && /^DSA_(TRACE_|FRAMEWORK|SIGNALS)/.test(st)) continue;
     if (c > cap) E(`OVER-RELIANCE: sub-type ${st} used ${c}× (>~${cap} for ${n} scenes) — swap some for other component types.`);
   }
-  const DYNAMIC = ['JEVONS_CURVE', 'DECISION_SLOTS', 'SMART_IF', 'PARALLEL_SAMPLER', 'REVIEW_YIELD', 'VAR_SCOPE', 'LIVE_CODE', 'COLUMN_SPLIT', 'CLAIM_CHECK', 'MODEL_SHRUG', 'WHEN_NOT_SQLITE', 'INDEX_LEDGER', 'WHERE_IT_RUNS', 'TABLE_SPLIT', 'GROUP_BUCKETS', 'TRANSACTION_DOOR', 'TYPE_GATE', 'CURSOR_WALK', 'KEY_CHORD', 'BROWSER_STEALS', 'DB_TWO_WAYS', 'JOIN_MERGE', 'PLACEHOLDER_SEAL', 'SCAN_VS_SEEK', 'RECORDED_STEP', 'UV_STAGE', 'MEM_STAGE', 'ASTRA_STAGE', 'HIDFI_STAGE', 'MCP_MESH', 'MCP_REACH', 'MCP_DEPRECATED', 'MCP_ELICIT', 'MCP_TERMINAL', 'MCP_FLAGS', 'MCP_TRANSPORT', 'MCP_PROGRESS', 'MCP_ROOTS', 'MCP_SAMPLING', 'MCP_MENTION', 'MCP_URI', 'MCP_LOOP', 'ALLURE_STAGE', 'MCP_SCHEMA', 'MCP_WIRE', 'MCP_CONTROL', 'MCP_API_ANATOMY', 'DSA_FRAMEWORK', 'DSA_COST', 'DSA_SIGNALS', 'DSA_TRACE_LIST', 'DSA_TRACE_INTERVALS', 'DSA_TRACE_DP', 'DSA_TRACE_TREE', 'DSA_TRACE_GRID', 'DSA_TRACE_STACK', 'DSA_TRACE_HASH', 'DSA_TRACE_BSEARCH', 'DSA_TRACE_WINDOW', 'DSA_TRACE_PTRS', 'CMD_LSUSB', 'CMD_LSPCI', 'CMD_CHEAT', 'CMD_TLDR', 'CMD_APROPOS', 'CMD_MAN', 'CMD_DMESG', 'CMD_JOURNALCTL', 'CMD_SYSTEMCTL', 'CMD_TMUX', 'CMD_SCREEN', 'CMD_HISTORY', 'CMD_ENV', 'CMD_ALIAS', 'CMD_BASHSCRIPT', 'CMD_CRONTAB', 'CMD_CRON', 'CMD_ZIP', 'CMD_BZIP2', 'CMD_GZIP', 'CMD_TAR', 'CMD_CURL', 'CMD_WGET', 'CMD_NC', 'CMD_RSYNC', 'CMD_SCP', 'CMD_SSH', 'CMD_WHOIS', 'CMD_NSLOOKUP', 'CMD_HOST', 'CMD_DIG', 'CMD_NLOAD', 'CMD_NETHOGS', 'CMD_IFTOP', 'CMD_NMCLI', 'CMD_SS', 'CMD_NETSTAT', 'CMD_MTR', 'CMD_TRACEROUTE', 'CMD_PING', 'CMD_IP', 'CMD_DD', 'CMD_UMOUNT', 'CMD_MOUNT', 'CMD_FSCK', 'CMD_MKFS', 'CMD_BLKID', 'CMD_PARTED', 'CMD_FDISK', 'CMD_NCDU', 'CMD_DU', 'CMD_DF', 'CMD_WATCH', 'CMD_SAR', 'CMD_DSTAT', 'CMD_IOTOP', 'CMD_IOSTAT', 'CMD_VMSTAT', 'CMD_FREE', 'CMD_UPTIME', 'CMD_STRACE', 'CMD_LSOF', 'CMD_WAIT', 'CMD_SLEEP', 'CMD_NOHUP', 'CMD_KILLALL', 'CMD_KILL', 'CMD_NMON', 'CMD_GLANCES', 'CMD_ATOP', 'CMD_BTOP', 'CMD_HTOP', 'CMD_TOP', 'CMD_PSTREE', 'CMD_PS', 'CMD_CHROOT', 'CMD_LAST', 'CMD_W', 'CMD_CHPASSWD', 'CMD_PASSWD', 'CMD_USERDEL', 'CMD_USERMOD', 'CMD_USERADD', 'CMD_SUDO', 'CMD_UMASK', 'CMD_CHOWN', 'CMD_CHMOD', 'CMD_XARGS', 'CMD_SED', 'CMD_AWK', 'CMD_GREP', 'CMD_LOCATE', 'CMD_FIND', 'CMD_DIFF', 'CMD_VI', 'CMD_TAIL', 'CMD_LESS', 'CMD_MORE', 'CMD_TAC', 'CMD_CAT', 'CMD_TOUCH', 'CMD_CLEAR', 'CMD_LN', 'CMD_RM', 'CMD_MV', 'CMD_CP', 'CMD_MKDIR', 'CMD_PWD', 'CMD_CD', 'CMD_LS', 'COPY_FORK', 'TOOL_BENCH', 'DELETION_GUARD', 'LINK_PAIR', 'LISTING_ROW', 'PATH_WALK', 'RECORD_DRAFT', 'FROZEN_FRAME', 'ORDER_ROULETTE', 'WORKER_SPREAD', 'SEALED_BOX', 'SET_LOGIC', 'SEARCH_NARROW', 'STAGE_HANDOFF', 'BACKSTAGE_PHONE', 'SCOPE_LADDER', 'HAND_STAMP', 'SAD_PATHS', 'MAIL_ROOM', 'TRACE_SCRUB', 'FLAG_HARVEST', 'SHOT_SCOPE', 'PICKER_BYPASS', 'DIALOG_GATE', 'FRAME_BOUNDARY', 'TRAP_TRIGGER', 'INDEX_DRIFT', 'ROW_FILTER', 'CROWD_MATCH', 'RESPONSIBILITY_SPLIT', 'SAVED_SEARCH', 'RULE_TEST', 'CHANGE_RIPPLE', 'FIXTURE_CREW', 'OVERLAY_BLOCK', 'BROWSER_STEP', 'CODE_RUN', 'QUIZ_CARD', 'THEATER_STAGE', 'INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
+  const DYNAMIC = ['LAYA_STAGE', 'JEVONS_CURVE', 'DECISION_SLOTS', 'SMART_IF', 'PARALLEL_SAMPLER', 'REVIEW_YIELD', 'VAR_SCOPE', 'LIVE_CODE', 'COLUMN_SPLIT', 'CLAIM_CHECK', 'MODEL_SHRUG', 'WHEN_NOT_SQLITE', 'INDEX_LEDGER', 'WHERE_IT_RUNS', 'TABLE_SPLIT', 'GROUP_BUCKETS', 'TRANSACTION_DOOR', 'TYPE_GATE', 'CURSOR_WALK', 'KEY_CHORD', 'BROWSER_STEALS', 'DB_TWO_WAYS', 'JOIN_MERGE', 'PLACEHOLDER_SEAL', 'SCAN_VS_SEEK', 'RECORDED_STEP', 'UV_STAGE', 'MEM_STAGE', 'ASTRA_STAGE', 'HIDFI_STAGE', 'MCP_MESH', 'MCP_REACH', 'MCP_DEPRECATED', 'MCP_ELICIT', 'MCP_TERMINAL', 'MCP_FLAGS', 'MCP_TRANSPORT', 'MCP_PROGRESS', 'MCP_ROOTS', 'MCP_SAMPLING', 'MCP_MENTION', 'MCP_URI', 'MCP_LOOP', 'ALLURE_STAGE', 'MCP_SCHEMA', 'MCP_WIRE', 'MCP_CONTROL', 'MCP_API_ANATOMY', 'DSA_FRAMEWORK', 'DSA_COST', 'DSA_SIGNALS', 'DSA_TRACE_LIST', 'DSA_TRACE_INTERVALS', 'DSA_TRACE_DP', 'DSA_TRACE_TREE', 'DSA_TRACE_GRID', 'DSA_TRACE_STACK', 'DSA_TRACE_HASH', 'DSA_TRACE_BSEARCH', 'DSA_TRACE_WINDOW', 'DSA_TRACE_PTRS', 'CMD_LSUSB', 'CMD_LSPCI', 'CMD_CHEAT', 'CMD_TLDR', 'CMD_APROPOS', 'CMD_MAN', 'CMD_DMESG', 'CMD_JOURNALCTL', 'CMD_SYSTEMCTL', 'CMD_TMUX', 'CMD_SCREEN', 'CMD_HISTORY', 'CMD_ENV', 'CMD_ALIAS', 'CMD_BASHSCRIPT', 'CMD_CRONTAB', 'CMD_CRON', 'CMD_ZIP', 'CMD_BZIP2', 'CMD_GZIP', 'CMD_TAR', 'CMD_CURL', 'CMD_WGET', 'CMD_NC', 'CMD_RSYNC', 'CMD_SCP', 'CMD_SSH', 'CMD_WHOIS', 'CMD_NSLOOKUP', 'CMD_HOST', 'CMD_DIG', 'CMD_NLOAD', 'CMD_NETHOGS', 'CMD_IFTOP', 'CMD_NMCLI', 'CMD_SS', 'CMD_NETSTAT', 'CMD_MTR', 'CMD_TRACEROUTE', 'CMD_PING', 'CMD_IP', 'CMD_DD', 'CMD_UMOUNT', 'CMD_MOUNT', 'CMD_FSCK', 'CMD_MKFS', 'CMD_BLKID', 'CMD_PARTED', 'CMD_FDISK', 'CMD_NCDU', 'CMD_DU', 'CMD_DF', 'CMD_WATCH', 'CMD_SAR', 'CMD_DSTAT', 'CMD_IOTOP', 'CMD_IOSTAT', 'CMD_VMSTAT', 'CMD_FREE', 'CMD_UPTIME', 'CMD_STRACE', 'CMD_LSOF', 'CMD_WAIT', 'CMD_SLEEP', 'CMD_NOHUP', 'CMD_KILLALL', 'CMD_KILL', 'CMD_NMON', 'CMD_GLANCES', 'CMD_ATOP', 'CMD_BTOP', 'CMD_HTOP', 'CMD_TOP', 'CMD_PSTREE', 'CMD_PS', 'CMD_CHROOT', 'CMD_LAST', 'CMD_W', 'CMD_CHPASSWD', 'CMD_PASSWD', 'CMD_USERDEL', 'CMD_USERMOD', 'CMD_USERADD', 'CMD_SUDO', 'CMD_UMASK', 'CMD_CHOWN', 'CMD_CHMOD', 'CMD_XARGS', 'CMD_SED', 'CMD_AWK', 'CMD_GREP', 'CMD_LOCATE', 'CMD_FIND', 'CMD_DIFF', 'CMD_VI', 'CMD_TAIL', 'CMD_LESS', 'CMD_MORE', 'CMD_TAC', 'CMD_CAT', 'CMD_TOUCH', 'CMD_CLEAR', 'CMD_LN', 'CMD_RM', 'CMD_MV', 'CMD_CP', 'CMD_MKDIR', 'CMD_PWD', 'CMD_CD', 'CMD_LS', 'COPY_FORK', 'TOOL_BENCH', 'DELETION_GUARD', 'LINK_PAIR', 'LISTING_ROW', 'PATH_WALK', 'RECORD_DRAFT', 'FROZEN_FRAME', 'ORDER_ROULETTE', 'WORKER_SPREAD', 'SEALED_BOX', 'SET_LOGIC', 'SEARCH_NARROW', 'STAGE_HANDOFF', 'BACKSTAGE_PHONE', 'SCOPE_LADDER', 'HAND_STAMP', 'SAD_PATHS', 'MAIL_ROOM', 'TRACE_SCRUB', 'FLAG_HARVEST', 'SHOT_SCOPE', 'PICKER_BYPASS', 'DIALOG_GATE', 'FRAME_BOUNDARY', 'TRAP_TRIGGER', 'INDEX_DRIFT', 'ROW_FILTER', 'CROWD_MATCH', 'RESPONSIBILITY_SPLIT', 'SAVED_SEARCH', 'RULE_TEST', 'CHANGE_RIPPLE', 'FIXTURE_CREW', 'OVERLAY_BLOCK', 'BROWSER_STEP', 'CODE_RUN', 'QUIZ_CARD', 'THEATER_STAGE', 'INTRO_CARD', 'REPO_CTA', 'AUTO_RUN', 'COMPONENT_LAB', 'BEAT_BOARD', 'PRODUCTION_GRIND', 'SCENE_FORGE', 'VIDEO_PLAYER', 'CHAT_TRIO', 'PROMPT_HANDOUT', 'APP_WINDOW', 'CHECK_SWEEP', 'PROMPT_HANDOFF', 'TOPIC_INTAKE', 'PIPELINE_GATE', 'ASPECT_TWIN', 'RESKIN_CAROUSEL', 'WORD_ANCHOR_RAIL', 'BUDGET_METER_ROW', 'LAB_ASSEMBLY', 'CAST_BOARD', 'SPEC_TO_FRAME', 'BATCH_SWEEP', 'PIPELINE_GANTT', 'DIAGRAM', 'KINETIC_TEXT', 'PHOTO', 'REVEAL', 'SOUND_WAVE', 'LOGO_REVEAL', 'CAROUSEL', 'ACTIVITY_CARD', 'LOCATION_MAP', 'FLIP_CARD', 'GALLERY', 'COMPARISON_SLIDER', 'QUOTE_SPOTLIGHT', 'STICKY_NOTE', 'IMAGE_SCENE', 'FUNNEL', 'WATERFALL', 'PICTOGRAM', 'RADAR', 'CANDLESTICK', 'BOX_PLOT', 'TREEMAP', 'SANKEY', 'ICON_GRID', 'ICON_CALLOUT', 'ICON_BURST', 'LOGO_WALL', 'LOGO_VERSUS', 'LOGO_TIMELINE', 'FORMULA', 'MOLECULE', 'DNA_HELIX', 'LABELED_FIGURE', 'VECTOR_FIELD', 'CIRCUIT_FLOW', 'TICKER_TAPE', 'MAP_RADAR', 'BITS', 'MEMORY', 'PACKET', 'PIPELINE', 'LAYERED_STACK', 'GRID_ARRAY', 'SPEC_COMPARE', 'DIE_SHOT', 'NEURAL_NET', 'DATACENTER', 'TRANSFORMER_BLOCK', 'CACHE_PYRAMID', 'CALL_STACK', 'TOKENIZER', 'FILE_TREE', 'DATABASE_TABLE', 'GIT_BRANCH', 'STATE_MACHINE', 'EMBEDDING_SPACE', 'QUEUE', 'API_REQUEST_RESPONSE', 'BOOLEAN_LOGIC_GATES', 'HASH_FUNCTION', 'SORTING_VISUAL', 'CLOCK_SIGNAL', 'GPU_CLUSTER', 'ZOOM_SCALE', 'ENCRYPTION', 'POINTER_DIAGRAM', 'NUMBER_BASE', 'CODE_EDITOR', 'TERMINAL_SESSION', 'LOG_STREAM', 'CODE_DIFF', 'ERROR_TRACE', 'WINDOW_FRAME', 'AUTOMATION_RUN', 'DOM_INSPECT', 'NETWORK_WATERFALL', 'DEVICE_FRAME', 'CLOUD_ARCH', 'K8S_CLUSTER', 'COST_METER', 'SLO_GAUGE', 'IAC_PLAN', 'ERD', 'PROCESS_TABLE', 'KERNEL_BOUNDARY', 'TEST_RUNNER', 'TEST_MATRIX', 'CONTEXT_METER', 'AGENT_HARNESS', 'KNOWLEDGE_GRAPH', 'RETRIEVAL_RANK', 'MODEL_STAGES', 'CONFIDENCE_GATE', 'SANDBOX_BOX', 'DRILL_IN', 'EVAL_DASHBOARD', 'VIDEO_HERO', 'VIDEO_SPOTLIGHT', 'MEDIA_CALLOUT', 'MEDIA_COMPARE', 'MEDIA_STAT_OVERLAY', 'SCREENSHOT_CASCADE', 'FLOATING_QUOTE_PILL', 'OVERLAY_SPLIT_DEFINITIONS', 'CYCLE_LOOP', 'STEP_STACK_OVERLAY', 'TITLE_BANNER_FOCUS', 'TALKING_POINTS', 'SLIDE_BULLETS_PIP', 'CAPTION_KINETIC_OVERLAY', 'PHOTO_TIMELINE', 'TRADEOFF_SCALE'];
   if (!types.some((t) => DYNAMIC.includes(t)))
     E(`NO DYNAMIC MOMENT: add at least one of DIAGRAM/KINETIC_TEXT/REVEAL/PHOTO/CAROUSEL/… so the video isn't all boxes, lists and numbers.`);
   const distinctTrans = new Set(spec.scenes.map((s) => s.transition).filter(Boolean)).size;
@@ -267,8 +269,16 @@ if (spec.meta?.format === 'long' && (!Array.isArray(spec.meta?.topicAxes) || spe
   W('meta.topicAxes has <2 strategy axes (entity-novelty/economic-pain/sovereignty/tribal-conflict) — historically this profile lands ~50-300 views; see channel_playbook.md §1');
 if (spec.meta?.format === 'long' && !spec.thumbnail)
   E('long spec missing "thumbnail": {title, badge, asset} — thumbnails must derive from the topic, never go stale');
-if (spec.thumbnail && len(spec.thumbnail.title) > BUDGET.coverTitle)
-  E(`thumbnail.title "${spec.thumbnail.title}" > ${BUDGET.coverTitle} chars`);
+// A SPLIT thumbnail gives the copy half the frame, so its title has to be short. A STACK
+// puts the art above the copy and hands it the whole width — the cap that protects one
+// layout silently forbids the sentence the other exists to carry (owner, 2026-09-24:
+// *"Its good to have shorter thumb texts, but at what cost — the user is not able to get
+// it"*). Brackets mark an accent span and are not read by anyone, so they do not count.
+const CARD_CAP = (card) => (card?.layout === 'stack' ? 64 : BUDGET.coverTitle);
+const cardTitleLen = (card) => len(String(card?.title ?? '').replace(/[[\]]/g, ''));
+if (spec.thumbnail && cardTitleLen(spec.thumbnail) > CARD_CAP(spec.thumbnail))
+  E(`thumbnail.title "${spec.thumbnail.title}" > ${CARD_CAP(spec.thumbnail)} chars` +
+    (spec.thumbnail.layout === 'stack' ? '' : ` (a "stack" layout allows 64 — it puts the art above the copy)`));
 
 if (spec.cover && len(spec.cover.title) > BUDGET.coverTitle)
   E(`cover.title "${spec.cover.title}" > ${BUDGET.coverTitle} chars — thumbnails are fragments, not sentences`);
@@ -328,6 +338,42 @@ const INTENT = /\b(today|in this (?:video|one|episode)|we(?:'re| are) going to|w
 const longFmt = (spec.meta?.format ?? 'long') === 'long';
 const chan = String(spec.brand?.channel ?? '').trim();
 const nar = (i) => String(spec.scenes?.[i]?.narration ?? '');
+
+// ── SPEAKS TO NOBODY (LAW 0q, owner 2026-09-24) ──────────────────────────────
+//
+// Owner, on a thumbnail reading "98,799 STARS TESTED": *"nobody will get it... what do you
+// think a first time viewer would get when they see that thumb?"* By the time these lines get
+// written the author has read the repo, run the tool and watched the footage; the viewer has a
+// two-inch picture and one line of text. Copy that is clear to the author and opaque to a
+// stranger never feels wrong from the inside, which is why it needs a gate rather than taste.
+//
+// A line that carries no person is the reliable symptom: "Agent Skills, tested" is a thing that
+// happened to nobody. This checks the four surfaces a stranger meets FIRST, and it checks only
+// the mechanical half — whether a person is present. Whether a stranger would UNDERSTAND the
+// line is the author's judgement and the half that actually matters.
+const PERSON = /\b(i|i'm|i'd|i've|my|me|we|we're|we've|our|us|let's|you|you're|you'll|your|yours)\b/i;
+{
+  const card = spec.thumbnail ?? spec.cover ?? {};
+  // The CARD is read as one block — badge, title and note together — and the title column is
+  // narrow whenever `art` is present, so the person often has to live in the badge. Judge the
+  // card whole rather than forcing a pronoun into six characters of headline.
+  const cardText = [card.badge, card.title, card.note].filter(Boolean).join(' · ');
+  const surfaces = [
+    ['thumbnail/cover card (badge + title + note)', cardText],
+    ['meta.seo.title', spec.meta?.seo?.title],
+    ['s01 narration', nar(0)],
+  ];
+  for (const [what, text] of surfaces) {
+    const t = String(text ?? '').trim();
+    if (!t) continue;
+    if (!PERSON.test(t)) {
+      W(`SPEAKS TO NOBODY — ${what} carries no person: ${JSON.stringify(t.slice(0, 64))}. ` +
+        `A first-time viewer knows nothing you know. Say who did it ("I tested…", "we put it on…") ` +
+        `or speak to them ("if you ship products, you'll want this"). A number with no subject ` +
+        `reads as noise to a stranger, however true it is (LAW 0q).`);
+    }
+  }
+}
 
 // ── 1. THE SUBJECT, IN THE FIRST SENTENCE. Errors, on EVERY format. ──────────
 //
@@ -2942,6 +2988,42 @@ for (const s of spec.scenes ?? []) {
     }
     if (cl.length && !cl.some((x) => x.atWord != null))
       W(`${id}: MEM_STAGE has no anchored cell — the whole picture lands at once instead of with the voice (LAW 0i)`);
+  }
+  // LAYA_STAGE — one type, seven pictures. Every cap below is a MEASUREMENT (LAW 0n:
+  // "a cap is a measurement, not a taste"), taken against the NARROWEST container, which
+  // is the 9:16 stage at 1080 wide less two 52px gutters.
+  if (d.layaStage) {
+    const u = d.layaStage;
+    const KINDS = ['one-pass','mask-slots','entropy-dial','proper-score','router-gate','budget-split','free-swap'];
+    if (!u.kind) E(`${id}: LAYA_STAGE needs a kind`);
+    else if (!KINDS.includes(u.kind)) E(`${id}: LAYA_STAGE unknown kind "${u.kind}" — must be one of ${KINDS.join(', ')}. It would render as UNKNOWN DEPICTION KIND.`);
+    if (len(u.headline) > 38) E(`${id}: LAYA_STAGE headline > 38 chars — it wraps in every pack at 16:9`);
+    if (len(u.stageTitle) > 40) E(`${id}: LAYA_STAGE stageTitle > 40 chars`);
+    // Per-kind capacity: each picture has its own room, so one blanket number would be
+    // wrong for six of the seven. mask-slots holds a whole sequence; budget-split two rows.
+    const LAYA_CAP = {'one-pass': 10, 'mask-slots': 14, 'entropy-dial': 7, 'proper-score': 3,
+                      'router-gate': 8, 'budget-split': 4, 'free-swap': 6};
+    const lcap = LAYA_CAP[u.kind] ?? 10;
+    const lst = u.stage ?? [];
+    if (lst.length > lcap) E(`${id}: LAYA_STAGE ${u.kind} holds at most ${lcap} stage items — the picture has no room for more`);
+    for (let k = 0; k < lst.length; k++) {
+      const it = lst[k];
+      if (len(it.label) > 46) E(`${id}: LAYA_STAGE stage[${k}].label > 46 chars`);
+      if (len(it.sub) > 64) E(`${id}: LAYA_STAGE stage[${k}].sub > 64 chars`);
+      if (len(it.text) > 24) E(`${id}: LAYA_STAGE stage[${k}].text > 24 chars`);
+      if (it.value != null && typeof it.value !== 'number') E(`${id}: LAYA_STAGE stage[${k}].value must be a number`);
+      checkColor(id, `layaStage.stage[${k}].color`, it.color);
+    }
+    // The mask-slots gather joins to a cell by `text`, so a gather naming no slot draws its
+    // riser at a fallback position — the silent field-mismatch class (LAW 0n).
+    if (u.kind === 'mask-slots') {
+      const slots = lst.filter((x) => x.group === 'cell' && x.text === 'slot').map((x) => x.label);
+      for (const g of lst.filter((x) => x.group === 'gather')) {
+        if (!slots.includes(g.text)) E(`${id}: LAYA_STAGE mask-slots gather "${g.label}" names cell "${g.text}", which is not a slot cell — its riser would point at the wrong token`);
+      }
+    }
+    if (lst.length && !lst.some((x) => x.atWord != null))
+      W(`${id}: LAYA_STAGE has no anchored element — the whole picture lands at once instead of with the voice (LAW 0i)`);
   }
   if (d.hidfiStage) {
     const u = d.hidfiStage;

@@ -10,6 +10,31 @@ type Replaces = {from?: string; to: string; fromAsset?: string; toAsset?: string
 
 const STRIKE = '#ff4d4d';
 
+/**
+ * ACCENT SPANS — "[like this]" inside a title.
+ *
+ * Owner, 2026-09-24: *"we need to also have highlights in the thumb's text, kinda like a
+ * outer glow subtle yet impactful"*. A thumbnail is read in about a second, and a flat wall
+ * of one colour gives the eye nowhere to land first. The bracketed phrase takes the pack's
+ * accent and a soft halo of its own colour — a GLOW, not a box, so the words still read as
+ * one sentence rather than a highlighted fragment pasted into it.
+ *
+ * `[` and `]` are stripped from the rendered text, so a title with no brackets is untouched
+ * and every existing thumbnail renders exactly as before.
+ */
+const withAccent = (text: string, accent: string, glow: number) => {
+  const parts = String(text ?? '').split(/(\[[^\]]+\])/g).filter(Boolean);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    part.startsWith('[') && part.endsWith(']') ? (
+      <span key={i} style={{
+        color: accent,
+        // subtle: the halo reads at thumbnail scale without smearing the letterforms
+        textShadow: glow > 0 ? `0 0 ${18}px ${accent}88, 0 0 ${44}px ${accent}55` : 'none',
+      }}>{part.slice(1, -1)}</span>
+    ) : <span key={i}>{part}</span>);
+};
+
 /** A word with a red bar drawn across it. A BAR, not a CSS line-through: at thumbnail
  *  scale a text decoration is a hairline nobody sees on a phone. The bar's weight and
  *  overhang scale with the type, so it reads the same struck at 96px and at 200px. */
@@ -87,9 +112,13 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
   logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
-  titleStruck?: string; art?: string;
-}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art}) => {
+  titleStruck?: string; art?: string; layout?: 'split' | 'stack'; artFade?: number;
+}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art, layout, artFade}) => {
   const t = useTheme();
+  // STACK puts the art ABOVE the copy, so the copy gets the whole frame width instead of the
+  // half a side-by-side leaves it. That is the difference between "WORTH TRYING?" and a
+  // sentence a stranger can actually act on (owner, 2026-09-24).
+  const stacked = layout === 'stack';
 
   // FIT THE TITLE. The size used to be a constant, so a longer title simply wrapped
   // to a third line and pushed the badge off the top edge of the frame — LAW 0o's
@@ -107,14 +136,14 @@ const ThumbInner: React.FC<{
   };
   // room above the logo wall, less the badge, the note, and the gaps between them.
   // A struck word takes its own big line, so the title above it has to give that room up.
-  const budget = (logos?.length ? 530 : 660) - 54 - 28 - (note ? 56 : 0) - (titleStruck ? 210 : 0);
-  const base = titleStruck ? 92 : logos?.length ? 132 : 108;
+  const budget = (stacked ? 330 : logos?.length ? 530 : 660) - 54 - 28 - (note ? 56 : 0) - (titleStruck ? 210 : 0);
+  const base = stacked ? 96 : titleStruck ? 92 : logos?.length ? 132 : 108;
   // 1584 is calibrated against the 88%-wide column a logo-wall thumbnail gets. A swap
   // block is a second COLUMN and takes real width away, so the same constant let the
   // title wrap to a line more than the fitter predicted and pushed the badge off the top
   // edge — LAW 0o's "never size to a constant", one layer further in. Scale, do not guess.
   // A free picture takes the right half, so the title fits a 50% column.
-  const fitWidth = replaces ? 1584 * (0.56 / 0.88) : art ? 1584 * (0.5 / 0.88) : 1584;
+  const fitWidth = stacked ? 1500 : replaces ? 1584 * (0.56 / 0.88) : art ? 1584 * (0.5 / 0.88) : 1584;
   const titleSize =
     [base, base - 10, base - 20, base - 28, base - 36, base - 44].find(
       (size) => wrapAt(Math.max(6, Math.floor(fitWidth / size))) * size * 1.02 <= budget,
@@ -150,27 +179,34 @@ const ThumbInner: React.FC<{
           // for) and crops a TALL one: the HID-Fi board is 500x1085, so 800 wide rendered
           // 1736 tall in an 891 frame and the thumbnail showed a strip of pins instead of a
           // board. The subject is drawn FREE and WHOLE, so whichever axis binds, binds.
-          style={{position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
-                   width: 'auto', height: 'auto', maxWidth: 800, maxHeight: '92%'}}
+          style={stacked
+            // STACK: a horizontal lockup across the top, copy underneath. A wide wordmark
+            // (a project banner) reads at a glance here and stops competing with the
+            // sentence for the same column.
+            ? {position: 'absolute', left: 90, top: 48, width: 'auto', height: 'auto',
+               maxWidth: 900, maxHeight: 296, opacity: artFade ?? 1,
+               borderRadius: 12, boxShadow: '0 18px 60px rgba(0,0,0,0.45)'}
+            : {position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
+               width: 'auto', height: 'auto', maxWidth: 800, maxHeight: '92%', opacity: artFade ?? 1}}
         />
       ) : null}
       <AbsoluteFill
         style={{
           flexDirection: 'row',
-          alignItems: 'center',
           justifyContent: 'space-between',
           // A logo wall reserves the bottom band, so the row is lifted to clear it.
           // With no wall the row centres on the frame itself, which is what a short
           // stack wants (owner, 2026-08-22: *"vertically align to the center of the
           // thumb overall"*) — the lifted version left the badge against the top edge.
-          padding: logos?.length ? '0 90px 190px' : '0 90px',
+          padding: stacked ? '386px 90px 0' : logos?.length ? '0 90px 190px' : '0 90px',
+          alignItems: stacked ? 'flex-start' : 'center',
         }}
       >
         {/* The swap block is a second column, not an icon, so the text column has to
             yield real width to it. Without this the left column kept the 88% it takes
             when a logo wall is present and the swap ran straight off the right edge. */}
         <div style={{display: 'flex', flexDirection: 'column', gap: 28,
-                     maxWidth: replaces ? '56%' : art ? '50%' : logos?.length ? '88%' : '62%'}}>
+                     maxWidth: stacked ? '94%' : replaces ? '56%' : art ? '50%' : logos?.length ? '88%' : '62%'}}>
           <div
             style={{
               alignSelf: 'flex-start',
@@ -206,7 +242,7 @@ const ThumbInner: React.FC<{
                     : '0 6px 28px rgba(0,0,0,0.25)',
               }}
             >
-              {title}
+              {withAccent(title, t.colors.accent2, t.style.glow)}
             </div>
             {/* The rejected word, set large and crossed out. It sits INSIDE the title
                 group rather than beside it, because it is the subject of the sentence
@@ -285,6 +321,8 @@ export const Thumbnail: React.FC<{
   replaces?: Replaces;
   titleStruck?: string;
   art?: string;
+  layout?: 'split' | 'stack';
+  artFade?: number;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />

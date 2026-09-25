@@ -17,14 +17,14 @@
     ],
     "screenplay": "documentary",
     "seo": {
-      "title": "I Installed 25 Agent Skills \u2014 Then Watched The Agent Ignore Every One",
+      "title": "Everyone's Installing This AI Coding Tool \u2014 So I Tested It On A Real Bug",
       "altTitles": [
-        "24 Tests Passed. The Bug Was Still There.",
-        "Agent Skills Tested: The One Sentence That Changed What My AI Proved",
-        "Addy Osmani's Agent Skills, Tested Against A Real Bug (With An Answer Key)"
+        "I Gave This AI Coding Tool A Real Bug. It Said The Tests Passed.",
+        "98,000 People Starred It. I Spent A Day Finding Out If It Works.",
+        "If You Let AI Write Your Code, You Should Watch This First"
       ],
-      "hook": "Agent Skills is a pack of 25 engineering workflows for AI coding agents with 98,000 stars. We install it on a real broken library, run the same bug twice \u2014 once just asking, once naming the testing skill \u2014 and grade both against the fix the maintainer actually shipped.",
-      "description": "We install addyosmani/agent-skills on a sealed copy of sindresorhus/slugify, parked one commit before a real bug fix, and run the same bug report twice. The only difference between the runs is one sentence. Everything on screen is the real thing: the repo page, the skill file, Claude Code's own tool transcripts, and the maintainer's published commit as an answer key.",
+      "hook": "I kept seeing this one on GitHub \u2014 98,000 stars and climbing \u2014 so I installed it and gave it a library with a real bug in it. Twice: once just asking it to fix the bug, once telling it to use the testing skill. Then I checked both against the fix the maintainer actually shipped.",
+      "description": "We install addyosmani/agent-skills on a sealed copy of sindresorhus/slugify, parked one commit before a real bug fix, and run the same bug report twice. The only difference between the runs is one sentence. Everything on screen is the real thing: the repo page, the skill file, Claude Code's own tool transcripts, and the maintainer's published commit as an answer key. Note on method: the pack's nine slash commands (including /test) are its intended way to invoke a skill; the plugin installer needs an SSH key this machine lacks, so we installed the skills alone and named the skill by hand. The project also deliberately ships no router for Claude Code, which routes skills natively \u2014 so run one not reaching for the skill is host behaviour, not a broken promise.",
       "pinned": "Twenty-four tests passed and the bug was still there \u2014 does your green suite actually prove anything?",
       "sources": [
         "Agent Skills \u2014 github.com/addyosmani/agent-skills (MIT)",
@@ -50,11 +50,13 @@
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "STILL BROKEN",
-    "badge": "Agent Skills",
-    "note": "24 TESTS PASSED",
-    "art": "img:askills-green-wall.png",
-    "asset": "img:askills-green-wall.png"
+    "title": "If AI Writes Your Code, [You Are Missing This]",
+    "badge": "98,000 STARS \u00b7 TRENDING ON GITHUB",
+    "note": "AGENT SKILLS, TESTED ON A REAL BUG",
+    "art": "img:askills-banner.jpg",
+    "asset": "img:askills-banner.jpg",
+    "layout": "stack",
+    "artFade": 1
   },
   "scenes": [
     {
@@ -62,10 +64,10 @@
       "type": "HOOK",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Agent Skills is installed. Twenty-four tests passed. The bug was still there.",
+      "narration": "I gave Agent Skills a real bug to fix. Twenty-four tests passed anyway.",
       "data": {
-        "headline": "Agent Skills, tested",
-        "subtext": "twenty-four tests passed \u2014 the bug was still there",
+        "headline": "I tested Agent Skills",
+        "subtext": "98,000 stars. One real bug.",
         "heroAsset": "lucide:flask-conical",
         "hookVariant": "statement",
         "headlineAtWord": 1,
@@ -103,7 +105,7 @@
               "ref": "rec:askills-gh#repo",
               "label": "the official page",
               "focus": true,
-              "atWord": 2.667,
+              "atWord": 1,
               "sourceNote": "addyosmani/agent-skills \u00b7 MIT \u00b7 98,799 stars at time of recording",
               "zooms": [],
               "callouts": [],
@@ -430,7 +432,7 @@
               "ref": "rec:askills-gh#about",
               "label": "the one-line description",
               "focus": true,
-              "atWord": 20,
+              "atWord": 47,
               "zooms": [
                 {
                   "marks": [
@@ -615,7 +617,7 @@
               "ref": "rec:askills-gh#lifecycle",
               "label": "the six phases, drawn",
               "focus": true,
-              "atWord": 59.75,
+              "atWord": 71,
               "zooms": [],
               "callouts": [],
               "id": "lifecycle",
@@ -896,7 +898,7 @@
               "ref": "rec:askills-gh#commands",
               "label": "nine slash commands",
               "focus": true,
-              "atWord": 90.167,
+              "atWord": 89,
               "zooms": [],
               "callouts": [],
               "id": "commands",
@@ -1203,7 +1205,7 @@
               "ref": "rec:askills-gh#design",
               "label": "the design choices",
               "focus": true,
-              "atWord": 116.833,
+              "atWord": 115,
               "zooms": [
                 {
                   "marks": [
@@ -1513,7 +1515,7 @@
               "ref": "rec:askills-gh#licence",
               "label": "the licence",
               "focus": true,
-              "atWord": 140.667,
+              "atWord": 166.683,
               "zooms": [],
               "callouts": [],
               "id": "licence",
@@ -1921,7 +1923,7 @@
               "ref": "rec:askills-files#count",
               "label": "twenty-five skills",
               "focus": true,
-              "atWord": 2.167,
+              "atWord": 1,
               "zooms": [],
               "callouts": [],
               "id": "count",
@@ -1985,7 +1987,7 @@
               "ref": "rec:askills-files#onedir",
               "label": "one file, and its size",
               "focus": true,
-              "atWord": 18.083,
+              "atWord": 10,
               "zooms": [],
               "callouts": [],
               "id": "onedir",
@@ -2134,7 +2136,7 @@
               "ref": "rec:askills-files#frontmatter",
               "label": "the name and the trigger",
               "focus": true,
-              "atWord": 49.333,
+              "atWord": 62,
               "zooms": [],
               "callouts": [],
               "id": "frontmatter",
@@ -2213,7 +2215,7 @@
               "ref": "rec:askills-files#trigger",
               "label": "the rule it enforces",
               "focus": true,
-              "atWord": 66.75,
+              "atWord": 78,
               "zooms": [
                 {
                   "marks": [
@@ -2342,7 +2344,7 @@
               "ref": "rec:askills-files#stack",
               "label": "it won't guess your tools",
               "focus": true,
-              "atWord": 96.25,
+              "atWord": 105.767,
               "zooms": [],
               "callouts": [],
               "id": "stack",
@@ -2622,7 +2624,7 @@
               "ref": "rec:askills-install#before",
               "label": "the project, untouched",
               "focus": true,
-              "atWord": 6.167,
+              "atWord": 1.0,
               "zooms": [],
               "callouts": [],
               "id": "before",
@@ -2684,7 +2686,7 @@
               "ref": "rec:askills-install#add",
               "label": "one line installs the pack",
               "focus": true,
-              "atWord": 16.167,
+              "atWord": 9.733,
               "zooms": [],
               "callouts": [],
               "id": "add",
@@ -2891,7 +2893,7 @@
               "ref": "rec:askills-install#count",
               "label": "twenty-five landed",
               "focus": true,
-              "atWord": 48.167,
+              "atWord": 48,
               "zooms": [],
               "callouts": [],
               "id": "count",
@@ -2969,7 +2971,7 @@
               "ref": "rec:askills-install#wired",
               "label": "symlinks, not copies",
               "focus": true,
-              "atWord": 59.833,
+              "atWord": 62.7,
               "zooms": [
                 {
                   "marks": [
@@ -3105,7 +3107,7 @@
               "ref": "rec:askills-install#lock",
               "label": "and a lockfile",
               "focus": true,
-              "atWord": 77.667,
+              "atWord": 78.683,
               "zooms": [],
               "callouts": [],
               "id": "lock",
@@ -3269,7 +3271,7 @@
               "ref": "rec:askills-bug#sealed",
               "label": "parked just before the fix",
               "focus": true,
-              "atWord": 3.833,
+              "atWord": 23,
               "zooms": [],
               "callouts": [],
               "id": "sealed",
@@ -3343,7 +3345,7 @@
               "ref": "rec:askills-bug#what",
               "label": "three calls",
               "focus": true,
-              "atWord": 27.75,
+              "atWord": 44,
               "zooms": [],
               "callouts": [],
               "id": "what",
@@ -3410,7 +3412,7 @@
               "ref": "rec:askills-bug#repro",
               "label": "the same slug, twice",
               "focus": true,
-              "atWord": 49.833,
+              "atWord": 52.067,
               "zooms": [
                 {
                   "marks": [
@@ -3487,7 +3489,7 @@
               "ref": "rec:askills-bug#suite",
               "label": "the library's own tests",
               "focus": true,
-              "atWord": 74.333,
+              "atWord": 114,
               "zooms": [
                 {
                   "marks": [
@@ -3581,7 +3583,7 @@
               "ref": "rec:askills-bug#exit",
               "label": "a clean exit code",
               "focus": true,
-              "atWord": 116.083,
+              "atWord": 128.6,
               "zooms": [],
               "callouts": [],
               "id": "exit",
@@ -3783,7 +3785,7 @@
               "ref": "rec:askills-control#ask",
               "label": "a plain bug report",
               "focus": true,
-              "atWord": 2.917,
+              "atWord": 10.299,
               "zooms": [],
               "callouts": [],
               "id": "ask",
@@ -3840,7 +3842,7 @@
               "ref": "rec:askills-control#skills",
               "label": "all twenty-five, installed",
               "focus": true,
-              "atWord": 17.417,
+              "atWord": 18.366,
               "zooms": [],
               "callouts": [],
               "id": "skills",
@@ -3917,7 +3919,7 @@
               "ref": "rec:askills-control#run",
               "label": "run one, start to finish",
               "focus": true,
-              "atWord": 27.133,
+              "atWord": 28.183,
               "zooms": [],
               "callouts": [],
               "id": "run",
@@ -4565,7 +4567,7 @@
               "ref": "rec:askills-control-diff#order",
               "label": "every tool call, in order",
               "focus": true,
-              "atWord": 3.417,
+              "atWord": 27,
               "zooms": [
                 {
                   "at": "full",
@@ -4634,7 +4636,7 @@
               "ref": "rec:askills-control-diff#stat",
               "label": "what it changed",
               "focus": true,
-              "atWord": 25.417,
+              "atWord": 37.5,
               "zooms": [],
               "callouts": [],
               "id": "stat",
@@ -4693,7 +4695,7 @@
               "ref": "rec:askills-control-diff#howverified",
               "label": "how it satisfied itself",
               "focus": true,
-              "atWord": 49.083,
+              "atWord": 74.283,
               "zooms": [],
               "callouts": [],
               "id": "howverified",
@@ -4769,7 +4771,7 @@
               "ref": "rec:askills-control-diff#suite",
               "label": "the suite it never ran",
               "focus": true,
-              "atWord": 76.333,
+              "atWord": 84.267,
               "zooms": [],
               "callouts": [],
               "id": "suite",
@@ -5057,7 +5059,7 @@
               "ref": "rec:askills-invoked#ask",
               "label": "the identical request",
               "focus": true,
-              "atWord": 0.5,
+              "atWord": 1,
               "zooms": [],
               "callouts": [],
               "id": "ask",
@@ -6047,7 +6049,7 @@
       "type": "SPEC_COMPARE",
       "transition": "slide",
       "background": "zoneA",
-      "narration": "So here are the two runs together, and I want to be careful about what this does and doesn't show. Run one never loaded a skill; run two loaded it first. Run one never ran the test suite at all; run two ran it and left it green. Run one added no tests to the project \u2014 the suite is still twenty-four. Run two left three new ones behind, so the next person who breaks this gets told. And the difference that actually matters is the last row. In run one, a failing test never existed at any point. In run two, it did, and that's the only moment in either run where anything was genuinely proved.",
+      "narration": "So here are the two runs together, and I want to be careful about what this does and doesn't show. The row that actually matters is whether a failing test existed at all \u2014 hold that one in mind while we walk the rest. Run one never loaded a skill; run two loaded it first. Run one never ran the test suite; run two ran it and left it green. Run one added no tests to the project, so the suite is still twenty-four. Run two left three new ones behind. And back to that last row: in run one a failing test never existed at any point, and in run two it did \u2014 the only moment in either run where anything was genuinely proved.",
       "data": {
         "compare": {
           "headline": "The same bug, one sentence apart",
@@ -6087,12 +6089,12 @@
               "a": "no",
               "b": "yes",
               "winner": "b",
-              "atWord": 60.083
+              "atWord": 28
             }
           ]
         }
       },
-      "durationFrames": 1096,
+      "durationFrames": 1105,
       "audio": "audio/agent-skills-prove-it_long_s24.mp3",
       "timingSource": "tts"
     },
@@ -6182,7 +6184,7 @@
               "ref": "rec:askills-key#stat",
               "label": "what it changed",
               "focus": true,
-              "atWord": 23.25,
+              "atWord": 23,
               "zooms": [],
               "callouts": [],
               "id": "stat",
@@ -6242,7 +6244,7 @@
               "ref": "rec:askills-key#mine",
               "label": "the fix our agent wrote",
               "focus": true,
-              "atWord": 42.417,
+              "atWord": 31.15,
               "zooms": [
                 {
                   "at": "full",
@@ -6347,7 +6349,7 @@
               "ref": "rec:askills-key#theirs",
               "label": "the maintainer's own fix",
               "focus": true,
-              "atWord": 70.083,
+              "atWord": 58,
               "zooms": [],
               "callouts": [],
               "id": "theirs",
@@ -6492,11 +6494,74 @@
       "timingSource": "tts"
     },
     {
+      "id": "s29",
+      "type": "FILE_TREE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "Before the verdict, there's something I owe this project. Agent Skills ships nine slash commands, and slash test is the one that invokes the testing skill for you. That's the intended way in, and it never got installed here \u2014 the plugin installer wants an SSH key this machine doesn't have, so I installed the skills on their own and named the skill by hand instead. That is a limitation of my setup, not of their work. And there's a line in their own hook file worth reading. They deliberately do not ship a router for Claude Code, because Claude Code already routes skills from their descriptions. So when run one never reached for the skill, that is this host's routing \u2014 not a promise this project broke. Every time something did invoke the skill, the skill did exactly what its own file says it would.",
+      "data": {
+        "fileTree": {
+          "headline": "The door we did not use",
+          "nodes": [
+            {
+              "name": "commands/",
+              "depth": 0,
+              "kind": "folder",
+              "atWord": 15
+            },
+            {
+              "name": "test.toml",
+              "depth": 1,
+              "kind": "file",
+              "color": "green",
+              "atWord": 23
+            },
+            {
+              "name": "spec.toml",
+              "depth": 1,
+              "kind": "file",
+              "atWord": 28
+            },
+            {
+              "name": "plan.toml",
+              "depth": 1,
+              "kind": "file",
+              "atWord": 32
+            },
+            {
+              "name": "review.toml",
+              "depth": 1,
+              "kind": "file",
+              "atWord": 36
+            },
+            {
+              "name": "ship.toml",
+              "depth": 1,
+              "kind": "file",
+              "atWord": 41
+            },
+            {
+              "name": "hooks/session-start.sh",
+              "depth": 0,
+              "kind": "file",
+              "color": "blue",
+              "atWord": 80
+            }
+          ],
+          "highlight": 1,
+          "atWord": 12.167
+        }
+      },
+      "durationFrames": 1292,
+      "audio": "audio/agent-skills-prove-it_long_s29.mp3",
+      "timingSource": "tts"
+    },
+    {
       "id": "s27",
       "type": "CHECK_SWEEP",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "So what can we actually say, from two runs? Let's be strict about it, because one run of one agent on one bug is not a study. We can say the skills were installed and advertised, and that on its own didn't make the agent use them. We can say naming the skill changed the order of work, and produced a failing test where there hadn't been one. We can say it ran the project's real suite instead of a check it made up. What we cannot say is that this happens every time \u2014 agents aren't repeatable, and a different run could go differently. And we can't say the code was better, because it wasn't; it was the same.",
+      "narration": "So what can we actually say, from two runs? Two things we cannot say, first, because they matter most. We cannot say the code came out better \u2014 it didn't, both runs landed on the same fix the maintainer shipped. And we cannot say this happens every time; agents aren't repeatable, and one run of one agent on one bug is not a study. What we can say is narrower and still worth knowing. The skills were installed and advertised, and that on its own didn't make the agent use them. Naming the skill changed the order of work, and produced a failing test where there hadn't been one. And it ran the project's real suite instead of a check it made up.",
       "data": {
         "checkSweep": {
           "headline": "What two runs can honestly support",
@@ -6516,11 +6581,11 @@
             },
             {
               "label": "this happens every time",
-              "atWord": 55.833
+              "atWord": 45
             },
             {
               "label": "the code came out better",
-              "atWord": 54.833
+              "atWord": 23
             }
           ],
           "caughtIndex": 3,
@@ -6529,7 +6594,7 @@
           "atWord": 20.167
         }
       },
-      "durationFrames": 1022,
+      "durationFrames": 1141,
       "audio": "audio/agent-skills-prove-it_long_s27.mp3",
       "timingSource": "tts"
     },

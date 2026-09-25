@@ -58,6 +58,16 @@ const CORRECTIONS = [
    'input: not from the command, and not from any file prep writes.',
    () => has('scripts/lib/record/runner.mjs', 'assertWaitForCannotSelfMatch\\(demo\\);') &&
          has('scripts/lib/record/runner.mjs', 'MATCHES THE ECHO, NOT THE WORK')],
+  ['a thumbnail, title or opening that speaks to nobody', 'SEAL',
+   'agent-skills cut, 2026-09-24: the thumbnail read "98,799 STARS TESTED". Owner: "nobody will get ' +
+   'it when they see 98k stars tested... what do you think a first time viewer would get when they see ' +
+   'that thumb?" The author knows the repo, the tool and the footage; the viewer has a two-inch picture ' +
+   'and one line. Copy clear to the author and opaque to a stranger never feels wrong from the inside. ' +
+   'The four surfaces a stranger meets first — thumbnail/cover title, seo.title (wide AND shorts), ' +
+   'scene 1 narration, seo.hook — each have to carry a PERSON: I / we / you.',
+   () => has('scripts/lint-spec.mjs', 'SPEAKS TO NOBODY') &&
+         has('scripts/lint-spec.mjs', 'const PERSON =') &&
+         has('CLAUDE.md', 'LAW 0q')],
   ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
    'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
    '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +
