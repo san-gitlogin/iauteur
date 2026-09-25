@@ -88,6 +88,16 @@ const CORRECTIONS = [
    () => has('scripts/lint-spec.mjs', 'MISCLASSIFIED SUBJECT') &&
          has('scripts/lint-spec.mjs', 'subjectKind') &&
          has('CLAUDE.md', 'CALL THE THING WHAT IT IS')],
+  ['an Archify story left running on its own clock', 'SEAL',
+   'owner, 2026-09-25, adopting tt-a1i/archify: "it is taking or consuming lot of tokens to design a ' +
+   'component, animate it then sync with voice overs. Some complex architectures are not properly ' +
+   'explained by us." Archify draws the system for us — but its story animates on its OWN clock, ' +
+   'which is LAW 0i\'s defect in a new costume: the picture completes while the voice is still on ' +
+   'beat one. Every take pauses the motion governor first and steps the story one beat per sentence, ' +
+   'and drives the JS API rather than the chrome (clicking cost two takes on the Archify cut).',
+   () => has('scripts/lib/record/browser.mjs', 'async archify\\(page, step\\)') &&
+         has('scripts/lib/record/browser.mjs', 'expectState') &&
+         has('CLAUDE.md', 'LAW 0r') && fs.existsSync('docs/ARCHIFY.md')],
   ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
    'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
    '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +

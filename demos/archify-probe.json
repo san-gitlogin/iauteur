@@ -1,0 +1,22 @@
+{
+  "slug": "archify-probe",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {"width": 1600, "height": 900},
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {"url": "file:///Users/santhu/iauteur/public/assets/archify/demo.architecture.html?theme=dark&present=1", "settleMs": 3500},
+  "steps": [
+    {"id": "still", "action": "archify", "call": "motionGovernor.pause", "args": [],
+     "label": "hold the animation so the voice leads", "expectState": {"paused": "true"}},
+    {"id": "focus", "action": "archify", "call": "focus.set", "args": ["api"],
+     "label": "light one component", "expectState": {"focus": "api"}},
+    {"id": "reach", "action": "archify", "call": "focus.reach", "args": ["downstream"],
+     "label": "everything it can reach"},
+    {"id": "route", "action": "archify", "call": "routeProbe.clear", "args": [],
+     "label": "clear the path"},
+    {"id": "wide", "action": "archify", "call": "view.reset", "args": [],
+     "label": "pull back to the whole map"}
+  ]
+}

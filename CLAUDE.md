@@ -1618,6 +1618,40 @@ review into an accusation has changed the video's genre, not just its wording.
 hook that does not appear in `meta.subjectKind`. It cannot check attribution — that is rule 2, and it
 is yours.
 
+## LAW 0r — ARCHIFY DRAWS THE SYSTEM; WE DRAW THE ARGUMENT (owner, 2026-09-25)
+
+Owner: *"For us to explain any flow it is taking or consuming lot of tokens to design a component,
+animate it then sync with voice overs. Some complex architectures are not properly explained by us in
+our videos... make sure that from next video onwards, Archify is used to the best."*
+
+**Read [`docs/ARCHIFY.md`](docs/ARCHIFY.md) before any beat that explains a flow, a pipeline, an
+architecture, a route or a state machine.** It carries the five diagram types, the full viewer API,
+the recording contract and the paid-for gotchas.
+
+The short version:
+
+1. **A system goes to Archify.** Components and connections, who-does-what-in-order, one interaction
+   over time, where data moves, states and retries — those are `architecture`, `workflow`, `sequence`,
+   `dataflow`, `lifecycle`. Author a typed source JSON, `archify validate`, `archify render`, film the
+   HTML. The source belongs in `briefs/<topic>/archify/` so the map is reviewable; the artifact is
+   generated, never hand-edited.
+2. **An argument stays ours.** An idea, a comparison, a count, a budget, a rule being tested — build
+   the component. Archify has no opinion about arguments, and LAW 0j still governs: the thing being
+   taught must be the thing that moves.
+3. **HOLD THE ANIMATION.** An Archify story runs on its own clock, which is LAW 0i's defect in a new
+   costume. The first step of every Archify take is `motionGovernor.pause()`, and every state change
+   after it is its own recorded step anchored to the word that names it. `.play()` is for one
+   deliberate "watch it run" moment with narration written to outlast it — never as the backdrop to
+   an explanation.
+4. **Drive the API, never the chrome.** `{action: 'archify', call: 'focus.set', args: ['api'],
+   expectState: {focus: 'api'}}`. Clicking cost two takes on the Archify cut. `expectState` is the
+   law "drive the product, then prove the state changed" made mechanical — the take fails unless the
+   viewer's own state says it happened, and every step reads that state back into the manifest.
+5. **`present=1`**, or the authoring toolbar is in the frame.
+
+An Archify beat counts as RECORDED_STEP against the over-reliance cap. That is correct — it is
+footage, and the cap keeps drawn teaching in the cut beside it.
+
 ## LAW 0e-q — A QUIZ WITHOUT A GAP IS NOT A QUIZ (owner, 2026-08-17)
 Owner, on a shipped episode: *"there is no gap at all between you asking the question and the
 answer getting highlighted."* Correct, and it made the quiz beat worthless — a viewer who is never

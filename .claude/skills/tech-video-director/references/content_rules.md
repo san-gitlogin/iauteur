@@ -114,3 +114,19 @@ agent running them. It then pinned a failure on the pack that the agent produced
    genre, not wording.
 
 Enforced: `lint-spec.mjs` → MISCLASSIFIED SUBJECT. It cannot check attribution — rule 2 is yours.
+
+### Archify draws the system; we draw the argument (owner, 2026-09-25)
+
+Before casting any beat that explains a **flow, pipeline, architecture, route or state machine**, read
+`docs/ARCHIFY.md`. Five types — architecture / workflow / sequence / dataflow / lifecycle — author a
+typed JSON, `archify validate`, `archify render`, then film the HTML with `surface: "browser"` and
+`action: "archify"`.
+
+- **System → Archify. Argument → build the component.** Archify has no opinion about ideas,
+  comparisons, counts or budgets.
+- **First step of every Archify take is `motionGovernor.pause()`.** The story otherwise runs on its
+  own clock, which is LAW 0i's defect wearing a new costume. Step it one beat per sentence.
+- **Drive the API, not the chrome**, and carry `expectState` so the take fails unless the product
+  actually changed state.
+- Capability map (chapters, focus, reachability, routes, lenses, hover, camera, radar, finder, share
+  cards) and the deep-link forms are all in `docs/ARCHIFY.md`.

@@ -492,6 +492,72 @@ export const browserActions = {
   },
 
   /** A deliberate look-at-it beat (LAW 0e rule 4). */
+  /**
+   * ARCHIFY — drive the viewer's own JS API instead of clicking its chrome.
+   *
+   * An Archify artifact is one standalone HTML file that publishes a global `Archify`
+   * object: chapters (`guidedViews`), semantic selection and reachability (`focus`),
+   * directed paths (`routeProbe`), type lenses (`semanticLens`), hover previews
+   * (`intentTrace`), the camera (`view`), the overview map (`radar`), the node search
+   * (`finder`) and, critically, `motionGovernor` — which PAUSES the viewer's own
+   * animation so a story can be stepped one beat per spoken word instead of running on
+   * its own clock (LAW 0i: no explanatory picture may move on a fixed interval).
+   *
+   * Clicking the chrome was tried on the Archify cut and cost two takes: a control moved,
+   * a text needle matched six times, and the camera framed a summary card instead of the
+   * node the product had lit (owner, 2026-09-16). The API is the product's own contract,
+   * it is stable, and it can be READ BACK — which is what turns a recording into evidence.
+   *
+   *   {action: 'archify', call: 'guidedViews.activate', args: ['happy-path'],
+   *    expectState: {chapter: 'happy-path'}, label: 'the happy path'}
+   *
+   * `expectState` is the law "drive the product, then prove the state changed" made
+   * mechanical: pressing a key is not evidence, the state afterwards is.
+   */
+  async archify(page, step) {
+    await page.waitForFunction(() => !!(window.Archify && window.Archify.view), {timeout: 30000})
+      .catch(() => { throw new Error(`Step "${step.id}": no Archify viewer on this page — is the artifact rendered HTML?`); });
+    const call = step.call, args = step.args ?? [];
+    if (!call) throw new Error(`Step "${step.id}": an archify step needs a \`call\`, e.g. 'focus.set'`);
+    const res = await page.evaluate(({call, args}) => {
+      const parts = call.split('.');
+      let ctx = window.Archify;
+      for (const k of parts.slice(0, -1)) ctx = ctx && ctx[k];
+      const fn = ctx && ctx[parts[parts.length - 1]];
+      if (typeof fn !== 'function') return {ok: false, why: `Archify.${call} is not a function`};
+      try { const out = fn.apply(ctx, args); return {ok: true, out: out === undefined ? '' : String(out).slice(0, 200)}; }
+      catch (e) { return {ok: false, why: String((e && e.message) || e)}; }
+    }, {call, args});
+    if (!res.ok) throw new Error(`Step "${step.id}": Archify.${call} failed — ${res.why}`);
+    // The viewer publishes its own settle promise; wait on that rather than guessing a delay.
+    await page.evaluate(() => window.Archify?.waitForStableLayout?.()).catch(() => {});
+    await sleep(step.settleMs ?? 900);
+    const state = await page.evaluate(() => {
+      const A = window.Archify || {}, safe = (f) => { try { const v = f(); return v == null ? null : v; } catch { return null; } };
+      return {
+        chapter: safe(() => A.guidedViews?.active?.()),
+        beat: safe(() => A.guidedViews?.beat?.()),
+        playing: safe(() => A.guidedViews?.isPlaying?.()),
+        focus: safe(() => A.focus?.active?.()),
+        route: safe(() => A.routeProbe?.active?.()),
+        paused: safe(() => A.motionGovernor?.isPaused?.()),
+      };
+    });
+    const flat = (v) => (v && typeof v === 'object' ? JSON.stringify(v) : String(v));
+    for (const [k, want] of Object.entries(step.expectState ?? {})) {
+      const got = flat(state[k]);
+      if (!got.includes(String(want))) {
+        throw new Error(
+          `Step "${step.id}": Archify.${call} ran, but the viewer's ${k} is ${got} — expected ${JSON.stringify(want)}.\n` +
+          `Pressing the control is not evidence; the state afterwards is. Either the id is wrong or the ` +
+          `product did not do the thing the narration is about to claim.`);
+      }
+    }
+    return {sent: `Archify.${call}(${args.map((a) => JSON.stringify(a)).join(', ')})`,
+            output: JSON.stringify(state), truth: 'read-back',
+            verified: "viewer state read back from the artifact's own API"};
+  },
+
   async pause(page, step) {
     await sleep(step.ms ?? 1500);
     return {sent: `(pause ${step.ms ?? 1500}ms)`, output: '', truth: 'no-output', verified: 'nothing to verify'};
