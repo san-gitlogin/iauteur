@@ -78,6 +78,16 @@ const CORRECTIONS = [
    () => has('scripts/gen-upload-kit.mjs', "typeof seo.tags === 'string'") &&
          has('scripts/gen-upload-kit.mjs', "typeof sseo.tags === 'string'") &&
          has('scripts/lint-spec.mjs', 'EMPTY TAG BOX')],
+  ['the subject reclassified, and blamed for what it did not do', 'SEAL',
+   'agent-skills cut, 2026-09-25. Title shipped as "Everyone\'s Installing This AI Coding Tool — So ' +
+   'I Tested It On A Real Bug". Owner: "Is the Agent Skills an AI coding tool? OR was it part of the ' +
+   'AI Coding Tool you used? Why are you blaming that it didnt fix that!" Agent Skills is a pack of ' +
+   'markdown workflow files FOR an agent; the AI coding tool was Claude Code. The title gave the ' +
+   'subject a category its own page never claims and pinned on it an outcome another program ' +
+   'produced — a TRUTH defect (LAW 3) aimed at somebody with 98,000 stars on their work.',
+   () => has('scripts/lint-spec.mjs', 'MISCLASSIFIED SUBJECT') &&
+         has('scripts/lint-spec.mjs', 'subjectKind') &&
+         has('CLAUDE.md', 'CALL THE THING WHAT IT IS')],
   ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
    'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
    '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +

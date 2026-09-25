@@ -274,11 +274,14 @@ if (spec.meta?.format === 'long' && !spec.thumbnail)
 // layout silently forbids the sentence the other exists to carry (owner, 2026-09-24:
 // *"Its good to have shorter thumb texts, but at what cost — the user is not able to get
 // it"*). Brackets mark an accent span and are not read by anyone, so they do not count.
-const CARD_CAP = (card) => (card?.layout === 'stack' ? 64 : BUDGET.coverTitle);
+// `stack` and `hero` both hand the copy the whole frame — hero additionally splits it into a
+// small set-up and a huge payoff, so it carries a longer sentence than a split ever could.
+const CARD_CAP = (card) => (card?.layout === 'stack' || card?.layout === 'hero' ? 64 : BUDGET.coverTitle);
 const cardTitleLen = (card) => len(String(card?.title ?? '').replace(/[[\]]/g, ''));
 if (spec.thumbnail && cardTitleLen(spec.thumbnail) > CARD_CAP(spec.thumbnail))
   E(`thumbnail.title "${spec.thumbnail.title}" > ${CARD_CAP(spec.thumbnail)} chars` +
-    (spec.thumbnail.layout === 'stack' ? '' : ` (a "stack" layout allows 64 — it puts the art above the copy)`));
+    (['stack', 'hero'].includes(spec.thumbnail.layout) ? '' :
+      ` — a "stack" or "hero" layout allows 64. When the sentence a stranger needs does not fit, change the LAYOUT, not the sentence (LAW 0q).`));
 
 if (spec.cover && len(spec.cover.title) > BUDGET.coverTitle)
   E(`cover.title "${spec.cover.title}" > ${BUDGET.coverTitle} chars — thumbnails are fragments, not sentences`);
@@ -361,6 +364,33 @@ const PERSON = /\b(i|i'm|i'd|i've|my|me|we|we're|we've|our|us|let's|you|you're|y
     const n = Array.isArray(tg) ? tg.length : typeof tg === 'string' ? tg.split(',').filter((x) => x.trim()).length : 0;
     if (!n) W(`meta.seo.tags is empty — YouTube's tag box will ship blank. It is a SEPARATE ` +
               `field from seo.queries (which only fills the description). Author both.`);
+  }
+  // MISCLASSIFIED SUBJECT (LAW 0q corollary, owner 2026-09-25). Calling a pack of markdown
+  // files "this AI coding tool" is a TRUTH defect: it hands the subject a category its own
+  // page never claims, and then lets an outcome be pinned on it that something else produced.
+  {
+    const kind = String(spec.meta?.subjectKind ?? '').toLowerCase();
+    const CATEGORY = ['tool', 'app', 'model', 'plugin', 'extension', 'cli', 'framework',
+                      'library', 'ide', 'editor', 'assistant', 'bot', 'service', 'platform'];
+    const faces = [['meta.seo.title', spec.meta?.seo?.title], ['meta.seo.hook', spec.meta?.seo?.hook],
+                   ['thumbnail/cover title', (spec.thumbnail ?? spec.cover ?? {}).title],
+                   ['thumbnail/cover note', (spec.thumbnail ?? spec.cover ?? {}).note]];
+    for (const [where, text] of faces) {
+      const t = String(text ?? '').toLowerCase();
+      if (!t) continue;
+      for (const c of CATEGORY) {
+        if (new RegExp(`\\b${c}s?\\b`).test(t) && !kind.includes(c)) {
+          W(`MISCLASSIFIED SUBJECT — ${where} calls ${spec.meta?.subject ?? 'the subject'} a ` +
+            `"${c}", which meta.subjectKind does not claim` +
+            (kind ? ` (it says: "${spec.meta.subjectKind}")` : ' (subjectKind is not set — set it)') +
+            `. Name the thing in the category its own page uses, and pin an outcome only on what ` +
+            `produced it (LAW 0q). NOTE: this cannot tell which noun the word attaches to — if it ` +
+            `describes something else in the sentence (another project you point the subject at), ` +
+            `read the line and move on. It fires so somebody LOOKS.`);
+          break;
+        }
+      }
+    }
   }
   const card = spec.thumbnail ?? spec.cover ?? {};
   // The CARD is read as one block — badge, title and note together — and the title column is

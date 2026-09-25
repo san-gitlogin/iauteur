@@ -112,13 +112,24 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
   logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
-  titleStruck?: string; art?: string; layout?: 'split' | 'stack'; artFade?: number;
+  titleStruck?: string; art?: string; layout?: 'split' | 'stack' | 'hero'; artFade?: number;
 }> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art, layout, artFade}) => {
   const t = useTheme();
   // STACK puts the art ABOVE the copy, so the copy gets the whole frame width instead of the
   // half a side-by-side leaves it. That is the difference between "WORTH TRYING?" and a
   // sentence a stranger can actually act on (owner, 2026-09-24).
   const stacked = layout === 'stack';
+  // HERO — the layout that exists because "text left, picture right, everything the same
+  // size" reads as a template (owner, 2026-09-25: *"looks very old school, aligned to left,
+  // top to bottom, texts smaller! I kinda not see any innovation"*).
+  //
+  // It uses the accent brackets the author has ALREADY written as a type hierarchy: the words
+  // outside `[...]` are the set-up and are set small; the bracketed phrase is the thing that
+  // earns the click and is set HUGE. One sentence, two weights, so the eye lands on the payoff
+  // from across a feed and only then reads the condition that qualifies it.
+  const hero = layout === 'hero';
+  const heroLead = String(title ?? '').split(/\[[^\]]+\]/)[0].trim().replace(/[,\s]+$/, '');
+  const heroPayoff = (String(title ?? '').match(/\[([^\]]+)\]/) ?? [, ''])[1];
 
   // FIT THE TITLE. The size used to be a constant, so a longer title simply wrapped
   // to a third line and pushed the badge off the top edge of the frame — LAW 0o's
@@ -186,10 +197,48 @@ const ThumbInner: React.FC<{
             ? {position: 'absolute', left: 90, top: 48, width: 'auto', height: 'auto',
                maxWidth: 900, maxHeight: 296, opacity: artFade ?? 1,
                borderRadius: 12, boxShadow: '0 18px 60px rgba(0,0,0,0.45)'}
+            : hero
+            // BLEED OFF THE CORNER. A mark boxed inside the frame reads as a slide; one that
+            // runs off the edge reads as a poster and leaves the type the whole width above it.
+            // Bleed DOWNWARD only. Running it off the right edge cropped the wordmark — the
+            // one thing on the card that tells a stranger what the video is about.
+            ? {position: 'absolute', right: 44, bottom: -8, width: 'auto', height: 'auto',
+               maxWidth: 470, maxHeight: 258, opacity: artFade ?? 1, borderRadius: 14,
+               transform: 'rotate(-3deg)', boxShadow: '0 26px 80px rgba(0,0,0,0.6)'}
             : {position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
                width: 'auto', height: 'auto', maxWidth: 800, maxHeight: '92%', opacity: artFade ?? 1}}
         />
       ) : null}
+      {hero ? (
+        <AbsoluteFill style={{padding: '84px 90px 0', flexDirection: 'column', justifyContent: 'flex-start'}}>
+          <div style={{alignSelf: 'flex-start', background: t.colors.accent2, color: t.colors.onAccent,
+                       fontFamily: t.fonts.mono, fontWeight: 800, fontSize: 30, padding: '9px 24px',
+                       borderRadius: 14 * t.style.cornerRadius, textTransform: 'uppercase',
+                       letterSpacing: '0.06em', marginBottom: 26}}>{badge}</div>
+          {heroLead ? (
+            <div style={{fontFamily: t.fonts.display, fontWeight: 600, fontSize: 54, lineHeight: 1.05,
+                         color: t.colors.muted, opacity: 0.95, letterSpacing: '-0.01em',
+                         maxWidth: '72%'}}>{heroLead}</div>
+          ) : null}
+          <div style={{fontFamily: t.fonts.display, fontWeight: t.style.displayWeight,
+                       // 2 lines of ~15 characters at this size fills the frame; longer payoffs
+                       // step down rather than wrapping into a paragraph.
+                       fontSize: heroPayoff.length > 26 ? 116 : heroPayoff.length > 18 ? 138 : 164,
+                       lineHeight: 0.96, color: t.colors.text, letterSpacing: '-0.035em',
+                       maxWidth: '78%', marginTop: 10,
+                       textShadow: t.style.glow > 0
+                         ? `0 10px 46px rgba(0,0,0,0.65), 0 0 56px ${t.colors.glowSoft}`
+                         : '0 8px 30px rgba(0,0,0,0.3)'}}>{heroPayoff}</div>
+          {note ? (
+            <div style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 24}}>
+              <div style={{width: 34, height: 3, borderRadius: 2, background: t.colors.accent2}} />
+              <div style={{fontFamily: t.fonts.mono, fontWeight: 700, fontSize: 28,
+                           letterSpacing: '0.16em', textTransform: 'uppercase',
+                           color: t.colors.accent2, maxWidth: 630, whiteSpace: 'nowrap'}}>{note}</div>
+            </div>
+          ) : null}
+        </AbsoluteFill>
+      ) : (
       <AbsoluteFill
         style={{
           flexDirection: 'row',
@@ -274,6 +323,7 @@ const ThumbInner: React.FC<{
         </div>
         {replaces ? <ReplacesBlock r={replaces} /> : logos?.length || art ? null : <AssetIcon asset={asset} size={300} />}
       </AbsoluteFill>
+      )}
       {/* THE LOGO WALL. Bare glyphs on the background itself — no chip, no card, no
           tinted container. Tinted uniformly: Anthropic (#191919), SpaceX (#000000)
           and OpenAI (#412991) are near-black official marks and would disappear
@@ -301,7 +351,11 @@ const ThumbInner: React.FC<{
         </div>
       ) : null}
       {logo ? (
-        <div style={{position: 'absolute', bottom: 26, right: 30, opacity: 0.9}}>
+        // In HERO the art owns the bottom-right corner, so the channel mark moves to the top
+        // right rather than sitting on top of somebody else's logo.
+        <div style={hero
+          ? {position: 'absolute', top: 30, right: 34, opacity: 0.9}
+          : {position: 'absolute', bottom: 26, right: 30, opacity: 0.9}}>
           <AssetIcon asset={logo} size={96} bare />
         </div>
       ) : null}
@@ -321,7 +375,7 @@ export const Thumbnail: React.FC<{
   replaces?: Replaces;
   titleStruck?: string;
   art?: string;
-  layout?: 'split' | 'stack';
+  layout?: 'split' | 'stack' | 'hero';
   artFade?: number;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>

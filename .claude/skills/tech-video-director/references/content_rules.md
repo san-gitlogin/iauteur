@@ -99,3 +99,18 @@ pointed at the surface people see first.
 
 **Accent the phrase that earns the click:** `[square brackets]` in a thumbnail title render in the
 pack accent with a soft outer glow. Subtle, never a highlighter box.
+
+### Call the thing what it is — and blame only what failed (owner, 2026-09-25)
+
+A title that reclassifies the subject is a TRUTH defect, not a style one. *"Everyone's Installing
+This AI Coding Tool"* was written about a pack of markdown workflow files; the AI coding tool was the
+agent running them. It then pinned a failure on the pack that the agent produced.
+
+1. **`meta.subjectKind`** — what the subject IS, in plain words from its own page. Set it on every
+   review. The title, thumbnail, note and hook may not assign a category it does not claim.
+2. **Before writing an outcome into a title**, finish *"the thing that actually did this was ___"*
+   and check the title names that thing.
+3. **Answer the brief.** A live review of a repository that gets titled as an accusation has changed
+   genre, not wording.
+
+Enforced: `lint-spec.mjs` → MISCLASSIFIED SUBJECT. It cannot check attribution — rule 2 is yours.

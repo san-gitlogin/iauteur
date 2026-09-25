@@ -1,14 +1,14 @@
 # SHORT — TITLE
-I Gave AI A Real Bug To Fix. It Said The Tests Passed. #ai #coding
+Installing A Skill Pack Doesn't Mean Your AI Uses It #ai #coding
 
 # SHORT — DESCRIPTION
 
-I gave this AI coding tool a library with a real bug in it, and it told me the tests passed. It never ran them.
+Agent Skills is 25 markdown workflow files for your AI coding agent. I installed all of them, then asked Claude Code to fix a real bug without naming one — and it never reached for them.
 
-Agent Skills (addyosmani/agent-skills, MIT) installed on a sealed copy of sindresorhus/slugify at commit 2acf5b3. Same bug, two runs, one sentence apart. Full breakdown on the channel.
+Agent Skills (addyosmani/agent-skills, MIT) installed on a sealed copy of sindresorhus/slugify at commit 2acf5b3. The skills were installed the whole time; naming one changed what the agent did. Full hands-on on the channel.
 
 ▶️ FULL EPISODE
-Everyone's Installing This AI Coding Tool — So I Tested It On A Real Bug
+Agent Skills Hands-On: What You Get From A 98,000-Star Repo
 
 🔗 SOURCE
 - Agent Skills — github.com/addyosmani/agent-skills (MIT)

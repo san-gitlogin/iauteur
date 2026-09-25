@@ -1588,6 +1588,36 @@ in the pack's accent with a soft outer glow — *"If AI Writes Your Code, [You A
 Subtle, not a highlighter box: the sentence still reads as one sentence. Brackets are stripped from
 the rendered text and do not count against the cap.
 
+### Corollary — CALL THE THING WHAT IT IS, AND BLAME ONLY WHAT FAILED (owner, 2026-09-25)
+
+Owner, on the title *"Everyone's Installing This AI Coding Tool — So I Tested It On A Real Bug"*:
+*"Is the Agent Skills an AI coding tool? OR was it part of the AI Coding Tool you used? Why are you
+blaming that it didnt fix that! It mean WHAT ??????"*
+
+He is right and it is a TRUTH defect (LAW 3), not a style one. Agent Skills is a pack of markdown
+workflow files FOR an AI coding agent. The AI coding tool was Claude Code. The title reclassified the
+subject into a category it does not belong to, and then hung an outcome on it that a different piece
+of software produced. Both halves are wrong, and together they read as an accusation against somebody
+whose work has ninety-eight thousand stars on it.
+
+**Two rules, and they apply to the title, the thumbnail, the description and the hook:**
+
+1. **Name the thing in the category its own page uses.** `meta.subjectKind` is now a required field
+   on a review: what the subject IS, in plain words, taken from the source — *"a pack of 25 markdown
+   workflow files for AI coding agents"*. If the title calls it a tool, an app, a model, a plugin or
+   a CLI and that word is not in `subjectKind`, the title is making a claim the source does not.
+2. **Attribute an outcome only to what produced it.** "I tested it and it didn't fix the bug" is a
+   sentence about the AGENT, not about the file pack it never opened. Before writing any outcome into
+   a title, finish the sentence *"the thing that actually did this was ___"* and check the title names
+   that thing.
+
+**And answer the brief.** The ask was a live review of a GitHub repository. A title that turns a
+review into an accusation has changed the video's genre, not just its wording.
+
+**Enforced.** `lint-spec.mjs` → **MISCLASSIFIED SUBJECT**: a category noun in the title, thumbnail or
+hook that does not appear in `meta.subjectKind`. It cannot check attribution — that is rule 2, and it
+is yours.
+
 ## LAW 0e-q — A QUIZ WITHOUT A GAP IS NOT A QUIZ (owner, 2026-08-17)
 Owner, on a shipped episode: *"there is no gap at all between you asking the question and the
 answer getting highlighted."* Correct, and it made the quiz beat worthless — a viewer who is never

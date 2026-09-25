@@ -17,14 +17,14 @@
     ],
     "screenplay": "documentary",
     "seo": {
-      "title": "Everyone's Installing This AI Coding Tool \u2014 So I Tested It On A Real Bug",
+      "title": "Agent Skills Hands-On: What You Get From A 98,000-Star Repo",
       "altTitles": [
-        "I Gave This AI Coding Tool A Real Bug. It Said The Tests Passed.",
-        "98,000 People Starred It. I Spent A Day Finding Out If It Works.",
-        "If You Let AI Write Your Code, You Should Watch This First"
+        "If You Code With AI, Here's What Agent Skills Actually Does",
+        "I Installed Agent Skills On A Real Repo \u2014 Hands-On Review",
+        "Agent Skills, Reviewed Live: 25 Workflows For Your Coding Agent"
       ],
-      "hook": "I kept seeing this one on GitHub \u2014 98,000 stars and climbing \u2014 so I installed it and gave it a library with a real bug in it. Twice: once just asking it to fix the bug, once telling it to use the testing skill. Then I checked both against the fix the maintainer actually shipped.",
-      "description": "We install addyosmani/agent-skills on a sealed copy of sindresorhus/slugify, parked one commit before a real bug fix, and run the same bug report twice. The only difference between the runs is one sentence. Everything on screen is the real thing: the repo page, the skill file, Claude Code's own tool transcripts, and the maintainer's published commit as an answer key. Note on method: the pack's nine slash commands (including /test) are its intended way to invoke a skill; the plugin installer needs an SSH key this machine lacks, so we installed the skills alone and named the skill by hand. The project also deliberately ships no router for Claude Code, which routes skills natively \u2014 so run one not reaching for the skill is host behaviour, not a broken promise.",
+      "hook": "Agent Skills is a pack of 25 markdown workflow files you install into your AI coding agent \u2014 98,000 stars on GitHub. I install it, read what a skill actually is, and put one of them to work on a real bug in a real library, so you can see what you get before you install it yourself.",
+      "description": "Agent Skills (addyosmani/agent-skills, MIT) is not an app or a CLI \u2014 it is 25 markdown files that tell an AI coding agent how a senior engineer works, across six phases from spec to ship. I install it, open one of the skill files to show what is actually inside, and then run the same bug twice through Claude Code on a sealed copy of sindresorhus/slugify at commit 2acf5b3: once just asking, once naming the test-driven-development skill. Both runs are graded against the fix the maintainer himself shipped.\\n\\nWhat the footage shows is about how skills get INVOKED, not about whether the pack works. The pack ships nine slash commands (/test among them) as its intended way in; the plugin installer needs an SSH key this machine does not have, so I installed the skills alone and named the skill by hand. The project also deliberately ships no router for Claude Code, because Claude Code routes skills from their descriptions itself.",
       "pinned": "Twenty-four tests passed and the bug was still there \u2014 does your green suite actually prove anything?",
       "sources": [
         "Agent Skills \u2014 github.com/addyosmani/agent-skills (MIT)",
@@ -39,7 +39,8 @@
         "do ai coding agents actually use skills"
       ],
       "tags": "agent skills,addy osmani,claude code,ai coding agent,tdd,test driven development,slugify,open source,github,ai agents,skills,coding with ai,claude,software testing"
-    }
+    },
+    "subjectKind": "a pack of 25 markdown workflow files for AI coding agents"
   },
   "brand": {
     "theme": "moderndark",
@@ -52,10 +53,10 @@
   "thumbnail": {
     "title": "If AI Writes Your Code, [You Are Missing This]",
     "badge": "98,000 STARS \u00b7 TRENDING ON GITHUB",
-    "note": "AGENT SKILLS, TESTED ON A REAL BUG",
+    "note": "25 SKILLS FOR YOUR AI AGENT",
     "art": "img:askills-banner.jpg",
     "asset": "img:askills-banner.jpg",
-    "layout": "stack",
+    "layout": "hero",
     "artFade": 1
   },
   "scenes": [

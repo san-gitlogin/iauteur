@@ -16,12 +16,12 @@
     ],
     "screenplay": "explainer",
     "seo": {
-      "title": "I Gave AI A Real Bug To Fix. It Said The Tests Passed. #ai #coding",
+      "title": "Installing A Skill Pack Doesn't Mean Your AI Uses It #ai #coding",
       "altTitles": [
-        "If You Let AI Fix Your Bugs, Watch This First"
+        "What Agent Skills Actually Is, In 50 Seconds"
       ],
-      "hook": "I gave this AI coding tool a library with a real bug in it, and it told me the tests passed. It never ran them.",
-      "description": "Agent Skills (addyosmani/agent-skills, MIT) installed on a sealed copy of sindresorhus/slugify at commit 2acf5b3. Same bug, two runs, one sentence apart. Full breakdown on the channel.",
+      "hook": "Agent Skills is 25 markdown workflow files for your AI coding agent. I installed all of them, then asked Claude Code to fix a real bug without naming one \u2014 and it never reached for them.",
+      "description": "Agent Skills (addyosmani/agent-skills, MIT) installed on a sealed copy of sindresorhus/slugify at commit 2acf5b3. The skills were installed the whole time; naming one changed what the agent did. Full hands-on on the channel.",
       "pinned": "Does your green test suite actually prove anything?",
       "sources": [
         "Agent Skills \u2014 github.com/addyosmani/agent-skills (MIT)",
@@ -33,7 +33,8 @@
         "tdd with ai"
       ],
       "tags": "agent skills,addy osmani,claude code,ai coding,tdd,test driven development,shorts"
-    }
+    },
+    "subjectKind": "a pack of 25 markdown workflow files for AI coding agents"
   },
   "brand": {
     "theme": "moderndark",
