@@ -98,6 +98,17 @@ const CORRECTIONS = [
    () => has('scripts/lib/record/browser.mjs', 'async archify\\(page, step\\)') &&
          has('scripts/lib/record/browser.mjs', 'expectState') &&
          has('CLAUDE.md', 'LAW 0r') && fs.existsSync('docs/ARCHIFY.md')],
+  ['an Archify clip held mid-transition', 'SEAL',
+   'owner, 2026-09-25: "we need to be double sure that the voice over syncs perfectly with the ' +
+   'archify chart display." A recorded clip HOLDS its last frame for the rest of the narration, so ' +
+   'for an Archify artifact a segment cut while focus/camera/chapter is still animating leaves the ' +
+   'viewer staring at a diagram caught MID-SLIDE while the voice explains the finished state. Every ' +
+   'other gate stays green — the API returned success, the state read back, the anchors landed. ' +
+   'check-archify-settle.mjs measures the pixels: max frame-to-frame luma difference over the last ' +
+   'half second. Measured settled 7e-4 vs moving 9.1 — the 0.35 threshold sits between them.',
+   () => fs.existsSync('scripts/check-archify-settle.mjs') &&
+         has('scripts/preflight.mjs', 'check-archify-settle.mjs') &&
+         has('scripts/render-topic.mjs', 'check-archify-settle.mjs')],
   ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
    'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
    '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +

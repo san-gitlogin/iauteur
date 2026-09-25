@@ -44,5 +44,8 @@ for (const spec of specs) {
   step(`lint     ${spec}`, 'node', ['scripts/lint-spec.mjs', spec]);
   // 5. the voice talks about the picture it is standing in front of
   step(`voice/vis ${spec}`, 'node', ['scripts/check-narration-visual.mjs', '--spec', spec]);
+  // 6. an Archify clip HOLDS its last frame for the rest of the beat, so that frame has to be
+  //    the settled diagram and not one caught mid-transition. Pixels — no other gate looks.
+  step(`archify  ${spec}`, 'node', ['scripts/check-archify-settle.mjs', spec]);
 }
 console.log('\n✓ PREFLIGHT PASSED — safe to voice.');

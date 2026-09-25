@@ -1,0 +1,32 @@
+{
+  "slug": "archify-unsettled",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "file:///Users/santhu/iauteur/public/assets/archify/demo.architecture.html?theme=dark&present=1",
+    "settleMs": 3500
+  },
+  "steps": [
+    {
+      "id": "snap",
+      "action": "archify",
+      "call": "view.reveal",
+      "args": [
+        [
+          "worker",
+          "users",
+          "db"
+        ]
+      ],
+      "label": "cut while the camera is still moving",
+      "settleMs": 0
+    }
+  ]
+}

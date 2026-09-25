@@ -1648,6 +1648,12 @@ The short version:
    law "drive the product, then prove the state changed" made mechanical — the take fails unless the
    viewer's own state says it happened, and every step reads that state back into the manifest.
 5. **`present=1`**, or the authoring toolbar is in the frame.
+6. **PROVE THE HELD FRAME IS STILL.** A clip holds its last frame for the rest of the beat, so an
+   Archify segment cut mid-transition makes the viewer stare at a sliding diagram while the voice
+   explains the finished state — and every other gate stays green, because none of them looks at
+   pixels. `scripts/check-archify-settle.mjs` measures it (settled reads ~7e-4, moving ~9.1) and runs
+   in both `preflight.mjs` and `render-topic.mjs`. When it fires, raise `settleMs` and re-record;
+   never shorten the narration to fit a short clip.
 
 An Archify beat counts as RECORDED_STEP against the over-reliance cap. That is correct — it is
 footage, and the cap keeps drawn teaching in the cut beside it.

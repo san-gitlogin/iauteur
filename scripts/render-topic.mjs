@@ -97,6 +97,10 @@ if (variant !== 'thumb' && variant !== 'cover') {
     // "you zoom in at a specific place only, and you are speaking about something which is
     // not in focus"). scripts/check-camera.mjs reads every zoom's framed text from the take.
     execSync(`node scripts/check-camera.mjs --spec ${specPath}`, {stdio: 'inherit'});
+    // An Archify clip holds its last frame for the rest of the beat. If the segment was cut
+    // mid-transition, that held frame is the diagram sliding — every other gate stays green,
+    // because this is the only one that looks at pixels (owner, 2026-09-25).
+    execSync(`node scripts/check-archify-settle.mjs ${specPath}`, {stdio: 'inherit'});
     // Same question, for the voice: are this cut's anchors real word times or estimates?
     execSync(`node scripts/check-sync.mjs --quiet --slug ${slug}`, {stdio: 'inherit'});
   } catch {

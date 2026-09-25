@@ -140,3 +140,43 @@ That is correct: it keeps drawn teaching in the cut alongside it.
   enforces it).
 - **The artifact is generated.** Commit the SOURCE json; regenerate the HTML. A hand-edited artifact
   is a fact nobody can check.
+
+## 8. Proving the sync — the gate no other check covers
+
+Owner, 2026-09-25: *"we need to be double sure that the voice over syncs perfectly with the archify
+chart display."*
+
+**The specific risk, and it is not the obvious one.** A recorded clip plays at capture speed and then
+HOLDS ITS LAST FRAME for the rest of the narration. On a terminal that is exactly right — the last
+frame is the finished output. On an Archify artifact it is a trap: `focus.set`, `view.reveal` and a
+chapter beat each start a transition, and a segment cut while that transition is still moving leaves
+the viewer staring at a diagram **caught mid-slide** for ten seconds while the voice explains the
+finished state.
+
+Every existing gate stays green through that: the API returned success, `expectState` read back
+correctly, `anchor-spec` fitted the clip, `audit-sync` put it on its word. None of them looks at
+pixels.
+
+    node scripts/check-archify-settle.mjs <spec.json> [--tail 0.5] [--max 0.35]
+
+It measures the maximum frame-to-frame luma difference over the last half second of every Archify
+clip. Measured on real takes: **a settled clip reads 7e-4; the same clip measured across its camera
+move reads 9.1** — four orders of magnitude apart, with the threshold sitting between them. It runs
+inside `preflight.mjs` (before you pay for a voice) and again in `render-topic.mjs`.
+
+**When it fires, raise the step's `settleMs` and re-record.** Never shorten the narration to fit a
+short clip — the hold is where the explanation lives.
+
+### The three layers that together make the sync safe
+
+1. **`motionGovernor.pause()` first** — the story stops running on its own clock, so nothing moves
+   that we did not ask for (§4).
+2. **One state change per step** — each becomes its own clip with its own anchor, so `anchor-spec`
+   and `audit-sync` treat it exactly like a typed command, and the picture changes on the word.
+3. **`check-archify-settle`** — the held frame is the settled diagram, measured, not assumed.
+
+### API signatures bite
+
+`view.reveal` takes an **array** of ids, not a single id: `args: [["worker", "users", "db"]]`. The
+`archify` action surfaces the real error (`(ids || []).forEach is not a function`) and refuses the
+take rather than recording a move that never happened — but check a signature before you script it.
