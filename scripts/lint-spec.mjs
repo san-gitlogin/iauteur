@@ -353,6 +353,15 @@ const nar = (i) => String(spec.scenes?.[i]?.narration ?? '');
 // line is the author's judgement and the half that actually matters.
 const PERSON = /\b(i|i'm|i'd|i've|my|me|we|we're|we've|our|us|let's|you|you're|you'll|your|yours)\b/i;
 {
+  // EMPTY TAG BOX. `seo.queries` fills the description; `seo.tags` fills YouTube's tag
+  // field, and a cut that authors only the first ships with no tags at all — invisible
+  // until somebody opens the upload kit (owner, 2026-09-25).
+  {
+    const tg = spec.meta?.seo?.tags;
+    const n = Array.isArray(tg) ? tg.length : typeof tg === 'string' ? tg.split(',').filter((x) => x.trim()).length : 0;
+    if (!n) W(`meta.seo.tags is empty — YouTube's tag box will ship blank. It is a SEPARATE ` +
+              `field from seo.queries (which only fills the description). Author both.`);
+  }
   const card = spec.thumbnail ?? spec.cover ?? {};
   // The CARD is read as one block — badge, title and note together — and the title column is
   // narrow whenever `art` is present, so the person often has to live in the badge. Judge the

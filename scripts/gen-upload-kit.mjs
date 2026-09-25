@@ -113,7 +113,16 @@ const hashtags = Array.isArray(seo.hashtags) ? seo.hashtags : [];
 
 // YouTube tags: comma-separated, hard-capped at 500 chars (YouTube's limit).
 // Truncates at the last whole tag that fits — never a cut-off fragment.
-const tagList = Array.isArray(seo.tags) ? seo.tags : [];
+// ACCEPT BOTH SHAPES. `tags` is described everywhere as "comma-joined", so authoring it as
+// one comma-separated string is the obvious reading — and it used to produce an EMPTY tag
+// box in silence, because only an array was read (agent-skills cut, 2026-09-25; the owner
+// caught it after the render). A field the author writes and nothing reads is a lie
+// (LAW 0f), and the fix is to read what they actually wrote.
+const tagList = Array.isArray(seo.tags)
+  ? seo.tags
+  : typeof seo.tags === 'string'
+    ? seo.tags.split(',').map((x) => x.trim()).filter(Boolean)
+    : [];
 let tags = '';
 for (const tg of tagList) {
   const next = tags ? `${tags}, ${tg}` : tg;
@@ -172,7 +181,13 @@ if (fs.existsSync(shortsPath)) {
   const frames = sh.scenes.reduce((a, s) => a + s.durationFrames, 0) + (sh.cover ? (sh.cover.frames ?? 2) : 0);
   const secs = Math.round(frames / (sh.meta?.fps ?? 30));
 
-  const stagList = Array.isArray(sseo.tags) ? sseo.tags : [];
+  // Same both-shapes reading as the long cut above — the shorts branch had its own copy
+  // of the array-only bug, which is how a fix to one leaves the other broken.
+  const stagList = Array.isArray(sseo.tags)
+    ? sseo.tags
+    : typeof sseo.tags === 'string'
+      ? sseo.tags.split(',').map((x) => x.trim()).filter(Boolean)
+      : [];
   let stags = '';
   for (const tg of stagList) {
     const next = stags ? `${stags}, ${tg}` : tg;

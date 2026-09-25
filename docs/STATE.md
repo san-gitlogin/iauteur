@@ -85,6 +85,18 @@ art leaves ~6, so long titles overflow into the art no matter how they are worde
 *REALLY*, which is a mild false positive on a title like "REALLY WORKS?" but the rule is right in spirit.
 
 
+**EMPTY TAG BOX (owner caught it after the render, 2026-09-25).** `meta.seo.tags` was authored as a
+comma-separated STRING — the shape every doc describes ("comma-joined", "≤500 chars") — and
+`gen-upload-kit.mjs` read it with `Array.isArray` only. The TAGS block was omitted from upload.md
+entirely, silently. Both branches (long AND shorts — the bug had two copies, so fixing one would have
+left the other broken) now accept a string or an array, and `lint-spec.mjs` warns when tags are
+absent so an empty tag box cannot ship unnoticed. Correction #67, break-tested.
+
+**Repo-wide consequence worth knowing: 28 of 120 topics have no `seo.tags` authored at all** and have
+been shipping with an empty YouTube tag box. The new warning will surface each one the next time it
+is linted, but nothing back-fills them — they need authoring per topic.
+
+
 **THUMBNAIL SYSTEM — second correction, same day.** Owner rejected `I TESTED IT MYSELF / WORTH
 TRYING?`: *"Again, who will know what AgentSkills is bro? I guess you are getting limited by the
 cutshort rules of thumb... You need to have varieties. Also I see all our thumb follows the same

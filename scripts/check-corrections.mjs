@@ -68,6 +68,16 @@ const CORRECTIONS = [
    () => has('scripts/lint-spec.mjs', 'SPEAKS TO NOBODY') &&
          has('scripts/lint-spec.mjs', 'const PERSON =') &&
          has('CLAUDE.md', 'LAW 0q')],
+  ['an empty YouTube tag box shipped in silence', 'SEAL',
+   'agent-skills cut, 2026-09-25, caught by the owner AFTER the render: `meta.seo.tags` was ' +
+   'authored as a comma-separated string — the shape every doc describes ("comma-joined") — and ' +
+   '`gen-upload-kit.mjs` read it with Array.isArray only, so the TAGS block was omitted entirely ' +
+   'and nothing said a word. A field the author writes and nothing reads is a lie (LAW 0f). The ' +
+   'bug had TWO copies, long and shorts, so fixing one would have left the other broken. Both ' +
+   'branches now accept a string or an array, and the linter warns when tags are absent.',
+   () => has('scripts/gen-upload-kit.mjs', "typeof seo.tags === 'string'") &&
+         has('scripts/gen-upload-kit.mjs', "typeof sseo.tags === 'string'") &&
+         has('scripts/lint-spec.mjs', 'EMPTY TAG BOX')],
   ['a live-agent take that hangs on a tool-permission prompt', 'SEAL',
    'Open Code Review cut, 2026-09-17, the take straight after the trust seal: sixteen minutes lost to ' +
    '"This command requires approval". `--permission-mode acceptEdits` was set and covers file edits, ' +
