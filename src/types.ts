@@ -12795,6 +12795,19 @@ export interface VideoSpec {
      *  the video rather than a footnote beside it — the title then reads as a lead-in to
      *  it, and the swap block on the right carries only the destination. */
     titleStruck?: string;
+    /** WHICH SHAPE the card takes. `split` (default) is text-left / art-right and keeps the
+     *  copy to half the frame, so its title must be short. `stack` puts the art across the
+     *  top and hands the copy the whole width. `hero` reads the `[accent]` brackets as a TYPE
+     *  HIERARCHY — the words outside them are the set-up, set small; the bracketed phrase is
+     *  the payoff, set huge — with the art bleeding off the bottom edge.
+     *
+     *  Owner, 2026-09-25: *"all our thumb follows the same rules of Text on left, picture,
+     *  logo or something one the right... looks very old school"*. A character cap protects a
+     *  LAYOUT; when the sentence a stranger needs does not fit, change this, not the sentence
+     *  (LAW 0q). `lint-spec` raises the title cap to 64 chars on `stack` and `hero`. */
+    layout?: 'split' | 'stack' | 'hero';
+    /** Opacity on `art`, for a mark that has to sit behind type rather than beside it. */
+    artFade?: number;
     /** A PICTURE drawn free on the right: an `img:` asset at full size, no crop, no rounded
      *  tile, no shadow box (owner, 2026-09-12: *"I dont want the component to be covered or
      *  put within a rounded rectangle container ... i want it to flow free"*). Author it as a

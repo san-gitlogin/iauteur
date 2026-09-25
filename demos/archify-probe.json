@@ -6,7 +6,7 @@
   "fps": 30,
   "masterWidth": 3840,
   "deviceScaleFactor": 2.4,
-  "prep": {"url": "file:///Users/santhu/iauteur/public/assets/archify/demo.architecture.html?theme=dark&present=1", "settleMs": 3500},
+  "prep": {"url": "repo:public/assets/archify/demo.architecture.html?theme=dark&present=1", "settleMs": 3500},
   "steps": [
     {"id": "still", "action": "archify", "call": "motionGovernor.pause", "args": [],
      "label": "hold the animation so the voice leads", "expectState": {"paused": "true"}},

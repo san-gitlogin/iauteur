@@ -12,6 +12,7 @@
 // a state it did not observe.
 import {chromium} from 'playwright';
 import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -222,7 +223,16 @@ export const setupBrowser = async (demo) => {
   page.__mobile = !!demo.mobile;
   // PREP (never recorded): land on the start URL so the take opens on a settled page.
   if (demo.prep?.url) {
-    await page.goto(demo.prep.url, {waitUntil: 'load', timeout: 60000});
+    // A LOCAL FIXTURE IS ADDRESSED RELATIVE TO THE REPO, NEVER TO ONE MACHINE.
+    // `file:///Users/<name>/iauteur/...` in a tracked demo is both a broken path on every
+    // other clone and somebody's home directory published to a PUBLIC repo (LAW 11).
+    // `repo:` resolves against the working directory instead, so the demo travels.
+    //   "url": "repo:public/assets/archify/demo.architecture.html?theme=dark&present=1"
+    const target = demo.prep.url.startsWith('repo:')
+      ? pathToFileURL(path.resolve(demo.prep.url.slice(5).split('?')[0])).href +
+        (demo.prep.url.includes('?') ? '?' + demo.prep.url.split('?').slice(1).join('?') : '')
+      : demo.prep.url;
+    await page.goto(target, {waitUntil: 'load', timeout: 60000});
     await page.waitForTimeout(demo.prep?.settleMs ?? 1500);
   }
   return {

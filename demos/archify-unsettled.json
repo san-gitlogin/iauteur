@@ -10,7 +10,7 @@
   "masterWidth": 3840,
   "deviceScaleFactor": 2.4,
   "prep": {
-    "url": "file:///Users/santhu/iauteur/public/assets/archify/demo.architecture.html?theme=dark&present=1",
+    "url": "repo:public/assets/archify/demo.architecture.html?theme=dark&present=1",
     "settleMs": 3500
   },
   "steps": [
