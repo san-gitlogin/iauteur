@@ -211,7 +211,7 @@ if (fs.existsSync(shortsPath)) {
     title,
     '',
     ...(creditSources.length ? ['🔗 SOURCE', ...creditSources.map((s) => `- ${s}`), ''] : []),
-    `👇 ${schannel} — the whole course is free.`,
+    `👇 ${schannel} — the full video is on the channel.`,
     '',
     shash.join(' '),
     ...(stags ? ['', '# TAGS (comma-separated, ≤500 chars)', stags] : []),

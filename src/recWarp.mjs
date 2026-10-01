@@ -123,9 +123,14 @@ export const planWarp = ({frames, changes, airtime}) => {
   let cursor = 0;
   let settle = 0;
   holds.forEach((h, i) => {
-    // play from the cursor through to the START of this pause (its first frame is the
-    // last thing that moved, so it is included and then held)
-    const to = h.from + 1;
+    // play from the cursor through to the START of this pause, and one frame INTO it, then
+    // hold. The recorded change index can still be the OLD picture: measured 2026-09-30 on
+    // tok-mcp, `changes` ended at 33, source frame 33 was blank and the /mcp menu first
+    // appeared at 34 — so holding on `h.from` froze a blank terminal for the whole beat and
+    // the camera's band landed on nothing (owner screenshot; the docs-page band sat one row
+    // above its table for the same reason). A pause is >= HOLD_MIN identical frames, so
+    // `h.from + 1` is always the settled picture whichever side of the change the index is.
+    const to = h.from === 0 ? 1 : Math.min(h.to, h.from + 2);
     if (to > cursor) {
       pieces.push({at, from: cursor, to, rate: 1});
       at += to - cursor;

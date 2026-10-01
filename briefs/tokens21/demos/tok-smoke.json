@@ -1,0 +1,57 @@
+{
+  "slug": "tok-smoke",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "tok-smoke",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 2,
+  "masterWidth": 1920,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1400,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "README.md": "# tiny shop\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "launch",
+      "action": "run",
+      "background": true,
+      "waitFor": "shift+tab to cycle",
+      "timeout": 90000,
+      "settleMs": 3000,
+      "cmd": "claude --model sonnet --allowedTools \"Read,Grep,Glob\"",
+      "label": "start claude",
+      "focus": "terminal",
+      "clearFirst": true
+    },
+    {
+      "id": "ctx",
+      "action": "agent",
+      "text": "/context",
+      "waitFor": "└ init",
+      "timeout": 60000,
+      "settleMs": 3000,
+      "focus": "terminal",
+      "label": "what is in the context"
+    },
+    {
+      "id": "up",
+      "action": "reveal",
+      "target": "terminal",
+      "text": "Autocompact buffer",
+      "label": "scroll back to the table",
+      "focus": "terminal",
+      "settleMs": 1500,
+      "pageUp": 6
+    }
+  ]
+}

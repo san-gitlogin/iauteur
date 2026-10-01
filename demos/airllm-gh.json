@@ -1,0 +1,96 @@
+{
+  "slug": "airllm-gh",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 4,
+  "prep": {
+    "url": "https://github.com/lyogavin/airllm",
+    "settleMs": 4000
+  },
+  "steps": [
+    {
+      "id": "about",
+      "action": "pause",
+      "ms": 1600,
+      "label": "the project's own one-line description",
+      "marks": [
+        {
+          "id": "what",
+          "text": "AirLLM 70B inference with single 4GB GPU"
+        }
+      ]
+    },
+    {
+      "id": "trust",
+      "action": "scroll",
+      "target": "text=295 watching",
+      "settleMs": 1800,
+      "label": "who wrote it, how many people use it, and the licence",
+      "marks": [
+        {
+          "id": "counts",
+          "text": "stars",
+          "to": "forks"
+        }
+      ]
+    },
+    {
+      "id": "claim",
+      "action": "scroll",
+      "target": "text=dramatically reduces inference memory usage",
+      "settleMs": 1800,
+      "label": "the claim, in the README's own words",
+      "marks": [
+        {
+          "id": "lead",
+          "text": "dramatically reduces inference memory usage, letting 70B large language models run on a single "
+        }
+      ]
+    },
+    {
+      "id": "trick",
+      "action": "scroll",
+      "target": "text=Tiny GPU, huge models",
+      "settleMs": 1800,
+      "label": "how they say it works",
+      "marks": [
+        {
+          "id": "one",
+          "text": "The trick: AirLLM only ever keeps"
+        }
+      ]
+    },
+    {
+      "id": "table",
+      "action": "scroll",
+      "target": "text=Llama 3.x 70B (full precision)",
+      "settleMs": 1800,
+      "label": "the table everybody screenshots",
+      "marks": [
+        {
+          "id": "row",
+          "text": "Llama 3.x 70B (full precision)"
+        }
+      ]
+    },
+    {
+      "id": "mac",
+      "action": "scroll",
+      "target": "text=Just install airllm and run the code",
+      "settleMs": 1800,
+      "label": "and what it says about running this on a Mac",
+      "marks": [
+        {
+          "id": "macos",
+          "text": "Just install airllm and run the code the same as on linux. See more in"
+        }
+      ]
+    }
+  ]
+}

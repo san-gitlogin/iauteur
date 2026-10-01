@@ -6685,6 +6685,69 @@ export interface LayaStageData {
   color?: SemColor;
 }
 
+/** TOK_STAGE — one element of a "21 ways to save Claude Code tokens" depiction. */
+export interface TokStageItem {
+  label?: string;
+  sub?: string;
+  /** PLUMBING, NEVER TEXT: which part of the picture this item is (see the kind lists in tokViz1/2/3). */
+  group?: string;
+  /** A second plumbing slot: a part key (system/tools/memory/skills/mcp/history/you), a turn index, a bin id. */
+  text?: string;
+  /** The picture's own number: tokens (k), dollars per million, minutes, a line count. */
+  value?: number;
+  color?: SemColor;
+  /** The word this element lands on. Every moment in tokViz resolves from one of these. */
+  atWord?: number;
+}
+
+/** TOK_STAGE — every drawn beat of the tokens video, on one scene type. */
+export interface TokStageData {
+  /** Which depiction to draw. Must exist in tokViz TOK_VIZ. */
+  kind?: string;
+  headline?: string;
+  /** Small caption above the picture, authored per beat. */
+  stageTitle?: string;
+  /** The standing sentence along the bottom: what the viewer is looking at (LAW 0l). */
+  premise?: string;
+  stage?: TokStageItem[];
+  /** Mode switch or asset file for the depiction (sheet: the image in public/assets). */
+  token?: string;
+  color?: SemColor;
+}
+
+/** AIRLLM_STAGE — one element of an AirLLM depiction. */
+export interface AirllmStageItem {
+  label?: string;
+  sub?: string;
+  /** PLUMBING, NEVER TEXT: which part of the picture this item is — `door`/`slab`/`verdict`,
+   *  `tower`/`lift`/`note`/`peak`, `file`/`total`, `from`/`to`/`bytes`/`rate`/`result`,
+   *  `point`/`line`/`left`/`right`, `call`/`road`/`taken`. It is `group` and not `detail`
+   *  for the reason LayaStageItem records: `audit-sync`'s HUMAN field list contains `label`,
+   *  `title`, `detail` and `sub`, so a lane key stored in any of them is read back as WORDS
+   *  ON SCREEN and reported as landing away from its own word. */
+  group?: string;
+  /** A second plumbing slot: which road this is (`cuda`/`mlx`), and which one was taken. */
+  text?: string;
+  /** The picture's own number: gigabytes, megabytes per second, seconds, a layer count. */
+  value?: number;
+  color?: SemColor;
+  /** The word this element lands on. Every moment in airllmViz resolves from one of these. */
+  atWord?: number;
+}
+
+/** AIRLLM_STAGE — every drawn beat of the AirLLM video, on one scene type. */
+export interface AirllmStageData {
+  /** Which depiction to draw. Must exist in airllmViz AIRLLM_VIZ. */
+  kind?: string;
+  headline?: string;
+  /** Small caption above the picture, authored per beat. */
+  stageTitle?: string;
+  stage?: AirllmStageItem[];
+  /** Mode switch or label for the depiction. */
+  token?: string;
+  color?: SemColor;
+}
+
 /** HIDFI_STAGE — every drawn beat of the HID-Fi product demo, on one scene type. */
 export interface HidfiStageData {
   /** Which depiction to draw. Must exist in hidfiViz HIDFI_VIZ. */
@@ -11458,6 +11521,8 @@ export interface SceneData {
   hidfiStage?: HidfiStageData;
   o55Stage?: O55StageData;
   layaStage?: LayaStageData;
+  airllmStage?: AirllmStageData;
+  tokStage?: TokStageData;
   cmdIp?: CmdIpData;
   cmdDd?: CmdDdData;
   cmdUmount?: CmdUmountData;

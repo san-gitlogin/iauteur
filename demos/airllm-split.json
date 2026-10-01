@@ -1,0 +1,98 @@
+{
+  "slug": "airllm-split",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "airllm-lab",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "split.py": "# split.py - turn the downloaded checkpoint into one file per layer\nimport time\nfrom airllm import AutoModel\n\nMODEL = \"/Volumes/Extreme SSD/airllm-demo/Meta-Llama-3-8B-Instruct\"\nSPLIT = \"/Volumes/Extreme SSD/airllm-demo/splits\"\n\nt0 = time.time()\nmodel = AutoModel.from_pretrained(MODEL, layer_shards_saving_path=SPLIT)\nprint(f\"\\nsplit finished in {time.time() - t0:.0f}s\")\nprint(f\"class in use: {type(model).__name__}\")\nprint(f\"layers: {model.model_args.n_layers}\")\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "downloaded",
+      "action": "run",
+      "cmd": "(cd '/Volumes/Extreme SSD/airllm-demo/Meta-Llama-3-8B-Instruct' && ls -lh *.safetensors | awk '{print $5, $NF}')",
+      "label": "what a model looks like when you download it",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "model-00001-of-00004.safetensors",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "shard",
+          "text": "model-00001-of-00004.safetensors"
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "action": "run",
+      "cmd": "cat split.py",
+      "label": "the whole program that splits it",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "layer_shards_saving_path",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "call",
+          "text": "layer_shards_saving_path"
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "action": "run",
+      "cmd": "./.venv/bin/python split.py",
+      "label": "one file per layer, written to the SSD",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": {
+        "contains": "split finished",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "done",
+          "text": "split finished"
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "action": "run",
+      "cmd": "(cd '/Volumes/Extreme SSD/airllm-demo/splits/splitted_model' && ls *.npz | wc -l && ls -lh model.embed_tokens.mlx.npz model.layers.0.mlx.npz lm_head.mlx.npz | awk '{print $5, $NF}')",
+      "label": "what it left behind",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "model.layers.0.mlx.npz",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "layer",
+          "text": "model.layers.0.mlx.npz"
+        }
+      ]
+    }
+  ]
+}

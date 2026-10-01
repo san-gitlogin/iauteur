@@ -1,0 +1,51 @@
+{
+  "slug": "tok-cachedocs",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "https://code.claude.com/docs/en/prompt-caching",
+    "settleMs": 5000,
+    "dismiss": [
+      "Reject all cookies"
+    ],
+    "hide": [
+      "*:has(> textarea.chat-assistant-input)",
+      "textarea.chat-assistant-input"
+    ]
+  },
+  "steps": [
+    {
+      "id": "ttl",
+      "action": "scroll",
+      "target": "text=Claude subscription, within plan usage",
+      "settleMs": 2400,
+      "label": "which cache lifetime you get, by how you pay",
+      "marks": [
+        {
+          "id": "table",
+          "text": "Claude subscription, within plan usage"
+        }
+      ]
+    },
+    {
+      "id": "flag",
+      "action": "scroll",
+      "target": "text=ENABLE_PROMPT_CACHING_1H=1",
+      "settleMs": 2400,
+      "label": "the flag from the infographic, in the docs",
+      "marks": [
+        {
+          "id": "flag",
+          "text": "ENABLE_PROMPT_CACHING_1H=1"
+        }
+      ]
+    }
+  ]
+}

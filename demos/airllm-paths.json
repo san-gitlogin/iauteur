@@ -1,0 +1,48 @@
+{
+  "slug": "airllm-paths",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "airllm-lab",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "paths.py": "# paths.py - which code runs, and what it sets\nimport json, mlx.core as mx\nfrom airllm import AutoModel\n\nMODEL = \"/Volumes/Extreme SSD/airllm-demo/Meta-Llama-3-8B-Instruct\"\nSPLIT = \"/Volumes/Extreme SSD/airllm-demo/splits\"\n\nmodel = AutoModel.from_pretrained(MODEL, layer_shards_saving_path=SPLIT)\nconfig = json.load(open(MODEL + \"/config.json\"))\n\nprint(f\"\\nclass that ran      : {type(model).__name__}\")\nprint(f\"config.json asks for: rope_theta = {config['rope_theta']}\")\nprint(f\"this code uses      : rope_theta = {model.model_args.rope_theta}\")\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "which",
+      "action": "run",
+      "cmd": "./.venv/bin/python paths.py",
+      "label": "which code a Mac actually runs",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 300000,
+      "expect": {
+        "contains": "AirLLMLlamaMlx",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "cls",
+          "text": "class that ran"
+        },
+        {
+          "id": "rope",
+          "text": "this code uses"
+        }
+      ]
+    }
+  ]
+}

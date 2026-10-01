@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "What AirLLM does to produce one word",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1030,
+      630
+    ],
+    "views": [
+      {
+        "id": "one-layer",
+        "label": "One layer at a time",
+        "focus": [
+          "read_layer",
+          "run_layer",
+          "drop_layer"
+        ],
+        "note": "A layer is read off the SSD, run once, and deleted before the next one is read."
+      },
+      {
+        "id": "the-ceiling",
+        "label": "What sets the memory ceiling",
+        "focus": [
+          "resident",
+          "read_embed",
+          "emit"
+        ],
+        "note": "The largest single file is the word table, not a decoder layer."
+      },
+      {
+        "id": "the-cost",
+        "label": "And again for the next word",
+        "focus": [
+          "emit",
+          "read_embed"
+        ],
+        "note": "No weights are kept between words, so the whole model is read again."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "The life of one word"
+    },
+    {
+      "id": "mem",
+      "label": "What is in memory while it runs"
+    }
+  ],
+  "states": [
+    {
+      "id": "read_embed",
+      "type": "start",
+      "label": "Read the word table",
+      "sublabel": "1.05 GB off the SSD",
+      "lane": "main",
+      "col": 0,
+      "step": "01",
+      "tag": "biggest file"
+    },
+    {
+      "id": "read_layer",
+      "type": "active",
+      "label": "Read layer N",
+      "sublabel": "0.44 GB off the SSD",
+      "lane": "main",
+      "col": 1,
+      "step": "02"
+    },
+    {
+      "id": "run_layer",
+      "type": "active",
+      "label": "Run that layer",
+      "sublabel": "attention, then MLP",
+      "lane": "main",
+      "col": 2,
+      "step": "03",
+      "tag": "on the GPU"
+    },
+    {
+      "id": "drop_layer",
+      "type": "decision",
+      "label": "Delete it",
+      "sublabel": "any layers left?",
+      "lane": "main",
+      "col": 3,
+      "step": "04"
+    },
+    {
+      "id": "emit",
+      "type": "success",
+      "label": "One word out",
+      "sublabel": "after a 1.05 GB table",
+      "lane": "main",
+      "col": 4,
+      "step": "05",
+      "tag": "done"
+    },
+    {
+      "id": "resident",
+      "type": "waiting",
+      "label": "One layer, resident",
+      "sublabel": "never two at once",
+      "lane": "mem",
+      "col": 0,
+      "tag": "the ceiling"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "loop-layers",
+      "from": "drop_layer",
+      "to": "read_layer",
+      "label": "31 more times",
+      "variant": "emphasis",
+      "route": "top-channel"
+    },
+    {
+      "id": "one-resident",
+      "from": "run_layer",
+      "to": "resident",
+      "variant": "dashed"
+    },
+    {
+      "id": "next-word",
+      "from": "emit",
+      "to": "read_embed",
+      "label": "next word: all 16.06 GB again",
+      "variant": "security",
+      "route": "bottom-channel",
+      "channelY": 380
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Why it fits in a small machine",
+      "items": [
+        "The whole 16.06 GB model is never in memory at once",
+        "Nothing is quantized, distilled or pruned away",
+        "The ceiling is the largest single file: 1.05 GB"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "What that costs",
+      "items": [
+        "No weights are kept between words",
+        "So 16.06 GB is read again for every word",
+        "At 984 MB/s that is about 16 seconds of reading"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "slug": "tok-skills",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "tok-skills",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "shop/__init__.py": "",
+      "shop/prices.py": "\"\"\"Prices for the tiny shop.\"\"\"\n\nTAX_RATE = 0.08\n\n\ndef apply_discount(price, percent):\n    \"\"\"Return the price after a percentage discount.\"\"\"\n    return round(price * (1 - percent / 100), 2)\n\n\ndef with_tax(price):\n    return round(price * (1 + TAX_RATE), 2)\n",
+      "shop/cart.py": "\"\"\"A shopping cart.\"\"\"\nfrom shop.prices import apply_discount, with_tax\n\n\nclass Cart:\n    def __init__(self):\n        self.items = []\n\n    def add(self, name, price, qty=1):\n        self.items.append((name, price, qty))\n\n    def subtotal(self):\n        return round(sum(p * q for _, p, q in self.items), 2)\n\n    def total(self, discount=0):\n        return with_tax(apply_discount(self.subtotal(), discount))\n",
+      "tests/__init__.py": "",
+      "tests/test_prices.py": "import pytest\nfrom shop.prices import apply_discount, with_tax\nfrom shop.cart import Cart\n\n\n@pytest.mark.parametrize(\"price,percent,expected\", [\n    (100, 0, 100), (100, 10, 90), (100, 25, 75), (80, 50, 40), (19.99, 10, 17.99),\n    (5, 20, 4), (250, 15, 212.5), (12.5, 40, 7.5), (1000, 5, 950), (3.3, 30, 2.31),\n    (60, 100, 0), (45, 12, 39.6), (9.99, 50, 5.0), (72, 25, 54), (200, 1, 198),\n])\ndef test_apply_discount(price, percent, expected):\n    assert apply_discount(price, percent) == expected\n\n\n@pytest.mark.parametrize(\"price,expected\", [\n    (100, 108), (0, 0), (10, 10.8), (19.99, 21.59), (50, 54), (1, 1.08),\n    (250, 270), (12.5, 13.5), (99.99, 107.99), (5, 5.4), (7.25, 7.83), (30, 32.4),\n])\ndef test_with_tax(price, expected):\n    assert with_tax(price) == expected\n\n\n@pytest.mark.parametrize(\"items,discount,expected\", [\n    ([(\"pen\", 2, 3)], 0, 6.48), ([(\"book\", 20, 1)], 10, 19.44), ([(\"mug\", 8, 2), (\"tea\", 4, 1)], 0, 21.6),\n    ([], 0, 0), ([(\"lamp\", 40, 1)], 50, 21.6), ([(\"cable\", 5, 4)], 25, 16.2),\n    ([(\"desk\", 150, 1)], 0, 162), ([(\"chair\", 90, 2)], 10, 174.96), ([(\"ink\", 3.5, 2)], 0, 7.56),\n    ([(\"bag\", 30, 1), (\"tag\", 1, 5)], 20, 30.24), ([(\"note\", 1.25, 8)], 0, 10.8), ([(\"box\", 12, 3)], 5, 36.94),\n    ([(\"clip\", 0.5, 10)], 0, 5.4),\n])\ndef test_cart_total(items, discount, expected):\n    cart = Cart()\n    for name, price, qty in items:\n        cart.add(name, price, qty)\n    assert cart.total(discount) == expected\n",
+      "CLAUDE.md": "# tiny shop\n\nPython 3, no framework.\n\n## Commands\n- Run tests: `python -m pytest -q`\n- Run one file: `python -m pytest -q tests/test_prices.py`\n\n## Compact instructions\nWhen you compact, keep the function names, the test command, and any failing test output.\n",
+      "logs/.keep": "",
+      ".claude/skills/release/SKILL.md": "---\nname: release\ndescription: The step-by-step release checklist for tiny shop. Use only when cutting a release.\n---\n\n## Release workflow (read every time)\n\n1. Release step 1: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 2.\n2. Release step 2: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 3.\n3. Release step 3: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 4.\n4. Release step 4: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 5.\n5. Release step 5: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 6.\n6. Release step 6: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 7.\n7. Release step 7: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 8.\n8. Release step 8: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 9.\n9. Release step 9: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 10.\n10. Release step 10: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 11.\n11. Release step 11: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 12.\n12. Release step 12: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 13.\n13. Release step 13: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 14.\n14. Release step 14: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 15.\n15. Release step 15: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 16.\n16. Release step 16: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 17.\n17. Release step 17: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 18.\n18. Release step 18: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 19.\n19. Release step 19: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 20.\n20. Release step 20: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 21.\n21. Release step 21: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 22.\n22. Release step 22: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 23.\n23. Release step 23: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 24.\n24. Release step 24: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 25.\n25. Release step 25: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 26.\n26. Release step 26: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 27.\n27. Release step 27: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 28.\n28. Release step 28: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 29.\n29. Release step 29: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 30.\n30. Release step 30: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 31.\n31. Release step 31: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 32.\n32. Release step 32: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 33.\n33. Release step 33: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 34.\n34. Release step 34: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 35.\n35. Release step 35: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 36.\n36. Release step 36: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 37.\n37. Release step 37: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 38.\n38. Release step 38: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 39.\n39. Release step 39: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 40.\n40. Release step 40: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 41.\n41. Release step 41: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 42.\n42. Release step 42: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 43.\n43. Release step 43: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 44.\n44. Release step 44: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 45.\n45. Release step 45: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 46.\n46. Release step 46: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 47.\n47. Release step 47: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 48.\n48. Release step 48: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 49.\n49. Release step 49: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 50.\n50. Release step 50: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 51.\n51. Release step 51: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 52.\n52. Release step 52: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 53.\n53. Release step 53: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 54.\n54. Release step 54: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 55.\n55. Release step 55: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 56.\n56. Release step 56: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 57.\n57. Release step 57: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 58.\n58. Release step 58: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 59.\n59. Release step 59: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 60.\n60. Release step 60: check the branch is clean, confirm the version in pyproject, run the full suite with coverage, compare the changelog entry against the diff, and post the summary in the team channel before moving on to step 61.\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "launch",
+      "action": "run",
+      "background": true,
+      "waitFor": "shift+tab to cycle",
+      "timeout": 90000,
+      "settleMs": 2500,
+      "cmd": "claude --model sonnet --allowedTools \"Read,Grep,Glob,Edit,Write,Bash,Agent\"",
+      "label": "start Claude Code on Sonnet 5.5",
+      "focus": "terminal",
+      "clearFirst": true
+    },
+    {
+      "id": "ctx",
+      "action": "agent",
+      "text": "/context",
+      "waitFor": "└ init",
+      "label": "the same workflows, moved into a skill",
+      "focus": "terminal",
+      "timeout": 60000,
+      "settleMs": 2500,
+      "keysBefore": [
+        "Control+End"
+      ]
+    },
+    {
+      "id": "ctx-up",
+      "action": "reveal",
+      "target": "terminal",
+      "text": "Autocompact buffer",
+      "pageUp": 8,
+      "settleMs": 1800,
+      "label": "scroll back to the categories",
+      "focus": "terminal",
+      "marks": [
+        {
+          "id": "tools",
+          "text": "System tools:"
+        },
+        {
+          "id": "memory",
+          "text": "Memory files:"
+        },
+        {
+          "id": "skills",
+          "text": "Skills:"
+        },
+        {
+          "id": "msgs",
+          "text": "Messages:"
+        },
+        {
+          "id": "free",
+          "text": "Free space:"
+        },
+        {
+          "id": "window",
+          "text": "Auto-compact window:"
+        }
+      ]
+    }
+  ]
+}

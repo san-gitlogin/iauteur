@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" width="1200" height="1000">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b4d8f" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#07162e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="deep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f8cff"/>
+      <stop offset="1" stop-color="#123a78"/>
+    </linearGradient>
+    <radialGradient id="tipglow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff5a5f" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ff5a5f" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <!-- the sea below the waterline -->
+  <rect x="0" y="300" width="1200" height="700" fill="url(#sea)"/>
+  <!-- the underwater mass: low-poly facets -->
+  <g stroke="#9cc7ff" stroke-opacity="0.35" stroke-width="2" stroke-linejoin="round">
+    <polygon points="600,300 420,300 250,420 170,560 230,720 380,860 560,930 600,930" fill="#2d6fd6"/>
+    <polygon points="600,300 780,300 950,420 1030,560 970,720 820,860 640,930 600,930" fill="#2560c2"/>
+    <polygon points="420,300 600,300 520,470 330,520 250,420" fill="#3b82f0"/>
+    <polygon points="780,300 600,300 690,470 880,520 950,420" fill="#3277e6"/>
+    <polygon points="520,470 690,470 740,640 600,760 460,640" fill="#1f56b0"/>
+    <polygon points="330,520 520,470 460,640 300,690 170,560" fill="#2966cc"/>
+    <polygon points="880,520 690,470 740,640 900,690 1030,560" fill="#1d52a8"/>
+    <polygon points="300,690 460,640 600,760 560,930 380,860 230,720" fill="#17458f"/>
+    <polygon points="900,690 740,640 600,760 640,930 820,860 970,720" fill="#153f85"/>
+  </g>
+  <!-- the tip above the water: small, bright -->
+  <g stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" stroke-linejoin="round">
+    <polygon points="600,150 536,300 664,300" fill="#eaf3ff"/>
+    <polygon points="600,150 626,226 664,300 600,300" fill="#b9d3ff"/>
+    <polygon points="536,300 600,150 588,236 566,300" fill="#ffffff"/>
+  </g>
+  <circle cx="600" cy="232" r="46" fill="url(#tipglow)" filter="url(#soft)" opacity="0.55"/>
+  <!-- the waterline -->
+  <path d="M40 300 Q 150 288 260 300 T 480 300 T 700 300 T 920 300 T 1160 300" fill="none" stroke="#bfe0ff" stroke-width="5" stroke-linecap="round"/>
+  <path d="M90 322 Q 200 312 310 322 T 530 322 T 750 322 T 970 322 T 1120 322" fill="none" stroke="#bfe0ff" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round"/>
+  <!-- labels -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    <text x="600" y="118" font-size="46" fill="#ff6b6f">YOUR PROMPT · ~8</text>
+    <text x="600" y="610" font-size="64" fill="#ffffff">23,883</text>
+    <text x="600" y="668" font-size="34" fill="#cfe4ff" font-weight="700">tokens actually sent</text>
+  </g>
+</svg>

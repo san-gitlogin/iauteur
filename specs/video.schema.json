@@ -471,6 +471,8 @@
               "HIDFI_STAGE",
               "O55_STAGE",
               "LAYA_STAGE",
+              "AIRLLM_STAGE",
+              "TOK_STAGE",
               "CMD_PING",
               "CMD_TRACEROUTE",
               "CMD_MTR",
@@ -8195,6 +8197,110 @@
                         },
                         "color": {
                           "description": "Accent."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "TOK_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "tokStage": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "description": "resend | grain | prefix | price | switch | jar | shelf | backpack | press | rewind | window | fan | twice | seal | clock | trips | sheet | sieve | card | room | toll | ttl | board. An unregistered kind renders LOUDLY in red."
+                        },
+                        "headline": {
+                          "type": "string",
+                          "description": "Optional headline, <=38 chars."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Small uppercase caption above the picture, <=44 chars, authored per beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Standing sentence along the bottom, <=120 chars: what the viewer is looking at (LAW 0l)."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The elements, each landing on its own atWord. `group` and `text` are PLUMBING, never drawn as words. label <=48, sub <=70."
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "sheet: the image file in public/assets."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic accent: blue|green|red|orange|purple|yellow."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "AIRLLM_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "airllmStage": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "description": "wall | floors | ceiling | pipe | crossover | road. An unregistered kind renders LOUDLY in red."
+                        },
+                        "headline": {
+                          "type": "string",
+                          "description": "Optional headline, <=38 chars. Most beats carry none — the object is the headline."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Small uppercase caption above the picture, <=40 chars, authored per beat."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The elements, each landing on its own atWord. `group` is PLUMBING, never drawn as words. wall: door (value = the memory in GB, sets the doorway height), slab (value = the model in GB), verdict. floors: tower (value = how many layers), lift, note, peak. ceiling: file (value = GB, sub = the figure printed on the bar, label = its name), total, peak (the ceiling line's label). pipe: from, to, bytes, rate, result. crossover: point (value = model GB) repeated, line (value = this machine's memory in GB), left, right. road: call, road x2 (text = an id such as cuda|mlx), taken (text = which road id won). label <=46, sub <=64."
+                        },
+                        "token": {
+                          "type": "string",
+                          "description": "Per-kind mode switch; unused by the six current pictures."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic accent: blue|green|red|orange|purple|yellow."
                         }
                       }
                     }

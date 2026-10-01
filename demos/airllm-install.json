@@ -1,0 +1,46 @@
+{
+  "slug": "airllm-install",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "airllm-lab",
+  "viewport": { "width": 1600, "height": 900 },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": { "workbench.startupEditor": "none" },
+  "steps": [
+    {
+      "id": "venv",
+      "action": "run",
+      "cmd": "python3 -m venv .venv && echo 'created .venv'",
+      "label": "a fresh, isolated Python environment",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 180000,
+      "expect": { "contains": "created .venv", "exitCode": 0 }
+    },
+    {
+      "id": "pip",
+      "action": "run",
+      "cmd": "./.venv/bin/pip install airllm mlx 2>&1 | tail -4",
+      "label": "the two packages a Mac needs",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": { "contains": "Successfully installed", "exitCode": 0 },
+      "marks": [ { "id": "ok", "text": "Successfully installed" } ]
+    },
+    {
+      "id": "versions",
+      "action": "run",
+      "cmd": "./.venv/bin/python -c \"import importlib.metadata as m; print('airllm', m.version('airllm')); print('mlx   ', m.version('mlx'))\"",
+      "label": "what we actually installed",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": { "contains": "airllm", "exitCode": 0 },
+      "marks": [ { "id": "ver", "text": "airllm 4.0.0" } ]
+    }
+  ]
+}

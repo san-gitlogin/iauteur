@@ -106,7 +106,10 @@ const RULES = [
     why: 'an email address',
     // Fixture identities are sample data in showcase specs and component examples -
     // they are meant to be on screen.
-    ok: (h) => FAKE_MAIL.test(h) || /@(anthropic\.com|pypi\.org|astral\.sh)\b/i.test(h) },
+    // A Python decorator after a JSON-escaped newline (backslash-n, then a pytest mark or an
+    // MCP tool decorator) reads as local-part "n" at a domain. It is code inside a spec.
+    ok: (h) => FAKE_MAIL.test(h) || /@(anthropic\.com|pypi\.org|astral\.sh)\b/i.test(h)
+      || /^n@(pytest\.mark|mcp\.(tool|resource|prompt))\b/.test(h) },
   { id: 'HOME_PATH', sev: 'BLOCK',
     re: /(?:[A-Za-z]:[\\/]+Users|\/c\/Users|\/Users|\/home)[\\/]+[A-Za-z0-9._-]+/g,
     why: 'a real home directory (identifies the machine + user)',

@@ -888,7 +888,9 @@ export const assertAgentWorkspaceTrusted = (demo, ws) => {
   const projects = cfg?.projects ?? {};
   // Both spellings matter: macOS resolves /tmp through /private, and Claude Code stores
   // whichever one it was launched with.
-  const keys = [ws, fs.existsSync(ws) ? fs.realpathSync(ws) : ws];
+  // Windows: Claude Code stores the key with FORWARD slashes (drive letter, then forward slashes) while
+  // path.join produces backslashes, so the same trusted folder read as untrusted.
+  const keys = [ws, fs.existsSync(ws) ? fs.realpathSync(ws) : ws].flatMap((k) => [k, k.split(path.sep).join('/')]);
   if (keys.some((k) => projects[k]?.hasTrustDialogAccepted === true)) return;
 
   throw new Error(
@@ -956,7 +958,12 @@ export const assertAgentRunCannotPrompt = (demo) => {
   const steps = demo.steps ?? [];
   const lastAgent = steps.map((s) => typeof s.cmd === 'string' &&
     /(^|[\s;&|(])claude(\s|$)/.test(s.cmd) && !/\s-p\b|--print\b/.test(s.cmd)).lastIndexOf(true);
-  if (lastAgent >= 0 && lastAgent !== steps.length - 1) {
+  // The one exception is the deliberate one: `agent` steps, which exist to type INTO that
+  // session and verify each command by what the tool prints (see actions.agent).
+  // `reveal` and `pause` type nothing, so they are safe there too (scrolling back to a long
+  // output such as /context's category table is part of reading it).
+  const onlyAgentAfter = steps.slice(lastAgent + 1).every((s) => ['agent', 'reveal', 'pause'].includes(s.action));
+  if (lastAgent >= 0 && lastAgent !== steps.length - 1 && !onlyAgentAfter) {
     throw new Error(
       `Step "${steps[lastAgent].id}" runs an interactive \`claude\`, but ${steps.length - 1 - lastAgent} ` +
       `step(s) follow it in the same take.\n\n` +
@@ -1215,7 +1222,22 @@ const actions = {
         hit.scrollIntoView({block: 'center'});
         return true;
       }, step.text);
-      if (!ok) throw new Error(`Step "${step.id}": nothing on screen contains ${JSON.stringify(step.text)} to scroll to`);
+      // A TUI's earlier output lives in xterm SCROLLBACK, which the DOM does not render — so a
+      // row that scrolled away cannot be found by its text. `pageUp: n` pages the terminal
+      // back with Shift+PageUp (a workbench key, so no palette overlay reaches the footage)
+      // and re-checks after each page. Added 2026-09-30 for /context's category table.
+      let found = ok;
+      const find = () => page.evaluate((needle) => {
+        const flat = (s) => String(s || '').replace(/ /g, ' ');
+        const rows = Array.from(document.querySelectorAll('.xterm-rows > div'));
+        return rows.some((r) => flat(r.innerText).includes(flat(needle)));
+      }, step.text);
+      for (let i = 0; !found && i < Number(step.pageUp ?? 0); i++) {
+        await page.keyboard.press('Shift+PageUp');
+        await sleep(step.pageGapMs ?? 500);
+        found = await find();
+      }
+      if (!found) throw new Error(`Step "${step.id}": nothing on screen contains ${JSON.stringify(step.text)} to scroll to`);
     } else if (where === 'terminal') {
       const cmd = step.direction === 'next' ? 'Terminal: Scroll to Next Command'
         : step.direction === 'bottom' ? 'Terminal: Scroll to Bottom'
@@ -1490,6 +1512,105 @@ ${content.text}`, truth: 'read-back',
       truth: 'read-back',
       verified: `${step.verify} held; moved: ${moved().join(', ') || '(nothing measurable)'}`,
     };
+  },
+
+  /**
+   * AGENT — drive a Claude Code session that an earlier step LEFT RUNNING.
+   *
+   * WHY IT EXISTS (2026-09-30, the "21 ways to save tokens" cut). Half of that video is slash
+   * commands — /context, /compact, /rewind, /clear, /model — and a slash command only exists
+   * INSIDE a live session. The rule "an interactive agent run must be the last step of its
+   * take" (recorded 2026-09-17) stops a later `run` from typing a SHELL command into the
+   * agent's prompt by accident. This step is the deliberate version of the same thing, and it
+   * is held to the same standard as every other step:
+   *
+   *   - it must name a `waitFor` needle, and the needle may NOT appear in what it types —
+   *     Claude Code echoes the input, so a self-matching needle "succeeds" on the echo
+   *     (the 2026-09-24 defect, sealed by assertWaitForCannotSelfMatch for `run`);
+   *   - success means the needle's COUNT in the terminal went UP, so an occurrence already on
+   *     screen from an earlier step cannot satisfy it;
+   *   - `keysBefore` / `keysAfter` are for keys a person presses in a TUI (Escape, arrows,
+   *     Enter to confirm a picker). Default after a typed line: Enter.
+   *
+   *   {action: 'agent', id: 'ctx', text: '/context', waitFor: 'Free space', focus: 'terminal'}
+   */
+  async agentPrepare(page) {
+    await palette(page, 'Terminal: Focus Terminal');
+    await sleep(500);
+  },
+  async agent(page, step) {
+    // `waitGone`: the proof for a command whose whole job is to REMOVE something (/clear wipes the
+    // conversation, so nothing new is printed). It must be on screen before the step, and the step
+    // passes only once it has gone.
+    if (step.waitGone) {
+      const gone = step.waitGone;
+      const pre = String(await readBuffer(page) || '');
+      if (!pre.includes(gone)) {
+        throw new Error(`Step "${step.id}": waitGone ${JSON.stringify(gone)} is not on screen before the step, so its ` +
+          `disappearance would prove nothing.`);
+      }
+      for (const ch of String(step.text ?? '')) { await page.keyboard.type(ch); await sleep(55); }
+      await sleep(400);
+      for (const k of step.keysAfter ?? ['Enter']) { await page.keyboard.press(k); await sleep(450); }
+      const t0 = Date.now();
+      let buf = pre;
+      while (buf.includes(gone)) {
+        if (Date.now() - t0 > (step.timeout ?? 60000)) {
+          throw new Error(`Step "${step.id}": ${JSON.stringify(gone)} is still on screen after the command.`);
+        }
+        await sleep(500);
+        buf = String(await readBuffer(page) || '');
+      }
+      await sleep(step.settleMs ?? 2000);
+      return {sent: String(step.text ?? ''), output: buf.slice(-4000), lines: buf.split(String.fromCharCode(10)), truth: 'read-back',
+              verified: `${JSON.stringify(gone)} was on screen before and is gone after`};
+    }
+    const needle = step.waitFor;
+    if (!needle) {
+      throw new Error(`Step "${step.id}": an agent step needs "waitFor" — text the TOOL prints when the ` +
+        `command has done its work. Without it the take cannot tell a working command from a hung one.`);
+    }
+    const text = String(step.text ?? '');
+    if (text && text.includes(needle)) {
+      throw new Error(`Step "${step.id}": waitFor ${JSON.stringify(needle)} appears in the text this step ` +
+        `types, so the agent's echo of the input would satisfy it before any work is done. Match something ` +
+        `only the tool prints.`);
+    }
+    const count = (buf) => String(buf || '').split(needle).length - 1;
+    const before = count(await readBuffer(page));
+    for (const k of step.keysBefore ?? []) { await page.keyboard.press(k); await sleep(step.keyGapMs ?? 450); }
+    for (const ch of text) {
+      await page.keyboard.type(ch);
+      await sleep(Math.max(10, (step.typeDelay ?? 55) + (Math.random() * 2 - 1) * 20));
+    }
+    if (text) await sleep(500);
+    for (const k of step.keysAfter ?? (text ? ['Enter'] : [])) {
+      await page.keyboard.press(k); await sleep(step.keyGapMs ?? 450);
+    }
+    const t0 = Date.now();
+    let buf = '';
+    for (;;) {
+      buf = String(await readBuffer(page) || '');
+      if (count(buf) > before) break;
+      // A REPEATED command prints the same text again while the earlier copy scrolls off, so the
+      // count can stay flat. Second proof: the needle sits AFTER the latest echo of what we typed —
+      // only output produced by this step can be there (checked after Enter, never before).
+      if (text && Date.now() - t0 > 1000) {
+        const echo = buf.lastIndexOf(text.slice(0, 40));
+        if (echo >= 0 && buf.indexOf(needle, echo + Math.min(40, text.length)) >= 0) break;
+      }
+      if (Date.now() - t0 > (step.timeout ?? 120000)) {
+        throw new Error(`Step "${step.id}": typed ${JSON.stringify(text || step.keysAfter)} into the agent, ` +
+          `but ${JSON.stringify(needle)} never appeared (${before} before). The terminal said:\n` +
+          buf.split('\n').slice(-25).join('\n'));
+      }
+      await sleep(500);
+    }
+    await sleep(step.settleMs ?? 2500);
+    buf = String(await readBuffer(page) || '');
+    return {sent: text || `(${[...(step.keysBefore ?? []), ...(step.keysAfter ?? [])].join(' ')})`,
+            output: buf.slice(-6000), lines: buf.split('\n'),
+            truth: 'read-back', verified: `agent printed ${JSON.stringify(needle)} (${before} -> ${count(buf)})`};
   },
 
   async pause(page, step) {
@@ -1948,6 +2069,14 @@ export const recordBrowserDemo = async (demo, {outDir, keepFrames = false, headl
       await sleep(600);
     }
     if (dismissed.length) console.log(`  prep: dismissed ${dismissed.map((d) => JSON.stringify(d)).join(', ')}`);
+    // FLOATING FURNITURE THAT HAS NO BUTTON TO DISMISS (2026-09-30). The Claude Code docs pin an
+    // "Ask a question…" box to the bottom of the viewport; it painted over the TTL table the beat
+    // was about, and the mark gate refused the take (rightly). `prep.hide` takes CSS selectors
+    // and hides them for the whole take — logged, like `dismiss`, so nothing vanishes silently.
+    if ((demo.prep?.hide ?? []).length) {
+      await page.addStyleTag({content: demo.prep.hide.map((s) => `${s}{display:none!important}`).join('\n')});
+      console.log(`  prep: hid ${demo.prep.hide.map((d) => JSON.stringify(d)).join(', ')}`);
+    }
     await sleep(400);
 
     console.log('  TAKE: capture started');

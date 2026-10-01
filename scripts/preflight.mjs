@@ -34,7 +34,8 @@ const step = (name, cmd, args) => {
 };
 
 // 1. the components compile at all
-step('typecheck', 'npx', ['tsc', '--noEmit', '-p', '.']);
+// Through node, not npx: execFileSync cannot resolve npx.cmd on Windows without a shell.
+step('typecheck', process.execPath, ['node_modules/typescript/bin/tsc', '--noEmit', '-p', '.']);
 // 2. the footage exists, is baked, and is sharp enough for the zooms the spec asks for
 step('recordings', 'node', ['scripts/check-recordings.mjs', '--quiet', '--slug', slug]);
 for (const spec of specs) {

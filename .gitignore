@@ -82,3 +82,6 @@ tools/
 # output. Publishing any of it to a public repo is the owner's decision, not a
 # side effect of authoring a video. briefs/pointai/ carries what the specs need.
 ai-analyst-tutorial/
+
+# third-party image shown with credit in the tokens video; not ours to redistribute
+public/assets/tok-infographic.jpg

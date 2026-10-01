@@ -1,0 +1,70 @@
+{
+  "slug": "tok-docs",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "https://code.claude.com/docs/en/costs",
+    "settleMs": 5000,
+    "dismiss": [
+      "Reject all cookies"
+    ],
+    "hide": [
+      "*:has(> textarea.chat-assistant-input)",
+      "textarea.chat-assistant-input"
+    ]
+  },
+  "steps": [
+    {
+      "id": "top",
+      "action": "pause",
+      "ms": 1800,
+      "label": "Anthropic’s own page on what Claude Code costs",
+      "marks": [
+        {
+          "id": "charges",
+          "text": "Claude Code charges by API token consumption."
+        }
+      ]
+    },
+    {
+      "id": "thinking",
+      "action": "scroll",
+      "target": "text=which always use extended thinking",
+      "settleMs": 600,
+      "label": "down to the thinking section"
+    },
+    {
+      "id": "thinking2",
+      "action": "scroll",
+      "by": 380,
+      "settleMs": 2200,
+      "label": "the line that corrects the infographic",
+      "marks": [
+        {
+          "id": "cant",
+          "text": "You can’t turn off thinking on Opus 5.5, Sonnet 5.5, or the Fable models"
+        }
+      ]
+    },
+    {
+      "id": "resend",
+      "action": "scroll",
+      "target": "text=Claude Code sends your full conversation with every request",
+      "settleMs": 2200,
+      "label": "the sentence the whole video rests on",
+      "marks": [
+        {
+          "id": "full",
+          "text": "Claude Code sends your full conversation with every request"
+        }
+      ]
+    }
+  ]
+}

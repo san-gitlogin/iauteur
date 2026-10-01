@@ -1982,6 +1982,35 @@ export const MANIFEST = {  JEVONS_CURVE: {
     },
     example: {"kind": "mask-slots", "stageTitle": "one sequence, one pass", "stage": [{"group": "cell", "label": "[CLS]", "atWord": 2}, {"group": "cell", "label": "which team?", "atWord": 3}, {"group": "cell", "label": "[MASK] billing", "text": "slot", "atWord": 5}, {"group": "cell", "label": "[MASK] technical", "text": "slot", "atWord": 6}, {"group": "cell", "label": "the email", "atWord": 8}, {"group": "read", "label": "the encoder reads all of it", "sub": "both directions at once", "atWord": 11}, {"group": "gather", "text": "[MASK] billing", "label": "billing", "sub": "0.95", "value": 0.95, "atWord": 16}, {"group": "gather", "text": "[MASK] technical", "label": "technical", "sub": "0.02", "value": 0.02, "atWord": 18}]},
   },
+  TOK_STAGE: {
+    category: "diagram", family: "diagram", data_key: "tokStage",
+    purpose: "Every DRAWN beat of the '21 ways to save Claude Code tokens' video on one scene type. The argument of that cut is about what rides along with every request (the stack re-sent each turn, the cache that makes it cheap, and what breaks the cache), so each `kind` names an OBJECT and moves it: a stack re-sent per turn, a field of dots with one lit, a sealed bar that turns red after a change, price tags on a rail, a dead switch next to a live dial, a jar with a magnified sliver, a shelf of spines, a backpack tipped out, a press, a snipped timeline, two sawtooth curves, a fan of reads, a doubled paste, a cache seal, a firing clock, a courier's trips, the source page read like a page, a funnel, a pinned card, a side room, a toll gate, two cache clocks and a sorting board. One type, twenty-three pictures (LAW 0n).",
+    use_when: "A token/context/cache beat a camera cannot film. Pick `kind` for the OBJECT (see the header of src/tokViz1.tsx, tokViz2.tsx, tokViz3.tsx for each kind's item groups).",
+    fields: {
+      kind: {t: "string", req: true, note: "resend | grain | prefix | price | switch | jar | shelf | backpack | press | rewind | window | fan | twice | seal | clock | trips | sheet | sieve | card | room | toll | ttl | board. An unregistered kind renders LOUDLY in red."},
+      headline: {t: "string", note: "Optional headline, <=38 chars."},
+      stageTitle: {t: "string", note: "Small uppercase caption above the picture, <=44 chars, authored per beat."},
+      premise: {t: "string", note: "Standing sentence along the bottom, <=120 chars: what the viewer is looking at (LAW 0l)."},
+      stage: {t: "items", note: "The elements, each landing on its own atWord. `group` and `text` are PLUMBING, never drawn as words. label <=48, sub <=70."},
+      token: {t: "string", note: "sheet: the image file in public/assets."},
+      color: {t: "string", note: "Semantic accent: blue|green|red|orange|purple|yellow."}
+    },
+    example: {"kind": "price", "stageTitle": "what a million tokens costs", "stage": [{"group": "tag", "label": "Haiku 4.5", "value": 1, "sub": "$5 out", "atWord": 2}, {"group": "tag", "label": "Sonnet 5.5", "value": 2, "sub": "$10 out", "atWord": 4}, {"group": "tag", "label": "Opus 5.5", "value": 4, "sub": "$20 out", "atWord": 6}, {"group": "pick", "text": "Sonnet 5.5", "label": "most coding work", "atWord": 9}]},
+  },
+  AIRLLM_STAGE: {
+    category: "diagram", family: "diagram", data_key: "airllmStage",
+    purpose: "Every DRAWN beat of the AirLLM video on one scene type. Every beat in that cut is an argument about SIZE or TIME \u2014 a model that will not fit, a stack of identical layers, a ceiling set by the largest single piece rather than the sum, a byte count divided by a read speed, the point where streaming starts to be worth its price \u2014 and each of those has a card-shaped answer that would only be a caption. So each `kind` names an OBJECT and moves it. One type, six pictures (LAW 0n).",
+    use_when: "A memory/throughput/layer-streaming beat a camera cannot film. Pick `kind` for the OBJECT: wall (a slab of weights travelling at a doorway whose HEIGHT is the machine's memory \u2014 it passes or it stops), floors (a tower of identical layers with a lift carriage that only ever holds one, walking the tower), ceiling (one bar per file with a ceiling line that sweeps in and settles on the TALLEST bar, next to the far larger total), pipe (two boxes joined by a cable with packets crossing it, and the division bytes / rate = seconds written out underneath), crossover (model sizes pinned along an axis with this machine's memory standing across it, the two sides tinted and labelled), road (one line of code forking into two code paths, the one actually taken lit and the other left dim but still named).",
+    fields: {
+      kind: {t: "string", req: true, note: "wall | floors | ceiling | pipe | crossover | road. An unregistered kind renders LOUDLY in red."},
+      headline: {t: "string", note: "Optional headline, <=38 chars. Most beats carry none \u2014 the object is the headline."},
+      stageTitle: {t: "string", note: "Small uppercase caption above the picture, <=40 chars, authored per beat."},
+      stage: {t: "items", note: "The elements, each landing on its own atWord. `group` is PLUMBING, never drawn as words. wall: door (value = the memory in GB, sets the doorway height), slab (value = the model in GB), verdict. floors: tower (value = how many layers), lift, note, peak. ceiling: file (value = GB, sub = the figure printed on the bar, label = its name), total, peak (the ceiling line's label). pipe: from, to, bytes, rate, result. crossover: point (value = model GB) repeated, line (value = this machine's memory in GB), left, right. road: call, road x2 (text = an id such as cuda|mlx), taken (text = which road id won). label <=46, sub <=64."},
+      token: {t: "string", note: "Per-kind mode switch; unused by the six current pictures."},
+      color: {t: "string", note: "Semantic accent: blue|green|red|orange|purple|yellow."}
+    },
+    example: {"kind": "ceiling", "stageTitle": "one file at a time", "stage": [{"group": "file", "label": "word table", "sub": "1.05 GB", "value": 1.05, "atWord": 2}, {"group": "file", "label": "one layer", "sub": "0.44 GB", "value": 0.44, "atWord": 4}, {"group": "file", "label": "output table", "sub": "1.05 GB", "value": 1.05, "atWord": 6}, {"group": "peak", "label": "the ceiling: 1.05 GB", "atWord": 8}, {"group": "total", "label": "the whole model is 16.06 GB", "atWord": 11}]},
+  },
   O55_STAGE: {
     category: "diagram", family: "diagram", data_key: "o55Stage",
     purpose: "Every DRAWN beat of the Claude Opus 5.5 release video on one scene type. These are arithmetic beats \u2014 a score, a price, a percentage \u2014 which are the ones that quietly default to a card, so each `kind` names an OBJECT instead: a board with model pucks travelling on it, a podium with somebody else on the top step, a pair of callipers closing, a rack of hanging price tags, a turnstile counting cached tokens, a quoted thread, a row of switches being thrown. One type, seven pictures (LAW 0n).",

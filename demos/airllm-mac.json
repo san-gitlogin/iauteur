@@ -1,0 +1,93 @@
+{
+  "slug": "airllm-mac",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "airllm-lab",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "steps": [
+    {
+      "id": "chip",
+      "action": "run",
+      "cmd": "system_profiler SPHardwareDataType | grep -E 'Model Name|Chip:|Total Number of Cores|Memory:'",
+      "label": "the machine everything runs on",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Apple M3 Pro",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "mem",
+          "text": "Memory: 18 GB"
+        }
+      ]
+    },
+    {
+      "id": "gpu",
+      "action": "run",
+      "cmd": "system_profiler SPDisplaysDataType | grep -E 'Chipset Model|Total Number of Cores'",
+      "label": "and its graphics cores",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "Apple M3 Pro",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "cores",
+          "text": "Total Number of Cores: 14"
+        }
+      ]
+    },
+    {
+      "id": "disk",
+      "action": "run",
+      "cmd": "df -h / '/Volumes/Extreme SSD' | awk 'NR>1 {printf \"%8s total %9s free   %s\\n\", $2, $4, ($9==\"/\" ? \"inside the laptop\" : \"the external SSD\")}'",
+      "label": "how little room is left inside, and how much is outside",
+      "focus": "terminal",
+      "clearFirst": true,
+      "expect": {
+        "contains": "the external SSD",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "free",
+          "text": "the external SSD"
+        }
+      ]
+    },
+    {
+      "id": "speed",
+      "action": "run",
+      "cmd": "dd if='/Volumes/Extreme SSD/airllm-demo/Meta-Llama-3-8B-Instruct/model-00004-of-00004.safetensors' of=/dev/null bs=1m 2>&1 | tail -1",
+      "label": "how fast that drive actually reads",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 120000,
+      "expect": {
+        "contains": "bytes transferred",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "rate",
+          "text": "bytes transferred"
+        }
+      ]
+    }
+  ]
+}

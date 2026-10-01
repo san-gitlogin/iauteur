@@ -101,6 +101,8 @@ export type SceneTypeName =
   | 'CMD_MTR'
   | 'CMD_TRACEROUTE'
   | 'LAYA_STAGE'
+  | 'TOK_STAGE'
+  | 'AIRLLM_STAGE'
   | 'O55_STAGE'
   | 'HIDFI_STAGE'
   | 'ASTRA_STAGE'
@@ -2050,6 +2052,29 @@ export type LayaStageScene = SceneCommon<'LAYA_STAGE'> & { data: {
       stage?: Array<Record<string, unknown>>;
       token?: string;
       color?: unknown;
+    };
+  } };
+
+export type TokStageScene = SceneCommon<'TOK_STAGE'> & { data: {
+    tokStage: {
+      kind: string;
+      headline?: string;
+      stageTitle?: string;
+      premise?: string;
+      stage?: Array<Record<string, unknown>>;
+      token?: string;
+      color?: string;
+    };
+  } };
+
+export type AirllmStageScene = SceneCommon<'AIRLLM_STAGE'> & { data: {
+    airllmStage: {
+      kind: string;
+      headline?: string;
+      stageTitle?: string;
+      stage?: Array<Record<string, unknown>>;
+      token?: string;
+      color?: string;
     };
   } };
 
@@ -5808,6 +5833,8 @@ export interface SceneByType {
   CMD_MTR: CmdMtrScene;
   CMD_TRACEROUTE: CmdTracerouteScene;
   LAYA_STAGE: LayaStageScene;
+  TOK_STAGE: TokStageScene;
+  AIRLLM_STAGE: AirllmStageScene;
   O55_STAGE: O55StageScene;
   HIDFI_STAGE: HidfiStageScene;
   ASTRA_STAGE: AstraStageScene;
@@ -6190,6 +6217,8 @@ export type TypedScene =
   | CmdMtrScene
   | CmdTracerouteScene
   | LayaStageScene
+  | TokStageScene
+  | AirllmStageScene
   | O55StageScene
   | HidfiStageScene
   | AstraStageScene

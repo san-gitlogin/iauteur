@@ -446,6 +446,17 @@ const CORRECTIONS = [
          // never spoken. Both gates fold through the same table now.
          has('scripts/lib/numwords.py', 'THE SCREEN \\(AND WHISPER\\) PRINT A FIGURE') &&
          has('scripts/audit-voice.py', 'fold_numbers')],
+  ['a thumbnail field the renderer reads and the normalizer deletes', 'SEAL',
+   'THIRD time on one list. normalize.mjs strips any thumbnail/cover key not in THUMB_KEYS; `art` went ' +
+   'missing in September and every normalized cover lost its free-drawn subject, then `layout`, `artFade` ' +
+   'and `logoTint` went missing and a shipped HERO thumbnail silently became a split one — which also ' +
+   'flipped lint-spec\'s title cap from 64 chars to 40 and turned a passing spec into a fleet-gate ' +
+   'regression on a topic nobody had touched. The list is now DERIVED from the code that reads these ' +
+   'objects, so a fourth occurrence fails the gate instead of a render.',
+   () => has('scripts/check-thumb-keys.mjs', 'SPEC-KEY SEAL') &&
+         has('scripts/check-thumb-keys.mjs', '\\.\\(thumbnail\\|cover\\)') &&
+         has('scripts/lib/constants.mjs', "'layout', 'artFade', 'logoTint'") &&
+         has('package.json', 'check-thumb-keys')],
 ];
 
 let missing = [];

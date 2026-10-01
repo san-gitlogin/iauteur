@@ -171,6 +171,8 @@ export const TYPES = [
   'HIDFI_STAGE',
   'O55_STAGE',
   'LAYA_STAGE',
+  'AIRLLM_STAGE',
+  'TOK_STAGE',
   'CMD_PING',
   'CMD_TRACEROUTE',
   'CMD_MTR',
@@ -363,9 +365,17 @@ export const CONSOLIDATED = new Set(['PIPELINE', 'gauge-surface', 'code-surface'
 // / `replaces` — four shipped thumbnail features — were being silently stripped the same way.
 //
 // Anything added to the envelope goes HERE, or normalize will quietly eat it.
+// SAME DEFECT AS THUMB_KEYS, ONE OBJECT UP (2026-09-26). normalize-spec deletes every meta key
+// not listed here, and FOUR keys the pipeline depends on were missing: `audioPrefix` (voiceover,
+// sync and render all resolve the mp3 prefix from it), `pronounce` (the respelling that decides
+// how the voice SAYS a product name, and the flag that arms the voice-audit gate), `subjectKind`
+// (what the MISCLASSIFIED SUBJECT guard compares a title against) and `voiceApproved`. Symptom:
+// a render refused on a voice audit the owner had already overridden, because normalize had
+// silently thrown the override away between the build and the gate.
+// `scripts/check-thumb-keys.mjs` now derives BOTH lists from the code that reads them.
 export const META_KEYS = [
-  'topic', 'subject', 'format', 'fps', 'onePayoff', 'openLoop', 'analogy',
-  'screenplay', 'topicAxes', 'seo',
+  'topic', 'subject', 'subjectKind', 'format', 'fps', 'onePayoff', 'openLoop', 'analogy',
+  'screenplay', 'topicAxes', 'seo', 'audioPrefix', 'pronounce', 'voiceApproved',
 ];
 export const THUMB_KEYS = [
   // `art` draws the subject FREE — full size, no crop, no rounded tile (owner, 2026-09-12).
@@ -374,5 +384,18 @@ export const THUMB_KEYS = [
   // the cover fell back to a generic lucide glyph in a tile. The wide thumbnail only escaped
   // because long.json happened not to be normalized after the field was set. A field the
   // renderer reads and a pipeline stage deletes is the same lie as a field nothing reads.
+  //
+  // AND THE SAME THING HAPPENED AGAIN, 2026-09-26 — THIRD TIME ON THIS LIST. `layout`,
+  // `artFade` and `logoTint` were added to Root.tsx's thumbnail props (and `layout` to
+  // lint-spec's own character cap, which allows 64 chars on a stack/hero layout and 40 on a
+  // split) and never added here, so `normalize.mjs` deleted all three. The visible symptom was
+  // the fleet gate reporting `agent-skills-prove-it/long: lint pass→fail`: the shipped spec
+  // passes, normalize strips `layout: "hero"`, and the linter then measures its 45-character
+  // title against the 40-char split cap. A shipped HERO thumbnail would have silently
+  // re-rendered as a split one on the next normalize.
+  //
+  // `scripts/check-thumb-keys.mjs` now derives this list's obligations from the code that
+  // READS these objects, so a fourth occurrence fails the gate instead of a render.
   'title', 'badge', 'asset', 'art', 'frames', 'note', 'logos', 'titleStruck', 'replaces',
+  'layout', 'artFade', 'logoTint',
 ];

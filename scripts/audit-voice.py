@@ -43,6 +43,7 @@ squash = lambda t: re.sub(r'[^a-z0-9]', '', t.lower()).replace('y', 'i')
 m = WhisperModel(model_name, device='cpu', compute_type='int8')
 only = {x for x in os.environ.get('ONLY', '').split(',') if x}
 fails = []
+detail = {}
 for sc in spec['scenes']:
     if only and sc['id'] not in only:
         continue
@@ -66,6 +67,7 @@ for sc in spec['scenes']:
         got = squash(heard).count(subject)
         if said and got < said:
             probs.append(f'subject "{subject}" said {said}x, heard {got}x')
+    detail[sc['id']] = probs
     mark = '✗' if probs else '✓'
     print(f"{mark} {sc['id']}  match {ratio:.2f}" + (f"  — {'; '.join(probs)}" if probs else ''))
     if probs:
@@ -75,6 +77,11 @@ for sc in spec['scenes']:
 # run HEARD correctly. A later re-voice changes the hash and voids its stamp.
 ts_file = f"out/tts/{prefix}_timestamps.json"
 stamp_file = f"out/tts/{prefix}_voiceaudit.json"
+# WHY each scene failed, so `meta.voiceApproved` can forgive a subject-only miss (which the
+# transcriber genuinely cannot resolve on an acronym) while a swallowed opening or a drifted
+# script still refuses the render.
+detail_file = f"out/tts/{prefix}_voiceaudit_detail.json"
+json.dump(detail, open(detail_file, "w"), indent=1)
 if os.path.exists(ts_file):
     ts = json.load(open(ts_file))
     stamp = json.load(open(stamp_file)) if os.path.exists(stamp_file) else {}

@@ -1,0 +1,111 @@
+{
+  "slug": "airllm-map",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "repo:public/assets/archify/airllm-token.lifecycle.html?theme=dark&present=1&embed=1",
+    "settleMs": 3500
+  },
+  "steps": [
+    {
+      "id": "hold",
+      "action": "archify",
+      "call": "motionGovernor.pause",
+      "args": [],
+      "expectState": {
+        "paused": "true"
+      },
+      "label": "the map, held still",
+      "settleMs": 1200
+    },
+    {
+      "id": "frame",
+      "action": "archify",
+      "call": "view.reveal",
+      "args": [
+        [
+          "read_embed",
+          "read_layer",
+          "run_layer",
+          "drop_layer",
+          "emit",
+          "resident"
+        ]
+      ],
+      "expectState": {
+        "paused": "true"
+      },
+      "label": "the whole loop, end to end",
+      "settleMs": 1600
+    },
+    {
+      "id": "layer",
+      "action": "archify",
+      "call": "guidedViews.activate",
+      "args": [
+        "one-layer"
+      ],
+      "expectState": {
+        "chapter": "one-layer",
+        "focus": "read_layer"
+      },
+      "label": "read a layer, run it, delete it",
+      "settleMs": 1600
+    },
+    {
+      "id": "ceiling",
+      "action": "archify",
+      "call": "guidedViews.activate",
+      "args": [
+        "the-ceiling"
+      ],
+      "expectState": {
+        "chapter": "the-ceiling",
+        "focus": "resident"
+      },
+      "label": "what actually sets the memory ceiling",
+      "settleMs": 1600
+    },
+    {
+      "id": "cost",
+      "action": "archify",
+      "call": "guidedViews.activate",
+      "args": [
+        "the-cost"
+      ],
+      "expectState": {
+        "chapter": "the-cost",
+        "focus": "emit"
+      },
+      "label": "and all of it again for the next word",
+      "settleMs": 1600
+    },
+    {
+      "id": "whole",
+      "action": "archify",
+      "call": "view.reveal",
+      "args": [
+        [
+          "read_embed",
+          "read_layer",
+          "run_layer",
+          "drop_layer",
+          "emit",
+          "resident"
+        ]
+      ],
+      "expectState": {
+        "paused": "true"
+      },
+      "label": "the shape of the whole thing",
+      "settleMs": 1600
+    }
+  ]
+}

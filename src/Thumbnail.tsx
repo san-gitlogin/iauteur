@@ -112,7 +112,7 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
   logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
-  titleStruck?: string; art?: string; layout?: 'split' | 'stack' | 'hero'; artFade?: number;
+  titleStruck?: string; art?: string; layout?: 'split' | 'stack' | 'hero' | 'mirror'; artFade?: number;
 }> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art, layout, artFade}) => {
   const t = useTheme();
   // STACK puts the art ABOVE the copy, so the copy gets the whole frame width instead of the
@@ -128,6 +128,8 @@ const ThumbInner: React.FC<{
   // earns the click and is set HUGE. One sentence, two weights, so the eye lands on the payoff
   // from across a feed and only then reads the condition that qualifies it.
   const hero = layout === 'hero';
+  // MIRROR — art on the LEFT, copy on the RIGHT. Same split proportions, opposite hand.
+  const mirror = layout === 'mirror';
   const heroLead = String(title ?? '').split(/\[[^\]]+\]/)[0].trim().replace(/[,\s]+$/, '');
   const heroPayoff = (String(title ?? '').match(/\[([^\]]+)\]/) ?? [, ''])[1];
 
@@ -147,14 +149,22 @@ const ThumbInner: React.FC<{
   };
   // room above the logo wall, less the badge, the note, and the gaps between them.
   // A struck word takes its own big line, so the title above it has to give that room up.
-  const budget = (stacked ? 330 : logos?.length ? 530 : 660) - 54 - 28 - (note ? 56 : 0) - (titleStruck ? 210 : 0);
-  const base = stacked ? 96 : titleStruck ? 92 : logos?.length ? 132 : 108;
+  // STACK + LOGO WALL WAS AN UNHANDLED COMBINATION (2026-09-26). The wall is absolutely
+  // positioned at bottom:58 and every other layout reserved a band for it — `stacked` did not,
+  // so on the first stack thumbnail that carried logos the marks were drawn straight through the
+  // title's second line and the note. A field the renderer reads and a layout does not account
+  // for is the same class of defect as a field nothing reads at all: valid spec, clean render,
+  // wrong picture. Both the headline budget and the column's bottom padding now know about it.
+  const wall = (logos?.length ?? 0) > 0;
+  const budget = (stacked ? (wall ? 330 - 150 : 330) : mirror ? 700 : wall ? 530 : 660)
+    - 54 - 28 - (note ? 56 : 0) - (titleStruck ? 210 : 0);
+  const base = mirror ? 118 : stacked ? 96 : titleStruck ? 92 : logos?.length ? 132 : 108;
   // 1584 is calibrated against the 88%-wide column a logo-wall thumbnail gets. A swap
   // block is a second COLUMN and takes real width away, so the same constant let the
   // title wrap to a line more than the fitter predicted and pushed the badge off the top
   // edge — LAW 0o's "never size to a constant", one layer further in. Scale, do not guess.
   // A free picture takes the right half, so the title fits a 50% column.
-  const fitWidth = stacked ? 1500 : replaces ? 1584 * (0.56 / 0.88) : art ? 1584 * (0.5 / 0.88) : 1584;
+  const fitWidth = mirror ? 1150 : stacked ? 1500 : replaces ? 1584 * (0.56 / 0.88) : art ? 1584 * (0.5 / 0.88) : 1584;
   const titleSize =
     [base, base - 10, base - 20, base - 28, base - 36, base - 44].find(
       (size) => wrapAt(Math.max(6, Math.floor(fitWidth / size))) * size * 1.02 <= budget,
@@ -174,7 +184,23 @@ const ThumbInner: React.FC<{
           became a request for public/assets/si:anthropic — a 404 that CANCELS the render, two
           segments into a five-minute cut. A si:/lucide: asset is drawn free here too: the
           glyph itself, at size, with no tile and no shadow box. */}
-      {art && !art.startsWith('img:') ? (
+      {art && !art.startsWith('img:') && hero ? (
+        // HERO + A BRAND MARK (owner, 2026-09-30: "not always BOLD texts on the left and logo on
+        // the right ... iauteur started sticking to an order from top to bottom, which is even
+        // worse"). A 400px mark parked mid-right beside the copy is exactly that template. The
+        // mark is the poster instead: huge, bleeding off the bottom-right corner, tilted, with a
+        // glow made from a blurred COPY of the glyph (never a filter on the mark itself). The
+        // type keeps the upper-left and reads over nothing.
+        <>
+          <div style={{position: 'absolute', right: -300, bottom: -300, transform: 'rotate(-14deg)',
+            opacity: 0.55, filter: 'blur(38px)'}}>
+            <AssetIcon asset={art} size={760} bare />
+          </div>
+          <div style={{position: 'absolute', right: -300, bottom: -300, transform: 'rotate(-14deg)'}}>
+            <AssetIcon asset={art} size={760} bare />
+          </div>
+        </>
+      ) : art && !art.startsWith('img:') ? (
         // A GLYPH IS NOT A PHOTOGRAPH: a brand mark is solid ink edge to edge, so the
         // maxWidth that suits a transparent product render (800) drew a wordmark straight
         // through the headline and the note. Sized to the frame's right third, clear of the
@@ -205,36 +231,44 @@ const ThumbInner: React.FC<{
             ? {position: 'absolute', right: 44, bottom: -8, width: 'auto', height: 'auto',
                maxWidth: 470, maxHeight: 258, opacity: artFade ?? 1, borderRadius: 14,
                transform: 'rotate(-3deg)', boxShadow: '0 26px 80px rgba(0,0,0,0.6)'}
+            : mirror
+            ? {position: 'absolute', left: 64, top: '50%', transform: 'translateY(-50%)',
+               width: 'auto', height: 'auto', maxWidth: 520, maxHeight: '74%', opacity: artFade ?? 1}
             : {position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
                width: 'auto', height: 'auto', maxWidth: 800, maxHeight: '92%', opacity: artFade ?? 1}}
         />
       ) : null}
       {hero ? (
-        <AbsoluteFill style={{padding: '84px 90px 0', flexDirection: 'column', justifyContent: 'flex-start'}}>
+        <AbsoluteFill style={heroPayoff.length > 12
+          ? {padding: '84px 90px 0', flexDirection: 'column', justifyContent: 'flex-start'}
+          // the short-payoff tier is CENTRED: top-aligned it left the bottom third empty
+          : {padding: '0 90px 26px', flexDirection: 'column', justifyContent: 'center'}}>
           <div style={{alignSelf: 'flex-start', background: t.colors.accent2, color: t.colors.onAccent,
-                       fontFamily: t.fonts.mono, fontWeight: 800, fontSize: 30, padding: '9px 24px',
+                       fontFamily: t.fonts.mono, fontWeight: 800, fontSize: heroPayoff.length > 12 ? 30 : 36, padding: '11px 26px',
                        borderRadius: 14 * t.style.cornerRadius, textTransform: 'uppercase',
                        letterSpacing: '0.06em', marginBottom: 26}}>{badge}</div>
           {heroLead ? (
-            <div style={{fontFamily: t.fonts.display, fontWeight: 600, fontSize: 54, lineHeight: 1.05,
+            <div style={{fontFamily: t.fonts.display, fontWeight: 600, fontSize: heroPayoff.length > 12 ? 54 : 72, lineHeight: 1.05,
                          color: t.colors.muted, opacity: 0.95, letterSpacing: '-0.01em',
                          maxWidth: '72%'}}>{heroLead}</div>
           ) : null}
           <div style={{fontFamily: t.fonts.display, fontWeight: t.style.displayWeight,
                        // 2 lines of ~15 characters at this size fills the frame; longer payoffs
                        // step down rather than wrapping into a paragraph.
-                       fontSize: heroPayoff.length > 26 ? 116 : heroPayoff.length > 18 ? 138 : 164,
+                       // A SHORT payoff (<= 12 chars, "Like a Pro") gets a fourth, larger tier: at 164 the block
+                       // ended two thirds of the way down and left a dead band under it (owner, 2026-10-01).
+                       fontSize: heroPayoff.length > 26 ? 116 : heroPayoff.length > 18 ? 138 : heroPayoff.length > 12 ? 164 : 190,
                        lineHeight: 0.96, color: t.colors.text, letterSpacing: '-0.035em',
-                       maxWidth: '78%', marginTop: 10,
+                       maxWidth: heroPayoff.length > 12 ? '78%' : '100%', whiteSpace: heroPayoff.length > 12 ? 'normal' : 'nowrap', marginTop: 10,
                        textShadow: t.style.glow > 0
                          ? `0 10px 46px rgba(0,0,0,0.65), 0 0 56px ${t.colors.glowSoft}`
                          : '0 8px 30px rgba(0,0,0,0.3)'}}>{heroPayoff}</div>
           {note ? (
-            <div style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 24}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 14, marginTop: 34}}>
               <div style={{width: 34, height: 3, borderRadius: 2, background: t.colors.accent2}} />
-              <div style={{fontFamily: t.fonts.mono, fontWeight: 700, fontSize: 28,
+              <div style={{fontFamily: t.fonts.mono, fontWeight: 700, fontSize: heroPayoff.length > 12 ? 28 : 36,
                            letterSpacing: '0.16em', textTransform: 'uppercase',
-                           color: t.colors.accent2, maxWidth: 630, whiteSpace: 'nowrap'}}>{note}</div>
+                           color: t.colors.accent2, maxWidth: 760, whiteSpace: 'nowrap'}}>{note}</div>
             </div>
           ) : null}
         </AbsoluteFill>
@@ -247,7 +281,8 @@ const ThumbInner: React.FC<{
           // With no wall the row centres on the frame itself, which is what a short
           // stack wants (owner, 2026-08-22: *"vertically align to the center of the
           // thumb overall"*) — the lifted version left the badge against the top edge.
-          padding: stacked ? '386px 90px 0' : logos?.length ? '0 90px 190px' : '0 90px',
+          padding: stacked ? (wall ? '300px 90px 210px' : '386px 90px 0')
+            : mirror ? '0 80px 0 660px' : wall ? '0 90px 190px' : '0 90px',
           alignItems: stacked ? 'flex-start' : 'center',
         }}
       >
@@ -255,7 +290,7 @@ const ThumbInner: React.FC<{
             yield real width to it. Without this the left column kept the 88% it takes
             when a logo wall is present and the swap ran straight off the right edge. */}
         <div style={{display: 'flex', flexDirection: 'column', gap: 28,
-                     maxWidth: stacked ? '94%' : replaces ? '56%' : art ? '50%' : logos?.length ? '88%' : '62%'}}>
+                     maxWidth: stacked ? '94%' : mirror ? '100%' : replaces ? '56%' : art ? '50%' : logos?.length ? '88%' : '62%'}}>
           <div
             style={{
               alignSelf: 'flex-start',
@@ -321,7 +356,7 @@ const ThumbInner: React.FC<{
             ) : null}
           </div>
         </div>
-        {replaces ? <ReplacesBlock r={replaces} /> : logos?.length || art ? null : <AssetIcon asset={asset} size={300} />}
+        {replaces ? <ReplacesBlock r={replaces} /> : wall || art ? null : <AssetIcon asset={asset} size={300} />}
       </AbsoluteFill>
       )}
       {/* THE LOGO WALL. Bare glyphs on the background itself — no chip, no card, no

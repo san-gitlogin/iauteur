@@ -70,7 +70,12 @@ Deep links do the same thing declaratively, which is the cheapest way to open on
 `?theme=dark&present=1&play=1#view=happy-path` · `#route=web~db` · `#lens=backend~database` ·
 `#focus=router&reach=downstream`
 
-`present=1` hides the authoring chrome. Always use it — we are filming the map, not the toolbar.
+**`present=1` is NOT enough — add `embed=1`.** Measured on the AirLLM lifecycle artifact
+(2026-09-26): with `?theme=dark&present=1` the toolbar (Dark / Classic / Still / Exit / Export)
+is still along the top of the frame, because present mode REFLOWS the page rather than hiding its
+chrome — `.toolbar` reports `visible: true`. `embed=1` sets `data-embed` and drops the toolbar,
+the header and the guided-views rail, leaving the diagram alone. Film with
+`?theme=dark&present=1&embed=1`, and check a frame rather than trusting either flag.
 
 ## 4. THE SYNC RULE — why this is safe to use at all
 
@@ -132,7 +137,8 @@ That is correct: it keeps drawn teaching in the cut alongside it.
 
 ## 7. Paid-for gotchas
 
-- **`present=1` or the toolbar is in your frame.**
+- **`present=1` alone leaves the toolbar in your frame — film with `embed=1` too** (measured
+  2026-09-26; see §3).
 - **A node id is not a label.** `focus.set` takes the id from the source JSON (`api`, `db`), not the
   display name. Probe the artifact for ids before authoring the demo.
 - **An ambiguous search focuses the wrong thing.** Use ids and `expectState`, not text.

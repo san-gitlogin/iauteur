@@ -1,5 +1,72 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-09-30 — "21 ways to save Claude Code tokens" (on the WINDOWS machine) · `TOK_STAGE`, 23 pictures
+
+**SHIPPED (rendered 2026-09-30 12:24 IST): `wide-dark.mp4` 22:38 (40,746 frames EXACT, drift 0 ms, mean -22.7 dB),
+`short-dark.mp4` 48.7s (-22.7 dB), `thumb.png`, `cover.png`, `upload.md`, `upload-shorts.md` — all in
+`C:\iauteur-c	opics\claude-code-21-token-savers\out\` (not on D:). THE REPO NOW LIVES AT `C:\iauteur-c`
+(clean clone of origin + today's work, `git fsck` clean). the original copy's `.git` has corrupt loose objects —
+do not commit there again. Nothing has been pushed. Channel name comes from `.env` (IAUTEUR_CHANNEL) — created on
+C: with THE NBX STUDIO; the specs were built without it at first, so check `brand.channel` on any spec built here.
+**Owner review (2026-09-30): highlights on empty space.** `recWarp.planWarp` held each pause on
+`h.from` — and the recorded change index can still be the OLD picture (tok-mcp: `changes` ended at 33,
+frame 33 blank, the /mcp menu first painted at 34). So the whole hold showed the frame BEFORE the final
+state and every band framed nothing. Fixed repo-wide: hold one frame into the pause. A gate that proves
+the held frame contains the mark's text is still missing — `check-camera` proves the words are spoken,
+not that the picture under the band has arrived.
+Thumbnail: `hero` + an `si:` mark now bleeds the mark off the bottom-right as a poster (owner: stop the
+text-left/logo-right and top-to-bottom templates); title retitled "Claude Code Essentials 2026 …".
+Known limits of this cut: terminal footage in the 9:16 short is small (camera moves can't land on a stretched last
+clip); 13 lint warnings are dwell estimates only.
+
+`topics/claude-code-21-token-savers` tests every move on Charlie Hills' infographic (the image is
+`public/assets/tok-infographic.jpg`, credited on screen) inside a live Claude Code session (Sonnet 5.5, Pro plan)
+and checks each against Anthropic's docs. Plan/facts/builders: `briefs/tokens21/` (PLAN.md, FACTS.md,
+build_long.mjs, build_shorts.mjs, gen-demos.mjs → demos/tok-*.json, take.sh, speed-seg.mjs).
+
+**What the docs say that the infographic doesn't:** thinking can't be turned off on Opus 5.5 / Sonnet 5.5 / Fable
+— filmed: `MAX_THINKING_TOKENS=0` + effort high still thought 2,424 tokens, effort low 1,598. Fast mode is Opus-only
+at 2x and needs usage credits (a one-time reprice when switched on mid-session). `ENABLE_PROMPT_CACHING_1H`: a
+subscription already gets 1h on the main conversation (filmed: 8,632 cache-write tokens, all 1h). The owner said an
+API key was in `.env`; **no .env came across to this machine**, so the API-key half was explained, not run.
+
+**This Windows machine, and what was fixed to make it work:**
+- Node's bundled npm is corrupt (`minimatch/dist/commonjs/unescape.js` is garbage). A clean npm 11.8.0 lives at
+  `~/.local/npm-clean` with `npm`/`npx` (+ `.cmd`) shims in `~/.local/bin`, which is ahead of Node on PATH.
+- `node_modules` copied from the Mac held macOS symlinks as text files; moved to `a backup folder beside the repo`
+  and reinstalled (win32 compositor).
+- **`topics/airllm-on-my-mac/{long,shorts}.json` did not survive the copy** (never committed; the folder held a
+  corrupt `.DS_Store`). The rest of the AirLLM work was committed as found. Recover the two specs from the Mac.
+- `preflight.mjs` ran `npx tsc` via execFileSync, which cannot resolve `npx.cmd` without a shell — now runs tsc
+  through node. Python heredocs on Windows: write JS with `newline=''` and never put `\n` escapes through python
+  strings (two syntax errors came from exactly that).
+
+**Recording Claude Code on camera — new, reusable:**
+- `briefs/tokens21/rec.sh` strips the authoring session's `CLAUDE_*` env and runs takes under a CLEAN config home
+  (`CLAUDE_CONFIG_DIR=<rec-root>/_claude-home`, login copied, seeded by `seed-home.mjs`). The owner's own user
+  skills and claude.ai-synced skills (some personal) would otherwise be listed on camera by `/context`;
+  `skillOverrides: "off"` hides the synced ones. `effortLevel: medium` is pinned because `/effort low` in a take
+  saves itself as the default.
+- Recorder: `agent` step types into a LIVE Claude session (slash commands) and is verified by a needle the TOOL
+  prints — the needle may not appear in the typed text, and success is "count went up" OR "needle after the latest
+  echo" (a repeated /context prints the same text). `waitGone` proves a command that REMOVES things (/clear).
+  `reveal.pageUp` pages xterm scrollback (TUI output scrolls out of the DOM). Browser `prep.hide` hides floating
+  furniture with no dismiss button (the docs' "Ask a question" box).
+- The Claude TUI ready needle on 2.1.28x is `shift+tab to cycle`. A second `/context` in one take never verified
+  reliably — end takes on the command's own result instead.
+- **Waiting footage drags.** `speed-seg.mjs` re-times one segment (original kept as `seg-NN.x1.mp4`) and the clip
+  label must say "N× speed". Used at 2–3x on 12 clips (model thinking 50s, agent runs, long typed commands).
+- The anchor solver stretches a beat's LAST clip across the read when its footage keeps changing, so a camera move
+  on a single-clip or last clip can never be satisfied — adding words only moves the target. Put zooms on
+  earlier clips or in their own beat.
+- Pro plan limits: the authoring session and the takes share one account; the 5-hour window hit 98% mid-session.
+- **DRIVE D: (Seagate ST1000LM049 HDD) CORRUPTS FILES AFTER THEY ARE WRITTEN**, while reporting Healthy. Four
+  recorded segments went bad within an hour of a clean bake (moov atom missing, h264 decode errors, frame counts
+  changing on disk). `public/rec`, `public/audio` and `out/` now live on the SSD at `C:\iauteur-ssd\` behind
+  directory junctions (the originals are kept as `*_hdd_old`). Before any render on this machine: decode every
+  referenced segment (`ffmpeg -v error -i seg.mp4 -f null -`) — `check-recordings` catches a frame-count change,
+  not a decode error. Consider moving the whole repo to C: and running chkdsk on D:.
+
 ## 2026-09-24 — Agent Skills / the Prove-It pattern (28 scenes, 15:44 wide + 50s short)
 
 `topics/agent-skills-prove-it` reviews **addyosmani/agent-skills** (98,799 stars, MIT) and tests it
