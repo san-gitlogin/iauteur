@@ -1,5 +1,25 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-10-03 (evening) — STOPPED: the data drive is corrupting files again
+
+About three hours after the Agent Reach render finished, ~217 files on the data drive were found overwritten with
+identical garbage: 175 under node_modules (including the renderer and tsc), 42 TRACKED files (25 under
+.claude/skills, plus .github, scripts/ai and others) and the local git pack (git fsck: cannot unpack, CRC
+mismatch). **Git does not list the damaged tracked files as modified**, because size and mtime are unchanged.
+Recordings, audio and the rendered videos still verified clean at that point, and the deliverables were copied to
+a safety folder on the system drive with matching checksums. The owner said to stop until the drive is checked.
+
+**Do not work in this clone.** Start from a FRESH clone of origin (everything up to the WIP commit is pushed).
+
+**Owed for the Agent Reach video, not done:**
+- Put a disclaimer board in front of the finished wide cut WITHOUT re-rendering it: render the
+   composition (src/Disclaimer.tsx, ~27s still, red bold title, white semi-bold body), give it a
+  silent AAC 48 kHz stereo track and the cut's 1/90000 video timebase, then . Shift every
+  chapter stamp in upload.md by the board's length and add .
+- New thumbnail copy (owner: "I tested it" does not work; say what it does, then the library name, then
+  "Live Demo!"). The WIP commit sets , note , and a new  field
+  drawn bottom-left in the hero layout. **None of this has been typechecked or rendered.**
+
 ## 2026-10-03 — Agent Reach, hands-on (35 scenes, 17:24 wide + 55s short) · RENDERED · `AR_STAGE`, 11 pictures
 
 `topics/agent-reach-hands-on` installs Agent Reach (github.com/Panniantong/Agent-Reach, MIT, Chinese README and
