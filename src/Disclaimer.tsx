@@ -27,7 +27,7 @@ const Inner: React.FC<{text: string; logo?: string}> = ({text, logo}) => {
       <div style={{width: 1480, boxSizing: 'border-box', padding: '64px 84px 70px',
         borderRadius: 26 * t.style.cornerRadius, background: hexA(red, 0.06),
         border: `3px solid ${hexA(red, 0.85)}`, boxShadow: `0 0 90px ${hexA(red, 0.16)}`}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: 26, marginBottom: 34}}>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 26, marginBottom: 34}}>
           <div style={{width: 64, height: 64, borderRadius: '50%', border: `5px solid ${red}`, color: red,
             display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: t.fonts.display,
             fontWeight: 800, fontSize: 44, lineHeight: 1}}>!</div>
@@ -35,8 +35,10 @@ const Inner: React.FC<{text: string; logo?: string}> = ({text, logo}) => {
             letterSpacing: '0.06em', textTransform: 'uppercase', color: red}}>Disclaimer</div>
         </div>
         <div style={{height: 3, background: hexA(red, 0.5), marginBottom: 38}} />
-        <div style={{fontFamily: t.fonts.body, fontWeight: 600, fontSize: 40, lineHeight: 1.5,
-          color: t.colors.text}}>{text}</div>
+        {/* CENTRED AND BALANCED (owner, 2026-10-03: the left-aligned block read as ugly). `textWrap: balance`
+            evens the line lengths, so the centred paragraph has no stub last line. */}
+        <div style={{fontFamily: t.fonts.body, fontWeight: 600, fontSize: 40, lineHeight: 1.5, textAlign: 'center',
+          textWrap: 'balance' as any, color: t.colors.text}}>{text}</div>
       </div>
       {logo ? (
         <Img src={staticFile('assets/' + logo.replace(/^img:/, ''))}
@@ -52,6 +54,6 @@ export const Disclaimer: React.FC<{themeName: string; text?: string; logo?: stri
   </ThemeProvider>
 );
 
-/** ~3 words a second is a comfortable silent read; a second on either side to arrive and leave. */
-export const disclaimerFrames = (text: string = DISCLAIMER_TEXT, fps = 30) =>
-  Math.round((text.trim().split(/\s+/).length / 3 + 2) * fps);
+/** FIVE SECONDS (owner, 2026-10-03: 26s, a full silent read, was far too long for an opening). A notice
+ *  board is shown, not read aloud; the viewer who wants every word pauses. */
+export const disclaimerFrames = (fps = 30) => 5 * fps;
