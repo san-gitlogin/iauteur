@@ -78,9 +78,9 @@ export const Crate: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const v = useV(accent);
   const frame = useCurrentFrame();
   const gate = one(items, 'gate'), old = one(items, 'old'), err = one(items, 'err'), neu = one(items, 'new'), ok = one(items, 'ok');
-  const S = Math.min(h * 0.4, w * 0.2);
-  const beltY = h * 0.66;
-  const gd = Math.min(h * 0.34, w * 0.16);
+  const S = v.vertical ? w * 0.34 : Math.min(h * 0.4, w * 0.2);
+  const beltY = h * (v.vertical ? 0.6 : 0.66);
+  const gd = v.vertical ? w * 0.26 : Math.min(h * 0.34, w * 0.16);
   const gx = w - gd / 2 - w * 0.02;
   const red = v.sem('red'), green = v.sem('green');
   const baseOn = arriveAt(frame, BASE(old?.atWord));
@@ -106,7 +106,7 @@ export const Crate: React.FC<ArVizProps> = ({items, accent, w, h}) => {
       <At x={0} y={beltY} w={gx - gd / 2} h={Math.max(3, v.s(6))} style={{opacity: baseOn, borderRadius: v.s(3),
         background: `repeating-linear-gradient(90deg, ${hexA(v.t.colors.muted, 0.6)} 0 ${v.s(18)}px, ${hexA(v.t.colors.muted, 0.2)} ${v.s(18)}px ${v.s(36)}px)`}} />
       <At x={gx} y={beltY - gd * 0.4} center><Medal v={v} icon={gate?.icon} d={gd} color={through > 0.9 ? green : v.t.colors.muted} lit={0.45 + 0.55 * through} on={baseOn} /></At>
-      <At x={gx - gd * 0.7} y={beltY + v.s(18)} w={gd * 1.4} style={{opacity: baseOn}}><Cap v={v} title={gate?.label} size={v.vertical ? 30 : 32} /></At>
+      <At x={gx - gd * 0.7} y={beltY + v.s(18)} w={gd * 1.4} style={{opacity: baseOn}}><Cap v={v} title={gate?.label} size={v.vertical ? 40 : 32} /></At>
       {/* the packaged release: arrives, is stamped, falls off the belt */}
       <At x={lerp(-S, midX - S / 2, inOld)} y={beltY - S + fall * h * 0.3} style={{opacity: (inOld > 0 ? 1 : 0) * (1 - fall * 0.75),
         transform: `rotate(${fall * 16}deg)`}}>
@@ -121,8 +121,8 @@ export const Crate: React.FC<ArVizProps> = ({items, accent, w, h}) => {
         {crate(neu?.label, neu?.sub, through > 0.5 ? green : v.a)}
       </At>
       {ok ? (
-        <At x={w * 0.04} y={h * 0.04} w={w * 0.7}>
-          <Cap v={v} title={ok.label} sub={ok.sub} align="left" size={v.vertical ? 32 : 32} color={green} on={clamp01(landAt(frame, F(ok.atWord) + 18))} />
+        <At x={w * 0.04} y={v.vertical ? beltY - S - h * 0.16 : h * 0.04} w={w * (v.vertical ? 0.92 : 0.7)}>
+          <Cap v={v} title={ok.label} sub={ok.sub} align="left" size={v.vertical ? 48 : 32} color={green} on={clamp01(landAt(frame, F(ok.atWord) + 18))} />
         </At>
       ) : null}
     </div>

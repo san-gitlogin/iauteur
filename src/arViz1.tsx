@@ -278,8 +278,8 @@ export const Key: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const robot = one(items, 'robot'), door = one(items, 'door'), browser = one(items, 'browser');
   const cli = one(items, 'cli'), pass = one(items, 'pass');
   const keys = pick(items, 'key');
-  const d = Math.min(h * 0.24, w * 0.12);
-  const y1 = h * 0.25, y2 = h * 0.74;
+  const d = v.vertical ? Math.min(h * 0.16, w * 0.2) : Math.min(h * 0.24, w * 0.12);
+  const y1 = h * (v.vertical ? 0.3 : 0.25), y2 = h * (v.vertical ? 0.66 : 0.74);
   const xL = d / 2 + w * 0.01, xD = w - d / 2 - w * 0.01, xC = w * 0.52;
   const red = v.sem('red'), green = v.sem('green');
   const baseOn = arriveAt(frame, BASE(robot?.atWord));
@@ -289,7 +289,7 @@ export const Key: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const blocked = landAt(frame, F(robot?.atWord) + 26);
   const cliLit = keys.length ? clamp01(arriveAt(frame, F(keys[keys.length - 1].atWord) + 18, 10)) : 1;
   const go = travelAt(frame, F(pass?.atWord), 22);
-  const fs = v.vertical ? 30 : 32;
+  const fs = v.vertical ? 42 : 32;
   return (
     <div style={{position: 'absolute', inset: 0}}>
       <Svg w={w} h={h}>
@@ -323,7 +323,8 @@ export const Key: React.FC<ArVizProps> = ({items, accent, w, h}) => {
         );
       })}
       {pass ? (
-        <At x={xC + d * 0.7} y={y2 - d * 0.5 - v.s(10)} w={xD - xC - d * 1.2} style={{transform: 'translateY(-100%)'}}>
+        <At x={v.vertical ? 0 : xC + d * 0.7} y={v.vertical ? y2 + d * 0.5 + v.s(120) : y2 - d * 0.5 - v.s(10)}
+          w={v.vertical ? w : xD - xC - d * 1.2} style={{transform: v.vertical ? undefined : 'translateY(-100%)'}}>
           <Cap v={v} title={pass.label} sub={pass.sub} size={fs} color={green} on={clamp01(landAt(frame, F(pass.atWord) + 14))} />
         </At>
       ) : null}

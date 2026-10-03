@@ -32,8 +32,9 @@ const N0 = "Here is Agent Reach on GitHub. Eighty-nine thousand stars, free, and
 c.add('RECORDED_STEP', 'push', 'zoneB', N0,
   (A) => ({
     sourceNote: 'github.com/Panniantong/Agent-Reach · MIT licence',
-    clips: [{ref: 'rec:ar-repo#top', label: 'the official repo', focus: false, atWord: A(0.02), wantAtWord: A(0.02), zooms: [],
-      callouts: [{text: '89 thousand stars', mark: 'stars', side: 'left', color: 'yellow', wantAtWord: wordIndex(N0, 'Eighty-nine thousand')}]}],
+    clips: [{ref: 'rec:ar-repo#top', label: 'the official repo', focus: false, atWord: A(0.02), wantAtWord: A(0.02),
+      zooms: [{marks: ['desc', 'stars'], wantAtWord: wordIndex(N0, 'on GitHub.')}],
+      callouts: []}],
   }));
 
 ar('fade', 'zoneA',
@@ -41,7 +42,7 @@ ar('fade', 'zoneA',
   "there's no are-you-human check at all.",
   {kind: 'key', color: 'blue', stageTitle: 'no robot check',
    stage: [
-     {group: 'robot', label: 'a robot browser', sub: 'Are you a robot?', icon: 'lucide:bot', at: 'For X, a'},
+     {group: 'robot', label: 'a robot browser', sub: 'Are you a robot?', icon: 'lucide:bot', at: 'not a robot,'},
      {group: 'door', label: 'X', icon: 'si:x', at: 'For X, a'},
      {group: 'browser', label: 'your browser', sub: 'logged in', icon: 'si:googlechrome', at: 'your own browser,'},
      {group: 'key', label: 'your cookie', at: 'the login cookie'},
@@ -53,7 +54,8 @@ const N1 = "So I installed the X tool and ran my first search. The search failed
   "not found.";
 c.add('RECORDED_STEP', 'fade', 'zoneB', N1,
   (A) => ({
-    clips: [{ref: 'rec:ar-x#fail', label: 'the first search · 2×', focus: false, atWord: A(0.02), wantAtWord: A(0.02), zooms: [], callouts: []}],
+    clips: [{ref: 'rec:ar-x#fail', label: 'the first search · 2×', focus: false, atWord: A(0.02), wantAtWord: A(0.02),
+      zooms: [{marks: ['__cmd', 'err'], wantAtWord: wordIndex(N1, 'The search failed.')}], callouts: []}],
   }));
 
 ar('slide', 'zoneA',
@@ -63,15 +65,16 @@ ar('slide', 'zoneA',
      {group: 'gate', label: 'X', icon: 'si:x', at: 'The packaged release'},
      {group: 'old', label: 'PyPI', sub: 'v0.8.5', at: 'The packaged release'},
      {group: 'err', label: '404', at: 'was behind,'},
-     {group: 'new', label: 'GitHub', sub: 'v0.8.6', at: 'the fix was'},
-     {group: 'ok', label: 'the source build works', at: 'source code on'},
+     {group: 'new', label: 'source', sub: 'v0.8.6', at: 'already sitting in'},
+     {group: 'ok', label: 'the source build works', at: "tool's source code"},
    ]});
 
-const N2 = "Installed from its GitHub source, the same search works: three posts, with their likes and views. No " +
-  "browser, and no paid API.";
+const N2 = "Installed from its GitHub source, the same search works: three posts from Claude's official account, " +
+  "each with its likes and views. No browser, and no paid API.";
 c.add('RECORDED_STEP', 'fade', 'zoneB', N2,
   (A) => ({
-    clips: [{ref: 'rec:ar-x#search', label: 'the same search · 2×', focus: false, atWord: A(0.02), wantAtWord: A(0.02), zooms: [], callouts: []}],
+    clips: [{ref: 'rec:ar-x#search', label: 'the same search · 2×', focus: false, atWord: A(0.02), wantAtWord: A(0.02),
+      zooms: [{marks: ['__cmd', 'ok'], wantAtWord: wordIndex(N2, 'the same search works:')}], callouts: []}],
   }));
 
 c.add('OUTRO_CTA', 'dip', 'zoneA',

@@ -83,17 +83,17 @@
               "focus": false,
               "atWord": 3.25,
               "wantAtWord": 1,
-              "zooms": [],
-              "callouts": [
+              "zooms": [
                 {
-                  "text": "89 thousand stars",
-                  "mark": "stars",
-                  "side": "left",
-                  "color": "yellow",
-                  "wantAtWord": 5.333,
+                  "marks": [
+                    "desc",
+                    "stars"
+                  ],
+                  "wantAtWord": 3.25,
                   "atWord": 6.417
                 }
               ],
+              "callouts": [],
               "id": "top",
               "src": "rec/ar-repo/seg-01.mp4",
               "frames": 36,
@@ -435,7 +435,12 @@
                 }
               ],
               "changes": [
-                0
+                0,
+                6,
+                12,
+                18,
+                24,
+                30
               ],
               "shows": "About"
             }
@@ -468,7 +473,7 @@
               "label": "a robot browser",
               "sub": "Are you a robot?",
               "icon": "lucide:bot",
-              "atWord": 1
+              "atWord": 13.5
             },
             {
               "group": "door",
@@ -521,7 +526,16 @@
               "focus": false,
               "atWord": 2,
               "wantAtWord": 1,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "__cmd",
+                    "err"
+                  ],
+                  "wantAtWord": 8.667,
+                  "atWord": 14
+                }
+              ],
               "callouts": [],
               "id": "fail",
               "src": "rec/ar-x/seg-02.mp4",
@@ -641,14 +655,14 @@
             },
             {
               "group": "new",
-              "label": "GitHub",
+              "label": "source",
               "sub": "v0.8.6",
-              "atWord": 5.417
+              "atWord": 6.833
             },
             {
               "group": "ok",
               "label": "the source build works",
-              "atWord": 9.75
+              "atWord": 8.833
             }
           ]
         }
@@ -662,7 +676,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Installed from its GitHub source, the same search works: three posts, with their likes and views. No browser, and no paid API.",
+      "narration": "Installed from its GitHub source, the same search works: three posts from Claude's official account, each with its likes and views. No browser, and no paid API.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -672,7 +686,16 @@
               "focus": false,
               "atWord": 3,
               "wantAtWord": 1,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "__cmd",
+                    "ok"
+                  ],
+                  "wantAtWord": 4.667,
+                  "atWord": 15.333
+                }
+              ],
               "callouts": [],
               "id": "search",
               "src": "rec/ar-x/seg-04.mp4",
@@ -781,10 +804,10 @@
             "width": 1600,
             "height": 900
           },
-          "atWord": 1.5
+          "atWord": 1.417
         }
       },
-      "durationFrames": 290,
+      "durationFrames": 328,
       "audio": "audio/agent-reach-hands-on_short_s06.mp3",
       "timingSource": "tts"
     },
