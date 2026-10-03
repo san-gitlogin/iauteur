@@ -21,9 +21,10 @@ const SPEED = {
   'ar-x': {search: 2, fail: 2, fix: 4, posts: 2},
   'ar-reddit': {search: 2},
   'ar-translate': {zh: 2, translated: 2},
-  'ar-install': {pip: 12, check: 2},
+  'ar-install': {pip: 12, check: 2, doctor: 2},
   'ar-read': {web: 2, ytsearch: 3, subs: 3, read: 3, rss: 3, gh: 2},
-  'ar-agent': {install: 4},
+  'ar-exa': {search: 3},
+  'ar-agent': {install: 8},
   'ar-agent2': {ask: 6},
 };
 const ALL = ['ar-repo', 'ar-readme', 'ar-install', 'ar-read', 'ar-x', 'ar-reddit', 'ar-exa', 'ar-agent', 'ar-agent2', 'ar-translate'];
@@ -39,6 +40,36 @@ for (const slug of ALL) {
     if (!st.segmentFrames) continue;
     st.changes = Array.from({length: Math.ceil(st.segmentFrames / 6)}, (_, i) => i * 6);
   }
+  fs.writeFileSync(f, JSON.stringify(m, null, 2));
+}
+// MEASURED MARKS on the agent's finished answer (ar-agent2#ask). An interactive agent take cannot be given
+// text marks in advance, because nobody knows what the answer will say. These two rectangles were read off
+// this take's last frame (1600x900 capture): the line where Claude names a tool per platform, and the block
+// of the answer itself. `covers` is the text under each, copied from the take's own screen text.
+{
+  const f = 'public/rec/ar-agent2/manifest.json';
+  const m = JSON.parse(fs.readFileSync(f, 'utf8'));
+  const st = m.steps.find((x) => x.id === 'ask');
+  const rows = String(st.screenText ?? '').split('\n');
+  const plan = rows.find((r) => /agent-reach: X via/.test(r)) ?? '';
+  const i = rows.findIndex((r) => r.trim() === 'X'), j = rows.findIndex((r) => /^\${3}$/.test(r.trim()));
+  if (!plan || i < 0 || j < 0) throw new Error('ar-agent2: the answer is not where the measured marks expect it; re-measure');
+  const R = (x, y, w, h, covers) => ({x, y, w, h, covers, block: {x, y, w, h}});
+  st.marks = {...(st.marks ?? {}),
+    plan: R(90, 279, 970, 22, plan.replace(/^[^A-Za-z]+/, '').trim()),
+    answer: R(88, 316, 1500, 372, rows.slice(i, j).join(' ').replace(/\s+/g, ' ').trim().slice(0, 600))};
+  fs.writeFileSync(f, JSON.stringify(m, null, 2));
+}
+// The same for the install take (ar-agent#install): the line where Claude reports Agent Reach is already on
+// the machine, read off the take's last frame.
+{
+  const f = 'public/rec/ar-agent/manifest.json';
+  const m = JSON.parse(fs.readFileSync(f, 'utf8'));
+  const st = m.steps.find((x) => x.id === 'install');
+  const row = String(st.screenText ?? '').split('\n').find((r) => /already (seems to be|installed)/.test(r));
+  if (!row) throw new Error('ar-agent: the "already installed" line is not on the last frame; re-measure');
+  const R = (x, y, w, h, covers) => ({x, y, w, h, covers, block: {x, y, w, h}});
+  st.marks = {...(st.marks ?? {}), found: R(100, 430, 1440, 24, row.replace(/^[^A-Za-z]+/, '').trim().slice(0, 200))};
   fs.writeFileSync(f, JSON.stringify(m, null, 2));
 }
 console.log(`straightened ${ALL.length} takes`);

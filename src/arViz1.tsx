@@ -156,7 +156,8 @@ export const Layer: React.FC<ArVizProps> = ({items, accent, w, h}) => {
         const on = arriveAt(frame, BASE(agent?.atWord) + stagger(i, 4));
         return (
           <React.Fragment key={i}>
-            <At x={tx(i)} y={toolY} center><Medal v={v} icon={t.icon} d={td} color={go > 0.9 ? v.sem('green') : v.t.colors.muted} lit={0.4 + 0.6 * go} on={on} /></At>
+            <At x={tx(i)} y={toolY} center><Medal v={v} icon={t.icon} d={td} color={go > 0.9 ? v.sem('green') : v.t.colors.muted}
+              lit={0.3 + 0.7 * Math.max(go, clamp01(arriveAt(frame, F(t.atWord))))} on={on} /></At>
             <At x={tx(i) - w * 0.09} y={toolY + td / 2 + v.s(6)} w={w * 0.18} style={{opacity: on}}>
               <Cap v={v} title={t.label} size={fs * 0.8} mono />
             </At>

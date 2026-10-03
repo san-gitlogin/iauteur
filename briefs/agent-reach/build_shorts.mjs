@@ -27,12 +27,12 @@ c.add('HOOK', 'dip', 'zoneA',
     atWord: A(0.5),
   }));
 
-const N0 = "This is Agent Reach on GitHub. Eighty-nine thousand stars, free, and it sets up the tools an AI agent needs " +
+const N0 = "Here is Agent Reach on GitHub. Eighty-nine thousand stars, free, and it sets up the tools an AI agent needs " +
   "to read sites like X.";
 c.add('RECORDED_STEP', 'push', 'zoneB', N0,
   (A) => ({
     sourceNote: 'github.com/Panniantong/Agent-Reach · MIT licence',
-    clips: [{ref: 'rec:ar-repo#top', label: 'the official repo', focus: false, atWord: A(0.02), zooms: [],
+    clips: [{ref: 'rec:ar-repo#top', label: 'the official repo', focus: false, atWord: A(0.02), wantAtWord: A(0.02), zooms: [],
       callouts: [{text: '89 thousand stars', mark: 'stars', side: 'left', color: 'yellow', wantAtWord: wordIndex(N0, 'Eighty-nine thousand')}]}],
   }));
 
@@ -49,11 +49,11 @@ ar('fade', 'zoneA',
      {group: 'pass', label: 'let through as you', at: 'so X sees you,'},
    ]});
 
-const N1 = "So I searched. Four-oh-four. Not found.";
+const N1 = "So I installed the X tool and ran my first search. The search failed. X answered with a four-oh-four, which means " +
+  "not found.";
 c.add('RECORDED_STEP', 'fade', 'zoneB', N1,
   (A) => ({
-    clips: [{ref: 'rec:ar-x#fail', label: 'the first search', focus: false, atWord: A(0.02), zooms: [],
-      callouts: [{text: 'X refused the request', mark: 'err', side: 'bottom', color: 'red', wantAtWord: wordIndex(N1, 'Four-oh-four.')}]}],
+    clips: [{ref: 'rec:ar-x#fail', label: 'the first search · 2×', focus: false, atWord: A(0.02), wantAtWord: A(0.02), zooms: [], callouts: []}],
   }));
 
 ar('slide', 'zoneA',
@@ -67,11 +67,11 @@ ar('slide', 'zoneA',
      {group: 'ok', label: 'the source build works', at: 'source code on'},
    ]});
 
-const N2 = "From source, it works. Three posts, likes and views, no browser and no paid API.";
+const N2 = "Installed from its GitHub source, the same search works: three posts, with their likes and views. No " +
+  "browser, and no paid API.";
 c.add('RECORDED_STEP', 'fade', 'zoneB', N2,
   (A) => ({
-    clips: [{ref: 'rec:ar-x#search', label: 'the same search again', focus: false, atWord: A(0.02), zooms: [],
-      callouts: [{text: 'it works now', mark: 'ok', side: 'bottom', color: 'green', wantAtWord: wordIndex(N2, 'it works.')}]}],
+    clips: [{ref: 'rec:ar-x#search', label: 'the same search · 2×', focus: false, atWord: A(0.02), wantAtWord: A(0.02), zooms: [], callouts: []}],
   }));
 
 c.add('OUTRO_CTA', 'dip', 'zoneA',

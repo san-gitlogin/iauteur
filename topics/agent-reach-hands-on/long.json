@@ -96,7 +96,16 @@
               "focus": true,
               "atWord": 2.583,
               "wantAtWord": 1,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "__cmd",
+                    "stats"
+                  ],
+                  "wantAtWord": 7.417,
+                  "atWord": 13.25
+                }
+              ],
               "callouts": [],
               "id": "search",
               "src": "rec/ar-x/seg-04.mp4",
@@ -206,7 +215,16 @@
               "focus": true,
               "atWord": 22.583,
               "wantAtWord": 22.583,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "__cmd",
+                    "more"
+                  ],
+                  "wantAtWord": 29.417,
+                  "atWord": 31.167
+                }
+              ],
               "callouts": [],
               "id": "search",
               "src": "rec/ar-reddit/seg-01.mp4",
@@ -335,27 +353,27 @@
               "zooms": [
                 {
                   "marks": [
-                    "desc"
+                    "desc",
+                    "stars"
                   ],
-                  "band": true,
-                  "wantAtWord": 20,
-                  "atWord": 20
+                  "wantAtWord": 18.083,
+                  "atWord": 18.083
                 },
                 {
                   "marks": [
+                    "desc",
                     "license"
                   ],
-                  "band": true,
                   "wantAtWord": 64,
                   "atWord": 64
                 },
                 {
                   "marks": [
+                    "desc",
                     "stars"
                   ],
-                  "band": true,
                   "wantAtWord": 74.5,
-                  "atWord": 74.5
+                  "atWord": 69.917
                 }
               ],
               "callouts": [
@@ -381,7 +399,7 @@
                   "side": "left",
                   "color": "yellow",
                   "wantAtWord": 82.417,
-                  "atWord": 82.417
+                  "atWord": 70.083
                 }
               ],
               "id": "top",
@@ -733,6 +751,357 @@
                 30
               ],
               "shows": "About"
+            },
+            {
+              "ref": "rec:ar-repo#zh",
+              "label": "down to the README",
+              "focus": false,
+              "atWord": 70.083,
+              "wantAtWord": 70.083,
+              "zooms": [],
+              "callouts": [],
+              "id": "zh",
+              "src": "rec/ar-repo/seg-02.mp4",
+              "frames": 72,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "tagline": {
+                  "x": 512,
+                  "y": 252,
+                  "w": 265,
+                  "h": 21,
+                  "covers": "给你的 AI Agent 一键装上互联网能力",
+                  "block": {
+                    "x": 512,
+                    "y": 252,
+                    "w": 265,
+                    "h": 21
+                  }
+                },
+                "english": {
+                  "x": 521,
+                  "y": 458,
+                  "w": 50,
+                  "h": 21,
+                  "covers": "English",
+                  "block": {
+                    "x": 445,
+                    "y": 458,
+                    "w": 399,
+                    "h": 21
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 570,
+                  "y": 17,
+                  "w": 256,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 17,
+                  "w": 90,
+                  "h": 18
+                },
+                {
+                  "x": 209,
+                  "y": 18,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1136,
+                  "y": 38,
+                  "w": 92,
+                  "h": 147
+                },
+                {
+                  "x": 1216,
+                  "y": 41,
+                  "w": 36,
+                  "h": 104
+                },
+                {
+                  "x": 570,
+                  "y": 58,
+                  "w": 305,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 58,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 209,
+                  "y": 59,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1256,
+                  "y": 73,
+                  "w": 32,
+                  "h": 72
+                },
+                {
+                  "x": 1296,
+                  "y": 73,
+                  "w": 32,
+                  "h": 72
+                },
+                {
+                  "x": 1336,
+                  "y": 73,
+                  "w": 32,
+                  "h": 72
+                },
+                {
+                  "x": 338,
+                  "y": 119,
+                  "w": 78,
+                  "h": 18
+                },
+                {
+                  "x": 467,
+                  "y": 119,
+                  "w": 69,
+                  "h": 18
+                },
+                {
+                  "x": 233,
+                  "y": 119,
+                  "w": 56,
+                  "h": 18
+                },
+                {
+                  "x": 586,
+                  "y": 119,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 193,
+                  "y": 120,
+                  "w": 290,
+                  "h": 42
+                },
+                {
+                  "x": 209,
+                  "y": 120,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 313,
+                  "y": 120,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 561,
+                  "y": 120,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 1063,
+                  "y": 120,
+                  "w": 16,
+                  "h": 16
+                },
+                {
+                  "x": 526,
+                  "y": 183,
+                  "w": 236,
+                  "h": 43
+                },
+                {
+                  "x": 1136,
+                  "y": 200,
+                  "w": 92,
+                  "h": 16
+                },
+                {
+                  "x": 512,
+                  "y": 252,
+                  "w": 265,
+                  "h": 21
+                },
+                {
+                  "x": 1136,
+                  "y": 252,
+                  "w": 78,
+                  "h": 21
+                },
+                {
+                  "x": 356,
+                  "y": 292,
+                  "w": 576,
+                  "h": 94
+                },
+                {
+                  "x": 1152,
+                  "y": 307,
+                  "w": 39,
+                  "h": 37
+                },
+                {
+                  "x": 1189,
+                  "y": 307,
+                  "w": 28,
+                  "h": 37
+                },
+                {
+                  "x": 1255,
+                  "y": 307,
+                  "w": 26,
+                  "h": 16
+                },
+                {
+                  "x": 574,
+                  "y": 407,
+                  "w": 153,
+                  "h": 28
+                },
+                {
+                  "x": 445,
+                  "y": 407,
+                  "w": 124,
+                  "h": 28
+                },
+                {
+                  "x": 731,
+                  "y": 407,
+                  "w": 112,
+                  "h": 28
+                },
+                {
+                  "x": 445,
+                  "y": 458,
+                  "w": 64,
+                  "h": 21
+                },
+                {
+                  "x": 704,
+                  "y": 458,
+                  "w": 64,
+                  "h": 21
+                },
+                {
+                  "x": 780,
+                  "y": 458,
+                  "w": 64,
+                  "h": 21
+                },
+                {
+                  "x": 521,
+                  "y": 458,
+                  "w": 50,
+                  "h": 21
+                },
+                {
+                  "x": 583,
+                  "y": 458,
+                  "w": 48,
+                  "h": 21
+                },
+                {
+                  "x": 643,
+                  "y": 458,
+                  "w": 48,
+                  "h": 21
+                },
+                {
+                  "x": 225,
+                  "y": 529,
+                  "w": 105,
+                  "h": 32
+                },
+                {
+                  "x": 245,
+                  "y": 585,
+                  "w": 112,
+                  "h": 21
+                },
+                {
+                  "x": 238,
+                  "y": 625,
+                  "w": 64,
+                  "h": 21
+                },
+                {
+                  "x": 419,
+                  "y": 656,
+                  "w": 628,
+                  "h": 117
+                },
+                {
+                  "x": 419,
+                  "y": 656,
+                  "w": 80,
+                  "h": 21
+                },
+                {
+                  "x": 240,
+                  "y": 698,
+                  "w": 150,
+                  "h": 29
+                },
+                {
+                  "x": 419,
+                  "y": 789,
+                  "w": 629,
+                  "h": 45
+                },
+                {
+                  "x": 240,
+                  "y": 792,
+                  "w": 150,
+                  "h": 35
+                },
+                {
+                  "x": 419,
+                  "y": 850,
+                  "w": 628,
+                  "h": 45
+                },
+                {
+                  "x": 419,
+                  "y": 850,
+                  "w": 67,
+                  "h": 21
+                },
+                {
+                  "x": 240,
+                  "y": 867,
+                  "w": 150,
+                  "h": 30
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66
+              ],
+              "shows": "👁️ Agent Reach"
             }
           ],
           "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence",
@@ -769,7 +1138,7 @@
                   ],
                   "band": true,
                   "wantAtWord": 12.5,
-                  "atWord": 13.583
+                  "atWord": 12.5
                 },
                 {
                   "at": "full",
@@ -780,7 +1149,7 @@
               "callouts": [],
               "id": "zh",
               "src": "rec/ar-translate/seg-01.mp4",
-              "frames": 159,
+              "frames": 98,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -815,7 +1184,26 @@
                   }
                 }
               },
-              "ink": [],
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 3582,
+                  "h": 262
+                },
+                {
+                  "x": 107,
+                  "y": 262,
+                  "w": 2400,
+                  "h": 1754
+                },
+                {
+                  "x": 2579,
+                  "y": 262,
+                  "w": 896,
+                  "h": 504
+                }
+              ],
               "changes": [
                 0,
                 6,
@@ -833,17 +1221,7 @@
                 78,
                 84,
                 90,
-                96,
-                102,
-                108,
-                114,
-                120,
-                126,
-                132,
-                138,
-                144,
-                150,
-                156
+                96
               ],
               "shows": "the README, in Chinese"
             },
@@ -851,8 +1229,8 @@
               "ref": "rec:ar-translate#menu",
               "label": "right-click → Translate",
               "focus": false,
-              "atWord": 26.333,
-              "wantAtWord": 26.333,
+              "atWord": 30.75,
+              "wantAtWord": 30.75,
               "zooms": [],
               "callouts": [
                 {
@@ -861,7 +1239,7 @@
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 32.417,
-                  "atWord": 33.583
+                  "atWord": 39.333
                 }
               ],
               "id": "menu",
@@ -901,7 +1279,26 @@
                   }
                 }
               },
-              "ink": [],
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 3582,
+                  "h": 262
+                },
+                {
+                  "x": 107,
+                  "y": 262,
+                  "w": 2400,
+                  "h": 1754
+                },
+                {
+                  "x": 2579,
+                  "y": 262,
+                  "w": 896,
+                  "h": 504
+                }
+              ],
               "changes": [
                 0,
                 6,
@@ -937,22 +1334,26 @@
                   ],
                   "band": true,
                   "wantAtWord": 47.917,
-                  "atWord": 51.5
-                }
-              ],
-              "callouts": [
+                  "atWord": 51.083
+                },
                 {
-                  "text": "Chrome’s built-in translator",
-                  "mark": "panel",
-                  "side": "left",
-                  "color": "blue",
+                  "marks": [
+                    "panel"
+                  ],
+                  "band": true,
                   "wantAtWord": 62,
                   "atWord": 62
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 71.75,
+                  "atWord": 71.75
                 }
               ],
+              "callouts": [],
               "id": "translated",
               "src": "rec/ar-translate/seg-03.mp4",
-              "frames": 85,
+              "frames": 84,
               "bbox": {
                 "x": 0,
                 "y": 0,
@@ -1000,7 +1401,26 @@
                   }
                 }
               },
-              "ink": [],
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 0,
+                  "w": 3582,
+                  "h": 262
+                },
+                {
+                  "x": 107,
+                  "y": 262,
+                  "w": 2400,
+                  "h": 1754
+                },
+                {
+                  "x": 2579,
+                  "y": 262,
+                  "w": 896,
+                  "h": 504
+                }
+              ],
               "changes": [
                 0,
                 6,
@@ -1015,8 +1435,7 @@
                 60,
                 66,
                 72,
-                78,
-                84
+                78
               ],
               "shows": "the same page, in English"
             }
@@ -1056,7 +1475,7 @@
               "group": "gate",
               "label": "X (Twitter)",
               "icon": "si:x",
-              "sub": "~$215 a month",
+              "sub": "a paid API",
               "atWord": 25.833
             },
             {
@@ -2648,31 +3067,31 @@
               "group": "tool",
               "label": "Jina Reader",
               "icon": "lucide:globe",
-              "atWord": 1
+              "atWord": 72.417
             },
             {
               "group": "tool",
               "label": "yt-dlp",
               "icon": "si:youtube",
-              "atWord": 1
+              "atWord": 78.667
             },
             {
               "group": "tool",
               "label": "gh",
               "icon": "si:github",
-              "atWord": 1
+              "atWord": 81.25
             },
             {
               "group": "tool",
               "label": "twitter-cli",
               "icon": "si:x",
-              "atWord": 1
+              "atWord": 87.833
             },
             {
               "group": "tool",
               "label": "rdt-cli",
               "icon": "si:reddit",
-              "atWord": 1
+              "atWord": 87.833
             },
             {
               "group": "direct",
@@ -2879,7 +3298,7 @@
             },
             {
               "ref": "rec:ar-install#check",
-              "label": "read-only check · 2×",
+              "label": "agent-reach install · 2×",
               "focus": true,
               "atWord": 41.833,
               "wantAtWord": 41.667,
@@ -2891,6 +3310,11 @@
                   "band": true,
                   "wantAtWord": 57.417,
                   "atWord": 57.417
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 67.083,
+                  "atWord": 67.083
                 },
                 {
                   "marks": [
@@ -2907,34 +3331,14 @@
                   "band": true,
                   "wantAtWord": 100.75,
                   "atWord": 100.75
-                }
-              ],
-              "callouts": [
-                {
-                  "text": "looks, installs nothing",
-                  "mark": "safe",
-                  "side": "right",
-                  "color": "green",
-                  "wantAtWord": 62.667,
-                  "atWord": 62.667
                 },
                 {
-                  "text": "nothing was changed",
-                  "mark": "done",
-                  "side": "right",
-                  "color": "green",
-                  "wantAtWord": 87.167,
-                  "atWord": 91.75
-                },
-                {
-                  "text": "a helper for web search — later",
-                  "mark": "mcp",
-                  "side": "right",
-                  "color": "orange",
-                  "wantAtWord": 99.167,
-                  "atWord": 102
+                  "at": "full",
+                  "wantAtWord": 120.5,
+                  "atWord": 108.083
                 }
               ],
+              "callouts": [],
               "id": "check",
               "src": "rec/ar-install/seg-02.mp4",
               "frames": 116,
@@ -3091,14 +3495,14 @@
               "label": "[!] 已装但需配置/登录",
               "sub": "installed — needs setup or login",
               "text": "warn",
-              "atWord": 19.25
+              "atWord": 24.917
             },
             {
               "group": "lamp",
               "label": "[X] 未安装",
               "sub": "not installed",
               "text": "off",
-              "atWord": 32.833
+              "atWord": 37.833
             }
           ]
         }
@@ -3118,18 +3522,18 @@
           "clips": [
             {
               "ref": "rec:ar-install#doctor",
-              "label": "agent-reach doctor",
+              "label": "agent-reach doctor · 2×",
               "focus": true,
               "atWord": 2.167,
               "wantAtWord": 1,
               "zooms": [
                 {
                   "marks": [
-                    "yt"
+                    "__cmd",
+                    "status"
                   ],
-                  "band": true,
-                  "wantAtWord": 14.417,
-                  "atWord": 18.917
+                  "wantAtWord": 4.5,
+                  "atWord": 11.917
                 },
                 {
                   "marks": [
@@ -3147,12 +3551,12 @@
               ],
               "callouts": [
                 {
-                  "text": "the legend: ready · needs setup · not installed",
-                  "mark": "legend",
+                  "text": "YouTube: ready",
+                  "mark": "yt",
                   "side": "right",
-                  "color": "blue",
-                  "wantAtWord": 10.25,
-                  "atWord": 20.417
+                  "color": "green",
+                  "wantAtWord": 14.417,
+                  "atWord": 14.417
                 },
                 {
                   "text": "web search: not installed yet",
@@ -3173,7 +3577,7 @@
               ],
               "id": "doctor",
               "src": "rec/ar-install/seg-03.mp4",
-              "frames": 196,
+              "frames": 100,
               "bbox": {
                 "x": 52,
                 "y": 30,
@@ -3288,23 +3692,7 @@
                 78,
                 84,
                 90,
-                96,
-                102,
-                108,
-                114,
-                120,
-                126,
-                132,
-                138,
-                144,
-                150,
-                156,
-                162,
-                168,
-                174,
-                180,
-                186,
-                192
+                96
               ],
               "shows": "$ agent-reach doctor",
               "said": "PS ar-install> agent-reach doctor\nAgent Reach 状态\n========================================\n图例：✅ 可用 [!] 已装但需配置/登录 [X] 未安装\n✅ 装好即用：\n [!] GitHub 仓库和代码 — gh CLI 可执行，且检测到显式认证配置；Doctor 不执行会写 device-id 的 `gh auth status`，因此未实时验证，未标记为可用。\n ✅ YouTube 视频和字幕 — 可提取视频信息和字幕\n ✅ V2EX 节点、主题与回复 — 公开 API 可用（热门主题、节点浏览、主题详情、用户信息）\n ✅ RSS/Atom 订阅源 — 可读取 RSS/Atom 源\n [X] 全网语义搜索 — 需要 mcporter + Exa MCP。安装：\n npm install -g mcporter\n mcporter config add exa https://mcp.exa.ai/mcp --scope home\n ✅ 任意网页 — 通过 Jina Reader 读取任意网页（curl https://r.jina.ai/URL）\n可选渠道（已安装）：\n ✅ B站视频、字幕和搜索 — B站搜索 API 可达（仅搜索，curl 直连）。完整功能建议安装 bili-cli：pipx install bilibili-cli （当前后端：B站搜索 API）\n状态：5/16 个渠道可用\n还有 9 个可选渠道可以解锁（Twitter/X 推文、Reddit 帖子和评论、Facebook 帖子、主页和群组、Instagram\n用户、主页和指定用户帖子、小红书笔记、小宇宙播客转文字、雪球股票行情与社区动态、LinkedIn 职业社交、Boss直聘 职位搜索与 JD），告诉你的 Agent「帮我装 XXX」即可\nPS ar-install>"
@@ -3411,7 +3799,7 @@
               "label": "Facebook",
               "icon": "si:facebook",
               "text": "off",
-              "sub": "not today",
+              "sub": "skipped",
               "atWord": 44
             },
             {
@@ -3419,7 +3807,7 @@
               "label": "Instagram",
               "icon": "si:instagram",
               "text": "off",
-              "sub": "not today",
+              "sub": "skipped",
               "atWord": 44
             },
             {
@@ -3427,7 +3815,7 @@
               "label": "LinkedIn",
               "icon": "lucide:briefcase",
               "text": "off",
-              "sub": "not today",
+              "sub": "skipped",
               "atWord": 44
             },
             {
@@ -3435,7 +3823,7 @@
               "label": "XiaoHongShu",
               "icon": "si:xiaohongshu",
               "text": "off",
-              "sub": "not today",
+              "sub": "skipped",
               "atWord": 48.417
             },
             {
@@ -3443,7 +3831,7 @@
               "label": "Xueqiu",
               "icon": "lucide:chart-candlestick",
               "text": "off",
-              "sub": "not today",
+              "sub": "skipped",
               "atWord": 48.417
             },
             {
@@ -3451,7 +3839,7 @@
               "label": "Xiaoyuzhou",
               "icon": "lucide:podcast",
               "text": "off",
-              "sub": "not today",
+              "sub": "skipped",
               "atWord": 48.417
             },
             {
@@ -3459,13 +3847,13 @@
               "label": "Boss Zhipin",
               "icon": "lucide:id-card",
               "text": "off",
-              "sub": "not today",
+              "sub": "skipped",
               "atWord": 48.417
             },
             {
               "group": "tally",
               "label": "ready after a fresh install",
-              "atWord": 1
+              "atWord": 7.083
             }
           ]
         }
@@ -3693,19 +4081,18 @@
               "ref": "rec:ar-read#ytsearch",
               "label": "YouTube search · 3×",
               "focus": true,
-              "atWord": 64.5,
-              "wantAtWord": 64.5,
-              "zooms": [],
-              "callouts": [
+              "atWord": 67.417,
+              "wantAtWord": 67.417,
+              "zooms": [
                 {
-                  "text": "channel  |  title",
-                  "mark": null,
-                  "side": "top",
-                  "color": "blue",
-                  "wantAtWord": 72.167,
-                  "atWord": 74.583
+                  "marks": [
+                    "__cmd"
+                  ],
+                  "wantAtWord": 78.667,
+                  "atWord": 79.417
                 }
               ],
+              "callouts": [],
               "id": "ytsearch",
               "src": "rec/ar-read/seg-02.mp4",
               "frames": 115,
@@ -3835,6 +4222,13 @@
               "zooms": [
                 {
                   "marks": [
+                    "__cmd"
+                  ],
+                  "wantAtWord": 8,
+                  "atWord": 16.5
+                },
+                {
+                  "marks": [
                     "wrote"
                   ],
                   "band": true,
@@ -3849,7 +4243,7 @@
                   "side": "right",
                   "color": "green",
                   "wantAtWord": 22.75,
-                  "atWord": 25.833
+                  "atWord": 22.75
                 }
               ],
               "id": "subs",
@@ -3923,31 +4317,23 @@
               "focus": true,
               "atWord": 25.833,
               "wantAtWord": 25.833,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "kind"
+                  ],
+                  "wantAtWord": 53.833,
+                  "atWord": 53.833
+                }
+              ],
               "callouts": [
                 {
-                  "text": "the opening of the video, as text",
+                  "text": "auto-captions: “quad” below is “Claude”",
                   "mark": "kind",
                   "side": "right",
-                  "color": "blue",
-                  "wantAtWord": 34.833,
-                  "atWord": 34.833
-                },
-                {
-                  "text": "“quad” is the caption mishearing “Claude”",
-                  "mark": null,
-                  "side": "top",
                   "color": "orange",
                   "wantAtWord": 42.333,
-                  "atWord": 42.333
-                },
-                {
-                  "text": "YouTube answered one request with a 429",
-                  "mark": null,
-                  "side": "bottom",
-                  "color": "red",
-                  "wantAtWord": 87.417,
-                  "atWord": 80.167
+                  "atWord": 54.917
                 }
               ],
               "id": "read",
@@ -4036,7 +4422,15 @@
               "focus": true,
               "atWord": 5.75,
               "wantAtWord": 1,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "__cmd"
+                  ],
+                  "wantAtWord": 14.583,
+                  "atWord": 14.583
+                }
+              ],
               "callouts": [],
               "id": "rss",
               "src": "rec/ar-read/seg-05.mp4",
@@ -4107,17 +4501,17 @@
                 {
                   "at": "full",
                   "wantAtWord": 52.667,
-                  "atWord": 48.167
+                  "atWord": 52.667
                 }
               ],
               "callouts": [
                 {
-                  "text": "worked because gh was already logged in",
+                  "text": "only worked logged in",
                   "mark": "head",
                   "side": "bottom",
                   "color": "orange",
-                  "wantAtWord": 41.75,
-                  "atWord": 41.75
+                  "wantAtWord": 48.167,
+                  "atWord": 48.167
                 }
               ],
               "id": "gh",
@@ -4197,15 +4591,23 @@
             },
             {
               "ref": "rec:ar-exa#search",
-              "label": "web search, no API key",
+              "label": "Exa web search · 3×",
               "focus": true,
-              "atWord": 48.167,
-              "wantAtWord": 65.167,
-              "zooms": [],
+              "atWord": 67.083,
+              "wantAtWord": 67.083,
+              "zooms": [
+                {
+                  "marks": [
+                    "__cmd"
+                  ],
+                  "wantAtWord": 80,
+                  "atWord": 80
+                }
+              ],
               "callouts": [],
               "id": "search",
               "src": "rec/ar-exa/seg-03.mp4",
-              "frames": 409,
+              "frames": 139,
               "bbox": {
                 "x": 52,
                 "y": 30,
@@ -4259,52 +4661,7 @@
                 120,
                 126,
                 132,
-                138,
-                144,
-                150,
-                156,
-                162,
-                168,
-                174,
-                180,
-                186,
-                192,
-                198,
-                204,
-                210,
-                216,
-                222,
-                228,
-                234,
-                240,
-                246,
-                252,
-                258,
-                264,
-                270,
-                276,
-                282,
-                288,
-                294,
-                300,
-                306,
-                312,
-                318,
-                324,
-                330,
-                336,
-                342,
-                348,
-                354,
-                360,
-                366,
-                372,
-                378,
-                384,
-                390,
-                396,
-                402,
-                408
+                138
               ],
               "shows": "$ Panniantong/Agent-Reach",
               "said": "PS ar-exa> (mcporter call exa.web_search_exa query=\"Agent Reach github Panniantong\" numResults=3) | Select-Object -First 16\nTitle: Panniantong/Agent-Reach\nURL: https://github.com/Panniantong/Agent-Reach\nPublished: N/A\nAuthor: N/A\nHighlights:\n# Panniantong/Agent-Reach\nGive your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu ΓÇö one CLI, zero API fees.\n...\n- Panniantong (290 contributions)\n- nyxst4ck (8 contributions)\n- alfred1994 (2 contributions)\n- kadaliao (2 contributions)\n- haosenwang1018 (2 contributions)\n- hymansun (2 contributions)\n- dl-robert (2 contributions)\nPS ar-exa>"
@@ -4392,7 +4749,7 @@
             {
               "group": "pass",
               "label": "let through as you",
-              "sub": "no browser to detect",
+              "sub": "nothing for X to detect",
               "atWord": 79
             }
           ]
@@ -4450,17 +4807,16 @@
               "focus": true,
               "atWord": 2.417,
               "wantAtWord": 1,
-              "zooms": [],
-              "callouts": [
+              "zooms": [
                 {
-                  "text": "the two cookie values were set off camera",
-                  "mark": null,
-                  "side": "top",
-                  "color": "yellow",
-                  "wantAtWord": 8.417,
+                  "marks": [
+                    "__cmd"
+                  ],
+                  "wantAtWord": 16.667,
                   "atWord": 17.667
                 }
               ],
+              "callouts": [],
               "id": "pip",
               "src": "rec/ar-x/seg-01.mp4",
               "frames": 212,
@@ -4534,7 +4890,15 @@
               "focus": true,
               "atWord": 31.75,
               "wantAtWord": 31.75,
-              "zooms": [],
+              "zooms": [
+                {
+                  "marks": [
+                    "__cmd"
+                  ],
+                  "wantAtWord": 31.75,
+                  "atWord": 43.083
+                }
+              ],
               "callouts": [
                 {
                   "text": "X refused the request: HTTP 404",
@@ -4542,15 +4906,7 @@
                   "side": "right",
                   "color": "red",
                   "wantAtWord": 42.833,
-                  "atWord": 43.083
-                },
-                {
-                  "text": "and a warning just above it",
-                  "mark": null,
-                  "side": "top",
-                  "color": "orange",
-                  "wantAtWord": 55.167,
-                  "atWord": 55.167
+                  "atWord": 44
                 }
               ],
               "id": "fail",
@@ -4822,7 +5178,7 @@
               ],
               "callouts": [
                 {
-                  "text": "it works now",
+                  "text": "three posts fetched",
                   "mark": "ok",
                   "side": "right",
                   "color": "green",
@@ -4934,7 +5290,7 @@
             },
             {
               "ref": "rec:ar-x#posts",
-              "label": "one account’s posts · 2×",
+              "label": "a second command · 2×",
               "focus": true,
               "atWord": 36.917,
               "wantAtWord": 36.917,
@@ -5286,7 +5642,7 @@
             {
               "group": "step",
               "label": "asks you",
-              "sub": "before more",
+              "sub": "which extras",
               "icon": "lucide:message-circle-question",
               "atWord": 44.917
             }
@@ -5303,55 +5659,59 @@
       "type": "RECORDED_STEP",
       "transition": "zoom",
       "background": "zoneA",
-      "narration": "Here's Claude Code, Anthropic's coding agent, and I've pasted the one line from the README. Claude fetches the installation guide and reads its four hundred-odd lines. Claude looks around the computer and finds Agent Reach is already installed. Then Claude tries the read-only check — and gets stopped. Not by Agent Reach. By Claude Code itself. On screen, the line reads denied by auto mode classifier, and the reason given is unauthorized persistence. Claude was in auto mode, where it approves safe steps on its own, and a web page telling it to set up software isn't something it'll wave through. That's the right call, because instructions on a web page shouldn't get to change your computer. And Claude doesn't try to sneak around it. Claude stops and gives me two options: run the command myself, or add a permission rule.",
+      "narration": "Here's Claude Code, Anthropic's coding agent, and I've pasted the one line from the README. Claude fetches the installation guide and reads its four hundred-odd lines. Claude looks around the computer and finds Agent Reach is already installed. Then Claude tries the read-only check — and gets stopped. Not by Agent Reach. By Claude Code itself. On screen, the line reads denied by auto mode classifier, and the reason given is unauthorized persistence. Claude was in auto mode, where it approves safe steps on its own, and a web page telling it to set up software isn't one of them. I think that's the right call. Claude stops and gives me two options: run the command myself, or add a permission rule.",
       "data": {
         "recordedStep": {
           "clips": [
             {
               "ref": "rec:ar-agent#install",
-              "label": "Claude Code · 4× speed",
+              "label": "Claude Code · 8× speed",
               "focus": true,
-              "atWord": 5.083,
-              "wantAtWord": 1.833,
+              "atWord": 4.917,
+              "wantAtWord": 1,
               "zooms": [
+                {
+                  "marks": [
+                    "found"
+                  ],
+                  "wantAtWord": 29.417,
+                  "atWord": 29.417
+                },
                 {
                   "marks": [
                     "denied"
                   ],
                   "band": true,
-                  "wantAtWord": 58.583,
-                  "atWord": 58.583
+                  "wantAtWord": 59.083,
+                  "atWord": 59.083
                 },
                 {
-                  "marks": [
-                    "why"
-                  ],
-                  "band": true,
-                  "wantAtWord": 67.417,
-                  "atWord": 67.417
+                  "at": "full",
+                  "wantAtWord": 71.5,
+                  "atWord": 71.5
                 }
               ],
               "callouts": [
                 {
-                  "text": "Claude Code’s own safety check said no",
-                  "mark": "denied",
+                  "text": "already installed here",
+                  "mark": "found",
                   "side": "bottom",
-                  "color": "red",
-                  "wantAtWord": 49.333,
-                  "atWord": 59.083
+                  "color": "blue",
+                  "wantAtWord": 32.417,
+                  "atWord": 32.417
                 },
                 {
-                  "text": "the reason it gave",
-                  "mark": "why",
-                  "side": "bottom",
-                  "color": "orange",
-                  "wantAtWord": 63.5,
-                  "atWord": 70.083
+                  "text": "denied: unauthorized persistence",
+                  "mark": "denied",
+                  "side": "top",
+                  "color": "red",
+                  "wantAtWord": 63.917,
+                  "atWord": 63.917
                 }
               ],
               "id": "install",
               "src": "rec/ar-agent/seg-02.mp4",
-              "frames": 518,
+              "frames": 260,
               "bbox": {
                 "x": 52,
                 "y": 30,
@@ -5372,6 +5732,19 @@
                   "w": 211,
                   "h": 19,
                   "covers": "Unauthorized Persistence"
+                },
+                "found": {
+                  "x": 100,
+                  "y": 430,
+                  "w": 1440,
+                  "h": 24,
+                  "covers": "Agent Reach already seems to be on this machine, at <root>/rec\\agent-reach\\venv\\Scripts\\agent-reach.exe. Because of that, I didn't install the package again.",
+                  "block": {
+                    "x": 100,
+                    "y": 430,
+                    "w": 1440,
+                    "h": 24
+                  }
                 }
               },
               "ink": [
@@ -5492,50 +5865,7 @@
                 240,
                 246,
                 252,
-                258,
-                264,
-                270,
-                276,
-                282,
-                288,
-                294,
-                300,
-                306,
-                312,
-                318,
-                324,
-                330,
-                336,
-                342,
-                348,
-                354,
-                360,
-                366,
-                372,
-                378,
-                384,
-                390,
-                396,
-                402,
-                408,
-                414,
-                420,
-                426,
-                432,
-                438,
-                444,
-                450,
-                456,
-                462,
-                468,
-                474,
-                480,
-                486,
-                492,
-                498,
-                504,
-                510,
-                516
+                258
               ],
               "shows": "… +422 lines (ctrl+o to expand)",
               "said": " … +422 lines (ctrl+o to expand)\n ⎿  Allowed by auto mode classifier\n● PowerShell(Get-Command pipx -ErrorAction SilentlyContinue | Select-Object Source; py -3 --version; Get-Command agent-reach -ErrorAction SilentlyContinue | Select-Object\n So…)\n ⎿  Python 3.10.4\n Source\n … +2 lines (ctrl+o to expand)\n ⎿  Allowed by auto mode classifier\n● PowerShell(agent-reach install --env=auto)\n ⎿  Denied by auto mode classifier ∙ [Unauthorized Persistence] ∙ see https://code.claude.com/docs/s/claude-code-auto-mode\n● I couldn't run the read-only check, so Agent Reach is not verified as installed.\n What I found\n - I fetched the install guide. It says agent-reach install --env=auto is the read-only default and --system is only for after you approve system changes. I did not use\n --system.\n - Agent Reach already seems to be on this machine, at <root>/rec\\agent-reach\\venv\\Scripts\\agent-reach.exe. Because of that, I didn't install the package again.\n What was blocked\n - I ran agent-reach install --env=auto. Claude Code's auto-mode permission check denied it with the reason \"Unauthorized Persistence\".\n - I did not try to get around the denial.\n Your options\n - Run the check yourself by typing ! agent-reach install --env=auto in the prompt.\n - Add a PowerShell permission rule for that command in your settings, then ask me to run it again.\n - Tell me to go ahead if you want me to proceed another way.\n Once the check has run, I can run agent-reach doctor and go through the optional channels with you.\n +++\n✻ Worked for 52s · done 2:49 PM\n───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯ ! agent-reach install --env=auto\n───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⏵⏵ auto mode on (shift+tab to cycle) · ← for agents powershell denied by auto mode · [Unauthorized Persistence] · /permissions"
@@ -5548,7 +5878,7 @@
           "atWord": 1
         }
       },
-      "durationFrames": 1457,
+      "durationFrames": 1286,
       "audio": "audio/agent-reach-hands-on_long_s31.mp3",
       "timingSource": "tts"
     },
@@ -5567,39 +5897,36 @@
               "focus": true,
               "atWord": 2.25,
               "wantAtWord": 1,
-              "zooms": [],
-              "callouts": [
+              "zooms": [
                 {
-                  "text": "the skill loads first",
-                  "mark": null,
-                  "side": "top",
-                  "color": "blue",
-                  "wantAtWord": 30.5,
-                  "atWord": 39.167
-                },
-                {
-                  "text": "then the health check",
-                  "mark": null,
-                  "side": "top",
-                  "color": "blue",
-                  "wantAtWord": 34.583,
+                  "marks": [
+                    "plan"
+                  ],
+                  "band": true,
+                  "wantAtWord": 40,
                   "atWord": 40
                 },
                 {
-                  "text": "a tool named for each platform",
-                  "mark": null,
-                  "side": "top",
-                  "color": "green",
-                  "wantAtWord": 40,
-                  "atWord": 40.583
-                },
-                {
-                  "text": "two points per platform, with links",
-                  "mark": null,
-                  "side": "top",
-                  "color": "purple",
+                  "marks": [
+                    "answer"
+                  ],
                   "wantAtWord": 64.583,
                   "atWord": 64.583
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 71.75,
+                  "atWord": 69.417
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "its plan, in one line",
+                  "mark": "plan",
+                  "side": "bottom",
+                  "color": "green",
+                  "wantAtWord": 45.583,
+                  "atWord": 45.583
                 }
               ],
               "id": "ask",
@@ -5610,6 +5937,34 @@
                 "y": 30,
                 "w": 1544,
                 "h": 838
+              },
+              "marks": {
+                "plan": {
+                  "x": 90,
+                  "y": 279,
+                  "w": 970,
+                  "h": 22,
+                  "covers": "Used agent-reach: X via twitter-cli, Reddit via rdt-cli, YouTube via yt-dlp. All covered Sep 26 – Oct 3, 2026.",
+                  "block": {
+                    "x": 90,
+                    "y": 279,
+                    "w": 970,
+                    "h": 22
+                  }
+                },
+                "answer": {
+                  "x": 88,
+                  "y": 316,
+                  "w": 1500,
+                  "h": 372,
+                  "covers": "X - Claude Code now supports mods. Users can change its behaviour, customize the UI or add their own features with a few lines of TypeScript, shipped inside plugins. ClaudeDevs announcement (https://x.com/ClaudeDevs/status/2105721434807083061) (about 19.8k likes). One user already built a mod that connects you to a multiplayer Doom server while Claude is busy: Jarrod Watts (https://x.com/jarrodwatts/status/2105858869482471602). - Creators are showing Claude Code modding games. The \"universal-modder\" toolkit lets it reverse-engineer and mod almost any game you own: post (https://x.com/rehan_she",
+                  "block": {
+                    "x": 88,
+                    "y": 316,
+                    "w": 1500,
+                    "h": 372
+                  }
+                }
               },
               "ink": [
                 {
@@ -5784,7 +6139,7 @@
           "kind": "board",
           "color": "green",
           "stageTitle": "what worked for me",
-          "premise": "Green means I ran it and it worked in this video. Grey means I did not try it.",
+          "premise": "Green means it worked when I ran it. Grey means I did not try it.",
           "stage": [
             {
               "group": "ch",
@@ -5832,7 +6187,7 @@
               "icon": "si:x",
               "text": "ok",
               "sub": "source build",
-              "atWord": 28.5
+              "atWord": 30.917
             },
             {
               "group": "ch",
@@ -5916,8 +6271,8 @@
             },
             {
               "group": "tally",
-              "label": "working by the end",
-              "atWord": 1
+              "label": "up and running",
+              "atWord": 54.167
             }
           ]
         }

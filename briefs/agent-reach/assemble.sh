@@ -2,7 +2,7 @@
 # Rebuild the long cut from its builder and bring it back to a rendered-ready state WITHOUT re-voicing:
 # build -> attach footage -> solve clip/camera timing -> re-time from the existing audio -> lint.
 # Run it after any change that is not narration. A narration change needs voiceover.py first (ONLY=sNN).
-set -e
+set -eo pipefail   # a builder that fails must stop the chain: without pipefail the gates ran on the STALE spec
 cd "$(dirname "$0")/../.."
 SPEC=topics/agent-reach-hands-on/${1:-long}.json
 PRE=agent-reach-hands-on_${1:-long}; [ "${1:-long}" = shorts ] && PRE=agent-reach-hands-on_short

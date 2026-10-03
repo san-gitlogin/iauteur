@@ -76,6 +76,9 @@ try {
   const {windowId} = await cdp.send('Browser.getWindowForTarget');
   await cdp.send('Browser.setWindowBounds', {windowId, bounds: {windowState: 'normal'}});
   await cdp.send('Browser.setWindowBounds', {windowId, bounds: {left: -B, top: 0, width: regW + 2 * B, height: regH + B}});
+  // GitHub follows the browser's colour scheme, and a fresh profile came up LIGHT on the third take: a white
+  // page inside a dark video, next to footage of the same repo recorded dark. Ask for dark explicitly.
+  await cdp.send('Emulation.setEmulatedMedia', {features: [{name: 'prefers-color-scheme', value: 'dark'}]});
   await page.goto(URL_, {waitUntil: 'load'});
   await sleep(2500);
   await page.evaluate(() => {
@@ -132,6 +135,11 @@ try {
   };
 
   await page.bringToFront();
+  // PARK THE POINTER INSIDE THE WINDOW. Left over the taskbar, it popped Windows' thumbnail previews of the
+  // operator's other windows over the bottom of the capture (fourth take, 2026-10-03).
+  execFileSync('powershell', ['-NoProfile', '-Command',
+    "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(" + Math.round(regW * 0.985) + ', ' + Math.round(regH * 0.45) + ')'],
+    {stdio: 'ignore', windowsHide: true});
   key(0);   // focus the window, send nothing
   await sleep(800);
   await step('zh', 'the README, in Chinese', async () => {
@@ -202,7 +210,13 @@ try {
     execFileSync('ffmpeg', ['-v', 'error', '-y', '-ss', s.tStart.toFixed(3), '-i', raw, '-frames:v', String(frames), '-r', String(FPS),
       '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '16', '-pix_fmt', 'yuv420p', '-an', path.join(OUT, seg)], {stdio: 'inherit'});
     out.push({id: s.id, index: i, action: 'screen', label: s.label, tStart: +s.tStart.toFixed(3), tEnd: +s.tEnd.toFixed(3),
-      bbox: {x: 0, y: 0, w: capW, h: capH}, marks: s.marks, ink: [], heading: s.label, sent: '(screen capture of the Chrome window)',
+      bbox: {x: 0, y: 0, w: capW, h: capH},
+      marks: Object.fromEntries(Object.entries(s.marks).map(([k, v]) => [k, {...v, block: v.block ?? {x: v.x, y: v.y, w: v.w, h: v.h}}])),
+      // INK: where the picture is busy, so overlays are placed beside it. A screen capture has no DOM for the
+      // browser's own chrome, so this is the toolbar, the README column and the top of the sidebar, by proportion.
+      ink: [{x: 0, y: 0, w: capW, h: Math.round(capH * 0.13)},
+            {x: Math.round(capW * 0.03), y: Math.round(capH * 0.13), w: Math.round(capW * 0.67), h: Math.round(capH * 0.87)},
+            {x: Math.round(capW * 0.72), y: Math.round(capH * 0.13), w: Math.round(capW * 0.25), h: Math.round(capH * 0.25)}], heading: s.label, sent: '(screen capture of the Chrome window)',
       output: '', truth: 'no-output', verified: 'page text read from the DOM; native UI measured from the frame',
       trimmedFrames: 0, changes: Array.from({length: Math.ceil(frames / 6)}, (_, k) => k * 6), segment: seg, segmentFrames: frames});
   });

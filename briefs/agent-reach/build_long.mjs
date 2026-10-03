@@ -75,8 +75,10 @@ rec('zoom', 'zoneB',
   "posts on Claude Code, pulled the same way. By the end you'll know how to set up both, and where the setup " +
   "didn't go smoothly for me.",
   null,
-  [{take: 'ar-x', step: 'search', label: 'X search · 2× speed', at: 0.02},
-   {take: 'ar-reddit', step: 'search', label: 'Reddit · 2× speed', at: 0.44}]);
+  [{take: 'ar-x', step: 'search', label: 'X search · 2× speed', at: 0.02,
+    camera: [{frame: ['__cmd', 'stats'], at: 'searched from a plain'}]},
+   {take: 'ar-reddit', step: 'search', label: 'Reddit · 2× speed', at: 0.44,
+    camera: [{frame: ['__cmd', 'more'], at: "this week's most"}]}]);
 
 c.add('TITLE_CARD', 'fade', 'zoneA',
   "Welcome to the channel. Today we're going to install Agent Reach, a free project, and try the " +
@@ -98,11 +100,12 @@ rec('push', 'zoneB',
   "speakers have never heard of, and I wanted to know whether it holds up.",
   GH,
   [{take: 'ar-repo', step: 'top', label: 'the official repo', at: 0.02,
-    camera: [{frame: 'desc', at: 'the summary says', band: true}, {frame: 'license', at: 'the MIT license,', band: true},
-             {frame: 'stars', at: 'the star count,', band: true}],
+    camera: [{frame: ['desc', 'stars'], at: 'On the right, the'}, {frame: ['desc', 'license'], at: 'the MIT license,'},
+             {frame: ['desc', 'stars'], at: 'the star count,'}],
     notes: [{text: 'what the project says about itself', mark: 'desc', at: 'says it plainly:', side: 'left', color: 'blue'},
             {text: 'free to use, even at work', mark: 'license', at: 'free to use,', side: 'left', color: 'green'},
-            {text: '89 thousand stars', mark: 'stars', at: 'eighty-nine thousand.', side: 'left', color: 'yellow'}]}]);
+            {text: '89 thousand stars', mark: 'stars', at: 'eighty-nine thousand.', side: 'left', color: 'yellow'}]},
+   {take: 'ar-repo', step: 'zh', label: 'down to the README', at: 0.84, focus: false}]);
 
 rec('zoom', 'zoneA',
   "Now for the catch. Scroll down to the README, which is a project's front page, and the headline about your AI " +
@@ -115,11 +118,13 @@ rec('zoom', 'zoneA',
   GH,
   [{take: 'ar-translate', step: 'zh', label: 'README in Chinese · 2×', at: 0.02, focus: false,
     camera: [{frame: 'tagline', at: 'headline about your AI', band: true}, {frame: 'full', at: "You don't need"}]},
-   {take: 'ar-translate', step: 'menu', label: 'right-click → Translate', at: 0.3, focus: false,
+   {take: 'ar-translate', step: 'menu', label: 'right-click → Translate', at: 0.36, focus: false,
     notes: [{text: 'right-click, then Translate to English', mark: 'item', at: 'right-click anywhere', color: 'green'}]},
    {take: 'ar-translate', step: 'translated', label: 'now in English · 2×', at: 0.48, focus: false,
-    camera: [{frame: 'tagline', at: 'equip your AI agent', band: true}, {frame: 'full', at: 'Under the address'}],
-    notes: [{text: 'Chrome’s built-in translator', mark: 'panel', at: 'Google Translate panel', side: 'left'}]}]);
+    // The camera goes from the translated headline to Chrome's own panel, then lets go. A callout on the panel
+    // while the camera was still on the headline pointed at the edge of the frame (proof sheet, 2026-10-03).
+    camera: [{frame: 'tagline', at: 'equip your AI agent', band: true}, {frame: 'panel', at: 'Google Translate panel', band: true},
+             {frame: 'full', at: 'A machine translation'}]}]);
 
 // ═══ WHAT IT IS ══════════════════════════════════════════════════════════════════════════
 ar('wipe', 'zoneB',
@@ -134,7 +139,7 @@ ar('wipe', 'zoneB',
    premise: 'Your AI agent on the left. Each platform on the right has its own barrier, as the README lists them.',
    stage: [
      {group: 'agent', label: 'your AI agent', icon: 'lucide:bot', at: 'Picture your AI agent'},
-     {group: 'gate', label: 'X (Twitter)', icon: 'si:x', sub: '~$215 a month', at: 'X charges'},
+     {group: 'gate', label: 'X (Twitter)', icon: 'si:x', sub: 'a paid API', at: 'X charges'},
      {group: 'gate', label: 'Reddit', icon: 'si:reddit', sub: '403 forbidden', at: 'Reddit answers'},
      {group: 'gate', label: 'XiaoHongShu', icon: 'si:xiaohongshu', sub: 'login required', at: 'XiaoHongShu, a Chinese'},
      {group: 'gate', label: 'Bilibili', icon: 'si:bilibili', sub: 'blocked overseas', at: 'And Bilibili,'},
@@ -177,11 +182,11 @@ ar('slide', 'zoneB',
      {group: 'job', label: 'installs', icon: 'lucide:download', at: 'it installs that tool.'},
      {group: 'job', label: 'checks', icon: 'lucide:stethoscope', at: 'it checks the tool'},
      {group: 'job', label: 'routes', icon: 'lucide:signpost', at: 'it tells your agent'},
-     {group: 'tool', label: 'Jina Reader', icon: 'lucide:globe', at: 'So what is'},
-     {group: 'tool', label: 'yt-dlp', icon: 'si:youtube', at: 'So what is'},
-     {group: 'tool', label: 'gh', icon: 'si:github', at: 'So what is'},
-     {group: 'tool', label: 'twitter-cli', icon: 'si:x', at: 'So what is'},
-     {group: 'tool', label: 'rdt-cli', icon: 'si:reddit', at: 'So what is'},
+     {group: 'tool', label: 'Jina Reader', icon: 'lucide:globe', at: 'calls those tools directly'},
+     {group: 'tool', label: 'yt-dlp', icon: 'si:youtube', at: 'yt-dlp for YouTube,'},
+     {group: 'tool', label: 'gh', icon: 'si:github', at: 'the GitHub command'},
+     {group: 'tool', label: 'twitter-cli', icon: 'si:x', at: 'twitter-cli for X.'},
+     {group: 'tool', label: 'rdt-cli', icon: 'si:reddit', at: 'twitter-cli for X.'},
      {group: 'direct', label: 'the agent calls the tools itself', sub: 'nothing in between', at: 'calls those tools directly'},
    ]},
   README);
@@ -222,12 +227,10 @@ rec('zoom', 'zoneA',
   null,
   [{take: 'ar-install', step: 'pip', label: 'pip install · 12× speed', at: 0.02,
     camera: [{frame: 'ok', at: 'a little over two', band: true}]},
-   {take: 'ar-install', step: 'check', label: 'read-only check · 2×', at: 0.3,
-    camera: [{frame: 'safe', at: 'safe mode. In', band: true}, {frame: 'done', at: 'no changes were made.', band: true},
-             {frame: 'mcp', at: 'mcporter is not', band: true}],
-    notes: [{text: 'looks, installs nothing', mark: 'safe', at: 'installer only looks.', color: 'green'},
-            {text: 'nothing was changed', mark: 'done', at: 'one line confirms', color: 'green'},
-            {text: 'a helper for web search — later', mark: 'mcp', at: 'a helper called', color: 'orange'}]}]);
+   {take: 'ar-install', step: 'check', label: 'agent-reach install · 2×', at: 0.3,
+    camera: [{frame: 'safe', at: 'safe mode. In', band: true}, {frame: 'full', at: "It checks what's"},
+             {frame: 'done', at: 'no changes were made.', band: true}, {frame: 'mcp', at: 'mcporter is not', band: true},
+             {frame: 'full', at: 'So after one'}]}]);
 
 ar('push', 'zoneB',
   "Before we read the health check, you need three symbols, because Agent Reach only prints Chinese. A green tick " +
@@ -237,8 +240,8 @@ ar('push', 'zoneB',
    premise: 'The tool’s own Chinese legend on top, and what each symbol means underneath.',
    stage: [
      {group: 'lamp', label: '✅ 可用', sub: 'ready to use', text: 'ok', at: 'A green tick'},
-     {group: 'lamp', label: '[!] 已装但需配置/登录', sub: 'installed — needs setup or login', text: 'warn', at: 'An exclamation mark'},
-     {group: 'lamp', label: '[X] 未安装', sub: 'not installed', text: 'off', at: 'And an X'},
+     {group: 'lamp', label: '[!] 已装但需配置/登录', sub: 'installed — needs setup or login', text: 'warn', at: 'installed, but still'},
+     {group: 'lamp', label: '[X] 未安装', sub: 'not installed', text: 'off', at: 'not installed.'},
    ]});
 
 rec('zoom', 'zoneA',
@@ -249,10 +252,10 @@ rec('zoom', 'zoneA',
   "sixteen channels available. A channel is simply one platform Agent Reach can reach. So a fresh install gives " +
   "you five, and the other eleven each need something from you. Getting them is what the rest of this video is about.",
   null,
-  [{take: 'ar-install', step: 'doctor', label: 'agent-reach doctor', at: 0.02,
-    camera: [{frame: 'yt', at: 'YouTube has the', band: true}, {frame: 'gh', at: 'GitHub has the exclamation', band: true},
+  [{take: 'ar-install', step: 'doctor', label: 'agent-reach doctor · 2×', at: 0.02,
+    camera: [{frame: ['__cmd', 'status'], at: 'a command called'}, {frame: 'gh', at: 'GitHub has the exclamation', band: true},
              {frame: 'full', at: 'And at the bottom,'}],
-    notes: [{text: 'the legend: ready · needs setup · not installed', mark: 'legend', at: 'Up top is', side: 'right', color: 'blue'},
+    notes: [{text: 'YouTube: ready', mark: 'yt', at: 'YouTube has the', side: 'right', color: 'green'},
             {text: 'web search: not installed yet', mark: 'exa', at: 'the line with', side: 'right', color: 'red'},
             {text: '5 of 16 channels available', mark: 'status', at: 'five of sixteen', side: 'right', color: 'green'}]}]);
 
@@ -274,14 +277,14 @@ ar('slide', 'zoneB',
      {group: 'ch', label: 'Web search', icon: 'lucide:search', text: 'login', sub: 'one helper', at: 'GitHub and web'},
      {group: 'ch', label: 'X', icon: 'si:x', text: 'login', sub: 'needs login', at: 'X and Reddit'},
      {group: 'ch', label: 'Reddit', icon: 'si:reddit', text: 'login', sub: 'needs login', at: 'X and Reddit'},
-     {group: 'ch', label: 'Facebook', icon: 'si:facebook', text: 'off', sub: 'not today', at: 'Facebook, Instagram'},
-     {group: 'ch', label: 'Instagram', icon: 'si:instagram', text: 'off', sub: 'not today', at: 'Facebook, Instagram'},
-     {group: 'ch', label: 'LinkedIn', icon: 'lucide:briefcase', text: 'off', sub: 'not today', at: 'Facebook, Instagram'},
-     {group: 'ch', label: 'XiaoHongShu', icon: 'si:xiaohongshu', text: 'off', sub: 'not today', at: 'a handful of'},
-     {group: 'ch', label: 'Xueqiu', icon: 'lucide:chart-candlestick', text: 'off', sub: 'not today', at: 'a handful of'},
-     {group: 'ch', label: 'Xiaoyuzhou', icon: 'lucide:podcast', text: 'off', sub: 'not today', at: 'a handful of'},
-     {group: 'ch', label: 'Boss Zhipin', icon: 'lucide:id-card', text: 'off', sub: 'not today', at: 'a handful of'},
-     {group: 'tally', label: 'ready after a fresh install'},
+     {group: 'ch', label: 'Facebook', icon: 'si:facebook', text: 'off', sub: 'skipped', at: 'Facebook, Instagram'},
+     {group: 'ch', label: 'Instagram', icon: 'si:instagram', text: 'off', sub: 'skipped', at: 'Facebook, Instagram'},
+     {group: 'ch', label: 'LinkedIn', icon: 'lucide:briefcase', text: 'off', sub: 'skipped', at: 'Facebook, Instagram'},
+     {group: 'ch', label: 'XiaoHongShu', icon: 'si:xiaohongshu', text: 'off', sub: 'skipped', at: 'a handful of'},
+     {group: 'ch', label: 'Xueqiu', icon: 'lucide:chart-candlestick', text: 'off', sub: 'skipped', at: 'a handful of'},
+     {group: 'ch', label: 'Xiaoyuzhou', icon: 'lucide:podcast', text: 'off', sub: 'skipped', at: 'a handful of'},
+     {group: 'ch', label: 'Boss Zhipin', icon: 'lucide:id-card', text: 'off', sub: 'skipped', at: 'a handful of'},
+     {group: 'tally', label: 'ready after a fresh install', at: 'straight after installing:'},
    ]});
 
 // ═══ 2 · NO LOGIN ════════════════════════════════════════════════════════════════════════
@@ -318,8 +321,8 @@ rec('zoom', 'zoneA',
   [{take: 'ar-read', step: 'web', label: 'a web page as text · 2×', at: 0.02,
     camera: [{frame: 'title', at: 'a title, the', band: true}, {frame: 'src', at: 'the source address,', band: true},
              {frame: 'full', at: 'Clean text matters'}]},
-   {take: 'ar-read', step: 'ytsearch', label: 'YouTube search · 3×', at: 0.66,
-    notes: [{text: 'channel  |  title', mark: null, at: 'YouTube search, with', side: 'top', color: 'blue'}]}]);
+   {take: 'ar-read', step: 'ytsearch', label: 'YouTube search · 3×', at: 0.78,
+    camera: [{frame: '__cmd', at: 'asked for five results'}]}]);
 
 ar('iris', 'zoneB',
   "Search is handy, but the next feature is the one I'd install Agent Reach for. A video is the worst thing you " +
@@ -350,12 +353,11 @@ rec('zoom', 'zoneA',
   "too often.",
   null,
   [{take: 'ar-read', step: 'subs', label: 'subtitles only · 3×', at: 0.02,
-    camera: [{frame: 'wrote', at: 'writing video subtitles,', band: true}],
+    camera: [{frame: '__cmd', at: 'write the automatic'}, {frame: 'wrote', at: 'writing video subtitles,', band: true}],
     notes: [{text: 'the words only — no video file', mark: 'wrote', at: 'tells you it worked,', color: 'green'}]},
    {take: 'ar-read', step: 'read', label: 'the video as text · 3×', at: 0.27,
-    notes: [{text: 'the opening of the video, as text', mark: 'kind', at: 'as plain text.', side: 'right', color: 'blue'},
-            {text: '“quad” is the caption mishearing “Claude”', mark: null, at: 'read quad where', side: 'top', color: 'orange'},
-            {text: 'YouTube answered one request with a 429', mark: null, at: 'too-many-requests error.', side: 'bottom', color: 'red'}]}]);
+    camera: [{frame: 'kind', at: 'automatic captions,'}],
+    notes: [{text: 'auto-captions: “quad” below is “Claude”', mark: 'kind', at: 'read quad where', side: 'right', color: 'orange'}]}]);
 
 rec('fade', 'zoneB',
   "Three quick ones. RSS is the feed format most blogs still publish, and here are the six latest headlines from " +
@@ -366,11 +368,13 @@ rec('fade', 'zoneB',
   "the mcporter helper from earlier, installed with one npm command. No API " +
   "key was involved, and the first result is the project's own GitHub page.",
   null,
-  [{take: 'ar-read', step: 'rss', label: 'an RSS feed · 3×', at: 0.02},
+  [{take: 'ar-read', step: 'rss', label: 'an RSS feed · 3×', at: 0.02,
+    camera: [{frame: '__cmd', at: 'latest headlines from'}]},
    {take: 'ar-read', step: 'gh', label: 'GitHub search · 2×', at: 0.24,
     camera: [{frame: 'count', at: 'five repositories about', band: true}, {frame: 'full', at: 'Logged out, gh'}],
-    notes: [{text: 'worked because gh was already logged in', mark: 'head', at: 'To be straight', side: 'bottom', color: 'orange'}]},
-   {take: 'ar-exa', step: 'search', label: 'web search, no API key', at: 0.66}]);
+    notes: [{text: 'only worked logged in', mark: 'head', at: 'already logged in', side: 'bottom', color: 'orange'}]},
+   {take: 'ar-exa', step: 'search', label: 'Exa web search · 3×', at: 0.7,
+    camera: [{frame: '__cmd', at: 'the mcporter helper'}]}]);
 
 // ═══ 3 · LOGINS ══════════════════════════════════════════════════════════════════════════
 chapter('dip', 'zoneA',
@@ -395,7 +399,7 @@ ar('push', 'zoneB',
      {group: 'key', label: 'auth_token', at: 'auth token'},
      {group: 'key', label: 'ct0', at: 'c-t-zero.'},
      {group: 'cli', label: 'twitter-cli', sub: 'a small program', icon: 'lucide:terminal', at: 'small program. Then'},
-     {group: 'pass', label: 'let through as you', sub: 'no browser to detect', at: 'the program asks X'},
+     {group: 'pass', label: 'let through as you', sub: 'nothing for X to detect', at: 'the program asks X'},
    ]});
 
 c.add('QUIZ_CARD', 'fade', 'zoneA',
@@ -425,10 +429,10 @@ rec('zoom', 'zoneB',
   "useful moment in this video, because it's exactly what Agent Reach claims to protect you from.",
   null,
   [{take: 'ar-x', step: 'pip', label: 'install twitter-cli', at: 0.02,
-    notes: [{text: 'the two cookie values were set off camera', mark: null, at: 'off camera,', side: 'top', color: 'yellow'}]},
+    camera: [{frame: '__cmd', at: 'install the X tool,'}]},
    {take: 'ar-x', step: 'fail', label: 'the first search · 2×', at: 0.36,
-    notes: [{text: 'X refused the request: HTTP 404', mark: 'err', at: 'the search fails.', color: 'red'},
-            {text: 'and a warning just above it', mark: null, at: 'Notice the warning', side: 'top', color: 'orange'}]}]);
+    camera: [{frame: '__cmd', at: 'my first search:'}],
+    notes: [{text: 'X refused the request: HTTP 404', mark: 'err', at: 'the search fails.', color: 'red'}]}]);
 
 ar('slide', 'zoneA',
   "So what went wrong? I can't tell you what changed on X's side. What I can show you is where the working copy " +
@@ -474,8 +478,8 @@ rec('zoom', 'zoneA',
   [{take: 'ar-x', step: 'fix', label: 'install from source · 4×', at: 0.02},
    {take: 'ar-x', step: 'search', label: 'the same search · 2×', at: 0.13,
     camera: [{frame: 'ok', at: 'fetched three posts,', band: true}, {frame: 'full', at: "the warning's still"}],
-    notes: [{text: 'it works now', mark: 'ok', at: 'reposts and views', color: 'green'}]},
-   {take: 'ar-x', step: 'posts', label: 'one account’s posts · 2×', at: 0.3,
+    notes: [{text: 'three posts fetched', mark: 'ok', at: 'reposts and views', color: 'green'}]},
+   {take: 'ar-x', step: 'posts', label: 'a second command · 2×', at: 0.3,
     camera: [{frame: 'who', at: "posts from Anthropic's account,", band: true}]},
    {take: 'ar-reddit', step: 'search', label: 'Reddit, this week · 2×', at: 0.52,
     camera: [{frame: 'count', at: 'get five results,', band: true}, {frame: 'head', at: 'subreddit, the title'}]}]);
@@ -517,7 +521,7 @@ ar('push', 'zoneB',
      {group: 'step', label: 'installs', sub: 'the package', icon: 'lucide:package', at: 'install the package,'},
      {group: 'step', label: 'checks', sub: 'read-only', icon: 'lucide:shield-check', at: 'run the read-only'},
      {group: 'step', label: 'reports', sub: 'health check', icon: 'lucide:stethoscope', at: 'read the health'},
-     {group: 'step', label: 'asks you', sub: 'before more', icon: 'lucide:message-circle-question', at: 'then ask you'},
+     {group: 'step', label: 'asks you', sub: 'which extras', icon: 'lucide:message-circle-question', at: 'then ask you'},
    ]},
   README);
 
@@ -525,18 +529,16 @@ rec('zoom', 'zoneA',
   "Here's Claude Code, Anthropic's coding agent, and I've pasted the one line from the README. Claude fetches " +
   "the installation guide and reads its four hundred-odd lines. Claude looks around the computer and finds " +
   "Agent Reach is already installed. Then Claude tries the read-only check — and gets stopped. Not by Agent " +
-  "Reach. By Claude Code itself. On screen, the line reads denied by auto mode classifier, and the reason given is " +
-  "unauthorized persistence. Claude was in auto mode, where it approves safe steps on its own, " +
-  "and a web page telling it to set up software isn't something it'll wave through. That's the right " +
-  "call, because instructions on a web page shouldn't get to change your computer. And Claude " +
-  "doesn't try to sneak around it. Claude stops and gives me two options: run the command myself, or add " +
-  "a permission rule.",
+  "Reach. By Claude Code itself. On screen, the line reads denied by auto mode classifier, and the reason given " +
+  "is unauthorized persistence. Claude was in auto mode, where it approves safe steps on its own, and a web " +
+  "page telling it to set up software isn't one of them. I think that's the right call. Claude stops and gives " +
+  "me two options: run the command myself, or add a permission rule.",
   null,
-  [{take: 'ar-agent', step: 'install', label: 'Claude Code · 4× speed', at: 0.02,
-    camera: [{frame: 'denied', at: 'denied by auto mode', band: true},
-             {frame: 'why', at: 'unauthorized persistence.', band: true}, {frame: 'full', at: 'Claude was in'}],
-    notes: [{text: 'Claude Code’s own safety check said no', mark: 'denied', at: 'By Claude Code itself.', side: 'bottom', color: 'red'},
-            {text: 'the reason it gave', mark: 'why', at: 'the reason given', side: 'bottom', color: 'orange'}]}]);
+  [{take: 'ar-agent', step: 'install', label: 'Claude Code · 8× speed', at: 0.02,
+    camera: [{frame: 'found', at: 'finds Agent Reach'}, {frame: 'denied', at: 'denied by auto mode', band: true},
+             {frame: 'full', at: 'Claude was in'}],
+    notes: [{text: 'already installed here', mark: 'found', at: 'is already installed.', side: 'bottom', color: 'blue'},
+            {text: 'denied: unauthorized persistence', mark: 'denied', at: 'the reason given', side: 'top', color: 'red'}]}]);
 
 rec('fade', 'zoneB',
   "So I allowed it for this session, and installed Agent Reach's skill file, because my earlier try " +
@@ -547,10 +549,8 @@ rec('fade', 'zoneB',
   "use, because the skill file had already told it where to go.",
   null,
   [{take: 'ar-agent2', step: 'ask', label: 'one question · 6× speed', at: 0.02,
-    notes: [{text: 'the skill loads first', mark: null, at: 'loads the skill.', side: 'top', color: 'blue'},
-            {text: 'then the health check', mark: null, at: 'runs the health check.', side: 'top', color: 'blue'},
-            {text: 'a tool named for each platform', mark: null, at: 'which tool', side: 'top', color: 'green'},
-            {text: 'two points per platform, with links', mark: null, at: 'writes two points', side: 'top', color: 'purple'}]}]);
+    camera: [{frame: 'plan', at: 'which tool', band: true}, {frame: 'answer', at: 'writes two points'}, {frame: 'full', at: 'I never told'}],
+    notes: [{text: 'its plan, in one line', mark: 'plan', at: 'twitter-cli for X,', side: 'bottom', color: 'green'}]}]);
 
 ar('slide', 'zoneA',
   "So, the verdict, channel by channel. Web pages, YouTube and RSS worked with no setup at all. GitHub worked " +
@@ -559,14 +559,14 @@ ar('slide', 'zoneA',
   "nine channels are up and running by the end of this video. As for the other seven, I didn't attempt them, which " +
   "means I can't vouch for them.",
   {kind: 'board', color: 'green', stageTitle: 'what worked for me',
-   premise: 'Green means I ran it and it worked in this video. Grey means I did not try it.',
+   premise: 'Green means it worked when I ran it. Grey means I did not try it.',
    stage: [
      {group: 'ch', label: 'Web pages', icon: 'lucide:globe', text: 'ok', sub: 'no setup', at: 'Web pages,'},
      {group: 'ch', label: 'YouTube', icon: 'si:youtube', text: 'ok', sub: 'no setup', at: 'YouTube and RSS'},
      {group: 'ch', label: 'RSS feeds', icon: 'si:rss', text: 'ok', sub: 'no setup', at: 'and RSS worked'},
      {group: 'ch', label: 'GitHub', icon: 'si:github', text: 'ok', sub: 'after login', at: 'GitHub worked'},
      {group: 'ch', label: 'Web search', icon: 'lucide:search', text: 'ok', sub: 'one helper', at: 'Web search worked'},
-     {group: 'ch', label: 'X', icon: 'si:x', text: 'ok', sub: 'source build', at: 'X worked,'},
+     {group: 'ch', label: 'X', icon: 'si:x', text: 'ok', sub: 'source build', at: 'only from the newer'},
      {group: 'ch', label: 'Reddit', icon: 'si:reddit', text: 'ok', sub: 'session cookie', at: 'Reddit worked'},
      {group: 'ch', label: 'Bilibili', icon: 'si:bilibili', text: 'ok', sub: 'no setup', at: 'Bilibili and V2EX,'},
      {group: 'ch', label: 'V2EX', icon: 'si:v2ex', text: 'ok', sub: 'no setup', at: 'and V2EX, worked'},
@@ -577,7 +577,7 @@ ar('slide', 'zoneA',
      {group: 'ch', label: 'Xueqiu', icon: 'lucide:chart-candlestick', text: 'off', sub: 'not tried', at: 'the other seven,'},
      {group: 'ch', label: 'Xiaoyuzhou', icon: 'lucide:podcast', text: 'off', sub: 'not tried', at: 'the other seven,'},
      {group: 'ch', label: 'Boss Zhipin', icon: 'lucide:id-card', text: 'off', sub: 'not tried', at: 'the other seven,'},
-     {group: 'tally', label: 'working by the end'},
+     {group: 'tally', label: 'up and running', at: 'nine channels are up'},
    ]});
 
 c.add('RECAP', 'fade', 'zoneB',
