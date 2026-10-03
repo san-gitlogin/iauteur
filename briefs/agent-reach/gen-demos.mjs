@@ -27,7 +27,10 @@ const web = (slug, url, steps) => ({
 // advertising with referral links. These selectors delete its heading, its 'appear here' line and the table.
 const SPONSORS = ['article.markdown-body details:has(table)', 'article.markdown-body blockquote:has(a[href^="mailto:"])',
   'article.markdown-body .markdown-heading:has(+ blockquote:has(a[href^="mailto:"]))',
-  'article.markdown-body .markdown-heading:has(a[href$="sponsors"])'];
+  'article.markdown-body .markdown-heading:has(a[href$="sponsors"])',
+  // the Chinese README: its heading is 赞助商, and its line under it has no mailto on some renders
+  'article.markdown-body .markdown-heading:has(a[href*="%E8%B5%9E%E5%8A%A9"])', 'article.markdown-body .markdown-heading:has(a[href*="赞助"])',
+  'article.markdown-body blockquote:has(a[href*="foxmail"])'];
 const REPO = 'https://github.com/Panniantong/Agent-Reach';
 const ZIP = 'https://github.com/Panniantong/agent-reach/archive/main.zip';
 const VIDEO = 'https://www.youtube.com/watch?v=AJpK3YTTKZ4'; // "Introducing Claude Code", Anthropic, 3:55. (fl1DSmwQKKY answered its subtitle request with HTTP 429.)

@@ -253,9 +253,9 @@ rec('zoom', 'zoneA',
   "you five, and the other eleven each need something from you. Getting them is what the rest of this video is about.",
   null,
   [{take: 'ar-install', step: 'doctor', label: 'agent-reach doctor · 2×', at: 0.02,
-    camera: [{frame: ['__cmd', 'status'], at: 'a command called'}, {frame: 'gh', at: 'GitHub has the exclamation', band: true},
+    camera: [{frame: ['__cmd', 'status'], at: 'a command called'}, {frame: ['gh', 'exa'], at: 'because the GitHub tool'},
              {frame: 'full', at: 'And at the bottom,'}],
-    notes: [{text: 'YouTube: ready', mark: 'yt', at: 'YouTube has the', side: 'right', color: 'green'},
+    notes: [{text: 'GitHub: installed, login not confirmed', mark: 'gh', at: 'GitHub has the exclamation', side: 'right', color: 'yellow'},
             {text: 'web search: not installed yet', mark: 'exa', at: 'the line with', side: 'right', color: 'red'},
             {text: '5 of 16 channels available', mark: 'status', at: 'five of sixteen', side: 'right', color: 'green'}]}]);
 
