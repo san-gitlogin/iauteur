@@ -36,14 +36,15 @@ export const Board: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   }
   const rows = Math.ceil(n / cols);
   const cw = w / cols, ch = areaH / rows;
-  const d = Math.min(cw * 0.46, ch * 0.5);
-  const fs = Math.max(v.s(v.vertical ? 22 : 19), d * 0.2);
+  // The medal takes most of its cell: at 0.46 a 16-socket board drew 100px sockets in 300px rows.
+  const d = Math.min(cw * 0.62, ch * 0.56);
+  const fs = Math.max(v.s(v.vertical ? 24 : 26), d * 0.2);
   const up = chs.filter((c) => c.text === 'ok' && c.atWord != null && frame >= F(c.atWord)).length;
   return (
     <div style={{position: 'absolute', inset: 0}}>
       {chs.map((c, i) => {
         const col = i % cols, row = Math.floor(i / cols);
-        const cx = cw * (col + 0.5), cy = ch * row + d / 2 + ch * 0.06;
+        const cx = cw * (col + 0.5), cy = ch * row + d / 2 + Math.max(ch * 0.06, (ch - d - fs * 3) / 2);
         const base = arriveAt(frame, BASE(chs[0]?.atWord) + stagger(i, 2));
         const on = c.atWord == null ? 0 : clamp01(landAt(frame, F(c.atWord)));
         const color = on > 0.5 ? stateColor(v, c.text === 'off' ? undefined : c.text) : v.t.colors.muted;
@@ -105,7 +106,7 @@ export const Crate: React.FC<ArVizProps> = ({items, accent, w, h}) => {
       <At x={0} y={beltY} w={gx - gd / 2} h={Math.max(3, v.s(6))} style={{opacity: baseOn, borderRadius: v.s(3),
         background: `repeating-linear-gradient(90deg, ${hexA(v.t.colors.muted, 0.6)} 0 ${v.s(18)}px, ${hexA(v.t.colors.muted, 0.2)} ${v.s(18)}px ${v.s(36)}px)`}} />
       <At x={gx} y={beltY - gd * 0.4} center><Medal v={v} icon={gate?.icon} d={gd} color={through > 0.9 ? green : v.t.colors.muted} lit={0.45 + 0.55 * through} on={baseOn} /></At>
-      <At x={gx - gd * 0.7} y={beltY + v.s(18)} w={gd * 1.4} style={{opacity: baseOn}}><Cap v={v} title={gate?.label} size={v.vertical ? 26 : 24} /></At>
+      <At x={gx - gd * 0.7} y={beltY + v.s(18)} w={gd * 1.4} style={{opacity: baseOn}}><Cap v={v} title={gate?.label} size={v.vertical ? 30 : 32} /></At>
       {/* the packaged release: arrives, is stamped, falls off the belt */}
       <At x={lerp(-S, midX - S / 2, inOld)} y={beltY - S + fall * h * 0.3} style={{opacity: (inOld > 0 ? 1 : 0) * (1 - fall * 0.75),
         transform: `rotate(${fall * 16}deg)`}}>
@@ -152,7 +153,7 @@ export const Fuse: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const sx = lerp(a.x, b.x, u >= n ? 1 : f), sy = lerp(a.y, b.y, u >= n ? 1 : f);
   const baseOn = arriveAt(frame, BASE(line?.atWord));
   const len = Math.max(20, (line?.label ?? '').length);
-  const fs = v.vertical ? 26 : 24;
+  const fs = v.vertical ? 30 : 32;
   return (
     <div style={{position: 'absolute', inset: 0}}>
       <At x={0} y={0} w={w} h={pillH * 0.78} style={{opacity: baseOn, borderRadius: v.rad(14), boxSizing: 'border-box',
@@ -265,7 +266,7 @@ export const Ring: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const gW = col ? w : w * 0.52, gH = col ? h - gy0 : h;
   const ng = Math.max(1, guards.length);
   const gd = Math.min((gH / ng) * 0.62, gW * 0.2);
-  const fs = col ? 28 : 28;
+  const fs = col ? 32 : 34;
   return (
     <div style={{position: 'absolute', inset: 0}}>
       <Svg w={w} h={h}>
@@ -279,10 +280,12 @@ export const Ring: React.FC<ArVizProps> = ({items, accent, w, h}) => {
         {guards.map((g, i) => {
           const gy = gy0 + (gH / ng) * (i + 0.5);
           const on = clamp01(arriveAt(frame, F(g.atWord)));
-          return <line key={i} x1={col ? cx : zoneW} y1={col ? zoneH : cy + zoneH * 0.3} x2={gx0 + gd / 2} y2={gy}
+          return <line key={i} x1={col ? cx : cx + R} y1={col ? cy + R : cy} x2={gx0 + gd / 2} y2={gy}
             stroke={v.sem('green')} strokeWidth={v.s(3)} strokeOpacity={0.5 * on} strokeDasharray={`${v.s(6)} ${v.s(8)}`} />;
         })}
       </Svg>
+      {/* a key on the ring, so the ring reads as a key ring and not as an empty circle */}
+      <At x={cx} y={cy} center style={{opacity: baseOn}}><AssetIcon asset="lucide:key-round" size={R * 0.9} bare tint={yellow} /></At>
       <At x={cx + R + v.s(18)} y={cy - R * 0.6} w={zoneW - cx - R - v.s(18)} style={{opacity: baseOn}}>
         <Cap v={v} title={ring?.label} sub={ring?.sub} align="left" size={fs} color={yellow} />
       </At>

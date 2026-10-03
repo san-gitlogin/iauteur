@@ -57,9 +57,9 @@ export const Gates: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const ad = Math.min(h * 0.3, w * 0.17);
   const gd = Math.min((h / n) * 0.66, w * 0.1);
   const ax = w * 0.02 + ad / 2, ay = h / 2;
-  const gx = w * (v.vertical ? 0.6 : 0.68);
+  const gx = w * (v.vertical ? 0.6 : 0.74);
   const red = v.sem('red');
-  const fs = v.vertical ? 30 : 28;
+  const fs = v.vertical ? 36 : 36;
   return (
     <div style={{position: 'absolute', inset: 0}}>
       <Svg w={w} h={h}>
@@ -119,9 +119,17 @@ export const Layer: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const tx = (i: number) => lerp(w * 0.1, w * 0.9, tools.length === 1 ? 0.5 : i / (tools.length - 1));
   const go = travelAt(frame, F(direct?.atWord), 26);
   const baseOn = arriveAt(frame, BASE(agent?.atWord));
-  const fs = v.vertical ? 26 : 24;
+  const fs = v.vertical ? 30 : 32;
   return (
     <div style={{position: 'absolute', inset: 0}}>
+      {/* the agent's wires go straight through the shelf to the tools */}
+      <Svg w={w} h={h}>
+        {tools.map((t, i) => {
+          const x2 = lerp(w / 2, tx(i), go), y2 = lerp(h * 0.03 + ad, toolY - td / 2, go);
+          return <line key={i} x1={w / 2} y1={h * 0.03 + ad} x2={x2} y2={y2} stroke={v.sem('green')} strokeWidth={v.s(4)}
+            strokeLinecap="round" strokeOpacity={go > 0 ? 0.9 : 0} />;
+        })}
+      </Svg>
       {/* the shelf */}
       <At x={w * 0.03} y={shelfY} w={w * 0.94} h={shelfH} style={{borderRadius: v.rad(18), opacity: baseOn,
         background: hexA(v.a, 0.1), border: `${Math.max(1.5, v.s(2))}px solid ${hexA(v.a, 0.7)}`}} />
@@ -133,21 +141,13 @@ export const Layer: React.FC<ArVizProps> = ({items, accent, w, h}) => {
         const x = lerp(w * 0.4, w * 0.9, jobs.length === 1 ? 0.5 : i / (jobs.length - 1));
         return (
           <React.Fragment key={i}>
-            <At x={x} y={shelfY + shelfH * 0.4} center><Medal v={v} icon={j.icon} d={jd} color={v.a} lit={clamp01(on)} on={0.35 + 0.65 * clamp01(on)} /></At>
-            <At x={x - w * 0.08} y={shelfY + shelfH * 0.4 + jd / 2 + v.s(6)} w={w * 0.16} style={{opacity: clamp01(on)}}>
+            <At x={x} y={shelfY + shelfH * 0.4} center style={{background: v.t.colors.bg, borderRadius: '50%'}}><Medal v={v} icon={j.icon} d={jd} color={v.a} lit={clamp01(on)} on={0.35 + 0.65 * clamp01(on)} /></At>
+            <At x={x - w * 0.045} y={shelfY + shelfH * 0.4 + jd / 2 + v.s(6)} w={w * 0.09} style={{opacity: clamp01(on), background: hexA(v.t.colors.bg, 0.9), borderRadius: v.rad(6)}}>
               <Cap v={v} title={j.label} size={fs * 0.82} mono />
             </At>
           </React.Fragment>
         );
       })}
-      {/* the agent's wires go straight through the shelf to the tools */}
-      <Svg w={w} h={h}>
-        {tools.map((t, i) => {
-          const x2 = lerp(w / 2, tx(i), go), y2 = lerp(h * 0.03 + ad, toolY - td / 2, go);
-          return <line key={i} x1={w / 2} y1={h * 0.03 + ad} x2={x2} y2={y2} stroke={v.sem('green')} strokeWidth={v.s(4)}
-            strokeLinecap="round" strokeOpacity={go > 0 ? 0.9 : 0} />;
-        })}
-      </Svg>
       <At x={w / 2} y={h * 0.03 + ad / 2} center><Medal v={v} icon={agent?.icon ?? 'lucide:bot'} d={ad} color={v.a} on={baseOn} /></At>
       <At x={w / 2 + ad / 2 + v.s(18)} y={h * 0.03 + ad * 0.18} w={w * 0.42} style={{opacity: baseOn}}>
         <Cap v={v} title={agent?.label} sub={agent?.sub} align="left" size={fs} />
@@ -192,7 +192,7 @@ export const Plugs: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const cy = lerp(jy(lo), jy(hi), pos - lo);
   const baseOn = arriveAt(frame, BASE(platform?.atWord));
   const green = v.sem('green'), red = v.sem('red');
-  const fs = v.vertical ? 28 : 28;
+  const fs = v.vertical ? 32 : 38;
   const x1 = px + pd / 2, x2 = jx - jd / 2;
   return (
     <div style={{position: 'absolute', inset: 0}}>
@@ -288,7 +288,7 @@ export const Key: React.FC<ArVizProps> = ({items, accent, w, h}) => {
   const blocked = landAt(frame, F(robot?.atWord) + 26);
   const cliLit = keys.length ? clamp01(arriveAt(frame, F(keys[keys.length - 1].atWord) + 18, 10)) : 1;
   const go = travelAt(frame, F(pass?.atWord), 22);
-  const fs = v.vertical ? 26 : 24;
+  const fs = v.vertical ? 30 : 32;
   return (
     <div style={{position: 'absolute', inset: 0}}>
       <Svg w={w} h={h}>

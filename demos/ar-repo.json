@@ -15,7 +15,8 @@
     "hide": [
       "article.markdown-body details:has(table)",
       "article.markdown-body blockquote:has(a[href^=\"mailto:\"])",
-      "article.markdown-body .markdown-heading:has(+ blockquote:has(a[href^=\"mailto:\"]))"
+      "article.markdown-body .markdown-heading:has(+ blockquote:has(a[href^=\"mailto:\"]))",
+      "article.markdown-body .markdown-heading:has(a[href$=\"sponsors\"])"
     ]
   },
   "steps": [

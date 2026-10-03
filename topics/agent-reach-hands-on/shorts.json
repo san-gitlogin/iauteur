@@ -1,22 +1,270 @@
 {
   "meta": {
-    "topic": "Agent Reach hands-on",
+    "topic": "Agent Reach on X: the first search failed",
     "format": "short",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "subject": "Agent Reach",
+    "subjectKind": "a free, open-source Python command-line installer and health checker that sets up the programs an AI agent uses to read X, Reddit, YouTube, GitHub and other sites",
+    "audioPrefix": "agent-reach-hands-on_short",
+    "onePayoff": "the first X search failed with a 404 on the packaged release and worked from the GitHub source",
+    "openLoop": "Why did the first search on X fail?",
+    "topicAxes": [
+      "hands-on",
+      "review"
+    ],
+    "screenplay": "explainer",
+    "seo": {
+      "title": "I Let My AI Agent Read X For Free. The First Search Failed. #aiagents #agentreach",
+      "altTitles": [
+        "Agent Reach, Tested On X: 404, Then It Worked #ai"
+      ],
+      "hook": "I tested Agent Reach, the free project that lets an AI agent read X. My first search came back with a 404, and here is what fixed it.",
+      "description": "Agent Reach sets up the programs an AI agent uses to read X, Reddit and YouTube. On X, the packaged release of twitter-cli answered with a 404; the build from its GitHub source worked. The full hands-on, with Reddit, YouTube subtitles and a live Claude Code session, is on the channel.",
+      "pinned": "Would you connect your AI agent to X?",
+      "sources": [
+        "Agent Reach by Panniantong (MIT): github.com/Panniantong/Agent-Reach — package: agent-reach",
+        "twitter-cli: github.com/public-clis/twitter-cli"
+      ],
+      "queries": [
+        "agent reach",
+        "ai agent read twitter",
+        "twitter-cli 404"
+      ],
+      "tags": "agent reach,ai agent,twitter cli,claude code,read twitter without api,open source ai,shorts"
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
     "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
   "cover": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles",
+    "title": "My AI Agent Read X For Free",
+    "badge": "AGENT REACH",
+    "note": "THE FIRST TRY FAILED",
+    "art": "lucide:eye",
+    "asset": "lucide:eye",
     "frames": 2
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Agent Reach says your AI agent can read X for free. My first search failed.",
+      "data": {
+        "headline": "Agent Reach: Does It Work?",
+        "subtext": "I tried it on X and Reddit.",
+        "heroAsset": "lucide:eye",
+        "hookVariant": "ask",
+        "atWord": 8
+      },
+      "durationFrames": 173
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "This is Agent Reach on GitHub. Eighty-nine thousand stars, free, and it sets up the tools an AI agent needs to read sites like X.",
+      "data": {
+        "recordedStep": {
+          "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence",
+          "clips": [
+            {
+              "ref": "rec:ar-repo#top",
+              "label": "the official repo",
+              "focus": false,
+              "atWord": 1,
+              "zooms": [],
+              "callouts": [
+                {
+                  "text": "89 thousand stars",
+                  "mark": "stars",
+                  "side": "left",
+                  "color": "yellow",
+                  "wantAtWord": 7
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 268
+    },
+    {
+      "id": "s03",
+      "type": "AR_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "For X, a small program carries the login cookie from your own browser, so X sees you, not a robot, and there's no are-you-human check at all.",
+      "data": {
+        "arStage": {
+          "kind": "key",
+          "color": "blue",
+          "stageTitle": "no robot check",
+          "stage": [
+            {
+              "group": "robot",
+              "label": "a robot browser",
+              "sub": "Are you a robot?",
+              "icon": "lucide:bot",
+              "atWord": 1
+            },
+            {
+              "group": "door",
+              "label": "X",
+              "icon": "si:x",
+              "atWord": 1
+            },
+            {
+              "group": "browser",
+              "label": "your browser",
+              "sub": "logged in",
+              "icon": "si:googlechrome",
+              "atWord": 11
+            },
+            {
+              "group": "key",
+              "label": "your cookie",
+              "atWord": 7
+            },
+            {
+              "group": "cli",
+              "label": "twitter-cli",
+              "icon": "lucide:terminal",
+              "atWord": 3
+            },
+            {
+              "group": "pass",
+              "label": "let through as you",
+              "atWord": 14
+            }
+          ]
+        }
+      },
+      "durationFrames": 287
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "So I searched. Four-oh-four. Not found.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-x#fail",
+              "label": "the first search",
+              "focus": false,
+              "atWord": 1,
+              "zooms": [],
+              "callouts": [
+                {
+                  "text": "X refused the request",
+                  "mark": "err",
+                  "side": "bottom",
+                  "color": "red",
+                  "wantAtWord": 4
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 87
+    },
+    {
+      "id": "s05",
+      "type": "AR_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "The packaged release was behind, and the fix was already sitting in the tool's source code on GitHub.",
+      "data": {
+        "arStage": {
+          "kind": "crate",
+          "color": "blue",
+          "stageTitle": "same tool, two places to get it",
+          "stage": [
+            {
+              "group": "gate",
+              "label": "X",
+              "icon": "si:x",
+              "atWord": 1
+            },
+            {
+              "group": "old",
+              "label": "PyPI",
+              "sub": "v0.8.5",
+              "atWord": 1
+            },
+            {
+              "group": "err",
+              "label": "404",
+              "atWord": 4
+            },
+            {
+              "group": "new",
+              "label": "GitHub",
+              "sub": "v0.8.6",
+              "atWord": 7
+            },
+            {
+              "group": "ok",
+              "label": "the source build works",
+              "atWord": 15
+            }
+          ]
+        }
+      },
+      "durationFrames": 201
+    },
+    {
+      "id": "s06",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "From source, it works. Three posts, likes and views, no browser and no paid API.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-x#search",
+              "label": "the same search again",
+              "focus": false,
+              "atWord": 1,
+              "zooms": [],
+              "callouts": [
+                {
+                  "text": "it works now",
+                  "mark": "ok",
+                  "side": "bottom",
+                  "color": "green",
+                  "wantAtWord": 3
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 173
+    },
+    {
+      "id": "s07",
+      "type": "OUTRO_CTA",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Reddit, YouTube and a live AI agent are in the full video.",
+      "data": {
+        "headline": "Agent Reach, tested",
+        "subtext": "full hands-on on the channel"
+      },
+      "durationFrames": 144
+    }
+  ]
 }

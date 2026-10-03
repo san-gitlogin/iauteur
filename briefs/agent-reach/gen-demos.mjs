@@ -26,7 +26,8 @@ const web = (slug, url, steps) => ({
 // REMOVED FROM THE PAGE, NOT BLURRED (owner, 2026-10-03): the README's sponsor block is third-party
 // advertising with referral links. These selectors delete its heading, its 'appear here' line and the table.
 const SPONSORS = ['article.markdown-body details:has(table)', 'article.markdown-body blockquote:has(a[href^="mailto:"])',
-  'article.markdown-body .markdown-heading:has(+ blockquote:has(a[href^="mailto:"]))'];
+  'article.markdown-body .markdown-heading:has(+ blockquote:has(a[href^="mailto:"]))',
+  'article.markdown-body .markdown-heading:has(a[href$="sponsors"])'];
 const REPO = 'https://github.com/Panniantong/Agent-Reach';
 const ZIP = 'https://github.com/Panniantong/agent-reach/archive/main.zip';
 const VIDEO = 'https://www.youtube.com/watch?v=AJpK3YTTKZ4'; // "Introducing Claude Code", Anthropic, 3:55. (fl1DSmwQKKY answered its subtitle request with HTTP 429.)
@@ -137,8 +138,7 @@ const demos = [
     run('config', 'mcporter config add exa https://mcp.exa.ai/mcp --scope home | Out-Null', 'point it at Exa', {expect: {exitCode: 0}}),
     run('search', '(mcporter call exa.web_search_exa query="Agent Reach github Panniantong" numResults=3) | Select-Object -First 16',
       'a web search with no API key', {expect: {exitCode: 0}}),
-    run('doctor', 'agent-reach doctor', 'the health check again',
-      {expect: {contains: 'Agent Reach', exitCode: 0}, marks: [{id: 'exa', text: '全网语义搜索'}, {id: 'status', text: '状态：'}]}),
+    // (No doctor step here: with mcporter configured it prints the config file's full path.)
   ]}),
 
   // 7. The headline: paste one line into an AI agent. Live Claude Code (Sonnet), clean config home.

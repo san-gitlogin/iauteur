@@ -56,29 +56,6 @@
       "expect": {
         "exitCode": 0
       }
-    },
-    {
-      "id": "doctor",
-      "action": "run",
-      "cmd": "agent-reach doctor",
-      "label": "the health check again",
-      "focus": "terminal",
-      "clearFirst": true,
-      "timeout": 240000,
-      "expect": {
-        "contains": "Agent Reach",
-        "exitCode": 0
-      },
-      "marks": [
-        {
-          "id": "exa",
-          "text": "全网语义搜索"
-        },
-        {
-          "id": "status",
-          "text": "状态："
-        }
-      ]
     }
   ]
 }
