@@ -11,14 +11,18 @@ a safety folder on the system drive with matching checksums. The owner said to s
 
 **Do not work in this clone.** Start from a FRESH clone of origin (everything up to the WIP commit is pushed).
 
-**Owed for the Agent Reach video, not done:**
-- Put a disclaimer board in front of the finished wide cut WITHOUT re-rendering it: render the
-  `disclaimer-wide` composition (src/Disclaimer.tsx, ~27s still, red bold title, white semi-bold body), give it a
-  silent AAC 48 kHz stereo track and the cut's 1/90000 video timebase, then `ffmpeg -f concat -c copy`. Shift
-  every chapter stamp in upload.md by the board's length and add `00:00 - Disclaimer`.
-- New thumbnail copy (owner: "I tested it" does not work; say what it does, then the library name, then
-  "Live Demo!"). The WIP commit sets `Your AI Can Now [Surf the Web]`, note `AGENT REACH`, and a new `stamp` field
-  drawn bottom-left in the hero layout. **None of this has been typechecked or rendered.**
+**Done afterwards, in this clone, at the owner's instruction to keep working here:**
+- The 42 damaged tracked files were restored from origin. The unreadable node_modules was renamed aside
+  (node_modules_broken_*, one of its folders cannot even be listed) and a fresh one installed with a freshly
+  downloaded npm, because the portable npm on the data drive was itself unreadable. tsc and lint pass.
+- **Disclaimer board:** src/Disclaimer.tsx, composition disclaimer-wide (26.3s still, red bold title, white
+  semi-bold body). briefs/agent-reach/add-disclaimer.sh renders it, adds a silent 48 kHz stereo track and joins it
+  in front of the finished cut through MPEG-TS with a stream copy: out/wide-dark-disclaimer.mp4, 17:50,
+  32,119 frames = 790 + 31,329, decodes clean, voice onset within 45 ms of the original. No re-render of the cut.
+  shift-chapters.mjs moved the upload kit's chapter stamps by 26s and added 00:00 - Disclaimer.
+- **Thumbnail:** Your AI Can Now [Surf the Web], name line AGENT REACH, and a new hero field, stamp, drawn
+  bottom-left in the theme's red (LIVE DEMO!). The owner rejected "I tested it" as the payoff.
+- Local git history is still damaged (git fsck). Commits and pushes work; a fresh clone is the clean fix.
 
 ## 2026-10-03 — Agent Reach, hands-on (35 scenes, 17:24 wide + 55s short) · RENDERED · `AR_STAGE`, 11 pictures
 
