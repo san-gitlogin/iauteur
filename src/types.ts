@@ -12905,6 +12905,8 @@ export interface VideoSpec {
     artFade?: number;
     /** hero + an img: art that is a wide banner (a project header), drawn large across the lower right. */
     artWide?: boolean;
+    /** hero: a short shout pinned bottom-left, e.g. "LIVE DEMO!". */
+    stamp?: string;
     /** A PICTURE drawn free on the right: an `img:` asset at full size, no crop, no rounded
      *  tile, no shadow box (owner, 2026-09-12: *"I dont want the component to be covered or
      *  put within a rounded rectangle container ... i want it to flow free"*). Author it as a

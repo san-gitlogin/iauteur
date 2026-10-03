@@ -5,6 +5,7 @@ import {designPacks} from './designs';
 import {showcaseSpec, newShowcaseSpec} from './showcaseSpec';
 import {topics} from './topicsIndex';
 import {Thumbnail} from './Thumbnail';
+import {Disclaimer, disclaimerFrames} from './Disclaimer';
 import {ThemedCover} from './CoverCard';
 import {CameraShowcase, CAMERA_SHOWCASE_FRAMES} from './camera/CameraShowcase';
 
@@ -84,7 +85,7 @@ export const RemotionRoot: React.FC = () => {
                 fps={30}
                 width={1280}
                 height={720}
-                defaultProps={{themeName: darkTheme, title: long.thumbnail.title, badge: long.thumbnail.badge, asset: long.thumbnail.asset, logo: long.brand?.logo, logos: long.thumbnail.logos, logoTint: long.thumbnail.logoTint, note: long.thumbnail.note, replaces: long.thumbnail.replaces, titleStruck: long.thumbnail.titleStruck, art: long.thumbnail.art, layout: long.thumbnail.layout, artFade: long.thumbnail.artFade, artWide: long.thumbnail.artWide}}
+                defaultProps={{themeName: darkTheme, title: long.thumbnail.title, badge: long.thumbnail.badge, asset: long.thumbnail.asset, logo: long.brand?.logo, logos: long.thumbnail.logos, logoTint: long.thumbnail.logoTint, note: long.thumbnail.note, replaces: long.thumbnail.replaces, titleStruck: long.thumbnail.titleStruck, art: long.thumbnail.art, layout: long.thumbnail.layout, artFade: long.thumbnail.artFade, artWide: long.thumbnail.artWide, stamp: long.thumbnail.stamp}}
               />
             ) : null}
             {shorts?.cover ? (
@@ -143,6 +144,17 @@ export const RemotionRoot: React.FC = () => {
           />
         </React.Fragment>
       ))}
+
+      {/* ---------- DISCLAIMER BOARD: rendered alone, joined in front of a finished cut ---------- */}
+      <Composition
+        id="disclaimer-wide"
+        component={Disclaimer}
+        durationInFrames={disclaimerFrames()}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{themeName: 'moderndark', logo: 'img:channel_logo.png'}}
+      />
 
       {/* ---------- CAMERA SYSTEM SHOWCASE (standalone demo) ---------- */}
       <Composition

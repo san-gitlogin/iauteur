@@ -112,8 +112,8 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
   logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
-  titleStruck?: string; art?: string; layout?: 'split' | 'stack' | 'hero' | 'mirror'; artFade?: number; artWide?: boolean;
-}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art, layout, artFade, artWide}) => {
+  titleStruck?: string; art?: string; layout?: 'split' | 'stack' | 'hero' | 'mirror'; artFade?: number; artWide?: boolean; stamp?: string;
+}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art, layout, artFade, artWide, stamp}) => {
   const t = useTheme();
   // STACK puts the art ABOVE the copy, so the copy gets the whole frame width instead of the
   // half a side-by-side leaves it. That is the difference between "WORTH TRYING?" and a
@@ -246,6 +246,14 @@ const ThumbInner: React.FC<{
             : {position: 'absolute', right: 24, top: '50%', transform: 'translateY(-50%)',
                width: 'auto', height: 'auto', maxWidth: 800, maxHeight: '92%', opacity: artFade ?? 1}}
         />
+      ) : null}
+      {hero && stamp ? (
+        // A SHOUT, NOT A SENTENCE (owner, 2026-10-03: "a short word at the bottom saying Live Demo"). Pinned
+        // bottom-left, tilted against the banner, in the theme's red so it is the one warm thing on the card.
+        <div style={{position: 'absolute', left: 90, bottom: 74, transform: 'rotate(-4deg)', zIndex: 3,
+          background: t.colors.sem.red, color: '#fff', fontFamily: t.fonts.display, fontWeight: 800, fontSize: 58,
+          lineHeight: 1, letterSpacing: '0.02em', padding: '18px 30px', borderRadius: 16 * t.style.cornerRadius,
+          textTransform: 'uppercase', boxShadow: `0 14px 50px ${t.colors.sem.red}66`}}>{stamp}</div>
       ) : null}
       {hero ? (
         <AbsoluteFill style={heroPayoff.length > 12
@@ -424,6 +432,7 @@ export const Thumbnail: React.FC<{
   layout?: 'split' | 'stack' | 'hero';
   artFade?: number;
   artWide?: boolean;
+  stamp?: string;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />

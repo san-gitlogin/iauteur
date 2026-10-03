@@ -662,7 +662,7 @@ const spec = {
     },
   },
   brand: c.brand(),
-  thumbnail: {layout: 'hero', badge: 'AGENT REACH · 89K STARS ON GITHUB', title: 'Your AI Can’t Read X? [I Tested It]',
+  thumbnail: {layout: 'hero', badge: '89K STARS ON GITHUB', title: 'Your AI Can Now [Surf the Web]', note: 'AGENT REACH', stamp: 'Live Demo!',
     art: 'img:agent-reach-header.png', asset: 'img:agent-reach-header.png', artWide: true},
   scenes: c.S,
 };
