@@ -3475,7 +3475,7 @@
       "type": "AR_STAGE",
       "transition": "push",
       "background": "zoneB",
-      "narration": "Before we read the health check, you need three symbols, because Agent Reach only prints Chinese. A green tick means ready to use. An exclamation mark in square brackets means installed, but still waiting for setup or a login. And an X in square brackets means not installed. Learn those three and the whole screen opens up.",
+      "narration": "Before we read the health check, you need three symbols, because everything on screen from Agent Reach is in Chinese. A green tick means ready to use. An exclamation mark in square brackets means installed, but still waiting for setup or a login. And an X in square brackets means not installed. Learn those three and the whole screen opens up.",
       "data": {
         "arStage": {
           "kind": "lamps",
@@ -3488,26 +3488,26 @@
               "label": "✅ 可用",
               "sub": "ready to use",
               "text": "ok",
-              "atWord": 13.833
+              "atWord": 15
             },
             {
               "group": "lamp",
               "label": "[!] 已装但需配置/登录",
               "sub": "installed — needs setup or login",
               "text": "warn",
-              "atWord": 24.917
+              "atWord": 26.417
             },
             {
               "group": "lamp",
               "label": "[X] 未安装",
               "sub": "not installed",
               "text": "off",
-              "atWord": 37.833
+              "atWord": 40
             }
           ]
         }
       },
-      "durationFrames": 603,
+      "durationFrames": 627,
       "audio": "audio/agent-reach-hands-on_long_s12.mp3",
       "timingSource": "tts"
     },

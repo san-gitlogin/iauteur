@@ -233,7 +233,7 @@ rec('zoom', 'zoneA',
              {frame: 'full', at: 'So after one'}]}]);
 
 ar('push', 'zoneB',
-  "Before we read the health check, you need three symbols, because Agent Reach only prints Chinese. A green tick " +
+  "Before we read the health check, you need three symbols, because everything on screen from Agent Reach is in Chinese. A green tick " +
   "means ready to use. An exclamation mark in square brackets means installed, but still waiting for setup or a " +
   "login. And an X in square brackets means not installed. Learn those three and the whole screen opens up.",
   {kind: 'lamps', color: 'green', stageTitle: 'the three symbols, translated',

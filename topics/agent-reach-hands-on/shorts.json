@@ -45,8 +45,8 @@
     "title": "My AI Agent Read X For Free",
     "badge": "AGENT REACH",
     "note": "THE FIRST TRY FAILED",
-    "art": "lucide:eye",
-    "asset": "lucide:eye",
+    "art": "img:agent-reach-title.png",
+    "asset": "img:agent-reach-title.png",
     "frames": 2
   },
   "scenes": [
