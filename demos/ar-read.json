@@ -84,13 +84,20 @@
       "clearFirst": true,
       "timeout": 240000,
       "expect": {
+        "contains": "captions",
         "exitCode": 0
-      }
+      },
+      "marks": [
+        {
+          "id": "kind",
+          "text": "Kind: captions"
+        }
+      ]
     },
     {
       "id": "rss",
       "action": "run",
-      "cmd": "python -c \"import feedparser; [print('-', e.title) for e in feedparser.parse('https://hnrss.org/frontpage').entries[:6]]\"",
+      "cmd": "python -c \"import feedparser; [print('-', e.title) for e in feedparser.parse('https://github.blog/feed/').entries[:6]]\"",
       "label": "any RSS feed",
       "focus": "terminal",
       "clearFirst": true,
@@ -108,8 +115,19 @@
       "clearFirst": true,
       "timeout": 240000,
       "expect": {
+        "contains": "repositories",
         "exitCode": 0
-      }
+      },
+      "marks": [
+        {
+          "id": "count",
+          "text": "repositories"
+        },
+        {
+          "id": "head",
+          "text": "DESCRIPTION"
+        }
+      ]
     },
     {
       "id": "bili",

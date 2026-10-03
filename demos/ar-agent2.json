@@ -40,9 +40,9 @@
       "focus": "terminal",
       "timeout": 900000,
       "settleMs": 3000,
-      "waitFor": "===",
+      "waitFor": "$$$",
       "label": "one real question, three platforms",
-      "text": "Agent Reach is installed and agent-reach is on the PATH. Using it, what are people saying about Claude Code this week on X, on Reddit and on YouTube? Two short points from each, with a link. Keep it clean and in English, and end your reply with a line of three equals signs."
+      "text": "Agent Reach is installed and agent-reach is on the PATH. Using it, what are people saying about Claude Code this week on X, on Reddit and on YouTube? Two short points from each, with a link. Keep it clean and in English, and end your reply with a line containing only three dollar signs."
     }
   ]
 }

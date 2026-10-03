@@ -103,10 +103,10 @@ const demos = [
       'download a video’s subtitles, not the video',
       {expect: {contains: 'subs', exitCode: 0}, marks: [{id: 'wrote', text: 'Writing video subtitles'}]}),
     run('read', "Get-Content subs\\*.vtt | Where-Object { $_.Trim() -and $_ -notmatch '-->|<' } | Select-Object -Unique | Select-Object -First 12",
-      'the words of the video, as text', {expect: {exitCode: 0}}),
-    run('rss', `python -c "import feedparser; [print('-', e.title) for e in feedparser.parse('https://hnrss.org/frontpage').entries[:6]]"`,
+      'the words of the video, as text', {expect: {contains: 'captions', exitCode: 0}, marks: [{id: 'kind', text: 'Kind: captions'}]}),
+    run('rss', `python -c "import feedparser; [print('-', e.title) for e in feedparser.parse('https://github.blog/feed/').entries[:6]]"`,
       'any RSS feed', {expect: {exitCode: 0}}),
-    run('gh', 'gh search repos "agent skills" --sort stars --limit 5', 'search GitHub', {expect: {exitCode: 0}}),
+    run('gh', 'gh search repos "agent skills" --sort stars --limit 5', 'search GitHub', {expect: {contains: 'repositories', exitCode: 0}, marks: [{id: 'count', text: 'repositories'}, {id: 'head', text: 'DESCRIPTION'}]}),
     run('bili', 'bili search "Claude Code" --type video -n 3', 'and Bilibili, the Chinese video site', {expect: {exitCode: 0}}),
   ]}),
 
@@ -160,12 +160,14 @@ const demos = [
           ? {id: 'install', action: 'agent', focus: 'terminal', timeout: 900000, settleMs: 3000, waitFor: '+++',
              label: 'the one line from the README, pasted into the agent',
              text: 'Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md ' +
-               'Use the read-only check only, never the system flag. Reply in English, and end your reply with a line of three plus signs.'}
-          : {id: 'ask', action: 'agent', focus: 'terminal', timeout: 900000, settleMs: 3000, waitFor: '===',
+               'Use the read-only check only, never the system flag. Reply in English, and end your reply with a line of three plus signs.',
+             marks: [{id: 'guide', text: 'Installation Guide'}, {id: 'denied', text: 'Denied by auto mode classifier'},
+                     {id: 'why', text: 'Unauthorized Persistence'}]}
+          : {id: 'ask', action: 'agent', focus: 'terminal', timeout: 900000, settleMs: 3000, waitFor: '$$$',   // NOT '===': agent-reach doctor prints a rule of equals signs, which ended the first take at 52s
              label: 'one real question, three platforms',
              text: 'Agent Reach is installed and agent-reach is on the PATH. Using it, what are people saying about Claude Code ' +
                'this week on X, on Reddit and on YouTube? Two short points from each, with a link. Keep it clean and in English, ' +
-               'and end your reply with a line of three equals signs.'},
+               'and end your reply with a line containing only three dollar signs.'},
       ]})),
 ];
 

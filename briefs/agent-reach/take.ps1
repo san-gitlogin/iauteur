@@ -16,6 +16,23 @@ if (Test-Path $ws) { Remove-Item -Recurse -Force $ws }
 # The authoring session's own Claude variables must not reach a `claude` started inside the take.
 Get-ChildItem Env: | Where-Object { $_.Name -like 'CLAUDE*' } | ForEach-Object { Remove-Item "Env:$($_.Name)" }
 
+# NOTHING UNDER THE REAL PROFILE MAY BE ON PATH. An agent take ran `which` for a tool that was not
+# installed, the shell printed the whole PATH, and the operator's user name was on screen in a dozen
+# entries (2026-10-03). The recorder's identity guard reads USERPROFILE, which this script redirects,
+# so it did not see it. So: claude is copied to the tools folder beside the recording root, every PATH
+# entry under the real profile is dropped, and VS Code keeps its server (which it adds to PATH) there too.
+$realHome = $env:USERPROFILE
+$tools = Join-Path (Split-Path $R) 'tools'
+$env:UV_PYTHON_INSTALL_DIR = Join-Path $tools 'python'
+$claudeSrc = Join-Path $realHome '.local\bin\claude.exe'
+$claudeDir = Join-Path $tools 'claude'
+if (Test-Path $claudeSrc) {
+  New-Item -ItemType Directory -Force $claudeDir | Out-Null
+  $dst = Join-Path $claudeDir 'claude.exe'
+  if (-not (Test-Path $dst) -or (Get-Item $dst).Length -ne (Get-Item $claudeSrc).Length) { Copy-Item $claudeSrc $dst -Force }
+}
+$env:VSCODE_CLI_DATA_DIR = Join-Path $tools 'vscode\cli-data'
+
 $recHome = Join-Path $R '_ar-home'
 $env:USERPROFILE = $recHome; $env:HOME = $recHome
 $env:CLAUDE_CONFIG_DIR = Join-Path $recHome '.claude'
@@ -32,7 +49,8 @@ if ($Fresh) {
   if (Test-Path $state) { Remove-Item -Recurse -Force $state }
 }
 $env:VIRTUAL_ENV = $venv
-$env:PATH = "$venv\Scripts;$env:PATH"
+$kept = ($env:PATH -split ';') | Where-Object { $_ -and -not $_.StartsWith($realHome, [System.StringComparison]::OrdinalIgnoreCase) }
+$env:PATH = (@("$venv\Scripts", $claudeDir) + $kept) -join ';'
 
 $secrets = Join-Path $R '_ar-secrets.env'
 if (Test-Path $secrets) {

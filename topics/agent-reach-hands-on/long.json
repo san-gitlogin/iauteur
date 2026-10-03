@@ -1,21 +1,2024 @@
 {
   "meta": {
-    "topic": "Agent Reach hands-on",
+    "topic": "Agent Reach, installed and tested",
     "format": "long",
     "fps": 30,
-    "onePayoff": "TODO",
-    "openLoop": "TODO",
-    "analogy": "TODO"
+    "subject": "Agent Reach",
+    "subjectKind": "a free, open-source Python command-line installer and health checker that sets up the programs an AI agent uses to read X, Reddit, YouTube, GitHub and other sites",
+    "audioPrefix": "agent-reach-hands-on_long",
+    "onePayoff": "what Agent Reach actually is, how to read its Chinese output, and which sites really worked when it was installed and run",
+    "openLoop": "Does Agent Reach really hand an AI agent the whole internet?",
+    "topicAxes": [
+      "hands-on",
+      "review"
+    ],
+    "screenplay": "documentary",
+    "seo": {
+      "title": "If You Use AI Agents, You Are Missing This: Agent Reach, Tested (Free X, Reddit & YouTube Access)",
+      "altTitles": [
+        "I Gave My AI Agent Free Access To X, Reddit & YouTube — Agent Reach, Full Hands-On",
+        "Agent Reach In English: Install It, Read Its Chinese Output, Test Every Site",
+        "My AI Agent Could Not Read X Or Reddit. I Tested Agent Reach To Fix That."
+      ],
+      "hook": "Agent Reach has 89 thousand stars on GitHub and promises your AI agent free access to X, Reddit, YouTube and more — but the whole project is written in Chinese. I install it on camera, translate everything it prints, and try each site myself, including the one that failed first time.",
+      "description": "Agent Reach is a free, open-source project that picks, installs and health-checks the programs an AI agent needs to read the internet: Jina Reader for web pages, yt-dlp for YouTube subtitles and search, gh for GitHub, twitter-cli for X, rdt-cli for Reddit, Exa for web search. In this hands-on I show how to translate the Chinese README in Chrome, install it safely, read the Chinese health check, and run every channel by hand on Windows. X failed with a 404 on the PyPI release and worked from the GitHub source. Claude Code’s auto mode refused the one-line install, and I show what it said. Nine of sixteen channels worked.",
+      "pinned": "Which site would you connect your AI agent to first?",
+      "sources": [
+        "Agent Reach by Panniantong (MIT): github.com/Panniantong/Agent-Reach — package: agent-reach",
+        "twitter-cli (X backend): github.com/public-clis/twitter-cli",
+        "rdt-cli (Reddit backend): github.com/public-clis/rdt-cli",
+        "yt-dlp (YouTube): github.com/yt-dlp/yt-dlp",
+        "Jina Reader (web pages): github.com/jina-ai/reader",
+        "Exa web search via mcporter: exa.ai · github.com/nicobailon/mcporter",
+        "feedparser (RSS): github.com/kurtmckee/feedparser",
+        "bilibili-cli: github.com/public-clis/bilibili-cli",
+        "Claude Code auto mode: code.claude.com/docs/s/claude-code-auto-mode",
+        "Subtitle demo video: “Introducing Claude Code” by Anthropic — youtube.com/watch?v=AJpK3YTTKZ4"
+      ],
+      "queries": [
+        "agent reach github",
+        "agent reach english",
+        "how to let ai agent read twitter",
+        "ai agent read reddit",
+        "claude code read youtube subtitles",
+        "twitter-cli 404",
+        "agent reach install windows"
+      ],
+      "tags": "agent reach,agent-reach,ai agent,claude code,twitter cli,rdt cli,yt-dlp,jina reader,exa search,ai agent internet access,read twitter without api,reddit without api,youtube subtitles,open source ai,github trending"
+    }
   },
   "brand": {
-    "theme": "CHOOSE_DARK_THEME",
+    "theme": "moderndark",
+    "themeLight": "daylight",
+    "design": "moderndark",
+    "background": "grid",
     "channel": "THE NBX STUDIO",
     "logo": "img:channel_logo.png"
   },
   "thumbnail": {
-    "title": "TODO",
-    "badge": "TODO",
-    "asset": "lucide:sparkles"
+    "layout": "hero",
+    "badge": "AGENT REACH · 89K STARS ON GITHUB",
+    "title": "Your AI Can’t Read X or Reddit. [I Tested This]",
+    "note": "FREE · OPEN SOURCE · FULL HANDS-ON",
+    "art": "lucide:eye",
+    "asset": "lucide:eye"
   },
-  "scenes": []
+  "scenes": [
+    {
+      "id": "s01",
+      "type": "HOOK",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Agent Reach says your AI agent can read X and Reddit free. I tested it.",
+      "data": {
+        "headline": "Agent Reach: Does It Work?",
+        "subtext": "X · Reddit · YouTube · GitHub — installed and tested",
+        "heroAsset": "lucide:eye",
+        "hookVariant": "ask",
+        "atWord": 8
+      },
+      "durationFrames": 173
+    },
+    {
+      "id": "s02",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "Here's where we'll end up. On screen is X, searched from a plain terminal — the latest posts from Claude's official account — with no browser window and no paid API. And next is Reddit: this week's most talked-about posts on Claude Code, pulled the same way. By the end you'll know how to set up both, and where the setup didn't go smoothly for me.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-x#search",
+              "label": "X, from a terminal",
+              "focus": true,
+              "atWord": 1,
+              "zooms": [
+                {
+                  "marks": [
+                    "head"
+                  ],
+                  "wantAtWord": 6
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 24
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-reddit#search",
+              "label": "Reddit, this week",
+              "focus": true,
+              "atWord": 29,
+              "zooms": [
+                {
+                  "marks": [
+                    "head"
+                  ],
+                  "wantAtWord": 32
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 44
+                }
+              ],
+              "callouts": []
+            }
+          ]
+        }
+      },
+      "durationFrames": 657
+    },
+    {
+      "id": "s03",
+      "type": "TITLE_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Welcome to the channel. Today we're going to install Agent Reach, a free project, and try the platforms it promises: web pages, YouTube, GitHub, X and Reddit. Everything it prints is in Chinese, so I'll translate. Does it hand an AI agent the whole internet?",
+      "data": {
+        "title": "Agent Reach, hands-on",
+        "subtitle": "installed, translated and tested",
+        "atWord": 14
+      },
+      "durationFrames": 458
+    },
+    {
+      "id": "s04",
+      "type": "RECORDED_STEP",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "So, what is Agent Reach? Here's its official page on GitHub, and you can open the same page yourself, because the link's in the description. On the right, the summary says it plainly: give your AI agent eyes to see the entire internet. Read and search Twitter, Reddit, YouTube and GitHub, with one command-line tool and zero API fees. An API fee, by the way, is what a platform charges a program for reading its data. Under the summary you'll find the MIT license, which means the project is free to use, even at work. And the star count, GitHub's version of a like, sits at eighty-nine thousand. So plenty of people rely on a project most English speakers have never heard of, and I wanted to know whether it holds up.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-repo#top",
+              "label": "the official repo",
+              "focus": true,
+              "atWord": 3,
+              "zooms": [
+                {
+                  "marks": [
+                    "desc"
+                  ],
+                  "band": true,
+                  "wantAtWord": 29
+                },
+                {
+                  "marks": [
+                    "license"
+                  ],
+                  "band": true,
+                  "wantAtWord": 82
+                },
+                {
+                  "marks": [
+                    "stars"
+                  ],
+                  "band": true,
+                  "wantAtWord": 97
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "what the project says about itself",
+                  "mark": "desc",
+                  "side": "left",
+                  "color": "blue",
+                  "wantAtWord": 31
+                },
+                {
+                  "text": "free to use, even at work",
+                  "mark": "license",
+                  "side": "left",
+                  "color": "green",
+                  "wantAtWord": 90
+                },
+                {
+                  "text": "89 thousand stars",
+                  "mark": "stars",
+                  "side": "left",
+                  "color": "yellow",
+                  "wantAtWord": 107
+                }
+              ]
+            }
+          ],
+          "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence"
+        }
+      },
+      "durationFrames": 1284
+    },
+    {
+      "id": "s05",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Now for the catch. Scroll down to the README, which is a project's front page, and the headline about your AI agent is written in Chinese. You don't need to read Chinese to follow along, because your browser can do the work. In Chrome, right-click anywhere on the page and choose Translate to English. A moment later the same headline reads: equip your AI agent with internet capabilities with a single click. Under the address bar, the small Google Translate panel lets you flip back to the original whenever you like. A machine translation is a little stiff, but more than good enough to follow. Its author has also written an English README by hand, so that's the version I'll quote from next.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-translate#zh",
+              "label": "the README, in Chinese",
+              "focus": false,
+              "atWord": 2,
+              "zooms": [
+                {
+                  "marks": [
+                    "tagline"
+                  ],
+                  "band": true,
+                  "wantAtWord": 18
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 27
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-translate#menu",
+              "label": "right-click → Translate",
+              "focus": false,
+              "atWord": 37,
+              "zooms": [],
+              "callouts": [
+                {
+                  "text": "right-click, then Translate to English",
+                  "mark": "item",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 45
+                }
+              ]
+            },
+            {
+              "ref": "rec:ar-translate#translated",
+              "label": "the same page, in English",
+              "focus": false,
+              "atWord": 59,
+              "zooms": [
+                {
+                  "marks": [
+                    "tagline"
+                  ],
+                  "band": true,
+                  "wantAtWord": 62
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 73
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Chrome’s built-in translator",
+                  "mark": "panel",
+                  "side": "left",
+                  "color": "blue",
+                  "wantAtWord": 79
+                }
+              ]
+            }
+          ],
+          "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence"
+        }
+      },
+      "durationFrames": 1199
+    },
+    {
+      "id": "s06",
+      "type": "AR_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Why would anyone need this? Picture your AI agent — an AI that can run commands for you, like Claude Code or Cursor. The trouble starts where the good discussions live. According to the README, X charges for its official API, and moderate use comes to about two hundred and fifteen dollars a month. Reddit answers a server with error four-oh-three, which means forbidden. XiaoHongShu, a Chinese review app, wants a login before you can browse. And Bilibili, China's answer to YouTube, blocks visitors from overseas servers. Four platforms, four locked doors — so that's the problem Agent Reach sets out to solve.",
+      "data": {
+        "arStage": {
+          "kind": "gates",
+          "color": "blue",
+          "stageTitle": "what stops a program at each platform",
+          "premise": "Your AI agent on the left. Each platform on the right has its own barrier, as the README lists them.",
+          "stage": [
+            {
+              "group": "agent",
+              "label": "your AI agent",
+              "icon": "lucide:bot",
+              "atWord": 6
+            },
+            {
+              "group": "gate",
+              "label": "X (Twitter)",
+              "icon": "si:x",
+              "sub": "~$215 a month",
+              "atWord": 36
+            },
+            {
+              "group": "gate",
+              "label": "Reddit",
+              "icon": "si:reddit",
+              "sub": "403 forbidden",
+              "atWord": 55
+            },
+            {
+              "group": "gate",
+              "label": "XiaoHongShu",
+              "icon": "si:xiaohongshu",
+              "sub": "login required",
+              "atWord": 65
+            },
+            {
+              "group": "gate",
+              "label": "Bilibili",
+              "icon": "si:bilibili",
+              "sub": "blocked overseas",
+              "atWord": 77
+            }
+          ]
+        },
+        "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+      },
+      "durationFrames": 1009
+    },
+    {
+      "id": "s07",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Here's the English README. At the top, the promise is one-click access to the entire internet, with the most reliable access path for each platform chosen, installed and health-checked for you. Hold on to those two words, access path, because they're the whole idea. Just below sits the table we drew a moment ago: the price of the X API, and Reddit turning servers away. Then come the supported platforms. Any web page is returned as clean Markdown, which is plain text with simple formatting. X needs a cookie, and I'll explain what a cookie is when we get there. Further down is YouTube, with subtitles and search. And for Reddit, the README admits there's no zero-config path, because Reddit blocks anonymous visitors. So even the project's own page tells you that two of the big names will take some effort, which I appreciated.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-readme#top",
+              "label": "the English README",
+              "focus": true,
+              "atWord": 3,
+              "zooms": [
+                {
+                  "marks": [
+                    "tagline"
+                  ],
+                  "band": true,
+                  "wantAtWord": 11
+                },
+                {
+                  "marks": [
+                    "promise"
+                  ],
+                  "band": true,
+                  "wantAtWord": 20
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-readme#pain",
+              "label": "why it is hard",
+              "focus": true,
+              "atWord": 49,
+              "zooms": [
+                {
+                  "marks": [
+                    "x"
+                  ],
+                  "band": true,
+                  "wantAtWord": 57
+                },
+                {
+                  "marks": [
+                    "reddit"
+                  ],
+                  "band": true,
+                  "wantAtWord": 62
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-readme#platforms",
+              "label": "supported platforms",
+              "focus": true,
+              "atWord": 72,
+              "zooms": [
+                {
+                  "marks": [
+                    "web"
+                  ],
+                  "band": true,
+                  "wantAtWord": 77
+                },
+                {
+                  "marks": [
+                    "x"
+                  ],
+                  "band": true,
+                  "wantAtWord": 86
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-readme#platforms2",
+              "label": "further down the table",
+              "focus": true,
+              "atWord": 100,
+              "zooms": [
+                {
+                  "marks": [
+                    "yt"
+                  ],
+                  "band": true,
+                  "wantAtWord": 105
+                },
+                {
+                  "marks": [
+                    "reddit"
+                  ],
+                  "band": true,
+                  "wantAtWord": 116
+                }
+              ],
+              "callouts": []
+            }
+          ],
+          "sourceNote": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+        }
+      },
+      "durationFrames": 1398
+    },
+    {
+      "id": "s08",
+      "type": "AR_STAGE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "So what is Agent Reach, really? Most people get this part wrong, and I did too at first. Agent Reach doesn't read anything itself. Its author calls it a capability layer, so picture a thin shelf sitting between your agent and a set of ordinary tools. That shelf has four jobs. First, the shelf picks the tool that currently works for each platform. Second, it installs that tool. Third, it checks the tool is healthy. And fourth, it tells your agent which one to use. After that, your agent calls those tools directly — yt-dlp for YouTube, the GitHub command line for GitHub, twitter-cli for X. Nothing sits in the middle, which means I can run every one of them by hand in this video and show you exactly what your agent would see.",
+      "data": {
+        "arStage": {
+          "kind": "layer",
+          "color": "blue",
+          "stageTitle": "a layer, not another tool",
+          "premise": "Agent Reach is the shelf in the middle. The tools underneath do the reading; the agent calls them itself.",
+          "stage": [
+            {
+              "group": "agent",
+              "label": "your AI agent",
+              "sub": "Claude Code, Cursor…",
+              "icon": "lucide:bot",
+              "atWord": 1
+            },
+            {
+              "group": "layer",
+              "label": "Agent Reach",
+              "sub": "the capability layer",
+              "atWord": 30
+            },
+            {
+              "group": "job",
+              "label": "picks",
+              "icon": "lucide:list-checks",
+              "atWord": 53
+            },
+            {
+              "group": "job",
+              "label": "installs",
+              "icon": "lucide:download",
+              "atWord": 65
+            },
+            {
+              "group": "job",
+              "label": "checks",
+              "icon": "lucide:stethoscope",
+              "atWord": 70
+            },
+            {
+              "group": "job",
+              "label": "routes",
+              "icon": "lucide:signpost",
+              "atWord": 78
+            },
+            {
+              "group": "tool",
+              "label": "Jina Reader",
+              "icon": "lucide:globe",
+              "atWord": 1
+            },
+            {
+              "group": "tool",
+              "label": "yt-dlp",
+              "icon": "si:youtube",
+              "atWord": 1
+            },
+            {
+              "group": "tool",
+              "label": "gh",
+              "icon": "si:github",
+              "atWord": 1
+            },
+            {
+              "group": "tool",
+              "label": "twitter-cli",
+              "icon": "si:x",
+              "atWord": 1
+            },
+            {
+              "group": "tool",
+              "label": "rdt-cli",
+              "icon": "si:reddit",
+              "atWord": 1
+            },
+            {
+              "group": "direct",
+              "label": "the agent calls the tools itself",
+              "sub": "nothing in between",
+              "atWord": 90
+            }
+          ]
+        },
+        "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+      },
+      "durationFrames": 1303
+    },
+    {
+      "id": "s09",
+      "type": "AR_STAGE",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Why is a layer like that worth having? Because tools for reading these sites break all the time — the sites keep changing. So for every platform, Agent Reach keeps an ordered list of tools: a first choice, then fallbacks. Take Bilibili. Its first choice used to be yt-dlp. In June, according to the README, Bilibili started refusing it with an error four-one-two. So the list was reordered: a tool called bili-cli took over, OpenCLI waits behind it, and a plain search API sits last. Anyone who had Agent Reach installed, the README says, didn't have to do a thing.",
+      "data": {
+        "arStage": {
+          "kind": "plugs",
+          "color": "blue",
+          "stageTitle": "one platform, an ordered list of tools",
+          "premise": "The green cable is the tool in use. When a tool stops working, the cable moves to the next one down.",
+          "stage": [
+            {
+              "group": "platform",
+              "label": "Bilibili",
+              "icon": "si:bilibili",
+              "atWord": 41
+            },
+            {
+              "group": "back",
+              "label": "yt-dlp",
+              "sub": "refused with a 412 in June",
+              "text": "dead",
+              "icon": "lucide:download",
+              "atWord": 57
+            },
+            {
+              "group": "back",
+              "label": "bili-cli",
+              "sub": "in use now",
+              "icon": "lucide:terminal",
+              "atWord": 72
+            },
+            {
+              "group": "back",
+              "label": "OpenCLI",
+              "sub": "waiting behind it",
+              "icon": "lucide:app-window",
+              "atWord": 75
+            },
+            {
+              "group": "back",
+              "label": "search API",
+              "sub": "the last resort",
+              "icon": "lucide:search",
+              "atWord": 80
+            }
+          ]
+        },
+        "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+      },
+      "durationFrames": 980
+    },
+    {
+      "id": "s10",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneB",
+      "narration": "Right. Enough reading. Let's install Agent Reach on a clean setup and see what it actually does.",
+      "data": {
+        "chapter": {
+          "number": "1",
+          "title": "Install it",
+          "subtitle": "one package, one read-only check",
+          "atWord": 3
+        }
+      },
+      "durationFrames": 192
+    },
+    {
+      "id": "s11",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "I'm starting in a fresh Python environment, which is an empty box for packages, so nothing here can touch the rest of my computer. Installing is one line: pip, Python's package installer, pointed straight at the project's GitHub address. I've sped this part up, because in real time the install took a little over two minutes. Next comes agent-reach install. Look at the first thing it prints: safe mode. In safe mode the installer only looks. It checks what's on your computer and changes nothing, so you'd have to add a flag called system before it's allowed to install anything more. Near the end, one line confirms it: no changes were made. Further up, the report says a helper called mcporter is not installed, which we'll need later for web search. And those stray codes in square brackets are only a display bug in the installer. So after one install command, the only new thing on this computer is the package itself.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-install#pip",
+              "label": "pip install · 8× speed",
+              "focus": true,
+              "atWord": 3,
+              "zooms": [
+                {
+                  "marks": [
+                    "ok"
+                  ],
+                  "band": true,
+                  "wantAtWord": 52
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-install#check",
+              "label": "the read-only check",
+              "focus": true,
+              "atWord": 49,
+              "zooms": [
+                {
+                  "marks": [
+                    "safe"
+                  ],
+                  "band": true,
+                  "wantAtWord": 68
+                },
+                {
+                  "marks": [
+                    "mcp"
+                  ],
+                  "band": true,
+                  "wantAtWord": 121
+                },
+                {
+                  "marks": [
+                    "done"
+                  ],
+                  "band": true,
+                  "wantAtWord": 109
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "looks, installs nothing",
+                  "mark": "safe",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 74
+                },
+                {
+                  "text": "nothing was changed",
+                  "mark": "done",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 105
+                },
+                {
+                  "text": "a helper for web search — later",
+                  "mark": "mcp",
+                  "side": "right",
+                  "color": "orange",
+                  "wantAtWord": 118
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 1569
+    },
+    {
+      "id": "s12",
+      "type": "AR_STAGE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "Before we read the health check, you need three symbols, because Agent Reach only prints Chinese. A green tick means ready to use. An exclamation mark in square brackets means installed, but still waiting for setup or a login. And an X in square brackets means not installed. Learn those three and the whole screen opens up.",
+      "data": {
+        "arStage": {
+          "kind": "lamps",
+          "color": "green",
+          "stageTitle": "the three symbols, translated",
+          "premise": "The tool’s own Chinese legend on top, and what each symbol means underneath.",
+          "stage": [
+            {
+              "group": "lamp",
+              "label": "✅ 可用",
+              "sub": "ready to use",
+              "text": "ok",
+              "atWord": 17
+            },
+            {
+              "group": "lamp",
+              "label": "[!] 已装但需配置/登录",
+              "sub": "installed — needs setup or login",
+              "text": "warn",
+              "atWord": 24
+            },
+            {
+              "group": "lamp",
+              "label": "[X] 未安装",
+              "sub": "not installed",
+              "text": "off",
+              "atWord": 40
+            }
+          ]
+        }
+      },
+      "durationFrames": 572
+    },
+    {
+      "id": "s13",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Now the health check itself, a command called agent-reach doctor. Up top is that legend. YouTube has the green tick, so videos and subtitles are ready. RSS feeds are ready too, and so is reading any web page. GitHub has the exclamation mark, because the GitHub tool is here but the doctor hasn't confirmed I'm logged in. Next, the line with the X is web search, which is waiting for the mcporter helper. And at the bottom, the score: five of sixteen channels available. A channel is simply one platform Agent Reach can reach. So a fresh install gives you five, and the other eleven each need something from you. Getting them is what the rest of this video is about.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-install#doctor",
+              "label": "agent-reach doctor",
+              "focus": true,
+              "atWord": 2,
+              "zooms": [
+                {
+                  "marks": [
+                    "yt"
+                  ],
+                  "band": true,
+                  "wantAtWord": 16
+                },
+                {
+                  "marks": [
+                    "rss"
+                  ],
+                  "band": true,
+                  "wantAtWord": 27
+                },
+                {
+                  "marks": [
+                    "gh"
+                  ],
+                  "band": true,
+                  "wantAtWord": 39
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 74
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the legend: ready · needs setup · not installed",
+                  "mark": "legend",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 11
+                },
+                {
+                  "text": "web search: not installed yet",
+                  "mark": "exa",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 59
+                },
+                {
+                  "text": "5 of 16 channels available",
+                  "mark": "status",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 80
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 1180
+    },
+    {
+      "id": "s14",
+      "type": "AR_STAGE",
+      "transition": "slide",
+      "background": "zoneB",
+      "narration": "Here are all sixteen at a glance. Five lit up straight after installing: web pages, YouTube, RSS feeds, and two Chinese sites, the developer forum V2EX and Bilibili. GitHub and web search are one small step away. X and Reddit need you to be logged in. And the rest — Facebook, Instagram and LinkedIn, plus a handful of Chinese platforms — need a logged-in desktop browser or extra setup, so I'm leaving those out today and sticking to the ones most of you will use.",
+      "data": {
+        "arStage": {
+          "kind": "board",
+          "color": "green",
+          "stageTitle": "sixteen channels, after a fresh install",
+          "premise": "Green is ready now. Yellow needs a login or one more step. Grey is not set up in this video.",
+          "stage": [
+            {
+              "group": "ch",
+              "label": "Web pages",
+              "icon": "lucide:globe",
+              "text": "ok",
+              "sub": "ready",
+              "atWord": 14
+            },
+            {
+              "group": "ch",
+              "label": "YouTube",
+              "icon": "si:youtube",
+              "text": "ok",
+              "sub": "ready",
+              "atWord": 16
+            },
+            {
+              "group": "ch",
+              "label": "RSS feeds",
+              "icon": "si:rss",
+              "text": "ok",
+              "sub": "ready",
+              "atWord": 17
+            },
+            {
+              "group": "ch",
+              "label": "V2EX",
+              "icon": "si:v2ex",
+              "text": "ok",
+              "sub": "ready",
+              "atWord": 25
+            },
+            {
+              "group": "ch",
+              "label": "Bilibili",
+              "icon": "si:bilibili",
+              "text": "ok",
+              "sub": "ready",
+              "atWord": 27
+            },
+            {
+              "group": "ch",
+              "label": "GitHub",
+              "icon": "si:github",
+              "text": "login",
+              "sub": "login check",
+              "atWord": 29
+            },
+            {
+              "group": "ch",
+              "label": "Web search",
+              "icon": "lucide:search",
+              "text": "login",
+              "sub": "one helper",
+              "atWord": 29
+            },
+            {
+              "group": "ch",
+              "label": "X",
+              "icon": "si:x",
+              "text": "login",
+              "sub": "needs login",
+              "atWord": 38
+            },
+            {
+              "group": "ch",
+              "label": "Reddit",
+              "icon": "si:reddit",
+              "text": "login",
+              "sub": "needs login",
+              "atWord": 38
+            },
+            {
+              "group": "ch",
+              "label": "Facebook",
+              "icon": "si:facebook",
+              "text": "off",
+              "sub": "not today",
+              "atWord": 51
+            },
+            {
+              "group": "ch",
+              "label": "Instagram",
+              "icon": "si:instagram",
+              "text": "off",
+              "sub": "not today",
+              "atWord": 51
+            },
+            {
+              "group": "ch",
+              "label": "LinkedIn",
+              "icon": "lucide:briefcase",
+              "text": "off",
+              "sub": "not today",
+              "atWord": 51
+            },
+            {
+              "group": "ch",
+              "label": "XiaoHongShu",
+              "icon": "si:xiaohongshu",
+              "text": "off",
+              "sub": "not today",
+              "atWord": 56
+            },
+            {
+              "group": "ch",
+              "label": "Xueqiu",
+              "icon": "lucide:chart-candlestick",
+              "text": "off",
+              "sub": "not today",
+              "atWord": 56
+            },
+            {
+              "group": "ch",
+              "label": "Xiaoyuzhou",
+              "icon": "lucide:podcast",
+              "text": "off",
+              "sub": "not today",
+              "atWord": 56
+            },
+            {
+              "group": "ch",
+              "label": "Boss Zhipin",
+              "icon": "lucide:id-card",
+              "text": "off",
+              "sub": "not today",
+              "atWord": 56
+            },
+            {
+              "group": "tally",
+              "label": "ready after a fresh install",
+              "atWord": 1
+            }
+          ]
+        }
+      },
+      "durationFrames": 838
+    },
+    {
+      "id": "s15",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Let's start with everything that works with no login at all.",
+      "data": {
+        "chapter": {
+          "number": "2",
+          "title": "No login needed",
+          "subtitle": "web pages, YouTube, RSS, GitHub, search",
+          "atWord": 2
+        }
+      },
+      "durationFrames": 135
+    },
+    {
+      "id": "s16",
+      "type": "AR_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "How is your agent meant to use all this? You don't learn any commands. You simply ask, in plain words, and a small instruction file that Agent Reach installs — the project calls it a skill — points the agent at the right tool. Read this link goes to a free service called Jina Reader. What does this video cover goes to yt-dlp. Search GitHub goes to the GitHub command line. And subscribe to this feed goes to a Python library called feedparser. I'm going to run each of those by hand now, so you can see exactly what your agent gets back.",
+      "data": {
+        "arStage": {
+          "kind": "signpost",
+          "color": "blue",
+          "stageTitle": "what you ask, and where it goes",
+          "premise": "Your request on the left. Each arm of the signpost is the tool the skill file points the agent to.",
+          "stage": [
+            {
+              "group": "ask",
+              "label": "you say",
+              "atWord": 1
+            },
+            {
+              "group": "arm",
+              "label": "curl r.jina.ai/URL",
+              "sub": "“Read this link”",
+              "icon": "lucide:globe",
+              "atWord": 45
+            },
+            {
+              "group": "arm",
+              "label": "yt-dlp",
+              "sub": "“What does this video cover?”",
+              "icon": "si:youtube",
+              "atWord": 56
+            },
+            {
+              "group": "arm",
+              "label": "gh search repos",
+              "sub": "“Search GitHub for…”",
+              "icon": "si:github",
+              "atWord": 64
+            },
+            {
+              "group": "arm",
+              "label": "feedparser",
+              "sub": "“Subscribe to this feed”",
+              "icon": "si:rss",
+              "atWord": 72
+            }
+          ]
+        },
+        "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+      },
+      "durationFrames": 1009
+    },
+    {
+      "id": "s17",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "First, a web page. I'm asking Jina Reader for Wikipedia's article on the Model Context Protocol, and I've kept just the first few lines. Look at what arrives: a title, the source address, and then the article as clean text, with no adverts, no menus and no scripts. Clean text matters because an AI reads words, so every bit of clutter you strip out is something it doesn't have to wade through. One Windows tip: type curl dot e-x-e, because plain curl means something else in PowerShell. Next, YouTube search, with yt-dlp. I asked for five results for what is Claude Code, and here they are — the channel on the left, the title on the right — without opening a browser.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-read#web",
+              "label": "a web page as text",
+              "focus": true,
+              "atWord": 2,
+              "zooms": [
+                {
+                  "marks": [
+                    "title"
+                  ],
+                  "band": true,
+                  "wantAtWord": 29
+                },
+                {
+                  "marks": [
+                    "src"
+                  ],
+                  "band": true,
+                  "wantAtWord": 31
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 49
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-read#ytsearch",
+              "label": "YouTube search",
+              "focus": true,
+              "atWord": 83,
+              "zooms": [],
+              "callouts": [
+                {
+                  "text": "channel  |  title",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 89
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 1189
+    },
+    {
+      "id": "s18",
+      "type": "AR_STAGE",
+      "transition": "iris",
+      "background": "zoneB",
+      "narration": "Search is handy, but the next feature is the one I'd install Agent Reach for. A video is the worst thing you can hand an AI, because it can't sit and watch for half an hour. But nearly every YouTube video carries subtitles, and subtitles are just text with timestamps. So yt-dlp skips the video completely and downloads only the words. I'm Boris, I'm an engineer. I'm a product manager. What people build. Line by line, a four-minute video turns into a small text file, which means your agent can read it, summarise it, or search inside it.",
+      "data": {
+        "arStage": {
+          "kind": "reel",
+          "color": "blue",
+          "stageTitle": "a video, turned into text",
+          "premise": "The film strip is the video. Each line on the right is a subtitle line from it, as plain text.",
+          "stage": [
+            {
+              "group": "video",
+              "label": "Introducing Claude Code",
+              "sub": "Anthropic · 3:55",
+              "atWord": 16
+            },
+            {
+              "group": "line",
+              "label": "I'm Boris I'm an engineer I'm cat",
+              "atWord": 62
+            },
+            {
+              "group": "line",
+              "label": "I'm a product manager we love seeing",
+              "atWord": 67
+            },
+            {
+              "group": "line",
+              "label": "what people build with quad especially",
+              "atWord": 71
+            },
+            {
+              "group": "read",
+              "label": "text your agent can read",
+              "sub": "the video itself is never downloaded",
+              "atWord": 83
+            }
+          ]
+        },
+        "source": "Captions: “Introducing Claude Code” (Anthropic), YouTube"
+      },
+      "durationFrames": 961
+    },
+    {
+      "id": "s19",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Here's the actual command. Its options say: write the automatic subtitles, in English, and skip the download of the video itself. One line near the bottom tells you it worked, writing video subtitles. Open the file, and there's the start of the video as plain text. Now look closely. You'll read quad where the speakers are saying Claude. Why? Because these are YouTube's automatic captions, and automatic captions mishear names. An AI reading them will usually work the name out from context, but it's worth knowing the text isn't perfect. Also, on my first attempt, with a different video, YouTube refused with a too-many-requests error. So subtitles work, but YouTube does push back when it's asked too often.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-read#subs",
+              "label": "subtitles only",
+              "focus": true,
+              "atWord": 2,
+              "zooms": [
+                {
+                  "marks": [
+                    "wrote"
+                  ],
+                  "band": true,
+                  "wantAtWord": 31
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "the words only — no video file",
+                  "mark": "wrote",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 27
+                }
+              ]
+            },
+            {
+              "ref": "rec:ar-read#read",
+              "label": "the video, as text",
+              "focus": true,
+              "atWord": 38,
+              "zooms": [
+                {
+                  "marks": [
+                    "kind"
+                  ],
+                  "wantAtWord": 34
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 47
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "“quad” is the caption mishearing “Claude”",
+                  "mark": null,
+                  "side": "top",
+                  "color": "orange",
+                  "wantAtWord": 51
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 1151
+    },
+    {
+      "id": "s20",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "Three quick ones. RSS is the feed format most blogs still publish, and here are the six latest headlines from GitHub's own blog, from one line of Python. GitHub search runs through gh, GitHub's official tool: five repositories about agent skills, sorted by stars. To be straight with you, that one only worked since I was already logged in to gh. Logged out, gh refused and asked me to sign in, so the README's zero-config label is a bit generous there. Last, web search, through a service called Exa. Web search needed the mcporter helper from earlier, installed with one npm command. No API key was involved, and the first thing it found was the project's own install guide.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-read#rss",
+              "label": "an RSS feed",
+              "focus": true,
+              "atWord": 2,
+              "zooms": [],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-read#gh",
+              "label": "GitHub search",
+              "focus": true,
+              "atWord": 29,
+              "zooms": [
+                {
+                  "marks": [
+                    "count"
+                  ],
+                  "band": true,
+                  "wantAtWord": 37
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 62
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "worked because gh was already logged in",
+                  "mark": "head",
+                  "side": "bottom",
+                  "color": "orange",
+                  "wantAtWord": 45
+                }
+              ]
+            },
+            {
+              "ref": "rec:ar-exa#search",
+              "label": "web search, no API key",
+              "focus": true,
+              "atWord": 79,
+              "zooms": [],
+              "callouts": []
+            }
+          ]
+        }
+      },
+      "durationFrames": 1161
+    },
+    {
+      "id": "s21",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Now the two everyone asks about, and the two that fight back the hardest: X and Reddit.",
+      "data": {
+        "chapter": {
+          "number": "3",
+          "title": "X and Reddit",
+          "subtitle": "the ones that need your login",
+          "atWord": 3
+        }
+      },
+      "durationFrames": 192
+    },
+    {
+      "id": "s22",
+      "type": "AR_STAGE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "If you've ever tried to automate a browser on X or Reddit, you know what happens. The site spots a robot, and you get the are-you-human check, or a temporary block. Agent Reach's tools take a different road, and here's why it works. When you log in to X in your own browser, X hands that browser a cookie. A cookie is a small piece of text that says: this person is already logged in. For X, two values matter, called auth token and c-t-zero. You copy those two values out of your browser once and give them to a small program. Then the program asks X for data the way your browser would, carrying your cookie. So there's no fake browser for X to catch, because there's no browser at all — only a small program that X recognises as you.",
+      "data": {
+        "arStage": {
+          "kind": "key",
+          "color": "blue",
+          "stageTitle": "why the robot check never shows up",
+          "premise": "Top lane: an automated browser, stopped. Bottom lane: your own cookie, carried by a small program.",
+          "stage": [
+            {
+              "group": "robot",
+              "label": "an automated browser",
+              "sub": "Are you a robot?",
+              "icon": "lucide:bot",
+              "atWord": 6
+            },
+            {
+              "group": "door",
+              "label": "X",
+              "icon": "si:x",
+              "atWord": 17
+            },
+            {
+              "group": "browser",
+              "label": "your own browser",
+              "sub": "already logged in",
+              "icon": "si:googlechrome",
+              "atWord": 50
+            },
+            {
+              "group": "key",
+              "label": "auth_token",
+              "atWord": 82
+            },
+            {
+              "group": "key",
+              "label": "ct0",
+              "atWord": 85
+            },
+            {
+              "group": "cli",
+              "label": "twitter-cli",
+              "sub": "a small program",
+              "icon": "lucide:terminal",
+              "atWord": 101
+            },
+            {
+              "group": "pass",
+              "label": "let through as you",
+              "sub": "no browser to detect",
+              "atWord": 104
+            }
+          ]
+        }
+      },
+      "durationFrames": 1379
+    },
+    {
+      "id": "s23",
+      "type": "QUIZ_CARD",
+      "transition": "fade",
+      "background": "zoneA",
+      "narration": "Quick check before we run it. Why doesn't X show the are-you-a-robot test to this program? Is it A, because Agent Reach pays for the official API? B, because the program carries the cookie from a browser where you've already logged in? Or C, because it hides behind a proxy server? Have a think, and pause the video if you want longer. Ready? The answer is B. There's no payment and no proxy, because the program simply shows X your own login.",
+      "data": {
+        "quiz": {
+          "question": "Why is there no “are you a robot?” check?",
+          "answerIndex": 1,
+          "why": "The program carries your own login cookie. No API fee, no proxy.",
+          "atWord": 1,
+          "options": [
+            {
+              "text": "It pays for the official API",
+              "atWord": 17
+            },
+            {
+              "text": "It carries your logged-in cookie",
+              "atWord": 28
+            },
+            {
+              "text": "It hides behind a proxy",
+              "atWord": 43
+            }
+          ],
+          "revealAtWord": 63
+        }
+      },
+      "durationFrames": 809
+    },
+    {
+      "id": "s24",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneB",
+      "narration": "I've put my two cookie values into the terminal beforehand, off camera, because they're as sensitive as a password. Then I install the X tool, twitter-cli, from PyPI, which is Python's package index. And I run my first search: posts about Claude Code from Claude's official account. And the search fails. X answers with a four-oh-four, which means not found. Notice the warning too: failed to init client transaction. So the very first thing I tried on X didn't work — and that failure is the most useful moment in this video, because it's exactly what Agent Reach claims to protect you from.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-x#pip",
+              "label": "install twitter-cli",
+              "focus": true,
+              "atWord": 2,
+              "zooms": [],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-x#fail",
+              "label": "the first search",
+              "focus": true,
+              "atWord": 37,
+              "zooms": [
+                {
+                  "marks": [
+                    "err"
+                  ],
+                  "band": true,
+                  "wantAtWord": 56
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 61
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "X refused the request",
+                  "mark": "err",
+                  "side": "right",
+                  "color": "red",
+                  "wantAtWord": 49
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 1009
+    },
+    {
+      "id": "s25",
+      "type": "AR_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So what went wrong? I can't tell you what changed on X's side. What I can show you is where the working copy was. On PyPI, the packaged release of twitter-cli, version zero point eight point five, got a four-oh-four. But the tool's developers had already moved on in their source code on GitHub, to version zero point eight point six, and that newer version hadn't been published as a package yet. So a working tool existed. That fix was simply one step further back than the usual install command reaches.",
+      "data": {
+        "arStage": {
+          "kind": "crate",
+          "color": "blue",
+          "stageTitle": "same tool, two places to get it",
+          "premise": "Two copies of twitter-cli heading for X: the packaged release, and the newer source on GitHub.",
+          "stage": [
+            {
+              "group": "gate",
+              "label": "X",
+              "icon": "si:x",
+              "atWord": 1
+            },
+            {
+              "group": "old",
+              "label": "PyPI",
+              "sub": "v0.8.5",
+              "atWord": 27
+            },
+            {
+              "group": "err",
+              "label": "404",
+              "atWord": 38
+            },
+            {
+              "group": "new",
+              "label": "GitHub",
+              "sub": "v0.8.6",
+              "atWord": 49
+            },
+            {
+              "group": "ok",
+              "label": "the source build gets through",
+              "sub": "not yet published as a package",
+              "atWord": 73
+            }
+          ]
+        }
+      },
+      "durationFrames": 895
+    },
+    {
+      "id": "s26",
+      "type": "AR_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "Here's where the ordered list earns its keep. For X, the README lists twitter-cli first, then OpenCLI, which borrows your logged-in browser, and then an older tool called bird. Agent Reach's job is to notice when the first choice is broken and move you along. In my case the first choice wasn't dead, because it only needed the newer build — so the newer build is what I installed.",
+      "data": {
+        "arStage": {
+          "kind": "plugs",
+          "color": "green",
+          "stageTitle": "the list for X, from the README",
+          "premise": "The green cable is the tool in use for X. The others are the fallbacks, in order.",
+          "stage": [
+            {
+              "group": "platform",
+              "label": "X",
+              "icon": "si:x",
+              "atWord": 9
+            },
+            {
+              "group": "back",
+              "label": "twitter-cli",
+              "sub": "first choice — needed the newer build",
+              "icon": "lucide:terminal",
+              "atWord": 14
+            },
+            {
+              "group": "back",
+              "label": "OpenCLI",
+              "sub": "borrows your logged-in browser",
+              "icon": "lucide:app-window",
+              "atWord": 16
+            },
+            {
+              "group": "back",
+              "label": "bird",
+              "sub": "an older tool",
+              "icon": "lucide:bird",
+              "atWord": 27
+            }
+          ]
+        },
+        "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+      },
+      "durationFrames": 686
+    },
+    {
+      "id": "s27",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "So I install twitter-cli again, this time straight from its GitHub source. Same search, same cookies. And there's the result: fetched three posts, each with its likes, reposts and views beside it. Yes, the warning's still printed, but the search works. Here's a second command, the latest posts from Anthropic's account, and that works too. Now Reddit. Reddit's tool is called rdt, and it carries my Reddit session cookie in exactly the same way. I ask for this week's posts about Claude Code and get five results, with the score, the subreddit, the title and the number of comments. Notice what never appeared, on either site: the are-you-a-robot page. Both sites treated these requests as me, sitting at my own browser, because that's exactly what the cookie tells them.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-x#fix",
+              "label": "install from source",
+              "focus": true,
+              "atWord": 3,
+              "zooms": [],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-x#search",
+              "label": "the same search again",
+              "focus": true,
+              "atWord": 18,
+              "zooms": [
+                {
+                  "marks": [
+                    "ok"
+                  ],
+                  "band": true,
+                  "wantAtWord": 21
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 34
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "it works now",
+                  "mark": "ok",
+                  "side": "right",
+                  "color": "green",
+                  "wantAtWord": 17
+                }
+              ]
+            },
+            {
+              "ref": "rec:ar-x#posts",
+              "label": "one account’s posts",
+              "focus": true,
+              "atWord": 46,
+              "zooms": [
+                {
+                  "marks": [
+                    "who"
+                  ],
+                  "band": true,
+                  "wantAtWord": 48
+                }
+              ],
+              "callouts": []
+            },
+            {
+              "ref": "rec:ar-reddit#search",
+              "label": "Reddit, this week",
+              "focus": true,
+              "atWord": 67,
+              "zooms": [
+                {
+                  "marks": [
+                    "count"
+                  ],
+                  "band": true,
+                  "wantAtWord": 85
+                },
+                {
+                  "marks": [
+                    "head"
+                  ],
+                  "wantAtWord": 92
+                }
+              ],
+              "callouts": []
+            }
+          ]
+        }
+      },
+      "durationFrames": 1256
+    },
+    {
+      "id": "s28",
+      "type": "AR_STAGE",
+      "transition": "wipe",
+      "background": "zoneB",
+      "narration": "A word of caution before you copy me, because this part matters. Those cookies are keys to your account. Anyone who gets hold of them can act as you, without ever knowing your password. So here are three rules I'd follow. One: use a spare account if you can, not your main one, because these are unofficial tools and a platform can restrict an account that uses them. Two: stick to reading. twitter-cli can also post, like and follow, so I'd keep an AI agent well away from those commands. And three: never let the cookie values appear on screen, in a screenshot, or in anything you share.",
+      "data": {
+        "arStage": {
+          "kind": "ring",
+          "color": "yellow",
+          "stageTitle": "your cookies are keys",
+          "premise": "The key ring is what you handed over. The three guards are how to keep it safe.",
+          "stage": [
+            {
+              "group": "ring",
+              "label": "your cookies",
+              "sub": "as good as a password",
+              "atWord": 13
+            },
+            {
+              "group": "key",
+              "label": "X",
+              "sub": "auth_token · ct0",
+              "icon": "si:x",
+              "atWord": 16
+            },
+            {
+              "group": "key",
+              "label": "Reddit",
+              "sub": "reddit_session",
+              "icon": "si:reddit",
+              "atWord": 20
+            },
+            {
+              "group": "guard",
+              "label": "use a spare account",
+              "sub": "unofficial tools can get an account restricted",
+              "icon": "lucide:user-round-plus",
+              "atWord": 42
+            },
+            {
+              "group": "guard",
+              "label": "stick to reading",
+              "sub": "no post, like or follow commands",
+              "icon": "lucide:book-open",
+              "atWord": 69
+            },
+            {
+              "group": "guard",
+              "label": "never show the values",
+              "sub": "not on screen, not in a screenshot",
+              "icon": "lucide:eye-off",
+              "atWord": 91
+            }
+          ]
+        }
+      },
+      "durationFrames": 1056
+    },
+    {
+      "id": "s29",
+      "type": "CHAPTER",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Everything so far, I typed by hand. Time to let an actual AI agent do it.",
+      "data": {
+        "chapter": {
+          "number": "4",
+          "title": "Hand it to the agent",
+          "subtitle": "the one-line install, in Claude Code",
+          "atWord": 3
+        }
+      },
+      "durationFrames": 182
+    },
+    {
+      "id": "s30",
+      "type": "AR_STAGE",
+      "transition": "push",
+      "background": "zoneB",
+      "narration": "According to the README, you paste one sentence into your agent: install Agent Reach, followed by a link to a file called install dot m-d. That file is a set of instructions written for the AI, not for you. So the agent is meant to read the guide, install the package, run the read-only check, read the health report, and then ask you which optional platforms you want before it changes anything else. That's the plan. Here's what happened when I tried it.",
+      "data": {
+        "arStage": {
+          "kind": "fuse",
+          "color": "blue",
+          "stageTitle": "what one pasted line is meant to set off",
+          "premise": "The line at the top is what you paste. Each stop is a step the agent is meant to take, in order.",
+          "stage": [
+            {
+              "group": "line",
+              "label": "Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md",
+              "atWord": 5
+            },
+            {
+              "group": "step",
+              "label": "reads the guide",
+              "sub": "install.md",
+              "icon": "lucide:file-text",
+              "atWord": 46
+            },
+            {
+              "group": "step",
+              "label": "installs",
+              "sub": "the package",
+              "icon": "lucide:package",
+              "atWord": 49
+            },
+            {
+              "group": "step",
+              "label": "checks",
+              "sub": "read-only",
+              "icon": "lucide:shield-check",
+              "atWord": 52
+            },
+            {
+              "group": "step",
+              "label": "reports",
+              "sub": "health check",
+              "icon": "lucide:stethoscope",
+              "atWord": 56
+            },
+            {
+              "group": "step",
+              "label": "asks you",
+              "sub": "before more",
+              "icon": "lucide:message-circle-question",
+              "atWord": 61
+            }
+          ]
+        },
+        "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+      },
+      "durationFrames": 819
+    },
+    {
+      "id": "s31",
+      "type": "RECORDED_STEP",
+      "transition": "zoom",
+      "background": "zoneA",
+      "narration": "Here's Claude Code, Anthropic's coding agent, and I've pasted the one line from the README. Claude fetches the installation guide and reads its four hundred-odd lines. Claude looks around the computer and finds Agent Reach is already installed. Then Claude tries the read-only check — and gets stopped. Not by Agent Reach. By Claude Code itself. On screen, the line reads denied by auto mode classifier, and the reason given is unauthorized persistence. Claude was in auto mode, where it approves safe steps on its own, and a web page telling it to set up software isn't something it'll wave through. That's the right call, because instructions on a web page shouldn't get to change your computer. And Claude doesn't try to sneak around it. Claude stops and gives me two options: run the command myself, or add a permission rule.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-agent#install",
+              "label": "Claude Code · 3× speed",
+              "focus": true,
+              "atWord": 3,
+              "zooms": [
+                {
+                  "marks": [
+                    "guide"
+                  ],
+                  "band": true,
+                  "wantAtWord": 18
+                },
+                {
+                  "marks": [
+                    "denied"
+                  ],
+                  "band": true,
+                  "wantAtWord": 62
+                },
+                {
+                  "marks": [
+                    "why"
+                  ],
+                  "band": true,
+                  "wantAtWord": 72
+                },
+                {
+                  "at": "full",
+                  "wantAtWord": 74
+                }
+              ],
+              "callouts": [
+                {
+                  "text": "Claude Code’s own safety check said no",
+                  "mark": "denied",
+                  "side": "bottom",
+                  "color": "red",
+                  "wantAtWord": 53
+                },
+                {
+                  "text": "the reason it gave",
+                  "mark": "why",
+                  "side": "bottom",
+                  "color": "orange",
+                  "wantAtWord": 68
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 1370
+    },
+    {
+      "id": "s32",
+      "type": "RECORDED_STEP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "So I allowed it for this session and asked a real question: what are people saying about Claude Code this week, on X, on Reddit and on YouTube? Watch what Claude does. Claude runs the health check first, to see what's available. Then it calls the same tools I ran by hand and writes a short summary from each platform, with links. I never told Claude which tool to use, because Agent Reach had already told it where to go.",
+      "data": {
+        "recordedStep": {
+          "clips": [
+            {
+              "ref": "rec:ar-agent2#ask",
+              "label": "one question, 3 platforms",
+              "focus": true,
+              "atWord": 2,
+              "zooms": [],
+              "callouts": [
+                {
+                  "text": "the health check comes first",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 34
+                },
+                {
+                  "text": "the same tools, chosen by the agent",
+                  "mark": null,
+                  "side": "top",
+                  "color": "green",
+                  "wantAtWord": 45
+                },
+                {
+                  "text": "two points per platform, with links",
+                  "mark": null,
+                  "side": "top",
+                  "color": "purple",
+                  "wantAtWord": 54
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "durationFrames": 790
+    },
+    {
+      "id": "s33",
+      "type": "AR_STAGE",
+      "transition": "slide",
+      "background": "zoneA",
+      "narration": "So, the verdict, channel by channel. Web pages, YouTube and RSS worked with no setup at all. GitHub worked once I was logged in. Web search worked after one helper. X worked, but only from the newer source build. Reddit worked with my session cookie. Both Chinese sites, Bilibili and V2EX, worked out of the box. So nine channels are up and running by the end of this video. As for the other seven, I didn't attempt them, which means I can't vouch for them.",
+      "data": {
+        "arStage": {
+          "kind": "board",
+          "color": "green",
+          "stageTitle": "what worked for me",
+          "premise": "Green means I ran it and it worked in this video. Grey means I did not try it.",
+          "stage": [
+            {
+              "group": "ch",
+              "label": "Web pages",
+              "icon": "lucide:globe",
+              "text": "ok",
+              "sub": "no setup",
+              "atWord": 7
+            },
+            {
+              "group": "ch",
+              "label": "YouTube",
+              "icon": "si:youtube",
+              "text": "ok",
+              "sub": "no setup",
+              "atWord": 9
+            },
+            {
+              "group": "ch",
+              "label": "RSS feeds",
+              "icon": "si:rss",
+              "text": "ok",
+              "sub": "no setup",
+              "atWord": 10
+            },
+            {
+              "group": "ch",
+              "label": "GitHub",
+              "icon": "si:github",
+              "text": "ok",
+              "sub": "after login",
+              "atWord": 18
+            },
+            {
+              "group": "ch",
+              "label": "Web search",
+              "icon": "lucide:search",
+              "text": "ok",
+              "sub": "one helper",
+              "atWord": 25
+            },
+            {
+              "group": "ch",
+              "label": "X",
+              "icon": "si:x",
+              "text": "ok",
+              "sub": "source build",
+              "atWord": 31
+            },
+            {
+              "group": "ch",
+              "label": "Reddit",
+              "icon": "si:reddit",
+              "text": "ok",
+              "sub": "session cookie",
+              "atWord": 40
+            },
+            {
+              "group": "ch",
+              "label": "Bilibili",
+              "icon": "si:bilibili",
+              "text": "ok",
+              "sub": "no setup",
+              "atWord": 49
+            },
+            {
+              "group": "ch",
+              "label": "V2EX",
+              "icon": "si:v2ex",
+              "text": "ok",
+              "sub": "no setup",
+              "atWord": 50
+            },
+            {
+              "group": "ch",
+              "label": "Facebook",
+              "icon": "si:facebook",
+              "text": "off",
+              "sub": "not tried",
+              "atWord": 72
+            },
+            {
+              "group": "ch",
+              "label": "Instagram",
+              "icon": "si:instagram",
+              "text": "off",
+              "sub": "not tried",
+              "atWord": 72
+            },
+            {
+              "group": "ch",
+              "label": "LinkedIn",
+              "icon": "lucide:briefcase",
+              "text": "off",
+              "sub": "not tried",
+              "atWord": 72
+            },
+            {
+              "group": "ch",
+              "label": "XiaoHongShu",
+              "icon": "si:xiaohongshu",
+              "text": "off",
+              "sub": "not tried",
+              "atWord": 72
+            },
+            {
+              "group": "ch",
+              "label": "Xueqiu",
+              "icon": "lucide:chart-candlestick",
+              "text": "off",
+              "sub": "not tried",
+              "atWord": 72
+            },
+            {
+              "group": "ch",
+              "label": "Xiaoyuzhou",
+              "icon": "lucide:podcast",
+              "text": "off",
+              "sub": "not tried",
+              "atWord": 72
+            },
+            {
+              "group": "ch",
+              "label": "Boss Zhipin",
+              "icon": "lucide:id-card",
+              "text": "off",
+              "sub": "not tried",
+              "atWord": 72
+            },
+            {
+              "group": "tally",
+              "label": "working by the end",
+              "atWord": 1
+            }
+          ]
+        }
+      },
+      "durationFrames": 838
+    },
+    {
+      "id": "s34",
+      "type": "RECAP",
+      "transition": "fade",
+      "background": "zoneB",
+      "narration": "If you remember four things, make it these. Agent Reach doesn't read the internet itself; it picks, installs and checks the tools that do. Its screen is in Chinese, but three symbols are all you need. X and Reddit work through your own login cookies, so treat those cookies like passwords. And when a tool breaks, check its GitHub source before you give up, because that's what fixed X for me.",
+      "data": {
+        "heading": "Four things to remember",
+        "points": [
+          {
+            "text": "It picks, installs and checks the tools",
+            "atWord": 9
+          },
+          {
+            "text": "Three symbols unlock the Chinese screen",
+            "atWord": 25
+          },
+          {
+            "text": "Cookies are passwords: protect them",
+            "atWord": 37
+          },
+          {
+            "text": "Broken tool? Try its GitHub source",
+            "atWord": 52
+          }
+        ]
+      },
+      "durationFrames": 705
+    },
+    {
+      "id": "s35",
+      "type": "OUTRO_CTA",
+      "transition": "dip",
+      "background": "zoneA",
+      "narration": "Agent Reach is made by Panniantong on GitHub, and it stands on other people's free work: twitter-cli, rdt-cli, yt-dlp, Jina Reader, Exa and feedparser, all linked in the description. Which platform would you connect first? Tell me in the comments. Thanks for watching.",
+      "data": {
+        "headline": "Nine channels worked for me",
+        "subtext": "Agent Reach · github.com/Panniantong/Agent-Reach"
+      },
+      "durationFrames": 439
+    }
+  ]
 }
