@@ -1,5 +1,26 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-10-03 — WINDOWS MACHINE RE-SET-UP ON D: — the paths in the entry below are DEAD
+
+D: was full-formatted on 2026-10-01 and iAuteur was set up fresh on 2026-10-03, entirely on D: (the owner
+wants C: left alone). **`C:\iauteur-c`, `C:\iauteur-ssd\` and the `~/.local/npm-clean` shims named in the
+2026-09-30 entry no longer apply.** Everything in that entry was pushed (`2be468b`); `main` == `origin/main`.
+
+- Layout, where `<root>` is the `iauteur` folder at the top of the data drive (this repo is PUBLIC, so the absolute paths live in the session memory note, not here): `<root>\iauteur` (repo) · `<root>\tools\node` (portable Node 22 — there is NO system-wide
+  Node) · `<root>\tools\vscode` (portable VS Code, for the recorder) · `<root>\venv` (Python, edge-tts) ·
+  `<root>\cache\*` · `<root>\tmp` · `<root>\rec` (recording workspaces).
+- `<root>\env.ps1` sets TEMP/TMP, the npm/pip/uv/Playwright caches, `IAUTEUR_REC_ROOT`,
+  `IAUTEUR_VSCODE_CLI` and PATH. Start a session with `<root>\start-iauteur.cmd`. Health check before any
+  pipeline step: `node -v` prints v22 and `$env:TEMP` is `<root>\tmp`; if not, dot-source `env.ps1`.
+- **Every old recording, voice track and render is gone** (`public/rec`, `public/audio`, `out/`). No shipped
+  topic can be re-rendered here; anything made on this machine starts from a fresh recording and a fresh voice.
+- **Not set up yet:** faster-whisper (`audit-voice.py`), the clean Claude recording home (re-run
+  `briefs/tokens21/seed-home.mjs`), any API key in `.env`.
+- D: is the same Seagate HDD that corrupted segments after a clean bake (see below), and power cuts happen here.
+  Commit after every finished step, push when a stage is complete, and decode-check every referenced segment
+  (`ffmpeg -v error -i seg.mp4 -f null -`) before a render. Nothing may exist only on this disk.
+- Still owed from the Mac: `topics/airllm-on-my-mac/{long,shorts}.json`.
+
 ## 2026-09-30 — "21 ways to save Claude Code tokens" (on the WINDOWS machine) · `TOK_STAGE`, 23 pictures
 
 **SHIPPED (rendered 2026-09-30 12:24 IST): `wide-dark.mp4` 22:38 (40,746 frames EXACT, drift 0 ms, mean -22.7 dB),
