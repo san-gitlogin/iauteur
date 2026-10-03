@@ -25,7 +25,7 @@
       "pinned": "Which site would you connect your AI agent to first?",
       "sources": [
         "Agent Reach by Panniantong (MIT): github.com/Panniantong/Agent-Reach — package: agent-reach",
-        "twitter-cli (X backend): github.com/public-clis/twitter-cli",
+        "twitter-cli (X backend): github.com/public-clis/twitter-cli — installed from git+https://github.com/public-clis/twitter-cli.git",
         "rdt-cli (Reddit backend): github.com/public-clis/rdt-cli",
         "yt-dlp (YouTube): github.com/yt-dlp/yt-dlp",
         "Jina Reader (web pages): github.com/jina-ai/reader",
@@ -75,9 +75,11 @@
         "subtext": "X · Reddit · YouTube · GitHub — installed and tested",
         "heroAsset": "lucide:eye",
         "hookVariant": "ask",
-        "atWord": 8
+        "atWord": 5.083
       },
-      "durationFrames": 173
+      "durationFrames": 167,
+      "audio": "audio/agent-reach-hands-on_long_s01.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s02",
@@ -90,59 +92,230 @@
           "clips": [
             {
               "ref": "rec:ar-x#search",
-              "label": "X, from a terminal",
+              "label": "X search · 2× speed",
               "focus": true,
-              "atWord": 1,
-              "zooms": [
+              "atWord": 2.583,
+              "wantAtWord": 1,
+              "zooms": [],
+              "callouts": [],
+              "id": "search",
+              "src": "rec/ar-x/seg-04.mp4",
+              "frames": 152,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "ok": {
+                  "x": 99,
+                  "y": 185,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "Fetched 3"
+                },
+                "head": {
+                  "x": 143,
+                  "y": 261,
+                  "w": 53,
+                  "h": 19,
+                  "covers": "Author"
+                },
+                "stats": {
+                  "x": 1287,
+                  "y": 261,
+                  "w": 44,
+                  "h": 19,
+                  "covers": "Stats"
+                },
+                "__cmd": {
+                  "x": 152,
+                  "y": 71,
+                  "w": 431,
+                  "h": 19,
+                  "covers": "twitter search \"Claude Code\" --from claudeai -n 3"
+                }
+              },
+              "ink": [
                 {
-                  "marks": [
-                    "head"
-                  ],
-                  "wantAtWord": 6
+                  "x": 73,
+                  "y": 71,
+                  "w": 510,
+                  "h": 19
                 },
                 {
-                  "at": "full",
-                  "wantAtWord": 24
+                  "x": 73,
+                  "y": 109,
+                  "w": 915,
+                  "h": 57
+                },
+                {
+                  "x": 73,
+                  "y": 185,
+                  "w": 475,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 223,
+                  "w": 1504,
+                  "h": 342
+                },
+                {
+                  "x": 73,
+                  "y": 584,
+                  "w": 70,
+                  "h": 19
                 }
               ],
-              "callouts": []
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150
+              ],
+              "shows": "$ ┃ Author ┃ Tweet ┃ Stats ┃ Score ┃",
+              "said": "PS ar-x> twitter search \"Claude Code\" --from claudeai -n 3\n🔐 Getting Twitter cookies...\nWARNING twitter_cli.client: Failed to init ClientTransaction: 'NoneType' object has no attribute 'group'\n🔍 Fetching 'Claude Code from:claudeai' (Top) (3 tweets)...\n✅ Fetched 3 'Claude Code from:claudeai' (Top) in 1.5s\n 🔍 'Claude Code from:claudeai' (Top) — 3 tweets\n┏━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓\n┃ # ┃ Author ┃ Tweet ┃ Stats ┃ Score ┃\n┡━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩\n│ 1 │ @claudeai ✓ │ Lots of inventive things made with Claude these past few weeks. A few of our favorites: A working │ ❤️ 5.9K 🔄 345 │ - │\n│ │ │ watermill, built w... 📹 │ 💬 216 👁️ 327.4K │ │\n│ │ │ 🔗 x.com/claudeai/status/2106125468365918268 │ 🕐 11h ago │ │\n├─────┼────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────────┼────────┤\n│ 2 │ @claudeai ✓ │ For two weeks, start a design, deck, or doc in the Claude app, and the work that follows in that │ ❤️ 7.7K 🔄 408 │ - │\n│ │ │ conversation uses 50... │ 💬 277 👁️ 1.3M │ │\n│ │ │ ┌ @claudeai: You can also now make decks, docs, and designs in your co... │ 🕐 1d ago │ │\n│ │ │ 🔗 x.com/claudeai/status/2105721630051692804 │ │ │\n├─────┼────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────────┼────────┤\n│ 3 │ @claudeai ✓ │ Projects now run from one conversation, starting in Claude Code. You describe what needs doing, and Claude │ ❤️ 11.6K 🔄 769 │ - │\n│ │ │ directs pa... 📹 │ 💬 607 👁️ 3.5M │ │\n│ │ │ 🔗 x.com/claudeai/status/2100632677904744716 │ 🕐 15d ago │ │\n└─────┴────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────────────────┴────────┘\n💡 Use `twitter show <N>` to view tweet #N from this list.\nPS ar-x>"
             },
             {
               "ref": "rec:ar-reddit#search",
-              "label": "Reddit, this week",
+              "label": "Reddit · 2× speed",
               "focus": true,
-              "atWord": 29,
-              "zooms": [
+              "atWord": 22.583,
+              "wantAtWord": 22.583,
+              "zooms": [],
+              "callouts": [],
+              "id": "search",
+              "src": "rec/ar-reddit/seg-01.mp4",
+              "frames": 107,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "count": {
+                  "x": 601,
+                  "y": 90,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "5 results"
+                },
+                "head": {
+                  "x": 223,
+                  "y": 128,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "Subreddit"
+                },
+                "more": {
+                  "x": 267,
+                  "y": 375,
+                  "w": 141,
+                  "h": 19,
+                  "covers": "to read a result"
+                },
+                "__cmd": {
+                  "x": 196,
+                  "y": 71,
+                  "w": 325,
+                  "h": 19,
+                  "covers": "rdt search \"claude code\" -t week -n 5"
+                }
+              },
+              "ink": [
                 {
-                  "marks": [
-                    "head"
-                  ],
-                  "wantAtWord": 32
+                  "x": 73,
+                  "y": 71,
+                  "w": 449,
+                  "h": 19
                 },
                 {
-                  "at": "full",
-                  "wantAtWord": 44
+                  "x": 73,
+                  "y": 90,
+                  "w": 897,
+                  "h": 266
+                },
+                {
+                  "x": 73,
+                  "y": 375,
+                  "w": 467,
+                  "h": 57
                 }
               ],
-              "callouts": []
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102
+              ],
+              "shows": "$ to read a result",
+              "said": "PS ar-reddit> rdt search \"claude code\" -t week -n 5\n 🔍 Search: \"claude code\" — 5 results\n┏━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━┓\n┃ # ┃ Score ┃ Subreddit ┃ Title ┃ Author ┃ 💬 ┃\n┡━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━┩\n│ 1 │ 1.2k │ r/ClaudeAI │ What tool have you built for yourself with Cl │ TomsMorello │ 584 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 2 │ 279 │ r/ClaudeCode │ Is everyone here millionaires │ IndustryOk24 │ 214 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 3 │ 913 │ r/ClaudeAI │ Pokémon Claude Red: Opus 5.5 remade all of Po │ singing_coac │ 212 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 4 │ 595 │ r/ClaudeAI │ I built a news-driven world map of current co │ Comm4nd0 │ 114 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 5 │ 29 │ r/agi │ Claude Code was used to build a publicly live │ Responsible- │ 514 │\n└─────┴────────┴──────────────┴───────────────────────────────────────────────┴──────────────┴───────┘\n 💡 Use rdt show <#> to read a result\n ▸ More: rdt search \"claude code\" --after t3_1ww09kx\nPS ar-reddit>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1.333
         }
       },
-      "durationFrames": 657
+      "durationFrames": 617,
+      "audio": "audio/agent-reach-hands-on_long_s02.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s03",
       "type": "TITLE_CARD",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Welcome to the channel. Today we're going to install Agent Reach, a free project, and try the platforms it promises: web pages, YouTube, GitHub, X and Reddit. Everything it prints is in Chinese, so I'll translate. Does it hand an AI agent the whole internet?",
+      "narration": "Welcome to the channel. Today we're going to install Agent Reach, a free project, and try the platforms it promises: YouTube, X and Reddit. Everything it prints is in Chinese, so I'll translate. Does it hand an AI agent the whole internet?",
       "data": {
         "title": "Agent Reach, hands-on",
         "subtitle": "installed, translated and tested",
-        "atWord": 14
+        "atWord": 9.333
       },
-      "durationFrames": 458
+      "durationFrames": 447,
+      "audio": "audio/agent-reach-hands-on_long_s03.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s04",
@@ -157,28 +330,32 @@
               "ref": "rec:ar-repo#top",
               "label": "the official repo",
               "focus": true,
-              "atWord": 3,
+              "atWord": 2.75,
+              "wantAtWord": 1.333,
               "zooms": [
                 {
                   "marks": [
                     "desc"
                   ],
                   "band": true,
-                  "wantAtWord": 29
+                  "wantAtWord": 20,
+                  "atWord": 20
                 },
                 {
                   "marks": [
                     "license"
                   ],
                   "band": true,
-                  "wantAtWord": 82
+                  "wantAtWord": 64,
+                  "atWord": 64
                 },
                 {
                   "marks": [
                     "stars"
                   ],
                   "band": true,
-                  "wantAtWord": 97
+                  "wantAtWord": 74.5,
+                  "atWord": 74.5
                 }
               ],
               "callouts": [
@@ -187,29 +364,388 @@
                   "mark": "desc",
                   "side": "left",
                   "color": "blue",
-                  "wantAtWord": 31
+                  "wantAtWord": 21.25,
+                  "atWord": 21.25
                 },
                 {
                   "text": "free to use, even at work",
                   "mark": "license",
                   "side": "left",
                   "color": "green",
-                  "wantAtWord": 90
+                  "wantAtWord": 69.333,
+                  "atWord": 69.333
                 },
                 {
                   "text": "89 thousand stars",
                   "mark": "stars",
                   "side": "left",
                   "color": "yellow",
-                  "wantAtWord": 107
+                  "wantAtWord": 82.417,
+                  "atWord": 82.417
                 }
-              ]
+              ],
+              "id": "top",
+              "src": "rec/ar-repo/seg-01.mp4",
+              "frames": 36,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "desc": {
+                  "x": 1136,
+                  "y": 243,
+                  "w": 241,
+                  "h": 45,
+                  "covers": "Give your AI agent eyes to see the entire internet.",
+                  "block": {
+                    "x": 1136,
+                    "y": 243,
+                    "w": 265,
+                    "h": 117
+                  }
+                },
+                "license": {
+                  "x": 1160,
+                  "y": 636,
+                  "w": 69,
+                  "h": 18,
+                  "covers": "MIT license",
+                  "block": {
+                    "x": 1160,
+                    "y": 636,
+                    "w": 69,
+                    "h": 18
+                  }
+                },
+                "stars": {
+                  "x": 1185,
+                  "y": 752,
+                  "w": 40,
+                  "h": 18,
+                  "covers": "k stars",
+                  "block": {
+                    "x": 1160,
+                    "y": 752,
+                    "w": 64,
+                    "h": 18
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 0,
+                  "y": 1,
+                  "w": 189,
+                  "h": 51
+                },
+                {
+                  "x": 405,
+                  "y": 25,
+                  "w": 96,
+                  "h": 21
+                },
+                {
+                  "x": 294,
+                  "y": 25,
+                  "w": 75,
+                  "h": 21
+                },
+                {
+                  "x": 537,
+                  "y": 25,
+                  "w": 75,
+                  "h": 21
+                },
+                {
+                  "x": 189,
+                  "y": 25,
+                  "w": 70,
+                  "h": 21
+                },
+                {
+                  "x": 648,
+                  "y": 25,
+                  "w": 52,
+                  "h": 21
+                },
+                {
+                  "x": 1466,
+                  "y": 27,
+                  "w": 50,
+                  "h": 18
+                },
+                {
+                  "x": 183,
+                  "y": 90,
+                  "w": 116,
+                  "h": 27
+                },
+                {
+                  "x": 56,
+                  "y": 90,
+                  "w": 111,
+                  "h": 27
+                },
+                {
+                  "x": 1234,
+                  "y": 94,
+                  "w": 70,
+                  "h": 16
+                },
+                {
+                  "x": 626,
+                  "y": 149,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 267,
+                  "y": 149,
+                  "w": 79,
+                  "h": 18
+                },
+                {
+                  "x": 526,
+                  "y": 149,
+                  "w": 49,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 207,
+                  "w": 45,
+                  "h": 21
+                },
+                {
+                  "x": 346,
+                  "y": 213,
+                  "w": 57,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 243,
+                  "w": 265,
+                  "h": 185
+                },
+                {
+                  "x": 974,
+                  "y": 269,
+                  "w": 106,
+                  "h": 43
+                },
+                {
+                  "x": 192,
+                  "y": 272,
+                  "w": 124,
+                  "h": 187
+                },
+                {
+                  "x": 349,
+                  "y": 272,
+                  "w": 326,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 318,
+                  "w": 220,
+                  "h": 18
+                },
+                {
+                  "x": 284,
+                  "y": 318,
+                  "w": 62,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 359,
+                  "w": 194,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 400,
+                  "w": 326,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 441,
+                  "w": 222,
+                  "h": 18
+                },
+                {
+                  "x": 1149,
+                  "y": 445,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 482,
+                  "w": 326,
+                  "h": 18
+                },
+                {
+                  "x": 1253,
+                  "y": 511,
+                  "w": 80,
+                  "h": 16
+                },
+                {
+                  "x": 1149,
+                  "y": 511,
+                  "w": 76,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 523,
+                  "w": 361,
+                  "h": 18
+                },
+                {
+                  "x": 1244,
+                  "y": 544,
+                  "w": 70,
+                  "h": 16
+                },
+                {
+                  "x": 1149,
+                  "y": 544,
+                  "w": 67,
+                  "h": 16
+                },
+                {
+                  "x": 570,
+                  "y": 563,
+                  "w": 326,
+                  "h": 18
+                },
+                {
+                  "x": 1136,
+                  "y": 577,
+                  "w": 185,
+                  "h": 280
+                },
+                {
+                  "x": 570,
+                  "y": 604,
+                  "w": 447,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 604,
+                  "w": 80,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 645,
+                  "w": 399,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 645,
+                  "w": 59,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 686,
+                  "w": 326,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 686,
+                  "w": 104,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 727,
+                  "w": 382,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 727,
+                  "w": 74,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 768,
+                  "w": 374,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 768,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 808,
+                  "w": 229,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 808,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 849,
+                  "w": 326,
+                  "h": 18
+                },
+                {
+                  "x": 235,
+                  "y": 849,
+                  "w": 77,
+                  "h": 18
+                },
+                {
+                  "x": 570,
+                  "y": 890,
+                  "w": 136,
+                  "h": 10
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30
+              ],
+              "shows": "About"
             }
           ],
-          "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence"
+          "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 1284
+      "durationFrames": 1239,
+      "audio": "audio/agent-reach-hands-on_long_s04.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s05",
@@ -222,29 +758,101 @@
           "clips": [
             {
               "ref": "rec:ar-translate#zh",
-              "label": "the README, in Chinese",
+              "label": "README in Chinese · 2×",
               "focus": false,
-              "atWord": 2,
+              "atWord": 3.917,
+              "wantAtWord": 1.25,
               "zooms": [
                 {
                   "marks": [
                     "tagline"
                   ],
                   "band": true,
-                  "wantAtWord": 18
+                  "wantAtWord": 12.5,
+                  "atWord": 13.583
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 27
+                  "wantAtWord": 20.667,
+                  "atWord": 20.667
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "zh",
+              "src": "rec/ar-translate/seg-01.mp4",
+              "frames": 159,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 3582,
+                "h": 2016
+              },
+              "marks": {
+                "tagline": {
+                  "x": 192,
+                  "y": 463,
+                  "w": 2217,
+                  "h": 72,
+                  "covers": "给你的 AI Agent 一键装上互联网能力",
+                  "block": {
+                    "x": 192,
+                    "y": 463,
+                    "w": 2217,
+                    "h": 72
+                  }
+                },
+                "second": {
+                  "x": 192,
+                  "y": 583,
+                  "w": 2217,
+                  "h": 72,
+                  "covers": "当下最稳的接入方式，替你选好、装好、体检好——接入方式会换代，你不用操心",
+                  "block": {
+                    "x": 192,
+                    "y": 583,
+                    "w": 2217,
+                    "h": 72
+                  }
+                }
+              },
+              "ink": [],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156
+              ],
+              "shows": "the README, in Chinese"
             },
             {
               "ref": "rec:ar-translate#menu",
               "label": "right-click → Translate",
               "focus": false,
-              "atWord": 37,
+              "atWord": 26.333,
+              "wantAtWord": 26.333,
               "zooms": [],
               "callouts": [
                 {
@@ -252,26 +860,84 @@
                   "mark": "item",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 45
+                  "wantAtWord": 32.417,
+                  "atWord": 33.583
                 }
-              ]
+              ],
+              "id": "menu",
+              "src": "rec/ar-translate/seg-02.mp4",
+              "frames": 103,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 3582,
+                "h": 2016
+              },
+              "marks": {
+                "tagline": {
+                  "x": 192,
+                  "y": 463,
+                  "w": 2217,
+                  "h": 72,
+                  "covers": "给你的 AI Agent 一键装上互联网能力",
+                  "block": {
+                    "x": 192,
+                    "y": 463,
+                    "w": 2217,
+                    "h": 72
+                  }
+                },
+                "item": {
+                  "x": 2373,
+                  "y": 1666,
+                  "w": 940,
+                  "h": 96,
+                  "covers": "Translate to English",
+                  "block": {
+                    "x": 2373,
+                    "y": 1666,
+                    "w": 940,
+                    "h": 96
+                  }
+                }
+              },
+              "ink": [],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102
+              ],
+              "shows": "right-click, Translate to English"
             },
             {
               "ref": "rec:ar-translate#translated",
-              "label": "the same page, in English",
+              "label": "now in English · 2×",
               "focus": false,
-              "atWord": 59,
+              "atWord": 43.75,
+              "wantAtWord": 43.75,
               "zooms": [
                 {
                   "marks": [
                     "tagline"
                   ],
                   "band": true,
-                  "wantAtWord": 62
-                },
-                {
-                  "at": "full",
-                  "wantAtWord": 73
+                  "wantAtWord": 47.917,
+                  "atWord": 51.5
                 }
               ],
               "callouts": [
@@ -280,22 +946,99 @@
                   "mark": "panel",
                   "side": "left",
                   "color": "blue",
-                  "wantAtWord": 79
+                  "wantAtWord": 62,
+                  "atWord": 62
                 }
-              ]
+              ],
+              "id": "translated",
+              "src": "rec/ar-translate/seg-03.mp4",
+              "frames": 85,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 3582,
+                "h": 2016
+              },
+              "marks": {
+                "tagline": {
+                  "x": 192,
+                  "y": 463,
+                  "w": 2217,
+                  "h": 72,
+                  "covers": "Equip your AI Agent with Internet capabilities with a single click",
+                  "block": {
+                    "x": 192,
+                    "y": 463,
+                    "w": 2217,
+                    "h": 72
+                  }
+                },
+                "second": {
+                  "x": 192,
+                  "y": 583,
+                  "w": 2217,
+                  "h": 144,
+                  "covers": "The most stable access method available today, selected, installed, and tested for you—access methods may be updated, but you don't need to worry about it.",
+                  "block": {
+                    "x": 192,
+                    "y": 583,
+                    "w": 2217,
+                    "h": 144
+                  }
+                },
+                "panel": {
+                  "x": 2313,
+                  "y": 254,
+                  "w": 1015,
+                  "h": 248,
+                  "covers": "Detected Language English Google Translate",
+                  "block": {
+                    "x": 2313,
+                    "y": 254,
+                    "w": 1015,
+                    "h": 248
+                  }
+                }
+              },
+              "ink": [],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84
+              ],
+              "shows": "the same page, in English"
             }
           ],
-          "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence"
+          "sourceNote": "github.com/Panniantong/Agent-Reach · MIT licence",
+          "capture": {
+            "width": 3582,
+            "height": 2016
+          },
+          "atWord": 1.25
         }
       },
-      "durationFrames": 1199
+      "durationFrames": 1160,
+      "audio": "audio/agent-reach-hands-on_long_s05.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s06",
       "type": "AR_STAGE",
       "transition": "wipe",
       "background": "zoneB",
-      "narration": "Why would anyone need this? Picture your AI agent — an AI that can run commands for you, like Claude Code or Cursor. The trouble starts where the good discussions live. According to the README, X charges for its official API, and moderate use comes to about two hundred and fifteen dollars a month. Reddit answers a server with error four-oh-three, which means forbidden. XiaoHongShu, a Chinese review app, wants a login before you can browse. And Bilibili, China's answer to YouTube, blocks visitors from overseas servers. Four platforms, four locked doors — so that's the problem Agent Reach sets out to solve.",
+      "narration": "Why would anyone need this? Picture your AI agent — an AI that can run commands, like Claude Code. The trouble starts where the good discussions live. According to the README, X charges for its official API, and moderate use comes to about two hundred and fifteen dollars a month. Reddit answers a server with error four-oh-three, which means forbidden. XiaoHongShu, a Chinese review app, wants a login before you can browse. And Bilibili, China's answer to YouTube, blocks visitors from overseas servers. So that's the problem Agent Reach sets out to solve.",
       "data": {
         "arStage": {
           "kind": "gates",
@@ -307,41 +1050,43 @@
               "group": "agent",
               "label": "your AI agent",
               "icon": "lucide:bot",
-              "atWord": 6
+              "atWord": 4.333
             },
             {
               "group": "gate",
               "label": "X (Twitter)",
               "icon": "si:x",
               "sub": "~$215 a month",
-              "atWord": 36
+              "atWord": 25.833
             },
             {
               "group": "gate",
               "label": "Reddit",
               "icon": "si:reddit",
               "sub": "403 forbidden",
-              "atWord": 55
+              "atWord": 40.5
             },
             {
               "group": "gate",
               "label": "XiaoHongShu",
               "icon": "si:xiaohongshu",
               "sub": "login required",
-              "atWord": 65
+              "atWord": 52.667
             },
             {
               "group": "gate",
               "label": "Bilibili",
               "icon": "si:bilibili",
               "sub": "blocked overseas",
-              "atWord": 77
+              "atWord": 61.833
             }
           ]
         },
         "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
       },
-      "durationFrames": 1009
+      "durationFrames": 1003,
+      "audio": "audio/agent-reach-hands-on_long_s06.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s07",
@@ -356,99 +1101,1498 @@
               "ref": "rec:ar-readme#top",
               "label": "the English README",
               "focus": true,
-              "atWord": 3,
+              "atWord": 4.417,
+              "wantAtWord": 1.5,
               "zooms": [
                 {
                   "marks": [
                     "tagline"
                   ],
                   "band": true,
-                  "wantAtWord": 11
+                  "wantAtWord": 8.5,
+                  "atWord": 8.5
                 },
                 {
                   "marks": [
                     "promise"
                   ],
                   "band": true,
-                  "wantAtWord": 20
+                  "wantAtWord": 15.583,
+                  "atWord": 15.583
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "top",
+              "src": "rec/ar-readme/seg-01.mp4",
+              "frames": 54,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "tagline": {
+                  "x": 754,
+                  "y": 252,
+                  "w": 413,
+                  "h": 21,
+                  "covers": "Give your AI Agent one-click access to the entire internet",
+                  "block": {
+                    "x": 754,
+                    "y": 252,
+                    "w": 413,
+                    "h": 21
+                  }
+                },
+                "promise": {
+                  "x": 472,
+                  "y": 292,
+                  "w": 334,
+                  "h": 21,
+                  "covers": "The most reliable access path for each platform",
+                  "block": {
+                    "x": 472,
+                    "y": 292,
+                    "w": 978,
+                    "h": 21
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 337,
+                  "y": 2,
+                  "w": 196,
+                  "h": 317
+                },
+                {
+                  "x": 507,
+                  "y": 2,
+                  "w": 116,
+                  "h": 21
+                },
+                {
+                  "x": 337,
+                  "y": 2,
+                  "w": 93,
+                  "h": 21
+                },
+                {
+                  "x": 1498,
+                  "y": 56,
+                  "w": 102,
+                  "h": 42
+                },
+                {
+                  "x": 467,
+                  "y": 59,
+                  "w": 199,
+                  "h": 18
+                },
+                {
+                  "x": 1379,
+                  "y": 60,
+                  "w": 46,
+                  "h": 16
+                },
+                {
+                  "x": 554,
+                  "y": 123,
+                  "w": 191,
+                  "h": 14
+                },
+                {
+                  "x": 64,
+                  "y": 155,
+                  "w": 43,
+                  "h": 18
+                },
+                {
+                  "x": 843,
+                  "y": 184,
+                  "w": 236,
+                  "h": 43
+                },
+                {
+                  "x": 64,
+                  "y": 187,
+                  "w": 72,
+                  "h": 18
+                },
+                {
+                  "x": 64,
+                  "y": 219,
+                  "w": 75,
+                  "h": 18
+                },
+                {
+                  "x": 754,
+                  "y": 252,
+                  "w": 413,
+                  "h": 21
+                },
+                {
+                  "x": 472,
+                  "y": 292,
+                  "w": 978,
+                  "h": 94
+                },
+                {
+                  "x": 72,
+                  "y": 348,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 380,
+                  "w": 94,
+                  "h": 18
+                },
+                {
+                  "x": 891,
+                  "y": 408,
+                  "w": 153,
+                  "h": 28
+                },
+                {
+                  "x": 762,
+                  "y": 408,
+                  "w": 124,
+                  "h": 28
+                },
+                {
+                  "x": 1048,
+                  "y": 408,
+                  "w": 112,
+                  "h": 28
+                },
+                {
+                  "x": 72,
+                  "y": 412,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 445,
+                  "w": 109,
+                  "h": 18
+                },
+                {
+                  "x": 1089,
+                  "y": 459,
+                  "w": 78,
+                  "h": 21
+                },
+                {
+                  "x": 755,
+                  "y": 459,
+                  "w": 77,
+                  "h": 21
+                },
+                {
+                  "x": 1009,
+                  "y": 459,
+                  "w": 67,
+                  "h": 21
+                },
+                {
+                  "x": 889,
+                  "y": 459,
+                  "w": 48,
+                  "h": 21
+                },
+                {
+                  "x": 949,
+                  "y": 459,
+                  "w": 48,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 477,
+                  "w": 149,
+                  "h": 18
+                },
+                {
+                  "x": 474,
+                  "y": 499,
+                  "w": 934,
+                  "h": 69
+                },
+                {
+                  "x": 474,
+                  "y": 499,
+                  "w": 216,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 509,
+                  "w": 59,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 541,
+                  "w": 123,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 573,
+                  "w": 67,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 606,
+                  "w": 128,
+                  "h": 18
+                },
+                {
+                  "x": 64,
+                  "y": 638,
+                  "w": 40,
+                  "h": 18
+                },
+                {
+                  "x": 455,
+                  "y": 643,
+                  "w": 204,
+                  "h": 32
+                },
+                {
+                  "x": 455,
+                  "y": 699,
+                  "w": 579,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 702,
+                  "w": 80,
+                  "h": 18
+                },
+                {
+                  "x": 64,
+                  "y": 734,
+                  "w": 59,
+                  "h": 18
+                },
+                {
+                  "x": 455,
+                  "y": 739,
+                  "w": 984,
+                  "h": 45
+                },
+                {
+                  "x": 64,
+                  "y": 767,
+                  "w": 104,
+                  "h": 18
+                },
+                {
+                  "x": 64,
+                  "y": 799,
+                  "w": 74,
+                  "h": 18
+                },
+                {
+                  "x": 480,
+                  "y": 810,
+                  "w": 73,
+                  "h": 21
+                },
+                {
+                  "x": 723,
+                  "y": 810,
+                  "w": 49,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 831,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 592,
+                  "y": 846,
+                  "w": 310,
+                  "h": 21
+                },
+                {
+                  "x": 469,
+                  "y": 846,
+                  "w": 76,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 863,
+                  "w": 51,
+                  "h": 18
+                },
+                {
+                  "x": 592,
+                  "y": 883,
+                  "w": 139,
+                  "h": 17
+                },
+                {
+                  "x": 469,
+                  "y": 883,
+                  "w": 46,
+                  "h": 17
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48
+              ],
+              "shows": "README_en.md"
             },
             {
               "ref": "rec:ar-readme#pain",
               "label": "why it is hard",
               "focus": true,
-              "atWord": 49,
+              "atWord": 40.667,
+              "wantAtWord": 40.667,
               "zooms": [
-                {
-                  "marks": [
-                    "x"
-                  ],
-                  "band": true,
-                  "wantAtWord": 57
-                },
                 {
                   "marks": [
                     "reddit"
                   ],
                   "band": true,
-                  "wantAtWord": 62
+                  "wantAtWord": 49.667,
+                  "atWord": 49.667
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "pain",
+              "src": "rec/ar-readme/seg-02.mp4",
+              "frames": 52,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "x": {
+                  "x": 592,
+                  "y": 454,
+                  "w": 310,
+                  "h": 21,
+                  "covers": "Pay-per-use, moderate usage ~$215/month",
+                  "block": {
+                    "x": 592,
+                    "y": 454,
+                    "w": 310,
+                    "h": 21
+                  }
+                },
+                "reddit": {
+                  "x": 592,
+                  "y": 491,
+                  "w": 126,
+                  "h": 21,
+                  "covers": "Server IPs get 403",
+                  "block": {
+                    "x": 592,
+                    "y": 491,
+                    "w": 139,
+                    "h": 21
+                  }
+                },
+                "xhs": {
+                  "x": 592,
+                  "y": 528,
+                  "w": 178,
+                  "h": 21,
+                  "covers": "Login required to browse",
+                  "block": {
+                    "x": 592,
+                    "y": 528,
+                    "w": 178,
+                    "h": 21
+                  }
+                },
+                "one": {
+                  "x": 455,
+                  "y": 652,
+                  "w": 306,
+                  "h": 21,
+                  "covers": "Agent Reach turns this into one command",
+                  "block": {
+                    "x": 455,
+                    "y": 652,
+                    "w": 310,
+                    "h": 21
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 346,
+                  "y": 13,
+                  "w": 199,
+                  "h": 261
+                },
+                {
+                  "x": 507,
+                  "y": 13,
+                  "w": 101,
+                  "h": 18
+                },
+                {
+                  "x": 354,
+                  "y": 13,
+                  "w": 81,
+                  "h": 18
+                },
+                {
+                  "x": 891,
+                  "y": 16,
+                  "w": 153,
+                  "h": 28
+                },
+                {
+                  "x": 762,
+                  "y": 16,
+                  "w": 124,
+                  "h": 28
+                },
+                {
+                  "x": 1048,
+                  "y": 16,
+                  "w": 112,
+                  "h": 28
+                },
+                {
+                  "x": 554,
+                  "y": 60,
+                  "w": 191,
+                  "h": 14
+                },
+                {
+                  "x": 1089,
+                  "y": 67,
+                  "w": 78,
+                  "h": 21
+                },
+                {
+                  "x": 755,
+                  "y": 67,
+                  "w": 77,
+                  "h": 21
+                },
+                {
+                  "x": 1009,
+                  "y": 67,
+                  "w": 67,
+                  "h": 21
+                },
+                {
+                  "x": 889,
+                  "y": 67,
+                  "w": 48,
+                  "h": 21
+                },
+                {
+                  "x": 949,
+                  "y": 67,
+                  "w": 48,
+                  "h": 21
+                },
+                {
+                  "x": 474,
+                  "y": 107,
+                  "w": 934,
+                  "h": 69
+                },
+                {
+                  "x": 474,
+                  "y": 107,
+                  "w": 216,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 187,
+                  "w": 72,
+                  "h": 18
+                },
+                {
+                  "x": 64,
+                  "y": 219,
+                  "w": 75,
+                  "h": 18
+                },
+                {
+                  "x": 455,
+                  "y": 251,
+                  "w": 204,
+                  "h": 32
+                },
+                {
+                  "x": 455,
+                  "y": 307,
+                  "w": 579,
+                  "h": 21
+                },
+                {
+                  "x": 455,
+                  "y": 347,
+                  "w": 984,
+                  "h": 45
+                },
+                {
+                  "x": 72,
+                  "y": 348,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 380,
+                  "w": 94,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 412,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 480,
+                  "y": 418,
+                  "w": 73,
+                  "h": 21
+                },
+                {
+                  "x": 723,
+                  "y": 418,
+                  "w": 49,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 445,
+                  "w": 109,
+                  "h": 18
+                },
+                {
+                  "x": 592,
+                  "y": 454,
+                  "w": 310,
+                  "h": 21
+                },
+                {
+                  "x": 469,
+                  "y": 454,
+                  "w": 76,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 477,
+                  "w": 149,
+                  "h": 18
+                },
+                {
+                  "x": 592,
+                  "y": 491,
+                  "w": 139,
+                  "h": 21
+                },
+                {
+                  "x": 469,
+                  "y": 491,
+                  "w": 46,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 509,
+                  "w": 59,
+                  "h": 18
+                },
+                {
+                  "x": 592,
+                  "y": 528,
+                  "w": 178,
+                  "h": 21
+                },
+                {
+                  "x": 469,
+                  "y": 528,
+                  "w": 97,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 541,
+                  "w": 123,
+                  "h": 18
+                },
+                {
+                  "x": 592,
+                  "y": 565,
+                  "w": 183,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 573,
+                  "w": 67,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 606,
+                  "w": 128,
+                  "h": 18
+                },
+                {
+                  "x": 455,
+                  "y": 612,
+                  "w": 867,
+                  "h": 21
+                },
+                {
+                  "x": 455,
+                  "y": 652,
+                  "w": 310,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 702,
+                  "w": 80,
+                  "h": 18
+                },
+                {
+                  "x": 471,
+                  "y": 708,
+                  "w": 740,
+                  "h": 16
+                },
+                {
+                  "x": 64,
+                  "y": 734,
+                  "w": 59,
+                  "h": 18
+                },
+                {
+                  "x": 455,
+                  "y": 759,
+                  "w": 681,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 767,
+                  "w": 104,
+                  "h": 18
+                },
+                {
+                  "x": 455,
+                  "y": 799,
+                  "w": 316,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 799,
+                  "w": 74,
+                  "h": 18
+                },
+                {
+                  "x": 64,
+                  "y": 831,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 471,
+                  "y": 856,
+                  "w": 725,
+                  "h": 16
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48
+              ],
+              "shows": "README_en.md"
             },
             {
               "ref": "rec:ar-readme#platforms",
               "label": "supported platforms",
               "focus": true,
-              "atWord": 72,
+              "atWord": 59.333,
+              "wantAtWord": 59.333,
               "zooms": [
                 {
                   "marks": [
                     "web"
                   ],
                   "band": true,
-                  "wantAtWord": 77
+                  "wantAtWord": 63.083,
+                  "atWord": 65.833
                 },
                 {
                   "marks": [
                     "x"
                   ],
                   "band": true,
-                  "wantAtWord": 86
+                  "wantAtWord": 71.417,
+                  "atWord": 71.417
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "platforms",
+              "src": "rec/ar-readme/seg-03.mp4",
+              "frames": 74,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "web": {
+                  "x": 1042,
+                  "y": 350,
+                  "w": 199,
+                  "h": 21,
+                  "covers": "Any URL → clean Markdown",
+                  "block": {
+                    "x": 1042,
+                    "y": 350,
+                    "w": 349,
+                    "h": 21
+                  }
+                },
+                "x": {
+                  "x": 1042,
+                  "y": 387,
+                  "w": 383,
+                  "h": 21,
+                  "covers": "Cookie unlocks search, timeline, tweet reading, articles",
+                  "block": {
+                    "x": 1042,
+                    "y": 387,
+                    "w": 383,
+                    "h": 45
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 631,
+                  "y": 0,
+                  "w": 500,
+                  "h": 12
+                },
+                {
+                  "x": 495,
+                  "y": 0,
+                  "w": 113,
+                  "h": 31
+                },
+                {
+                  "x": 346,
+                  "y": 13,
+                  "w": 231,
+                  "h": 261
+                },
+                {
+                  "x": 631,
+                  "y": 27,
+                  "w": 813,
+                  "h": 48
+                },
+                {
+                  "x": 554,
+                  "y": 60,
+                  "w": 191,
+                  "h": 14
+                },
+                {
+                  "x": 631,
+                  "y": 100,
+                  "w": 556,
+                  "h": 21
+                },
+                {
+                  "x": 776,
+                  "y": 161,
+                  "w": 480,
+                  "h": 21
+                },
+                {
+                  "x": 636,
+                  "y": 165,
+                  "w": 135,
+                  "h": 16
+                },
+                {
+                  "x": 455,
+                  "y": 251,
+                  "w": 227,
+                  "h": 32
+                },
+                {
+                  "x": 692,
+                  "y": 314,
+                  "w": 84,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 348,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 1042,
+                  "y": 350,
+                  "w": 208,
+                  "h": 21
+                },
+                {
+                  "x": 903,
+                  "y": 350,
+                  "w": 81,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 380,
+                  "w": 94,
+                  "h": 18
+                },
+                {
+                  "x": 1042,
+                  "y": 387,
+                  "w": 383,
+                  "h": 45
+                },
+                {
+                  "x": 623,
+                  "y": 399,
+                  "w": 94,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 412,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 445,
+                  "w": 109,
+                  "h": 18
+                },
+                {
+                  "x": 1042,
+                  "y": 448,
+                  "w": 383,
+                  "h": 69
+                },
+                {
+                  "x": 623,
+                  "y": 472,
+                  "w": 183,
+                  "h": 21
+                },
+                {
+                  "x": 889,
+                  "y": 472,
+                  "w": 109,
+                  "h": 21
+                },
+                {
+                  "x": 495,
+                  "y": 472,
+                  "w": 100,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 477,
+                  "w": 149,
+                  "h": 18
+                },
+                {
+                  "x": 623,
+                  "y": 533,
+                  "w": 221,
+                  "h": 45
+                },
+                {
+                  "x": 1204,
+                  "y": 533,
+                  "w": 219,
+                  "h": 21
+                },
+                {
+                  "x": 1042,
+                  "y": 533,
+                  "w": 101,
+                  "h": 45
+                },
+                {
+                  "x": 72,
+                  "y": 541,
+                  "w": 123,
+                  "h": 18
+                },
+                {
+                  "x": 623,
+                  "y": 594,
+                  "w": 205,
+                  "h": 45
+                },
+                {
+                  "x": 1204,
+                  "y": 594,
+                  "w": 219,
+                  "h": 21
+                },
+                {
+                  "x": 1042,
+                  "y": 594,
+                  "w": 101,
+                  "h": 45
+                },
+                {
+                  "x": 72,
+                  "y": 606,
+                  "w": 128,
+                  "h": 18
+                },
+                {
+                  "x": 890,
+                  "y": 654,
+                  "w": 107,
+                  "h": 70
+                },
+                {
+                  "x": 1042,
+                  "y": 679,
+                  "w": 292,
+                  "h": 21
+                },
+                {
+                  "x": 623,
+                  "y": 679,
+                  "w": 184,
+                  "h": 21
+                },
+                {
+                  "x": 1042,
+                  "y": 739,
+                  "w": 345,
+                  "h": 45
+                },
+                {
+                  "x": 623,
+                  "y": 739,
+                  "w": 220,
+                  "h": 45
+                },
+                {
+                  "x": 903,
+                  "y": 751,
+                  "w": 81,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 767,
+                  "w": 104,
+                  "h": 18
+                },
+                {
+                  "x": 623,
+                  "y": 800,
+                  "w": 189,
+                  "h": 45
+                },
+                {
+                  "x": 1042,
+                  "y": 812,
+                  "w": 282,
+                  "h": 21
+                },
+                {
+                  "x": 890,
+                  "y": 812,
+                  "w": 107,
+                  "h": 21
+                },
+                {
+                  "x": 495,
+                  "y": 812,
+                  "w": 98,
+                  "h": 21
+                },
+                {
+                  "x": 64,
+                  "y": 831,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 1042,
+                  "y": 861,
+                  "w": 372,
+                  "h": 39
+                },
+                {
+                  "x": 469,
+                  "y": 861,
+                  "w": 57,
+                  "h": 39
+                },
+                {
+                  "x": 495,
+                  "y": 861,
+                  "w": 85,
+                  "h": 21
+                },
+                {
+                  "x": 623,
+                  "y": 873,
+                  "w": 91,
+                  "h": 21
+                },
+                {
+                  "x": 900,
+                  "y": 873,
+                  "w": 86,
+                  "h": 21
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72
+              ],
+              "shows": "README_en.md"
             },
             {
               "ref": "rec:ar-readme#platforms2",
               "label": "further down the table",
               "focus": true,
-              "atWord": 100,
+              "atWord": 80,
+              "wantAtWord": 80,
               "zooms": [
                 {
                   "marks": [
                     "yt"
                   ],
                   "band": true,
-                  "wantAtWord": 105
+                  "wantAtWord": 84.917,
+                  "atWord": 85.333
                 },
                 {
                   "marks": [
                     "reddit"
                   ],
                   "band": true,
-                  "wantAtWord": 116
+                  "wantAtWord": 96.083,
+                  "atWord": 96.083
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "platforms2",
+              "src": "rec/ar-readme/seg-04.mp4",
+              "frames": 64,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "w": 1600,
+                "h": 900
+              },
+              "marks": {
+                "yt": {
+                  "x": 1042,
+                  "y": 260,
+                  "w": 303,
+                  "h": 21,
+                  "covers": "Subtitles + search across 1800+ video sites",
+                  "block": {
+                    "x": 1042,
+                    "y": 260,
+                    "w": 354,
+                    "h": 45
+                  }
+                },
+                "reddit": {
+                  "x": 1042,
+                  "y": 443,
+                  "w": 375,
+                  "h": 21,
+                  "covers": "No zero-config path (anonymous endpoints blocked)",
+                  "block": {
+                    "x": 1042,
+                    "y": 443,
+                    "w": 403,
+                    "h": 45
+                  }
+                }
+              },
+              "ink": [
+                {
+                  "x": 346,
+                  "y": 13,
+                  "w": 201,
+                  "h": 243
+                },
+                {
+                  "x": 495,
+                  "y": 13,
+                  "w": 113,
+                  "h": 85
+                },
+                {
+                  "x": 554,
+                  "y": 14,
+                  "w": 258,
+                  "h": 60
+                },
+                {
+                  "x": 1042,
+                  "y": 28,
+                  "w": 282,
+                  "h": 21
+                },
+                {
+                  "x": 890,
+                  "y": 28,
+                  "w": 107,
+                  "h": 21
+                },
+                {
+                  "x": 1042,
+                  "y": 59,
+                  "w": 372,
+                  "h": 63
+                },
+                {
+                  "x": 623,
+                  "y": 89,
+                  "w": 91,
+                  "h": 21
+                },
+                {
+                  "x": 900,
+                  "y": 89,
+                  "w": 86,
+                  "h": 21
+                },
+                {
+                  "x": 1042,
+                  "y": 138,
+                  "w": 340,
+                  "h": 45
+                },
+                {
+                  "x": 885,
+                  "y": 150,
+                  "w": 117,
+                  "h": 21
+                },
+                {
+                  "x": 495,
+                  "y": 150,
+                  "w": 86,
+                  "h": 21
+                },
+                {
+                  "x": 1085,
+                  "y": 199,
+                  "w": 300,
+                  "h": 45
+                },
+                {
+                  "x": 1042,
+                  "y": 199,
+                  "w": 45,
+                  "h": 45
+                },
+                {
+                  "x": 623,
+                  "y": 211,
+                  "w": 94,
+                  "h": 21
+                },
+                {
+                  "x": 903,
+                  "y": 211,
+                  "w": 81,
+                  "h": 21
+                },
+                {
+                  "x": 1042,
+                  "y": 260,
+                  "w": 312,
+                  "h": 45
+                },
+                {
+                  "x": 903,
+                  "y": 272,
+                  "w": 81,
+                  "h": 21
+                },
+                {
+                  "x": 1042,
+                  "y": 321,
+                  "w": 177,
+                  "h": 69
+                },
+                {
+                  "x": 1190,
+                  "y": 321,
+                  "w": 256,
+                  "h": 45
+                },
+                {
+                  "x": 903,
+                  "y": 345,
+                  "w": 81,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 348,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 1042,
+                  "y": 406,
+                  "w": 148,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 412,
+                  "w": 98,
+                  "h": 18
+                },
+                {
+                  "x": 1042,
+                  "y": 443,
+                  "w": 403,
+                  "h": 45
+                },
+                {
+                  "x": 72,
+                  "y": 445,
+                  "w": 109,
+                  "h": 18
+                },
+                {
+                  "x": 881,
+                  "y": 455,
+                  "w": 124,
+                  "h": 21
+                },
+                {
+                  "x": 623,
+                  "y": 455,
+                  "w": 94,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 477,
+                  "w": 149,
+                  "h": 18
+                },
+                {
+                  "x": 474,
+                  "y": 513,
+                  "w": 949,
+                  "h": 45
+                },
+                {
+                  "x": 474,
+                  "y": 513,
+                  "w": 90,
+                  "h": 21
+                },
+                {
+                  "x": 72,
+                  "y": 541,
+                  "w": 123,
+                  "h": 18
+                },
+                {
+                  "x": 72,
+                  "y": 606,
+                  "w": 128,
+                  "h": 18
+                },
+                {
+                  "x": 455,
+                  "y": 608,
+                  "w": 121,
+                  "h": 32
+                },
+                {
+                  "x": 506,
+                  "y": 664,
+                  "w": 177,
+                  "h": 21
+                },
+                {
+                  "x": 724,
+                  "y": 664,
+                  "w": 116,
+                  "h": 21
+                },
+                {
+                  "x": 474,
+                  "y": 705,
+                  "w": 435,
+                  "h": 45
+                },
+                {
+                  "x": 1132,
+                  "y": 705,
+                  "w": 284,
+                  "h": 21
+                },
+                {
+                  "x": 1002,
+                  "y": 709,
+                  "w": 126,
+                  "h": 41
+                },
+                {
+                  "x": 894,
+                  "y": 709,
+                  "w": 82,
+                  "h": 41
+                },
+                {
+                  "x": 64,
+                  "y": 767,
+                  "w": 104,
+                  "h": 18
+                },
+                {
+                  "x": 490,
+                  "y": 785,
+                  "w": 120,
+                  "h": 16
+                },
+                {
+                  "x": 633,
+                  "y": 785,
+                  "w": 112,
+                  "h": 16
+                },
+                {
+                  "x": 64,
+                  "y": 831,
+                  "w": 121,
+                  "h": 18
+                },
+                {
+                  "x": 991,
+                  "y": 837,
+                  "w": 280,
+                  "h": 21
+                },
+                {
+                  "x": 474,
+                  "y": 837,
+                  "w": 52,
+                  "h": 45
+                },
+                {
+                  "x": 532,
+                  "y": 841,
+                  "w": 714,
+                  "h": 41
+                },
+                {
+                  "x": 527,
+                  "y": 841,
+                  "w": 239,
+                  "h": 16
+                },
+                {
+                  "x": 1277,
+                  "y": 841,
+                  "w": 127,
+                  "h": 16
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60
+              ],
+              "shows": "README_en.md"
             }
           ],
-          "sourceNote": "Agent Reach README · github.com/Panniantong/Agent-Reach"
+          "sourceNote": "Agent Reach README · github.com/Panniantong/Agent-Reach",
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1.083
         }
       },
-      "durationFrames": 1398
+      "durationFrames": 1467,
+      "audio": "audio/agent-reach-hands-on_long_s07.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s08",
@@ -474,31 +2618,31 @@
               "group": "layer",
               "label": "Agent Reach",
               "sub": "the capability layer",
-              "atWord": 30
+              "atWord": 20.583
             },
             {
               "group": "job",
               "label": "picks",
               "icon": "lucide:list-checks",
-              "atWord": 53
+              "atWord": 42.333
             },
             {
               "group": "job",
               "label": "installs",
               "icon": "lucide:download",
-              "atWord": 65
+              "atWord": 51.75
             },
             {
               "group": "job",
               "label": "checks",
               "icon": "lucide:stethoscope",
-              "atWord": 70
+              "atWord": 57.833
             },
             {
               "group": "job",
               "label": "routes",
               "icon": "lucide:signpost",
-              "atWord": 78
+              "atWord": 64.167
             },
             {
               "group": "tool",
@@ -534,20 +2678,22 @@
               "group": "direct",
               "label": "the agent calls the tools itself",
               "sub": "nothing in between",
-              "atWord": 90
+              "atWord": 72.417
             }
           ]
         },
         "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
       },
-      "durationFrames": 1303
+      "durationFrames": 1294,
+      "audio": "audio/agent-reach-hands-on_long_s08.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s09",
       "type": "AR_STAGE",
       "transition": "fade",
       "background": "zoneA",
-      "narration": "Why is a layer like that worth having? Because tools for reading these sites break all the time — the sites keep changing. So for every platform, Agent Reach keeps an ordered list of tools: a first choice, then fallbacks. Take Bilibili. Its first choice used to be yt-dlp. In June, according to the README, Bilibili started refusing it with an error four-one-two. So the list was reordered: a tool called bili-cli took over, OpenCLI waits behind it, and a plain search API sits last. Anyone who had Agent Reach installed, the README says, didn't have to do a thing.",
+      "narration": "Tools for reading these sites break all the time, because the sites keep changing. So for every platform, Agent Reach keeps an ordered list of tools: a first choice, then fallbacks. Take Bilibili. Its first choice used to be yt-dlp. In June, according to the README, Bilibili started refusing it with an error four-one-two. So the list was reordered: a tool called bili-cli took over, OpenCLI waits behind it, and a plain search API sits last. Anyone who had Agent Reach installed, the README says, didn't have to do a thing.",
       "data": {
         "arStage": {
           "kind": "plugs",
@@ -559,7 +2705,7 @@
               "group": "platform",
               "label": "Bilibili",
               "icon": "si:bilibili",
-              "atWord": 41
+              "atWord": 26.833
             },
             {
               "group": "back",
@@ -567,34 +2713,36 @@
               "sub": "refused with a 412 in June",
               "text": "dead",
               "icon": "lucide:download",
-              "atWord": 57
+              "atWord": 43.25
             },
             {
               "group": "back",
               "label": "bili-cli",
               "sub": "in use now",
               "icon": "lucide:terminal",
-              "atWord": 72
+              "atWord": 55.417
             },
             {
               "group": "back",
               "label": "OpenCLI",
               "sub": "waiting behind it",
               "icon": "lucide:app-window",
-              "atWord": 75
+              "atWord": 59.833
             },
             {
               "group": "back",
               "label": "search API",
               "sub": "the last resort",
               "icon": "lucide:search",
-              "atWord": 80
+              "atWord": 64.583
             }
           ]
         },
         "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
       },
-      "durationFrames": 980
+      "durationFrames": 1005,
+      "audio": "audio/agent-reach-hands-on_long_s09.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s10",
@@ -607,10 +2755,12 @@
           "number": "1",
           "title": "Install it",
           "subtitle": "one package, one read-only check",
-          "atWord": 3
+          "atWord": 2.917
         }
       },
-      "durationFrames": 192
+      "durationFrames": 204,
+      "audio": "audio/agent-reach-hands-on_long_s10.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s11",
@@ -623,46 +2773,140 @@
           "clips": [
             {
               "ref": "rec:ar-install#pip",
-              "label": "pip install · 8× speed",
+              "label": "pip install · 12× speed",
               "focus": true,
-              "atWord": 3,
+              "atWord": 2.25,
+              "wantAtWord": 1.833,
               "zooms": [
                 {
                   "marks": [
                     "ok"
                   ],
                   "band": true,
-                  "wantAtWord": 52
+                  "wantAtWord": 43.583,
+                  "atWord": 41.833
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "pip",
+              "src": "rec/ar-install/seg-01.mp4",
+              "frames": 346,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "ok": {
+                  "x": 73,
+                  "y": 774,
+                  "w": 194,
+                  "h": 19,
+                  "covers": "Successfully installed"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 1504,
+                  "h": 779
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156,
+                162,
+                168,
+                174,
+                180,
+                186,
+                192,
+                198,
+                204,
+                210,
+                216,
+                222,
+                228,
+                234,
+                240,
+                246,
+                252,
+                258,
+                264,
+                270,
+                276,
+                282,
+                288,
+                294,
+                300,
+                306,
+                312,
+                318,
+                324,
+                330,
+                336,
+                342
+              ],
+              "shows": "Downloading pycryptodomex-3.23.0-cp37-abi3-win_amd64.whl.metadata (3.5 kB)",
+              "said": " Downloading pycryptodomex-3.23.0-cp37-abi3-win_amd64.whl.metadata (3.5 kB)\nCollecting websockets>=13.0 (from yt-dlp[default]>=2026.07.04->agent-reach==1.5.0)\n Downloading websockets-17.1-cp312-cp312-win_amd64.whl.metadata (6.5 kB)\nCollecting yt-dlp-ejs==0.8.0 (from yt-dlp[default]>=2026.07.04->agent-reach==1.5.0)\n Downloading yt_dlp_ejs-0.8.0-py3-none-any.whl.metadata (3.5 kB)\nDownloading feedparser-6.0.14-py3-none-any.whl (80 kB)\nDownloading feedparser_sgmllib-2.1.0-py3-none-any.whl (11 kB)\nDownloading loguru-0.7.3-py3-none-any.whl (61 kB)\nDownloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)\nDownloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)\nDownloading pyyaml-6.0.3-cp312-cp312-win_amd64.whl (154 kB)\nDownloading requests-2.34.2-py3-none-any.whl (73 kB)\nDownloading charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl (207 kB)\nDownloading idna-3.20-py3-none-any.whl (69 kB)\nDownloading urllib3-2.8.0-py3-none-any.whl (135 kB)\nDownloading certifi-2026.7.22-py3-none-any.whl (136 kB)\nDownloading rich-15.0.0-py3-none-any.whl (310 kB)\nDownloading pygments-2.21.0-py3-none-any.whl (1.3 MB)\n ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 1.4 MB/s 0:00:00\nDownloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)\nDownloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)\nDownloading win32_setctime-1.2.0-py3-none-any.whl (4.1 kB)\nDownloading yt_dlp-2026.8.19-py3-none-any.whl (3.2 MB)\n ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.2/3.2 MB 3.2 MB/s 0:00:01\nDownloading yt_dlp_ejs-0.8.0-py3-none-any.whl (53 kB)\nDownloading websockets-17.1-cp312-cp312-win_amd64.whl (217 kB)\nDownloading brotli-1.2.0-cp312-cp312-win_amd64.whl (369 kB)\nDownloading mutagen-1.48.1-py3-none-any.whl (195 kB)\nDownloading pycryptodomex-3.23.0-cp37-abi3-win_amd64.whl (1.8 MB)\n ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 3.2 MB/s 0:00:00\nBuilding wheels for collected packages: agent-reach\n Building wheel for agent-reach (pyproject.toml) ... done\n Created wheel for agent-reach: filename=agent_reach-1.5.0-py3-none-any.whl size=142360 sha256=9431103c1a95909535d5508838fbf766546aabe47a6621072c17bdcd75c822b7\n Stored in directory: <root>/tmp\\pip-ephem-wheel-cache-j0057dwp\\wheels\\d5\\a3\\7b\\dba40dce548001814be92b3f5eeafe25ad23b92c87b115852a\nSuccessfully built agent-reach\nInstalling collected packages: brotli, yt-dlp-ejs, yt-dlp, win32-setctime, websockets, urllib3, pyyaml, python-dotenv, pygments, pycryptodomex, mutagen, mdurl, idna, feedp\narser-sgmllib, colorama, charset_normalizer, certifi, requests, markdown-it-py, loguru, feedparser, rich, agent-reach\nSuccessfully installed agent-reach-1.5.0 brotli-1.2.0 certifi-2026.7.22 charset_normalizer-3.5.2 colorama-0.4.6 feedparser-6.0.14 feedparser-sgmllib-2.1.0 idna-3.20 loguru\n-0.7.3 markdown-it-py-4.2.0 mdurl-0.1.2 mutagen-1.48.1 pycryptodomex-3.23.0 pygments-2.21.0 python-dotenv-1.2.4 pyyaml-6.0.3 requests-2.34.2 rich-15.0.0 urllib3-2.8.0 webs\nockets-17.1 win32-setctime-1.2.0 yt-dlp-2026.8.19 yt-dlp-ejs-0.8.0\nPS ar-install>"
             },
             {
               "ref": "rec:ar-install#check",
-              "label": "the read-only check",
+              "label": "read-only check · 2×",
               "focus": true,
-              "atWord": 49,
+              "atWord": 41.833,
+              "wantAtWord": 41.667,
               "zooms": [
                 {
                   "marks": [
                     "safe"
                   ],
                   "band": true,
-                  "wantAtWord": 68
-                },
-                {
-                  "marks": [
-                    "mcp"
-                  ],
-                  "band": true,
-                  "wantAtWord": 121
+                  "wantAtWord": 57.417,
+                  "atWord": 57.417
                 },
                 {
                   "marks": [
                     "done"
                   ],
                   "band": true,
-                  "wantAtWord": 109
+                  "wantAtWord": 91.083,
+                  "atWord": 91.083
+                },
+                {
+                  "marks": [
+                    "mcp"
+                  ],
+                  "band": true,
+                  "wantAtWord": 100.75,
+                  "atWord": 100.75
                 }
               ],
               "callouts": [
@@ -671,28 +2915,156 @@
                   "mark": "safe",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 74
+                  "wantAtWord": 62.667,
+                  "atWord": 62.667
                 },
                 {
                   "text": "nothing was changed",
                   "mark": "done",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 105
+                  "wantAtWord": 87.167,
+                  "atWord": 91.75
                 },
                 {
                   "text": "a helper for web search — later",
                   "mark": "mcp",
                   "side": "right",
                   "color": "orange",
-                  "wantAtWord": 118
+                  "wantAtWord": 99.167,
+                  "atWord": 102
                 }
-              ]
+              ],
+              "id": "check",
+              "src": "rec/ar-install/seg-02.mp4",
+              "frames": 116,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "safe": {
+                  "x": 73,
+                  "y": 71,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "SAFE MODE"
+                },
+                "mcp": {
+                  "x": 117,
+                  "y": 261,
+                  "w": 194,
+                  "h": 19,
+                  "covers": "mcporter not installed"
+                },
+                "done": {
+                  "x": 302,
+                  "y": 812,
+                  "w": 176,
+                  "h": 19,
+                  "covers": "No changes were made"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 396,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 109,
+                  "w": 378,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 147,
+                  "w": 537,
+                  "h": 76
+                },
+                {
+                  "x": 73,
+                  "y": 242,
+                  "w": 713,
+                  "h": 76
+                },
+                {
+                  "x": 73,
+                  "y": 337,
+                  "w": 167,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 375,
+                  "w": 800,
+                  "h": 57
+                },
+                {
+                  "x": 73,
+                  "y": 451,
+                  "w": 1504,
+                  "h": 190
+                },
+                {
+                  "x": 73,
+                  "y": 660,
+                  "w": 1504,
+                  "h": 57
+                },
+                {
+                  "x": 73,
+                  "y": 736,
+                  "w": 1504,
+                  "h": 57
+                },
+                {
+                  "x": 73,
+                  "y": 812,
+                  "w": 607,
+                  "h": 38
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114
+              ],
+              "shows": "SAFE MODE — skipping automatic system changes",
+              "said": "SAFE MODE — skipping automatic system changes\nEnvironment: Local computer (auto-detected)\nChecking system dependencies (safe mode — no auto-install)...\n ✅ GitHub CLI already installed\n ✅ Node.js already installed\n All system dependencies are installed!\nChecking mcporter (safe mode)...\n -- mcporter not installed\n To install: npm install -g mcporter\n Then configure Exa: mcporter config add exa https://mcp.exa.ai/mcp --scope home\nTesting channels...\n[bold cyan]Agent Reach 状态[/bold cyan]\n[cyan]========================================[/cyan]\n图例：[green]✅[/green] 可用 [yellow][!][/yellow] 已装但需配置/登录 [red][X][/red] 未安装\n[bold]✅ 装好即用：[/bold]\n [yellow][!][/yellow] [bold]GitHub 仓库和代码[/bold] — gh CLI 可执行，且检测到显式认证配置；Doctor 不执行会写 device-id 的 `gh auth status`，因此未实时验证，未标记为可用\n。\n [green]✅[/green] [bold]YouTube 视频和字幕[/bold] — 可提取视频信息和字幕\n [green]✅[/green] [bold]V2EX 节点、主题与回复[/bold] — 公开 API 可用（热门主题、节点浏览、主题详情、用户信息）\n [green]✅[/green] [bold]RSS/Atom 订阅源[/bold] — 可读取 RSS/Atom 源\n [red][X][/red] [bold]全网语义搜索[/bold] — 需要 mcporter + Exa MCP。安装：\n npm install -g mcporter\n mcporter config add exa https://mcp.exa.ai/mcp --scope home\n [green]✅[/green] [bold]任意网页[/bold] — 通过 Jina Reader 读取任意网页（curl https://r.jina.ai/URL）\n[bold]可选渠道（已安装）：[/bold]\n [green]✅[/green] [bold]B站视频、字幕和搜索[/bold] — B站搜索 API 可达（仅搜索，curl 直连）。完整功能建议安装 bili-cli：pipx install bilibili-cli [dim]（当前后端：B站搜索\n API）[/dim]\n状态：[yellow]5/16[/yellow] 个渠道可用\n还有 9 个可选渠道可以解锁（Twitter/X 推文、Reddit 帖子和评论、Facebook 帖子、主页和群组、Instagram 用户、主页和指定用户帖子、小红书笔记、小宇宙播客转文字、雪球股票行情与社\n区动态、LinkedIn 职业社交、Boss直聘 职位搜索与 JD），告诉你的 Agent「帮我装 XXX」即可\nSafe mode check complete. No changes were made. 5/16 channels active.\nPS ar-install>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 1569
+      "durationFrames": 1625,
+      "audio": "audio/agent-reach-hands-on_long_s11.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s12",
@@ -712,26 +3084,28 @@
               "label": "✅ 可用",
               "sub": "ready to use",
               "text": "ok",
-              "atWord": 17
+              "atWord": 13.833
             },
             {
               "group": "lamp",
               "label": "[!] 已装但需配置/登录",
               "sub": "installed — needs setup or login",
               "text": "warn",
-              "atWord": 24
+              "atWord": 19.25
             },
             {
               "group": "lamp",
               "label": "[X] 未安装",
               "sub": "not installed",
               "text": "off",
-              "atWord": 40
+              "atWord": 32.833
             }
           ]
         }
       },
-      "durationFrames": 572
+      "durationFrames": 603,
+      "audio": "audio/agent-reach-hands-on_long_s12.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s13",
@@ -746,32 +3120,29 @@
               "ref": "rec:ar-install#doctor",
               "label": "agent-reach doctor",
               "focus": true,
-              "atWord": 2,
+              "atWord": 2.167,
+              "wantAtWord": 1,
               "zooms": [
                 {
                   "marks": [
                     "yt"
                   ],
                   "band": true,
-                  "wantAtWord": 16
-                },
-                {
-                  "marks": [
-                    "rss"
-                  ],
-                  "band": true,
-                  "wantAtWord": 27
+                  "wantAtWord": 14.417,
+                  "atWord": 18.917
                 },
                 {
                   "marks": [
                     "gh"
                   ],
                   "band": true,
-                  "wantAtWord": 39
+                  "wantAtWord": 35.167,
+                  "atWord": 35.167
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 74
+                  "wantAtWord": 61.083,
+                  "atWord": 61.083
                 }
               ],
               "callouts": [
@@ -780,28 +3151,175 @@
                   "mark": "legend",
                   "side": "right",
                   "color": "blue",
-                  "wantAtWord": 11
+                  "wantAtWord": 10.25,
+                  "atWord": 20.417
                 },
                 {
                   "text": "web search: not installed yet",
                   "mark": "exa",
                   "side": "right",
                   "color": "red",
-                  "wantAtWord": 59
+                  "wantAtWord": 51,
+                  "atWord": 51
                 },
                 {
                   "text": "5 of 16 channels available",
                   "mark": "status",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 80
+                  "wantAtWord": 66.417,
+                  "atWord": 66.417
                 }
-              ]
+              ],
+              "id": "doctor",
+              "src": "rec/ar-install/seg-03.mp4",
+              "frames": 196,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "legend": {
+                  "x": 73,
+                  "y": 128,
+                  "w": 35,
+                  "h": 19,
+                  "covers": "图例"
+                },
+                "ready": {
+                  "x": 99,
+                  "y": 166,
+                  "w": 70,
+                  "h": 19,
+                  "covers": "装好即用"
+                },
+                "gh": {
+                  "x": 135,
+                  "y": 185,
+                  "w": 150,
+                  "h": 19,
+                  "covers": "GitHub 仓库和代码"
+                },
+                "yt": {
+                  "x": 117,
+                  "y": 204,
+                  "w": 158,
+                  "h": 19,
+                  "covers": "YouTube 视频和字幕"
+                },
+                "rss": {
+                  "x": 117,
+                  "y": 242,
+                  "w": 132,
+                  "h": 19,
+                  "covers": "RSS/Atom 订阅源"
+                },
+                "exa": {
+                  "x": 135,
+                  "y": 261,
+                  "w": 106,
+                  "h": 19,
+                  "covers": "全网语义搜索"
+                },
+                "web": {
+                  "x": 117,
+                  "y": 318,
+                  "w": 70,
+                  "h": 19,
+                  "covers": "任意网页"
+                },
+                "status": {
+                  "x": 73,
+                  "y": 413,
+                  "w": 53,
+                  "h": 19,
+                  "covers": "状态："
+                },
+                "__cmd": {
+                  "x": 205,
+                  "y": 71,
+                  "w": 158,
+                  "h": 19,
+                  "covers": "agent-reach doctor"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 422,
+                  "h": 76
+                },
+                {
+                  "x": 73,
+                  "y": 166,
+                  "w": 1258,
+                  "h": 171
+                },
+                {
+                  "x": 73,
+                  "y": 356,
+                  "w": 1267,
+                  "h": 38
+                },
+                {
+                  "x": 73,
+                  "y": 413,
+                  "w": 1381,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156,
+                162,
+                168,
+                174,
+                180,
+                186,
+                192
+              ],
+              "shows": "$ agent-reach doctor",
+              "said": "PS ar-install> agent-reach doctor\nAgent Reach 状态\n========================================\n图例：✅ 可用 [!] 已装但需配置/登录 [X] 未安装\n✅ 装好即用：\n [!] GitHub 仓库和代码 — gh CLI 可执行，且检测到显式认证配置；Doctor 不执行会写 device-id 的 `gh auth status`，因此未实时验证，未标记为可用。\n ✅ YouTube 视频和字幕 — 可提取视频信息和字幕\n ✅ V2EX 节点、主题与回复 — 公开 API 可用（热门主题、节点浏览、主题详情、用户信息）\n ✅ RSS/Atom 订阅源 — 可读取 RSS/Atom 源\n [X] 全网语义搜索 — 需要 mcporter + Exa MCP。安装：\n npm install -g mcporter\n mcporter config add exa https://mcp.exa.ai/mcp --scope home\n ✅ 任意网页 — 通过 Jina Reader 读取任意网页（curl https://r.jina.ai/URL）\n可选渠道（已安装）：\n ✅ B站视频、字幕和搜索 — B站搜索 API 可达（仅搜索，curl 直连）。完整功能建议安装 bili-cli：pipx install bilibili-cli （当前后端：B站搜索 API）\n状态：5/16 个渠道可用\n还有 9 个可选渠道可以解锁（Twitter/X 推文、Reddit 帖子和评论、Facebook 帖子、主页和群组、Instagram\n用户、主页和指定用户帖子、小红书笔记、小宇宙播客转文字、雪球股票行情与社区动态、LinkedIn 职业社交、Boss直聘 职位搜索与 JD），告诉你的 Agent「帮我装 XXX」即可\nPS ar-install>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 1180
+      "durationFrames": 1234,
+      "audio": "audio/agent-reach-hands-on_long_s13.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s14",
@@ -822,7 +3340,7 @@
               "icon": "lucide:globe",
               "text": "ok",
               "sub": "ready",
-              "atWord": 14
+              "atWord": 10.25
             },
             {
               "group": "ch",
@@ -830,7 +3348,7 @@
               "icon": "si:youtube",
               "text": "ok",
               "sub": "ready",
-              "atWord": 16
+              "atWord": 12.083
             },
             {
               "group": "ch",
@@ -838,7 +3356,7 @@
               "icon": "si:rss",
               "text": "ok",
               "sub": "ready",
-              "atWord": 17
+              "atWord": 13.75
             },
             {
               "group": "ch",
@@ -846,7 +3364,7 @@
               "icon": "si:v2ex",
               "text": "ok",
               "sub": "ready",
-              "atWord": 25
+              "atWord": 21.583
             },
             {
               "group": "ch",
@@ -854,7 +3372,7 @@
               "icon": "si:bilibili",
               "text": "ok",
               "sub": "ready",
-              "atWord": 27
+              "atWord": 24.5
             },
             {
               "group": "ch",
@@ -862,7 +3380,7 @@
               "icon": "si:github",
               "text": "login",
               "sub": "login check",
-              "atWord": 29
+              "atWord": 27.5
             },
             {
               "group": "ch",
@@ -870,7 +3388,7 @@
               "icon": "lucide:search",
               "text": "login",
               "sub": "one helper",
-              "atWord": 29
+              "atWord": 27.5
             },
             {
               "group": "ch",
@@ -878,7 +3396,7 @@
               "icon": "si:x",
               "text": "login",
               "sub": "needs login",
-              "atWord": 38
+              "atWord": 34.833
             },
             {
               "group": "ch",
@@ -886,7 +3404,7 @@
               "icon": "si:reddit",
               "text": "login",
               "sub": "needs login",
-              "atWord": 38
+              "atWord": 34.833
             },
             {
               "group": "ch",
@@ -894,7 +3412,7 @@
               "icon": "si:facebook",
               "text": "off",
               "sub": "not today",
-              "atWord": 51
+              "atWord": 44
             },
             {
               "group": "ch",
@@ -902,7 +3420,7 @@
               "icon": "si:instagram",
               "text": "off",
               "sub": "not today",
-              "atWord": 51
+              "atWord": 44
             },
             {
               "group": "ch",
@@ -910,7 +3428,7 @@
               "icon": "lucide:briefcase",
               "text": "off",
               "sub": "not today",
-              "atWord": 51
+              "atWord": 44
             },
             {
               "group": "ch",
@@ -918,7 +3436,7 @@
               "icon": "si:xiaohongshu",
               "text": "off",
               "sub": "not today",
-              "atWord": 56
+              "atWord": 48.417
             },
             {
               "group": "ch",
@@ -926,7 +3444,7 @@
               "icon": "lucide:chart-candlestick",
               "text": "off",
               "sub": "not today",
-              "atWord": 56
+              "atWord": 48.417
             },
             {
               "group": "ch",
@@ -934,7 +3452,7 @@
               "icon": "lucide:podcast",
               "text": "off",
               "sub": "not today",
-              "atWord": 56
+              "atWord": 48.417
             },
             {
               "group": "ch",
@@ -942,7 +3460,7 @@
               "icon": "lucide:id-card",
               "text": "off",
               "sub": "not today",
-              "atWord": 56
+              "atWord": 48.417
             },
             {
               "group": "tally",
@@ -952,7 +3470,9 @@
           ]
         }
       },
-      "durationFrames": 838
+      "durationFrames": 843,
+      "audio": "audio/agent-reach-hands-on_long_s14.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s15",
@@ -965,10 +3485,12 @@
           "number": "2",
           "title": "No login needed",
           "subtitle": "web pages, YouTube, RSS, GitHub, search",
-          "atWord": 2
+          "atWord": 1
         }
       },
-      "durationFrames": 135
+      "durationFrames": 119,
+      "audio": "audio/agent-reach-hands-on_long_s15.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s16",
@@ -993,34 +3515,36 @@
               "label": "curl r.jina.ai/URL",
               "sub": "“Read this link”",
               "icon": "lucide:globe",
-              "atWord": 45
+              "atWord": 32.5
             },
             {
               "group": "arm",
               "label": "yt-dlp",
               "sub": "“What does this video cover?”",
               "icon": "si:youtube",
-              "atWord": 56
+              "atWord": 40.167
             },
             {
               "group": "arm",
               "label": "gh search repos",
               "sub": "“Search GitHub for…”",
               "icon": "si:github",
-              "atWord": 64
+              "atWord": 48.25
             },
             {
               "group": "arm",
               "label": "feedparser",
               "sub": "“Subscribe to this feed”",
               "icon": "si:rss",
-              "atWord": 72
+              "atWord": 55
             }
           ]
         },
         "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
       },
-      "durationFrames": 1009
+      "durationFrames": 915,
+      "audio": "audio/agent-reach-hands-on_long_s16.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s17",
@@ -1033,36 +3557,144 @@
           "clips": [
             {
               "ref": "rec:ar-read#web",
-              "label": "a web page as text",
+              "label": "a web page as text · 2×",
               "focus": true,
-              "atWord": 2,
+              "atWord": 4.333,
+              "wantAtWord": 1.417,
               "zooms": [
                 {
                   "marks": [
                     "title"
                   ],
                   "band": true,
-                  "wantAtWord": 29
+                  "wantAtWord": 23.667,
+                  "atWord": 23.667
                 },
                 {
                   "marks": [
                     "src"
                   ],
                   "band": true,
-                  "wantAtWord": 31
+                  "wantAtWord": 25.5,
+                  "atWord": 25.5
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 49
+                  "wantAtWord": 40.167,
+                  "atWord": 40.167
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "web",
+              "src": "rec/ar-read/seg-01.mp4",
+              "frames": 206,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "title": {
+                  "x": 73,
+                  "y": 90,
+                  "w": 53,
+                  "h": 19,
+                  "covers": "Title:"
+                },
+                "src": {
+                  "x": 73,
+                  "y": 128,
+                  "w": 97,
+                  "h": 19,
+                  "covers": "URL Source:"
+                },
+                "__cmd": {
+                  "x": 179,
+                  "y": 71,
+                  "w": 968,
+                  "h": 19,
+                  "covers": "(curl.exe -s https://r.jina.ai/https://en.wikipedia.org/wiki/Model_Context_Protocol) | Select-Object -First 14"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 1073,
+                  "h": 38
+                },
+                {
+                  "x": 73,
+                  "y": 128,
+                  "w": 563,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 166,
+                  "w": 317,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 204,
+                  "w": 325,
+                  "h": 38
+                },
+                {
+                  "x": 73,
+                  "y": 261,
+                  "w": 1504,
+                  "h": 133
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156,
+                162,
+                168,
+                174,
+                180,
+                186,
+                192,
+                198,
+                204
+              ],
+              "shows": "$ (curl.exe -s https://r.jina.ai/https://en.wikipedia.org/wiki/Model_C",
+              "said": "PS ar-read> (curl.exe -s https://r.jina.ai/https://en.wikipedia.org/wiki/Model_Context_Protocol) | Select-Object -First 14\nTitle: Model Context Protocol\nURL Source: https://en.wikipedia.org/wiki/Model_Context_Protocol\nPublished Time: 2025-04-14T12:01:07Z\nMarkdown Content:\nFrom Wikipedia, the free encyclopedia\nModel Context Protocol[![Image 1](https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Model_Context_Protocol_logo.svg/250px-Model_Context_Protocol_logo.svg.png?utm_so\nurce=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File:Model_Context_Protocol_logo.svg)\nDeveloped by[Anthropic](https://en.wikipedia.org/wiki/Anthropic \"Anthropic\")\nIntroduced November 25, 2024;22 months ago\nIndustry[Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence \"Artificial intelligence\")\nConnector type* [TypeScript](https://en.wikipedia.org/wiki/TypeScript \"TypeScript\")\nPS ar-read>"
             },
             {
               "ref": "rec:ar-read#ytsearch",
-              "label": "YouTube search",
+              "label": "YouTube search · 3×",
               "focus": true,
-              "atWord": 83,
+              "atWord": 64.5,
+              "wantAtWord": 64.5,
               "zooms": [],
               "callouts": [
                 {
@@ -1070,14 +3702,72 @@
                   "mark": null,
                   "side": "top",
                   "color": "blue",
-                  "wantAtWord": 89
+                  "wantAtWord": 72.167,
+                  "atWord": 74.583
                 }
-              ]
+              ],
+              "id": "ytsearch",
+              "src": "rec/ar-read/seg-02.mp4",
+              "frames": 115,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 179,
+                  "y": 71,
+                  "w": 792,
+                  "h": 19,
+                  "covers": "yt-dlp --flat-playlist --print \"%(channel)s  |  %(title)s\" \"ytsearch5:what is claude code\""
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 897,
+                  "h": 133
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114
+              ],
+              "shows": "$ yt-dlp --flat-playlist --print \"%(channel)s | %(title)s\" \"ytsearch5:",
+              "said": "PS ar-read> yt-dlp --flat-playlist --print \"%(channel)s | %(title)s\" \"ytsearch5:what is claude code\"\nClaude | What is Claude Code?\nClaude | How Claude Code Works\nAnthropic | Introducing Claude Code\nGreg Isenberg | Claude Code Clearly Explained (and how to use it)\nSajjaad Khader | Learn 80% of Claude Code in 10 Minutes (2026 Tutorial)\nPS ar-read>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1.417
         }
       },
-      "durationFrames": 1189
+      "durationFrames": 1184,
+      "audio": "audio/agent-reach-hands-on_long_s17.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s18",
@@ -1096,34 +3786,36 @@
               "group": "video",
               "label": "Introducing Claude Code",
               "sub": "Anthropic · 3:55",
-              "atWord": 16
+              "atWord": 11.75
             },
             {
               "group": "line",
               "label": "I'm Boris I'm an engineer I'm cat",
-              "atWord": 62
+              "atWord": 49.583
             },
             {
               "group": "line",
               "label": "I'm a product manager we love seeing",
-              "atWord": 67
+              "atWord": 55.25
             },
             {
               "group": "line",
               "label": "what people build with quad especially",
-              "atWord": 71
+              "atWord": 58.75
             },
             {
               "group": "read",
               "label": "text your agent can read",
               "sub": "the video itself is never downloaded",
-              "atWord": 83
+              "atWord": 68.083
             }
           ]
         },
         "source": "Captions: “Introducing Claude Code” (Anthropic), YouTube"
       },
-      "durationFrames": 961
+      "durationFrames": 992,
+      "audio": "audio/agent-reach-hands-on_long_s18.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s19",
@@ -1136,16 +3828,18 @@
           "clips": [
             {
               "ref": "rec:ar-read#subs",
-              "label": "subtitles only",
+              "label": "subtitles only · 3×",
               "focus": true,
-              "atWord": 2,
+              "atWord": 4.583,
+              "wantAtWord": 1.083,
               "zooms": [
                 {
                   "marks": [
                     "wrote"
                   ],
                   "band": true,
-                  "wantAtWord": 31
+                  "wantAtWord": 25.167,
+                  "atWord": 25.167
                 }
               ],
               "callouts": [
@@ -1154,41 +3848,178 @@
                   "mark": "wrote",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 27
+                  "wantAtWord": 22.75,
+                  "atWord": 25.833
                 }
-              ]
+              ],
+              "id": "subs",
+              "src": "rec/ar-read/seg-03.mp4",
+              "frames": 161,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "wrote": {
+                  "x": 135,
+                  "y": 280,
+                  "w": 202,
+                  "h": 19,
+                  "covers": "Writing video subtitles"
+                },
+                "__cmd": {
+                  "x": 179,
+                  "y": 71,
+                  "w": 1003,
+                  "h": 19,
+                  "covers": "yt-dlp --write-auto-sub --sub-lang en --skip-download -o \"subs/%(id)s\" https://www.youtube.com/watch?v=AJpK3YTTKZ4"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 1504,
+                  "h": 285
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156
+              ],
+              "shows": "$ yt-dlp --write-auto-sub --sub-lang en --skip-download -o \"subs/%(id)",
+              "said": "PS ar-read> yt-dlp --write-auto-sub --sub-lang en --skip-download -o \"subs/%(id)s\" https://www.youtube.com/watch?v=AJpK3YTTKZ4\n[youtube] Extracting URL: https://www.youtube.com/watch?v=AJpK3YTTKZ4\n[youtube] AJpK3YTTKZ4: Downloading webpage\nWARNING: [youtube] unable to extract yt initial data; please report this issue on https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template.\n Confirm you are on the latest version using yt-dlp -U\nWARNING: [youtube] Incomplete data received in embedded initial data; re-fetching using API.\n[youtube] AJpK3YTTKZ4: Downloading initial data API JSON\n[youtube] AJpK3YTTKZ4: Downloading visionos player API JSON\n[youtube] AJpK3YTTKZ4: Downloading m3u8 information\n[info] AJpK3YTTKZ4: Downloading subtitles: en\n[info] AJpK3YTTKZ4: Downloading 1 format(s): 616+251\n[info] Writing video subtitles to: subs\\AJpK3YTTKZ4.en.vtt\n[download] Destination: subs\\AJpK3YTTKZ4.en.vtt\n[download] 100% of 26.86KiB in 00:00:00 at 90.68KiB/s\nPS ar-read>"
             },
             {
               "ref": "rec:ar-read#read",
-              "label": "the video, as text",
+              "label": "the video as text · 3×",
               "focus": true,
-              "atWord": 38,
-              "zooms": [
-                {
-                  "marks": [
-                    "kind"
-                  ],
-                  "wantAtWord": 34
-                },
-                {
-                  "at": "full",
-                  "wantAtWord": 47
-                }
-              ],
+              "atWord": 25.833,
+              "wantAtWord": 25.833,
+              "zooms": [],
               "callouts": [
+                {
+                  "text": "the opening of the video, as text",
+                  "mark": "kind",
+                  "side": "right",
+                  "color": "blue",
+                  "wantAtWord": 34.833,
+                  "atWord": 34.833
+                },
                 {
                   "text": "“quad” is the caption mishearing “Claude”",
                   "mark": null,
                   "side": "top",
                   "color": "orange",
-                  "wantAtWord": 51
+                  "wantAtWord": 42.333,
+                  "atWord": 42.333
+                },
+                {
+                  "text": "YouTube answered one request with a 429",
+                  "mark": null,
+                  "side": "bottom",
+                  "color": "red",
+                  "wantAtWord": 87.417,
+                  "atWord": 80.167
                 }
-              ]
+              ],
+              "id": "read",
+              "src": "rec/ar-read/seg-04.mp4",
+              "frames": 123,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "kind": {
+                  "x": 73,
+                  "y": 109,
+                  "w": 123,
+                  "h": 19,
+                  "covers": "Kind: captions"
+                },
+                "__cmd": {
+                  "x": 179,
+                  "y": 71,
+                  "w": 1117,
+                  "h": 19,
+                  "covers": "Get-Content subs\\*.vtt | Where-Object { $_.Trim() -and $_ -notmatch '-->|<' } | Select-Object -Unique | Select-Object -First 12"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 1223,
+                  "h": 266
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120
+              ],
+              "shows": "$ Get-Content subs\\*.vtt | Where-Object { $_.Trim() -and $_ -notmatch ",
+              "said": "PS ar-read> Get-Content subs\\*.vtt | Where-Object { $_.Trim() -and $_ -notmatch '-->|<' } | Select-Object -Unique | Select-Object -First 12\nWEBVTT\nKind: captions\nLanguage: en\nshould we be doing like big smile or uh\nno big smile is creepy that's sort of\nway I'm Boris I'm an engineer I'm cat\nI'm a product manager we love seeing\nwhat people build with quad especially\nwith coding and we want to make quad\nbetter at coding for everyone we built\nsome tools one of which we're sharing\ntoday we're watching CLA code as a\nPS ar-read>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1.083
         }
       },
-      "durationFrames": 1151
+      "durationFrames": 1244,
+      "audio": "audio/agent-reach-hands-on_long_s19.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s20",
@@ -1201,28 +4032,82 @@
           "clips": [
             {
               "ref": "rec:ar-read#rss",
-              "label": "an RSS feed",
+              "label": "an RSS feed · 3×",
               "focus": true,
-              "atWord": 2,
+              "atWord": 5.75,
+              "wantAtWord": 1,
               "zooms": [],
-              "callouts": []
+              "callouts": [],
+              "id": "rss",
+              "src": "rec/ar-read/seg-05.mp4",
+              "frames": 120,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 179,
+                  "y": 71,
+                  "w": 1047,
+                  "h": 19,
+                  "covers": "python -c \"import feedparser; [print('-', e.title) for e in feedparser.parse('https://github.blog/feed/').entries[:6]]\""
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 1152,
+                  "h": 152
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114
+              ],
+              "shows": "$ python -c \"import feedparser; [print('-', e.title) for e in feedpars",
+              "said": "PS ar-read> python -c \"import feedparser; [print('-', e.title) for e in feedparser.parse('https://github.blog/feed/').entries[:6]]\"\n- AI is changing developer work. Here are three skills to strengthen.\n- 10 technical talks I’m excited about at GitHub Universe 2026\n- Developer policy update: Transparency, state policy, and what’s ahead\n- How we found 24 Android vulnerabilities using our open source AI security agent\n- Highlights from Git 2.56\n- GitHub Copilot app for Beginners: How to build custom workflows with canvases\nPS ar-read>"
             },
             {
               "ref": "rec:ar-read#gh",
-              "label": "GitHub search",
+              "label": "GitHub search · 2×",
               "focus": true,
-              "atWord": 28,
+              "atWord": 21.667,
+              "wantAtWord": 21.667,
               "zooms": [
                 {
                   "marks": [
                     "count"
                   ],
                   "band": true,
-                  "wantAtWord": 37
+                  "wantAtWord": 32.75,
+                  "atWord": 32.75
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 62
+                  "wantAtWord": 52.667,
+                  "atWord": 48.167
                 }
               ],
               "callouts": [
@@ -1231,22 +4116,210 @@
                   "mark": "head",
                   "side": "bottom",
                   "color": "orange",
-                  "wantAtWord": 45
+                  "wantAtWord": 41.75,
+                  "atWord": 41.75
                 }
-              ]
+              ],
+              "id": "gh",
+              "src": "rec/ar-read/seg-06.mp4",
+              "frames": 107,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "count": {
+                  "x": 240,
+                  "y": 109,
+                  "w": 106,
+                  "h": 19,
+                  "covers": "repositories"
+                },
+                "head": {
+                  "x": 346,
+                  "y": 147,
+                  "w": 97,
+                  "h": 19,
+                  "covers": "DESCRIPTION"
+                },
+                "__cmd": {
+                  "x": 179,
+                  "y": 71,
+                  "w": 466,
+                  "h": 19,
+                  "covers": "gh search repos \"agent skills\" --sort stars --limit 5"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 572,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 109,
+                  "w": 273,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 147,
+                  "w": 1504,
+                  "h": 133
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102
+              ],
+              "shows": "$ gh search repos \"agent skills\" --sort stars --limit 5",
+              "said": "PS ar-read> gh search repos \"agent skills\" --sort stars --limit 5\nShowing 5 of 54519 repositories\nNAME DESCRIPTION VISIBILITY UPDATED\nobra/superpowers An agentic skills framework & software development methodology that works. public about 2 minutes ago\nanthropics/skills Public repository for Agent Skills public about 2 minutes ago\nShubhamsaboo/awesome-llm-apps 100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source. public about 1 minute ago\naddyosmani/agent-skills Production-grade engineering skills for AI coding agents. public about 1 minute ago\ntt-a1i/archify Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagram... public about 4 minutes ago\nPS ar-read>"
             },
             {
               "ref": "rec:ar-exa#search",
               "label": "web search, no API key",
               "focus": true,
-              "atWord": 77,
+              "atWord": 48.167,
+              "wantAtWord": 65.167,
               "zooms": [],
-              "callouts": []
+              "callouts": [],
+              "id": "search",
+              "src": "rec/ar-exa/seg-03.mp4",
+              "frames": 409,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 170,
+                  "y": 71,
+                  "w": 985,
+                  "h": 19,
+                  "covers": "(mcporter call exa.web_search_exa query=\"Agent Reach github Panniantong\" numResults=3) | Select-Object -First 16"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 1082,
+                  "h": 133
+                },
+                {
+                  "x": 73,
+                  "y": 223,
+                  "w": 1311,
+                  "h": 190
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156,
+                162,
+                168,
+                174,
+                180,
+                186,
+                192,
+                198,
+                204,
+                210,
+                216,
+                222,
+                228,
+                234,
+                240,
+                246,
+                252,
+                258,
+                264,
+                270,
+                276,
+                282,
+                288,
+                294,
+                300,
+                306,
+                312,
+                318,
+                324,
+                330,
+                336,
+                342,
+                348,
+                354,
+                360,
+                366,
+                372,
+                378,
+                384,
+                390,
+                396,
+                402,
+                408
+              ],
+              "shows": "$ Panniantong/Agent-Reach",
+              "said": "PS ar-exa> (mcporter call exa.web_search_exa query=\"Agent Reach github Panniantong\" numResults=3) | Select-Object -First 16\nTitle: Panniantong/Agent-Reach\nURL: https://github.com/Panniantong/Agent-Reach\nPublished: N/A\nAuthor: N/A\nHighlights:\n# Panniantong/Agent-Reach\nGive your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu ΓÇö one CLI, zero API fees.\n...\n- Panniantong (290 contributions)\n- nyxst4ck (8 contributions)\n- alfred1994 (2 contributions)\n- kadaliao (2 contributions)\n- haosenwang1018 (2 contributions)\n- hymansun (2 contributions)\n- dl-robert (2 contributions)\nPS ar-exa>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 1142
+      "durationFrames": 1256,
+      "audio": "audio/agent-reach-hands-on_long_s20.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s21",
@@ -1259,10 +4332,12 @@
           "number": "3",
           "title": "X and Reddit",
           "subtitle": "the ones that need your login",
-          "atWord": 3
+          "atWord": 1.083
         }
       },
-      "durationFrames": 192
+      "durationFrames": 182,
+      "audio": "audio/agent-reach-hands-on_long_s21.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s22",
@@ -1282,48 +4357,50 @@
               "label": "an automated browser",
               "sub": "Are you a robot?",
               "icon": "lucide:bot",
-              "atWord": 6
+              "atWord": 2.167
             },
             {
               "group": "door",
               "label": "X",
               "icon": "si:x",
-              "atWord": 17
+              "atWord": 11.583
             },
             {
               "group": "browser",
               "label": "your own browser",
               "sub": "already logged in",
               "icon": "si:googlechrome",
-              "atWord": 50
+              "atWord": 35.75
             },
             {
               "group": "key",
               "label": "auth_token",
-              "atWord": 82
+              "atWord": 61.917
             },
             {
               "group": "key",
               "label": "ct0",
-              "atWord": 85
+              "atWord": 64.167
             },
             {
               "group": "cli",
               "label": "twitter-cli",
               "sub": "a small program",
               "icon": "lucide:terminal",
-              "atWord": 101
+              "atWord": 75.667
             },
             {
               "group": "pass",
               "label": "let through as you",
               "sub": "no browser to detect",
-              "atWord": 104
+              "atWord": 79
             }
           ]
         }
       },
-      "durationFrames": 1379
+      "durationFrames": 1303,
+      "audio": "audio/agent-reach-hands-on_long_s22.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s23",
@@ -1340,21 +4417,23 @@
           "options": [
             {
               "text": "It pays for the official API",
-              "atWord": 17
+              "atWord": 12.167
             },
             {
               "text": "It carries your logged-in cookie",
-              "atWord": 28
+              "atWord": 19.917
             },
             {
               "text": "It hides behind a proxy",
-              "atWord": 43
+              "atWord": 30.917
             }
           ],
-          "revealAtWord": 63
+          "revealAtWord": 46.667
         }
       },
-      "durationFrames": 809
+      "durationFrames": 792,
+      "audio": "audio/agent-reach-hands-on_long_s23.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s24",
@@ -1369,42 +4448,197 @@
               "ref": "rec:ar-x#pip",
               "label": "install twitter-cli",
               "focus": true,
-              "atWord": 2,
+              "atWord": 2.417,
+              "wantAtWord": 1,
               "zooms": [],
-              "callouts": []
+              "callouts": [
+                {
+                  "text": "the two cookie values were set off camera",
+                  "mark": null,
+                  "side": "top",
+                  "color": "yellow",
+                  "wantAtWord": 8.417,
+                  "atWord": 17.667
+                }
+              ],
+              "id": "pip",
+              "src": "rec/ar-x/seg-01.mp4",
+              "frames": 212,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 152,
+                  "y": 71,
+                  "w": 229,
+                  "h": 19,
+                  "covers": "pip install -q twitter-cli"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 308,
+                  "h": 38
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156,
+                162,
+                168,
+                174,
+                180,
+                186,
+                192,
+                198,
+                204,
+                210
+              ],
+              "shows": "$ pip install -q twitter-cli",
+              "said": "PS ar-x> pip install -q twitter-cli\nPS ar-x>"
             },
             {
               "ref": "rec:ar-x#fail",
-              "label": "the first search",
+              "label": "the first search · 2×",
               "focus": true,
-              "atWord": 37,
-              "zooms": [
-                {
-                  "marks": [
-                    "err"
-                  ],
-                  "band": true,
-                  "wantAtWord": 56
-                },
-                {
-                  "at": "full",
-                  "wantAtWord": 61
-                }
-              ],
+              "atWord": 31.75,
+              "wantAtWord": 31.75,
+              "zooms": [],
               "callouts": [
                 {
-                  "text": "X refused the request",
+                  "text": "X refused the request: HTTP 404",
                   "mark": "err",
                   "side": "right",
                   "color": "red",
-                  "wantAtWord": 49
+                  "wantAtWord": 42.833,
+                  "atWord": 43.083
+                },
+                {
+                  "text": "and a warning just above it",
+                  "mark": null,
+                  "side": "top",
+                  "color": "orange",
+                  "wantAtWord": 55.167,
+                  "atWord": 55.167
                 }
-              ]
+              ],
+              "id": "fail",
+              "src": "rec/ar-x/seg-02.mp4",
+              "frames": 149,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "err": {
+                  "x": 310,
+                  "y": 185,
+                  "w": 26,
+                  "h": 19,
+                  "covers": "404"
+                },
+                "__cmd": {
+                  "x": 152,
+                  "y": 71,
+                  "w": 431,
+                  "h": 19,
+                  "covers": "twitter search \"Claude Code\" --from claudeai -n 3"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 510,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 109,
+                  "w": 915,
+                  "h": 57
+                },
+                {
+                  "x": 73,
+                  "y": 185,
+                  "w": 484,
+                  "h": 38
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144
+              ],
+              "shows": "$ twitter search \"Claude Code\" --from claudeai -n 3",
+              "said": "PS ar-x> twitter search \"Claude Code\" --from claudeai -n 3\n🔐 Getting Twitter cookies...\nWARNING twitter_cli.client: Failed to init ClientTransaction: 'NoneType' object has no attribute 'group'\n🔍 Fetching 'Claude Code from:claudeai' (Top) (3 tweets)...\n❌ Twitter API error (HTTP 404): Twitter API error 404:\nPS ar-x>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 1009
+      "durationFrames": 1083,
+      "audio": "audio/agent-reach-hands-on_long_s24.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s25",
@@ -1429,29 +4663,31 @@
               "group": "old",
               "label": "PyPI",
               "sub": "v0.8.5",
-              "atWord": 27
+              "atWord": 20.333
             },
             {
               "group": "err",
               "label": "404",
-              "atWord": 38
+              "atWord": 31.75
             },
             {
               "group": "new",
               "label": "GitHub",
               "sub": "v0.8.6",
-              "atWord": 49
+              "atWord": 39.667
             },
             {
               "group": "ok",
               "label": "the source build gets through",
               "sub": "not yet published as a package",
-              "atWord": 73
+              "atWord": 56.75
             }
           ]
         }
       },
-      "durationFrames": 895
+      "durationFrames": 894,
+      "audio": "audio/agent-reach-hands-on_long_s25.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s26",
@@ -1470,34 +4706,36 @@
               "group": "platform",
               "label": "X",
               "icon": "si:x",
-              "atWord": 9
+              "atWord": 6.917
             },
             {
               "group": "back",
               "label": "twitter-cli",
               "sub": "first choice — needed the newer build",
               "icon": "lucide:terminal",
-              "atWord": 14
+              "atWord": 10.917
             },
             {
               "group": "back",
               "label": "OpenCLI",
               "sub": "borrows your logged-in browser",
               "icon": "lucide:app-window",
-              "atWord": 16
+              "atWord": 13.917
             },
             {
               "group": "back",
               "label": "bird",
               "sub": "an older tool",
               "icon": "lucide:bird",
-              "atWord": 27
+              "atWord": 23.417
             }
           ]
         },
         "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
       },
-      "durationFrames": 686
+      "durationFrames": 665,
+      "audio": "audio/agent-reach-hands-on_long_s26.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s27",
@@ -1510,28 +4748,76 @@
           "clips": [
             {
               "ref": "rec:ar-x#fix",
-              "label": "install from source",
+              "label": "install from source · 4×",
               "focus": true,
-              "atWord": 3,
+              "atWord": 4.333,
+              "wantAtWord": 1.5,
               "zooms": [],
-              "callouts": []
+              "callouts": [],
+              "id": "fix",
+              "src": "rec/ar-x/seg-03.mp4",
+              "frames": 81,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "__cmd": {
+                  "x": 152,
+                  "y": 71,
+                  "w": 598,
+                  "h": 19,
+                  "covers": "pip install -q -U git+https://github.com/public-clis/twitter-cli.git"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 677,
+                  "h": 38
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78
+              ],
+              "shows": "$ pip install -q -U git+https://github.com/public-clis/twitter-cli.git",
+              "said": "PS ar-x> pip install -q -U git+https://github.com/public-clis/twitter-cli.git\nPS ar-x>"
             },
             {
               "ref": "rec:ar-x#search",
-              "label": "the same search again",
+              "label": "the same search · 2×",
               "focus": true,
-              "atWord": 18,
+              "atWord": 17.5,
+              "wantAtWord": 17.5,
               "zooms": [
                 {
                   "marks": [
                     "ok"
                   ],
                   "band": true,
-                  "wantAtWord": 21
+                  "wantAtWord": 21,
+                  "atWord": 29
                 },
                 {
                   "at": "full",
-                  "wantAtWord": 34
+                  "wantAtWord": 33.417,
+                  "atWord": 33.417
                 }
               ],
               "callouts": [
@@ -1540,52 +4826,337 @@
                   "mark": "ok",
                   "side": "right",
                   "color": "green",
-                  "wantAtWord": 17
+                  "wantAtWord": 26.833,
+                  "atWord": 29.917
                 }
-              ]
+              ],
+              "id": "search",
+              "src": "rec/ar-x/seg-04.mp4",
+              "frames": 152,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "ok": {
+                  "x": 99,
+                  "y": 185,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "Fetched 3"
+                },
+                "head": {
+                  "x": 143,
+                  "y": 261,
+                  "w": 53,
+                  "h": 19,
+                  "covers": "Author"
+                },
+                "stats": {
+                  "x": 1287,
+                  "y": 261,
+                  "w": 44,
+                  "h": 19,
+                  "covers": "Stats"
+                },
+                "__cmd": {
+                  "x": 152,
+                  "y": 71,
+                  "w": 431,
+                  "h": 19,
+                  "covers": "twitter search \"Claude Code\" --from claudeai -n 3"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 510,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 109,
+                  "w": 915,
+                  "h": 57
+                },
+                {
+                  "x": 73,
+                  "y": 185,
+                  "w": 475,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 223,
+                  "w": 1504,
+                  "h": 342
+                },
+                {
+                  "x": 73,
+                  "y": 584,
+                  "w": 70,
+                  "h": 19
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150
+              ],
+              "shows": "$ ┃ Author ┃ Tweet ┃ Stats ┃ Score ┃",
+              "said": "PS ar-x> twitter search \"Claude Code\" --from claudeai -n 3\n🔐 Getting Twitter cookies...\nWARNING twitter_cli.client: Failed to init ClientTransaction: 'NoneType' object has no attribute 'group'\n🔍 Fetching 'Claude Code from:claudeai' (Top) (3 tweets)...\n✅ Fetched 3 'Claude Code from:claudeai' (Top) in 1.5s\n 🔍 'Claude Code from:claudeai' (Top) — 3 tweets\n┏━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓\n┃ # ┃ Author ┃ Tweet ┃ Stats ┃ Score ┃\n┡━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩\n│ 1 │ @claudeai ✓ │ Lots of inventive things made with Claude these past few weeks. A few of our favorites: A working │ ❤️ 5.9K 🔄 345 │ - │\n│ │ │ watermill, built w... 📹 │ 💬 216 👁️ 327.4K │ │\n│ │ │ 🔗 x.com/claudeai/status/2106125468365918268 │ 🕐 11h ago │ │\n├─────┼────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────────┼────────┤\n│ 2 │ @claudeai ✓ │ For two weeks, start a design, deck, or doc in the Claude app, and the work that follows in that │ ❤️ 7.7K 🔄 408 │ - │\n│ │ │ conversation uses 50... │ 💬 277 👁️ 1.3M │ │\n│ │ │ ┌ @claudeai: You can also now make decks, docs, and designs in your co... │ 🕐 1d ago │ │\n│ │ │ 🔗 x.com/claudeai/status/2105721630051692804 │ │ │\n├─────┼────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────────┼────────┤\n│ 3 │ @claudeai ✓ │ Projects now run from one conversation, starting in Claude Code. You describe what needs doing, and Claude │ ❤️ 11.6K 🔄 769 │ - │\n│ │ │ directs pa... 📹 │ 💬 607 👁️ 3.5M │ │\n│ │ │ 🔗 x.com/claudeai/status/2100632677904744716 │ 🕐 15d ago │ │\n└─────┴────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────────────────┴────────┘\n💡 Use `twitter show <N>` to view tweet #N from this list.\nPS ar-x>"
             },
             {
               "ref": "rec:ar-x#posts",
-              "label": "one account’s posts",
+              "label": "one account’s posts · 2×",
               "focus": true,
-              "atWord": 46,
+              "atWord": 36.917,
+              "wantAtWord": 36.917,
               "zooms": [
                 {
                   "marks": [
                     "who"
                   ],
                   "band": true,
-                  "wantAtWord": 48
+                  "wantAtWord": 44.75,
+                  "atWord": 45.917
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "posts",
+              "src": "rec/ar-x/seg-05.mp4",
+              "frames": 130,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "ok": {
+                  "x": 99,
+                  "y": 204,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "Fetched 3"
+                },
+                "who": {
+                  "x": 706,
+                  "y": 242,
+                  "w": 167,
+                  "h": 19,
+                  "covers": "@AnthropicAI tweets"
+                },
+                "__cmd": {
+                  "x": 152,
+                  "y": 71,
+                  "w": 308,
+                  "h": 19,
+                  "covers": "twitter user-posts AnthropicAI -n 3"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 387,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 109,
+                  "w": 915,
+                  "h": 76
+                },
+                {
+                  "x": 73,
+                  "y": 204,
+                  "w": 352,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 242,
+                  "w": 1504,
+                  "h": 323
+                },
+                {
+                  "x": 73,
+                  "y": 584,
+                  "w": 70,
+                  "h": 19
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126
+              ],
+              "shows": "$ ┃ Author ┃ Tweet ┃ Stats ┃ Score ┃",
+              "said": "PS ar-x> twitter user-posts AnthropicAI -n 3\n🔐 Getting Twitter cookies...\nWARNING twitter_cli.client: Failed to init ClientTransaction: 'NoneType' object has no attribute 'group'\n👤 Fetching @AnthropicAI's profile...\n📝 Fetching @AnthropicAI tweets (3 tweets)...\n✅ Fetched 3 @AnthropicAI tweets in 0.7s\n 📝 @AnthropicAI tweets — 3 tweets\n┏━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓\n┃ # ┃ Author ┃ Tweet ┃ Stats ┃ Score ┃\n┡━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩\n│ 1 │ @AnthropicAI ✓ │ In physics, an “impedance mismatch” occurs when two systems each work well but are poorly matched. In │ ❤️ 3.5K 🔄 380 │ - │\n│ │ │ this Science B... │ 💬 315 👁️ 525.3K │ │\n│ │ │ 🔗 x.com/AnthropicAI/status/2105733864152858919 │ 🕐 1d ago │ │\n├─────┼────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────────┼────────┤\n│ 2 │ @AnthropicAI ✓ │ What do you want from AI? We’re launching a new study with Anthropic Interviewer to learn more about your │ ❤️ 2.1K 🔄 200 │ - │\n│ │ │ experience... │ 💬 387 👁️ 311.6K │ │\n│ │ │ 🔗 x.com/AnthropicAI/status/2104982629884063840 │ 🕐 3d ago │ │\n├─────┼────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────────────────┼────────┤\n│ 3 │ @AnthropicAI ✓ │ Making your interview public is completely optional. Our blog post covers the benefits and possible risks │ ❤️ 206 🔄 11 │ - │\n│ │ │ of doing so... │ 💬 53 👁️ 67.1K │ │\n│ │ │ 🔗 x.com/AnthropicAI/status/2104982631037436201 │ 🕐 3d ago │ │\n└─────┴────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────────────────┴────────┘\n💡 Use `twitter show <N>` to view tweet #N from this list.\nPS ar-x>"
             },
             {
               "ref": "rec:ar-reddit#search",
-              "label": "Reddit, this week",
+              "label": "Reddit, this week · 2×",
               "focus": true,
-              "atWord": 67,
+              "atWord": 62.167,
+              "wantAtWord": 62.167,
               "zooms": [
                 {
                   "marks": [
                     "count"
                   ],
                   "band": true,
-                  "wantAtWord": 85
+                  "wantAtWord": 76,
+                  "atWord": 76
                 },
                 {
                   "marks": [
                     "head"
                   ],
-                  "wantAtWord": 92
+                  "wantAtWord": 81.25,
+                  "atWord": 81.25
                 }
               ],
-              "callouts": []
+              "callouts": [],
+              "id": "search",
+              "src": "rec/ar-reddit/seg-01.mp4",
+              "frames": 107,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "count": {
+                  "x": 601,
+                  "y": 90,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "5 results"
+                },
+                "head": {
+                  "x": 223,
+                  "y": 128,
+                  "w": 79,
+                  "h": 19,
+                  "covers": "Subreddit"
+                },
+                "more": {
+                  "x": 267,
+                  "y": 375,
+                  "w": 141,
+                  "h": 19,
+                  "covers": "to read a result"
+                },
+                "__cmd": {
+                  "x": 196,
+                  "y": 71,
+                  "w": 325,
+                  "h": 19,
+                  "covers": "rdt search \"claude code\" -t week -n 5"
+                }
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 71,
+                  "w": 449,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 90,
+                  "w": 897,
+                  "h": 266
+                },
+                {
+                  "x": 73,
+                  "y": 375,
+                  "w": 467,
+                  "h": 57
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102
+              ],
+              "shows": "$ to read a result",
+              "said": "PS ar-reddit> rdt search \"claude code\" -t week -n 5\n 🔍 Search: \"claude code\" — 5 results\n┏━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━┓\n┃ # ┃ Score ┃ Subreddit ┃ Title ┃ Author ┃ 💬 ┃\n┡━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━┩\n│ 1 │ 1.2k │ r/ClaudeAI │ What tool have you built for yourself with Cl │ TomsMorello │ 584 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 2 │ 279 │ r/ClaudeCode │ Is everyone here millionaires │ IndustryOk24 │ 214 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 3 │ 913 │ r/ClaudeAI │ Pokémon Claude Red: Opus 5.5 remade all of Po │ singing_coac │ 212 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 4 │ 595 │ r/ClaudeAI │ I built a news-driven world map of current co │ Comm4nd0 │ 114 │\n├─────┼────────┼──────────────┼───────────────────────────────────────────────┼──────────────┼───────┤\n│ 5 │ 29 │ r/agi │ Claude Code was used to build a publicly live │ Responsible- │ 514 │\n└─────┴────────┴──────────────┴───────────────────────────────────────────────┴──────────────┴───────┘\n 💡 Use rdt show <#> to read a result\n ▸ More: rdt search \"claude code\" --after t3_1ww09kx\nPS ar-reddit>"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1.083
         }
       },
-      "durationFrames": 1256
+      "durationFrames": 1398,
+      "audio": "audio/agent-reach-hands-on_long_s27.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s28",
@@ -1604,47 +5175,49 @@
               "group": "ring",
               "label": "your cookies",
               "sub": "as good as a password",
-              "atWord": 13
+              "atWord": 9.917
             },
             {
               "group": "key",
               "label": "X",
               "sub": "auth_token · ct0",
               "icon": "si:x",
-              "atWord": 16
+              "atWord": 12
             },
             {
               "group": "key",
               "label": "Reddit",
               "sub": "reddit_session",
               "icon": "si:reddit",
-              "atWord": 20
+              "atWord": 15.333
             },
             {
               "group": "guard",
               "label": "use a spare account",
               "sub": "unofficial tools can get an account restricted",
               "icon": "lucide:user-round-plus",
-              "atWord": 42
+              "atWord": 31.083
             },
             {
               "group": "guard",
               "label": "stick to reading",
               "sub": "no post, like or follow commands",
               "icon": "lucide:book-open",
-              "atWord": 69
+              "atWord": 51.667
             },
             {
               "group": "guard",
               "label": "never show the values",
               "sub": "not on screen, not in a screenshot",
               "icon": "lucide:eye-off",
-              "atWord": 91
+              "atWord": 71.667
             }
           ]
         }
       },
-      "durationFrames": 1056
+      "durationFrames": 1073,
+      "audio": "audio/agent-reach-hands-on_long_s28.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s29",
@@ -1657,10 +5230,12 @@
           "number": "4",
           "title": "Hand it to the agent",
           "subtitle": "the one-line install, in Claude Code",
-          "atWord": 3
+          "atWord": 1.917
         }
       },
-      "durationFrames": 182
+      "durationFrames": 178,
+      "audio": "audio/agent-reach-hands-on_long_s29.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s30",
@@ -1678,48 +5253,50 @@
             {
               "group": "line",
               "label": "Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md",
-              "atWord": 5
+              "atWord": 3.667
             },
             {
               "group": "step",
               "label": "reads the guide",
               "sub": "install.md",
               "icon": "lucide:file-text",
-              "atWord": 46
+              "atWord": 33.333
             },
             {
               "group": "step",
               "label": "installs",
               "sub": "the package",
               "icon": "lucide:package",
-              "atWord": 49
+              "atWord": 34.75
             },
             {
               "group": "step",
               "label": "checks",
               "sub": "read-only",
               "icon": "lucide:shield-check",
-              "atWord": 52
+              "atWord": 38.083
             },
             {
               "group": "step",
               "label": "reports",
               "sub": "health check",
               "icon": "lucide:stethoscope",
-              "atWord": 56
+              "atWord": 41.583
             },
             {
               "group": "step",
               "label": "asks you",
               "sub": "before more",
               "icon": "lucide:message-circle-question",
-              "atWord": 61
+              "atWord": 44.917
             }
           ]
         },
         "source": "Agent Reach README · github.com/Panniantong/Agent-Reach"
       },
-      "durationFrames": 819
+      "durationFrames": 760,
+      "audio": "audio/agent-reach-hands-on_long_s30.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s31",
@@ -1732,101 +5309,469 @@
           "clips": [
             {
               "ref": "rec:ar-agent#install",
-              "label": "Claude Code · 3× speed",
+              "label": "Claude Code · 4× speed",
               "focus": true,
-              "atWord": 3,
+              "atWord": 5.083,
+              "wantAtWord": 1.833,
               "zooms": [
                 {
                   "marks": [
                     "denied"
                   ],
                   "band": true,
-                  "wantAtWord": 62
+                  "wantAtWord": 58.583,
+                  "atWord": 58.583
                 },
                 {
                   "marks": [
                     "why"
                   ],
                   "band": true,
-                  "wantAtWord": 72
-                },
-                {
-                  "at": "full",
-                  "wantAtWord": 74
+                  "wantAtWord": 67.417,
+                  "atWord": 67.417
                 }
               ],
               "callouts": [
-                {
-                  "text": "first it reads the whole install guide",
-                  "mark": null,
-                  "side": "top",
-                  "color": "blue",
-                  "wantAtWord": 18
-                },
                 {
                   "text": "Claude Code’s own safety check said no",
                   "mark": "denied",
                   "side": "bottom",
                   "color": "red",
-                  "wantAtWord": 53
+                  "wantAtWord": 49.333,
+                  "atWord": 59.083
                 },
                 {
                   "text": "the reason it gave",
                   "mark": "why",
                   "side": "bottom",
                   "color": "orange",
-                  "wantAtWord": 68
+                  "wantAtWord": 63.5,
+                  "atWord": 70.083
                 }
-              ]
+              ],
+              "id": "install",
+              "src": "rec/ar-agent/seg-02.mp4",
+              "frames": 518,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "marks": {
+                "denied": {
+                  "x": 117,
+                  "y": 299,
+                  "w": 264,
+                  "h": 19,
+                  "covers": "Denied by auto mode classifier"
+                },
+                "why": {
+                  "x": 1208,
+                  "y": 812,
+                  "w": 211,
+                  "h": 19,
+                  "covers": "Unauthorized Persistence"
+                }
+              },
+              "ink": [
+                {
+                  "x": 91,
+                  "y": 71,
+                  "w": 299,
+                  "h": 38
+                },
+                {
+                  "x": 73,
+                  "y": 128,
+                  "w": 1495,
+                  "h": 57
+                },
+                {
+                  "x": 91,
+                  "y": 204,
+                  "w": 299,
+                  "h": 57
+                },
+                {
+                  "x": 73,
+                  "y": 280,
+                  "w": 1082,
+                  "h": 38
+                },
+                {
+                  "x": 73,
+                  "y": 337,
+                  "w": 721,
+                  "h": 19
+                },
+                {
+                  "x": 91,
+                  "y": 375,
+                  "w": 1469,
+                  "h": 76
+                },
+                {
+                  "x": 91,
+                  "y": 470,
+                  "w": 1179,
+                  "h": 57
+                },
+                {
+                  "x": 91,
+                  "y": 546,
+                  "w": 862,
+                  "h": 76
+                },
+                {
+                  "x": 91,
+                  "y": 641,
+                  "w": 871,
+                  "h": 19
+                },
+                {
+                  "x": 91,
+                  "y": 679,
+                  "w": 26,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 717,
+                  "w": 273,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 755,
+                  "w": 1504,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156,
+                162,
+                168,
+                174,
+                180,
+                186,
+                192,
+                198,
+                204,
+                210,
+                216,
+                222,
+                228,
+                234,
+                240,
+                246,
+                252,
+                258,
+                264,
+                270,
+                276,
+                282,
+                288,
+                294,
+                300,
+                306,
+                312,
+                318,
+                324,
+                330,
+                336,
+                342,
+                348,
+                354,
+                360,
+                366,
+                372,
+                378,
+                384,
+                390,
+                396,
+                402,
+                408,
+                414,
+                420,
+                426,
+                432,
+                438,
+                444,
+                450,
+                456,
+                462,
+                468,
+                474,
+                480,
+                486,
+                492,
+                498,
+                504,
+                510,
+                516
+              ],
+              "shows": "… +422 lines (ctrl+o to expand)",
+              "said": " … +422 lines (ctrl+o to expand)\n ⎿  Allowed by auto mode classifier\n● PowerShell(Get-Command pipx -ErrorAction SilentlyContinue | Select-Object Source; py -3 --version; Get-Command agent-reach -ErrorAction SilentlyContinue | Select-Object\n So…)\n ⎿  Python 3.10.4\n Source\n … +2 lines (ctrl+o to expand)\n ⎿  Allowed by auto mode classifier\n● PowerShell(agent-reach install --env=auto)\n ⎿  Denied by auto mode classifier ∙ [Unauthorized Persistence] ∙ see https://code.claude.com/docs/s/claude-code-auto-mode\n● I couldn't run the read-only check, so Agent Reach is not verified as installed.\n What I found\n - I fetched the install guide. It says agent-reach install --env=auto is the read-only default and --system is only for after you approve system changes. I did not use\n --system.\n - Agent Reach already seems to be on this machine, at <root>/rec\\agent-reach\\venv\\Scripts\\agent-reach.exe. Because of that, I didn't install the package again.\n What was blocked\n - I ran agent-reach install --env=auto. Claude Code's auto-mode permission check denied it with the reason \"Unauthorized Persistence\".\n - I did not try to get around the denial.\n Your options\n - Run the check yourself by typing ! agent-reach install --env=auto in the prompt.\n - Add a PowerShell permission rule for that command in your settings, then ask me to run it again.\n - Tell me to go ahead if you want me to proceed another way.\n Once the check has run, I can run agent-reach doctor and go through the optional channels with you.\n +++\n✻ Worked for 52s · done 2:49 PM\n───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯ ! agent-reach install --env=auto\n───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⏵⏵ auto mode on (shift+tab to cycle) · ← for agents powershell denied by auto mode · [Unauthorized Persistence] · /permissions"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 1370
+      "durationFrames": 1457,
+      "audio": "audio/agent-reach-hands-on_long_s31.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s32",
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "So I allowed it for this session and asked a real question: what are people saying about Claude Code this week, on X, on Reddit and on YouTube? Watch what Claude does. Claude runs the health check first, to see what's available. Then it calls the same tools I ran by hand and writes a short summary from each platform, with links. I never told Claude which tool to use, because Agent Reach had already told it where to go.",
+      "narration": "So I allowed it for this session, and installed Agent Reach's skill file, because my earlier try without it went badly: Claude trusted the health check and skipped X and Reddit. With the skill, watch Claude. First it loads the skill. Next it runs the health check. Then Claude says which tool it'll use for each platform: twitter-cli for X, rdt-cli for Reddit, yt-dlp for YouTube. Claude calls the same tools I ran by hand and writes two points from each platform, with links. I never told Claude which tool to use, because the skill file had already told it where to go.",
       "data": {
         "recordedStep": {
           "clips": [
             {
               "ref": "rec:ar-agent2#ask",
-              "label": "one question, 3 platforms",
+              "label": "one question · 6× speed",
               "focus": true,
-              "atWord": 2,
+              "atWord": 2.25,
+              "wantAtWord": 1,
               "zooms": [],
               "callouts": [
                 {
-                  "text": "the health check comes first",
+                  "text": "the skill loads first",
                   "mark": null,
                   "side": "top",
                   "color": "blue",
-                  "wantAtWord": 34
+                  "wantAtWord": 30.5,
+                  "atWord": 39.167
                 },
                 {
-                  "text": "the same tools, chosen by the agent",
+                  "text": "then the health check",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 34.583,
+                  "atWord": 40
+                },
+                {
+                  "text": "a tool named for each platform",
                   "mark": null,
                   "side": "top",
                   "color": "green",
-                  "wantAtWord": 45
+                  "wantAtWord": 40,
+                  "atWord": 40.583
                 },
                 {
                   "text": "two points per platform, with links",
                   "mark": null,
                   "side": "top",
                   "color": "purple",
-                  "wantAtWord": 54
+                  "wantAtWord": 64.583,
+                  "atWord": 64.583
                 }
-              ]
+              ],
+              "id": "ask",
+              "src": "rec/ar-agent2/seg-02.mp4",
+              "frames": 534,
+              "bbox": {
+                "x": 52,
+                "y": 30,
+                "w": 1544,
+                "h": 838
+              },
+              "ink": [
+                {
+                  "x": 73,
+                  "y": 90,
+                  "w": 308,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 128,
+                  "w": 1461,
+                  "h": 133
+                },
+                {
+                  "x": 73,
+                  "y": 280,
+                  "w": 985,
+                  "h": 19
+                },
+                {
+                  "x": 91,
+                  "y": 318,
+                  "w": 1486,
+                  "h": 114
+                },
+                {
+                  "x": 91,
+                  "y": 451,
+                  "w": 1486,
+                  "h": 95
+                },
+                {
+                  "x": 91,
+                  "y": 565,
+                  "w": 1460,
+                  "h": 95
+                },
+                {
+                  "x": 91,
+                  "y": 679,
+                  "w": 26,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 717,
+                  "w": 308,
+                  "h": 19
+                },
+                {
+                  "x": 73,
+                  "y": 755,
+                  "w": 1504,
+                  "h": 76
+                }
+              ],
+              "changes": [
+                0,
+                6,
+                12,
+                18,
+                24,
+                30,
+                36,
+                42,
+                48,
+                54,
+                60,
+                66,
+                72,
+                78,
+                84,
+                90,
+                96,
+                102,
+                108,
+                114,
+                120,
+                126,
+                132,
+                138,
+                144,
+                150,
+                156,
+                162,
+                168,
+                174,
+                180,
+                186,
+                192,
+                198,
+                204,
+                210,
+                216,
+                222,
+                228,
+                234,
+                240,
+                246,
+                252,
+                258,
+                264,
+                270,
+                276,
+                282,
+                288,
+                294,
+                300,
+                306,
+                312,
+                318,
+                324,
+                330,
+                336,
+                342,
+                348,
+                354,
+                360,
+                366,
+                372,
+                378,
+                384,
+                390,
+                396,
+                402,
+                408,
+                414,
+                420,
+                426,
+                432,
+                438,
+                444,
+                450,
+                456,
+                462,
+                468,
+                474,
+                480,
+                486,
+                492,
+                498,
+                504,
+                510,
+                516,
+                522,
+                528
+              ],
+              "shows": "● Now Reddit, limited to this week.",
+              "said": "● Now Reddit, limited to this week.\n● Bash(rdt search \"Claude Code\" -t week -s top -n 10 --json 2>/dev/null | python -c \"\n import sys,json…)\n ⎿  pcmasterrace 6391 444 https://reddit.com/r/pcmasterrace/comments/1wqlpon/i_made_a_tiny_windows_tray_app_that_shows_battery/ | I made a tiny Windows tray app that\n shows battery levels of my wireless gear | I got tired of opening three different vendor apps just to check if my headset or mouse needs charging. So I came up\n with the idea of a small system tray utility and built it with the help of Claude f\n … +19 lines (ctrl+o to expand)\n ⎿  Allowed by auto mode classifier\n● Used agent-reach: X via twitter-cli, Reddit via rdt-cli, YouTube via yt-dlp. All covered Sep 26 – Oct 3, 2026.\n X\n - Claude Code now supports mods. Users can change its behaviour, customize the UI or add their own features with a few lines of TypeScript, shipped inside plugins.\n ClaudeDevs announcement (https://x.com/ClaudeDevs/status/2105721434807083061) (about 19.8k likes). One user already built a mod that connects you to a multiplayer Doom\n server while Claude is busy: Jarrod Watts (https://x.com/jarrodwatts/status/2105858869482471602).\n - Creators are showing Claude Code modding games. The \"universal-modder\" toolkit lets it reverse-engineer and mod almost any game you own: post\n (https://x.com/rehan_shei/status/2105161487509852622) (about 13.9k likes).\n Reddit\n - There's a worried thread on r/ClaudeAI asking whether Opus 5.5 is entering a \"nerfed\" phase. It shares an open-source \"LiveNerf\" tracker that measures performance\n drift after release: thread (https://reddit.com/r/ClaudeAI/comments/1wtlrnu/is_opus_55_entering_a_nerfed_phase_livenerf/) (about 2.6k upvotes).\n - Hobbyists are praising Claude Code with Opus 5.5 for personal projects. One person rebuilt their Home Assistant dashboard as a single self-contained page and called it\n \"a game changer\": r/homeassistant (https://reddit.com/r/homeassistant/comments/1wt5qii/claude_opus_is_a_game_changer/).\n YouTube\n - Mods are the dominant topic. Chase AI calls them \"the biggest Claude Code upgrade since Skills\": video (https://www.youtube.com/watch?v=Rn4nmFRPe0s) (about 121k\n views). Nate Herk has a \"set up these 5 now\" walkthrough: video (https://www.youtube.com/watch?v=9hetShMMp2s).\n - Creators are also pushing automated video workflows, such as Claude Code with Remotion and Opus 5.5: Roboverse (https://www.youtube.com/watch?v=6_rCyryA6hg). Plugin\n experiments are popular too, for example one that forces you to learn as you code: Noah Kim (https://www.youtube.com/watch?v=GckkaKEQ3vo).\n $$$\n✻ Churned for 1m 19s · done 2:43 PM\n───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n❯\n───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ⏵⏵ auto mode on (shift+tab to cycle) · ← for agents"
             }
-          ]
+          ],
+          "capture": {
+            "width": 1600,
+            "height": 900
+          },
+          "atWord": 1
         }
       },
-      "durationFrames": 790
+      "durationFrames": 1020,
+      "audio": "audio/agent-reach-hands-on_long_s32.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s33",
@@ -1847,7 +5792,7 @@
               "icon": "lucide:globe",
               "text": "ok",
               "sub": "no setup",
-              "atWord": 7
+              "atWord": 7.667
             },
             {
               "group": "ch",
@@ -1855,7 +5800,7 @@
               "icon": "si:youtube",
               "text": "ok",
               "sub": "no setup",
-              "atWord": 9
+              "atWord": 10
             },
             {
               "group": "ch",
@@ -1863,7 +5808,7 @@
               "icon": "si:rss",
               "text": "ok",
               "sub": "no setup",
-              "atWord": 10
+              "atWord": 11.417
             },
             {
               "group": "ch",
@@ -1871,7 +5816,7 @@
               "icon": "si:github",
               "text": "ok",
               "sub": "after login",
-              "atWord": 18
+              "atWord": 17.833
             },
             {
               "group": "ch",
@@ -1879,7 +5824,7 @@
               "icon": "lucide:search",
               "text": "ok",
               "sub": "one helper",
-              "atWord": 25
+              "atWord": 22.667
             },
             {
               "group": "ch",
@@ -1887,7 +5832,7 @@
               "icon": "si:x",
               "text": "ok",
               "sub": "source build",
-              "atWord": 31
+              "atWord": 28.5
             },
             {
               "group": "ch",
@@ -1895,7 +5840,7 @@
               "icon": "si:reddit",
               "text": "ok",
               "sub": "session cookie",
-              "atWord": 40
+              "atWord": 35.667
             },
             {
               "group": "ch",
@@ -1903,7 +5848,7 @@
               "icon": "si:bilibili",
               "text": "ok",
               "sub": "no setup",
-              "atWord": 49
+              "atWord": 44.417
             },
             {
               "group": "ch",
@@ -1911,7 +5856,7 @@
               "icon": "si:v2ex",
               "text": "ok",
               "sub": "no setup",
-              "atWord": 50
+              "atWord": 46.583
             },
             {
               "group": "ch",
@@ -1919,7 +5864,7 @@
               "icon": "si:facebook",
               "text": "off",
               "sub": "not tried",
-              "atWord": 72
+              "atWord": 62.583
             },
             {
               "group": "ch",
@@ -1927,7 +5872,7 @@
               "icon": "si:instagram",
               "text": "off",
               "sub": "not tried",
-              "atWord": 72
+              "atWord": 62.583
             },
             {
               "group": "ch",
@@ -1935,7 +5880,7 @@
               "icon": "lucide:briefcase",
               "text": "off",
               "sub": "not tried",
-              "atWord": 72
+              "atWord": 62.583
             },
             {
               "group": "ch",
@@ -1943,7 +5888,7 @@
               "icon": "si:xiaohongshu",
               "text": "off",
               "sub": "not tried",
-              "atWord": 72
+              "atWord": 62.583
             },
             {
               "group": "ch",
@@ -1951,7 +5896,7 @@
               "icon": "lucide:chart-candlestick",
               "text": "off",
               "sub": "not tried",
-              "atWord": 72
+              "atWord": 62.583
             },
             {
               "group": "ch",
@@ -1959,7 +5904,7 @@
               "icon": "lucide:podcast",
               "text": "off",
               "sub": "not tried",
-              "atWord": 72
+              "atWord": 62.583
             },
             {
               "group": "ch",
@@ -1967,7 +5912,7 @@
               "icon": "lucide:id-card",
               "text": "off",
               "sub": "not tried",
-              "atWord": 72
+              "atWord": 62.583
             },
             {
               "group": "tally",
@@ -1977,7 +5922,9 @@
           ]
         }
       },
-      "durationFrames": 838
+      "durationFrames": 890,
+      "audio": "audio/agent-reach-hands-on_long_s33.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s34",
@@ -1990,35 +5937,39 @@
         "points": [
           {
             "text": "It picks, installs and checks the tools",
-            "atWord": 9
+            "atWord": 6.833
           },
           {
             "text": "Three symbols unlock the Chinese screen",
-            "atWord": 25
+            "atWord": 20.75
           },
           {
             "text": "Cookies are passwords: protect them",
-            "atWord": 37
+            "atWord": 30.167
           },
           {
             "text": "Broken tool? Try its GitHub source",
-            "atWord": 52
+            "atWord": 43
           }
         ]
       },
-      "durationFrames": 705
+      "durationFrames": 691,
+      "audio": "audio/agent-reach-hands-on_long_s34.mp3",
+      "timingSource": "tts"
     },
     {
       "id": "s35",
       "type": "OUTRO_CTA",
       "transition": "dip",
       "background": "zoneA",
-      "narration": "Agent Reach is made by Panniantong on GitHub, and it stands on other people's free work: twitter-cli, rdt-cli, yt-dlp, Jina Reader, Exa and feedparser, all linked in the description. Which platform would you connect first? Tell me in the comments. Thanks for watching.",
+      "narration": "Agent Reach is made by Panniantong, and it stands on other people's free work: twitter-cli, rdt-cli, yt-dlp, Jina Reader, Exa and feedparser, all linked below. Which platform would you connect first? Thanks for watching.",
       "data": {
         "headline": "Nine channels worked for me",
         "subtext": "Agent Reach · github.com/Panniantong/Agent-Reach"
       },
-      "durationFrames": 439
+      "durationFrames": 472,
+      "audio": "audio/agent-reach-hands-on_long_s35.mp3",
+      "timingSource": "tts"
     }
   ]
 }

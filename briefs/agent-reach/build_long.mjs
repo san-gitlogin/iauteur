@@ -31,6 +31,9 @@ const rec = (transition, bg, narration, source, clips, extra = {}) =>
   c.add('RECORDED_STEP', transition, bg, narration, (A) => ({
     clips: clips.map((k) => ({
       ref: `rec:${k.take}#${k.step}`, label: k.label, focus: k.focus ?? true, atWord: A(k.at ?? 0.03),
+      // The solver owns atWord and otherwise pushes the last clip towards the end of the read; wantAtWord
+      // pins each clip to the words that introduce it.
+      wantAtWord: A(k.at ?? 0.03),
       ...(k.source ? {sourceNote: k.source} : {}),
       zooms: (k.camera ?? []).map((m) => (m.frame === 'full'
         ? {at: 'full', wantAtWord: wordIndex(narration, m.at)}
@@ -72,14 +75,12 @@ rec('zoom', 'zoneB',
   "posts on Claude Code, pulled the same way. By the end you'll know how to set up both, and where the setup " +
   "didn't go smoothly for me.",
   null,
-  [{take: 'ar-x', step: 'search', label: 'X, from a terminal', at: 0.02,
-    camera: [{frame: 'head', at: 'On screen is X,'}, {frame: 'full', at: 'with no browser'}]},
-   {take: 'ar-reddit', step: 'search', label: 'Reddit, this week', at: 0.44,
-    camera: [{frame: 'head', at: 'And next is Reddit:'}, {frame: 'full', at: 'pulled the same'}]}]);
+  [{take: 'ar-x', step: 'search', label: 'X search · 2× speed', at: 0.02},
+   {take: 'ar-reddit', step: 'search', label: 'Reddit · 2× speed', at: 0.44}]);
 
 c.add('TITLE_CARD', 'fade', 'zoneA',
   "Welcome to the channel. Today we're going to install Agent Reach, a free project, and try the " +
-  "platforms it promises: web pages, YouTube, GitHub, X and Reddit. Everything it prints is in Chinese, so I'll " +
+  "platforms it promises: YouTube, X and Reddit. Everything it prints is in Chinese, so I'll " +
   "translate. Does it hand an AI agent the whole internet?",
   (A) => ({
     title: 'Agent Reach, hands-on',
@@ -112,22 +113,22 @@ rec('zoom', 'zoneA',
   "translation is a little stiff, but more than good enough to follow. Its author has also written an English " +
   "README by hand, so that's the version I'll quote from next.",
   GH,
-  [{take: 'ar-translate', step: 'zh', label: 'the README, in Chinese', at: 0.02, focus: false,
+  [{take: 'ar-translate', step: 'zh', label: 'README in Chinese · 2×', at: 0.02, focus: false,
     camera: [{frame: 'tagline', at: 'headline about your AI', band: true}, {frame: 'full', at: "You don't need"}]},
    {take: 'ar-translate', step: 'menu', label: 'right-click → Translate', at: 0.3, focus: false,
     notes: [{text: 'right-click, then Translate to English', mark: 'item', at: 'right-click anywhere', color: 'green'}]},
-   {take: 'ar-translate', step: 'translated', label: 'the same page, in English', at: 0.48, focus: false,
+   {take: 'ar-translate', step: 'translated', label: 'now in English · 2×', at: 0.48, focus: false,
     camera: [{frame: 'tagline', at: 'equip your AI agent', band: true}, {frame: 'full', at: 'Under the address'}],
     notes: [{text: 'Chrome’s built-in translator', mark: 'panel', at: 'Google Translate panel', side: 'left'}]}]);
 
 // ═══ WHAT IT IS ══════════════════════════════════════════════════════════════════════════
 ar('wipe', 'zoneB',
-  "Why would anyone need this? Picture your AI agent — an AI that can run commands for you, like Claude Code or " +
-  "Cursor. The trouble starts where the good discussions live. " +
+  "Why would anyone need this? Picture your AI agent — an AI that can run commands, like Claude Code. " +
+  "The trouble starts where the good discussions live. " +
   "According to the README, X charges for its official API, and moderate use comes to about two hundred and " +
   "fifteen dollars a month. Reddit answers a server with error four-oh-three, which means forbidden. " +
   "XiaoHongShu, a Chinese review app, wants a login before you can browse. And Bilibili, China's answer to " +
-  "YouTube, blocks visitors from overseas servers. Four platforms, four locked doors — so that's the problem " +
+  "YouTube, blocks visitors from overseas servers. So that's the problem " +
   "Agent Reach sets out to solve.",
   {kind: 'gates', color: 'blue', stageTitle: 'what stops a program at each platform',
    premise: 'Your AI agent on the left. Each platform on the right has its own barrier, as the README lists them.',
@@ -153,7 +154,7 @@ rec('fade', 'zoneA',
   [{take: 'ar-readme', step: 'top', label: 'the English README', at: 0.02,
     camera: [{frame: 'tagline', at: 'one-click access', band: true}, {frame: 'promise', at: 'reliable access path', band: true}]},
    {take: 'ar-readme', step: 'pain', label: 'why it is hard', at: 0.34,
-    camera: [{frame: 'x', at: 'of the X API,', band: true}, {frame: 'reddit', at: 'Reddit turning servers', band: true}]},
+    camera: [{frame: 'reddit', at: 'Reddit turning servers', band: true}]},
    {take: 'ar-readme', step: 'platforms', label: 'supported platforms', at: 0.5,
     camera: [{frame: 'web', at: 'clean Markdown,', band: true}, {frame: 'x', at: 'X needs a cookie,', band: true}]},
    {take: 'ar-readme', step: 'platforms2', label: 'further down the table', at: 0.7,
@@ -186,7 +187,7 @@ ar('slide', 'zoneB',
   README);
 
 ar('fade', 'zoneA',
-  "Why is a layer like that worth having? Because tools for reading these sites break all the time — the sites " +
+  "Tools for reading these sites break all the time, because the sites " +
   "keep changing. So for every platform, Agent Reach keeps an ordered list of tools: a first choice, then " +
   "fallbacks. Take Bilibili. Its first choice used to be yt-dlp. In June, " +
   "according to the README, Bilibili started refusing it with an error four-one-two. So the list was reordered: " +
@@ -219,11 +220,11 @@ rec('zoom', 'zoneA',
   "web search. And those stray codes in square brackets are only a display bug in the installer. So after one " +
   "install command, the only new thing on this computer is the package itself.",
   null,
-  [{take: 'ar-install', step: 'pip', label: 'pip install · 8× speed', at: 0.02,
+  [{take: 'ar-install', step: 'pip', label: 'pip install · 12× speed', at: 0.02,
     camera: [{frame: 'ok', at: 'a little over two', band: true}]},
-   {take: 'ar-install', step: 'check', label: 'the read-only check', at: 0.3,
-    camera: [{frame: 'safe', at: 'safe mode. In', band: true}, {frame: 'mcp', at: 'mcporter is not', band: true},
-             {frame: 'done', at: 'no changes were made.', band: true}],
+   {take: 'ar-install', step: 'check', label: 'read-only check · 2×', at: 0.3,
+    camera: [{frame: 'safe', at: 'safe mode. In', band: true}, {frame: 'done', at: 'no changes were made.', band: true},
+             {frame: 'mcp', at: 'mcporter is not', band: true}],
     notes: [{text: 'looks, installs nothing', mark: 'safe', at: 'installer only looks.', color: 'green'},
             {text: 'nothing was changed', mark: 'done', at: 'one line confirms', color: 'green'},
             {text: 'a helper for web search — later', mark: 'mcp', at: 'a helper called', color: 'orange'}]}]);
@@ -249,8 +250,8 @@ rec('zoom', 'zoneA',
   "you five, and the other eleven each need something from you. Getting them is what the rest of this video is about.",
   null,
   [{take: 'ar-install', step: 'doctor', label: 'agent-reach doctor', at: 0.02,
-    camera: [{frame: 'yt', at: 'YouTube has the', band: true}, {frame: 'rss', at: 'RSS feeds are ready', band: true},
-             {frame: 'gh', at: 'GitHub has the exclamation', band: true}, {frame: 'full', at: 'And at the bottom,'}],
+    camera: [{frame: 'yt', at: 'YouTube has the', band: true}, {frame: 'gh', at: 'GitHub has the exclamation', band: true},
+             {frame: 'full', at: 'And at the bottom,'}],
     notes: [{text: 'the legend: ready · needs setup · not installed', mark: 'legend', at: 'Up top is', side: 'right', color: 'blue'},
             {text: 'web search: not installed yet', mark: 'exa', at: 'the line with', side: 'right', color: 'red'},
             {text: '5 of 16 channels available', mark: 'status', at: 'five of sixteen', side: 'right', color: 'green'}]}]);
@@ -314,10 +315,10 @@ rec('zoom', 'zoneA',
   "asked for five results for what is Claude Code, and here they are — the channel on the left, the title on " +
   "the right — without opening a browser.",
   null,
-  [{take: 'ar-read', step: 'web', label: 'a web page as text', at: 0.02,
+  [{take: 'ar-read', step: 'web', label: 'a web page as text · 2×', at: 0.02,
     camera: [{frame: 'title', at: 'a title, the', band: true}, {frame: 'src', at: 'the source address,', band: true},
              {frame: 'full', at: 'Clean text matters'}]},
-   {take: 'ar-read', step: 'ytsearch', label: 'YouTube search', at: 0.68,
+   {take: 'ar-read', step: 'ytsearch', label: 'YouTube search · 3×', at: 0.66,
     notes: [{text: 'channel  |  title', mark: null, at: 'YouTube search, with', side: 'top', color: 'blue'}]}]);
 
 ar('iris', 'zoneB',
@@ -348,12 +349,13 @@ rec('zoom', 'zoneA',
   "YouTube refused with a too-many-requests error. So subtitles work, but YouTube does push back when it's asked " +
   "too often.",
   null,
-  [{take: 'ar-read', step: 'subs', label: 'subtitles only', at: 0.02,
+  [{take: 'ar-read', step: 'subs', label: 'subtitles only · 3×', at: 0.02,
     camera: [{frame: 'wrote', at: 'writing video subtitles,', band: true}],
     notes: [{text: 'the words only — no video file', mark: 'wrote', at: 'tells you it worked,', color: 'green'}]},
-   {take: 'ar-read', step: 'read', label: 'the video, as text', at: 0.32,
-    camera: [{frame: 'kind', at: 'Open the file,'}, {frame: 'full', at: 'Now look closely.'}],
-    notes: [{text: '“quad” is the caption mishearing “Claude”', mark: null, at: 'read quad where', side: 'top', color: 'orange'}]}]);
+   {take: 'ar-read', step: 'read', label: 'the video as text · 3×', at: 0.27,
+    notes: [{text: 'the opening of the video, as text', mark: 'kind', at: 'as plain text.', side: 'right', color: 'blue'},
+            {text: '“quad” is the caption mishearing “Claude”', mark: null, at: 'read quad where', side: 'top', color: 'orange'},
+            {text: 'YouTube answered one request with a 429', mark: null, at: 'too-many-requests error.', side: 'bottom', color: 'red'}]}]);
 
 rec('fade', 'zoneB',
   "Three quick ones. RSS is the feed format most blogs still publish, and here are the six latest headlines from " +
@@ -364,8 +366,8 @@ rec('fade', 'zoneB',
   "the mcporter helper from earlier, installed with one npm command. No API " +
   "key was involved, and the first result is the project's own GitHub page.",
   null,
-  [{take: 'ar-read', step: 'rss', label: 'an RSS feed', at: 0.02},
-   {take: 'ar-read', step: 'gh', label: 'GitHub search', at: 0.24,
+  [{take: 'ar-read', step: 'rss', label: 'an RSS feed · 3×', at: 0.02},
+   {take: 'ar-read', step: 'gh', label: 'GitHub search · 2×', at: 0.24,
     camera: [{frame: 'count', at: 'five repositories about', band: true}, {frame: 'full', at: 'Logged out, gh'}],
     notes: [{text: 'worked because gh was already logged in', mark: 'head', at: 'To be straight', side: 'bottom', color: 'orange'}]},
    {take: 'ar-exa', step: 'search', label: 'web search, no API key', at: 0.66}]);
@@ -422,10 +424,11 @@ rec('zoom', 'zoneB',
   "client transaction. So the very first thing I tried on X didn't work — and that failure is the most " +
   "useful moment in this video, because it's exactly what Agent Reach claims to protect you from.",
   null,
-  [{take: 'ar-x', step: 'pip', label: 'install twitter-cli', at: 0.02},
-   {take: 'ar-x', step: 'fail', label: 'the first search', at: 0.36,
-    camera: [{frame: 'err', at: 'four-oh-four, which', band: true}, {frame: 'full', at: 'Notice the warning'}],
-    notes: [{text: 'X refused the request', mark: 'err', at: 'the search fails.', color: 'red'}]}]);
+  [{take: 'ar-x', step: 'pip', label: 'install twitter-cli', at: 0.02,
+    notes: [{text: 'the two cookie values were set off camera', mark: null, at: 'off camera,', side: 'top', color: 'yellow'}]},
+   {take: 'ar-x', step: 'fail', label: 'the first search · 2×', at: 0.36,
+    notes: [{text: 'X refused the request: HTTP 404', mark: 'err', at: 'the search fails.', color: 'red'},
+            {text: 'and a warning just above it', mark: null, at: 'Notice the warning', side: 'top', color: 'orange'}]}]);
 
 ar('slide', 'zoneA',
   "So what went wrong? I can't tell you what changed on X's side. What I can show you is where the working copy " +
@@ -468,13 +471,13 @@ rec('zoom', 'zoneA',
   "are-you-a-robot page. Both sites treated these requests as me, sitting at my own browser, because that's " +
   "exactly what the cookie tells them.",
   null,
-  [{take: 'ar-x', step: 'fix', label: 'install from source', at: 0.02},
-   {take: 'ar-x', step: 'search', label: 'the same search again', at: 0.14,
+  [{take: 'ar-x', step: 'fix', label: 'install from source · 4×', at: 0.02},
+   {take: 'ar-x', step: 'search', label: 'the same search · 2×', at: 0.13,
     camera: [{frame: 'ok', at: 'fetched three posts,', band: true}, {frame: 'full', at: "the warning's still"}],
-    notes: [{text: 'it works now', mark: 'ok', at: "And there's the result:", color: 'green'}]},
-   {take: 'ar-x', step: 'posts', label: 'one account’s posts', at: 0.36,
+    notes: [{text: 'it works now', mark: 'ok', at: 'reposts and views', color: 'green'}]},
+   {take: 'ar-x', step: 'posts', label: 'one account’s posts · 2×', at: 0.3,
     camera: [{frame: 'who', at: "posts from Anthropic's account,", band: true}]},
-   {take: 'ar-reddit', step: 'search', label: 'Reddit, this week', at: 0.52,
+   {take: 'ar-reddit', step: 'search', label: 'Reddit, this week · 2×', at: 0.52,
     camera: [{frame: 'count', at: 'get five results,', band: true}, {frame: 'head', at: 'subreddit, the title'}]}]);
 
 ar('wipe', 'zoneB',
@@ -529,23 +532,25 @@ rec('zoom', 'zoneA',
   "doesn't try to sneak around it. Claude stops and gives me two options: run the command myself, or add " +
   "a permission rule.",
   null,
-  [{take: 'ar-agent', step: 'install', label: 'Claude Code · 3× speed', at: 0.02,
+  [{take: 'ar-agent', step: 'install', label: 'Claude Code · 4× speed', at: 0.02,
     camera: [{frame: 'denied', at: 'denied by auto mode', band: true},
              {frame: 'why', at: 'unauthorized persistence.', band: true}, {frame: 'full', at: 'Claude was in'}],
-    notes: [{text: 'first it reads the whole install guide', mark: null, at: 'the installation guide', side: 'top', color: 'blue'},
-            {text: 'Claude Code’s own safety check said no', mark: 'denied', at: 'By Claude Code itself.', side: 'bottom', color: 'red'},
+    notes: [{text: 'Claude Code’s own safety check said no', mark: 'denied', at: 'By Claude Code itself.', side: 'bottom', color: 'red'},
             {text: 'the reason it gave', mark: 'why', at: 'the reason given', side: 'bottom', color: 'orange'}]}]);
 
 rec('fade', 'zoneB',
-  "So I allowed it for this session and asked a real question: what are people saying about Claude Code this " +
-  "week, on X, on Reddit and on YouTube? Watch what Claude does. Claude runs the health check first, to see " +
-  "what's available. Then it calls the same tools I ran by hand and writes a short summary from each platform, " +
-  "with links. I never told Claude which tool to use, because Agent Reach had already told it where to go.",
+  "So I allowed it for this session, and installed Agent Reach's skill file, because my earlier try " +
+  "without it went badly: Claude trusted the health check and skipped X and Reddit. With the skill, " +
+  "watch Claude. First it loads the skill. Next it runs the health check. Then Claude says which tool " +
+  "it'll use for each platform: twitter-cli for X, rdt-cli for Reddit, yt-dlp for YouTube. Claude calls the same " +
+  "tools I ran by hand and writes two points from each platform, with links. I never told Claude which tool to " +
+  "use, because the skill file had already told it where to go.",
   null,
-  [{take: 'ar-agent2', step: 'ask', label: 'one question, 3 platforms', at: 0.02,
-    notes: [{text: 'the health check comes first', mark: null, at: 'runs the health check', side: 'top', color: 'blue'},
-            {text: 'the same tools, chosen by the agent', mark: null, at: 'calls the same tools', side: 'top', color: 'green'},
-            {text: 'two points per platform, with links', mark: null, at: 'writes a short summary', side: 'top', color: 'purple'}]}]);
+  [{take: 'ar-agent2', step: 'ask', label: 'one question · 6× speed', at: 0.02,
+    notes: [{text: 'the skill loads first', mark: null, at: 'loads the skill.', side: 'top', color: 'blue'},
+            {text: 'then the health check', mark: null, at: 'runs the health check.', side: 'top', color: 'blue'},
+            {text: 'a tool named for each platform', mark: null, at: 'which tool', side: 'top', color: 'green'},
+            {text: 'two points per platform, with links', mark: null, at: 'writes two points', side: 'top', color: 'purple'}]}]);
 
 ar('slide', 'zoneA',
   "So, the verdict, channel by channel. Web pages, YouTube and RSS worked with no setup at all. GitHub worked " +
@@ -591,9 +596,9 @@ c.add('RECAP', 'fade', 'zoneB',
   }));
 
 c.add('OUTRO_CTA', 'dip', 'zoneA',
-  "Agent Reach is made by Panniantong on GitHub, and it stands on other people's free work: twitter-cli, rdt-cli, " +
-  "yt-dlp, Jina Reader, Exa and feedparser, all linked in the description. Which platform would you connect " +
-  "first? Tell me in the comments. Thanks for watching.",
+  "Agent Reach is made by Panniantong, and it stands on other people's free work: twitter-cli, rdt-cli, " +
+  "yt-dlp, Jina Reader, Exa and feedparser, all linked below. Which platform would you connect first? " +
+  "Thanks for watching.",
   () => ({
     headline: 'Nine channels worked for me',
     subtext: 'Agent Reach · github.com/Panniantong/Agent-Reach',
@@ -633,7 +638,7 @@ const spec = {
       pinned: 'Which site would you connect your AI agent to first?',
       sources: [
         'Agent Reach by Panniantong (MIT): github.com/Panniantong/Agent-Reach — package: agent-reach',
-        'twitter-cli (X backend): github.com/public-clis/twitter-cli',
+        'twitter-cli (X backend): github.com/public-clis/twitter-cli — installed from git+https://github.com/public-clis/twitter-cli.git',
         'rdt-cli (Reddit backend): github.com/public-clis/rdt-cli',
         'yt-dlp (YouTube): github.com/yt-dlp/yt-dlp',
         'Jina Reader (web pages): github.com/jina-ai/reader',

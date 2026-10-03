@@ -27,11 +27,20 @@ const SLUG = 'ar-translate';
 const OUT = path.join('public/rec', SLUG);
 const PORT = 9334, FPS = 30;
 // Native-UI rectangles in capture pixels, measured from this take's frames (see the header).
-const NATIVE = JSON.parse(process.env.AR_NATIVE ?? '{}');
+// Measured on the 3582x2016 take of 2026-10-03 (the menu opens at the same place every run, because the
+// click point and the window are fixed). Re-measure if the window size or the click point changes.
+const NATIVE = JSON.parse(process.env.AR_NATIVE ?? JSON.stringify({
+  menu: {item: {x: 2373, y: 1666, w: 940, h: 96, covers: 'Translate to English'}},
+  translated: {panel: {x: 2313, y: 254, w: 1015, h: 248, covers: 'Detected Language English Google Translate'}},
+}));
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const key = (k) => execFileSync('powershell', ['-NoProfile', '-Command',
-  `$w = New-Object -ComObject WScript.Shell; $null = $w.AppActivate('Agent-Reach'); Start-Sleep -Milliseconds 150; $w.SendKeys('${k}')`],
+// KEYS GO THROUGH keybd_event, NOT WScript SendKeys. SendKeys toggles NumLock on the way, and the laptop's
+// lock-key overlay ('1 On') was drawn over the capture (second take, 2026-10-03). vk: 0 = focus only.
+const key = (vk) => execFileSync('powershell', ['-NoProfile', '-Command',
+  "\ = New-Object -ComObject WScript.Shell; \ = \.AppActivate('Agent-Reach'); Start-Sleep -Milliseconds 200; " +
+  (vk ? "Add-Type -Namespace W -Name K -MemberDefinition '[DllImport(\"user32.dll\")] public static extern void keybd_event(byte v, byte s, uint f, System.UIntPtr e);'; " +
+        "[W.K]::keybd_event(" + vk + ", 0, 0, [System.UIntPtr]::Zero); Start-Sleep -Milliseconds 60; [W.K]::keybd_event(" + vk + ", 0, 2, [System.UIntPtr]::Zero)" : '')],
   {stdio: 'ignore', windowsHide: true});
 
 const profile = path.join(ROOT, '_ar-chrome');
@@ -123,7 +132,7 @@ try {
   };
 
   await page.bringToFront();
-  key('{F15}');   // focus the window without typing anything into it
+  key(0);   // focus the window, send nothing
   await sleep(800);
   await step('zh', 'the README, in Chinese', async () => {
     await sleep(900);
@@ -135,14 +144,16 @@ try {
   });
   await step('menu', 'right-click, Translate to English', async () => {
     const r = await rectOf('article.markdown-body p', '当下最稳的接入方式');
-    await page.mouse.click(r.x + r.w * 0.5, r.y + r.h + 26, {button: 'right'});
-    await sleep(1800);
-    for (let i = 0; i < 3; i++) { key('{UP}'); await sleep(450); }
-    await sleep(1500);
+    // On BLANK page space: the right-hand end of the centred paragraph's own box. A click on the badge
+    // under it opens the image-link menu, which has no Translate entry (first take, 2026-10-03).
+    await page.mouse.click(r.x + r.w - 26, r.y + r.h * 0.5, {button: 'right'});
+    // The menu stays up long enough to be read; its Translate entry is chosen in the next step with the
+    // entry's own access key (T). Walking the highlight up with arrow keys did not land on it reliably.
+    await sleep(3400);
     return {tagline: toCap(await rectOf('article.markdown-body p', '一键装上互联网能力'))};
   });
   await step('translated', 'the same page, in English', async () => {
-    key('{ENTER}');
+    key(0x54);   // T: the access key of "Translate to English"
     for (let i = 0; i < 40; i++) {
       if (await page.evaluate(() => /translated/.test(document.documentElement.className))) break;
       await sleep(300);
@@ -155,7 +166,7 @@ try {
     return {tagline: toCap(ps[0]), second: toCap(ps[1])};
   });
   await step('read', 'reading on, translated', async () => {
-    key('{ESC}');
+    key(0x1B);
     await sleep(700);
     const t = await page.evaluate(() => {
       const tb = document.querySelector('article.markdown-body table');
@@ -170,9 +181,17 @@ try {
     return {table: toCap(tb)};
   });
   const tEndAll = now();
+  const tq = Date.now();
   ff.stdin.write('q');
   await new Promise((r) => ff.on('close', r));
   ff = null;
+  // THE ENCODER RUNS BEHIND THE CAPTURE at this frame size, so the first progress line arrives late and
+  // every step was cut seconds early (the menu segment showed no menu). The file's own length is the
+  // truth: the capture ran until q, so its first frame is at (q - duration).
+  const dur = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', raw], {encoding: 'utf8'}));
+  const shift = (t0 - (tq - dur * 1000)) / 1000;
+  for (const st of steps) { st.tStart += shift; st.tEnd += shift; }
+  console.log('  timeline shift ' + shift.toFixed(2) + 's (encoder lag)');
 
   // ── cut ──
   const out = [];
@@ -192,7 +211,8 @@ try {
     theme: 'dark', viewport: {width: capW, height: capH}, fps: FPS, startUrl: URL_, steps: out}, null, 2));
   console.log(`OK  ${OUT}  ${capW}x${capH}  ${tEndAll.toFixed(1)}s  ${out.map((s) => `${s.segment}:${s.segmentFrames}f`).join(' ')}`);
 } finally {
-  try { ff?.stdin.write('q'); } catch { /* gone */ }
+  // Let ffmpeg write its index even when a step throws, or the footage that explains the failure is unreadable.
+  if (ff) { try { ff.stdin.write('q'); await new Promise((r) => { ff.on('close', r); setTimeout(r, 8000); }); } catch { /* gone */ } }
   try { await browser?.close(); } catch { /* gone */ }
   try { chrome.kill(); } catch { /* gone */ }
 }
