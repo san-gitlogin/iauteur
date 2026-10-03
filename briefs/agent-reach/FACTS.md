@@ -45,8 +45,17 @@ Nothing here may be quoted as a number in the script; numbers come from the fram
 | Bilibili search (`bili search`) | works without login; titles are Chinese |
 | GitHub (`gh search repos`) | **fails logged out**: "please run: gh auth login". The README says public repos work immediately — on a logged-out `gh` they do not. |
 | Exa web search | not installed (`npm install -g mcporter` + one config line) |
-| X / Twitter (`twitter-cli`) | installed; needs the owner's `auth_token` + `ct0` cookies |
-| Reddit (`rdt-cli`) | installed; needs `rdt login` |
+| X / Twitter (`twitter-cli`) | **PyPI 0.8.5 fails**: "Failed to init ClientTransaction", then `HTTP 404` on search. **0.8.6 from the GitHub source works** — search, `user`, `user-posts` all returned data with the owner's `auth_token` + `ct0`. No browser window, no robot check. |
+| Reddit (`rdt-cli`, pinned commit from install.md) | works: `rdt search` returned a listing from a hand-written `credential.json` holding the exported reddit.com cookies. `rdt login` (automatic browser extraction) was NOT tried. No browser window, no robot check. |
+
+Credentials live outside the repo, in the probe folder: `secrets.env` (the two X values) and
+`home/.config/rdt-cli/credential.json`. Rules for the takes:
+- **Raw `rdt` output prints the session's `modhash`** on line six, and `twitter whoami` / `status` print the
+  account. Never film raw `rdt` output or those two commands; pipe through `agent-reach format` or print
+  selected fields, and grep every capture for the account name before it is baked.
+- twitter-cli also has WRITE commands (post, delete, follow, like, retweet). The demo runs read commands only.
+- The X fix is itself a beat: the README's point is that access paths break and get re-routed, and here one
+  broke between the PyPI release and the source.
 
 Findings worth a beat each:
 1. **The CLI speaks Chinese.** `AGENT_REACH_LANG=en` only switches the installed SKILL file to
