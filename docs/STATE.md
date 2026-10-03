@@ -1,6 +1,6 @@
 # PROJECT STATE — read this after CLAUDE.md
 
-## 2026-10-03 — Agent Reach, hands-on (35 scenes, 17:29 wide + 55s short) · `AR_STAGE`, 11 pictures
+## 2026-10-03 — Agent Reach, hands-on (35 scenes, 17:24 wide + 55s short) · RENDERED · `AR_STAGE`, 11 pictures
 
 `topics/agent-reach-hands-on` installs Agent Reach (github.com/Panniantong/Agent-Reach, MIT, Chinese README and
 Chinese-only CLI output) and runs every well-known channel on camera: web pages, YouTube search and subtitles, RSS,
