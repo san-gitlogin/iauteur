@@ -183,7 +183,11 @@ const CLI_CANDIDATES = () => {
 // `shell: true` is for the Windows `code.cmd` shim ONLY. Elsewhere the CLI is a real
 // executable with a shebang, and putting an absolute path through a shell re-splits it on
 // spaces: "/Applications/Visual Studio Code.app/…" ran as "/Applications/Visual".
-const viaShell = (cli) => os.platform() === 'win32' && !path.isAbsolute(cli);
+// AND AN ABSOLUTE `.cmd` NEEDS THE SHELL TOO. Node refuses to spawn a .cmd/.bat without one
+// (EINVAL since the 2024 CVE fix), so IAUTEUR_VSCODE_CLI pointing at a portable install's
+// `bin\code.cmd` was rejected as "not Visual Studio Code (serve-web says: nothing)" — the probe
+// never ran. Measured 2026-10-03 on the portable VS Code this machine records with.
+const viaShell = (cli) => os.platform() === 'win32' && (!path.isAbsolute(cli) || /\.(cmd|bat)$/i.test(cli));
 
 const serveWebBanner = (cli) => {
   try {
@@ -329,6 +333,14 @@ export const startServer = async ({workspace, port, dataDir, timeoutMs = 180000}
       // PAID FOR: every failed run leaked one, and after 26 of them the machine could no
       // longer start a terminal at all — recordings failed for a reason that had nothing
       // to do with the code being debugged.
+      // ON WINDOWS THE TREE IS FOUR DEEP: shell -> code.cmd -> code-tunnel -> cmd -> the node
+      // server, its pty host, the terminal's own powershell. reapPort stops the tunnel and the
+      // listener; the server under them survived, kept the caller's stdout open, and a take
+      // that had finished in a minute "ran" until its 8-minute timeout (measured 2026-10-03).
+      // taskkill /T walks the tree from the child we spawned while the parent links still exist.
+      if (os.platform() === 'win32' && child.pid) {
+        try { execFileSync('taskkill', ['/PID', String(child.pid), '/T', '/F'], {stdio: 'ignore', windowsHide: true}); } catch { /* already gone */ }
+      }
       try { child.kill(); } catch { /* already gone */ }
       try {
         reapPort(chosen);
