@@ -286,8 +286,9 @@ export const Ring: React.FC<ArVizProps> = ({items, accent, w, h}) => {
       </Svg>
       {/* a key on the ring, so the ring reads as a key ring and not as an empty circle */}
       <At x={cx} y={cy} center style={{opacity: baseOn}}><AssetIcon asset="lucide:key-round" size={R * 0.9} bare tint={yellow} /></At>
-      <At x={cx + R + v.s(18)} y={cy - R * 0.6} w={zoneW - cx - R - v.s(18)} style={{opacity: baseOn}}>
-        <Cap v={v} title={ring?.label} sub={ring?.sub} align="left" size={fs} color={yellow} />
+      {/* the caption sits on the far side from the guards, so their connectors never run through it */}
+      <At x={col ? cx + R + v.s(18) : 0} y={cy - R * 0.6} w={col ? zoneW - cx - R - v.s(18) : cx - R - v.s(18)} style={{opacity: baseOn}}>
+        <Cap v={v} title={ring?.label} sub={ring?.sub} align={col ? "left" : "right"} size={fs} color={yellow} />
       </At>
       {keys.map((k, i) => {
         const kx = lerp(kd * 0.6, zoneW - kd * 0.6, keys.length === 1 ? 0.5 : i / (keys.length - 1));

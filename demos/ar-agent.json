@@ -45,10 +45,6 @@
       "text": "Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md Use the read-only check only, never the system flag. Reply in English, and end your reply with a line of three plus signs.",
       "marks": [
         {
-          "id": "guide",
-          "text": "Installation Guide"
-        },
-        {
           "id": "denied",
           "text": "Denied by auto mode classifier"
         },

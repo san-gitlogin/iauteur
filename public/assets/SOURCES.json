@@ -251,5 +251,13 @@
     "bytes": 584114,
     "contentType": "image/jpeg",
     "fetchedAt": "2026-09-29T19:46:55.783Z"
+  },
+  {
+    "file": "agent-reach-header.png",
+    "url": "https://github.com/Panniantong/Agent-Reach/blob/main/docs/README_en.md",
+    "note": "Header of the Agent Reach English README (MIT licensed project by Panniantong), cropped from our own recording of the page. The channel owner asked for the project header to be the thumbnail art. Used in a review video that credits the project on screen and in the description.",
+    "bytes": 421897,
+    "contentType": "image/png",
+    "fetchedAt": "2026-10-03T08:47:56.763Z"
   }
 ]

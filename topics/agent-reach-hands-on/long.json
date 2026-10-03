@@ -1738,13 +1738,6 @@
               "zooms": [
                 {
                   "marks": [
-                    "guide"
-                  ],
-                  "band": true,
-                  "wantAtWord": 18
-                },
-                {
-                  "marks": [
                     "denied"
                   ],
                   "band": true,
@@ -1763,6 +1756,13 @@
                 }
               ],
               "callouts": [
+                {
+                  "text": "first it reads the whole install guide",
+                  "mark": null,
+                  "side": "top",
+                  "color": "blue",
+                  "wantAtWord": 18
+                },
                 {
                   "text": "Claude Code’s own safety check said no",
                   "mark": "denied",

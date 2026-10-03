@@ -530,9 +530,10 @@ rec('zoom', 'zoneA',
   "a permission rule.",
   null,
   [{take: 'ar-agent', step: 'install', label: 'Claude Code · 3× speed', at: 0.02,
-    camera: [{frame: 'guide', at: 'the installation guide', band: true}, {frame: 'denied', at: 'denied by auto mode', band: true},
+    camera: [{frame: 'denied', at: 'denied by auto mode', band: true},
              {frame: 'why', at: 'unauthorized persistence.', band: true}, {frame: 'full', at: 'Claude was in'}],
-    notes: [{text: 'Claude Code’s own safety check said no', mark: 'denied', at: 'By Claude Code itself.', side: 'bottom', color: 'red'},
+    notes: [{text: 'first it reads the whole install guide', mark: null, at: 'the installation guide', side: 'top', color: 'blue'},
+            {text: 'Claude Code’s own safety check said no', mark: 'denied', at: 'By Claude Code itself.', side: 'bottom', color: 'red'},
             {text: 'the reason it gave', mark: 'why', at: 'the reason given', side: 'bottom', color: 'orange'}]}]);
 
 rec('fade', 'zoneB',

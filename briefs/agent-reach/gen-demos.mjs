@@ -161,7 +161,8 @@ const demos = [
              label: 'the one line from the README, pasted into the agent',
              text: 'Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md ' +
                'Use the read-only check only, never the system flag. Reply in English, and end your reply with a line of three plus signs.',
-             marks: [{id: 'guide', text: 'Installation Guide'}, {id: 'denied', text: 'Denied by auto mode classifier'},
+             // (no mark on the fetched guide: it has scrolled off by the time the reply lands)
+             marks: [{id: 'denied', text: 'Denied by auto mode classifier'},
                      {id: 'why', text: 'Unauthorized Persistence'}]}
           : {id: 'ask', action: 'agent', focus: 'terminal', timeout: 900000, settleMs: 3000, waitFor: '$$$',   // NOT '===': agent-reach doctor prints a rule of equals signs, which ended the first take at 52s
              label: 'one real question, three platforms',
