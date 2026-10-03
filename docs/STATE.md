@@ -1,5 +1,59 @@
 # PROJECT STATE — read this after CLAUDE.md
 
+## 2026-10-03 — Agent Reach, hands-on (35 scenes, 17:29 wide + 55s short) · `AR_STAGE`, 11 pictures
+
+`topics/agent-reach-hands-on` installs Agent Reach (github.com/Panniantong/Agent-Reach, MIT, Chinese README and
+Chinese-only CLI output) and runs every well-known channel on camera: web pages, YouTube search and subtitles, RSS,
+GitHub, Exa web search, X and Reddit, then a live Claude Code session. Everything is in `briefs/agent-reach/`:
+`FACTS.md`, `gen-demos.mjs` → `demos/ar-*.json`, `take.ps1` / `take-all.ps1`, `rec-translate.mjs`, `retime.mjs`,
+`build_long.mjs`, `build_shorts.mjs`, `assemble.sh`.
+
+**The order that works after a non-narration change:** `bash briefs/agent-reach/assemble.sh long|shorts`
+(build → bake → scrub paths → anchor → sync from the existing audio → lint), then `check-camera`, `check-holds`,
+`audit-sync`. After re-recording any take, run `node briefs/agent-reach/retime.mjs` FIRST.
+
+**What the footage showed that the README does not say** (all in the narration):
+- `agent-reach doctor` prints Chinese only; `AGENT_REACH_LANG=en` changes just the installed skill file.
+- twitter-cli 0.8.5 from PyPI answers a search with HTTP 404; 0.8.6 from its GitHub source works.
+- `gh search` fails logged out, so GitHub is not zero-config.
+- Claude Code's auto mode DENIED `agent-reach install --env=auto` as "Unauthorized Persistence". Filmed as it is.
+- Without the skill file an agent trusts `doctor`, which never live-checks X or Reddit, and answers for YouTube
+  only. With `agent-reach skill --install` (take.ps1 `-Skill`) it used all three.
+- `doctor` still reports 5/16 after X, Reddit and Exa work; "nine channels" is our own tally of what ran.
+
+**Paid for on this cut — each is general:**
+- **Terminal clips: the camera's marks only exist on the LAST frame, and the solver puts every zoom and callout in
+  the hold after the footage.** A step that types and waits for 10s under a sentence naming its result at word 20
+  cannot be solved ("0 word(s) of script after its footage ends", ten beats). `retime.mjs` speeds each step from its
+  untouched original and labels the clip "N×"; it also writes a dense motion map so the renderer plays 1× and then
+  HOLDS, instead of spreading the footage across the whole beat.
+- **Pin every clip with `wantAtWord`.** Without it the solver pushed each scene's last clip to the end of the read.
+- **The solver interleaves a clip's events zoom, callout, zoom, callout and never reorders them.** A callout wanted
+  later than the next zoom drags that zoom with it. And a callout stays up for the rest of its clip, so a later zoom
+  must keep that callout's mark in frame or the label is pinned to the frame edge.
+- **An interactive agent take cannot carry text marks** (nobody knows what it will print). `retime.mjs` adds
+  measured rectangles on the finished answer, with `covers` copied from the take's own screen text.
+- **Browser UI is not in a page capture, and Playwright launches Chrome with Translate disabled.**
+  `rec-translate.mjs` starts the installed Chrome itself, attaches over CDP, and films the window with gdigrab.
+  It took five takes: right-click on blank page space (a badge opens the image menu); send keys with `keybd_event`
+  (WScript SendKeys flips NumLock and the laptop's overlay was filmed); force `prefers-color-scheme: dark`; park the
+  pointer inside the window (the taskbar popped thumbnail previews); and shift the timeline by the encoder's lag.
+- **Agent takes on Windows:** everything under the real profile must be off PATH (an agent ran `which`, the shell
+  printed PATH, and the operator's name was on screen; the recorder's identity guard reads the REDIRECTED
+  USERPROFILE and missed it). `take.ps1` copies claude.exe beside the recording root and filters PATH.
+  `workbench.welcomePage.walkthroughs.openOnInstall: false`, or the Claude Code extension's welcome page opens
+  mid-take and swallows the next prompt. A completion marker must be something the TOOL cannot print: `===` matched
+  doctor's own rule line and ended a take at 52s.
+- **Recorder on Windows:** an absolute `code.cmd` needs `shell: true`; the serve-web tree must be reaped with
+  `taskkill /T`; and a batch must wait on the take's PROCESS, not its pipe (a leftover server held the pipe open
+  and the next take never started).
+- **The baked spec carries drive paths** from the footage's screen text and the push gate blocks them:
+  `scrub-paths.mjs` runs inside `assemble.sh`.
+- **`set -eo pipefail` in any assemble script.** Without it a failed builder was hidden by `| tail` and the gates
+  passed on the stale spec.
+- **Remove, don't blur** (owner): `prep.hide` selectors delete the README's sponsor block before filming.
+- Thumbnail: `artWide: true` gives a wide banner (a project header) its own treatment in the `hero` layout.
+
 ## 2026-10-03 — WINDOWS MACHINE RE-SET-UP ON D: — the paths in the entry below are DEAD
 
 D: was full-formatted on 2026-10-01 and iAuteur was set up fresh on 2026-10-03, entirely on D: (the owner
