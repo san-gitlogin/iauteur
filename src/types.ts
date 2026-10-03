@@ -12903,6 +12903,8 @@ export interface VideoSpec {
     layout?: 'split' | 'stack' | 'hero';
     /** Opacity on `art`, for a mark that has to sit behind type rather than beside it. */
     artFade?: number;
+    /** hero + an img: art that is a wide banner (a project header), drawn large across the lower right. */
+    artWide?: boolean;
     /** A PICTURE drawn free on the right: an `img:` asset at full size, no crop, no rounded
      *  tile, no shadow box (owner, 2026-09-12: *"I dont want the component to be covered or
      *  put within a rounded rectangle container ... i want it to flow free"*). Author it as a

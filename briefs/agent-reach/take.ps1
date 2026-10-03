@@ -1,11 +1,12 @@
 # Record one take from demos/<slug>.json in a freshly wiped workspace.
 #   powershell -File briefs/agent-reach/take.ps1 ar-doctor
 #   powershell -File briefs/agent-reach/take.ps1 ar-install -Fresh     (empty venv: the install is filmed for real)
+#   powershell -File briefs/agent-reach/take.ps1 ar-agent2 -Skill      (the agent gets Agent Reach's skill file first)
 #
 # Everything the take touches lives under IAUTEUR_REC_ROOT: a recording HOME (so the tools' config,
 # the Reddit credential and the Claude config never touch the real profile), the venv that holds
 # Agent Reach and its backends, and the two X cookie values in a file that is never committed.
-param([Parameter(Mandatory = $true)][string]$Slug, [switch]$Fresh)
+param([Parameter(Mandatory = $true)][string]$Slug, [switch]$Fresh, [switch]$Skill)
 $R = $env:IAUTEUR_REC_ROOT
 if (-not $R) { throw 'set IAUTEUR_REC_ROOT to the recording workspace root' }
 Set-Location (Resolve-Path "$PSScriptRoot\..\..").Path
@@ -55,6 +56,19 @@ $env:PATH = (@("$venv\Scripts", $claudeDir) + $kept) -join ';'
 $secrets = Join-Path $R '_ar-secrets.env'
 if (Test-Path $secrets) {
   Get-Content $secrets | ForEach-Object { $k, $v = $_ -split '=', 2; if ($k -and $v) { Set-Item "Env:$k" $v } }
+}
+
+# THE SKILL FILE IS HOW AN AGENT KNOWS TO TRY A CHANNEL THE DOCTOR HIDES. Without it, an agent trusted
+# the doctor command (which never live-checks X or Reddit and so never lists them as available) and
+# answered for YouTube only. With -Skill the take starts the way the project intends: the English skill
+# installed where Claude Code loads skills, and the X cookies saved through the tool's own command. Both
+# run off camera because they print the home path; the cookie values go in on stdin and are never echoed.
+if ($Skill) {
+  $env:AGENT_REACH_LANG = 'en'
+  if ($env:TWITTER_AUTH_TOKEN -and $env:TWITTER_CT0) {
+    "auth_token=$($env:TWITTER_AUTH_TOKEN); ct0=$($env:TWITTER_CT0)" | agent-reach configure twitter-cookies | Out-Null
+  }
+  agent-reach skill --install | Out-Null
 }
 
 node scripts/record.mjs "demos/$Slug.json" 2>&1 | Where-Object { $_ -notmatch 'DEP0190|trace-deprecation' }

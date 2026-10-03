@@ -112,8 +112,8 @@ const ReplacesBlock: React.FC<{r: Replaces}> = ({r}) => {
 const ThumbInner: React.FC<{
   title: string; badge: string; asset: string; logo?: string;
   logos?: string[]; logoTint?: string; note?: string; replaces?: Replaces;
-  titleStruck?: string; art?: string; layout?: 'split' | 'stack' | 'hero' | 'mirror'; artFade?: number;
-}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art, layout, artFade}) => {
+  titleStruck?: string; art?: string; layout?: 'split' | 'stack' | 'hero' | 'mirror'; artFade?: number; artWide?: boolean;
+}> = ({title, badge, asset, logo, logos, logoTint, note, replaces, titleStruck, art, layout, artFade, artWide}) => {
   const t = useTheme();
   // STACK puts the art ABOVE the copy, so the copy gets the whole frame width instead of the
   // half a side-by-side leaves it. That is the difference between "WORTH TRYING?" and a
@@ -223,6 +223,15 @@ const ThumbInner: React.FC<{
             ? {position: 'absolute', left: 90, top: 48, width: 'auto', height: 'auto',
                maxWidth: 900, maxHeight: 296, opacity: artFade ?? 1,
                borderRadius: 12, boxShadow: '0 18px 60px rgba(0,0,0,0.45)'}
+            : hero && artWide
+            // A BANNER IS NOT A MARK (owner, 2026-10-03: use the project's own header, but it must sit IN the
+            // design, not look pasted on). A 4:1 header at the mark's 470px cap rendered 120px tall: a strip
+            // nobody can read, cut off at the frame edge. A banner gets two thirds of the width, a slight
+            // tilt from its bottom-right corner, an accent hairline and glow so it belongs to the card, and
+            // it runs off the RIGHT edge only, where the header's own margin is, so no words are lost.
+            ? {position: 'absolute', right: 26, bottom: 34, width: 800, height: 'auto', opacity: artFade ?? 1,
+               borderRadius: 18, transform: 'rotate(-3.5deg)', transformOrigin: '100% 100%',
+               boxShadow: `0 0 0 2px ${t.colors.accent}99, 0 30px 90px rgba(0,0,0,0.75), 0 0 90px ${t.colors.accent}66`}
             : hero
             // BLEED OFF THE CORNER. A mark boxed inside the frame reads as a slide; one that
             // runs off the edge reads as a poster and leaves the type the whole width above it.
@@ -242,7 +251,9 @@ const ThumbInner: React.FC<{
         <AbsoluteFill style={heroPayoff.length > 12
           ? {padding: '84px 90px 0', flexDirection: 'column', justifyContent: 'flex-start'}
           // the short-payoff tier is CENTRED: top-aligned it left the bottom third empty
-          : {padding: '0 90px 26px', flexDirection: 'column', justifyContent: 'center'}}>
+          // …and with a banner along the bottom the copy is centred in the space ABOVE it, or the payoff
+          // line lands on the banner (first proof, 2026-10-03).
+          : {padding: artWide && art?.startsWith('img:') ? '0 90px 236px' : '0 90px 26px', flexDirection: 'column', justifyContent: 'center'}}>
           <div style={{alignSelf: 'flex-start', background: t.colors.accent2, color: t.colors.onAccent,
                        fontFamily: t.fonts.mono, fontWeight: 800, fontSize: heroPayoff.length > 12 ? 30 : 36, padding: '11px 26px',
                        borderRadius: 14 * t.style.cornerRadius, textTransform: 'uppercase',
@@ -412,6 +423,7 @@ export const Thumbnail: React.FC<{
   art?: string;
   layout?: 'split' | 'stack' | 'hero';
   artFade?: number;
+  artWide?: boolean;
 }> = ({themeName, ...props}) => (
   <ThemeProvider themeName={themeName}>
     <ThumbInner {...props} />

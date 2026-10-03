@@ -7,6 +7,7 @@ foreach ($t in $Takes) {
   $slug, $mode = $t -split ':', 2
   $a = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "$PSScriptRoot\take.ps1", $slug)
   if ($mode -eq 'fresh') { $a += '-Fresh' }
+  if ($mode -eq 'skill') { $a += '-Skill' }
   $out = & powershell @a 2>&1 | ForEach-Object { "$_" }
   $out | Set-Content -Encoding utf8 (Join-Path $logs "$slug.log")
   $verdict = if ($out -match '^OK ') { 'OK' } else { 'FAILED' }

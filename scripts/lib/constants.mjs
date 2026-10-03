@@ -397,5 +397,5 @@ export const THUMB_KEYS = [
   // `scripts/check-thumb-keys.mjs` now derives this list's obligations from the code that
   // READS these objects, so a fourth occurrence fails the gate instead of a render.
   'title', 'badge', 'asset', 'art', 'frames', 'note', 'logos', 'titleStruck', 'replaces',
-  'layout', 'artFade', 'logoTint',
+  'layout', 'artFade', 'artWide', 'logoTint',
 ];

@@ -58,10 +58,10 @@
   "thumbnail": {
     "layout": "hero",
     "badge": "AGENT REACH · 89K STARS ON GITHUB",
-    "title": "Your AI Can’t Read X or Reddit. [I Tested This]",
-    "note": "FREE · OPEN SOURCE · FULL HANDS-ON",
-    "art": "lucide:eye",
-    "asset": "lucide:eye"
+    "title": "Your AI Can’t Read X? [I Tested It]",
+    "art": "img:agent-reach-header.png",
+    "asset": "img:agent-reach-header.png",
+    "artWide": true
   },
   "scenes": [
     {
