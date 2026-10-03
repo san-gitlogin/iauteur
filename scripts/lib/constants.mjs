@@ -172,7 +172,7 @@ export const TYPES = [
   'O55_STAGE',
   'LAYA_STAGE',
   'AIRLLM_STAGE',
-  'TOK_STAGE',
+  'TOK_STAGE', 'AR_STAGE',
   'CMD_PING',
   'CMD_TRACEROUTE',
   'CMD_MTR',

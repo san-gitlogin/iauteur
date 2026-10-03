@@ -1982,6 +1982,20 @@ export const MANIFEST = {  JEVONS_CURVE: {
     },
     example: {"kind": "mask-slots", "stageTitle": "one sequence, one pass", "stage": [{"group": "cell", "label": "[CLS]", "atWord": 2}, {"group": "cell", "label": "which team?", "atWord": 3}, {"group": "cell", "label": "[MASK] billing", "text": "slot", "atWord": 5}, {"group": "cell", "label": "[MASK] technical", "text": "slot", "atWord": 6}, {"group": "cell", "label": "the email", "atWord": 8}, {"group": "read", "label": "the encoder reads all of it", "sub": "both directions at once", "atWord": 11}, {"group": "gather", "text": "[MASK] billing", "label": "billing", "sub": "0.95", "value": 0.95, "atWord": 16}, {"group": "gather", "text": "[MASK] technical", "label": "technical", "sub": "0.02", "value": 0.02, "atWord": 18}]},
   },
+  AR_STAGE: {
+    category: "diagram", family: "diagram", data_key: "arStage",
+    purpose: "Every DRAWN beat of the Agent Reach video on one scene type. That cut is about an AI agent reaching platforms that try to keep programs out, so each `kind` names an OBJECT and moves it: an agent whose wires are stopped by barriers at each platform, a thin shelf the agent's wires run straight through, a switchboard cable moving to the next jack when a backend dies, signal lamps that translate the tool's own Chinese legend, two lanes to one door (a robot browser stopped, your own cookies walking through), a board of channel sockets with a counter, two crates on a belt (the packaged release dropped, the source build let through), a fuse running from one pasted line, a signpost whose arms swing out, and a key ring with guards. One type, ten pictures (LAW 0n).",
+    use_when: "An agent / internet-access / backend-routing beat a camera cannot film. Pick `kind` for the OBJECT (see the header of src/arViz1.tsx and arViz2.tsx for each kind's item groups).",
+    fields: {
+      kind: {t: "string", req: true, note: "gates | layer | plugs | lamps | key | board | crate | fuse | signpost | ring. An unregistered kind renders LOUDLY in red."},
+      headline: {t: "string", note: "Optional headline, <=38 chars."},
+      stageTitle: {t: "string", note: "Small uppercase caption above the picture, <=44 chars, authored per beat."},
+      premise: {t: "string", note: "Standing sentence along the bottom, <=120 chars: what the viewer is looking at (LAW 0l)."},
+      stage: {t: "items", note: "The elements, each landing on its own atWord. `group` and `text` are PLUMBING, never drawn as words. `icon` is the object: si:<brand> or lucide:<name>. label <=34, sub <=64."},
+      color: {t: "string", note: "Semantic accent: blue|green|red|orange|purple|yellow."}
+    },
+    example: {"kind": "plugs", "stageTitle": "one platform, an ordered list of tools", "stage": [{"group": "platform", "label": "Bilibili", "icon": "si:bilibili", "atWord": 1}, {"group": "back", "label": "yt-dlp", "sub": "blocked with a 412", "text": "dead", "icon": "lucide:download", "atWord": 6}, {"group": "back", "label": "bili-cli", "sub": "in use now", "icon": "lucide:terminal", "atWord": 11}, {"group": "back", "label": "OpenCLI", "sub": "next in line", "icon": "lucide:app-window", "atWord": 14}]},
+  },
   TOK_STAGE: {
     category: "diagram", family: "diagram", data_key: "tokStage",
     purpose: "Every DRAWN beat of the '21 ways to save Claude Code tokens' video on one scene type. The argument of that cut is about what rides along with every request (the stack re-sent each turn, the cache that makes it cheap, and what breaks the cache), so each `kind` names an OBJECT and moves it: a stack re-sent per turn, a field of dots with one lit, a sealed bar that turns red after a change, price tags on a rail, a dead switch next to a live dial, a jar with a magnified sliver, a shelf of spines, a backpack tipped out, a press, a snipped timeline, two sawtooth curves, a fan of reads, a doubled paste, a cache seal, a firing clock, a courier's trips, the source page read like a page, a funnel, a pinned card, a side room, a toll gate, two cache clocks and a sorting board. One type, twenty-three pictures (LAW 0n).",

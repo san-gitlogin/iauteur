@@ -473,6 +473,7 @@
               "LAYA_STAGE",
               "AIRLLM_STAGE",
               "TOK_STAGE",
+              "AR_STAGE",
               "CMD_PING",
               "CMD_TRACEROUTE",
               "CMD_MTR",
@@ -8197,6 +8198,56 @@
                         },
                         "color": {
                           "description": "Accent."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "AR_STAGE"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "arStage": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "description": "gates | layer | plugs | lamps | key | board | crate | fuse | signpost | ring. An unregistered kind renders LOUDLY in red."
+                        },
+                        "headline": {
+                          "type": "string",
+                          "description": "Optional headline, <=38 chars."
+                        },
+                        "stageTitle": {
+                          "type": "string",
+                          "description": "Small uppercase caption above the picture, <=44 chars, authored per beat."
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Standing sentence along the bottom, <=120 chars: what the viewer is looking at (LAW 0l)."
+                        },
+                        "stage": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "description": "The elements, each landing on its own atWord. `group` and `text` are PLUMBING, never drawn as words. `icon` is the object: si:<brand> or lucide:<name>. label <=34, sub <=64."
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "Semantic accent: blue|green|red|orange|purple|yellow."
                         }
                       }
                     }

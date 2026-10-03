@@ -6715,6 +6715,35 @@ export interface TokStageData {
   color?: SemColor;
 }
 
+/** AR_STAGE — one element of an Agent Reach depiction. */
+export interface ArStageItem {
+  label?: string;
+  sub?: string;
+  /** PLUMBING, NEVER TEXT: which part of the picture this item is (see the kind list at the top of arViz1/2). */
+  group?: string;
+  /** A second plumbing slot: a state (ok / warn / off / dead), a side, a target id. */
+  text?: string;
+  /** The object this element is drawn as: `si:<brand>` or `lucide:<name>`. */
+  icon?: string;
+  value?: number;
+  color?: SemColor;
+  /** The word this element lands on. Every moment in arViz resolves from one of these. */
+  atWord?: number;
+}
+
+/** AR_STAGE — every drawn beat of the Agent Reach video, on one scene type. */
+export interface ArStageData {
+  /** Which depiction to draw. Must exist in arViz AR_VIZ. */
+  kind?: string;
+  headline?: string;
+  /** Small caption above the picture, authored per beat. */
+  stageTitle?: string;
+  /** The standing sentence along the bottom: what the viewer is looking at (LAW 0l). */
+  premise?: string;
+  stage?: ArStageItem[];
+  color?: SemColor;
+}
+
 /** AIRLLM_STAGE — one element of an AirLLM depiction. */
 export interface AirllmStageItem {
   label?: string;
@@ -11523,6 +11552,7 @@ export interface SceneData {
   layaStage?: LayaStageData;
   airllmStage?: AirllmStageData;
   tokStage?: TokStageData;
+  arStage?: ArStageData;
   cmdIp?: CmdIpData;
   cmdDd?: CmdDdData;
   cmdUmount?: CmdUmountData;
