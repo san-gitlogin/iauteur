@@ -1,0 +1,60 @@
+{
+  "slug": "ar-repo",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "https://github.com/Panniantong/Agent-Reach",
+    "settleMs": 5000,
+    "hide": [
+      "article.markdown-body details:has(table)",
+      "article.markdown-body blockquote:has(a[href^=\"mailto:\"])",
+      "article.markdown-body .markdown-heading:has(+ blockquote:has(a[href^=\"mailto:\"]))"
+    ]
+  },
+  "steps": [
+    {
+      "id": "top",
+      "action": "pause",
+      "ms": 2000,
+      "label": "Agent Reach on GitHub",
+      "marks": [
+        {
+          "id": "desc",
+          "text": "Give your AI agent eyes to see the entire internet."
+        },
+        {
+          "id": "license",
+          "text": "MIT license"
+        },
+        {
+          "id": "stars",
+          "text": "k stars"
+        }
+      ]
+    },
+    {
+      "id": "zh",
+      "action": "scroll",
+      "target": "text=给你的 AI Agent 一键装上互联网能力",
+      "settleMs": 2200,
+      "label": "the README is written in Chinese",
+      "marks": [
+        {
+          "id": "tagline",
+          "text": "给你的 AI Agent 一键装上互联网能力"
+        },
+        {
+          "id": "english",
+          "text": "English"
+        }
+      ]
+    }
+  ]
+}

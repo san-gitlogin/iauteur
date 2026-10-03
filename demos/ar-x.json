@@ -1,0 +1,117 @@
+{
+  "slug": "ar-x",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ar-x",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "README.txt": "Agent Reach hands-on\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "pip",
+      "action": "run",
+      "cmd": "pip install -q twitter-cli",
+      "label": "the X backend, from PyPI",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "fail",
+      "action": "run",
+      "cmd": "twitter search \"Claude Code\" --from claudeai -n 3",
+      "label": "the first search",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "404"
+      },
+      "marks": [
+        {
+          "id": "err",
+          "text": "404"
+        }
+      ]
+    },
+    {
+      "id": "fix",
+      "action": "run",
+      "cmd": "pip install -q -U git+https://github.com/public-clis/twitter-cli.git",
+      "label": "the newest source instead",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "search",
+      "action": "run",
+      "cmd": "twitter search \"Claude Code\" --from claudeai -n 3",
+      "label": "the same search again",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "Fetched 3",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "ok",
+          "text": "Fetched 3"
+        },
+        {
+          "id": "head",
+          "text": "Author"
+        },
+        {
+          "id": "stats",
+          "text": "Stats"
+        }
+      ]
+    },
+    {
+      "id": "posts",
+      "action": "run",
+      "cmd": "twitter user-posts AnthropicAI -n 3",
+      "label": "one account’s recent posts",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "Fetched 3",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "ok",
+          "text": "Fetched 3"
+        },
+        {
+          "id": "who",
+          "text": "@AnthropicAI tweets"
+        }
+      ]
+    }
+  ]
+}

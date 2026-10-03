@@ -1,7 +1,7 @@
 import React from 'react';
 import {UnknownKind} from './unknownKind';
 import {ArVizProps, Gates, Layer, Plugs, Lamps, Key} from './arViz1';
-import {Board, Crate, Fuse, Signpost, Ring} from './arViz2';
+import {Board, Crate, Fuse, Signpost, Ring, Reel} from './arViz2';
 
 /**
  * AR depictions: every drawn beat of the Agent Reach video, on one scene type (LAW 0n: plan
@@ -10,7 +10,7 @@ import {Board, Crate, Fuse, Signpost, Ring} from './arViz2';
  */
 export const AR_VIZ: Record<string, React.FC<ArVizProps>> = {
   gates: Gates, layer: Layer, plugs: Plugs, lamps: Lamps, key: Key,
-  board: Board, crate: Crate, fuse: Fuse, signpost: Signpost, ring: Ring,
+  board: Board, crate: Crate, fuse: Fuse, signpost: Signpost, ring: Ring, reel: Reel,
 };
 
 export const ArViz: React.FC<ArVizProps & {kind: string}> = ({kind, ...rest}) => {

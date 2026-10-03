@@ -1,0 +1,84 @@
+{
+  "slug": "ar-exa",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ar-exa",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "README.txt": "Agent Reach hands-on\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "npm",
+      "action": "run",
+      "cmd": "npm install -g mcporter",
+      "label": "the one missing piece for web search",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "config",
+      "action": "run",
+      "cmd": "mcporter config add exa https://mcp.exa.ai/mcp --scope home | Out-Null",
+      "label": "point it at Exa",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "search",
+      "action": "run",
+      "cmd": "(mcporter call exa.web_search_exa query=\"Agent Reach github Panniantong\" numResults=3) | Select-Object -First 16",
+      "label": "a web search with no API key",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "doctor",
+      "action": "run",
+      "cmd": "agent-reach doctor",
+      "label": "the health check again",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "Agent Reach",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "exa",
+          "text": "全网语义搜索"
+        },
+        {
+          "id": "status",
+          "text": "状态："
+        }
+      ]
+    }
+  ]
+}

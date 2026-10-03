@@ -16,6 +16,7 @@ import {ArVizProps, pick, one, stateColor, Medal, Svg} from './arViz1';
  *   fuse      one pasted line at the top, a fuse running from it through each thing it sets off
  *   signpost  a post whose arms swing out one at a time: what you ask for, and the tool it points to
  *   ring      a key ring holding your logins, and the guards that land around it
+ *   reel      a film strip winding on, and the lines of text that come out of it
  */
 
 /* ── BOARD ──────────────────────────────────────────────────────────────────────────────── */
@@ -310,6 +311,74 @@ export const Ring: React.FC<ArVizProps> = ({items, accent, w, h}) => {
           </React.Fragment>
         );
       })}
+    </div>
+  );
+};
+
+/* ── REEL ───────────────────────────────────────────────────────────────────────────────── */
+// items: video (label, sub, icon) · line (label = a subtitle line) xN · read (label, sub)
+export const Reel: React.FC<ArVizProps> = ({items, accent, w, h}) => {
+  const v = useV(accent);
+  const frame = useCurrentFrame();
+  const video = one(items, 'video'), read = one(items, 'read');
+  const lines = pick(items, 'line');
+  const n = Math.max(1, lines.length);
+  const col = v.vertical;
+  const stripW = col ? w : w * 0.34, stripH = col ? h * 0.3 : h * 0.62;
+  const sx = 0, sy = col ? 0 : h * 0.08;
+  const cells = col ? 4 : 3;
+  const baseOn = arriveAt(frame, BASE(video?.atWord));
+  // The strip winds on by one frame each time a line of text comes out of it.
+  let wound = 0;
+  lines.forEach((l) => { wound += travelAt(frame, F(l.atWord) - 10, 14); });
+  const tx0 = col ? 0 : stripW + w * 0.07, ty0 = col ? stripH + h * 0.2 : h * 0.06;
+  const tW = w - tx0, tH = (col ? h - ty0 - h * 0.14 : h * 0.72);
+  const rowH = tH / n;
+  const fs = Math.min(rowH * 0.42, v.s(col ? 32 : 34));
+  const hole = stripW * 0.035;
+  return (
+    <div style={{position: 'absolute', inset: 0}}>
+      {/* the film strip */}
+      <At x={sx} y={sy} w={stripW} h={stripH} style={{opacity: baseOn, overflow: 'hidden', borderRadius: v.rad(12), boxSizing: 'border-box',
+        background: hexA(v.t.colors.muted, 0.12), border: `${Math.max(1.5, v.s(2))}px solid ${hexA(v.t.colors.muted, 0.6)}`}}>
+        {Array.from({length: cells + n + 1}).map((_, i) => {
+          const along = (i - wound) / cells;
+          const cw = col ? stripW / cells : stripW * 0.7, chh = col ? stripH * 0.62 : stripH / cells;
+          const left = col ? along * stripW + stripW * 0.02 : stripW * 0.15;
+          const topp = col ? stripH * 0.19 : along * stripH + stripH * 0.02;
+          return <div key={i} style={{position: 'absolute', left, top: topp, width: cw * 0.92, height: chh * 0.9, borderRadius: v.rad(6),
+            background: hexA(v.a, 0.16), border: `${Math.max(1, v.s(1.5))}px solid ${hexA(v.a, 0.55)}`, display: 'flex',
+            alignItems: 'center', justifyContent: 'center'}}>
+            <AssetIcon asset="lucide:play" size={Math.min(cw, chh) * 0.3} bare tint={hexA(v.t.colors.text, 0.6)} /></div>;
+        })}
+        {Array.from({length: 14}).map((_, i) => (col
+          ? <React.Fragment key={i}>
+              <div style={{position: 'absolute', left: (i + 0.5) * (stripW / 14) - hole / 2, top: stripH * 0.05, width: hole, height: hole, background: v.t.colors.bg, borderRadius: hole * 0.2}} />
+              <div style={{position: 'absolute', left: (i + 0.5) * (stripW / 14) - hole / 2, bottom: stripH * 0.05, width: hole, height: hole, background: v.t.colors.bg, borderRadius: hole * 0.2}} />
+            </React.Fragment>
+          : <React.Fragment key={i}>
+              <div style={{position: 'absolute', top: (i + 0.5) * (stripH / 14) - hole / 2, left: stripW * 0.045, width: hole, height: hole, background: v.t.colors.bg, borderRadius: hole * 0.2}} />
+              <div style={{position: 'absolute', top: (i + 0.5) * (stripH / 14) - hole / 2, right: stripW * 0.045, width: hole, height: hole, background: v.t.colors.bg, borderRadius: hole * 0.2}} />
+            </React.Fragment>))}
+      </At>
+      <At x={sx} y={sy + stripH + v.s(14)} w={col ? w : stripW} style={{opacity: baseOn}}>
+        <Cap v={v} title={video?.label} sub={video?.sub} align={col ? 'left' : 'center'} size={col ? 28 : 26} />
+      </At>
+      {/* the words coming out of it */}
+      {lines.map((l, i) => {
+        const on = clamp01(arriveAt(frame, F(l.atWord), 12));
+        return (
+          <At key={i} x={tx0 - (1 - on) * w * 0.05} y={ty0 + rowH * i} w={tW} h={rowH} style={{opacity: on, display: 'flex', alignItems: 'center',
+            gap: fs * 0.6, fontFamily: v.t.fonts.mono, fontSize: fs, color: v.t.colors.text, lineHeight: 1.2}}>
+            <span style={{color: v.a, flex: 'none'}}>›</span><span>{l.label}</span>
+          </At>
+        );
+      })}
+      {read ? (
+        <At x={tx0} y={ty0 + tH + h * 0.03} w={tW}>
+          <Cap v={v} title={read.label} sub={read.sub} align="left" size={col ? 32 : 32} color={v.sem('green')} on={clamp01(landAt(frame, F(read.atWord)))} />
+        </At>
+      ) : null}
     </div>
   );
 };

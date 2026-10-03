@@ -1,0 +1,44 @@
+{
+  "slug": "ar-smoke",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ar-smoke",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "README.txt": "Agent Reach hands-on\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "doctor",
+      "action": "run",
+      "cmd": "agent-reach doctor",
+      "label": "the health check",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "Agent Reach",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "yt",
+          "text": "YouTube"
+        }
+      ]
+    }
+  ]
+}

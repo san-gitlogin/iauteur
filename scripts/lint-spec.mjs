@@ -3071,12 +3071,12 @@ for (const s of spec.scenes ?? []) {
     if (lst.length && !lst.some((x) => x.atWord != null))
       W(`${id}: LAYA_STAGE has no anchored element — the whole picture lands at once instead of with the voice (LAW 0i)`);
   }
-  // AR_STAGE — one type, ten pictures (the Agent Reach video). Caps measured on the proof sheet:
+  // AR_STAGE — one type, eleven pictures (the Agent Reach video). Caps measured on the proof sheet:
   // a label sits beside or under a medal, so 34 chars is one line at the 16:9 type size and two at
   // 9:16; the fuse's pasted line and a signpost question are quoted, so they get the pane's width.
   if (d.arStage) {
     const u = d.arStage;
-    const KINDS = ['gates', 'layer', 'plugs', 'lamps', 'key', 'board', 'crate', 'fuse', 'signpost', 'ring'];
+    const KINDS = ['gates', 'layer', 'plugs', 'lamps', 'key', 'board', 'crate', 'fuse', 'signpost', 'ring', 'reel'];
     if (!u.kind) E(`${id}: AR_STAGE needs a kind`);
     else if (!KINDS.includes(u.kind)) E(`${id}: AR_STAGE unknown kind "${u.kind}" — must be one of ${KINDS.join(', ')}. It would render as UNKNOWN DEPICTION KIND.`);
     if (len(u.headline) > 38) E(`${id}: AR_STAGE headline > 38 chars`);

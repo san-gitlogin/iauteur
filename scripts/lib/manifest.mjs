@@ -1987,7 +1987,7 @@ export const MANIFEST = {  JEVONS_CURVE: {
     purpose: "Every DRAWN beat of the Agent Reach video on one scene type. That cut is about an AI agent reaching platforms that try to keep programs out, so each `kind` names an OBJECT and moves it: an agent whose wires are stopped by barriers at each platform, a thin shelf the agent's wires run straight through, a switchboard cable moving to the next jack when a backend dies, signal lamps that translate the tool's own Chinese legend, two lanes to one door (a robot browser stopped, your own cookies walking through), a board of channel sockets with a counter, two crates on a belt (the packaged release dropped, the source build let through), a fuse running from one pasted line, a signpost whose arms swing out, and a key ring with guards. One type, ten pictures (LAW 0n).",
     use_when: "An agent / internet-access / backend-routing beat a camera cannot film. Pick `kind` for the OBJECT (see the header of src/arViz1.tsx and arViz2.tsx for each kind's item groups).",
     fields: {
-      kind: {t: "string", req: true, note: "gates | layer | plugs | lamps | key | board | crate | fuse | signpost | ring. An unregistered kind renders LOUDLY in red."},
+      kind: {t: "string", req: true, note: "gates | layer | plugs | lamps | key | board | crate | fuse | signpost | ring | reel. An unregistered kind renders LOUDLY in red."},
       headline: {t: "string", note: "Optional headline, <=38 chars."},
       stageTitle: {t: "string", note: "Small uppercase caption above the picture, <=44 chars, authored per beat."},
       premise: {t: "string", note: "Standing sentence along the bottom, <=120 chars: what the viewer is looking at (LAW 0l)."},

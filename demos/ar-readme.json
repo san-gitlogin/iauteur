@@ -1,0 +1,137 @@
+{
+  "slug": "ar-readme",
+  "surface": "browser",
+  "theme": "dark",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "fps": 30,
+  "masterWidth": 3840,
+  "deviceScaleFactor": 2.4,
+  "prep": {
+    "url": "https://github.com/Panniantong/Agent-Reach/blob/main/docs/README_en.md",
+    "settleMs": 5000,
+    "hide": [
+      "article.markdown-body details:has(table)",
+      "article.markdown-body blockquote:has(a[href^=\"mailto:\"])",
+      "article.markdown-body .markdown-heading:has(+ blockquote:has(a[href^=\"mailto:\"]))"
+    ]
+  },
+  "steps": [
+    {
+      "id": "top",
+      "action": "scroll",
+      "target": "text=Give your AI Agent one-click access to the entire internet",
+      "settleMs": 2200,
+      "label": "the maintainer’s own English version",
+      "marks": [
+        {
+          "id": "tagline",
+          "text": "Give your AI Agent one-click access to the entire internet"
+        },
+        {
+          "id": "promise",
+          "text": "The most reliable access path for each platform"
+        }
+      ]
+    },
+    {
+      "id": "pain",
+      "action": "scroll",
+      "target": "text=Why Agent Reach?",
+      "settleMs": 2200,
+      "label": "why reading these platforms is hard",
+      "marks": [
+        {
+          "id": "x",
+          "text": "Pay-per-use, moderate usage ~$215/month"
+        },
+        {
+          "id": "reddit",
+          "text": "Server IPs get 403"
+        },
+        {
+          "id": "xhs",
+          "text": "Login required to browse"
+        },
+        {
+          "id": "one",
+          "text": "Agent Reach turns this into one command"
+        }
+      ]
+    },
+    {
+      "id": "platforms",
+      "action": "scroll",
+      "target": "text=Supported Platforms",
+      "settleMs": 2200,
+      "label": "what it says it can reach",
+      "marks": [
+        {
+          "id": "web",
+          "text": "Any URL → clean Markdown"
+        },
+        {
+          "id": "x",
+          "text": "Cookie unlocks search, timeline, tweet reading, articles"
+        }
+      ]
+    },
+    {
+      "id": "platforms2",
+      "action": "scroll",
+      "target": "text=Subtitles + search across 1800+ video sites",
+      "settleMs": 2200,
+      "label": "further down the same table",
+      "marks": [
+        {
+          "id": "yt",
+          "text": "Subtitles + search across 1800+ video sites"
+        },
+        {
+          "id": "reddit",
+          "text": "No zero-config path (anonymous endpoints blocked)"
+        }
+      ]
+    },
+    {
+      "id": "layer",
+      "action": "scroll",
+      "target": "text=Design Philosophy",
+      "settleMs": 2200,
+      "label": "what it is, in the author’s words",
+      "marks": [
+        {
+          "id": "layer",
+          "text": "Agent Reach is a capability layer, not yet another tool."
+        },
+        {
+          "id": "does",
+          "text": "selection, installation, health checks, and routing"
+        }
+      ]
+    },
+    {
+      "id": "backends",
+      "action": "scroll",
+      "target": "text=Every platform = an ordered backend list",
+      "settleMs": 2200,
+      "label": "one ordered list of tools per platform",
+      "marks": [
+        {
+          "id": "x",
+          "text": "twitter-cli ▸ OpenCLI ▸ bird"
+        },
+        {
+          "id": "reddit",
+          "text": "OpenCLI ▸ rdt-cli"
+        },
+        {
+          "id": "yt",
+          "text": "yt-dlp"
+        }
+      ]
+    }
+  ]
+}

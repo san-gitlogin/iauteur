@@ -8224,7 +8224,7 @@
                       "properties": {
                         "kind": {
                           "type": "string",
-                          "description": "gates | layer | plugs | lamps | key | board | crate | fuse | signpost | ring. An unregistered kind renders LOUDLY in red."
+                          "description": "gates | layer | plugs | lamps | key | board | crate | fuse | signpost | ring | reel. An unregistered kind renders LOUDLY in red."
                         },
                         "headline": {
                           "type": "string",

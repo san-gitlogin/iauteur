@@ -1,0 +1,48 @@
+{
+  "slug": "ar-agent2",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ar-agent2",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none",
+    "workbench.welcomePage.walkthroughs.openOnInstall": false
+  },
+  "prep": {
+    "files": {
+      "README.txt": "Agent Reach hands-on\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "launch",
+      "action": "run",
+      "background": true,
+      "waitFor": "shift+tab to cycle",
+      "timeout": 90000,
+      "settleMs": 2500,
+      "cmd": "claude --model sonnet --allowedTools \"Read,Grep,Glob,Edit,Write,Bash,PowerShell,WebFetch\"",
+      "label": "start Claude Code",
+      "focus": "terminal",
+      "clearFirst": true
+    },
+    {
+      "id": "ask",
+      "action": "agent",
+      "focus": "terminal",
+      "timeout": 900000,
+      "settleMs": 3000,
+      "waitFor": "===",
+      "label": "one real question, three platforms",
+      "text": "Agent Reach is installed and agent-reach is on the PATH. Using it, what are people saying about Claude Code this week on X, on Reddit and on YouTube? Two short points from each, with a link. Keep it clean and in English, and end your reply with a line of three equals signs."
+    }
+  ]
+}

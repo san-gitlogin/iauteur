@@ -19,6 +19,8 @@ Get-ChildItem Env: | Where-Object { $_.Name -like 'CLAUDE*' } | ForEach-Object {
 $recHome = Join-Path $R '_ar-home'
 $env:USERPROFILE = $recHome; $env:HOME = $recHome
 $env:CLAUDE_CONFIG_DIR = Join-Path $recHome '.claude'
+# Claude Code must not install or wake its editor extension inside the recorded window.
+$env:CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL = '1'
 $env:PYTHONUTF8 = '1'; $env:PYTHONIOENCODING = 'utf-8'
 
 $venv = Join-Path $R 'agent-reach\venv'

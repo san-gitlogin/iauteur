@@ -1,0 +1,70 @@
+{
+  "slug": "ar-reddit",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ar-reddit",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "README.txt": "Agent Reach hands-on\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "search",
+      "action": "run",
+      "cmd": "rdt search \"claude code\" -t week -n 5",
+      "label": "search Reddit, this week only",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "5 results",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "count",
+          "text": "5 results"
+        },
+        {
+          "id": "head",
+          "text": "Subreddit"
+        },
+        {
+          "id": "more",
+          "text": "to read a result"
+        }
+      ]
+    },
+    {
+      "id": "sub",
+      "action": "run",
+      "cmd": "rdt search \"agent\" -r ClaudeAI -s top -t month -n 5",
+      "label": "one subreddit, top of the month",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "head",
+          "text": "Subreddit"
+        }
+      ]
+    }
+  ]
+}

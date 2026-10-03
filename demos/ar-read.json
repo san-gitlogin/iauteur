@@ -1,0 +1,127 @@
+{
+  "slug": "ar-read",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ar-read",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "README.txt": "Agent Reach hands-on\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "web",
+      "action": "run",
+      "cmd": "(curl.exe -s https://r.jina.ai/https://en.wikipedia.org/wiki/Model_Context_Protocol) | Select-Object -First 14",
+      "label": "any web page, handed back as clean text",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "Title:",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "title",
+          "text": "Title:"
+        },
+        {
+          "id": "src",
+          "text": "URL Source:"
+        }
+      ]
+    },
+    {
+      "id": "ytsearch",
+      "action": "run",
+      "cmd": "yt-dlp --flat-playlist --print \"%(channel)s  |  %(title)s\" \"ytsearch5:what is claude code\"",
+      "label": "search YouTube from the terminal",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "subs",
+      "action": "run",
+      "cmd": "yt-dlp --write-auto-sub --sub-lang en --skip-download -o \"subs/%(id)s\" https://www.youtube.com/watch?v=AJpK3YTTKZ4",
+      "label": "download a video’s subtitles, not the video",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "subs",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "wrote",
+          "text": "Writing video subtitles"
+        }
+      ]
+    },
+    {
+      "id": "read",
+      "action": "run",
+      "cmd": "Get-Content subs\\*.vtt | Where-Object { $_.Trim() -and $_ -notmatch '-->|<' } | Select-Object -Unique | Select-Object -First 12",
+      "label": "the words of the video, as text",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "rss",
+      "action": "run",
+      "cmd": "python -c \"import feedparser; [print('-', e.title) for e in feedparser.parse('https://hnrss.org/frontpage').entries[:6]]\"",
+      "label": "any RSS feed",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "gh",
+      "action": "run",
+      "cmd": "gh search repos \"agent skills\" --sort stars --limit 5",
+      "label": "search GitHub",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    },
+    {
+      "id": "bili",
+      "action": "run",
+      "cmd": "bili search \"Claude Code\" --type video -n 3",
+      "label": "and Bilibili, the Chinese video site",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "exitCode": 0
+      }
+    }
+  ]
+}

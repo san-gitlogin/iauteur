@@ -1,0 +1,118 @@
+{
+  "slug": "ar-install",
+  "surface": "vscode",
+  "theme": "dark",
+  "workspace": "ar-install",
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 4,
+  "masterWidth": 3840,
+  "fps": 30,
+  "terminalOnly": true,
+  "maxHoldMs": 1600,
+  "settings": {
+    "workbench.startupEditor": "none"
+  },
+  "prep": {
+    "files": {
+      "README.txt": "Agent Reach hands-on\n"
+    }
+  },
+  "steps": [
+    {
+      "id": "pip",
+      "action": "run",
+      "cmd": "pip install https://github.com/Panniantong/agent-reach/archive/main.zip",
+      "label": "install the package from GitHub",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 600000,
+      "expect": {
+        "contains": "Successfully installed",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "ok",
+          "text": "Successfully installed"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "action": "run",
+      "cmd": "agent-reach install --env=auto",
+      "label": "the read-only check: nothing on the machine is changed",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "No changes were made",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "safe",
+          "text": "SAFE MODE"
+        },
+        {
+          "id": "mcp",
+          "text": "mcporter not installed"
+        },
+        {
+          "id": "done",
+          "text": "No changes were made"
+        }
+      ]
+    },
+    {
+      "id": "doctor",
+      "action": "run",
+      "cmd": "agent-reach doctor",
+      "label": "the health check, in Chinese",
+      "focus": "terminal",
+      "clearFirst": true,
+      "timeout": 240000,
+      "expect": {
+        "contains": "Agent Reach",
+        "exitCode": 0
+      },
+      "marks": [
+        {
+          "id": "legend",
+          "text": "图例"
+        },
+        {
+          "id": "ready",
+          "text": "装好即用"
+        },
+        {
+          "id": "gh",
+          "text": "GitHub 仓库和代码"
+        },
+        {
+          "id": "yt",
+          "text": "YouTube 视频和字幕"
+        },
+        {
+          "id": "rss",
+          "text": "RSS/Atom 订阅源"
+        },
+        {
+          "id": "exa",
+          "text": "全网语义搜索"
+        },
+        {
+          "id": "web",
+          "text": "任意网页"
+        },
+        {
+          "id": "status",
+          "text": "状态："
+        }
+      ]
+    }
+  ]
+}
