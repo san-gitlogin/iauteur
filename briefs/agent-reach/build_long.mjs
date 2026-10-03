@@ -362,7 +362,7 @@ rec('fade', 'zoneB',
   "since I was already logged in to gh. Logged out, gh refused and asked me to sign in, so the README's " +
   "zero-config label is a bit generous there. Last, web search, through a service called Exa. Web search needed " +
   "the mcporter helper from earlier, installed with one npm command. No API " +
-  "key was involved, and the first thing it found was the project's own install guide.",
+  "key was involved, and the first result is the project's own GitHub page.",
   null,
   [{take: 'ar-read', step: 'rss', label: 'an RSS feed', at: 0.02},
    {take: 'ar-read', step: 'gh', label: 'GitHub search', at: 0.24,

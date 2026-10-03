@@ -1195,7 +1195,7 @@
       "type": "RECORDED_STEP",
       "transition": "fade",
       "background": "zoneB",
-      "narration": "Three quick ones. RSS is the feed format most blogs still publish, and here are the six latest headlines from GitHub's own blog, from one line of Python. GitHub search runs through gh, GitHub's official tool: five repositories about agent skills, sorted by stars. To be straight with you, that one only worked since I was already logged in to gh. Logged out, gh refused and asked me to sign in, so the README's zero-config label is a bit generous there. Last, web search, through a service called Exa. Web search needed the mcporter helper from earlier, installed with one npm command. No API key was involved, and the first thing it found was the project's own install guide.",
+      "narration": "Three quick ones. RSS is the feed format most blogs still publish, and here are the six latest headlines from GitHub's own blog, from one line of Python. GitHub search runs through gh, GitHub's official tool: five repositories about agent skills, sorted by stars. To be straight with you, that one only worked since I was already logged in to gh. Logged out, gh refused and asked me to sign in, so the README's zero-config label is a bit generous there. Last, web search, through a service called Exa. Web search needed the mcporter helper from earlier, installed with one npm command. No API key was involved, and the first result is the project's own GitHub page.",
       "data": {
         "recordedStep": {
           "clips": [
@@ -1211,7 +1211,7 @@
               "ref": "rec:ar-read#gh",
               "label": "GitHub search",
               "focus": true,
-              "atWord": 29,
+              "atWord": 28,
               "zooms": [
                 {
                   "marks": [
@@ -1239,14 +1239,14 @@
               "ref": "rec:ar-exa#search",
               "label": "web search, no API key",
               "focus": true,
-              "atWord": 79,
+              "atWord": 77,
               "zooms": [],
               "callouts": []
             }
           ]
         }
       },
-      "durationFrames": 1161
+      "durationFrames": 1142
     },
     {
       "id": "s21",
