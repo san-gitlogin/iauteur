@@ -156,6 +156,17 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{themeName: 'moderndark', logo: 'img:channel_logo.png'}}
       />
 
+      {/* three seconds on a short: its whole length has to stay under the Shorts ceiling */}
+      <Composition
+        id="disclaimer-short"
+        component={Disclaimer}
+        durationInFrames={disclaimerFrames(30, 3)}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{themeName: 'moderndark', logo: 'img:channel_logo.png'}}
+      />
+
       {/* ---------- CAMERA SYSTEM SHOWCASE (standalone demo) ---------- */}
       <Composition
         id="camera-showcase"

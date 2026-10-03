@@ -20,6 +20,8 @@ a safety folder on the system drive with matching checksums. The owner said to s
   in front of the finished cut through MPEG-TS with a stream copy: out/wide-dark-disclaimer.mp4, 17:29,
   31,479 frames = 150 + 31,329, decodes clean, voice onset within 45 ms of the original. No re-render of the cut.
   shift-chapters.mjs moved the upload kit's chapter stamps by 5s and added 00:00 - Disclaimer.
+- The short has one too: composition disclaimer-short (3s, 9:16), joined the same way with
+  add-disclaimer.sh <slug> short -> out/short-dark-disclaimer.mp4, 58.0s.
 - **Thumbnail:** Your AI Can Now [Surf the Web], name line AGENT REACH, and a new hero field, stamp, drawn
   bottom-left in the theme's red (LIVE DEMO!). The owner rejected "I tested it" as the payoff.
 - Local git history is still damaged (git fsck). Commits and pushes work; a fresh clone is the clean fix.
