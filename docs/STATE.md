@@ -13,11 +13,11 @@ a safety folder on the system drive with matching checksums. The owner said to s
 
 **Owed for the Agent Reach video, not done:**
 - Put a disclaimer board in front of the finished wide cut WITHOUT re-rendering it: render the
-   composition (src/Disclaimer.tsx, ~27s still, red bold title, white semi-bold body), give it a
-  silent AAC 48 kHz stereo track and the cut's 1/90000 video timebase, then . Shift every
-  chapter stamp in upload.md by the board's length and add .
+  `disclaimer-wide` composition (src/Disclaimer.tsx, ~27s still, red bold title, white semi-bold body), give it a
+  silent AAC 48 kHz stereo track and the cut's 1/90000 video timebase, then `ffmpeg -f concat -c copy`. Shift
+  every chapter stamp in upload.md by the board's length and add `00:00 - Disclaimer`.
 - New thumbnail copy (owner: "I tested it" does not work; say what it does, then the library name, then
-  "Live Demo!"). The WIP commit sets , note , and a new  field
+  "Live Demo!"). The WIP commit sets `Your AI Can Now [Surf the Web]`, note `AGENT REACH`, and a new `stamp` field
   drawn bottom-left in the hero layout. **None of this has been typechecked or rendered.**
 
 ## 2026-10-03 — Agent Reach, hands-on (35 scenes, 17:24 wide + 55s short) · RENDERED · `AR_STAGE`, 11 pictures
